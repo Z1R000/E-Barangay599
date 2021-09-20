@@ -1,0 +1,57 @@
+if ($result = "1"){
+		$sql ="SELECT ID FROM tblresident WHERE UserName=:username and Password=:password";
+		$query=$dbh->prepare($sql);
+		$query-> bindParam(':username', $username, PDO::PARAM_STR);
+		$query-> bindParam(':password', $password, PDO::PARAM_STR);
+		$query-> execute();
+		$results=$query->fetchAll(PDO::FETCH_OBJ);
+		if($query->rowCount() > 0)
+		{
+			foreach ($results as $result) {
+				$_SESSION['clientmsuid']=$result->ID;
+			}
+			$_SESSION['login']=$_POST['username'];
+			echo "<script type='text/javascript'> document.location ='client/dashboard.php'; </script>";
+		} else{
+			echo "<script>alert('Invalid Details');</script>";
+		}
+		
+	}else{
+		
+		$sql ="SELECT ID FROM tbladmin WHERE UserName=:username and Password=:password";
+		$query=$dbh->prepare($sql);
+		$query-> bindParam(':username', $username, PDO::PARAM_STR);
+		$query-> bindParam(':password', $password, PDO::PARAM_STR);
+		$query-> execute();
+		$results=$query->fetchAll(PDO::FETCH_OBJ);
+		if($query->rowCount() > 0)
+		{
+			foreach ($results as $result) {
+				$_SESSION['clientmsaid']=$result->ID;
+			}
+			$_SESSION['login']=$_POST['username'];
+			echo "<script type='text/javascript'> document.location ='admin/dashboard.php'; </script>";
+		} else{
+			echo "<script>alert('Invalid Details');</script>";
+		}
+	}
+	
+	
+	
+	if(isset($_POST['login'])) 
+  {
+    $username=$_POST['username'];
+    $password=$_POST['password'];
+	$sql="SELECT UserType FROM tbladmin WHERE UserName=:username and Password=:password";
+	$query=$dbh->prepare($sql);
+	$query-> execute();
+	$results=$query->fetchAll(PDO::FETCH_OBJ);
+	if ($result-> num_rows > 0){
+		while($row = $result->fetch_assoc()){
+			echo $row['UserType'];
+		}
+	}
+	
+	
+	
+  }
