@@ -3,7 +3,6 @@
 <head>
 <title>599 E-Barangay System</title>
 <style>
-	/*hudas*/
 	body{
 		text-align: center;
 		font-family: bahnschrift light;
@@ -61,7 +60,9 @@
 	<a href="create-resident.php" class="button" style="color: white;"><i>Click here to register</i></a> 
 <div class="footer" style="position: fixed: left:0; bottom:0; text-align: center;">
 		
-		<?php //include_once('includes/footer.php');?>
+		<?php //include_once('includes/footer.php')
+		//asdawdawdawd
+		;?>
 	</div>
 </body>
 </html>
