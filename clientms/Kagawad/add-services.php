@@ -7,7 +7,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
   } else{
     if(isset($_POST['submit']))
   {
-
+/**tite
+ * 
+ */
 
  $sname=$_POST['sname'];
  $price=$_POST['price'];
