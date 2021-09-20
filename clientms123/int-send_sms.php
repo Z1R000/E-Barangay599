@@ -17,7 +17,7 @@ $password = 'your_password';
 $msisdn = '44123123123';
 
 /*
-* Please see the FAQ regarding HTTPS (port 443) and HTTP (port 80/5567)
+* Please see the FAQ regarding HTTPS (port 443) and HTTP (port 80/5567) testing
 */
 $url = 'https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0';
 
