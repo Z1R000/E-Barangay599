@@ -74,6 +74,8 @@ if($query->rowCount() > 0)
 {
 foreach($results as $row)
 {               ?>
+<!--dasdasdsa-->
+
 									     <tr class="active">
 											 <td style="color: #000;"><?php  echo htmlentities($row->Purok);?></td>
 									        <td style="color: #000;"><?php  echo htmlentities($row->ResidentType);?></td>
