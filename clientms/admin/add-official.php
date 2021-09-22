@@ -11,7 +11,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 $clientmsaid=$_SESSION['clientmsaid'];
  $barangayposition=$_POST['barangayposition'];
  $password=$_POST['password'];
- $uname=$_POST['uname'];
+ $email=$_POST['email'];
  $resid=$_POST['resid'];
 
  
