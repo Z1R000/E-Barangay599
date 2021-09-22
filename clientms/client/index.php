@@ -36,7 +36,7 @@ echo "<script>alert('Invalid Details');</script>";
 	body{
 		text-align: center;
 		font-family: bahnschrift light;
-		background-image: url(client/images/barangaybackground.png);
+		background-image: url(images/barangaybackground.png);
 		background-size: cover;
 		color: white;
 	}
