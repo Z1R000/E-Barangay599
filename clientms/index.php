@@ -6,8 +6,9 @@
 	body{
 		text-align: center;
 		font-family: bahnschrift light;
-		background-image: url("https://scontent.fmnl8-2.fna.fbcdn.net/v/t1.15752-9/181017880_310530980473698_8025202058568047204_n.jpg?_nc_cat=107&ccb=1-3&_nc_sid=ae9488&_nc_eui2=AeEJAZgiTLaz66vd217i73vANuMbaL6tyGA24xtovq3IYBc1LvUZRBtdoDjnYp9Hxfk9Loo-3yetCMXfT3-7FNZv&_nc_ohc=mCwCSjyYJSsAX8zsMal&_nc_ht=scontent.fmnl8-2.fna&oh=16b4ddeccf5a1831907a1152c57ada76&oe=60B66D13");
+		background-image: url(images/barangaybackground.png);
 		background-size: cover;
+		background-repeat: no-repeat;
 		color: white;
 	}
 	p{
@@ -40,7 +41,7 @@
 		padding: 8px;
 		}
 </style>
-</body>
+	</body>
 <br><br><br><br><br><br><br>
 	<img src="images/barangay.png" alt="logo" width="200" height="200" class="image">
 	<h1> BARANGAY 599, ZONE 59, DISTRICT VI <br>
