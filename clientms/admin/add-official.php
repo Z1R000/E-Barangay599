@@ -27,7 +27,7 @@ $query->bindParam(':password',$password,PDO::PARAM_STR);
    $LastInsertId=$dbh->lastInsertId();
    if ($LastInsertId>0) {
     echo '<script>alert("Official has been added.")</script>';
-echo "<script>window.location.href ='add-official.php'</script>";
+		echo "<script>window.location.href ='add-official.php'</script>";
   }
   else
     {
