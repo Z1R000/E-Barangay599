@@ -85,7 +85,7 @@ $voter=$row6->voter;
 								<label><h4 style="font-size: 1.5em;">Total Voters: </h4><h3><?php echo htmlentities($voter);?></h3></label>
 							</div>
 						</div>
-						<div class="clearfix"> </div>	
+						<div> </div>	
 						
 
 					</div>
@@ -161,7 +161,7 @@ $total_sale=$row9->totalcost;
 								<label><h4 style="font-size: 1.5em;">Total Children(0-9y.o): </h4><h3><?php //echo htmlentities($tresidents);?>99</h3></label>
 							</div>
 						</div>
-						<div class="clearfix"> </div>	
+						<div> </div>	
 						
 
 					</div>
