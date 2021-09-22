@@ -22,6 +22,24 @@ a:focus, a:active, a.dropdown-toggle{
 	text-decoration:none;
 	border: 1px #fff solid;
 }
+.barangaylogoleft{
+	width: -10%;
+}
+.barangaylogoright{
+	width: -10%;
+}
+#bll{
+	width:60%;
+}
+#blr{
+	width:60%;
+}
+.kumakain{
+	margin: auto;
+	width: 50%;
+	padding: 10px;
+
+}
 a:hover{
 	color: #f00;
 	border: 1px #f00 solid;
@@ -83,13 +101,13 @@ a:hover { transition: all 200ms ease-in-out; }
     width:87%;
 }
 .page-container.sidebar-collapsed .sidebar-menu {
-  width: 65px;
+  width: 4.9%;
   transition: all 100ms ease-in-out;
   transition-delay: 300ms;
 }
 
 .page-container.sidebar-collapsed-back .sidebar-menu {
-  width: 220px;
+  width: 13.7%;
   transition: all 100ms ease-in-out;
 }
 
@@ -152,9 +170,9 @@ a:hover { transition: all 200ms ease-in-out; }
 }
 
 .sidebar-menu {
-     position: fixed;
+    position: fixed;
     float: left;
-    width: 17%;
+    width: 13.80%;
     top: 0;
     left: 0;
     bottom: 0;
@@ -594,7 +612,6 @@ li#menu-mensagens-enviadas,li#menu-mensagens,li#menu-academico-avaliacoes,li#men
 li.dropdown.note {
     background: #00c6d7;
     border-left: 1px solid rgba(1, 189, 206, 0.93);
-    display: inline-block;
     float: left;
 	    cursor: pointer;
 }
@@ -609,9 +626,7 @@ ul.nofitications-dropdown {
     padding: 0;
     margin: 0;
 }
-li.dropdown.head-dpdn:nth-child(2) {
-    
-}
+
 li.dropdown.head-dpdn:nth-child(3) {
 	border:none;
 }
@@ -1170,10 +1185,14 @@ ul.dropdown {
 .header-section {
     background:#f1f1f1;
 	box-shadow: 2px 0 6px rgba(1, 70, 76, 0.68);
-	    -webkit-box-shadow: 2px 0 6px rgba(1, 70, 76, 0.68);
+	-webkit-box-shadow: 2px 0 6px rgba(1, 70, 76, 0.68);
     -moz-box-shadow: 2px 0 6px rgba(1, 70, 76, 0.68);
     -o-box-shadow: 2px 0 6px rgba(1, 70, 76, 0.68);
+	display: flex;
+	flex-wrap: nowrap;
 }
+
+
 /*--//top_header--*/
 /*--/inner-content-start--*/
 .outter-wp {
@@ -1196,6 +1215,7 @@ ul.dropdown {
     float: left;
     width: 100%;
     background-color: #052963;
+	margin-bottom: 1%;
     text-align: center;
     padding: 1em;
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
@@ -1625,7 +1645,6 @@ p.text-left {
     font-weight: 300;
 }
 ul.clock-category li{
-  list:none;
   display:inline-block;
   width:24%;
 }
@@ -2773,6 +2792,7 @@ ul#menu-comunicacao-sub {
     z-index: 999999;
 }
 .error_page {
+	
 }
 
 .error-top {
@@ -7281,7 +7301,7 @@ footer  p a:hover ,.footer p a:hover{
 	.ribbon3 span:after {
 		content: "";
 		width: 220px;
-		height: 60px
+		height: 60px;
 	    top: -30px;
 		}
 	.ribbon3 span:before {
