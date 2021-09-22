@@ -1,10 +1,9 @@
 <div class="header-section" style="font-family: bahnschrift light;">
-<img class="1" src="images/barangay.png" style="height: 18%; width: 13%; position: absolute;">
+<img class="barangaylogoleft" src="images/barangay.png" style="height: 18%; width: 13%;">
 <p style="padding-top: 10px;color: black;text-align: center; font-size: 1.25em; font-weight: 600;">BARANGAY 599, ZONE 59, DISTRICT VI<br>OFFICE OF THE SANGGUNIANG BARANGAY<br><span style="font-size: 0.8em; font-style: italic;">#4745 Peralta St., V. Mapa Sta. Mesa, Manila<br>Tel. #722-9743</span></p>
-<img class="2" src="images/Maynila.png" style=" height: 18%; width: 13%; position: absolute; top: 0%; right: 1%;">
+<img class="barangaylogoright" src="images/Maynila.png" style=" height: 18%; width: 13%; top: 0%; right: 1%;">
         <!--menu-right-->
         <div class="top_menu">
-          
           <!--/profile_details-->
           <div class="profile_details_left">
             <ul class="nofitications-dropdown">
