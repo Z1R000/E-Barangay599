@@ -6,7 +6,9 @@
 	body{
 		text-align: center;
 		font-family: bahnschrift light;
-		background-image: url(images/barangaybackground.png);
+
+		background-image: url(client/images/barangaybackground.png);
+
 		background-size: cover;
 		background-repeat: no-repeat;
 		color: white;
@@ -45,7 +47,7 @@
 <br><br><br><br><br><br><br>
 	<img src="images/barangay.png" alt="logo" width="200" height="200" class="image">
 	<h1> BARANGAY 599, ZONE 59, DISTRICT VI <br>
-		OFFICE OF THE SANGGGUNIANG BARANGAY <h1>
+		OFFICE OF THE SANGGUNIANG BARANGAY <h1>
 	<p> #4745 Peralta St., V. Mapa Sta. Mesa, Manila <br>
 		Tel. #722-9743 </p> <br>
 	<div class="con1"> 
