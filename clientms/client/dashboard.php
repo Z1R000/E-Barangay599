@@ -1,258 +1,349 @@
-<?php
-session_start();
-error_reporting(0);
-include('includes/dbconnection.php');
-if (strlen($_SESSION['clientmsuid']==0)) {
-  header('location:logout.php');
-  } 
-     ?>
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<title>Dashboard</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- Bootstrap Core CSS -->
-<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-<!-- Custom CSS -->
-<link href="css/style.css" rel='stylesheet' type='text/css' />
-<!-- Graph CSS -->
-<link href="css/font-awesome.css" rel="stylesheet"> 
-<!-- jQuery -->
-<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
-<!-- lined-icons -->
-<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
-<!-- //lined-icons -->
-<script src="js/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="css/sidebar.css" />
+    
+	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
-</head> 
+    <title>Bootstap 5 Responsive Admin Dashboard</title>
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", function(){
+        document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
+        element.addEventListener('click', function (e) {
+        let nextEl = element.nextElementSibling;
+        let parentEl  = element.parentElement;	
+
+        if(nextEl) {
+            e.preventDefault();	
+            let mycollapse = new bootstrap.Collapse(nextEl);
+            
+            if(nextEl.classList.contains('show')){
+              mycollapse.hide();
+            } else {
+                mycollapse.show();
+                // find other submenus with class=show
+                var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
+                // if it exists, then close all of them
+                if(opened_submenu){
+                  new bootstrap.Collapse(opened_submenu);
+                }
+            }
+        }
+            }); // addEventListener
+        }) // forEach
+        }); 
+    </script>
+
+
+    <style type = "text/css">
+    .sidebar li .submenu{ 
+        list-style: none; 
+        margin: 0; 
+        padding: 0; 
+        padding-left: 1rem; 
+        padding-right: 1rem;
+    }
+             
+    </style>
+
+</head>
+
 <body>
-<div class="page-container">
-	<!--/content-inner-->
-	<div class="left-content">
-		<div class="inner-content">
-		
-			<?php include_once('includes/header.php');?>
-			
-			<div class="outter-wp">
-				<!--custom-widgets-->
-				<div class="custom-widgets">
-					<div class="row-one">
-						<div class="col-md-4 widget">
-							<div class="stats-left ">
-								<?php 
-$sql ="SELECT ID from tbladmin ";
-$query = $dbh -> prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-$tresidents=$query->rowCount();
-?>
-								<label><h4 style="font-size: 1.5em;">Total Officials: </h4><h3><?php echo htmlentities($tresidents);?></h3></label>
-							</div>
-							<div class="clearfix"> </div>	
-						</div>
-						<div class="col-md-4 widget">
-							<div class="stats-left">
-							<?php 
-$sql1 ="SELECT ID from tblresident ";
-$query1 = $dbh -> prepare($sql1);
-$query1->execute();
-$results1=$query1->fetchAll(PDO::FETCH_OBJ);
-$tser=$query1->rowCount();
-?>	
-								<label><h4 style="font-size: 1.5em;">Total Residents: </h4><h3><?php echo htmlentities($tser);?></h3></label>
-							</div>
-							<div class="clearfix"> </div>	
-						</div>
-						
-						<div class="col-md-4 widget states-thrd">
-							<div class="stats-left">
-								<?php
-$sql6="select count(tblresident.voter) as voter
- from tblresident where tblresident.voter='Yes'";
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-light" id="sidebar-wrapper">
+            
+            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><img src = "../images/Barangay.png" style = "width: 60px;"><br>Barangay 599 <br>E-barangay</div>
 
-  $query6 = $dbh -> prepare($sql6);
-  $query6->execute();
-  $results6=$query6->fetchAll(PDO::FETCH_OBJ);
-  foreach($results6 as $row6)
-{
+            <nav class="sidebar py-2 mb-4 bg-light">
 
-$voter=$row6->voter;
-}
+                <ul class="nav flex-column" id="nav_accordion">
+                    
+                    <li class="nav-item">
+                        <a href="#" class="list-group-item  list-group-item-action bg-transparent second-text active fs-6"><i
+                            class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                    </li>
 
+                    <li class="nav-item has-submenu">
+                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text fw-bold nav-link fs-6">
+                            <i class="fas fa-paperclip my-0 me-2"></i>Announcement</a>
+                        <ul class="submenu collapse">
+                            <li><a class="nav-link" href="current-announcement.php">Current Announcement </a></li>
+                            <li><a class="nav-link" href="announcement-list.php">Announcement History </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="list-group-item  list-group-item-action bg-transparent second-text active fs-6"><i
+                            class="fas fa-user-friends"></i> Officials</a>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text fw-bold nav-link fs-6">
+                            <i class="fas fa-book my-0 me-2"></i>Request</a>
+                        <ul class="submenu collapse">
+                            <li><a class="nav-link" href="#">Certification Request </a></li>
+                            <li><a class="nav-link" href="#">Blotter Request </a></li>
+                            <li><a class="nav-link" href="#">Rental Request</a></li>
+                            <li><a class="nav-link" href="#">Resident Registration</a></li>
+                            <li><a class="nav-link" href="#">Other Service Request </a></li>
+                        </ul>
+                    </li>
+                    <!--<li class="nav-item has-submenu">
+                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-6 dropdown-toggle" ><i
+                            class="fas fa-book me-2"></i>Request</a>
 
-  ?>
-								<label><h4 style="font-size: 1.5em;">Total Voters: </h4><h3><?php echo htmlentities($voter);?></h3></label>
-							</div>
-						</div>
-						<div> </div>	
-						
+                        <ul class="submenu collapse">
+                            <li><a class="nav-link" href="#">Certification </a></li>
+                            <li><a class="nav-link" href="#">Blotter </a></li>
+                            <li><a class="nav-link" href="#">Rentals</a></li>
+                            <li><a class="nav-link" href="#">Other Services </a></li>
+                            </ul>
+                        
+                            
+                    </li>-->    
+                    <li class="nav-item has-submenu">
+                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text fw-bold nav-link fs-6">
+                            <i class="fas fa-book my-0 me-2"></i>Record</a>
+                        <ul class="submenu collapse">
+                            <li><a class="nav-link" href="#">Certification Record </a></li>
+                            <li><a class="nav-link" href="#">Blotter Record </a></li>
+                            <li><a class="nav-link" href="#">Rental Record</a></li>
+                            <li><a class="nav-link" href="#">Resident Record</a></li>
+                            <li><a class="nav-link" href="#">Other Service Record </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="list-group list-group-flush my-3">
+                <a href="../client/index.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold fs-6"><i
+                        class="fas fa-power-off me-2"></i>Logout</a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
 
-					</div>
-				</div>
-			</div>
-			
-			<div class="outter-wp">
-				<!--custom-widgets-->
-				<div class="custom-widgets">
-					<div class="row-one">
-						<div class="col-md-4 widget">
-							<div class="stats-left ">
-								<?php
-								$sql7="select count(tblresident.Gender) as male
-									from tblresident where tblresident.Gender='Male'";
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+                <div class="d-flex align-items-center">
+                    <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
+                    <h2 class="fs-2 m-0">Dashboard</h2>
+                </div>
 
-								  $query7 = $dbh -> prepare($sql7);
-								  $query7->execute();
-								  $results7=$query7->fetchAll(PDO::FETCH_OBJ);
-								  foreach($results7 as $row7)
-								{
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-								$male=$row7->male;
-								}
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user me-2"></i>USER
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
 
+            <div class="container-fluid px-4">
+                <div class="row g-3 my-2">
+                    <div class="w-100 col-lg-5">
+                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            
+                            <i class="fas fa-user fs-1 primary-text border rounded-full secondary-bg p-4"></i>
+                            <div>
+                                <h3 class="fs-2">5000</h3>
+                                <a class = "link-dark fs-3 card-text" href ="#">Residents</a>
+                            </div>
+                        </div>
+                    </div>
 
-								  ?>
-								<label><h4 style="font-size: 1.5em;">Total Male Residents: </h4><h3><?php echo htmlentities($male);?></h3></label>
-							</div>
-							<div class="clearfix"> </div>	
-						</div>
-						<div class="col-md-4 widget">
-							<div class="stats-left">
-							<?php
-$sql8="select count(tblresident.Gender) as fem
-from tblresident where tblresident.Gender='Female'";
-
-  $query8 = $dbh -> prepare($sql8);
-  $query8->execute();
-  $results8=$query8->fetchAll(PDO::FETCH_OBJ);
-  foreach($results8 as $row8)
-{
-
-$fem=$row8->fem;
-}
-
-
-  ?>
-
-								<label><h4 style="font-size: 1.5em;">Total Female Residents: </h4><h3><?php echo htmlentities($fem);?></h3></label>
-							</div>
-							<div class="clearfix"> </div>	
-						</div>
-						
-						<div class="col-md-4 widget states-thrd">
-							<div class="stats-left">
-								<?php
-/*$sql9="select  sum(tblservices.ServicePrice) as totalcost
- from tblinvoice 
-  join tblservices  on tblservices.ID=tblinvoice.ServiceId";
-
-  $query9 = $dbh -> prepare($sql9);
-  $query9->execute();
-  $results9=$query9->fetchAll(PDO::FETCH_OBJ);
-  foreach($results9 as $row9)
-{
-
-$total_sale=$row9->totalcost;
-}*/
-
-
-  ?>
-								<label><h4 style="font-size: 1.5em;">Total Children(0-9y.o): </h4><h3><?php //echo htmlentities($tresidents);?>99</h3></label>
-							</div>
-						</div>
-						<div> </div>	
-						
-
-					</div>
-				</div>
-			</div>
-						
-			<div class="outter-wp">
-				<div class="custom-widgets">
-					<div class="row-one">
-						<div class="col-md-4 widget">
-							<div class="stats-left">
-							<?php
-								$sql7="select count(tblresident.Gender) as male
-									from tblresident where tblresident.Gender='Male'";
-
-								  $query7 = $dbh -> prepare($sql7);
-								  $query7->execute();
-								  $results7=$query7->fetchAll(PDO::FETCH_OBJ);
-								  foreach($results7 as $row7)
-								{
-
-								$male=$row7->male;
-								}
+                    <div class="col-md-3">
+                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            <div>
+                                <h3 class="fs-2">2500</h3>
+                                <a class = "link-dark fs-4 card-text" href ="#">Male</a>
+                            </div>
+                                <i class="fas fa-mars fs-1 primary-text border rounded-circle secondary-bg p-3"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            <div>
+                                <h3 class="fs-2">2500</h3>
+                                <a class = "link-dark fs-4 card-text" href ="#">Female</a>
+                              
+                            </div>
+                            <i class="fas fa-venus fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                        </div>
+                    </div>
 
 
-								  ?>
-								<label><h4 style="font-size: 1.5em;">Total Adolescent: </h4><h3><?php //echo htmlentities($tresidents);?>99</h3></label>
-								<div class="clearfix"> </div>	
-							</div>
-						</div>
-						<div class="col-md-4 widget">
-							<div class="stats-left">
-								<?php
-$sql8="select count(tblresident.Gender) as fem
-from tblresident where tblresident.Gender='Female'";
+                    <div class="col-md-3">
+                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            <div>
+                                <h3 class="fs-2">2320</h3>
+                                <a class = "link-dark fs-4 card-text" href ="#">Adults</a>
+                            </div>
+                            <i class="fas fa-user-circle fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                        </div>
+                    </div>
 
-  $query8 = $dbh -> prepare($sql8);
-  $query8->execute();
-  $results8=$query8->fetchAll(PDO::FETCH_OBJ);
-  foreach($results8 as $row8)
-{
+                    <div class="col-md-3">
+                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            <div>
+                                <h3 class="fs-2">1203</h3>
+                                <a class = "link-dark fs-4 card-text" href ="#">Minors</a>
+                            </div>
+                            <i class="fas fa-child fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                        </div>
+                        
+                    </div>
 
-$fem=$row8->fem;
-}
+                    <div class="col-md-6">
+                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            <div>
+                                <h3 class="fs-2" tooltip = "Number of pending requests">320</h3>
+                                <a class = "link-dark fs-4 card-text" href ="#">Pending requests</a>
+                            </div>
+                            <i class="fas fa-exclamation-circle fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                        </div>
+                    </div>
 
+                    <div class="col-md-6">
+                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            <div>
+                                <h3 class="fs-2">50</h3>
+                                <a class = "link-dark fs-4 card-text" href ="#">Transaction Logs</a>
+                            </div>
+                            <i class="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                        </div>
+                    </div>
+                </div>
+                <!--
+                <div class="row my-5">
+                    <h3 class="fs-4 mb-3">Recent Orders</h3>
+                    <div class="col">
+                        <table class="table bg-white rounded shadow-sm  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col" width="50">#</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Customer</th>
+                                    <th scope="col">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Television</td>
+                                    <td>Jonny</td>
+                                    <td>$1200</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Laptop</td>
+                                    <td>Kenny</td>
+                                    <td>$750</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Cell Phone</td>
+                                    <td>Jenny</td>
+                                    <td>$600</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td>Fridge</td>
+                                    <td>Killy</td>
+                                    <td>$300</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">5</th>
+                                    <td>Books</td>
+                                    <td>Filly</td>
+                                    <td>$120</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">6</th>
+                                    <td>Gold</td>
+                                    <td>Bumbo</td>
+                                    <td>$1800</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">7</th>  
+                                    <td>Pen</td>
+                                    <td>Bilbo</td>
+                                    <td>$75</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">8</th>
+                                    <td>Notebook</td>
+                                    <td>Frodo</td>
+                                    <td>$36</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">9</th>
+                                    <td>Dress</td>
+                                    <td>Kimo</td>
+                                    <td>$255</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">10</th>
+                                    <td>Paint</td>
+                                    <td>Zico</td>
+                                    <td>$434</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">11</th>
+                                    <td>Carpet</td>
+                                    <td>Jeco</td>
+                                    <td>$1236</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">12</th>
+                                    <td>Food</td>
+                                    <td>Haso</td>
+                                    <td>$422</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>-->
+                </div>
 
-  ?>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+    </div>
 
-								<label><h4 style="font-size: 1.5em;">Total Senior Citizen: </h4><h3><?php //echo htmlentities($tresidents);?>99</h3></label>
-								<div class="clearfix"> </div>	
-							</div>
-						</div>
-					</div>
-				</div>
-			
-	</div>
-</div>
-<!--//content-inner-->
-<?php include_once('includes/footer.php');?>
-<?php include_once('includes/sidebar.php');?>
-<div class="clearfix"></div>		
-</div>
-<script>
-var toggle = true;
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var el = document.getElementById("wrapper");
+        var toggleButton = document.getElementById("menu-toggle");
 
-$(".sidebar-icon").click(function() {                
-	if (toggle)
-	{
-		$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-		$("#menu span").css({"position":"absolute"});
-	}
-	else
-	{
-		$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-		setTimeout(function() {
-			$("#menu span").css({"position":"relative"});
-		}, 400);
-	}
-
-	toggle = !toggle;
-});
-</script>
-<!--js -->
-<link rel="stylesheet" href="css/vroom.css">
-<script type="text/javascript" src="js/vroom.js"></script>
-<script type="text/javascript" src="js/TweenLite.min.js"></script>
-<script type="text/javascript" src="js/CSSPlugin.min.js"></script>
-<script src="js/jquery.nicescroll.js"></script>
-<script src="js/scripts.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+        toggleButton.onclick = function () {
+            el.classList.toggle("toggled");
+        };
+    </script>
 </body>
+
 </html>
