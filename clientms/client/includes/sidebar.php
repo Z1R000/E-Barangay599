@@ -39,7 +39,6 @@ foreach($results as $row)
                 <ul id="menu-academico-sub" >
                     <li id="menu-academico-avaliacoes" ><a href="current-announcement.php">Current Announcement</a></li>
                     <li id="menu-academico-boletim" ><a href="announcement-list.php">Announcement History</a></li>
-                   
                 </ul>
             </li>
 
