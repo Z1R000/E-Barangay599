@@ -4,77 +4,122 @@ error_reporting(0);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsuid']==0)) {
   header('location:logout.php');
-  } 
-     ?>
-<!DOCTYPE HTML>
-<html>
+  } else{
+  	?>
+
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<title>Official List</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- Bootstrap Core CSS -->
-<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-<!-- Custom CSS -->
-<link href="css/style.css" rel='stylesheet' type='text/css' />
-<!-- Graph CSS -->
-<link href="css/font-awesome.css" rel="stylesheet"> 
-<!-- jQuery -->
-<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
-<!-- lined-icons -->
-<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
-<!-- //lined-icons -->
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/amcharts.js"></script>	
-<script src="js/serial.js"></script>	
-<script src="js/light.js"></script>	
-<script src="js/radar.js"></script>	
-<link href="css/barChart.css" rel='stylesheet' type='text/css' />
-<link href="css/fabochart.css" rel='stylesheet' type='text/css' />
-<!--clock init-->
-<script src="js/css3clock.js"></script>
-<!--Easy Pie Chart-->
-<!--skycons-icons-->
-<script src="js/skycons.js"></script>
+    <link rel="stylesheet" href="css/sidebar.css" />
+    
+	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
-<script src="js/jquery.easydropdown.js"></script>
+    <title>Bootstap 5 Responsive Admin Dashboard</title>
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", function(){
+        document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
+        element.addEventListener('click', function (e) {
+        let nextEl = element.nextElementSibling;
+        let parentEl  = element.parentElement;	
 
-<!--//skycons-icons-->
-</head> 
+        if(nextEl) {
+            e.preventDefault();	
+            let mycollapse = new bootstrap.Collapse(nextEl);
+            
+            if(nextEl.classList.contains('show')){
+              mycollapse.hide();
+            } else {
+                mycollapse.show();
+                // find other submenus with class=show
+                var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
+                // if it exists, then close all of them
+                if(opened_submenu){
+                  new bootstrap.Collapse(opened_submenu);
+                }
+            }
+        }
+            }); // addEventListener
+        }) // forEach
+        }); 
+    </script>
+
+
+    <style type = "text/css">
+    .sidebar li .submenu{ 
+        list-style: none; 
+        margin: 0; 
+        padding: 0; 
+        padding-left: 1rem; 
+        padding-right: 1rem;
+    }
+             
+    </style>
+
+</head>
 <body>
-	<div class="page-container">
-		<!--/content-inner-->
-		<div class="left-content">
-			<div class="inner-content">
-				<!-- header-starts -->
-				<?php include_once('includes/header.php');?>
-				<!-- //header-ends -->
-				<!--outter-wp-->
-				<div class="outter-wp">
-					<!--sub-heard-part-->
-					<div class="sub-heard-part">
-						<ol class="breadcrumb m-b-0">
-							<li><a href="dashboard.php">Home</a></li>
-							<li class="active">Official List</li>
-						</ol>
-					</div>
-					<!--//sub-heard-part-->
-					<div class="graph-visual tables-main">
-						
-					
-						<h3 class="inner-tittle two">Official List</h3>
-						<div class="graph" style="border-radius: 15px;">
-							<div class="tables">
-								<table class="table" border="1"> <thead style="background-color: #021f4e;">
-									 <th><span style="color: #fff; font-size: 120%;">Barangay Position</span></th> 
-									 <th><span style="color: #fff; font-size: 120%;">Official Name</span></th>
-									 <th><span style="color: #fff; font-size: 120%;">Time of Duty</span></th>
-									  </tr>
-									   </thead>
-									    <tbody>
-									    	<?php
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <?php include_once('includes/sidebarupdated.php'); 	?>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+                <div class="d-flex align-items-center">
+                    <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
+                    <h2 class="fs-2 m-0">Offical List</h2>
+                    
+                </div>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!--User-->
+				<?php include_once('includes/usertoggle.php');?>
+                <!--User-->
+            </nav>
+            <div class="sub-heard-part">
+                <ol class="breadcrumb m-b-0"style="text-indent: 15px; margin-left: 2.5%;">
+                    <li><a href="dashboard.php">Home</a></li>/
+                    <li class="active">Official List</li>
+                </ol>
+            </div>
+
+
+            <div class="container-fluid px-4">
+			<div style="background-color: aliceblue;border-radius: 10px;padding: 25px;">
+				<div class="graph-visual tables-main">
+                    
+                    <div class="graph" style="border-radius: 15px;">
+                        <div class="tables">
+                            <table class="table"> <thead style="background-color: #021f4e;">
+                                 <th><span style="color: #fff; font-size: 120%;">Barangay Position</span></th> 
+                                 <th><span style="color: #fff; font-size: 120%;">Official Name</span></th>
+                                 <th><span style="color: #fff; font-size: 120%;">Time of Duty</span></th>
+								 <th><span style="color: #fff; font-size: 120%;">End of Duty</span></th>
+                                  </tr>
+                                   </thead>
+                                    <tbody>
+                                        <?php
 
 $sql="SELECT distinct tbladmin.ID, tblresident.ID, tbladmin.BarangayPosition, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Age, tbladmin.dutyTime, 
-	tblresident.Cellphnumber from tbladmin JOIN tblresident WHERE tbladmin.residentID=tblresident.ID";
+tblresident.Cellphnumber from tbladmin JOIN tblresident WHERE tbladmin.residentID=tblresident.ID";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -84,53 +129,33 @@ if($query->rowCount() > 0)
 {
 foreach($results as $row)
 {               ?>
-									     <tr class="active">
-									        <td style="color: black;"><?php  echo htmlentities($row->BarangayPosition);?></td>
-									         <td style="color: black;"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?></td>
-											 <td><input type="time" name="td" value="<?php  echo $row->dutyTime;?>" class="form-control" required='true' readonly='true' style="border:none; color: black;"></td>
-									     </tr>
-									     <?php $cnt=$cnt+1;}} ?>
-									     </tbody> </table> 
-							</div>
+                                     <tr class="active">
+                                        <td style="color: black;"><?php  echo htmlentities($row->BarangayPosition);?></td>
+                                         <td style="color: black;"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?></td>
+                                         <td><input type="time" name="td" value="<?php  echo $row->dutyTime;?>" class="form-control" required='true' readonly='true' style="border:none; color: black;"></td>
+                                     </tr>
+                                     <?php $cnt=$cnt+1;}} ?>
+                                     </tbody> </table> 
+                        </div>
 
-						</div>
-				
-					</div>
-					<!--//graph-visual-->
-				</div>
-				<!--//outer-wp-->
-				<?php include_once('includes/footer.php');?>
+                    </div>
+            
+                </div>
 			</div>
 		</div>
-		<!--//content-inner-->
-		<!--/sidebar-menu-->
-		<?php include_once('includes/sidebar.php');?>
-		<div class="clearfix"></div>		
-	</div>
-	<script>
-		var toggle = true;
+                <!-- /#page-content-wrapper -->
+    </div>
 
-		$(".sidebar-icon").click(function() {                
-			if (toggle)
-			{
-				$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-				$("#menu span").css({"position":"absolute"});
-			}
-			else
-			{
-				$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-				setTimeout(function() {
-					$("#menu span").css({"position":"relative"});
-				}, 400);
-			}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var el = document.getElementById("wrapper");
+        var toggleButton = document.getElementById("menu-toggle");
 
-			toggle = !toggle;
-		});
-	</script>
-	<!--js -->
-	<script src="js/jquery.nicescroll.js"></script>
-	<script src="js/scripts.js"></script>
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
+        toggleButton.onclick = function () {
+            el.classList.toggle("toggled");
+        };
+    </script>
 </body>
+
 </html>
+<?php } ?>
