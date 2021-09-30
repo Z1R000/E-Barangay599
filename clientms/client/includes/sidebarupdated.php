@@ -16,7 +16,7 @@
                             <i class="fas fa-paperclip my-0 me-2"></i>Announcement</a>
                         <ul class="submenu collapse">
                             <li><a class="nav-link" href="current-announcement.php">Current Announcement </a></li>
-                            <li><a class="nav-link" href="announcement-list.php">Announcement History </a></li>
+                            <li><a class="nav-link" href="announcement-list.php">Announcement List </a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
