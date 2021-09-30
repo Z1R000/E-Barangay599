@@ -5,64 +5,13 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsuid']==0)) {
   header('location:logout.php');
   } else{
-  	if(isset($_POST['submit'])){
+  	?>
 
+<!DOCTYPE html>
+<html lang="en">
 
-$uid=$_SESSION['clientmsuid'];
-$certid=$_POST['certid'];
-$rs='Pending';
-
-$sql="insert into tblcertificaterequest(Userid,CertificateId,requestStatus)values(:uid,:certid,:rs)";
-$query=$dbh->prepare($sql);
-$query->bindParam(':uid',$uid,PDO::PARAM_STR);
-$query->bindParam(':certid',$certid,PDO::PARAM_STR);
-$query->bindParam(':rs',$rs,PDO::PARAM_STR);
-$query->execute();
-
-   $LastInsertId=$dbh->lastInsertId();
-   if ($LastInsertId>0) {
-    echo '<script>alert("Certificate Request Sent.")</script>';
-echo "<script>window.location.href ='certificate-request.php'</script>";
-  }
-  else
-    {
-         echo '<script>alert("Something Went Wrong. Please try again")</script>';
-    }
-}
-     ?>
-<!DOCTYPE HTML>
-<html>
 <head>
-<title>Certificate Request</title>
-
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- Bootstrap Core CSS -->
-<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-<!-- Custom CSS -->
-<link href="css/style.css" rel='stylesheet' type='text/css' />
-<!-- Graph CSS -->
-<link href="css/font-awesome.css" rel="stylesheet"> 
-<!-- jQuery -->
-<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
-<!-- lined-icons -->
-<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
-<!-- //lined-icons -->
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/amcharts.js"></script>	
-<script src="js/serial.js"></script>	
-<script src="js/light.js"></script>	
-<script src="js/radar.js"></script>	
-<link href="css/barChart.css" rel='stylesheet' type='text/css' />
-<link href="css/fabochart.css" rel='stylesheet' type='text/css' />
-<!--clock init-->
-<script src="js/css3clock.js"></script>
-<!--Easy Pie Chart-->
-<!--skycons-icons-->
-<script src="js/skycons.js"></script>
-
-<script src="js/jquery.easydropdown.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script>
+<script>
         $(document).ready(function(){
             $("select").change(function(){
                 $(this).find("option:selected").each(function(){
@@ -76,63 +25,108 @@ echo "<script>window.location.href ='certificate-request.php'</script>";
                 });
             }).change();
         });
+</script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="css/sidebar.css" />
+    
+	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
+
+    <title>Bootstap 5 Responsive Admin Dashboard</title>
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", function(){
+        document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
+        element.addEventListener('click', function (e) {
+        let nextEl = element.nextElementSibling;
+        let parentEl  = element.parentElement;	
+
+        if(nextEl) {
+            e.preventDefault();	
+            let mycollapse = new bootstrap.Collapse(nextEl);
+            
+            if(nextEl.classList.contains('show')){
+              mycollapse.hide();
+            } else {
+                mycollapse.show();
+                // find other submenus with class=show
+                var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
+                // if it exists, then close all of them
+                if(opened_submenu){
+                  new bootstrap.Collapse(opened_submenu);
+                }
+            }
+        }
+            }); // addEventListener
+        }) // forEach
+        }); 
     </script>
 
-<!--//skycons-icons-->
+
+    <style type = "text/css">
+    .sidebar li .submenu{ 
+        list-style: none; 
+        margin: 0; 
+        padding: 0; 
+        padding-left: 1rem; 
+        padding-right: 1rem;
+    }
+    .box{
+		padding:10px;
+		display:none;
+		margin:10px;
+	}
+    </style>
+
 </head>
-<style>
-		.button{
-			font-family: bahnschrift light;
-			color: black;
-			padding: 22px;
-			font-size: 20px;
-		}
-		
-		.sub{
-		color: white;
-		background-color: #00a6FF;
-		padding: 5px;
-		font-size: 18px;
-		height: 40px;
-		width: 150px;
-		float: right;
-		text-decoration: none;
-		border-radius: 25px;
-		font-family: bahnschrift light;
-		border-style: none;
-		padding: 8px;
-		}
-		
-		.box{
-            padding: 20px;
-            display: none;
-            margin-top: 20px;
-        }
-		input[type="text"]{
-			background-color: #fff;
-			color: black;
-		}
-	</style> 
 <body>
-<div class="page-container">
-	<!--/content-inner-->
-	<div class="left-content">
-		<div class="inner-content">
-		
-			<?php include_once('includes/header.php');?>
-				<div class="outter-wp">
-					<!--sub-heard-part-->
-					<div class="sub-heard-part">
-						<ol class="breadcrumb m-b-0">
-							<li><a href="dashboard.php">Home</a></li>
-							<li class="active">Create Certificate</li>
-						</ol>
-					</div>
-					<!--//sub-heard-part-->
-					<div class="graph-visual tables-main">
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <?php include_once('includes/sidebarupdated.php'); 	?>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+                <div class="d-flex align-items-center">
+                    <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
+                    <h2 class="fs-2 m-0">Announcement List</h2>
+                    
+                </div>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!--User-->
+				<?php include_once('includes/usertoggle.php');?>
+                <!--User-->
+            </nav>
+            <div class="sub-heard-part">
+                <ol class="breadcrumb m-b-0"style="text-indent: 15px; margin-left: 2.5%;">
+                    <li><a href="dashboard.php">Home</a></li>/
+                    <li class="active">Announcement List</li>
+                </ol>
+            </div>
+
+
+            <div class="container-fluid px-4">
+				<div style="background-color: aliceblue;border-radius: 25px;padding: 25px;">
+                <div class="graph-visual tables-main">
 					
 						<h3 class="inner-tittle two"> Create Certificate </h3>
-						<div class="graph" style="border: 1px solid black; border-radius: 15px;">
+						<div class="graph" style="border-radius: 15px;">
 							<div class="form-body">
 							<form method="post" style="font-size:1.25em;">
 								<table style="width: 100%;">
@@ -239,48 +233,19 @@ echo "<script>window.location.href ='certificate-request.php'</script>";
 						</div>
 				
 					</div>
-					<!--//graph-visual-->
-				</div>
-					
-			<?php include_once('includes/footer.php');?>
-		
-	</div>
-</div>
-<!--//content-inner-->
+                <!-- /#page-content-wrapper -->
+    </div>
 
-<?php include_once('includes/sidebar.php');?>
-<div class="clearfix"></div>		
-</div>
-<script>
-var toggle = true;
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var el = document.getElementById("wrapper");
+        var toggleButton = document.getElementById("menu-toggle");
 
-$(".sidebar-icon").click(function() {                
-	if (toggle)
-	{
-		$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-		$("#menu span").css({"position":"absolute"});
-	}
-	else
-	{
-		$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-		setTimeout(function() {
-			$("#menu span").css({"position":"relative"});
-		}, 400);
-	}
-
-	toggle = !toggle;
-});
-</script>
-<!--js -->
-<link rel="stylesheet" href="css/vroom.css">
-<script type="text/javascript" src="js/vroom.js"></script>
-<script type="text/javascript" src="js/TweenLite.min.js"></script>
-<script type="text/javascript" src="js/CSSPlugin.min.js"></script>
-<script src="js/jquery.nicescroll.js"></script>
-<script src="js/scripts.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+        toggleButton.onclick = function () {
+            el.classList.toggle("toggled");
+        };
+    </script>
 </body>
+
 </html>
-<?php }  ?>
+<?php } ?>
