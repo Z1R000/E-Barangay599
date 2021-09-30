@@ -99,6 +99,7 @@ echo "<script>alert('Invalid Details');</script>";
 		  z-index: 999;
 		  box-shadow: 0 8px 160px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 		}
+	
 	  
 </style>
 </head>
@@ -109,6 +110,7 @@ echo "<script>alert('Invalid Details');</script>";
 	<p> #4745 Peralta St., V. Mapa Sta. Mesa, Manila <br>
 	Tel. #722-9743 </p>
 	<br>
+	<!--sdasdadadas-->
 	<div class="con1"> 
 		<div class='test'>
 			<div class="login" style="">
