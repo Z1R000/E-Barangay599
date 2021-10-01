@@ -109,11 +109,11 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                     <div class="graph" style="border-radius: 15px;">
                         <div class="tables">
                             <table class="table"> <thead> <tr style="background-color: #021f4e;">
-                                 <th><span style="color: #fff; font-size: 120%;">Announcement</span></th>
-                                 <th><span style="color: #fff; font-size: 120%;">Announced By</span></th>
-                                 <th><span style="color: #fff; font-size: 120%;">Announcement From</span></th>
-                                 <th><span style="color: #fff; font-size: 120%;">Announcement To</span></th>
-                                 <th><span style="color: #fff; font-size: 120%;">File Uploaded</span></th>
+                                 <th><span style="color: #fff; font-size: 100%;">Announcement</span></th>
+                                 <th><span style="color: #fff; font-size: 100%;">Announced By</span></th>
+                                 <th><span style="color: #fff; font-size: 100%;">Announcement From</span></th>
+                                 <th><span style="color: #fff; font-size: 100%;">Announcement To</span></th>
+                                 <th><span style="color: #fff; font-size: 100%;">File Uploaded</span></th>
                                   </tr>
                                    </thead>
                                     <tbody>
@@ -156,6 +156,7 @@ foreach($results as $row)
             el.classList.toggle("toggled");
         };
     </script>
+    
 </body>
 
 </html>
