@@ -14,7 +14,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
@@ -64,7 +64,13 @@ if (strlen($_SESSION['clientmsuid']==0)) {
         padding: 0; 
         padding-left: 1rem; 
         padding-right: 1rem;
+        
     }
+    .divfortable{
+    background-color: white;
+    overflow-x:auto;
+    }
+
              
     </style>
 
@@ -104,10 +110,14 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 
 
             <div class="container-fluid px-4">
-				<div style="background-color: aliceblue;border-radius: 25px;padding: 25px;">
+				<div class="divfortable">
+                    
                 <div class="graph-visual tables-main">
-                    <div class="graph" style="border-radius: 15px;">
-                        <div class="tables">
+               
+                    <div class="graph">
+                        
+                        <div class="table">
+                           
                             <table class="table"> <thead> <tr style="background-color: #021f4e;">
                                  <th><span style="color: #fff; font-size: 100%;">Announcement</span></th>
                                  <th><span style="color: #fff; font-size: 100%;">Announced By</span></th>
@@ -139,7 +149,7 @@ foreach($results as $row)
                                      <?php $cnt=$cnt+1;}} ?>
                                      </tbody> </table> 
                         </div>
-
+                    
                     </div>
             
                 </div>
