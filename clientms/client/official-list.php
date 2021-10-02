@@ -26,7 +26,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
     
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
-    <title>Bootstap 5 Responsive Admin Dashboard</title>
+    <title>Officials List</title>
     <script>
         
         document.addEventListener("DOMContentLoaded", function(){
