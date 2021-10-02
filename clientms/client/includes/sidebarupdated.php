@@ -27,9 +27,9 @@
                         <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text fw-bold nav-link fs-6">
                             <i class="fas fa-book my-0 me-2"></i>Request</a>
                         <ul class="submenu collapse">
-                            <li><a class="nav-link" href="certificate-request.php">Certification Request </a></li>
+                            <li><a class="nav-link" href="certificate-request.php">Certificate Request </a></li>
                             <li><a class="nav-link" href="blotter-request.php">Blotter Request </a></li>
-                            <li><a class="nav-link" href="#">Rental Request</a></li>
+                            <li><a class="nav-link" href="rental-request.php">Rental Request</a></li>
                             <li><a class="nav-link" href="#">Resident Registration</a></li>
                             <li><a class="nav-link" href="#">Other Service Request </a></li>
                         </ul>
