@@ -32,6 +32,7 @@ echo "<script>alert('Invalid Details');</script>";
 <head>
 <link href="css/font-awesome.css" rel="stylesheet"> 
 <title>599 Resident Login</title>
+
 <style>
 	body{
 		text-align: center;

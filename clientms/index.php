@@ -2,6 +2,7 @@
 <html lang = "en">
 <head>
 <title>599 E-Barangay System</title>
+<link rel="icon" href="IMAGES/Barangay.png" type="image/icon type">
 <style>
 	body{
 		text-align: center;
