@@ -15,8 +15,8 @@
                         <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text fw-bold nav-link fs-6">
                             <i class="fas fa-paperclip my-0 me-2"></i>Announcement</a>
                         <ul class="submenu collapse">
-                            <li><a class="nav-link" href="current-announcement.php">Current Announcement </a></li>
                             <li><a class="nav-link" href="announcement-list.php">Announcement List </a></li>
+                            <li><a class="nav-link" href="current-announcement.php">Current Announcement </a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -27,8 +27,8 @@
                         <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text fw-bold nav-link fs-6">
                             <i class="fas fa-book my-0 me-2"></i>Request</a>
                         <ul class="submenu collapse">
-                            <li><a class="nav-link" href="certificate-request.php">Certificate Request </a></li>
                             <li><a class="nav-link" href="blotter-request.php">Blotter Request </a></li>
+                            <li><a class="nav-link" href="certificate-request.php">Certificate Request </a></li>
                             <li><a class="nav-link" href="rental-request.php">Rental Request</a></li>
                             <li><a class="nav-link" href="#">Resident Registration</a></li>
                             <li><a class="nav-link" href="#">Other Service Request </a></li>
@@ -51,9 +51,9 @@
                         <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text fw-bold nav-link fs-6">
                             <i class="fas fa-book my-0 me-2"></i>Record</a>
                         <ul class="submenu collapse">
-                            <li><a class="nav-link" href="#">Certification Record </a></li>
-                            <li><a class="nav-link" href="#">Blotter Record </a></li>
-                            <li><a class="nav-link" href="#">Rental Record</a></li>
+                            <li><a class="nav-link" href="manage-blotter.php">Blotter Record </a></li>
+                            <li><a class="nav-link" href="manage-certificate.php">Certification Record </a></li>
+                            <li><a class="nav-link" href="manage-rental.php">Rental Record</a></li>
                             <li><a class="nav-link" href="#">Resident Record</a></li>
                             <li><a class="nav-link" href="#">Other Service Record </a></li>
                         </ul>

@@ -17,7 +17,7 @@
     
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
-    <title>Bootstap 5 Responsive Admin Dashboard</title>
+    <title>Current Announcement</title>
     <script>
         
         document.addEventListener("DOMContentLoaded", function(){
@@ -104,7 +104,7 @@
                         </h4>
                         <br><br><br>
                         <div class="testulit" style="border-radius: 25px; ">
-                            <h5 style="text-align: justify; margin:25px; text-indent: 10%;">Dear fellow staff, I am pleased to announce to all of you that [name] has been promoted to [new role within the company]. [name] has worked here at [company's name] for [length of time], and was instrumental in [address some important work and/or achievement]. </h5>
+                            <h5 style="text-align: justify; margin:25px; text-indent: 5%;">Dear fellow staff, I am pleased to announce to all of you that [name] has been promoted to [new role within the company]. [name] has worked here at [company's name] for [length of time], and was instrumental in [address some important work and/or achievement]. </h5>
                         </div>
                         <h3 style="margin: 25px; color: #021f4e;">Announced By:</h3>
                         <h2 style="margin: 25px; color: #021f4e;">Chairman Ledesma</h2>
