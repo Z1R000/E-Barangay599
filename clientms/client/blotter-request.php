@@ -43,7 +43,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
     
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
-    <title>Bootstap 5 Responsive Admin Dashboard</title>
+    <title>Blotter Request</title>
     <script>
         
         document.addEventListener("DOMContentLoaded", function(){
@@ -101,7 +101,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Announcement List</h2>
+                    <h2 class="fs-2 m-0">Blotter Request</h2>
                     
                 </div>
                 
@@ -155,7 +155,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 	
 	<br>
 	<!--kinopya ko mula certificate request pa lagyan nalang backend baka mapunta sa ibang db hahaha-->
-	<button type="submit" class="btn btn-default" name="submit" id="submit" style="color: white; background-color: #021f4e; border: 1px; width: 10%; border-radius:25px;">Create</button>
+	<button type="submit" class="btn btn-default" name="submit" id="submit" style="color: white; background-color: #021f4e; border: 1px; width: 20%; border-radius:25px;">Create</button>
 <br>	 
 </div>
 </div>
