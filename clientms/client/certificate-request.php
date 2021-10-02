@@ -101,7 +101,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Announcement List</h2>
+                    <h2 class="fs-2 m-0">Certificate Request</h2>
                     
                 </div>
                 
@@ -118,7 +118,8 @@ if (strlen($_SESSION['clientmsuid']==0)) {
             <div class="sub-heard-part">
                 <ol class="breadcrumb m-b-0"style="text-indent: 15px; margin-left: 2.5%;">
                     <li><a href="dashboard.php">Home</a></li>/
-                    <li class="active">Announcement List</li>
+					<li class="active">Request</li>/
+                    <li class="active">Certificate Request</li>
                 </ol>
             </div>
 
