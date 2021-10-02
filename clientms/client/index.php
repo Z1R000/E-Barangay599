@@ -32,6 +32,7 @@ echo "<script>alert('Invalid Details');</script>";
 <head>
 <link href="css/font-awesome.css" rel="stylesheet"> 
 <title>599 Resident Login</title>
+<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
 <style>
 	body{
