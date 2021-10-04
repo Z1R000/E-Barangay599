@@ -17,7 +17,7 @@
     
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
-    <title>Admin Dashboard</title>
+    <title>Resident Dashboard</title>
     <script>
         
         document.addEventListener("DOMContentLoaded", function(){
@@ -76,7 +76,7 @@
                     <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
                     <h2 class="fs-2 m-0">Dashboard</h2>
                 </div>
-
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -87,13 +87,29 @@
                     <?php include_once('includes/usertoggle.php');?>
                 <!--User-->
             </nav>
-
+            <div class="container-fluid px-4">
+                <div class = "table-responsive" style="background-color: aliceblue;border-radius:4px;overflow: hidden;">
+                    <h1 style="float: left; margin:25px;    color: #021f4e;">Announcement</h2>
+                        <br>
+                        <h4 style="float: right; margin: 25px; color: #021f4e;">
+                            For April 1, 2021 to April 3, 2021 <?php  //echo $row-> ContactName;?>
+                        </h4>
+                        <br><br><br>
+                        <div class="testulit" style="border-radius: 25px; ">
+                            <h5 style="text-align: justify; margin:25px; text-indent: 5%;">Dear fellow staff, I am pleased to announce to all of you that [name] has been promoted to [new role within the company]. [name] has worked here at [company's name] for [length of time], and was instrumental in [address some important work and/or achievement]. </h5>
+                        </div>
+                        <h3 style="margin: 25px; color: #021f4e;">Announced By:</h3>
+                        <h2 style="margin: 25px; color: #021f4e;">Chairman Ledesma</h2>
+                
+                </div>
+            </div>
             <div class="container-fluid px-4">
                 <div class="row g-3 my-2">
                     <div class="w-100 col-lg-5">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             
                             <i class="fas fa-user fs-1 primary-text border rounded-full secondary-bg p-4"></i>
+                            
                             <div>
                                 <h3 class="fs-2">5000</h3>
                                 <a class = "link-dark fs-3 card-text" href ="#">Residents</a>
@@ -163,6 +179,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <!--
                 <div class="row my-5">
                     <h3 class="fs-4 mb-3">Recent Orders</h3>
@@ -257,6 +274,7 @@
             </div>
         </div>
     </div>
+    
     <!-- /#page-content-wrapper -->
     </div>
 
