@@ -234,7 +234,18 @@ echo htmlentities($tser);
                     <div class="col-md-4">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
-                                <h3 class="fs-2" tooltip = "Number of pending requests">320</h3>
+                                <h3 class="fs-2" tooltip = "Number of pending requests"><?php
+									$sql6="select count(tblresident.voter) as voter
+									 from tblresident where tblresident.voter='Yes'";
+
+									  $query6 = $dbh -> prepare($sql6);
+									  $query6->execute();
+									  $results6=$query6->fetchAll(PDO::FETCH_OBJ);
+									  foreach($results6 as $row6)
+									{
+
+									$voter=$row6->voter;
+									}echo htmlentities($voter);?></h3>
                                 <a class = "link-dark fs-4 card-text" href ="#">Voters</a>
                             </div>
                             <i class="fas fa-vote-yea fs-1 primary-text border rounded-full secondary-bg p-3"></i>
@@ -244,7 +255,19 @@ echo htmlentities($tser);
                     <div class="col-md-4">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
-                                <h3 class="fs-2">50</h3>
+                                <h3 class="fs-2"><?php
+									$sql7 ="SELECT TIMESTAMPDIFF(YEAR, BirthDate, CURDATE()) AS sen7 from tblresident";
+									$query7 = $dbh -> prepare($sql7);
+									$query7->execute();
+									$results7=$query7->fetchAll(PDO::FETCH_OBJ);
+									$cnt7 = 0;
+									foreach($results7 as $row7){
+										$get7 = $row5->sen7;
+										if ($get7 >= 60){
+											$cnt7 += 1;
+										}
+									}
+									echo htmlentities($cnt7);?></h3>
                                 <a class = "link-dark fs-4 card-text" href ="#">Senior Citizens</a>
                             </div>
                             <i class="fas fa-blind fs-1 primary-text border rounded-full secondary-bg p-3"></i>
@@ -253,7 +276,13 @@ echo htmlentities($tser);
                     <div class="col-md-4">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
-                                <h3 class="fs-2">50</h3>
+                                <h3 class="fs-2"><?php 
+									$sql8 ="SELECT ID from tbladmin ";
+									$query8 = $dbh -> prepare($sql8);
+									$query8->execute();
+									$results8=$query8->fetchAll(PDO::FETCH_OBJ);
+									$tresidents=$query8->rowCount();
+									echo htmlentities($tresidents);?></h3>
                                 <a class = "link-dark fs-4 card-text" href ="#">Officials</a>
                             </div>
                             <i class="fas fa-user-shield fs-1 primary-text border rounded-full secondary-bg p-3"></i>
