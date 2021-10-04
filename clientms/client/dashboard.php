@@ -231,23 +231,32 @@ echo htmlentities($tser);
                         
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <h3 class="fs-2" tooltip = "Number of pending requests">320</h3>
-                                <a class = "link-dark fs-4 card-text" href ="#">Pending requests</a>
+                                <a class = "link-dark fs-4 card-text" href ="#">Voters</a>
                             </div>
-                            <i class="fas fa-exclamation-circle fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                            <i class="fas fa-vote-yea fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <h3 class="fs-2">50</h3>
-                                <a class = "link-dark fs-4 card-text" href ="#">Transaction Logs</a>
+                                <a class = "link-dark fs-4 card-text" href ="#">Senior Citizens</a>
                             </div>
-                            <i class="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                            <i class="fas fa-blind fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            <div>
+                                <h3 class="fs-2">50</h3>
+                                <a class = "link-dark fs-4 card-text" href ="#">Officials</a>
+                            </div>
+                            <i class="fas fa-user-shield fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
                     </div>
                 </div>
