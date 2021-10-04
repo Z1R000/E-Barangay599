@@ -1,3 +1,11 @@
+<?php
+session_start();
+error_reporting(0);
+include('includes/dbconnection.php');
+if (strlen($_SESSION['clientmsuid']==0)) {
+  header('location:logout.php');
+  } 
+     ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -91,15 +99,26 @@
                 <div class = "table-responsive" style="background-color: aliceblue;border-radius:4px;overflow: hidden;">
                     <h1 style="float: left; margin:25px;    color: #021f4e;">Announcement</h2>
                         <br>
-                        <h4 style="float: right; margin: 25px; color: #021f4e;">
-                            For April 1, 2021 to April 3, 2021 <?php  //echo $row-> ContactName;?>
+						<?php 
+							$sql ="SELECT distinct tblannouncement.ID, tblannouncement.announcement, tblannouncement.announcementDate, tblannouncement.endDate, tblannouncement.adminID, tbladmin.BarangayPosition, tblresident.LastName from tblannouncement join tbladmin on tblannouncement.adminID = tbladmin.ID join tblresident on tbladmin.ID = tblresident.ID order by tblannouncement.ID DESC LIMIT 1";
+							$query = $dbh -> prepare($sql);
+							$query->execute();
+							$results=$query->fetchAll(PDO::FETCH_OBJ);
+							foreach($results as $row)
+							{ 
+								$sDate = $row->announcementDate;
+								$eDate = $row->endDate;
+
+						?>
+                        <h4 style="float: right; margin: 25px; color: #021f4e; text-align: justify;">
+                            For <?php  echo date('l, jS F Y - h:i A', strtotime($sDate));?> <br> To <?php  echo date('l, jS F Y - h:i A', strtotime($eDate));?>
                         </h4>
                         <br><br><br>
                         <div class="testulit" style="border-radius: 25px; ">
-                            <h5 style="text-align: justify; margin:25px; text-indent: 5%;">Dear fellow staff, I am pleased to announce to all of you that [name] has been promoted to [new role within the company]. [name] has worked here at [company's name] for [length of time], and was instrumental in [address some important work and/or achievement]. </h5>
+                            <h5 style="text-align: justify; margin:25px; text-indent: 5%;"><?php  echo $row->announcement;?> </h5>
                         </div>
                         <h3 style="margin: 25px; color: #021f4e;">Announced By:</h3>
-                        <h2 style="margin: 25px; color: #021f4e;">Chairman Ledesma</h2>
+                        <h2 style="margin: 25px; color: #021f4e;"><?php  echo $row->BarangayPosition;?> <?php  echo $row->LastName;}?></h2>
                 
                 </div>
             </div>
@@ -111,7 +130,14 @@
                             <i class="fas fa-user fs-1 primary-text border rounded-full secondary-bg p-4"></i>
                             
                             <div>
-                                <h3 class="fs-2">5000</h3>
+                                <h3 class="fs-2"><?php 
+$sql1 ="SELECT ID from tblresident ";
+$query1 = $dbh -> prepare($sql1);
+$query1->execute();
+$results1=$query1->fetchAll(PDO::FETCH_OBJ);
+$tser=$query1->rowCount();
+echo htmlentities($tser);
+?>	</h3>
                                 <a class = "link-dark fs-3 card-text" href ="#">Residents</a>
                             </div>
                         </div>
@@ -120,7 +146,18 @@
                     <div class="col-md-3">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
-                                <h3 class="fs-2">2500</h3>
+                                <h3 class="fs-2"><?php
+								$sql2="select count(tblresident.Gender) as male
+									from tblresident where tblresident.Gender='Male'";
+
+								  $query2 = $dbh -> prepare($sql2);
+								  $query2->execute();
+								  $results2=$query2->fetchAll(PDO::FETCH_OBJ);
+								  foreach($results2 as $row2)
+								{
+
+								$male=$row2->male;
+								}echo htmlentities($male);?></h3>
                                 <a class = "link-dark fs-4 card-text" href ="#">Male</a>
                             </div>
                                 <i class="fas fa-mars fs-1 primary-text border rounded-circle secondary-bg p-3"></i>
@@ -129,7 +166,18 @@
                     <div class="col-md-3">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
-                                <h3 class="fs-2">2500</h3>
+                                <h3 class="fs-2"><?php
+									$sql3="select count(tblresident.Gender) as fem
+									from tblresident where tblresident.Gender='Female'";
+
+									  $query3 = $dbh -> prepare($sql3);
+									  $query3->execute();
+									  $results3=$query3->fetchAll(PDO::FETCH_OBJ);
+									  foreach($results3 as $row3)
+									{
+
+									$fem=$row3->fem;
+									}echo htmlentities($fem);?></h3>
                                 <a class = "link-dark fs-4 card-text" href ="#">Female</a>
                               
                             </div>
@@ -141,7 +189,19 @@
                     <div class="col-md-3">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
-                                <h3 class="fs-2">2320</h3>
+                                <h3 class="fs-2"><?php
+									$sql4 ="SELECT TIMESTAMPDIFF(YEAR, BirthDate, CURDATE()) AS adult4 from tblresident";
+									$query4 = $dbh -> prepare($sql4);
+									$query4->execute();
+									$results4=$query4->fetchAll(PDO::FETCH_OBJ);
+									$cnt4 = 0;
+									foreach($results4 as $row4){
+										$get4 = $row4->adult4;
+										if ($get4 >= 18){
+											$cnt4 += 1;
+										}
+									}
+									echo htmlentities($cnt4);?></h3>
                                 <a class = "link-dark fs-4 card-text" href ="#">Adults</a>
                             </div>
                             <i class="fas fa-user-circle fs-1 primary-text border rounded-full secondary-bg p-3"></i>
@@ -151,7 +211,19 @@
                     <div class="col-md-3">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
-                                <h3 class="fs-2">1203</h3>
+                                <h3 class="fs-2"><?php
+									$sql5 ="SELECT TIMESTAMPDIFF(YEAR, BirthDate, CURDATE()) AS min5 from tblresident";
+									$query5 = $dbh -> prepare($sql5);
+									$query5->execute();
+									$results5=$query5->fetchAll(PDO::FETCH_OBJ);
+									$cnt5 = 0;
+									foreach($results5 as $row5){
+										$get5 = $row5->min5;
+										if ($get5 < 18){
+											$cnt5 += 1;
+										}
+									}
+									echo htmlentities($cnt5);?></h3>
                                 <a class = "link-dark fs-4 card-text" href ="#">Minors</a>
                             </div>
                             <i class="fas fa-child fs-1 primary-text border rounded-full secondary-bg p-3"></i>
