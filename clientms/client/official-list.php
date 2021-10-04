@@ -118,7 +118,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                                     <tbody>
                                         <?php
 
-$sql="SELECT distinct tbladmin.ID, tblresident.ID, tbladmin.BarangayPosition, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Age, tbladmin.dutyTime, tbladmin.endDuty,
+$sql="SELECT distinct tbladmin.ID, tblresident.ID, tbladmin.BarangayPosition, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tbladmin.dutyTime, tbladmin.endDuty,
 tblresident.Cellphnumber from tbladmin JOIN tblresident WHERE tbladmin.residentID=tblresident.ID";
 $query = $dbh -> prepare($sql);
 $query->execute();
