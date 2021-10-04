@@ -139,49 +139,49 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 										<th><span  style="color: #021f4e;">Certificate Price</th>
 									</tr>
 									<tr>
-										<td><select  name="certid"  class="form-control select2" required='true' style="padding: 1px; font-size: 0.8em; width: 90%;">
-										<option value="">Choose Certificate</option>
-										<option value="1">Barangay Certificate</option>
-										<option value="2">Barangay Clearance</option>
-										<option value="3">Barangay Permit</option>
-										<option value="4">Proof of Residency</option>
-										<option value="5">Business Permit</option>
-										<option value="6">Business Clearance</option>
-										<option value="9">Certificate of Good Moral</option>
-										<option value="10">Lipat-bahay Clearance</option>
-										<option value="11">Certificate of Acceptance</option>
-										<option value="12">Certificate of Cohabitation</option>
-										<option value="13">Certificate of Indigency</option>
-										<option value="14">Certificate to File Action</option>
-										<option value="15">Barangay ID</option>
-										<option value="16">Medical Assistance/Senior Citizen</option>
-										<option value="17">Referral Recommendation</option>
-										<option value="18">Filling Fee</option>
+										<td>
+											<?php
+											$sql ="SELECT ID, CertificateName, CertificatePrice from tblcertificate";
+											$query = $dbh -> prepare($sql);
+											$query->execute();
+											$results=$query->fetchAll(PDO::FETCH_OBJ);
+											if($query->rowCount() > 0)
+											{
+												echo "<select  name='certid' id='certid' class='form-control select2' required='true' style='padding: 1px; font-size: 0.8em; width: 90%;'>
+													<option value=''>Choose Certificate</option>";
+											foreach($results as $row)
+											{
+											echo "<option value='$row->ID'>$row->CertificateName</option>";
+											}?>
+											</td>
+											<td style='color: black;'></td>
+											<td style='color: black;'><?php echo"$row->CertificatePrice</td>"; 
 									
-								</select></td>
-										<td style="color: black;"></td>
-										<td style="color: black;">Php 30.00</td>
+											echo "</select>";}
+											?>
+										</td>
 									</tr>
 									<tr>
 										<td>
-											<div class="1 2 3 4 9 10 11 12 13 14 15 16 17 18 box">
+											<div class="1 2 3 4 9 10 11 12 13 14 15 16 17 18 101 102 103 104 105 box">
 												
 												<table>
 													<tr>
 														<td>Purpose:</td>
 													</tr>
 													<tr>
-														<td><select>
-															<option>Personal Use</option>
-															<option>Business Use</option>
-															<option>Reference</option>
-															<option>Financing</option>
-															<option>Local Employment</option>
+														<td><select id="typeofuse">
+															<option value="100">-Choose-</option>
+															<option value="101">Personal Use</option>
+															<option value="102">Business Use</option>
+															<option value="103">Reference</option>
+															<option value="104">Financing</option>
+															<option value="105">Local Employment</option>
 														</select></td>
 													</tr>
 												</table>
 											</div>
-											<div class="5 6 box">
+											<div class="5 6 7 8 102 box">
 												
 												<table style="width: 130%;">
 													<tr>
@@ -200,11 +200,11 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 													</tr>
 													<tr>
 														<td>
-															<input type="radio" id="10b" name="capital" value="10b">
+															<input type="radio" id="10b" name="capital" value="6">
 															<label for="10b" style="color: black;">Php10,000-below</label><br>
-															<input type="radio" id="101" name="capital" value="101">
+															<input type="radio" id="101" name="capital" value="7">
 															<label for="101" style="color: black;">Php10,001-Php100-000</label><br>
-															<input type="radio" id="10a" name="capital" value="10a">
+															<input type="radio" id="10a" name="capital" value="8">
 															<label for="10a" style="color: black;">Php100,001-Above</label><br>
 
 														</td>
