@@ -95,22 +95,22 @@
             </div>
 
 
-            <div class="container-fluid px-4">
-                <div class = "table-responsive" style="background-color: aliceblue;border-radius: 25px;overflow: hidden;">
-                    <h1 style="float: left; margin:25px;    color: #021f4e;">Announcement</h2>
-                        <br>
-                        <h4 style="float: right; margin: 25px; color: #021f4e;">
-                            For April 1, 2021 to April 3, 2021 <?php  //echo $row-> ContactName;?>
-                        </h4>
-                        <br><br><br>
-                        <div class="testulit" style="border-radius: 25px; ">
-                            <h5 style="text-align: justify; margin:25px; text-indent: 5%;">Dear fellow staff, I am pleased to announce to all of you that [name] has been promoted to [new role within the company]. [name] has worked here at [company's name] for [length of time], and was instrumental in [address some important work and/or achievement]. </h5>
-                        </div>
-                        <h3 style="margin: 25px; color: #021f4e;">Announced By:</h3>
-                        <h2 style="margin: 25px; color: #021f4e;">Chairman Ledesma</h2>
-                
+                <div class="container-fluid px-4">
+                    <div class = "table-responsive" style="background-color: aliceblue;border-radius: 25px;overflow: hidden;">
+                        <h1 style="float: left; margin:25px;    color: #021f4e;">Announcement</h2>
+                            <br>
+                            <h4 style="float: right; margin: 25px; color: #021f4e;">
+                                For April 1, 2021 to April 3, 2021 <?php  //echo $row-> ContactName;?>
+                            </h4>
+                            <br><br><br>
+                            <div class="testulit" style="border-radius: 25px; ">
+                                <h5 style="text-align: justify; margin:25px; text-indent: 5%;">Dear fellow staff, I am pleased to announce to all of you that [name] has been promoted to [new role within the company]. [name] has worked here at [company's name] for [length of time], and was instrumental in [address some important work and/or achievement]. </h5>
+                            </div>
+                            <h3 style="margin: 25px; color: #021f4e;">Announced By:</h3>
+                            <h2 style="margin: 25px; color: #021f4e;">Chairman Ledesma</h2>
+                    
+                    </div>
                 </div>
-            </div>
     <!-- /#page-content-wrapper -->
     </div>
 
