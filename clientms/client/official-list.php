@@ -65,6 +65,10 @@ if (strlen($_SESSION['clientmsuid']==0)) {
         padding-left: 1rem; 
         padding-right: 1rem;
     }
+    .divfortable{
+    background-color: white;
+    overflow-x:auto;
+    }
              
     </style>
 
@@ -106,7 +110,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 			<div style="background-color: aliceblue;border-radius: 10px;padding: 25px;">
 				<div class="graph-visual tables-main">
                     
-                    <div class="graph" style="border-radius: 15px;">
+                    <div class="divfortable">
                         <div class="tables">
                             <table class="table"> <thead style="background-color: #021f4e;">
                                  <th><span style="color: #fff; font-size: 120%;">Barangay Position</span></th> 
