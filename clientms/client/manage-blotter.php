@@ -14,7 +14,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
@@ -26,7 +26,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
     
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
-    <title>Announcement List</title>
+    <title>Officials List</title>
     <script>
         
         document.addEventListener("DOMContentLoaded", function(){
@@ -64,13 +64,11 @@ if (strlen($_SESSION['clientmsuid']==0)) {
         padding: 0; 
         padding-left: 1rem; 
         padding-right: 1rem;
-        
     }
-    .divfortable{
+	.divfortable{
     background-color: white;
     overflow-x:auto;
     }
-
              
     </style>
 
@@ -86,7 +84,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Announcement List</h2>
+                    <h2 class="fs-2 m-0">Blotter Record</h2>
                     
                 </div>
                 
@@ -101,17 +99,18 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                 <!--User-->
             </nav>
             <div class="sub-heard-part">
-                <ol class="breadcrumb m-b-0"style="text-indent: 15px; margin-left: 2.5%;">
+                <ol class="breadcrumb m-b-0"style="text-indent: 15px; margin-left: 2.5%;overflow-x:auto;">
                     <li><a href="dashboard.php">Home</a></li>/
-                    <i class="fas fa-paperclip my-0 me-2"></i>
-					<li class="active">Announcement List</li>
+                    <li class="active">Record</li>/
+                    <li class="active">Blotter Record</li>
                 </ol>
             </div>
 
 
             <div class="container-fluid px-4">
-				<div class="divfortable">
-                <div class="graph">
+			<div style="background-color: aliceblue;border-radius: 10px;padding: 25px;">
+			<h3 class="inner-tittle two">Blotter Request List</h3>
+            <div class="divfortable">
 							<div class="tables">
 								<table class="table" border="1">
 								<thead style="background-color: #021f4e;">
@@ -153,8 +152,6 @@ foreach($results as $row)
 							</div>
 
 						</div>
-                </div>
-			</div>
                 <!-- /#page-content-wrapper -->
     </div>
 
@@ -167,7 +164,6 @@ foreach($results as $row)
             el.classList.toggle("toggled");
         };
     </script>
-    
 </body>
 
 </html>
