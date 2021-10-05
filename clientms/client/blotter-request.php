@@ -177,13 +177,8 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e;">Defendant/s:</label> <input type="text" name="comp" placeholder="Defendant/s Name" value="" class="form-control" required='true' style=" font-size: 0.8em;"> </div>
 	
 	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e;">Incident Location:</label> <input type="text" name="incloc" placeholder="Incident Location" value="" class="form-control" required='true' style=" font-size: 0.8em;"> </div>
-	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e;">Incident Time and Date</label> <input type="datetime-local" name="incd" value="" placeholder="Incident Date" class="form-control" required='true' style=" font-size: 0.8em;"> </div> 
-<<<<<<< Updated upstream
-	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e;">Narrative Incident:</label> <textarea type="text" name="blotsum" placeholder="Narrative" value="" class="form-control" required='true' rows="4" cols="3" style=" font-size: 0.8em;"></textarea> </div>	
-=======
+	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e;">Incident Time and Date</label> <input type="datetime-local" name="incd" value="" placeholder="Incident Date" class="form-control" required='true' style=" font-size: 0.8em;"> </div>
 	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e;">Narrative Incident:</label> <textarea type="text" name="blotsum" placeholder="Narrative" value="" class="form-control" required='true' rows="4" cols="3" style=" font-size: 0.8em;"></textarea> </div>
-	
->>>>>>> Stashed changes
 	<br>
 	<!--kinopya ko mula certificate request pa lagyan nalang backend baka mapunta sa ibang db hahaha-->
 	<button type="submit" class="btn btn-default" name="submit" id="submit" style="color: white; background-color: #021f4e; border: 1px; width: 20%; border-radius:25px;">Create</button>
