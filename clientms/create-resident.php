@@ -2,97 +2,108 @@
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
-    if(isset($_POST['submit']))
-  {
-	  
- $acctid=mt_rand(100000000, 999999999);
- $residenttype=$_POST['residenttype'];
- $voter=$_POST['voter'];
- $password=$_POST['password'];
- $lname=$_POST['lname'];
- $fname=$_POST['fname'];
- $mname=$_POST['mname'];
- $bplace=$_POST['bplace'];
- $bdate=$_POST['bdate'];
- $address=$_POST['address'];
- $contact=$_POST['contact'];
- $tin=$_POST['tin'];
- $sss=$_POST['sss'];
- $age=$_POST['age'];
- $cstatus=$_POST['cstatus'];
- $email=$_POST['email'];
- 
-$sql="insert into tblresident (AccountID,ResidentType,voter,LastName,FirstName,MiddleName,BirthPlace,BirthDate,Address,Cellphnumber,tinNumber,sssNumber,AGE,CivilStatus,Email,Password)
-	values(:acctid,:residenttype,:voter,:lname,:fname,:mname,:bplace,:bdate,:address,:contact,:tin,:sss,:age,:cstatus,:email,:password)";
-$query=$dbh->prepare($sql);
-$query->bindParam(':acctid',$acctid,PDO::PARAM_STR);
-$query->bindParam(':residenttype',$residenttype,PDO::PARAM_STR);
-$query->bindParam(':voter',$voter,PDO::PARAM_STR);
-$query->bindParam(':lname',$lname,PDO::PARAM_STR);
-$query->bindParam(':fname',$fname,PDO::PARAM_STR);
-$query->bindParam(':mname',$mname,PDO::PARAM_STR);
-$query->bindParam(':bplace',$bplace,PDO::PARAM_STR);
-$query->bindParam(':bdate',$bdate,PDO::PARAM_STR);
-$query->bindParam(':address',$address,PDO::PARAM_STR);
-$query->bindParam(':contact',$contact,PDO::PARAM_STR);
-$query->bindParam(':tin',$tin,PDO::PARAM_STR);
-$query->bindParam(':sss',$sss,PDO::PARAM_STR);
-$query->bindParam(':age',$age,PDO::PARAM_STR);
-$query->bindParam(':cstatus',$cstatus,PDO::PARAM_STR);
-$query->bindParam(':email',$email,PDO::PARAM_STR);
-$query->bindParam(':password',$password,PDO::PARAM_STR);
- $query->execute();
+if (strlen($_SESSION['clientmsuid']==0)) {
+  header('location:logout.php');
+  } else{
+  	?>
 
-   $LastInsertId=$dbh->lastInsertId();
-   if ($LastInsertId>0) {
-    echo '<script>alert("Resident request has been sent.")</script>';
-echo "<script>window.location.href ='create-resident.php'</script>";
-  }
-  else
-    {
-         echo '<script>alert("Something Went Wrong. Please try again")</script>';
-    }
-}
+<!DOCTYPE html>
+<html lang="en">
 
-?>
-<!DOCTYPE HTML>
-<html>
 <head>
-	<title>599 Resident Request</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js">
+</script>
+<script>
+        $(document).ready(function(){
+            $("select").change(function(){
+                $(this).find("option:selected").each(function(){
+                    var optionValue = $(this).attr("value");
+                    if(optionValue){
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else{
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+</script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
-	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-	<!-- Bootstrap Core CSS -->
-	<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-	<!-- Custom CSS -->
-	<link href="css/style.css" rel='stylesheet' type='text/css' />
-	<!-- Graph CSS -->
-	<link href="css/font-awesome.css" rel="stylesheet"> 
-	<!-- jQuery -->
-	<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
-	<!-- lined-icons -->
-	<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
-	<!-- //lined-icons -->
-	<script src="js/jquery-1.10.2.min.js"></script>
-	<!--clock init-->
-	<script src="js/jquery.nicescroll.js"></script>
-	<script src="js/scripts.js"></script>
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
-	<style>
-	</style>
-</head> 
-<body style="background-color: #fff;">
-<div class="page-container" >
-<!--/content-inner-->
-<div class="left-content" >
-<div class="inner-content" >
-	
-<?php include_once('includes/header.php');?>
-				<!--//outer-wp-->
+    <link rel="stylesheet" href="client/css/sidebar.css" />
+    
+	<link rel="icon" href="IMAGES/Barangay.png" type="image/icon type">
 
-					<!--/sub-heard-part-->	
-					<!--/forms-->
-<h2 class="inner-tittle" style="font-weight: 700; Margin: 0% 3%;">Add Residents </h2>
+    <title>599 Registration</title>
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", function(){
+        document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
+        element.addEventListener('click', function (e) {
+        let nextEl = element.nextElementSibling;
+        let parentEl  = element.parentElement;	
+
+        if(nextEl) {
+            e.preventDefault();	
+            let mycollapse = new bootstrap.Collapse(nextEl);
+            
+            if(nextEl.classList.contains('show')){
+              mycollapse.hide();
+            } else {
+                mycollapse.show();
+                // find other submenus with class=show
+                var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
+                // if it exists, then close all of them
+                if(opened_submenu){
+                  new bootstrap.Collapse(opened_submenu);
+                }
+            }
+        }
+            }); // addEventListener
+        }) // forEach
+        }); 
+    </script>
+
+
+    <style type = "text/css">
+    .sidebar li .submenu{ 
+        list-style: none; 
+        margin: 0; 
+        padding: 0; 
+        padding-left: 1rem; 
+        padding-right: 1rem;
+    }
+    .box{
+		padding:10px;
+		display:none;
+		margin:10px;
+	}
+    </style>
+
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        
+            
+
+			<!--yung div mismo-->
+            <div class="container-fluid px-4" style="margin-top:25px;">
+				<div style="background-color: aliceblue;border-radius: 25px;padding: 25px;">
+                <h2 class="inner-tittle" style="font-weight: 700; Margin: 0% 3%;">Registration Form</h2>
 <div class="graph-form" >
 <div class="form-body" style="margin: 1% 6%;">
 <form method="post"> 
@@ -220,39 +231,22 @@ echo "<script>window.location.href ='create-resident.php'</script>";
 	 
 </div>
 </div>
-<div class="footer" style="text-align: center;">
-		
-		<?php include_once('includes/footer.php');?>
-	</div>
-</div>
-</div>	
-<div class="clearfix" ></div>		
-</div>
-<script>
-		var toggle = true;
+						</div>
+				
+					</div>
+                <!-- /#page-content-wrapper -->
+    </div>
 
-		$(".sidebar-icon").click(function() {                
-			if (toggle)
-			{
-				$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-				$("#menu span").css({"position":"absolute"});
-			}
-			else
-			{
-				$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-				setTimeout(function() {
-					$("#menu span").css({"position":"relative"});
-				}, 400);
-			}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var el = document.getElementById("wrapper");
+        var toggleButton = document.getElementById("menu-toggle");
 
-			toggle = !toggle;
-		});
-	</script>
-	<!--js -->
-	<script src="js/jquery.nicescroll.js"></script>
-	<script src="js/scripts.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
+        toggleButton.onclick = function () {
+            el.classList.toggle("toggled");
+        };
+    </script>
 </body>
+
 </html>
+<?php } ?>
