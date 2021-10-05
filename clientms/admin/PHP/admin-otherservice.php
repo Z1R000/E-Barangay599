@@ -40,7 +40,7 @@
 <body>
 
     <?php 
-        include ('sidebar.php');
+        include ('../includes/sidebar.php');
     ?> 
             <!--breadcrumb-->
             <div class="container mx-5">
