@@ -5,6 +5,40 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsuid']==0)) {
   header('location:logout.php');
   } else{
+	  if(isset($_POST['submit'])){
+		$uid=$_SESSION['clientmsuid'];
+		$rs='Pending';
+		$blottype=$_POST['blottype'];
+		 $incloc=$_POST['incloc'];
+		 $incd=$_POST['incd'];
+		 $res=$_POST['res'];
+		 $comp=$_POST['comp'];
+		 $blotsum=$_POST['blotsum'];
+
+		$sql="insert into tblblotterrequest(userID,blotterType,incidentLocation,incidentDate,respondent,complainant,blotterSummary,requestStatus)values(:uid,:blottype,:incloc,:incd,:res,:comp,:blotsum,:rs)";
+		$query=$dbh->prepare($sql);
+		$query->bindParam(':uid',$uid,PDO::PARAM_STR);
+		$query->bindParam(':blottype',$blottype,PDO::PARAM_STR);
+		$query->bindParam(':incloc',$incloc,PDO::PARAM_STR);
+		$query->bindParam(':incd',$incd,PDO::PARAM_STR);
+		$query->bindParam(':res',$res,PDO::PARAM_STR);
+		$query->bindParam(':comp',$comp,PDO::PARAM_STR);
+		$query->bindParam(':blotsum',$blotsum,PDO::PARAM_STR);
+		$query->bindParam(':rs',$rs,PDO::PARAM_STR);
+		$query->execute();
+
+		$LastInsertId=$dbh->lastInsertId();
+		   if ($LastInsertId>0) {
+			echo '<script>swal({
+					  title: "Blotter request sent.",
+					  text: "Please wait for your request to be verified.",
+					  icon: "success",
+					});</script>';
+			echo "<script>window.location.href ='blotter-request.php'</script>";
+			}else{
+				 echo '<script>swal("Blotter Request Failed.", "Please check if your information is correct", "error")</script>';
+			}
+		}
   	?>
 
 <!DOCTYPE html>
@@ -13,6 +47,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 <head>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js">
 </script>
+<script src="js/sweetalert.min.js"></script>
 <script>
         $(document).ready(function(){
             $("select").change(function(){
@@ -143,7 +178,12 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 	
 	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e;">Incident Location:</label> <input type="text" name="incloc" placeholder="Incident Location" value="" class="form-control" required='true' style=" font-size: 0.8em;"> </div>
 	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e;">Incident Time and Date</label> <input type="datetime-local" name="incd" value="" placeholder="Incident Date" class="form-control" required='true' style=" font-size: 0.8em;"> </div> 
+<<<<<<< Updated upstream
 	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e;">Narrative Incident:</label> <textarea type="text" name="blotsum" placeholder="Narrative" value="" class="form-control" required='true' rows="4" cols="3" style=" font-size: 0.8em;"></textarea> </div>	
+=======
+	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e;">Narrative Incident:</label> <textarea type="text" name="blotsum" placeholder="Narrative" value="" class="form-control" required='true' rows="4" cols="3" style=" font-size: 0.8em;"></textarea> </div>
+	
+>>>>>>> Stashed changes
 	<br>
 	<!--kinopya ko mula certificate request pa lagyan nalang backend baka mapunta sa ibang db hahaha-->
 	<button type="submit" class="btn btn-default" name="submit" id="submit" style="color: white; background-color: #021f4e; border: 1px; width: 20%; border-radius:25px;">Create</button>
