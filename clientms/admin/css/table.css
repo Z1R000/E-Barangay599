@@ -1,0 +1,64 @@
+.sidebar li .submenu{ 
+    list-style: none; 
+    margin: 0; 
+    padding: 0; 
+    padding-left: 1rem; 
+    padding-right: 1rem;
+}
+
+#search-form{
+    width: 50%;
+}
+
+table,tr,td{
+    text-align: center;
+}
+table{
+    background-color: white;
+ 
+}
+td{
+    color: rgb(43, 40, 40);
+}
+
+
+.container-fluid{
+    width: 95%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.container{
+    margin: 0;
+}
+.ser{
+    margin-left: 57.5px;
+}
+
+.form-control{
+    width: 100%;
+}
+
+@media (max-width: 576px){
+    td,th{
+        font-size: 10px;
+
+    }
+
+    #search-form{
+       width: 100%;
+    }
+    .float-end{
+        width: 100%;
+    }
+    .ser{
+        width: 100%;
+        margin: auto;
+    }
+   
+}
+.blue{
+    background-color: #021f4e;
+}
+#blue{
+    background-color: #021f4e;
+}
