@@ -128,21 +128,24 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                                    </thead>
                                     <tbody>
                                         <?php
-$sql="SELECT distinct tblannouncement.ID, tblannouncement.announcement, tblannouncement.announcementDate, tblannouncement.adminID, tbladmin.BarangayPosition, tblresident.LastName from tblannouncement join tbladmin on tblannouncement.adminID = tbladmin.ID join tblresident on tbladmin.ID = tblresident.ID";
-$query = $dbh -> prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
+											$sql="SELECT distinct tblannouncement.ID, tblannouncement.announcement, tblannouncement.announcementDate, tblannouncement.adminID, tbladmin.BarangayPosition, tblresident.LastName from tblannouncement join tbladmin on tblannouncement.adminID = tbladmin.ID join tblresident on tbladmin.ID = tblresident.ID";
+											$query = $dbh -> prepare($sql);
+											$query->execute();
+											$results=$query->fetchAll(PDO::FETCH_OBJ);
 
-$cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $row)
-{               ?>
+											$cnt=1;
+											if($query->rowCount() > 0)
+											{
+											foreach($results as $row)
+											{ 
+											$sDate = $row->announcementDate;
+											$eDate = $row->endDate;              
+										?>
                                      <tr class="active">
                                         <td style="color: black;"><?php echo $row->announcement;?></td> 
                                          <td style="color: black;"><?php echo $row->BarangayPosition;?> <?php echo $row->LastName;?></td>
-                                         <td style="color: black;"><?php echo $row->announcementDate;?></td>
-                                         <td style="color: black;"><?php echo $row->announcementDate;?></td>
+                                         <td style="color: black;"><?php  echo date('l, jS F Y - h:i A', strtotime($sDate));?></td>
+                                         <td style="color: black;"><?php  echo date('l, jS F Y - h:i A', strtotime($eDate));?></td>
                                          <td style="color: red; text-decoration: underline;">View File</td>
                                      </tr>
                                      
@@ -150,8 +153,7 @@ foreach($results as $row)
                                      </tbody> </table> 
                         </div>
                     
-                    </div>
-            
+                    </div>            
                 </div>
 			</div>
                 <!-- /#page-content-wrapper -->
@@ -171,3 +173,5 @@ foreach($results as $row)
 
 </html>
 <?php } ?>
+
+	
