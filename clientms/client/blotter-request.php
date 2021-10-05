@@ -139,7 +139,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 		<option value="Robbery">Robbery</option>
 	</select> </div>
 	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e;">Respondent/s:</label> <input type="text" name="res" placeholder="Respondent/s Name" value="" class="form-control" required='true'> </div>
-	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e;">Complainant/s:</label> <input type="text" name="comp" placeholder="Complainant/s Name" value="" class="form-control" required='true' style=" font-size: 0.8em;"> </div>
+	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e;">Defendant/s:</label> <input type="text" name="comp" placeholder="Defendant/s Name" value="" class="form-control" required='true' style=" font-size: 0.8em;"> </div>
 	
 	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e;">Incident Location:</label> <input type="text" name="incloc" placeholder="Incident Location" value="" class="form-control" required='true' style=" font-size: 0.8em;"> </div>
 	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e;">Incident Time and Date</label> <input type="datetime-local" name="incd" value="" placeholder="Incident Date" class="form-control" required='true' style=" font-size: 0.8em;"> </div> 
