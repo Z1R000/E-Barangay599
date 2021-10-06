@@ -3,7 +3,7 @@
                                     <table class = "table">
                                         <thead style= "background:#021f4e">
                                             <tr>
-                                                <td colspan = 5 class = "" style = "color: white" align = "center">Rental Certification Records</td>
+                                                <td colspan = 5 class = "" style = "color: white" align = "center">Rental Records</td>
                                             </tr>
                                         </thead>
                                         <tbody>
