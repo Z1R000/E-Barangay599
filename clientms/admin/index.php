@@ -280,7 +280,6 @@ if(isset($_POST['login']))
 				<p>Forgot password? <a href="forgot-password.php"><i>Click here</i></a></p>
 				<div align = "center">
 					<input class = "btn-primary" type="submit" onclick="myFunction()" value="LOGIN" name="login" class="sub">
-					
 				</div>
 		</form>
 		<br>

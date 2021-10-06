@@ -75,7 +75,7 @@
                                 <a href = "#add-blotter-type" class="btn btn-primary mx-1 my-1" data-bs-toggle = "modal" role = "button"><i class="fa fa-plus"></i>&nbsp;Blotter Type</a>
                             </div>
                             <div class="btn-group" role="group" >
-                                <a href = "admin-Brequest.php" class="btn btn-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;Blotter Type</a>
+                                <a href = "admin-Brequest.php" class="btn btn-primary mx-1 my-1"><i class="fa fa-list"></i>&nbsp;Requests</a>
                             </div>
                            
                         </div>
