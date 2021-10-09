@@ -57,6 +57,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 
 
     <style type = "text/css">
+    @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
     .sidebar li .submenu{ 
         list-style: none; 
         margin: 0; 
@@ -64,6 +65,46 @@ if (strlen($_SESSION['clientmsuid']==0)) {
         padding-left: 1rem; 
         padding-right: 1rem;
     }
+    h4{
+                font-family: 'Acme','sans-serif';
+            }
+            .text-inner{
+                color: white;
+            }
+            .logo{
+                color: #d3d3d3;
+            }
+            .left{
+                margin-right: 1%;
+            }
+            .minor{
+                background: #ff8c00;
+            }
+            .right{
+                margin: 13.5%;
+            }
+
+            .voters{
+                background: #008080;
+            }
+            .officials{
+                background:  #004242;
+            }
+            .dis{
+                display:none;
+            }
+
+            @media (max-width:576px){
+                .banner{
+                    display:none;
+                }
+                .right{
+                    margin-left: 8%;
+                }
+                .dis{
+                    display: flex;
+                }
+            }
              
     </style>
 
@@ -81,7 +122,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
-                    <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
+                    <i class="fa fa-align-justify test-text fs-4 me-3" id="menu-toggle"></i>
                     <h2 class="fs-2 m-0">Dashboard</h2>
                 </div>
                 
@@ -95,8 +136,8 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                     <?php include_once('includes/usertoggle.php');?>
                 <!--User-->
             </nav>
-            <div class="container-fluid px-4">
-                <div class = "table-responsive" style="background-color: aliceblue;border-radius:4px;overflow: hidden;">
+            <div class="container-fluid px-4 mb-3">
+                <div class = "table-responsive" style="background-color:aliceblue;border:1px solid black;  border-radius:4px; overflow: hidden;">
                     <h1 style="float: left; margin:25px;    color: #021f4e;">Announcement</h2>
                         <br>
 						<?php 
@@ -110,7 +151,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 								$eDate = $row->endDate;
 
 						?>
-                        <h4 style="float: right; margin: 25px; color: #021f4e; text-align: justify;">
+                        <h4 style="float: right; font-family: Segoe UI; margin: 25px; color: #021f4e; text-align: justify;">
                             For <?php  echo date('l, jS F Y - h:i A', strtotime($sDate));?> <br> To <?php  echo date('l, jS F Y - h:i A', strtotime($eDate));?>
                         </h4>
                         <br><br><br>
@@ -119,270 +160,11 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                         </div>
                         <h3 style="margin: 25px; color: #021f4e;">Announced By:</h3>
                         <h2 style="margin: 25px; color: #021f4e;"><?php  echo $row->BarangayPosition;?> <?php  echo $row->LastName;}?></h2>
-                
                 </div>
             </div>
-            <div class="container-fluid px-4">
-                <div class="row g-3 my-2">
-                    <div class="w-100 col-lg-5">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                            
-                            <i class="fas fa-user fs-1 primary-text border rounded-full secondary-bg p-4"></i>
-                            
-                            <div>
-                                <h3 class="fs-2"><?php 
-$sql1 ="SELECT ID from tblresident ";
-$query1 = $dbh -> prepare($sql1);
-$query1->execute();
-$results1=$query1->fetchAll(PDO::FETCH_OBJ);
-$tser=$query1->rowCount();
-echo htmlentities($tser);
-?>	</h3>
-                                <a class = "link-dark fs-3 card-text" href ="#">Residents</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                            <div>
-                                <h3 class="fs-2"><?php
-								$sql2="select count(tblresident.Gender) as male
-									from tblresident where tblresident.Gender='Male'";
-
-								  $query2 = $dbh -> prepare($sql2);
-								  $query2->execute();
-								  $results2=$query2->fetchAll(PDO::FETCH_OBJ);
-								  foreach($results2 as $row2)
-								{
-
-								$male=$row2->male;
-								}echo htmlentities($male);?></h3>
-                                <a class = "link-dark fs-4 card-text" href ="#">Male</a>
-                            </div>
-                                <i class="fas fa-mars fs-1 primary-text border rounded-circle secondary-bg p-3"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                            <div>
-                                <h3 class="fs-2"><?php
-									$sql3="select count(tblresident.Gender) as fem
-									from tblresident where tblresident.Gender='Female'";
-
-									  $query3 = $dbh -> prepare($sql3);
-									  $query3->execute();
-									  $results3=$query3->fetchAll(PDO::FETCH_OBJ);
-									  foreach($results3 as $row3)
-									{
-
-									$fem=$row3->fem;
-									}echo htmlentities($fem);?></h3>
-                                <a class = "link-dark fs-4 card-text" href ="#">Female</a>
-                              
-                            </div>
-                            <i class="fas fa-venus fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-3">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                            <div>
-                                <h3 class="fs-2"><?php
-									$sql4 ="SELECT TIMESTAMPDIFF(YEAR, BirthDate, CURDATE()) AS adult4 from tblresident";
-									$query4 = $dbh -> prepare($sql4);
-									$query4->execute();
-									$results4=$query4->fetchAll(PDO::FETCH_OBJ);
-									$cnt4 = 0;
-									foreach($results4 as $row4){
-										$get4 = $row4->adult4;
-										if ($get4 >= 18){
-											$cnt4 += 1;
-										}
-									}
-									echo htmlentities($cnt4);?></h3>
-                                <a class = "link-dark fs-4 card-text" href ="#">Adults</a>
-                            </div>
-                            <i class="fas fa-user-circle fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                            <div>
-                                <h3 class="fs-2"><?php
-									$sql5 ="SELECT TIMESTAMPDIFF(YEAR, BirthDate, CURDATE()) AS min5 from tblresident";
-									$query5 = $dbh -> prepare($sql5);
-									$query5->execute();
-									$results5=$query5->fetchAll(PDO::FETCH_OBJ);
-									$cnt5 = 0;
-									foreach($results5 as $row5){
-										$get5 = $row5->min5;
-										if ($get5 < 18){
-											$cnt5 += 1;
-										}
-									}
-									echo htmlentities($cnt5);?></h3>
-                                <a class = "link-dark fs-4 card-text" href ="#">Minors</a>
-                            </div>
-                            <i class="fas fa-child fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                        </div>
-                        
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                            <div>
-                                <h3 class="fs-2" tooltip = "Number of pending requests"><?php
-									$sql6="select count(tblresident.voter) as voter
-									 from tblresident where tblresident.voter='Yes'";
-
-									  $query6 = $dbh -> prepare($sql6);
-									  $query6->execute();
-									  $results6=$query6->fetchAll(PDO::FETCH_OBJ);
-									  foreach($results6 as $row6)
-									{
-
-									$voter=$row6->voter;
-									}echo htmlentities($voter);?></h3>
-                                <a class = "link-dark fs-4 card-text" href ="#">Voters</a>
-                            </div>
-                            <i class="fas fa-vote-yea fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                            <div>
-                                <h3 class="fs-2"><?php
-									$sql7 ="SELECT TIMESTAMPDIFF(YEAR, BirthDate, CURDATE()) AS sen7 from tblresident";
-									$query7 = $dbh -> prepare($sql7);
-									$query7->execute();
-									$results7=$query7->fetchAll(PDO::FETCH_OBJ);
-									$cnt7 = 0;
-									foreach($results7 as $row7){
-										$get7 = $row5->sen7;
-										if ($get7 >= 60){
-											$cnt7 += 1;
-										}
-									}
-									echo htmlentities($cnt7);?></h3>
-                                <a class = "link-dark fs-4 card-text" href ="#">Senior Citizens</a>
-                            </div>
-                            <i class="fas fa-blind fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                            <div>
-                                <h3 class="fs-2"><?php 
-									$sql8 ="SELECT ID from tbladmin ";
-									$query8 = $dbh -> prepare($sql8);
-									$query8->execute();
-									$results8=$query8->fetchAll(PDO::FETCH_OBJ);
-									$tresidents=$query8->rowCount();
-									echo htmlentities($tresidents);?></h3>
-                                <a class = "link-dark fs-4 card-text" href ="#">Officials</a>
-                            </div>
-                            <i class="fas fa-user-shield fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                        </div>
-                    </div>
-                </div>
-                
-                <!--
-                <div class="row my-5">
-                    <h3 class="fs-4 mb-3">Recent Orders</h3>
-                    <div class="col">
-                        <table class="table bg-white rounded shadow-sm  table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col" width="50">#</th>
-                                    <th scope="col">Product</th>
-                                    <th scope="col">Customer</th>
-                                    <th scope="col">Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Television</td>
-                                    <td>Jonny</td>
-                                    <td>$1200</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Laptop</td>
-                                    <td>Kenny</td>
-                                    <td>$750</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Cell Phone</td>
-                                    <td>Jenny</td>
-                                    <td>$600</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>Fridge</td>
-                                    <td>Killy</td>
-                                    <td>$300</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>Books</td>
-                                    <td>Filly</td>
-                                    <td>$120</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">6</th>
-                                    <td>Gold</td>
-                                    <td>Bumbo</td>
-                                    <td>$1800</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">7</th>  
-                                    <td>Pen</td>
-                                    <td>Bilbo</td>
-                                    <td>$75</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">8</th>
-                                    <td>Notebook</td>
-                                    <td>Frodo</td>
-                                    <td>$36</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">9</th>
-                                    <td>Dress</td>
-                                    <td>Kimo</td>
-                                    <td>$255</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">10</th>
-                                    <td>Paint</td>
-                                    <td>Zico</td>
-                                    <td>$434</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">11</th>
-                                    <td>Carpet</td>
-                                    <td>Jeco</td>
-                                    <td>$1236</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">12</th>
-                                    <td>Food</td>
-                                    <td>Haso</td>
-                                    <td>$422</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>-->
-                </div>
-
-            </div>
-        </div>
+            
+            
+            
     </div>
     
     <!-- /#page-content-wrapper -->
