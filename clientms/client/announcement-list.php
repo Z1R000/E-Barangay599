@@ -110,51 +110,36 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 
 
             <div class="container-fluid px-4">
-				<div class="divfortable">
-                    
-                <div class="graph-visual tables-main">
-               
-                    <div class="graph">
-                        
-                        <div class="table">
-                           
-                            <table class="table"> <thead> <tr style="background-color: #021f4e;">
-                                 <th><span style="color: #fff; font-size: 100%;">Announcement</span></th>
-                                 <th><span style="color: #fff; font-size: 100%;">Announced By</span></th>
-                                 <th><span style="color: #fff; font-size: 100%;">Announcement From</span></th>
-                                 <th><span style="color: #fff; font-size: 100%;">Announcement To</span></th>
-                                 <th><span style="color: #fff; font-size: 100%;">File Uploaded</span></th>
-                                  </tr>
-                                   </thead>
-                                    <tbody>
-                                        <?php
-											$sql="SELECT distinct tblannouncement.ID, tblannouncement.announcement, tblannouncement.announcementDate, tblannouncement.adminID, tbladmin.BarangayPosition, tblresident.LastName from tblannouncement join tbladmin on tblannouncement.adminID = tbladmin.ID join tblresident on tbladmin.ID = tblresident.ID";
-											$query = $dbh -> prepare($sql);
-											$query->execute();
-											$results=$query->fetchAll(PDO::FETCH_OBJ);
+            <?php 
+							$sql ="SELECT distinct tblannouncement.ID, tblannouncement.announcement, tblannouncement.announcementDate, tblannouncement.endDate, tblannouncement.adminID, tbladmin.BarangayPosition, tblresident.LastName from tblannouncement join tbladmin on tblannouncement.adminID = tbladmin.ID join tblresident on tbladmin.ID = tblresident.ID order by tblannouncement.ID Desc";
+							$query = $dbh -> prepare($sql);
+							$query->execute();
+							$results=$query->fetchAll(PDO::FETCH_OBJ);
+							foreach($results as $row)
+							{ 
+                                
+                                echo "
+                                <div class = 'mb-3 table-responsive' style='background-color:aliceblue;border:1px solid black;  border-radius:4px; overflow: hidden;'>
+                                <h1 style='float: left; margin:25px;    color: #021f4e;'>Announcement</h1>";
+								$sDate = $row->announcementDate;
+								$eDate = $row->endDate;
+                            
 
-											$cnt=1;
-											if($query->rowCount() > 0)
-											{
-											foreach($results as $row)
-											{ 
-											$sDate = $row->announcementDate;
-											$eDate = $row->endDate;              
-										?>
-                                     <tr class="active">
-                                        <td style="color: black;"><?php echo $row->announcement;?></td> 
-                                         <td style="color: black;"><?php echo $row->BarangayPosition;?> <?php echo $row->LastName;?></td>
-                                         <td style="color: black;"><?php  echo date('l, jS F Y - h:i A', strtotime($sDate));?></td>
-                                         <td style="color: black;"><?php  echo date('l, jS F Y - h:i A', strtotime($eDate));?></td>
-                                         <td style="color: red; text-decoration: underline;">View File</td>
-                                     </tr>
-                                     
-                                     <?php $cnt=$cnt+1;}} ?>
-                                     </tbody> </table> 
+						?>
+                        <h4 style="float: right; font-family: Segoe UI; margin: 25px; color: #021f4e; text-align: justify;">
+                            For <?php  echo date('l, jS F Y - h:i A', strtotime($sDate));?> <br> To <?php  echo date('l, jS F Y - h:i A', strtotime($eDate));?>
+                        </h4>
+                        <br><br><br>
+                        <div class="testulit" style="border-radius: 25px; ">
+                            <h5 style="text-align: justify; margin:25px; text-indent: 5%;"><?php  echo $row->announcement;?> </h5>
                         </div>
-                    
-                    </div>            
-                </div>
+                        <h3 style="margin: 25px; color: #021f4e;">Announced By:</h3>
+                        <h2 style="margin: 25px; color: #021f4e;"><?php  echo $row->BarangayPosition;?> <?php  echo $row->LastName;
+                        echo "</h2></div>";    
+                        }
+                        
+                        ?>
+                       </div>
 			</div>
                 <!-- /#page-content-wrapper -->
     </div>
