@@ -122,6 +122,20 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 		display:none;
 		margin:10px;
 	}
+    .testdiv{
+    background-color: aliceblue;
+    border-radius: 25px;
+    padding: 25px;
+    
+    width: 75%;
+    }
+
+    @media (max-width:576px){
+        .testdiv{
+            width:100%;
+        }
+        
+    }
     </style>
 
 </head>
@@ -159,14 +173,14 @@ if (strlen($_SESSION['clientmsuid']==0)) {
             </div>
 
 			<!--yung div mismo-->
-            <div class="container-fluid px-4">
-				<div style="background-color: aliceblue;border-radius: 25px;padding: 25px;">
-                <div class="graph-form" >
+            <div class="container px-4" align="center">
+				<div class="testdiv" >
+                <div class="graph-form" style="text-align:left"  >
 <div class="form-body">
 <form method="post" style="font-size:1.25em;"> 
 <h3 class="inner-tittle two"> Blotter Request</h3>
 									 
-	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e;">Blotter Type</label> 
+	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e; font-size:2em;">Blotter Type</label> 
 		<select  name="blottype" class="form-control select2" required='true' style="padding: 1px; font-size: 0.8em;">
 		<option value="" disable selected>Choose Blotter type: </option>
 		<option value="Violence">Violence</option>
@@ -184,7 +198,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 	<button type="submit" class="btn btn-default" name="submit" id="submit" style="color: white; background-color: #021f4e; border: 1px; width: 20%; border-radius:25px;">Create</button>
 <br>	 
 </div>
-</div>
+        </div>
 </div> 
 						</div>
 				
