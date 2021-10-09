@@ -125,10 +125,10 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 
 
             <div class="container-fluid px-4">
-				<div style="background-color: aliceblue;border-radius: 25px;padding: 25px;">
+				<div style="background-color: aliceblue;border-radius: 25px;border:1px solid black;padding: 25px;">
                 <div class="graph-visual tables-main">
 					
-						<h3 class="inner-tittle two"> Create Certificate </h3>
+						<h3 class="inner-tittle two"> Certificate Request </h3>
 						<div class="graph" style="border-radius: 15px;">
 							<div class="form-body">
 							<form method="post" style="font-size:1.25em;">
