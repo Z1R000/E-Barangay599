@@ -87,6 +87,43 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 		display:none;
 		margin:10px;
 	}
+	.text-inner{
+                color: white;
+            }
+            .logo{
+                color: #d3d3d3;
+            }
+            .left{
+                margin-right: 1%;
+            }
+            .minor{
+                background: #ff8c00;
+            }
+            .right{
+                margin: 13.5%;
+            }
+
+            .voters{
+                background: #008080;
+            }
+            .officials{
+                background:  #004242;
+            }
+            .dis{
+                display:none;
+            }
+
+            @media (max-width:576px){
+                .banner{
+                    display:none;
+                }
+                .right{
+                    margin-left: 8%;
+                }
+                .dis{
+                    display: flex;
+                }
+            }
     </style>
 
 </head>
@@ -100,7 +137,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
-                    <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
+                    <i class="fa fa-align-justify secondary-text fs-4 me-3" id="menu-toggle"></i>
                     <h2 class="fs-2 m-0">Certificate Request</h2>
                     
                 </div>
@@ -126,9 +163,9 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 
             <div class="container-fluid px-4">
 				<div style="background-color: aliceblue;border-radius: 25px;border:1px solid black;padding: 25px;">
-                <div class="graph-visual tables-main">
+                	<div class="graph-visual tables-main">
 					
-						<h3 class="inner-tittle two"> Certificate Request </h3>
+						<h1 class="inner-tittle two"> Certificate Request </h1>
 						<div class="graph" style="border-radius: 15px;">
 							<div class="form-body">
 							<form method="post" style="font-size:1.25em;">
@@ -206,7 +243,6 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 															<label for="101" style="color: black;">Php10,001-Php100-000</label><br>
 															<input type="radio" id="10a" name="capital" value="8">
 															<label for="10a" style="color: black;">Php100,001-Above</label><br>
-
 														</td>
 													</tr>
 												</table>
@@ -216,12 +252,16 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 
 									</tr>
 									<tr>
+									
 										<td><label>
-									<span style="color: black";>Proof of Payment</span><br><input type="file" style="border: none; color: black; background-color: #fff; font-size: 80%;">
+											<br>
+										<button type="submit" class="btn btn-default" name="submit" id="submit" style="color: white; background-color: #021f4e; border: 1px; width: 100%; border-radius:25px;">Create</button>
 								</label></td>
-								<td style="color: black;"></td>
+
+								
+									<td style="color: black;"></td>
 										<td>
-											 <button type="submit" class="btn btn-default" name="submit" id="submit" style="color: white; background-color: #021f4e; border: 1px; width: 80%; border-radius:25px;">Create</button>
+											 
 										</td>
 									</tr>
 									
