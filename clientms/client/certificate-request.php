@@ -200,6 +200,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 										</td>
                                         
 									</tr>
+                                    
 									<tr>
 										<td>
 											<div class="1 2 3 4 9 10 11 12 13 14 15 16 17 18 101 102 103 104 105 box">
@@ -247,12 +248,25 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 															<label for="10a" style="color: black;">Php100,001-Above</label><br>
 														</td>
 													</tr>
+                                                    
 												</table>
 											</div>
 											
 										</td>
                                        
 									</tr>
+                                    
+                                    <tr>
+                                        <td>
+                                            <h3 class="testfont">Choose payment option:</h3>
+                                            <select >
+                                                
+                                                <option disabled selected>-Choose payment option-</option>
+                                                <option >Personal Use</option>
+                                                <option >Business Use</option>
+											</select>
+                                        </td>
+                                    </tr>
 									<tr>
                                          
 										<td><label>
@@ -263,7 +277,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 								
 									<td style="color: black;"></td>
 										<td>
-											 
+											
 										</td>
 									</tr>
 									
