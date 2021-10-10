@@ -117,6 +117,7 @@ body{
 
 
 
+
 @media (min-width: 0px){
     #wrapper.toggled #sidebar-wrapper {
         margin-left: -16rem;
@@ -144,9 +145,75 @@ body{
         width: 100%;
         
     }
-    
-
+ 
 
 }
+
+@media screen and (max-width: 900px) {
+    h5.testfont {
+      font-size: 20px;
+    }
+    h1.h1font{
+      font-size: 25px;   
+    }
+    h3.testfont{
+        font-size: 15px;
+    }
+    h2.testfont{
+        font-size: 25px;
+    }
+    h4.testfont{
+        font-size: 12px;
+    }
+    span.anothertestfont{
+        font-size: 20px;
+    }
+    select.dropdownstyle{
+        width: 100px;
+        height: 30px;
+        overflow-y: hidden;
+    }
+    select.dropdownstyle option{
+        width: 100px;
+        height: 20px;
+        overflow-y: hidden;
+    }
+    
+  }
+
+
+
+  @media screen and (min-width: 601px) {
+    h5.testfont {
+      font-size: 30px;
+    }
+    h1.h1font{
+      font-size: 35px;   
+    }
+    h3.testfont{
+        font-size: 25px;
+    }
+    h2.testfont{
+        font-size: 30px;
+    
+    }
+    h4.testfont{
+        font-size: 18px;
+    }
+    span.anothertestfont{
+        font-size: 25px;
+    }
+    select.dropdownstyle{
+
+        width: 300px;
+        height: 40px;
+    }
+    select.dropdownstyle option{
+
+        width: 3000px;
+        height: 40px;
+    }
+  } 
+
 /*Textbox test*/
 
