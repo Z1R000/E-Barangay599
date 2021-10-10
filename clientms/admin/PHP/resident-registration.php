@@ -164,7 +164,13 @@
                         <div class="row g-0 ">
                                    
                             <label for= "street" class="col-form-label fw-bold">Street</label>
-                            <input type="text" id = "street" class = "form-control" placeholder ="Street name here">
+                       
+                                   <select class="form-select" id = "vp" aria-label="Default select example">
+                                        <option selected>Street Number</option>
+                                        <option value="s1">Street 1</option>
+                                        <option value="s2">Street 2</option>
+                                    </select>        
+       
 
                         </div>
                         <div class="row g-0 ">

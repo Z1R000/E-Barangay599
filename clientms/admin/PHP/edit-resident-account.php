@@ -164,7 +164,7 @@
                             <table class="table my-3" >
                                     <tr>
                                         <th class ="">Email Address</th>
-                                        <td style = "text-align:right;padding-right: 4%;"><input type="email" class = "" value = "portgas.ace@gmail.com"></td>
+                                        <td style = "text-align:right;padding-right: 4%;">portgas.ace@gmail.com</td>
                                     </tr>
                                     <tr>
                                         <th class ="">Password</th>

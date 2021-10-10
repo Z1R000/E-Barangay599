@@ -34,7 +34,7 @@
             }
 
             h4{
-                font-family: 'Acme','sans-serif';
+                font-family:'Segoe UI';
             }
             .text-inner{
                 color: white;

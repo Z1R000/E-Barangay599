@@ -76,7 +76,7 @@
         <div class="row g-0 mx-2">
             <div class="row g-3">
                 <div class="mx-auto col-xl-10 white   ">
-                    <div class="row g-0 bg-primary rounded-top ">
+                    <div class="row g-0  rounded-top " style= "background-color:#021f4e">
                         <div class="fs-5 px-3 py-1">
                             Resident #123
                         </div>
@@ -186,11 +186,11 @@
                                 
                                     <tr>
                                         <th class ="">Purok</th>
-                                        <td style ="text-align: right; padding-right: 4%" >Purok II</td>
+                                        <td style ="text-align: right; padding-right: 4%" >Purok 2</td>
                                     </tr>
                                     <tr>
                                         <th class ="">Street</th>
-                                        <td style ="text-align: right; padding-right: 4%" >Back Street</td>
+                                        <td style ="text-align: right; padding-right: 4%" >Street 1</td>
                                     </tr>
                                  
                                     <tr>
@@ -202,8 +202,12 @@
                                         <td style ="text-align: right; padding-right: 4%" >13-45622-892</td>
                                     </tr>
                                     <tr>
-                                        <th class ="">Voter's  </th>
-                                        <td style ="text-align: right; padding-right: 4%" >2</td>
+                                        <th class ="">Voter Status </th>
+                                        <td style ="text-align: right; padding-right: 4%" >Voter</td>
+                                    </tr>
+                                    <tr>
+                                        <th class ="">Voter Precinct </th>
+                                        <td style ="text-align: right; padding-right: 4%" >50-A</td>
                                     </tr>
 
                             </table>

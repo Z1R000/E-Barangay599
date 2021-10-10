@@ -213,7 +213,13 @@
                                     </tr>
                                     <tr>
                                         <th class ="">Street</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><input type="text" class = "" value = "Backstreet"></td>
+                                        <td  style ="text-align: right; padding-right: 4%"><select id = "vp" aria-label="Default select example">
+                                            <option selected>Street Number</option>
+                                            <option value="s1">Street 1</option>
+                                            <option value="s2">Street 2</option>
+                                        </select></td>    
+       
+                                       
                                     </tr>
                                   
                                     <tr>
