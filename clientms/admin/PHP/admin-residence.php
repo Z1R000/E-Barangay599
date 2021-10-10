@@ -243,7 +243,11 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </td>
                                 
                                 <td  scope="col"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?></td>
-                                <td  scope = "col">35</td>
+                                <td  scope = "col"><?php $gbd = $row->BirthDate;
+												  $gbd = date('Y-m-d', strtotime($gbd));
+												  $today = date('Y-m-d');
+												  $diff = date_diff(date_create($gbd), date_create($today));
+												  echo $diff->format('%y');?></td>
                                 <td    scope="col"><i class = "fa fa-mars link-info me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
                                 <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
                                 <td scope="col"><?php  echo htmlentities($row->streetName);?> </td>
