@@ -5,7 +5,7 @@
                 <img src = "images/resident-logo.png" class = "py-1"style = "width: 60px;"><br>
           
                 <div class="btn-group my-2" role="group" aria-label="Basic example">
-                    <a type = " button" class = "btn border-danger link-danger fs-6" ><i class = "fa fa-power-off"></i>&nbsp;Logout </a>          
+                    <a href="index.php" type = " button" class = "btn border-danger link-danger fs-6" ><i class = "fa fa-power-off"></i>&nbsp;Logout </a>          
                 </div>
                 
                 
