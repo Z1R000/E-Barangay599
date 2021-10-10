@@ -147,7 +147,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 	<div class="form-group"> <label for="exampleInputEmail1" style="color: #021f4e;">Rental End-Date:</label> <input type="datetime-local" name="redate" value="" placeholder="Rental End Date" class="form-control" required='true' style="font-size: 0.8em;"> </div> 
 	
 	<br>
-	<button type="submit" class="btn btn-default" name="submit" id="submit" style="color: white; background-color: #021f4e; border: 1px; width: 20%; border-radius:25px;">Create</button>
+	<button type="submit" class="btn btn-default" name="submit" id="submit" style="color: white; background-color: #021f4e; border: 1px; width: 5%; border-radius:25px;">Create</button>
 	 <br>
 </div>
 </div>

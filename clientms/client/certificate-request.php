@@ -159,22 +159,23 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                     <li class="active">Certificate Request</li>
                 </ol>
             </div>
-
-
             <div class="container-fluid px-4">
 				<div style="background-color: aliceblue;border-radius: 25px;border:1px solid black;padding: 25px;">
                 	<div class="graph-visual tables-main">
 					
-						<h1 class="inner-tittle two"> Certificate Request </h1>
+						<h1 class="testfont"> Certificate Request </h1>
 						<div class="graph" style="border-radius: 15px;">
 							<div class="form-body">
 							<form method="post" style="font-size:1.25em;">
 								<table style="width: 100%;">
 									<tr>
-										<th><span  style="color: #021f4e;">Choose Certificate</th>
+										<th><span class="anothertestfont" style="color: #021f4e;">Choose Certificate</th>
+                                        <br>
 										<th><span  style="color: #021f4e;"></th>
-										<th><span  style="color: #021f4e;">Certificate Price</th>
+										<th><span  class="anothertestfont" style="color: #021f4e;">Certificate Price</th>
+                                        
 									</tr>
+                                    
 									<tr>
 										<td>
 											<?php
@@ -184,7 +185,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 											$results=$query->fetchAll(PDO::FETCH_OBJ);
 											if($query->rowCount() > 0)
 											{
-												echo "<select  name='certid' id='certid' class='form-control select2' required='true' style='padding: 1px; font-size: 0.8em; width: 90%;'>
+												echo "<select  name='certid' id='certid' class='form-control select2 dropdownstyle' required='true' style='padding: 1px; font-size: 1em; width: 90%;'>
 													<option value=''>Choose Certificate</option>";
 											foreach($results as $row)
 											{
@@ -192,11 +193,12 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 											}?>
 											</td>
 											<td style='color: black;'></td>
-											<td style='color: black;'><?php echo"$row->CertificatePrice</td>"; 
+											<td style='color: black;font-size:20px;'><?php echo"$row->CertificatePrice</td>"; 
 									
 											echo "</select>";}
 											?>
 										</td>
+                                        
 									</tr>
 									<tr>
 										<td>
@@ -249,10 +251,10 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 											</div>
 											
 										</td>
-
+                                       
 									</tr>
 									<tr>
-									
+                                         
 										<td><label>
 											<br>
 										<button type="submit" class="btn btn-default" name="submit" id="submit" style="color: white; background-color: #021f4e; border: 1px; width: 100%; border-radius:25px;">Create</button>

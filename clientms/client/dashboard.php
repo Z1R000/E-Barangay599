@@ -66,7 +66,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
         padding-right: 1rem;
     }
     h4{
-                font-family: 'Acme','sans-serif';
+            font-family: 'Acme','sans-serif';
             }
             .text-inner{
                 color: white;
@@ -99,11 +99,17 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                     display:none;
                 }
                 .right{
-                    margin-left: 8%;
+                    margin-left: 5%;
                 }
                 .dis{
                     display: flex;
                 }
+            }
+            iframe {
+            height: 300px;
+            width: 100%;
+            resize: both;
+            overflow: auto;
             }
              
     </style>
@@ -140,37 +146,166 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                     
                         <br>
                         <div class='container-fluid px-4' style="padding: 5px; background-image: url(https://img.wallpapersafari.com/desktop/1440/900/97/58/SdRCAL.jpg);">
-						<?php 
-							$sql ="SELECT distinct tblannouncement.ID, tblannouncement.announcement, tblannouncement.announcementDate, tblannouncement.endDate, tblannouncement.adminID, tbladmin.BarangayPosition, tblresident.LastName from tblannouncement join tbladmin on tblannouncement.adminID = tbladmin.ID join tblresident on tbladmin.ID = tblresident.ID where tblannouncement.announcementDate <= now() and tblannouncement.endDate >= now() order by tblannouncement.ID desc";
-							$query = $dbh -> prepare($sql);
-							$query->execute();
-							$results=$query->fetchAll(PDO::FETCH_OBJ);
-							foreach($results as $row)
-							{ 
-                                
-                                echo "
-                                <div class = 'mb-3 table-responsive' style='background-color:aliceblue;border:1px solid black;  border-radius:4px; overflow: hidden;'>
-                                <h1 style='float: left; margin:25px;    color: #021f4e;'>Announcement</h1>";
-								$sDate = $row->announcementDate;
-								$eDate = $row->endDate;
-                            
-
-						?>
-                        <h4 style="float: right; font-family: Segoe UI; margin: 25px; color: #021f4e; text-align: justify;">
-                            For <?php  echo date('l, jS F Y - h:i A', strtotime($sDate));?> <br> To <?php  echo date('l, jS F Y - h:i A', strtotime($eDate));?>
-                        </h4>
-                        <br><br><br><br>
-                        <div class="testulit" style="border-radius: 25px; ">
-                            <h5 style="text-align: justify; margin:25px; text-indent: 5%;"><?php  echo $row->announcement;?> </h5>
-                        </div>
-                        <h3 style="margin: 25px; color: #021f4e;">Announced By:</h3>
-                        <h2 style="margin: 25px; color: #021f4e;"><?php  echo $row->BarangayPosition;?> <?php  echo $row->LastName;
-                        echo "</h2></div>";    
-                        }
-                        
-                        ?>
+						</div>
+                        <br>
+                        <div class='container-fluid px-4 mb-3' height="20%">
+						<iframe src="currentiframe.php" title="announcement" width="100%"></iframe>
                        </div>
+                       <!--Makulay start-->
+                       <div class="container-fluid  right my-1" align  ="center">
+                <div class="row g-3">
+                    <div class="row g-3 px-2"  >
+                        <div class="row g-3 my-2">
+                            <div class="col-md-3 left rounded border shadow-md bg-primary">
+                                <div class="row g-3">
+                                    <div class="p-3 bg-primary  d-flex justify-content-around align-items-center ">
+                                        <div class = "text-inner">
+                                            <h4 class="fs-3">2500</h4>
+                                            <p class = "text-inner fs-5 card-text " href ="#">Total Residents</p>
+                                        </div>
+                                            <i class="fas fa-users fs-1 logo  p-4 "></i>
+                                            
+                                    </div>
+                                </div>
+                                <div class="row border-top g-0 ">
+                                    <a class = "text-inner text-decoration-none" href = "admin-residence.php"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 left rounded border shadow-md officials">
+                                <div class="row g-3">
+                                    <div class="p-3 officials  d-flex justify-content-around align-items-center ">
+                                        <div class = "text-inner">
+                                            <h4 class="fs-3">420</h4>
+                                            <p class = "text-inner fs-5 card-text " href ="#">Current Officials</p>
+                                        </div>
+                                            <i class="fas fa-user-shield fs-1 logo  p-4"></i>
+                                            
+                                    </div>
+                                </div>
+                                <div class="row border-top g-0 ">
+                                    <a class = "text-inner text-decoration-none" href = "#"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 rounded left border shadow-md bg-success">
+                                <div class="row g-3">
+                                    <div class="p-3 bg-success d-flex justify-content-around align-items-center ">
+                                        <div class = "text-inner">
+                                            <h4 class="fs-3">500</h4>
+                                            <p class = "text-inner fs-5 card-text " href ="#">Specific Requests</p>
+                                        </div>
+                                            <i class="fas fa-folder fa-folder fs-1 logo  p-4 "></i>
+                                            
+
+                                    </div>
+                                </div>
+                                <div class="row border-top g-0 ">
+                                    <a class = "text-inner text-decoration-none" href = "#"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
+                                </div>
+                                
+                            </div>
+                            
+                         
+                        </div>
+                        
+                    
+                    </div>
+                    <div class="row g-3 "  >
+                        <div class="row g-3 my-1">
+                            <div class="col-md-3 left rounded border shadow-md bg-warning">
+                                <div class="row g-3">
+                                    <div class="p-3 bg-warning  d-flex justify-content-around align-items-center ">
+                                        <div class = "text-inner">
+                                            <h4 class="fs-3">420</h4>
+                                            <p class = "text-inner fs-5 card-text " href ="#">Senior Citizens</p>
+                                        </div>
+                                            <i class="fas fa-blind fs-1 logo  p-4"></i>
+                                            
+                                    </div>
+                                </div>
+                                <div class="row border-top g-0 ">
+                                    <a class = "text-inner text-decoration-none" href = "#"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 rounded left border shadow-md minor">
+                                <div class="row g-3">
+                                    <div class="p-3 minor d-flex justify-content-around align-items-center ">
+                                        <div class = "text-inner">
+                                            <h4 class="fs-3">500</h4>
+                                            <p class = "text-inner fs-5 card-text " href ="#">Minor Residents</p>
+                                        </div>
+                                            <i class="fas fa-child fs-1 logo  p-4 "></i>
+                                            
+
+                                    </div>
+                                </div>
+                                <div class="row border-top g-0 ">
+                                    <a class = "text-inner text-decoration-none" href = "#"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
+                                </div>
+                                
+                            </div>
+                            <div class="col-md-3  rounded border left shadow-md voters">
+                                <div class="row g-3">
+                                    <div class="p-3 voters  d-flex justify-content-around align-items-center ">
+                                        <div class = "text-inner">
+                                            <h4 class="fs-3">2500</h4>
+                                            <p class = "text-inner fs-5 card-text " href ="#">Total Voters</p>
+                                        </div>
+                                            <i class="fas fa-vote-yea fs-1 logo  p-4"></i>
+                                            
+
+                                    </div>
+                                </div>
+                                <div class="row border-top g-0 ">
+                                    <a class = "text-inner text-decoration-none" href = "#"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                    
+                    </div>
+                    <div class="row g-3 "  >
+                        <div class="row g-3 my-1">
+                            <div class="col-md-3 left rounded border shadow-md bg-info">
+                                <div class="row g-3">
+                                    <div class="p-3 bg-info  d-flex justify-content-around align-items-center ">
+                                        <div class = "text-inner">
+                                            <h4 class="fs-3">420</h4>
+                                            <p class = "text-inner fs-5 card-text " href ="#">Male Residents</p>
+                                        </div>
+                                            <i class="fas fa-mars fs-1 logo  p-4"></i>
+                                            
+                                    </div>
+                                </div>
+                                <div class="row border-top g-0 ">
+                                    <a class = "text-inner text-decoration-none" href = "#"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 rounded left border shadow-md bg-danger">
+                                <div class="row g-3">
+                                    <div class="p-3 bg-danger d-flex justify-content-around align-items-center ">
+                                        <div class = "text-inner">
+                                            <h4 class="fs-3">500</h4>
+                                            <p class = "text-inner fs-5 card-text " href ="#">Female Residents</p>
+                                        </div>
+                                            <i class="fas fa-venus fs-1 logo  p-4 "></i>
+                                            
+
+                                    </div>
+                                </div>
+                                <div class="row border-top g-0 ">
+                                    <a class = "text-inner text-decoration-none" href = "#"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
+                                </div>
+                                
+                            </div>
+                        
+                    
+                    </div>
+                </div>
+            </div>
     </div>
+    
     
     <!-- /#page-content-wrapper -->
     </div>

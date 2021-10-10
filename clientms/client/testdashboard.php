@@ -21,7 +21,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="css/sidebar.css" />
+    <link rel="stylesheet" href="css/testsidebar.css" />
     
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
@@ -65,8 +65,8 @@ if (strlen($_SESSION['clientmsuid']==0)) {
         padding-left: 1rem; 
         padding-right: 1rem;
     }
-    h4{
-                font-family: 'Acme','sans-serif';
+            h4{
+            font-family: 'Acme','sans-serif';
             }
             .text-inner{
                 color: white;
@@ -99,13 +99,18 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                     display:none;
                 }
                 .right{
-                    margin-left: 8%;
+                    margin-left: 5%;
                 }
                 .dis{
                     display: flex;
                 }
             }
-             
+            iframe {
+            height: 300px;
+            width: 100%;
+            resize: both;
+            overflow: auto;
+            }
     </style>
 
 </head>
@@ -117,6 +122,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
             <?php include_once('includes/sidebarupdated.php');?>
         </div>
         <!-- /#sidebar-wrapper -->
+        
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
@@ -134,15 +140,34 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 
                 <!--User-->
                     <?php include_once('includes/usertoggle.php');?>
-                <!--User-->
-            </nav>
-
                     
+                <!--User-->
+                
+            </nav>
+            <div class="container-fluid banner " align = "center">
+                <div class="row my-1">
+                    <div class="col-xl-3 px-4 ">
+                        <img src = "../images/barangay.png" style ="width: 90px;">
+                    </div>
+                    <div class="col-xl-6 " align = "center">
+                        <h4 class= "py-2" style="font-family: Segoe UI;">BARANGAY 599, ZONE 59, DISTRICT VI <br>
+                            OFFICE OF THE SANGGUNIANG BARANGAY</h4>
+                    </div>
+                    <div class="col-xl-3">
+                        
+                            <img src = "../images/maynila.png" style ="width: 90px;">
+                        
+                    </div>
+                </div>
+                <div class="col-sm-12 dis">
+                    <img src = "../images/admin-logo.png" class = "dis img-fluid" style ="width: 90px;">
+                </div>
+            </div>
                         <br>
                         <div class='container-fluid px-4 mb-3' height="20%">
 						<iframe src="testdash.php" title="announcement" width="100%"></iframe>
                        </div>
-                <div class="container-fluid  right my-1" align  ="center">
+                       <div class="container-fluid  right my-1" align  ="center">
                 <div class="row g-3">
                     <div class="row g-3 px-2"  >
                         <div class="row g-3 my-2">
@@ -158,7 +183,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                                     </div>
                                 </div>
                                 <div class="row border-top g-0 ">
-                                    <a class = "text-inner text-decoration-none" href = "#"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
+                                    <a class = "text-inner text-decoration-none" href = "admin-residence.php"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
                                 </div>
                             </div>
 
@@ -169,7 +194,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                                             <h4 class="fs-3">420</h4>
                                             <p class = "text-inner fs-5 card-text " href ="#">Current Officials</p>
                                         </div>
-                                            <i class="fas fa-blind fs-1 logo  p-4"></i>
+                                            <i class="fas fa-user-shield fs-1 logo  p-4"></i>
                                             
                                     </div>
                                 </div>
@@ -224,7 +249,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                                             <h4 class="fs-3">500</h4>
                                             <p class = "text-inner fs-5 card-text " href ="#">Minor Residents</p>
                                         </div>
-                                            <i class="fas fa-mars fs-1 logo  p-4 "></i>
+                                            <i class="fas fa-child fs-1 logo  p-4 "></i>
                                             
 
                                     </div>
@@ -264,7 +289,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                                             <h4 class="fs-3">420</h4>
                                             <p class = "text-inner fs-5 card-text " href ="#">Male Residents</p>
                                         </div>
-                                            <i class="fas fa-blind fs-1 logo  p-4"></i>
+                                            <i class="fas fa-mars fs-1 logo  p-4"></i>
                                             
                                     </div>
                                 </div>
@@ -279,7 +304,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                                             <h4 class="fs-3">500</h4>
                                             <p class = "text-inner fs-5 card-text " href ="#">Female Residents</p>
                                         </div>
-                                            <i class="fas fa-mars fs-1 logo  p-4 "></i>
+                                            <i class="fas fa-venus fs-1 logo  p-4 "></i>
                                             
 
                                     </div>
