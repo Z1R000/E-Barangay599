@@ -1,13 +1,18 @@
-<?php 
-    $curr ="Residents";
-?>
+<?php
+session_start();
+error_reporting(0);
+include('includes/dbconnection.php');
+if (strlen($_SESSION['clientmsaid']==0)) {
+  header('location:logout.php');
+  } else{
+  	?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $curr;?></title>
+    <title>Residents</title>
    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -119,10 +124,13 @@
 
                             </div>
                             <div class="col-md-4 " >
-                                <form class = "d-flex">
+                                <form class = "d-flex" method="post" name="search" action="">
+									<p style="font-size:16px; color:red" align="center"> <?php if($msg){
+										echo $msg;
+									  }  ?> </p>
                                         
-                                        <input type = "text" class= "form-control" placeholder = "Search here">
-                                        <button type ="button" class = "btn btn-outline-info" ><i class = "fa fa-search"></i></button>
+                                        <input id="searchdata" type = "text" class= "form-control" name="searchdata"placeholder = "Search here">
+                                        <button type ="submit" class = "btn btn-outline-info" name="search"><i class = "fa fa-search"></i></button>
                                 </form>
 
                             </div>
@@ -130,6 +138,13 @@
                         </div>
                     </div>
                 </div>
+				<?php
+					if(isset($_POST['search']))
+					{ 
+
+					$sdata=$_POST['searchdata'];
+				?>
+				<h4 align="center">Result for "<?php echo $sdata;?>"</h4>
 
                 <div class="row g-1 px-5">
                     
@@ -149,22 +164,34 @@
                             </thead>
                             <tbody>
                             <tr>
+								<?php
+									$sql="SELECT * from tblresident where tblresident.LastName like '%$sdata%'";
+									$query = $dbh -> prepare($sql);
+									$query->execute();
+									$results=$query->fetchAll(PDO::FETCH_OBJ);
+
+									$cnt=1;
+									if($query->rowCount() > 0)
+									{
+									foreach($results as $row)
+									{               
+								?>
                                 <td  class ="small" scope="col">
                                     <i class ="fa fa-circle link-success me-1"></i>
                                     Active
                                 </td>
                                 
-                                <td  scope="col">Gol D. Roger</td>
+                                <td  scope="col"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?></td>
                                 <td  scope = "col">35</td>
-                                <td    scope="col"><i class = "fa fa-mars link-info me-2"> </i>Male </td>
-                                <td   scope="col">Purok 3</td>
-                                <td scope="col">East Blue </td>
+                                <td    scope="col"><i class = "fa fa-mars link-info me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
+                                <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
+                                <td scope="col"><?php  echo htmlentities($row->streetName);?> </td>
                                 <td  class ="action" scope="col">
                                     <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                        <a href  = "view-resident-personal.php" type="button" class="btn btng btn-primary"><i class = "fa fa-eye"></i></a>
+                                        <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btng btn-primary"><i class = "fa fa-eye"></i></a>
                                     </div>
                                     <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                        <a type="button" href ="edit-resident-personal.php"class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
+                                        <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
                                     </div>
                                     <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                         <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn btn-danger"> <i class = "fa fa-trash"></i></button>
@@ -173,12 +200,74 @@
                             
                             
                             </tr>
-                               
+                            <?php $cnt=$cnt+1;}}}else{?>   
                             </tbody>
                         </table>
                     </div>
 
                 </div>
+				<!--END SEARCH -->
+				<div class="row g-1 px-5">
+                    
+                    <div class="col-xl-12 col-md-12 col-sm-12 ">
+                        <table class="table bg-white rounded shadow-sm  table-hover">
+                            <thead>
+                                <tr>
+                                    <th  scope="col">
+                                        Status  </th>
+                                    <th   scope="col">Name </th>
+                                    <th   scope="col">Age </th>
+                                    <th   scope="col">Gender </th>
+                                    <th   scope="col">Purok</th>
+                                    <th  scope="col">Street </th>
+                                    <th   scope="col">Action </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+								<?php
+									$sql="SELECT * from tblresident";
+									$query = $dbh -> prepare($sql);
+									$query->execute();
+									$results=$query->fetchAll(PDO::FETCH_OBJ);
+
+									$cnt=1;
+									if($query->rowCount() > 0)
+									{
+									foreach($results as $row)
+									{               
+								?>
+                                <td  class ="small" scope="col">
+                                    <i class ="fa fa-circle link-success me-1"></i>
+                                    Active
+                                </td>
+                                
+                                <td  scope="col"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?></td>
+                                <td  scope = "col">35</td>
+                                <td    scope="col"><i class = "fa fa-mars link-info me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
+                                <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
+                                <td scope="col"><?php  echo htmlentities($row->streetName);?> </td>
+                                <td  class ="action" scope="col">
+                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                        <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btng btn-primary"><i class = "fa fa-eye"></i></a>
+                                    </div>
+                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                        <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
+                                    </div>
+                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                        <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn btn-danger"> <i class = "fa fa-trash"></i></button>
+                                    </div>
+                                </td>
+                            
+                            
+                            </tr>
+                            <?php $cnt=$cnt+1;}}}?>   
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+				
                 
             
         </div>
@@ -222,3 +311,4 @@
     
 </body>
 </html>
+<?php }  ?>
