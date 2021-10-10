@@ -53,7 +53,7 @@
 		Tel. #722-9743 </p> <br>
 	<div class="con1"> 
 		<div class='test'>
-		  <div style='float: left;'><a href="admin/index.php" class="sub" style="
+		  <div style='float: left;'><a href="admin/PHP/index.php" class="sub" style="
 				padding: 10px 52px;">ADMIN</a>
 		  </div>
 		  <div style='float: right;'><a href="client/index.php" class="sub" style="

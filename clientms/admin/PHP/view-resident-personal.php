@@ -1,13 +1,20 @@
-<?php 
-    $curr ="Resident Info";
-?>
+<?php
+session_start();
+error_reporting(0);
+include('includes/dbconnection.php');
+if (strlen($_SESSION['clientmsaid']==0)) {
+  header('location:logout.php');
+  } else{
+	
+  	?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $curr;?></title>
+    <title>Resident Information</title>
    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -67,25 +74,41 @@
                             <li class="breadcrumb-item fs-6"><a href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
                          
                             <li class="breadcrumb-item fs-6 active"><a href="admin-residence.php"><i class="fa fa-users"></i>&nbsp;Resident List</a></li>
-                            <li class="breadcrumb-item fs-6 active"><a href="#"><i class="fa fa-user text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
+                            <li class="breadcrumb-item fs-6 active"><a href="#"><i class="fa fa-user text-muted"></i></a>&nbsp;Resident Information</li>
                         </ol>
                     </nav>
                 </nav>
             </div>
+			<?php
+				$vid=$_GET['viewid'];
+				$clientmsaid=$_SESSION['clientmsaid'];
+				$sql="select * from tblresident where ID=:vid";
+				$query = $dbh -> prepare($sql);
+				$query->bindParam(':vid',$vid,PDO::PARAM_STR);
+				$query->execute();
+
+				$results=$query->fetchAll(PDO::FETCH_OBJ);
+
+				$cnt=1;
+				if($query->rowCount() > 0)
+				{
+				foreach($results as $row)
+				{               
+			?>
     <div class="container-fluid mx-4 px-5">
         <div class="row g-0 mx-2">
             <div class="row g-3">
                 <div class="mx-auto col-xl-10 white   ">
                     <div class="row g-0  rounded-top " style= "background-color:#021f4e">
                         <div class="fs-5 px-3 py-1">
-                            Resident #123
+                            Resident #<?php  echo htmlentities($row->ID);?>
                         </div>
                     </div>
                     <div class="row g-0 border bg-white">
                         <div class="col-xl-3 py-3 border-end" align = "center">
                       
                             <img src="../images/user-res.png" alt="resident" style ="width: 105px; height: 100px;">
-                            <div class = "fs-6 black">Portgas D. Ace</div>
+                            <div class = "fs-6 black"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?></div>
                             
                         </div>
                         <div class="col-xl-4 mx-2  px-2">
@@ -93,16 +116,20 @@
                             <table class="table my-3">
                                     <tr>
                                         <th class =""><i class ="fa fa-calendar me-2"></i>Age</th>
-                                        <td>40</td>
+                                        <td><?php $gbd = $row->BirthDate;
+												  $gbd = date('Y-m-d', strtotime($gbd));
+												  $today = date('Y-m-d');
+												  $diff = date_diff(date_create($gbd), date_create($today));
+												  echo $diff->format('%y');?></td>
                                     </tr>
                                     <tr>
                                         <th class ="" > <i class= "fa fa-venus-mars me-1"></i> Gender</th>
-                                        <td>Male</td>
+                                        <td><?php  echo htmlentities($row->Gender);?></td>
                                     </tr>
                         
                                     <tr>
                                         <th class ="" > <i class= "fa fa-heart me-1"></i> Civil Status</th>
-                                        <td>Single</td>
+                                        <td><?php  echo htmlentities($row->CivilStatus);?></td>
                                     </tr>
                         
                             </table>
@@ -113,7 +140,7 @@
                             <table class="table my-3">
                                     <tr>
                                         <th class =""><i class ="fa fa-birthday-cake me-2"></i>Birthdate</th>
-                                        <td>September 9 1990</td>
+                                        <td><?php $bd = $row->BirthDate; echo date('j F Y', strtotime($bd));?></td>
                                     </tr>
                                     <tr>
                                         <th class ="" > <i class= "fa fa-info me-1"></i> Status</th>
@@ -159,59 +186,59 @@
                             <table class="table my-3" >
                                     <tr>
                                         <th class ="">Resident Type</th>
-                                        <td style ="text-align: right; padding-right: 4%" >House Owner</td>
+                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->ResidentType);?></td>
                                     </tr>
                                     <tr>
                                         <th class ="">Contact No.</th>
-                                        <td style ="text-align: right; padding-right: 4%" >2222</td>
+                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->Cellphnumber);?></td>
                                     </tr>
                                     <tr>
                                         <th class ="">First</th>
-                                        <td style ="text-align: right; padding-right: 4%" >Portgas</td>
+                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->FirstName);?></td>
                                     </tr>
                                 
                                     
                                     <tr>
                                         <th class ="">Middle Name</th>
-                                        <td style ="text-align: right; padding-right: 4%" >Dee</td>
+                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->MiddleName);?></td>
                                     </tr>
                                     <tr>
                                         <th class ="">Last Name</th>
-                                        <td style ="text-align: right; padding-right: 4%" >Ace</td>
+                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->LastName);?></td>
                                     </tr>
                                     <tr>
                                         <th class ="">House Unit/Number</th>
-                                        <td style ="text-align: right; padding-right: 4%" >#2124</td>
+                                        <td style ="text-align: right; padding-right: 4%" >#<?php  echo htmlentities($row->houseUnit);?></td>
                                     </tr>
                                 
                                     <tr>
                                         <th class ="">Purok</th>
-                                        <td style ="text-align: right; padding-right: 4%" >Purok 2</td>
+                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->Purok);?></td>
                                     </tr>
                                     <tr>
                                         <th class ="">Street</th>
-                                        <td style ="text-align: right; padding-right: 4%" >Street 1</td>
+                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->streetName);?></td>
                                     </tr>
                                  
                                     <tr>
                                         <th class ="">TIN</th>
-                                        <td style ="text-align: right; padding-right: 4%" >123-456-789</td>
+                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->tinNumber);?></td>
                                     </tr>
                                     <tr>
                                         <th class ="">SSS number</th>
-                                        <td style ="text-align: right; padding-right: 4%" >13-45622-892</td>
+                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->sssNumber);?></td>
                                     </tr>
                                     <tr>
                                         <th class ="">Voter Status </th>
-                                        <td style ="text-align: right; padding-right: 4%" >Voter</td>
+                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->voter);?></td>
                                     </tr>
                                     <tr>
                                         <th class ="">Voter Precinct </th>
-                                        <td style ="text-align: right; padding-right: 4%" >50-A</td>
+                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->vPrecinct);?></td>
                                     </tr>
 
                             </table>
-                           
+							<?php $cnt=$cnt+1;}} ?>
                         </div>
                       
                     </div>
@@ -231,3 +258,4 @@
     
 </body>
 </html>
+<?php }  ?>
