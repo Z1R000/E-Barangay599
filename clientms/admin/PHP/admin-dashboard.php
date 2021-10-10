@@ -1,13 +1,18 @@
-<?php 
-    $curr ="Dashboard";
-?>
+<?php
+session_start();
+error_reporting(0);
+include('includes/dbconnection.php');
+if (strlen($_SESSION['clientmsaid']==0)) {
+  header('location:logout.php');
+  } 
+     ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $curr;?></title>
+    <title>Dashboard</title>
    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -109,7 +114,15 @@
                                 <div class="row g-3">
                                     <div class="p-3 bg-primary  d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
-                                            <h4 class="fs-3">2500</h4>
+                                            <h4 class="fs-3"><?php 
+																$sql1 ="SELECT ID from tblresident ";
+																$query1 = $dbh -> prepare($sql1);
+																$query1->execute();
+																$results1=$query1->fetchAll(PDO::FETCH_OBJ);
+																$tser=$query1->rowCount();
+																echo htmlentities($tser);
+															?>	
+											</h4>
                                             <p class = "text-inner fs-5 card-text " href ="#">Total Residents</p>
                                         </div>
                                             <i class="fas fa-users fs-1 logo  p-4 "></i>
@@ -125,7 +138,15 @@
                                 <div class="row g-3">
                                     <div class="p-3 officials  d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
-                                            <h4 class="fs-3">420</h4>
+                                            <h4 class="fs-3"><?php 
+																$sql ="SELECT ID from tbladmin ";
+																$query = $dbh -> prepare($sql);
+																$query->execute();
+																$results=$query->fetchAll(PDO::FETCH_OBJ);
+																$tofficial=$query->rowCount();
+																echo htmlentities($tofficial);
+															?>
+											</h4>
                                             <p class = "text-inner fs-5 card-text " href ="#">Current Officials</p>
                                         </div>
                                             <i class="fas fa-user-shield fs-1 logo  p-4"></i>
