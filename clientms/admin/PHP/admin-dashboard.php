@@ -61,6 +61,9 @@
             .dis{
                 display:none;
             }
+            .blue{
+                background: #6699cc;
+            }
 
             @media (max-width:576px){
                 .banner{
@@ -121,14 +124,14 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3 left rounded border shadow-md officials">
+                            <div class="col-md-3 left rounded border shadow-md blue">
                                 <div class="row g-3">
-                                    <div class="p-3 officials  d-flex justify-content-around align-items-center ">
+                                    <div class="p-3 blue d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
                                             <h4 class="fs-3">420</h4>
-                                            <p class = "text-inner fs-5 card-text " href ="#">Current Officials</p>
+                                            <p class = "text-inner fs-5 card-text " href ="#">Rental Requests</p>
                                         </div>
-                                            <i class="fas fa-user-shield fs-1 logo  p-4"></i>
+                                            <i class="fas fa-archive fs-1 logo  p-4"></i>
                                             
                                     </div>
                                 </div>
@@ -141,7 +144,7 @@
                                     <div class="p-3 bg-success d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
                                             <h4 class="fs-3">500</h4>
-                                            <p class = "text-inner fs-5 card-text " href ="#">Specific Requests</p>
+                                            <p class = "text-inner fs-5 card-text " href ="#">Certification Requests</p>
                                         </div>
                                             <i class="fas fa-folder fa-folder fs-1 logo  p-4 "></i>
                                             
@@ -247,6 +250,21 @@
                                     <a class = "text-inner text-decoration-none" href = "#"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
                                 </div>
                                 
+                            </div>
+                            <div class="col-md-3 left rounded border shadow-md officials">
+                                <div class="row g-3">
+                                    <div class="p-3 officials  d-flex justify-content-around align-items-center ">
+                                        <div class = "text-inner">
+                                            <h4 class="fs-3">10</h4>
+                                            <p class = "text-inner fs-5 card-text " href ="#">Current Officials</p>
+                                        </div>
+                                            <i class="fas fa-user-shield fs-1 logo  p-4"></i>
+                                            
+                                    </div>
+                                </div>
+                                <div class="row border-top g-0 ">
+                                    <a class = "text-inner text-decoration-none" href = "#"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
+                                </div>
                             </div>
                         
                     
