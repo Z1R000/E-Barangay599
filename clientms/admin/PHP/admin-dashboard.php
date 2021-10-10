@@ -259,7 +259,6 @@
                                             <p class = "text-inner fs-5 card-text " href ="#">Current Officials</p>
                                         </div>
                                             <i class="fas fa-user-shield fs-1 logo  p-4"></i>
-                                            
                                     </div>
                                 </div>
                                 <div class="row border-top g-0 ">
