@@ -129,7 +129,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                         <h4 style="float: right; font-family: Segoe UI; margin: 25px; color: #021f4e; text-align: justify;">
                             For <?php  echo date('l, jS F Y - h:i A', strtotime($sDate));?> <br> To <?php  echo date('l, jS F Y - h:i A', strtotime($eDate));?>
                         </h4>
-                        <br><br><br>
+                        <br><br><br><br>
                         <div class="testulit" style="border-radius: 25px; ">
                             <h5 style="text-align: justify; margin:25px; text-indent: 5%;"><?php  echo $row->announcement;?> </h5>
                         </div>
