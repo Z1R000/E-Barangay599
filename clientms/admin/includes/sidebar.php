@@ -61,7 +61,7 @@
         <!-- Sidebar -->
         <div class="side-color" id="sidebar-wrapper">
             
-            <div class="sidebar-heading text-center py-1 second-text fs-5 fw-bold border-bottom">
+            <div class="sidebar-heading text-center py-2 second-text fs-5 fw-bold border-bottom">
              <br>Barangay 599 <br>E-barangay<br>
                 <img src = "../IMAGES/admin-logo.png" class = "py-1"style = "width: 60px;"><br>
           
@@ -82,7 +82,7 @@
                     </li>
 
                     <li class="nav-item has-submenu">
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-6"><i
+                        <a href="admin-residence.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-6"><i
                             class="fas fa-users me-2"></i>599 Residence</a>                        
                        
                     </li>
@@ -135,25 +135,14 @@
             <nav class="navbar navbar-expand-lg navbar-light border-bottom px-4 w-100">
                 <div class="d-flex align-items-center">
                     <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0"><?php echo $curr;?></h2>
+                    <h2 class="fs-4 m-0"><?php echo $curr;?></h2>
                 </div>
 
-                <button class="navbar-toggler " type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+              
 
-                <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li>
-                            
-                        </li>
-                    </ul>
-                </div>
+              
             </nav>
-            
-      
+   
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
