@@ -91,7 +91,7 @@
                         <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text fw-bold nav-link fs-6">
                             <i class="fas fa-paperclip my-0 me-2"></i>Services</a>
                         <ul class="submenu collapse">
-                            <li><a class="nav-link fs-6" href="admin-Certificates.php">Certification </a></li>
+                            <li><a class="nav-link fs-6" href="admin-certificate.php">Certification </a></li>
                             <li><a class="nav-link fs-6" href="admin-blotter.php">Blotter </a></li>
                             <li><a class="nav-link fs-6" href="admin-rentals.php">Rentals</a></li>
                             <li><a class="nav-link fs-6" href="admin-otherservice.php">Other Services </a></li>
