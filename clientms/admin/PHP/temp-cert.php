@@ -94,7 +94,7 @@
 <body>
   <main class="py-5">
     <div class="container justify-content-start">
-        <a href="admin-certificate.php" class="link-primary"><i class= "fas fa-arrow-left me-2"></i>Go back</a>
+        <a href="#" onclick= 'history.back();' class="link-primary"><i class= "fas fa-arrow-left me-2"></i>Go back</a>
         
     </div>
     <div class="container d-flex justify-content-center mb-3">

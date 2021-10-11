@@ -1,5 +1,5 @@
 <?php 
-    $curr ="Certificate List";
+    $curr ="Certificate Records";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +37,9 @@
         .btng{
             width: 50px;
         }
-
+        .uni{
+            background:#021f4e;
+        }
         @media (max-width: 576px){
             .row{
                 overflow-x: auto;
@@ -101,8 +103,8 @@
                     <div class="row g-0  rounded-top border" style= "background: aliceblue">
                         <div class="col-xl-4 py-2 px-2  ">
                             <nav class="nav nav-pills flex-column  flex-sm-row">
-                                <a class="flex-sm-fill  text-sm-center nav-link active " aria-current="page" href="#">Certificates List</a>
-                                <a class="flex-sm-fill text-sm-center nav-link " href="admin-crecords.php">Certification Records</a>
+                                <a class="flex-sm-fill  text-sm-center nav-link  " aria-current="page" href="admin-certificate.php">Certificates List</a>
+                                <a class="flex-sm-fill text-sm-center nav-link active " href="#">Certification Records</a>
                             
         
                             </nav>
@@ -117,14 +119,14 @@
                             <div class="col-md-8 px-2">
                                   
                                 <div class="btn-group" role="group">
-                                    <a href = "add-certificate.php"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;New Certificate</a>
+                                    <a href = "#walk-in"  data-bs-toggle ="modal" role = "button"class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;Walk-in certification</a>
                                 </div>
 
                             </div>
                             <div class="col-md-4  px-2" >
                                 <div class="d-flex">
                              
-                                <input type="text" name ="searchCert" placeholder = "Search Record"class="form-control">
+                                <input type="text" name ="searchCert" placeholder = "Search Certificate"class="form-control">
                                 <button class= "btn btn-outline-info mx-1 my-1"><i class= "fa fa-search"></i></button>
 
                                 </div>
@@ -138,30 +140,37 @@
                                     <table class="table bg-white table-hover "> 
                                         <thead>
                                             <tr>
-                                                <td scope = "col" colspan = 3 style ="background: #012f6e; color: white; text-align: center">Certificates List</td>
+                                                <td scope = "col" colspan = 7 style ="background: #012f6e; color: white; text-align: center">Certificates List</td>
                                             </tr>
                                             <tr>
                 
-                                                <th style = "text-align: left">Certification Name</th>
-                                                <th style = "text-align: left">Certification Fee</th>
-                                                <th style = "text-align: center">Action</th>
+                                                <th style = "text-align: left">Requestor's Name</th>
+                                                <th style = "text-align: left">Payment Method</th>
+                                                <th style = "text-align: left">Purpose</th>
+                                                <th style = "text-align: left">Requested Certificate</th>
+                                                <th style = "text-align: left">Certificate fee</th>
+                                                <th style = "text-align: left">Date</th>
+                                                <th style = "text-align: center">Actions</th>
+                                                
                                     
                                             </tr>
                                         
                                         </thead>           
                                         <tbody class= "table-hover">
                                             <tr>
+                                                <td scope="col" style = "text-align: left">ekoc omsim</td>
+                                                <td scope="col" style = "text-align: left">g-cash</td>
+                                                <td scope="col" style = "text-align: left">For employment</td>
                                                 <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                <td scope="col" style = "text-align: left">20 PHP</td>
+                                                <td scope="col" style = "text-align: left">30 PHP</td>
+                                                <td scope="col" style = "text-align: left">10-12-2021</td>
                                                 <td scope="col" style = "text-align: center">
-                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <button type = "submit" type="button" class="btn btng btn-primary"><i class = "fa fa-eye"></i></button>
+                                                    
+                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                            <a type="" href ="temp-cert.php"class="btn btng btn-success"><i class = "fa fa-print"></i></a>
                                                         </div>
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="" href ="edit-cert.php"class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
-                                                        </div>
-                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="button" href ="#delete-cert" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
                                                         </div>
                                                     
                                                 </td>
@@ -171,29 +180,20 @@
                                         </tbody>
          
                                     </table>                        
-                            </div>   
+                                </div>   
+                            </div>
                         </div>
-                        
                     </div>
-
-                   
-                    
-                
                 </div>
-            
-            </div>
-          
+            </div> 
         </div>
-        
-    </div>
 
     </form>
    
     <!--modal-->
 
-      
        
-    <div class="modal fade" id = "delete-cert" tab-idndex = "-1">
+    <div class="modal fade" id = "delete-record" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger ">
                     <div class="modal-header bg-danger white ">
@@ -209,7 +209,7 @@
                     
                         </div>
                         <div class="row">
-                            <p class = "fs-4 text-center">You are about to delete an existing certificate, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
+                            <p class = "fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
                         </div>
                         <div class="row justify-content-center" align = "center">
                             <form method = "POST" action = "#">
@@ -229,6 +229,90 @@
                 </div>
             </div>
         </div>
+    <!-- walk-in modal-->
+    <form method = "POST" action = "#">
+
+        <div class="modal fade" id = "walk-in" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content g-0 uni" >
+                    <div class="modal-header uni white ">
+                        <h5 class="modal-title" id="delete">&nbsp;<i class = "far fa-copy"></i>&nbsp;&nbsp;Walk in Certification</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body py-4 bg-white">
+                        <div class="row ">
+                            <div class="col-md-4">
+                                
+                                <label for="ctype"class="fs-6 fw-bold">Certification Type</label>
+                                <div class="d-flex">
+                                    <select class= "select form-control" name="" id="ctype">
+                                        <option  selected>Avaiable certifications</option>
+                                        <option value="gcash">Employment</option>
+                                        <option value="cash">Indigency</option>
+                                    </select>
+                                </div>
+                                
+                            </div>
+                            <div class="col-md-4">
+                                
+                                <label for="rname"class="fs-6 fw-bold">Certification Fee</label>
+                                <div class="d-flex">
+                                    <input type="text" class="form-control me-2 w-50" id="rname" value  = "20.00" readonly>
+                                    <div class="fs-5">
+                                        PHP
+                                    </div>
+                                </div>
+                                
+                            </div>
+                          
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="rname"class="fs-6 fw-bold">Requestor Name</label>
+                                <input type="text" class="form-control" id="rname" placeholder ="e.g Juan Dela Cruz">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="pmethod"class= "fs-6 fw-bold">Mode of Payment</label>
+                                <select class= "select form-control" name="" id="pmethod">
+                                    <option  selected>Modes of payment</option>
+                                    <option value="gcash">G-cash</option>
+                                    <option value="cash">Cash</option>
+                                </select>
+                            </div>
+                
+                        </div>
+                       <div class="row">
+                           <div class="col-md-6">
+                                <label for="purp" class= "fs-6 fw-bold">Purposes</label>
+                                    <select class= "select form-control" name="" id="purp">
+                                        <option  selected>Purposes</option>
+                                        <option value="ent">For entertainment</option>
+                                        <option value="med">For medical reasons</option>
+                                    </select>
+                           </div>
+                           <div class="col-md-6">
+                                <label for="purp" class= "fs-6 fw-bold">Business name 
+                                    <small class="text-muted">(If business related)</small> </label>
+                                <input type="text" class="form-control" id="rname" placeholder ="e.g Manong Store"> 
+                           </div>
+                       </div>
+                
+                    </div>
+                    <div class="modal-footer py-0">
+                                <button type = "submit" class="btn btn-success rounded"  name = "Submit" value ="Submit">
+                                    Submit
+                                </button>
+                                <button type = "button" class="btn btn-danger rounded" data-bs-dismiss ="modal" role  ="button"  name = "Cancel" value ="Cancel">
+                                    Discard                                    
+                                </button>
+                              
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     
 
 </body>
