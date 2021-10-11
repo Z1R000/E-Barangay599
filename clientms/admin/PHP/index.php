@@ -60,7 +60,7 @@ if(isset($_POST['login']))
 			height: 100%;
 		}
 		body{
-			background: url("images/barangaybackground.png");
+			background: url("../images/barangaybackground.png");
 			background-size: cover;
 			
 		}
@@ -254,7 +254,7 @@ if(isset($_POST['login']))
 	<div align = center>
 	<div class ="container">
 		<div class = "container-sm" align = center>
-			<img src = "images/admin-logo.png" class = "img-fluid">
+			<img src = "../images/admin-logo.png" class = "img-fluid">
 			
 			<!--<h4>Barangay 599, Zone 59, District VI</h4>-->
 			<h4>E-barangay - 599</h4>
