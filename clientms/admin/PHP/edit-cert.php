@@ -132,7 +132,7 @@
               <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                        <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#"><i class="fa fa-paperclip"></i>&nbsp;Dashboard</a></li>
+                        <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
                         <li class="breadcrumb-item"><a  class= "text-decoration-none"  href="admin-certificate.php"><i class="fa fa-list"></i>&nbsp;Certificates List</a></li>
                         <li class="breadcrumb-item active"><a href="#"><i class="fa fa-edit text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
                     </ol>

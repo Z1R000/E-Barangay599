@@ -55,7 +55,7 @@
                         </ol>
                     </nav>
                 </nav>
-            </div>
+            </div>  
 
             <!--other actions for blotter-->
             <div class="container-fluid mb-2">

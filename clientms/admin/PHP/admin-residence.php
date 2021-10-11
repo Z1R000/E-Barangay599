@@ -279,7 +279,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         
     </div>
 
-    
     <div class="modal fade" id = "delete" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger ">
@@ -296,15 +295,22 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                     
                         </div>
                         <div class="row">
-                            <p class = "fs-4 text-center">You are about to delete a record, do you wish to continue?<br></p>
+                            <p class = "fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
+                        </div>
+                        <div class="row justify-content-center" align = "center">
+                            <form method = "POST" action = "#">
+                                <button type = "button" class="btn btn-success rounded-circle" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                    <i class= 'fa fa-check '></i>
+                                </button>
+                                <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                    <i class= "fa fa-times"></i>
+                                </button>
+                            </form>
                         </div>
                 
                     </div>
                     <div class="modal-footer">
-                        <form method = "POST" action = "#">
-                            <input type = "button" class="btn btn-success" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                            <input type = "button" class="btn btn-secondary" data-bs-dismiss = "modal"  name = "no" value ="No">
-                        </form>
+                        
                     </div>
                 </div>
             </div>
