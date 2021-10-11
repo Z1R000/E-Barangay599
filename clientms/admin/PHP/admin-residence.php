@@ -74,6 +74,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 <body>
 
     <?php 
+        $curr = "Resident List";
         include ('../includes/sidebar.php');
     ?> 
             <!--breadcrumb-->
