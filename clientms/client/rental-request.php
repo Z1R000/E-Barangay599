@@ -177,9 +177,9 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                     <form method="post" style="font-size:1.25em;">
                                         <table style="width: 100%;">
                                             <tr>
-                                                <th><span class="anothertestfont" style="color: #021f4e;">Choose Rental</th>
+                                                <th><span class="anothertestfont" style="color: #021f4e; ">Choose Rental</th>
                                                 <br>
-                                                <th><span style="color: #021f4e;"></th>
+                                                
                                                 <th><span class="anothertestfont" style="color: #021f4e;">Rental Price</th>
 
                                             </tr>
@@ -192,13 +192,13 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                                     $query->execute();
                                                     $results = $query->fetchAll(PDO::FETCH_OBJ);
                                                     if ($query->rowCount() > 0) {
-                                                        echo "<select  name='certid' id='certid' class='form-control select2 dropdownstyle' required='true' style='padding: 1px; font-size: 1em; width: 90%;'>
+                                                        echo "<select  name='certid' id='certid' class='form-control select2 dropdownstyle' required='true' style='padding: 1px; margin-left:1px;font-size: 1.3em; width: 90%;'>
 													<option value=''disabled selected>Choose Rental</option>";
                                                         foreach ($results as $row) {
                                                             echo "<option value='$row->ID'>$row->CertificateName</option>";
                                                         } ?>
                                                 </td>
-                                                <td style='color: black;'></td>
+                                                
                                                 <td style='color: black;'>
                                                 <?php echo "$row->CertificatePrice</td>";
 
@@ -211,55 +211,11 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
                                             <tr>
                                                 <td>
-                                                    <div class="1 2 3 4 9 10 11 12 13 14 15 16 17 18 101 102 103 104 105 box">
-
-                                                        <table>
-                                                            <tr>
-                                                                <td>Purpose:</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><select id="typeofuse">
-                                                                        <option value="100">-Choose-</option>
-                                                                        <option value="101">Personal Use</option>
-                                                                        <option value="102">Business Use</option>
-                                                                        <option value="103">Reference</option>
-                                                                        <option value="104">Financing</option>
-                                                                        <option value="105">Local Employment</option>
-                                                                    </select></td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                    <div class="5 6 7 8 102 box">
-
-                                                        <table style="width: 130%;">
-                                                            <tr>
-                                                                <td>Business Name:</td>
-                                                                <td>Business Address:</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><input type="text" style="width: 90%;"></td>
-                                                                <td><input type="text" style="width: 90%;"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><br></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Business Capital</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <input type="radio" id="10b" name="capital" value="6">
-                                                                    <label for="10b" style="color: black;">Php10,000-below</label><br>
-                                                                    <input type="radio" id="101" name="capital" value="7">
-                                                                    <label for="101" style="color: black;">Php10,001-Php100-000</label><br>
-                                                                    <input type="radio" id="10a" name="capital" value="8">
-                                                                    <label for="10a" style="color: black;">Php100,001-Above</label><br>
-                                                                </td>
-                                                            </tr>
-
-                                                        </table>
-                                                    </div>
-
+                                                <div class="form-group"> <h2 for="exampleInputEmail1" style="color: #021f4e;">Rental Start-Date:</h2> <input type="datetime-local" name="rsdate" value="" id="date" placeholder="Rental Start Date" class="form-control" required='true' style="font-size: 2vh; width: 90%;"> </div>
+                                                <div class="form-group"> <h2 for="exampleInputEmail1" style="color: #021f4e;">Rental End-Date:</h2> <input type="datetime-local" name="redate" value="" id="date" placeholder="Rental End Date" class="form-control" required='true' style="font-size: 2vh; width: 90%;"> </div>
+                                                </td>
+                                                <td>
+                                                
                                                 </td>
 
                                             </tr>
