@@ -132,7 +132,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                         </div>
                     </div>
                         <div class="graph">
-                            <div class="tables">
+                            <div class="tables" style="overflow-x:auto;">
                                 <table class="table" border="1">
                                     <thead style="background-color: #021f4e;">
                                         <th><span style="color: #fff; font-size:120%;">Rent</th>
