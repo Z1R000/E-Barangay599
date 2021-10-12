@@ -1,6 +1,8 @@
 <?php 
     $curr ="Blotters";
 ?>
+
+<!-- supply with the selected record's information -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +24,9 @@
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
     <style type = "text/css">
+        table,tr,td,th{
+            border: 1px solid grey;
+        }
         body,html{
             height: 100%;
         }
@@ -36,6 +41,9 @@
             max-height:250px;
             overflow-Y: auto;
         }
+        .white{
+            color:white;
+        }
 
     </style>
 </head>
@@ -45,779 +53,195 @@
         include ('../includes/sidebar.php');
     ?> 
             <!--breadcrumb-->
-            <div class="container mx-5">
+        <div class="container mx-5 mt-3">
+            <nav aria-label="breadcrumb">
                 <nav aria-label="breadcrumb">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-paperclip text-muted"></i></a>&nbsp;Services</li>
-                            <li class="breadcrumb-item active"><a href="#"><i class="fa fa-gavel text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
-                        </ol>
-                    </nav>
-                </nav>
-            </div>  
-
-            <!--other actions for blotter-->
-            <div class="container-fluid mb-2">
-                <div class="row ">
-                    <div class = "col mt-2">
-                    </div>
-                    
-                    <div class="col-md-8 mt-2 mx-0">
-                        <div class ="nav justify-content-end mx-0">
-                            <div class="btn-group" role="group">
-                                <a href = "#update-fee" class="btn btn-primary mx-1 my-1" data-bs-toggle = "modal"><i class="fa fa-edit"></i>&nbsp;Update fee</a>
-                            </div>
-                            <div class="btn-group" role="group">
-                                <a href = "#add-blotter-case" data-bs-toggle = "modal" role = "button" class="btn btn-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;Blotter report</a>
-                            </div>
-                            <div class="btn-group" role="group" >
-                                <a href = "#add-blotter-type" class="btn btn-primary mx-1 my-1" data-bs-toggle = "modal" role = "button"><i class="fa fa-plus"></i>&nbsp;Blotter Type</a>
-                            </div>
-                            <div class="btn-group" role="group" >
-                                <a href = "admin-Brequest.php" class="btn btn-primary mx-1 my-1"><i class="fa fa-list"></i>&nbsp;Requests</a>
-                            </div>
-                           
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-
-            <div class="container-fluid">
-                    <!--1-->
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12  my-2">
-                            <!-- search bar-->
-                            <div class="row  my-2">
-                                <div class="col-6 ">
-
-                                </div>
-                            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 ">
-                                <form class = "d-flex">
-                                    <input type = "text" class= "form-control" placeholder = "Search here">
-                                    <button type ="button" class = "btn btn-success" ><i class = "fa fa-search"></i></button>
-                                </form>
-                                </div>
-                            </div>
-                        <!--table-->
-                        <!--2-->
-                            <div class="row my-2">
-                                <?php include('supporting-files.php')?>
-                            </div>
-
-                            <div class="row  my-2">
-                        
-                                <div class="col-xl-6  ">
-                                </div>
-
-                                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 ">
-                                    <form class = "d-flex">
-                                        <input type = "text" class= "form-control" placeholder = "Search here">
-                                        <button type ="button" class = "btn btn-success" ><i class = "fa fa-search"></i></button>
-                                   </form>
-                                </div>
-
-                            </div>
-                        <div class="row">
-                            <?php include('gen-cer.php')?>
-                        </div>
-                    </div>
-                    <div class="col-xl-7 col-lg-12 col-md-12 col-sm-12  my-2">
-                        <div class="row  my-2">
-                            <div class="col-6 ">
-
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 ">
-                                <form class = "d-flex">
-                                    <input type = "text" class= "form-control" placeholder = "Search here">
-                                    <button type ="button" class = "btn btn-success" ><i class = "fa fa-search"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                        <?php include('right-blotter.php')?>
-                   
-                </div>
-            
-            
-            
-
-    
-      
-    <!-- add blotter type modal-->
-    <div class="modal fade" id="add-blotter-type"  tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="add-blotter-type"><i class = "fa fa-plus"></i>&nbsp;New Blotter type</h5>
-                 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class = "image-fluid" align = "center">
-                            <img src = "../IMAGES/BARANGAY.png" class ="brand-logo" style = "width: 30px">
-                        </div>
-                    </div>
-                    <form method = "POST" action="#">
-                        <div class="row">
-                            <div class="col my-1">
-                                <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text">?</div>
-                                    </div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="New Blotter type here">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class ="row my-1">
-                            <div class ="col">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
-                                    <label class = "text-muted" for="floatingTextarea2">Blotter type description here</label>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                     <a  href = "#verif" role= "button" class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" >Save</a>
-                    <input type = "reset" class="btn btn-primary" >
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--blotter type addition verification-->
-    <div class="modal fade" id = "verif" tab-idndex = "-1">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="delete-cert">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
-                    
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body px-5">
-                    <p class = "fs-4">New blotter type is about to be created<br>Click "Yes" if certain?</p>
-                </div>
-                <div class="modal-footer">
-                    <form method = "POST" action = "#">
-                    <input type = "button" class="btn btn-success"  name = "yes" value ="Yes">
-                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal"  value = "No">
-                    </form>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--blotter addition record verification modal-->
-    <div class="modal fade" id = "verif-brecord" tab-idndex = "-1">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content">
-                <div class="modal-header    ">
-                    <h5 class="modal-title" id="delete-cert">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
-                    
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body px-5">
-                    <p class = "fs-4">New blotter record about to be created,<br>Click "Yes" if certain</p>
-                </div>
-                <div class="modal-footer">
-                    <form method = "POST" action = "#">
-                    <input type = "button" class="btn btn-success"  name = "yes" value ="Yes">
-                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal"  value = "No">
-                    </form>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--feeupdate verificationn modal-->
-    <div class="modal fade" id = "verif-fee" tab-idndex = "-1">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content">
-                <div class="modal-header ">
-                    <h5 class="modal-title" id="delete-cert">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
-                    
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body px-5">
-                    <p class = "fs-4">Confirm fees update<br>Click "Yes" if certain</p>
-                </div>
-                <div class="modal-footer">
-                    <form method = "POST" action = "#">
-                    <input type = "button" class="btn btn-success"  name = "yes" value ="Yes">
-                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal"  value = "No">
-                    </form>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- update verification modal-->
-    <div class="modal fade" id = "verif-update" tab-idndex = "-1">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="delete-cert">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
-                    
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body px-5">
-                    <p class = "fs-4">Confirm record update<br>Click "Yes" if certain</p>
-                </div>
-                <div class="modal-footer">
-                    <form method = "POST" action = "#">
-                    <input type = "button" class="btn btn-success"  name = "yes" value ="Yes">
-                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal"  value = "No">
-                    </form>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--delete verification modal-->
-    <div class="modal fade" id = "verif-del" tab-idndex = "-1">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content">
-                <div class="modal-header ">
-                    <h5 class="modal-title" id="delete-cert">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
-                    
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body px-5">
-                    <p class = "fs-4">Confirm record deletion<br>Click "Yes" if certain</p>
-                </div>
-                <div class="modal-footer">
-                    <form method = "POST" action = "#">
-                    <input type = "button" class="btn btn-success"  name = "yes" value ="Yes">
-                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal"  value = "No">
-                    </form>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-    <!--populate with current fee for blotter copy update fee modal-->
-    <div class="modal fade" id = "update-fee" tab-idndex = "-1">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content">
-                <div class="modal-header ">
-                    <h5 class="modal-title" id="delete-cert">&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Update Extra blotter copy fee</h5>
-                    
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body px-5">
-                    <!-- 1 copy = 0 more than one me presyuhan na -->
-                    <div class  = "row">
-                        <div class="col-md-4">
-                            Current: <div class= "fs-3">5 PHP</div>
-                        </div>
-                        <div class = "col-md-4">
-                            <form action = "#" method = "POST">
-                                <input type = "number" class = "form-control fs-4" min = 0 placeholder = "new price here"> 
-                            </form>  
-                    </div>
-                        
-                        
-                    </div>
-                    
-                </div>
-                <div class="modal-footer">
-                    
-                    <a href = "#verif-fee" data-bs-toggle = "modal" role = "button" data-bs-dismiss = "modal" class="btn btn-success">Yes</a>
-                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal"  value = "No">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--populate cells requiring data from blotter db, 
-        this is add-blotter record modal-->
-    <div class="modal fade" id="add-blotter-case"  tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="add-blotter-type"><i class = "fa fa-plus"></i>&nbsp;New Blotter Record</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class = "image-fluid" align = "center">
-                            <img src = "../IMAGES/BARANGAY.png" class ="brand-logo" style = "width: 30px">
-                        </div>
-                    </div>
-                    <form method = "POST" action="#">
-                        <div class="row">
-                            <div class="col-md-6 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-question"></i></a></div>
-                                    </div>
-                                    <!--populate with db-->
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected disabled>Blotter type</option>
-                                        <option value="violence">Violence</option>
-                                        <option value="public" >Public Disturbance</option>
-                                        <option value= "vb">Verbal Abuse</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-8 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-user"></i></a></div>
-                                    </div>
-                                    <input type="text" class="form-control"  placeholder="Complainant's name">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-map-marker"></i></a></div>
-                                    </div>
-                                    <input type="text" class="form-control"  placeholder="Incident location">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class ="row my-1">
-                            <div class ="col">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 50px"></textarea>
-                                    <label class = "text-muted" for="floatingTextarea2">Complaint's Respondents</label>
-                                </div>
-                            </div>
-                        </div>
-                        
-
-                        <div class="row">
-                            <div class="fs-6">Incident Date</div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-calendar"></i></a></div>
-                                    </div>
-                                    
-                                    <input type="date" class="form-control">
-                                
-                                </div>
-                            </div>
-                            <div class="col-md-6 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-tasks"></i></a></div>
-                                    </div>
-                                    <!--populate with db-->
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected disabled>Blotter Status</option>
-                                        <option value="">Fullfilled</option>
-                                        <option value="public" >On Going</option>
-                                        
-                                    </select>
-                                
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class ="row my-1">
-                            <div class ="col">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
-                                    <label class = "text-muted" for="floatingTextarea2">Complainant's Narrative here</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="fs-6">Summon Schedule</div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-calendar"></i></a></div>
-                                    </div>
-                                    
-                                    <input type="date" class="form-control">
-                                
-                                </div>
-                            </div>
-                            <div class="col-md-6 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-clock"></i></a></div>
-                                    </div>
-                                    
-                                    <input type="time" class="form-control">
-                                
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                <div class="modal-footer">
-                     <a  href = "#verif-brecord" role= "button" class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" >Save</a>
-                    <input type = "reset" class="btn btn-primary" >
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--populate with db data check blotter case modal-->
-
-    <div class="modal fade" id="check-blotter-case"  tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="add-blotter-type"><i class = "fa fa-plus"></i>&nbsp;Blotter Record</h5>
-                 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class = "image-fluid" align = "center">
-                            <img src = "../IMAGES/BARANGAY.png" class ="brand-logo" style = "width: 30px">
-                        </div>
-                    </div>
-                    <form method = "POST" action="#">
-                        <div class="row">
-                            <div class="col-8 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-user"></i></a></div>
-                                    </div>
-                                    <input type="text" class="form-control"  placeholder="Complainant's name" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                        
-                            <div class="col-md-6 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-question"></i></a></div>
-                                    </div>
-                                    <!--populate with db-->
-                                    <select class="form-select" aria-label="Default select example" disabled>
-                                        <option selected disabled>Blotter type</option>
-                                        <option value="violence">Violence</option>
-                                        <option value="public" >Public Disturbance</option>
-                                        <option value= "vb">Verbal Abuse</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-credit-card"></i></a></div>
-                                    </div>
-                                    <!--populate with db-->
-                                    <select class="form-select" aria-label="Default select example" disabled>
-                                        <option selected disabled>Settlement Status</option>
-                                        <option value="violence">Settled</option>
-                                        <option value="public" >Unsettled</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                       
-                        
-                        <div class="row">
-                            <div class="col my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-map-marker" ></i></a></div>
-                                    </div>
-                                    <input type="text" class="form-control"  placeholder="Incident location" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class ="row my-1">
-                            <div class ="col">
-                                <div class="form-floating">
-                                    <textarea readonly class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 50px"></textarea>
-                                    <label class = "text-muted" for="floatingTextarea2">Complaint's Respondents </label>
-                                </div>
-                            </div>
-                        </div>
-                        
-
-                        <div class="row">
-                            <div class="fs-6">Incident Date</div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-calendar"></i></a></div>
-                                    </div>
-                                    
-                                    <input type="date" class="form-control" readonly>
-                                
-                                </div>
-                            </div>
-                            <div class="col-md-6 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-tasks"></i></a></div>
-                                    </div>
-                                    <!--populate with db-->
-                                    <select  readonly class="form-select" aria-label="Default select example" disabled>
-                                        <option selected disabled>Blotter Status</option>
-                                        <option value="">Fullfilled</option>
-                                        <option value="public" >On Going</option>
-                                        
-                                    </select>
-                                
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class ="row my-1">
-                            <div class ="col">
-                                <div class="form-floating">
-                                    <textarea  readonly class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
-                                    <label class = "text-muted" for="floatingTextarea2">Complainant's Narrative here</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="fs-6">Summon Schedule</div>
-                        </div>
-
-                        <div class="row">
-                            <div  class="col-md-6 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-calendar"></i></a></div>
-                                    </div>
-                                    
-                                    <input readonly type="date" class="form-control">
-                                
-                                </div>
-                            </div>
-                            <div class="col-md-6 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-clock"></i></a></div>
-                                    </div>
-                                    
-                                    <input readonly type="time" class="form-control">
-                                
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                <div class="modal-footer">
-                    <form method = "POST" action ="#">
-                        <a  role= "button" class="btn btn-primary" data-bs-dismiss="modal" >Done</a>
-                        <input type = "submit" class="btn btn-primary" value = "Create Report">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- db populate edit blotter case modal -->
-    <div class="modal fade" id="edit-blotter-case"  tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="edit-blotter-type"><i class = "fa fa-plus"></i>&nbsp;Update Blotter Record</h5>
-                 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class = "image-fluid" align = "center">
-                            <img src = "../IMAGES/BARANGAY.png" class ="brand-logo" style = "width: 30px">
-                        </div>
-                    </div>
-                    <form method = "POST" action="#">
-
-                        <div class="row">
-                            <div class="col-8 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-user"></i></a></div>
-                                    </div>
-                                    <input type="text" class="form-control"  placeholder="Complainant's name">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-question"></i></a></div>
-                                    </div>
-                                    <!--populate with db-->
-                                    <select class="form-select" aria-label="Default select example" >
-                                        <option selected disabled>Blotter type</option>
-                                        <option value="violence">Violence</option>
-                                        <option value="public" >Public Disturbance</option>
-                                        <option value= "vb">Verbal Abuse</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-credit-card"></i></a></div>
-                                    </div>
-                                    <!--populate with db-->
-                                    <select class="form-select" aria-label="Default select example" >
-                                        <option selected disabled>Settlement Status</option>
-                                        <option value="violence">Settled</option>
-                                        <option value="public" >Unsettled</option>
-                                       
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
+                        <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
                       
+                        <li class="breadcrumb-item active"><a href="#"><i class="fa fa-gavel text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
+                    </ol>
+                </nav>
+            </nav>
+        </div>
+
+
+        <div class="container-fluid mx-4  px-4 mb-5">
+        <div class="row g-0">
+            <div class="row gx-4 gy-2">
+                <div class="mx-auto col-xl-12 ">
+                    <div class="row g-0  rounded-top border white" style= "background: #021f4e">
+                        <div class="col-xl-2  px-2  ">
+                            <div class="row">
+                                <h5 class="flex-sm-fill  text-sm-center nav-link  " aria-current="page" >
+                                    <i class= "fa fa-suitcase"></i> Blotter Records</h5>
+                            </div>
+        
+
+                        </div>
                         
-                        <div class="row">
-                            <div class="col my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-map-marker"></i></a></div>
-                                    </div>
-                                    <input type="text" class="form-control"  placeholder="Incident location">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class ="row my-1">
-                            <div class ="col">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 50px"></textarea>
-                                    <label class = "text-muted" for="floatingTextarea2">Complaint's Respondents</label>
-                                </div>
-                            </div>
-                        </div>
-                        
-
-                        <div class="row">
-                            <div class="fs-6">Incident Date</div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-calendar"></i></a></div>
-                                    </div>
-                                    
-                                    <input type="date" class="form-control">
-                                
-                                </div>
-                            </div>
-                            <div class="col-md-6 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-tasks"></i></a></div>
-                                    </div>
-                                    <!--populate with db-->
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected disabled>Blotter Status</option>
-                                        <option value="">Fullfilled</option>
-                                        <option value="public" >On Going</option>
-                                        
-                                    </select>
-                                
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class ="row my-1">
-                            <div class ="col">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
-                                    <label class = "text-muted" for="floatingTextarea2">Complainant's Narrative here</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="fs-6">Summon Schedule</div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-calendar"></i></a></div>
-                                    </div>
-                                    
-                                    <input type="date" class="form-control">
-                                
-                                </div>
-                            </div>
-                            <div class="col-md-6 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-clock"></i></a></div>
-                                    </div>
-                                    
-                                    <input type="time" class="form-control">
-                                
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
-                <div class="modal-footer">
-                     <a  href = "#verif-update" role= "button" class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" >Save</a>
-                    <input type = "reset" class="btn btn-primary" >
-                    </form>
+                    <div class="row g-0 border bg-white" >
+                      
+
+                        <div class = "row py-2 g-0 px-3">
+                            <div class="col-md-8 px-1">
+                                <div class="btn-group" role="group">
+                                    <a href = "#blotter-choice" data-bs-toggle= "modal" role = "button" class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;New Case</a>
+                                </div>
+                            </div>
+                            <div class="col-md-4  px-2" >
+                                <div class="d-flex">
+                            
+                                <input type="text" name ="searchCert" placeholder = "Search Record" class="form-control">
+                                <button class= "btn btn-outline-info mx-1 my-1"><i class= "fa fa-search"></i></button>
+
+                                </div>
+                        
+                            
+                            </div>
+                            
+                        </div>
+                        <div class="row g-0">
+                            <div class="col-xl-11 mx-2  mx-auto py-3  px-2">
+                                    <table class="table bg-white table-hover "> 
+                                        <thead class = "bg-light">
+                                            <tr>
+                                           
+                                            </tr>
+                                            <tr>
+                
+                                                <th style = "text-align: left">Status</th>
+                                                <th style = "text-align: left">Complainant</th>
+                                                <th style = "text-align: left">Incident Type</th>
+                                                <th style = "text-align: left">Date Time Reported</th>
+                                                <th style = "text-align: left">Incident's Estimated Time </th>
+                                                <th style = "text-align: center">Actions</th>
+                                                
+                                    
+                                            </tr>
+                                        
+                                        </thead>           
+                                        <tbody class= "table-hover">
+                                            <tr>
+                                                <td scope="col" style = "text-align: left">On-going</td>
+                                                <td scope="col" style = "text-align: left">Mang Berting</td>
+                                                <td scope="col" style = "text-align: left">Public Disturbance</td>
+                                         
+                            
+                                                
+                                                <td scope="col" style = "text-align: left">12-10-2021</td>
+                                                <td scope="col" style = "text-align: left">6:00pm</td>
+                                                <td scope="col" style = "text-align: center">
+                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                            <a type="" href ="blotter-report.php"class="btn btng btn-primary"><i class = "fa fa-print"></i></a>
+                                                        </div>
+                                                    
+                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                            <a href ="edit-blotter.php"class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
+                                                        </div>
+                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                        </div>
+                                                    
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+         
+                                    </table>                        
+                                </div>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+    </form>
+   
+    <!--modal-->
+
+       
+        <div class="modal fade" id = "delete-record" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-danger ">
+                    <div class="modal-header bg-danger white ">
+                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        <div class="row">
+                            <div class="col xl-4" align = "center">
+                                <img src="../images/trash.png" alt="trash" class= " img-fluid " style ="width: 10%;">
+                            </div>
+                    
+                        </div>
+                        <div class="row">
+                            <p class = "fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
+                        </div>
+                        <div class="row justify-content-center" align = "center">
+                            <form method = "POST" action = "#">
+                                <button type = "button" class="btn btn-success rounded-circle" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                    <i class= 'fa fa-check '></i>
+                                </button>
+                                <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                    <i class= "fa fa-times"></i>
+                                </button>
+                            </form>
+                        </div>
+                
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <?php
-        include('decline-modal.php');
-    ?>
 
+        <div class="modal fade" id = "blotter-choice" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 blue ">
+                    <div class="modal-header blue white">
+                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-user"></i>&nbsp;&nbsp;Complainant Type</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        <div class="row  px-2">
+                            <div class="col xl-4 px-3" align = "center">
+                                <img src="../images/resident-logo.png" alt="trash" class= " img-fluid " style ="width: 40%;">
+                                
+                            <div class="row">
+                                    <a type = "button" href="create-blotter-resident.php" class="btn btn-outline-info rounded"  name = "resident" value ="resident">
+                                        599 resident
+                                    </a>
+                                </div>                           
+                            </div>
 
+                            <div class="col xl-4 px-3" align = "center">
+                                <img src="../images/outsider.png" alt="trash" class= " img-fluid " style ="width: 40%;">
+                                <div class="row">
+                                    <a class="btn btn-outline-info rounded" href ="create-blotter-outsider.php"  name = "outsider" value ="outsider">
+                                        Outsider
+                                    </a>
+                                </div>   
+                            </div>
+                            
+                        </div>
+                 
+                
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- walk-in modal-->
+    
     
 </body>
 </html>

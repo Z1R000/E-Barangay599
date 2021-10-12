@@ -24,7 +24,7 @@
     <style type = "text/css">
         @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
 
-
+            
             .sidebar li .submenu{ 
                 list-style: none; 
                 margin: 0; 
@@ -113,7 +113,7 @@
                                     <div class="p-3 bg-primary  d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
                                             <h4 class="fs-3">2500</h4>
-                                            <p class = "text-inner fs-5 card-text " href ="#">Total Residents</p>
+                                            <p class = "text-inner fs-5 card-text " href ="#">Total<Br> Residents</p>
                                         </div>
                                             <i class="fas fa-users fs-1 logo  p-4 "></i>
                                             
@@ -129,7 +129,7 @@
                                     <div class="p-3 blue d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
                                             <h4 class="fs-3">420</h4>
-                                            <p class = "text-inner fs-5 card-text " href ="#">Rental Requests</p>
+                                            <p class = "text-inner fs-5 card-text " href ="#">Rental <br>Requests</p>
                                         </div>
                                             <i class="fas fa-archive fs-1 logo  p-4"></i>
                                             
