@@ -115,8 +115,8 @@
                     <div class="row g-0 border bg-white" >
                       
 
-                        <div class = "row py-2 g-0 px-5">
-                            <div class="col-md-8 px-2">
+                        <div class = "row py-2 g-0 px-3">
+                            <div class="col-md-8 ">
                                   
                                 <div class="btn-group" role="group">
                                     <a href = "#walk-in"  data-bs-toggle ="modal" role = "button"class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;Walk-in certification</a>
@@ -136,11 +136,11 @@
                             
                         </div>
                         <div class="row border g-0">
-                            <div class="col-xl-11 mx-2  mx-auto py-3  px-2">
+                            <div class="col-xl-12 mx-2  mx-auto py-3  px-3">
                                     <table class="table bg-white table-hover "> 
                                         <thead>
                                             <tr>
-                                                <td scope = "col" colspan = 7 style ="background: #012f6e; color: white; text-align: center">Certificates List</td>
+                                                <td scope = "col" colspan = 8 style ="background: #012f6e; color: white; text-align: center">Certification Records</td>
                                             </tr>
                                             <tr>
                 
@@ -150,6 +150,7 @@
                                                 <th style = "text-align: left">Requested Certificate</th>
                                                 <th style = "text-align: left">Certificate fee</th>
                                                 <th style = "text-align: left">Date</th>
+                                                <th style = "text-align: left">Barangay Certification #</th>
                                                 <th style = "text-align: center">Actions</th>
                                                 
                                     
@@ -164,6 +165,7 @@
                                                 <td scope="col" style = "text-align: left">Barangay Clearance</td>
                                                 <td scope="col" style = "text-align: left">30 PHP</td>
                                                 <td scope="col" style = "text-align: left">10-12-2021</td>
+                                                <td scope="col" style = "text-align: left">015-22</td>
                                                 <td scope="col" style = "text-align: center">
                                                     
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
@@ -306,7 +308,6 @@
                                 <button type = "button" class="btn btn-danger rounded" data-bs-dismiss ="modal" role  ="button"  name = "Cancel" value ="Cancel">
                                     Discard                                    
                                 </button>
-                              
                             </form>
                     </div>
                 </div>
