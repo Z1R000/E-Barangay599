@@ -1,5 +1,50 @@
 <?php 
     $curr ="Resident Info";
+    session_start();
+    error_reporting(0);
+    include('includes/dbconnection.php');
+    if (strlen($_SESSION['clientmsaid']==0)) {
+      header('location:logout.php');
+      } else{
+        if(isset($_POST['submit']))
+        {
+        $eid=intval($_GET['editid']);
+        $clientmsaid=$_SESSION['clientmsaid'];
+            $rest=$_POST['rest'];
+            $lname=$_POST['lname'];
+            $fname=$_POST['fname'];
+            $mname=$_POST['mname'];
+            $hu=$_POST['hu'];
+            $vp=$_POST['vp'];
+            $prk=$_POST['prk'];
+            $stn=$_POST['stn'];
+            $gnd=$_POST['gnd'];
+            $contact=$_POST['contact'];
+            $cstat=$_POST['cstat'];
+            $vstat=$_POST['vstat'];
+            $email=$_POST['email'];
+            $sss=$_POST['sss'];
+            $tin=$_POST['tin'];
+            $bdt=$_POST['bdt'];
+        
+        $sql="update tblresident set ResidentType=:rest, Purok=:prk, houseUnit=:hu, streetName=:stn, LastName=:lname, FirstName=:fname, MiddleName=:mname, houseUnit=:hu, streetName=:stn, Purok=:prk, Cellphnumber=:contact, CivilStatus=:cstat, voter=:vstat, Email=:email where ID=:eid";
+        $query=$dbh->prepare($sql);
+        $query->bindParam(':rest',$rest,PDO::PARAM_STR);
+        $query->bindParam(':vstat',$vstat,PDO::PARAM_STR);
+        $query->bindParam(':lname',$lname,PDO::PARAM_STR);
+        $query->bindParam(':fname',$fname,PDO::PARAM_STR);
+        $query->bindParam(':mname',$mname,PDO::PARAM_STR);
+        $query->bindParam(':hu',$hu,PDO::PARAM_STR);
+        $query->bindParam(':stn',$stn,PDO::PARAM_STR);
+        $query->bindParam(':prk',$prk,PDO::PARAM_STR);
+        $query->bindParam(':contact',$contact,PDO::PARAM_STR);
+        $query->bindParam(':cstat',$cstat,PDO::PARAM_STR);
+        $query->bindParam(':email',$email,PDO::PARAM_STR);
+        $query->bindParam(':eid',$eid,PDO::PARAM_STR);
+        $query->execute();
+        echo '<script>alert("Resident detail has been updated")</script>';
+        echo "<script type='text/javascript'> document.location ='edit-resident-account.php?editid=" + $eid + "'; </script>";
+            }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,16 +124,30 @@
         <div class="row g-0 mx-2">
             <div class="row g-3">
                 <div class="mx-auto col-xl-10 white   ">
-                    <div class="row g-0 rounded-top "  style= "background-color:#021f4e">
+                <form method="post"> 
+                    <?php
+                        $eid=$_GET['editid'];
+                        $sql="SELECT * from tblresident where ID=:eid";
+                        $query = $dbh -> prepare($sql);
+                        $query->bindParam(':eid',$eid,PDO::PARAM_STR);
+                        $query->execute();
+                        $results=$query->fetchAll(PDO::FETCH_OBJ);
+                        $cnt=1;
+                        if($query->rowCount() > 0)
+                        {
+                        foreach($results as $row)
+                        {               
+                    ?>
+                    <div class="row g-0 rounded-top"  style= "background-color:#021f4e">
                         <div class="fs-5 px-3 py-1">
-                            Resident #123
+                            Resident #<?php echo $row->ID; ?>
                         </div>
                     </div>
                     <div class="row g-0 border bg-white">
                         <div class="col-xl-3 py-3 border-end" align = "center">
                       
                             <img src="../images/user-res.png" alt="resident" style ="width: 105px; height: 100px;">
-                            <div class = "fs-6 black">Portgas D. Ace</div>
+                            <div class = "fs-6 black"><?php echo "$row->FirstName "; echo "$row->MiddleName "; echo $row->LastName; ?></div>
                             
                         </div>
                         <div class="col-xl-4 mx-2  px-2">
@@ -96,16 +155,33 @@
                             <table class="table my-3">
                                     <tr>
                                         <th class =""><i class ="fa fa-calendar me-2"></i>Age</th>
-                                        <td><input type="number" class = "smol" value = "40"></td>
+                                        <td>
+                                            <?php 
+                                                $gbd = $row->BirthDate;
+                                                $gbd = date('Y-m-d', strtotime($gbd));
+                                                $today = date('Y-m-d');
+                                                $diff = date_diff(date_create($gbd), date_create($today));
+                                                echo $diff->format('%y'); 
+                                            ?>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th class ="" > <i class= "fa fa-venus-mars me-1"></i> Gender</th>
-                                        <td>Male</td>
+                                        <td><?php echo $row->Gender; ?></td>
                                     </tr>
                         
                                     <tr>
                                         <th class ="" > <i class= "fa fa-heart me-1"></i> Civil Status</th>
-                                        <td><input type="text" class = "smol" value = "Single"></td>
+                                        <td>
+                                        <select  name="cstatus"  class="form-control select2" required='true' style="padding: 1px; width: 90%; font-size: 90%; color: black;">
+                                            <option value="<?php  echo htmlentities($row->CivilStatus);?>"><?php  echo htmlentities($row->CivilStatus);?></option>
+                                            <option value="Single">Single</option>
+                                            <option value="Married">Married</option>
+                                            <option value="Widow">Widow</option>
+                                            <option value="Separated">Separated</option>
+                                            
+                                        </select>
+                                        </td>
                                     </tr>
                         
                             </table>
@@ -116,7 +192,13 @@
                             <table class="table my-3">
                                     <tr>
                                         <th class =""><i class ="fa fa-birthday-cake me-2"></i>Birthdate</th>
-                                        <td>September 9 1990</td>
+                                        <td>
+                                            <?php 
+                                                $gbd = $row->BirthDate;
+                                                $gbd = date('j F Y', strtotime($gbd));
+                                                echo $gbd;
+                                            ?>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th class ="" > <i class= "fa fa-info me-1"></i> Status</th>
@@ -136,8 +218,9 @@
                     
                 
                 </div>
-            
+                <?php $cnt=$cnt+1;}} ?>
             </div>
+                        </form>
           
         </div>
     </div>
@@ -167,76 +250,70 @@
                                     <tr>
                                         <th class ="">Resident Type</th>
                                         <td style ="text-align: right; padding-right: 4%" > 
-                                            <select class=" input-sm" id = "rtype" aria-label="Default select example">
-                                    
-                                                <option value="homeowner selected">Home Owner</option>
-                                                <option value="caretaker">Care taker</option>
-                                                <option value="rental">Rental/Boarder</option>
-                                                <option value="wrelative">Living with Relatives</option>
-                                                <option value="wrelative">Others</option>
-                                            </select>  
+                                        <select class="form-select input-sm" name = "rest" aria-label="Default select example">
+                                            <option value="<?php  echo htmlentities($row->ResidentType);?>"><?php  echo htmlentities($row->ResidentType);?></option>
+                                            <option value="homeowner">Home Owner</option>
+                                            <option value="caretaker">Care taker</option>
+                                            <option value="rental">Rental/Boarder</option>
+                                            <option value="wrelative">Living with Relatives</option>
+                                        </select>  
                                         </td>
                                         
                                     </tr>
                                     <tr>
-                                        <th class ="">Contact No.</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><input type="text"  value = "12222"></td>
+                                        <th class ="">Contact Number</th>
+                                        <td style ="text-align: right; padding-right: 4%" ><input type="text" name="contact"  value = "<?php echo $row->Cellphnumber ?>"></td>
                                     </tr>
                                     <tr>
-                                        <th class ="">First</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><input type="text" class = "" value = "Portgas"></td>
+                                        <th class ="">First Name</th>
+                                        <td style ="text-align: right; padding-right: 4%" ><input type="text" name="fname" class = "" value = "<?php echo $row->FirstName ?>"></td>
                                     </tr>
                                 
                                     
                                     <tr>
                                         <th class ="">Middle Name</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><input type="text" class = "" value = "Dee"></td>
+                                        <td style ="text-align: right; padding-right: 4%" ><input type="text" name="mname" class = "" value = "<?php echo $row->MiddleName ?>"></td>
                                     </tr>
                                     <tr>
                                         <th class ="">Last Name</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><input type="text" class = "" value = "Ace"></td>
+                                        <td style ="text-align: right; padding-right: 4%" ><input type="text" name="lname" class = "" value = "<?php echo $row->LastName ?>"></td>
                                     </tr>
                                     <tr>
                                         <th class ="">House Unit/Number</th>
-                                        <td style ="text-align: right; padding-right: 4%" >#<input type="text" class = "" value = "2124"></td>
+                                        <td style ="text-align: right; padding-right: 4%" >#<input type="text" name="hu" class = "" value = "<?php echo $row->houseUnit ?>"></td>
                                     </tr>
                                 
                                     <tr>
                                         <th class ="">Purok</th>
                                         <td style ="text-align: right; padding-right: 4%" >
-                                            <select  id = "purok" aria-label="Default select example">
+                                            <select name="prk" id = "purok" aria-label="Default select example">
+                                                <option value="<?php echo $row->Purok ?>">Purok <?php echo $row->Purok ?></option>
                                                 <option value="1">Purok 1</option>
-                                                <option value="2" selected>Purok 2</option>
+                                                <option value="2">Purok 2</option>
                                                 <option value="3">Purok 3</option>
                                             </select>      
                                         </td>
                                     </tr>
                                     <tr>
                                         <th class ="">Street</th>
-                                        <td  style ="text-align: right; padding-right: 4%"><select id = "vp" aria-label="Default select example">
-                                            <option selected>Street Number</option>
-                                            <option value="s1">Street 1</option>
-                                            <option value="s2">Street 2</option>
-                                        </select></td>    
+                                        <td  style ="text-align: right; padding-right: 4%">
+                                            <select name="stn" id = "vp" aria-label="Default select example">
+                                                <option value="<?php echo $row->streetName ?>"><?php echo $row->streetName ?></option>
+                                                <option value="s1">Street 1</option>
+                                                <option value="s2">Street 2</option>
+                                            </select>
+                                        </td>    
        
                                        
                                     </tr>
                                   
                                     <tr>
                                         <th class ="">TIN</th>
-                                        <td style ="text-align: right; padding-right: 4%" >123-456-789</td>
+                                        <td style ="text-align: right; padding-right: 4%" ><?php echo $row->tinNumber ?></td>
                                     </tr>
                                     <tr>
                                         <th class ="">SSS number</th>
-                                        <td style ="text-align: right; padding-right: 4%" >13-45622-892</td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="">Voter's  </th>
-                                        <td style ="text-align: right; padding-right: 4%" >  <select  id = "vp" aria-label="Default select example">
-                                       
-                                        <option value="50-A"selected>50-A</option>
-                                        <option value="51-A">51-A</option>
-                                    </select>        </td>
+                                        <td style ="text-align: right; padding-right: 4%" ><?php echo $row->sssNumber ?></td>
                                     </tr>
 
                             </table>
@@ -269,3 +346,4 @@
     
 </body>
 </html>
+<?php }  ?>
