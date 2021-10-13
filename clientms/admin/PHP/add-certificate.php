@@ -121,24 +121,26 @@
     </style>
 </head>
 <body>
-
     <?php 
         include ('../includes/sidebar.php');
     ?> 
      <!--breadcrumb-->
-      
-      <div class="container mx-5 mt-2">
-          <nav aria-label="breadcrumb">
-              <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                        <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
-                        <li class="breadcrumb-item"><a  class= "text-decoration-none"  href="admin-certificate.php"><i class="fa fa-list"></i>&nbsp;Certificates List</a></li>
-                        <li class="breadcrumb-item active"><a href="#"><i class="fa fa-file text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
-                    </ol>
-              </nav>
-          </nav>
-      </div>
+     <div class="d-flex align-items-center">
+                <div class="container  mt-3">
+                    <nav aria-label="breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="admin-certificate.php"><i class="fa fa-file"></i>&nbsp;Certificates</a></li>
+                                <li class="breadcrumb-item active"><a href="#"><i class="fa fa-list text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
+                            </ol>
+                        </nav>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </nav>
       <form action="temp-cert.php"method ="POST">
         <div class="container-fluid mb-3 ms-1 mx-5">
           <div class="row mx-1  py-2">

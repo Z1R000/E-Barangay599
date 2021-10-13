@@ -48,6 +48,18 @@
             padding-left: 1rem; 
             padding-right: 1rem;
         }
+        
+        @media (max-width:576px){
+                .banner{
+                    display:none;
+                }
+                .right{
+                    margin-left: 8%;
+                }
+                .dis{
+                    display: flex;
+                }
+            }
        
         
        
@@ -129,19 +141,43 @@
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
+        
 
         <div id="page-content-wrapper">
-            
-            <nav class="navbar navbar-expand-lg navbar-light border-bottom px-4 w-100">
-                <div class="d-flex align-items-center">
-                    <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-4 m-0"><?php echo $curr;?></h2>
+        <div class="container-fluid banner" align = "center">
+                <div class="row">
+                    <div class="col-xl-3 px-1 ">
+                        <div class="float-start">
+                            <img src = "../images/barangay.png" style ="width: 100px;">
+                        </div>
+                        
+                    </div>
+                    <div class="col-xl-6 " align = "center">
+                        <h3 class= "py-4">BARANGAY 599, ZONE 59, DISTRICT VI <br>
+                            OFFICE OF THE SANGGUNIANG BARANGAY</h3>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="float-end">
+                        <img src = "../images/maynila.png" style ="width: 100px;">
+                        </div>
+                            
+                        
+                    </div>
                 </div>
+                
+            </div>
+ 
+            <nav class="navbar navbar-expand-lg navbar-light border-top px-3 ">
+                <div class="container-fluid p-0">
+                    <div class="d-flex align-items-center ">
+                        <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
+                        <h2 class="fs-4 m-0"><?php echo $curr;?></h2>
+                    </div>
+                    
 
-              
-
-              
-            </nav>
+                
+            
+           
    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>

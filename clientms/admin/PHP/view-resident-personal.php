@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
@@ -65,20 +66,25 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 <body>
 
     <?php 
+        $curr = "Resident Profile";
         include ('../includes/sidebar.php');
-    ?> 
-            <div class="container mt-4 mx-5">   
-                <nav aria-label="breadcrumb">
+    ?>
+<div class="d-flex align-items-center">
+                <div class="container mx-5 mt-3">
                     <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item fs-6"><a href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                         
-                            <li class="breadcrumb-item fs-6 active"><a href="admin-residence.php"><i class="fa fa-users"></i>&nbsp;Resident List</a></li>
-                            <li class="breadcrumb-item fs-6 active"><a href="#"><i class="fa fa-user text-muted"></i></a>&nbsp;Resident Information</li>
-                        </ol>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="admin-residence.php"><i class="fa fa-users"></i>&nbsp;Resident List</a></li>
+                            
+                                <li class="breadcrumb-item active"><a href="#"><i class="fa fa-address-book text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
+                            </ol>
+                        </nav>
                     </nav>
-                </nav>
+                </div>
             </div>
+        </div>
+    </nav>
 			<?php
 				$vid=$_GET['viewid'];
 				$clientmsaid=$_SESSION['clientmsaid'];

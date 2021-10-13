@@ -90,26 +90,9 @@
     <?php 
         include ('../includes/sidebar.php');
     ?> 
+    </nav>
             <!--breadcrumb-->
-            <div class="container-fluid banner " align = "center">
-                <div class="row my-1">
-                    <div class="col-xl-3 px-4 ">
-                        <img src = "../images/barangay.png" style ="width: 90px;">
-                    </div>
-                    <div class="col-xl-6 " align = "center">
-                        <h4 class= "py-2">BARANGAY 599, ZONE 59, DISTRICT VI <br>
-                            OFFICE OF THE SANGGUNIANG BARANGAY</h4>
-                    </div>
-                    <div class="col-xl-3">
-                        
-                            <img src = "../images/maynila.png" style ="width: 90px;">
-                        
-                    </div>
-                </div>
-                <div class="col-sm-12 dis">
-                    <img src = "../images/admin-logo.png" class = "dis img-fluid" style ="width: 90px;">
-                </div>
-            </div>
+            
             <div class="container-fluid  right my-1" align  ="center">
                 <div class="row g-3">
                     <div class="row g-3 px-2"  >

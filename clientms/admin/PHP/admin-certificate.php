@@ -23,7 +23,7 @@
 
     <style type = "text/css">
           table,td,tr,th{
-            border: 1px solid #d3d3d3;
+            border: 1px solid #333;
             text-align: left;
             font-size: 1em;
             padding: 100px;
@@ -76,29 +76,35 @@
 
     <?php 
         include ('../includes/sidebar.php');
+
     ?> 
      <!--breadcrumb-->
-    <form action="view-cert.php" method= "POST">
+ 
 
-   
-        <div class="container mx-5 mt-3">
-            <nav aria-label="breadcrumb">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                        <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
-                      
-                        <li class="breadcrumb-item active"><a href="#"><i class="fa fa-list text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
-                    </ol>
-                </nav>
-            </nav>
+            <div class="d-flex align-items-center">
+                <div class="container mx-5 mt-3">
+                    <nav aria-label="breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#service-choice" data-bs-toggle= "modal" role ="button"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
+                            
+                                <li class="breadcrumb-item active"><a href="#"><i class="fa fa-list text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
+                            </ol>
+                        </nav>
+                    </nav>
+                </div>
+            </div>
         </div>
+    </nav>
+        
 
+    <form action="view-cert.php" method= "POST">
         <div class="container-fluid mx-4  px-4 mb-5">
         <div class="row g-0">
             <div class="row gx-4 gy-2">
-                <div class="mx-auto col-xl-12 ">
-                    <div class="row g-0  rounded-top border" style= "background: aliceblue">
+                <div class="mx-auto col-xl-12  ">
+                    <div class="row g-0  shadow-sm rounded-top border" style= "background: aliceblue">
                         <div class="col-xl-4 py-2 px-2  ">
                             <nav class="nav nav-pills flex-column  flex-sm-row">
                                 <a class="flex-sm-fill  text-sm-center nav-link active " aria-current="page" href="#">Certificates List</a>
@@ -110,7 +116,7 @@
                         </div>
                         
                     </div>
-                    <div class="row g-0 border bg-white" >
+                    <div class="row g-0 shadow-sm border bg-white" >
                       
 
                         <div class = "row py-2 g-0 px-5">
@@ -191,8 +197,11 @@
    
     <!--modal-->
 
-      
-       
+    <?php
+        include ('services.php');
+    
+    ?>
+    
     <div class="modal fade" id = "delete-cert" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger ">

@@ -1,5 +1,5 @@
 <?php 
-    $curr = "Other Services";
+    $curr ="Properties List";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +22,7 @@
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
     <style type = "text/css">
-          table,td,tr,th{
+        table,td,tr,th{
             border: 1px solid #333;
             text-align: left;
             font-size: 1em;
@@ -35,7 +35,10 @@
      
         }
         .btng{
-            width: 50px;
+            width: 40px;
+        }
+        body,html{
+            height: 100%;
         }
 
         @media (max-width: 576px){
@@ -87,6 +90,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
                                 <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#service-choice" data-bs-toggle= "modal" role ="button"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
+                            
                                 <li class="breadcrumb-item active"><a href="#"><i class="fa fa-list text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
                             </ol>
                         </nav>
@@ -95,24 +99,24 @@
             </div>
         </div>
     </nav>
-    
+
      <!--breadcrumb-->
     <form action="#" method= "POST">
-
+        
         <div class="container-fluid mx-4  px-4 mb-5">
 
             <div class="row g-0">
                 <div class="row gx-4 gy-2">
                     <div class="mx-auto col-xl-12 ">
                         <div class="row g-0  rounded-top border" style= "background: aliceblue">
-                            <div class="col-xl-4 py-2 px-2">
+                            <div class="col-xl-6 py-2 px-2  ">
                                 <nav class="nav nav-pills flex-column  flex-sm-row">
-                                    <a class="flex-sm-fill  text-sm-center nav-link active " aria-current="page" href="#">Rental Properties </a>
-                                    <a class="flex-sm-fill text-sm-center nav-link " href="admin-rrecords.php">Rental Records</a>
-                            
+                                    <a class="flex-sm-fill  text-sm-center nav-link  " aria-current="page" href="admin-rentals.php">Rental Properties</a>
+                                    
+                                    <a class="flex-sm-fill text-sm-center nav-link  " href="admin-rrecords.php">Rental Records</a>
+                                    <a class="flex-sm-fill text-sm-center nav-link  active" href="payment-logs-rental.php">Payment logs</a>
                                 </nav>
                             </div>
-                            
                         </div>
                         <div class="row g-0 border bg-white" >
                         
@@ -121,7 +125,7 @@
                                 <div class="col-md-8 px-2">
                                     
                                     <div class="btn-group" role="group">
-                                        <a href = "#new-property" data-bs-toggle="modal"  role="button" class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;New Property</a>
+                                        <a href = "#"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;Walk-in rental</a>
                                     </div>
 
                                 </div>
@@ -143,32 +147,39 @@
                                         <table class="table bg-white table-hover "> 
                                             <thead>
                                                 <tr>
-                                                    <td scope = "col" colspan = 4 style ="background: #012f6e; color: white; text-align: center">Properties List</td>
+                                                    <td scope = "col" colspan = 8 style ="background: #012f6e; color: white; text-align: center">Properties List</td>
                                                 </tr>
                                                 <tr>
                     
-                                                    <th style = "text-align: left;width: 20%;">Property Name</th>
-                                                    <th style = "text-align: left; width: 13%;">Rate <span class="ms-1 fs-6 text-muted"> (per hour)</span></th>
-                                                    <th style = "text-align: left; width: 13%;">Availablility</th>
-                                                    <th style = "text-align: center;width: 13%;">Action</th>
+                                                    <th style = "text-align: left;">Requestor Name</th>
+                                                    <th style = "text-align: left; ">Mode of Payment </th>
+                                                    <th style = "text-align: left; ">Payment ID </th>
+                                                    <th style = "text-align: left; ">Attachment</th>
+                                                    <th style = "text-align: left;;">Amount Paid</th>
+                                                    <th style = "text-align: left;">Amount Payable</th>
+                                                    <th style = "text-align: left;">Date Submitted</th>
+                                                    <th style = "text-align: center;">Action</th>
                                         
                                                 </tr>
                                             
                                             </thead>           
                                             <tbody class= "table-hover">
                                                 <tr>
-                                                    <td scope="col" style = "text-align: left">Basketball Court</td>
-                                                    <td scope="col" style = "text-align: left">20 PHP</td>
-                                                    <td scope="col" style = "text-align: left">Available</td>
+                                                    <td scope="col" style = "text-align: left">Tobirama Uchiha</td>
+                                                    <td scope="col" style = "text-align: left">G-cash</td>
+                                                    <td scope="col" style = "text-align: left">#2123213</td>
+                                                    <td scope="col" style = "text-align: left"><a href = "#">proof of payment</a></td>
+                                                    <td scope="col" style = "text-align: left">50.00 PHP</td>
+                                                    <td scope = "col" style = "text-align: left;">50.00 PHP</td>
+                                                    <td scope="col" style = "text-align: left">10-14-2021</td>
+
                                                     <td scope="col" style = "text-align: center">
-                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                <button  type="button" href ="#check-property" data-bs-toggle="modal" role="button" class="btn btng btn-primary"><i class = "fa fa-eye"></i></button>
+                                                      
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                <a href ="#edit-record    " data-bs-toggle ="modal" role ="button" class="btn btng rounded-circle btn-success"><i class = "fa fa-check"></i></a>
                                                             </div>
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                <a href ="#edit-property    " data-bs-toggle ="modal" role ="button" class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
-                                                            </div>
-                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                <a type="button" href ="#delete-prop" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                                <a type="button" href ="#delete-prop" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger rounded-circle"><i class = "fa fa-times"></i></a>
                                                             </div>
                                                         
                                                     </td>
@@ -234,6 +245,10 @@
                 </div>
             </div>
         </div>
+        <?php
+        
+            include('services.php');
+        ?>
        
         <!--<div class="modal fade" id = "check-property" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
@@ -261,13 +276,11 @@
                 </div>
             </div>
         </div>-->
-    <?php
-        include('services.php');
-    ?>
+        
 
     <form action="" method ="POST">
-        <div class="modal fade" id = "edit-property" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal fade" id = "edit-record" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content g-0 blue">
                     <div class="modal-header blue white ">
                         <h5 class="modal-title" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Basketball Court</h5>
@@ -277,11 +290,19 @@
                     <div class="modal-body bg-white ">
                         <div class="row">
                             <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Property Rate</label>
+                                <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
                                 <div class="d-flex">    
                                     
-                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Rate">
-                                    <div class="fs-5 fw-bold">PHP</div>  
+                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "e.g Juan Dela Cruz">
+                                    
+                               </div> 
+                            </div>
+                            <div class="col-xl-6" >
+                                <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
+                                <div class="d-flex">    
+                                    
+                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "e.g Juan Dela Cruz">
+                                    
                                </div> 
                             </div>
                         </div>
@@ -306,61 +327,6 @@
                                 <button type ="button" role = "button" class="btn btn-outline-primary" >
                                     <i class="fa fa-save"></i>
                                     Save
-                                </button>
-                            </div>
-                        </div>
-                    
-                        
-                                        
-                    </div>
-                    <div class="modal-footer">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    <form action="" method ="POST">
-        <div class="modal fade" id = "new-property" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 blue">
-                    <div class="modal-header blue white ">
-                        <h5 class="modal-title" >&nbsp;<i class = "fa fa-plus"></i>&nbsp;&nbsp;New Property</h5>
-                        
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-white ">
-                        <div class="row">
-                            <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Property Rate</label>
-                                <div class="d-flex">    
-                                    
-                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Rate">
-                                    <div class="fs-5 fw-bold">PHP</div>  
-                               </div> 
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-8" >
-                                <label for="pname" class="fs-5 fw-bold">Property Name</label>
-                                <input type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-8" >  
-                                <label for="status" class="fs-5 fw-bold">Property Availablility</label>
-                                <select name="" class="form-control" id="status">
-                                    <option value="avail">Available</option>
-                                    <option value="noavail">Not Available</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row " align="center">
-                            <div class="col-md-5  mx-auto my-2">
-                                <button type ="button" role = "button" class="btn btn-outline-primary" >
-                                    <i class="fa fa-check me-1"></i>
-                                    Submit
                                 </button>
                             </div>
                         </div>
@@ -410,7 +376,15 @@
                             </div>
                         </div>
 
-                     
+                        <div class="row " align="center">
+                            <div class="col-md-5  mx-auto my-2">
+                                <button type ="button" role = "button" class="btn btn-outline-primary" >
+                                    <i class="fa fa-save"></i>
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    
                         
                                         
                     </div>
