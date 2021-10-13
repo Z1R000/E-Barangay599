@@ -1,5 +1,11 @@
 <?php 
     $curr ="Dashboard";
+    session_start();
+    error_reporting(0);
+    include('includes/dbconnection.php');
+    if (strlen($_SESSION['clientmsaid']==0)) {
+    header('location:logout.php');
+    } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,7 +118,16 @@
                                 <div class="row g-3">
                                     <div class="p-3 bg-primary  d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
-                                            <h4 class="fs-3">2500</h4>
+                                            <h4 class="fs-3">
+                                                <?php 
+                                                    $sql ="SELECT ID from tblresident ";
+                                                    $query = $dbh -> prepare($sql);
+                                                    $query->execute();
+                                                    $results=$query->fetchAll(PDO::FETCH_OBJ);
+                                                    $tser=$query->rowCount();
+                                                    echo htmlentities($tser);
+                                                ?>	
+                                            </h4>
                                             <p class = "text-inner fs-5 card-text " href ="#">Total<Br> Residents</p>
                                         </div>
                                             <i class="fas fa-users fs-1 logo  p-4 "></i>
@@ -128,7 +143,16 @@
                                 <div class="row g-3">
                                     <div class="p-3 blue d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
-                                            <h4 class="fs-3">420</h4>
+                                            <h4 class="fs-3">
+                                                <?php 
+                                                    $sql1 ="SELECT ID from tblrentalrequest ";
+                                                    $query1 = $dbh -> prepare($sql1);
+                                                    $query1->execute();
+                                                    $results1=$query1->fetchAll(PDO::FETCH_OBJ);
+                                                    $renreq=$query1->rowCount();
+                                                    echo htmlentities($renreq);
+                                                ?>	
+                                            </h4>
                                             <p class = "text-inner fs-5 card-text " href ="#">Rental <br>Requests</p>
                                         </div>
                                             <i class="fas fa-archive fs-1 logo  p-4"></i>
@@ -136,15 +160,24 @@
                                     </div>
                                 </div>
                                 <div class="row border-top g-0 ">
-                                    <a class = "text-inner text-decoration-none" href = "#"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
+                                    <a class = "text-inner text-decoration-none" href = "admin-rrequest.php"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
                                 </div>
                             </div>
                             <div class="col-md-3 rounded left border shadow-md bg-success">
                                 <div class="row g-3">
                                     <div class="p-3 bg-success d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
-                                            <h4 class="fs-3">500</h4>
-                                            <p class = "text-inner fs-5 card-text " href ="#">Certification Requests</p>
+                                            <h4 class="fs-3">
+                                                <?php 
+                                                    $sql2 ="SELECT ID from tblcertificaterequest ";
+                                                    $query2 = $dbh -> prepare($sql2);
+                                                    $query2->execute();
+                                                    $results2=$query2->fetchAll(PDO::FETCH_OBJ);
+                                                    $certreq=$query2->rowCount();
+                                                    echo htmlentities($certreq);
+                                                ?>	
+                                            </h4>
+                                            <p class = "text-inner fs-5 card-text " href ="">Certification Requests</p>
                                         </div>
                                             <i class="fas fa-folder fa-folder fs-1 logo  p-4 "></i>
                                             
@@ -152,7 +185,7 @@
                                     </div>
                                 </div>
                                 <div class="row border-top g-0 ">
-                                    <a class = "text-inner text-decoration-none" href = "#"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
+                                    <a class = "text-inner text-decoration-none" href = "admin-crequest.php"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
                                 </div>
                                 
                             </div>
@@ -168,7 +201,32 @@
                                 <div class="row g-3">
                                     <div class="p-3 bg-warning  d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
-                                            <h4 class="fs-3">420</h4>
+                                            <h4 class="fs-3">
+                                                <?php
+                                                     
+                                                    $sql3 ="SELECT BirthDate from tblresident ";
+                                                    $query3 = $dbh -> prepare($sql3);
+                                                    $query3->execute();
+                                                    $results3=$query3->fetchAll(PDO::FETCH_OBJ);
+                                                    $sencount = 0;
+                                                    if($query3->rowCount() > 0)
+                                                    {
+                                                        foreach($results3 as $row3)
+                                                        { 
+                                                            $sbd = $row3->BirthDate;
+                                                            $sbd = date('Y-m-d', strtotime($sbd));
+                                                            $today3 = date('Y-m-d');
+                                                            $diff3 = date_diff(date_create($sbd), date_create($today3));
+                                                            $check3 = $diff3->format('%y');
+                                                            if ($check3 >= 60){
+                                                                $sencount += 1;
+                                                            }
+                                                        }
+                                                    }   
+                                                    
+                                                    echo $sencount;
+                                                ?>	
+                                            </h4>
                                             <p class = "text-inner fs-5 card-text " href ="#">Senior Citizens</p>
                                         </div>
                                             <i class="fas fa-blind fs-1 logo  p-4"></i>
@@ -183,7 +241,32 @@
                                 <div class="row g-3">
                                     <div class="p-3 minor d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
-                                            <h4 class="fs-3">500</h4>
+                                            <h4 class="fs-3">
+                                                <?php
+                                                     
+                                                    $sql4 ="SELECT BirthDate from tblresident ";
+                                                    $query4 = $dbh -> prepare($sql4);
+                                                    $query4->execute();
+                                                    $results4=$query4->fetchAll(PDO::FETCH_OBJ);
+                                                    $mincount = 0;
+                                                    if($query4->rowCount() > 0)
+                                                    {
+                                                        foreach($results4 as $row4)
+                                                        { 
+                                                            $mbd = $row4->BirthDate;
+                                                            $mbd = date('Y-m-d', strtotime($mbd));
+                                                            $today4 = date('Y-m-d');
+                                                            $diff4 = date_diff(date_create($mbd), date_create($today4));
+                                                            $check4 = $diff4->format('%y');
+                                                            if ($check4 > 0 && $check4 < 18){
+                                                                $mincount += 1;
+                                                            }
+                                                        }
+                                                    }   
+                                                    
+                                                    echo $mincount;
+                                                ?>	
+                                            </h4>
                                             <p class = "text-inner fs-5 card-text " href ="#">Minor Residents</p>
                                         </div>
                                             <i class="fas fa-child fs-1 logo  p-4 "></i>
@@ -200,7 +283,28 @@
                                 <div class="row g-3">
                                     <div class="p-3 voters  d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
-                                            <h4 class="fs-3">2500</h4>
+                                            <h4 class="fs-3">
+                                                <?php
+                                                     
+                                                    $sql5 ="SELECT voter from tblresident ";
+                                                    $query5 = $dbh -> prepare($sql5);
+                                                    $query5->execute();
+                                                    $results5=$query5->fetchAll(PDO::FETCH_OBJ);
+                                                    $vcount = 0;
+                                                    if($query5->rowCount() > 0)
+                                                    {
+                                                        foreach($results5 as $row5)
+                                                        { 
+                                                            $vc = $row5->voter;
+                                                            if ($vc == 'Yes'){
+                                                                $vcount += 1;
+                                                            }
+                                                        }
+                                                    }   
+                                                    
+                                                    echo $vcount;
+                                                ?>	
+                                            </h4>
                                             <p class = "text-inner fs-5 card-text " href ="#">Total Voters</p>
                                         </div>
                                             <i class="fas fa-vote-yea fs-1 logo  p-4"></i>
@@ -223,7 +327,27 @@
                                 <div class="row g-3">
                                     <div class="p-3 bg-info  d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
-                                            <h4 class="fs-3">420</h4>
+                                            <h4 class="fs-3">
+                                                <?php 
+                                                    $sql6 ="SELECT Gender from tblresident ";
+                                                    $query6 = $dbh -> prepare($sql6);
+                                                    $query6->execute();
+                                                    $results6=$query6->fetchAll(PDO::FETCH_OBJ);
+                                                    $gcount = 0;
+                                                    if($query6->rowCount() > 0)
+                                                    {
+                                                        foreach($results6 as $row6)
+                                                        { 
+                                                            $gc = $row6->Gender;
+                                                            if ($gc == 'Male'){
+                                                                $gcount += 1;
+                                                            }
+                                                        }
+                                                    }   
+                                                    
+                                                    echo $gcount;
+                                                ?>	
+                                            </h4>
                                             <p class = "text-inner fs-5 card-text " href ="#">Male Residents</p>
                                         </div>
                                             <i class="fas fa-mars fs-1 logo  p-4"></i>
@@ -238,7 +362,27 @@
                                 <div class="row g-3">
                                     <div class="p-3 bg-danger d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
-                                            <h4 class="fs-3">500</h4>
+                                            <h4 class="fs-3">
+                                                <?php 
+                                                    $sql7 ="SELECT Gender from tblresident ";
+                                                    $query7 = $dbh -> prepare($sql7);
+                                                    $query7->execute();
+                                                    $results7=$query7->fetchAll(PDO::FETCH_OBJ);
+                                                    $fcount = 0;
+                                                    if($query7->rowCount() > 0)
+                                                    {
+                                                        foreach($results7 as $row7)
+                                                        { 
+                                                            $fc = $row7->Gender;
+                                                            if ($fc == 'Female'){
+                                                                $fcount += 1;
+                                                            }
+                                                        }
+                                                    }   
+                                                    
+                                                    echo $fcount;
+                                                ?>	
+                                            </h4>
                                             <p class = "text-inner fs-5 card-text " href ="#">Female Residents</p>
                                         </div>
                                             <i class="fas fa-venus fs-1 logo  p-4 "></i>
@@ -255,7 +399,16 @@
                                 <div class="row g-3">
                                     <div class="p-3 officials  d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
-                                            <h4 class="fs-3">10</h4>
+                                            <h4 class="fs-3">
+                                                <?php 
+                                                    $sql8 ="SELECT ID from tbladmin ";
+                                                    $query8 = $dbh -> prepare($sql8);
+                                                    $query8->execute();
+                                                    $results8=$query8->fetchAll(PDO::FETCH_OBJ);
+                                                    $of=$query8->rowCount();
+                                                    echo htmlentities($of);
+                                                ?>	
+                                            </h4>
                                             <p class = "text-inner fs-5 card-text " href ="#">Current Officials</p>
                                         </div>
                                             <i class="fas fa-user-shield fs-1 logo  p-4"></i>
