@@ -277,6 +277,7 @@ echo "<script>alert('Invalid Details');</script>";
 					<input type="password" class="form-control shadow-none" placeholder="Password" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="password" required="true">
 				</div>
 				<p>Forgot password? <a href="forgot-password.php"><i>Click here</i></a></p>
+				<p><a href="../index.php"><i>Home</i></a></p>
 				<div align = "center">
 					<input class = "btn-primary" type="submit" onclick="myFunction()" value="LOGIN" name="login" class="sub">
 				</div>
