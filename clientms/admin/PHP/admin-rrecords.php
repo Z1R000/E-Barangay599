@@ -284,7 +284,7 @@
         include('services.php');
     ?>
     <form action="" method ="POST">
-        <div class="modal fade" id = "edit-record" tab-idndex = "-1">
+    <div class="modal fade" id = "edit-record" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content g-0 blue">
                     <div class="modal-header blue white ">

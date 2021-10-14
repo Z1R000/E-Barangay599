@@ -88,7 +88,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
                                 <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#service-choice" data-bs-toggle= "modal" role ="button"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
-                            
+
                                 <li class="breadcrumb-item active"><a href="#"><i class="fa fa-list text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
                             </ol>
                         </nav>
@@ -109,8 +109,9 @@
                         <div class="col-xl-4 py-2 px-2  ">
                             <nav class="nav nav-pills flex-column  flex-sm-row">
                                 <a class="flex-sm-fill  text-sm-center nav-link  " aria-current="page" href="admin-certificate.php">Certificates List</a>
+                                
                                 <a class="flex-sm-fill text-sm-center nav-link active " href="#">Certification Records</a>
-                            
+                                <a class="flex-sm-fill text-sm-center nav-link " href="payment-logs-certificate.php">Payments</a>
         
                             </nav>
 
