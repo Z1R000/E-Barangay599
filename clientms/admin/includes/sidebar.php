@@ -114,7 +114,6 @@
                             <i class="fas fa-book my-0 me-2"></i>Request</a>
                         <ul class="submenu collapse">
                             <li><a class="nav-link fs-6" href="admin-Crequest.php">Certification Request </a></li>
-                            <li><a class="nav-link fs-6" href="admin-Brequest.php">Blotter Request </a></li>
                             <li><a class="nav-link fs-6" href="admin-Rrequest.php">Rental Request</a></li>
                             <li><a class="nav-link fs-6" href="admin-OSrequest.php">Other Service Request </a></li>
                         </ul>

@@ -171,10 +171,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
             <div class="row g-2">
                 <div class="mx-auto col-xl-10 ">
                     <div class="row g-0  rounded-top border bg-white">
-                        <div class="col-xl-10 py-2 px-2  ">
+                        <div class="col-xl-8 py-2 px-2  ">
                             <nav class="nav nav-pills flex-column  flex-sm-row">
                                 <a class="flex-sm-fill  text-sm-center nav-link active" aria-current="page" href="#">Personal Details</a>
-                                <a class="flex-sm-fill text-sm-center nav-link" href="view-resident-account.php">Account Details</a>
                                 <a class="flex-sm-fill text-sm-center nav-link" href="view-resident-cases.php">Cases</a>
                                 <a class="flex-sm-fill text-sm-center nav-link" href="view-resident-certifications.php">Certifications Availed</a>
                                 <a class="flex-sm-fill text-sm-center nav-link" href="view-resident-services.php">Services Availed</a>

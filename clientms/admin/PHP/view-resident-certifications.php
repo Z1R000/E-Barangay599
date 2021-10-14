@@ -40,8 +40,14 @@
         .right{
             margin-left: 8.5%;
         }
+        .bor{
+            border: 1px solid #000;
+        }
         
         @media (max-width: 576px){
+            .row{
+                overflow-x: auto;
+            }
             .right{
                 margin: auto;
             }
@@ -142,10 +148,9 @@
             <div class="row g-2">
                 <div class="mx-auto col-xl-10 ">
                     <div class="row g-0  rounded-top border bg-white">
-                        <div class="col-xl-10 py-2 px-2  ">
+                        <div class="col-xl-8 py-2 px-2  ">
                             <nav class="nav nav-pills flex-column  flex-sm-row">
                                 <a class="flex-sm-fill  text-sm-center nav-link" aria-current="page" href="view-resident-personal.php">Personal Details</a>
-                                <a class="flex-sm-fill text-sm-center nav-link " href="view-resident-account.php">Account Details</a>
                                 <a class="flex-sm-fill text-sm-center nav-link" href="view-resident-cases.php">Cases</a>
                                 <a class="flex-sm-fill text-sm-center nav-link active" href="view-resident-certifications.php">Certifications Availed</a>
                                 <a class="flex-sm-fill text-sm-center nav-link" href="view-resident-services.php">Services Availed</a>
@@ -159,6 +164,54 @@
                     <div class="row g-0 border bg-white" >
                     
                         <div class="col-xl-11 mx-2  mx-auto  px-2">
+                        <div class="row  g-0">
+                            <div class="col-xl-12 mx-2  mx-auto py-3">
+                                    <table class="table bg-white table-hover bor "> 
+                                        <thead class ="bg-light">
+                                           
+                                            <tr class="bor">
+                
+                                                <th class = "bor" style = "text-align: left">Status</th>
+                                                <th class= "bor" style = "text-align: left">Payment Method</th>
+                                                <th class = "bor" style = "text-align: left">Purpose</th>
+                                                <th class = "bor" style = "text-align: left">Requested Certificate</th>
+                                                <th class = "bor" style = "text-align: left">Certificate fee</th>
+                                                <th class = "bor" style = "text-align: left">Date</th>
+                                                <th class = "bor" style = "text-align: left">Barangay Certification #</th>
+                                                <th class = "bor" style = "text-align: center">Actions</th>
+                                            </tr>
+                                        
+                                        </thead>           
+
+                                        <tbody class= "table-hover">
+                                            <tr>
+                                                <td class = "bor" scope="col" style = "text-align: left">Settled</td>
+                                                <td class = "bor" scope="col" style = "text-align: left">g-cash</td>
+                                                <td class = "bor" scope="col" style = "text-align: left">For employment</td>
+                                                <td class = "bor" scope="col" style = "text-align: left">Barangay Clearance</td>
+                                                <td class = "bor" scope="col" style = "text-align: left">30 PHP</td>
+                                                <td class = "bor" scope="col" style = "text-align: left">10-12-2021</td>
+                                                <td class = "bor" scope="col" style = "text-align: left">015-22</td>
+                                                <td class = "bor" scope="col" style = "text-align: center">
+                                                    
+                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                            <a type="" href ="temp-cert.php"class="btn btng btn-success"><i class = "fa fa-print"></i></a>
+                                                        </div>
+                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                        </div>
+                                                    
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+         
+                                    </table>                        
+                                </div>   
+                            </div>
+                        </div>
+                            
                             
                           
                            

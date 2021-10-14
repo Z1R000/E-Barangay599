@@ -40,8 +40,14 @@
         .right{
             margin-left: 8.5%;
         }
+        .bor{
+            border: 1px solid #000;
+        }
         
         @media (max-width: 576px){
+            .row{
+                overflow-x: auto;
+            }
             .right{
                 margin: auto;
             }
@@ -143,10 +149,10 @@
             <div class="row g-2">
                 <div class="mx-auto col-xl-10 ">
                     <div class="row g-0  rounded-top border bg-white">
-                        <div class="col-xl-10 py-2 px-2  ">
+                        <div class="col-xl-8 py-2 px-2  ">
                             <nav class="nav nav-pills flex-column  flex-sm-row">
                                 <a class="flex-sm-fill  text-sm-center nav-link" aria-current="page" href="view-resident-personal.php">Personal Details</a>
-                                <a class="flex-sm-fill text-sm-center nav-link " href="view-resident-account.php">Account Details</a>
+             
                                 <a class="flex-sm-fill text-sm-center nav-link " href="view-resident-cases.php">Cases</a>
                                 <a class="flex-sm-fill text-sm-center nav-link" href="view-resident-certifications.php">Certifications Availed</a>
                                 <a class="flex-sm-fill text-sm-center nav-link active" href="view-resident-services.php">Services Availed</a>
@@ -160,9 +166,58 @@
                     <div class="row g-0 border bg-white" >
                     
                         <div class="col-xl-11 mx-2  mx-auto  px-2">
+                            <div class="row border g-0">
+
+                                <div class="col-xl-12 mx-2  mx-auto py-3 ">
+                                    <table class="table bg-white table-hover bor "> 
+                                        <thead class="bg-light">
+                                          
+                                            <tr>
+
                             
-                          
-                           
+                                                <th style = "text-align: left; ">Requested Service/Rental</th>
+                                                <th style = "text-align: left; ">Mode of payment</th>
+                                                <th style = "text-align: left;;">Date of rental</th>
+                                                <th style = "text-align: left;">Duration</th>
+                                                <th style = "text-align: left;">Rate</th>
+                                                <th style = "text-align: left;">Status</th>
+                                                
+                                            
+                                            
+                                                <th style = "text-align: center;">Action</th>
+                                    
+                                            </tr>
+                                        
+                                        </thead>           
+                                        <tbody class= "table-hover">
+                                            <tr>
+                                              
+                                                <td scope="col" style = "text-align: left">Barangay van</td>
+                                                <td scope="col" style = "text-align: left">G-cash</td>
+                                                <td scope="col" style = "text-align: left">10-13-2021, 6:00am</td>
+                                                <td scope="col" style = "text-align: left">2 hrs</td>
+                                                <td style = "text-align: left;">40.00 PHP</td>
+                                                <td scope="col" style = "text-align: left">On-going</td>
+
+                                                <td scope="col" style = "text-align: center">
+                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                            <button  type="button" href ="#check-property" data-bs-toggle="modal" role="button" class="btn btng btn-primary"><i class = "fa fa-eye"></i></button>
+                                                        </div>
+                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                            <a href ="#edit-record    " data-bs-toggle ="modal" role ="button" class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
+                                                        </div>
+                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                            <a type="button" href ="#delete-prop" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                        </div>
+                                                    
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>                        
+                                </div>   
+                            </div>  
                         </div>
                       
                     </div>
@@ -174,6 +229,9 @@
           
         </div>
     </div>
+    <?php
+        include('rental-action.php');
+    ?>
             
            
                 

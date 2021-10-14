@@ -40,8 +40,20 @@
         .right{
             margin-left: 8.5%;
         }
-        
+        .bor{
+            border: 1px solid #000;
+        }
+       
         @media (max-width: 576px){
+            .row{
+                overflow-y: auto;
+            }
+            .btnx{
+              margin-bottom: 10px;
+            }
+            .row {
+                overflow-x: auto;
+            }
             .right{
                 margin: auto;
             }
@@ -142,14 +154,12 @@
             <div class="row g-2">
                 <div class="mx-auto col-xl-10 ">
                     <div class="row g-0  rounded-top border bg-white">
-                        <div class="col-xl-10 py-2 px-2  ">
+                        <div class="col-xl-8 py-2 px-2  ">
                             <nav class="nav nav-pills flex-column  flex-sm-row">
                                 <a class="flex-sm-fill  text-sm-center nav-link" aria-current="page" href="view-resident-personal.php">Personal Details</a>
-                                <a class="flex-sm-fill text-sm-center nav-link " href="view-resident-account.php">Account Details</a>
                                 <a class="flex-sm-fill text-sm-center nav-link active" href="#">Cases</a>
                                 <a class="flex-sm-fill text-sm-center nav-link" href="view-resident-certifications.php">Certifications Availed</a>
                                 <a class="flex-sm-fill text-sm-center nav-link" href="view-resident-services.php">Services Availed</a>
-        
         
                             </nav>
 
@@ -159,6 +169,51 @@
                     <div class="row g-0 border bg-white" >
                     
                         <div class="col-xl-11 mx-2  mx-auto  px-2">
+                        <div class="row  g-0 ">
+                            <div class="col-xl-12 mx-2  mx-auto py-3  px-2">
+                                    <table class="table shadow-sm  bg-white table-hover bor "> 
+                                        <thead class = "bg-light">
+                                            <tr>
+                                           
+                                            </tr>
+                                            <tr>
+                                                <th class= "bor" style = "text-align: left">Status</th>
+                                                <th class= "bor" style = "text-align: left">Incident Type</th>
+                                                <th class= "bor" style = "text-align: left">Date Time Reported</th>
+                                                <th class= "bor" style = "text-align: left">Incident's Estimated Time </th>
+                                                <th class= "bor" style = "text-align: center">Actions</th>
+                                                
+                                            </tr>
+                                        
+                                        </thead>           
+                                        <tbody class= "table-hover">
+                                            <tr>
+                                                <td class= "bor" scope="col" style = "text-align: left">On-going</td>
+                                                <td class= "bor" scope="col" style = "text-align: left">Public Disturbance</td>
+                                                <td class= "bor" scope="col" style = "text-align: left">12-10-2021</td>
+                                                <td class= "bor" scope="col" style = "text-align: left">6:00pm</td>
+                                                <td  class= "bor"   scope="col" style = "text-align: center">
+                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                            <a type="" href ="blotter-report.php"class="btn btng btn-primary"><i class = "fa fa-print"></i></a>
+                                                        </div>
+                                                    
+                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                            <a href ="edit-blotter.php"class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
+                                                        </div>
+                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                        </div>
+                                                    
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+         
+                                    </table>                        
+                                </div>   
+                            </div>
+                        </div>
                             
                           
                            

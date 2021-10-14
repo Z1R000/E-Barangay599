@@ -108,7 +108,7 @@
     <?php 
         include ('../includes/sidebar.php');
     ?> 
- <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center">
                 <div class="container mx-5 mt-3">
                     <nav aria-label="breadcrumb">
                         <nav aria-label="breadcrumb">
@@ -211,6 +211,7 @@
                                             <select>
                                                 <option value="Active" selected>Active</option>
                                                 <option value="Inactive" >Inactive</option>
+                                                <option value="Inactive" >Deceased</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -232,12 +233,12 @@
     <div class="container-fluid mx-auto px-5 mb-5">
         <div class="row g-0 mx-2">
             <div class="row g-2">
-                <div class="mx-auto col-xl-11 ">
+                <div class="mx-auto col-xl-10 ">
                     <div class="row g-0  rounded-top border bg-white">
-                        <div class="col-xl-4 py-2 px-2  ">
+                        <div class="col-xl-2 py-2 px-2  ">
                             <nav class="nav nav-pills flex-column  flex-sm-row">
                                 <a class="flex-sm-fill  text-sm-center nav-link active" aria-current="page" href="#">Personal Details</a>
-                                <a class="flex-sm-fill text-sm-center nav-link " href="edit-resident-account.php">Account Details</a>
+                               
                               
                             </nav>
 
@@ -252,7 +253,7 @@
                                     <tr>
                                         <th class ="">Resident Type</th>
                                         <td style ="text-align: right; padding-right: 4%" > 
-                                        <select class="form-select input-sm" name = "rest" aria-label="Default select example">
+                                        <select class="form-select input-sm" style="width: 50%; float: right;" name = "rest" aria-label="Default select example">
                                             <option value="<?php  echo htmlentities($row->ResidentType);?>"><?php  echo htmlentities($row->ResidentType);?></option>
                                             <option value="homeowner">Home Owner</option>
                                             <option value="caretaker">Care taker</option>
@@ -260,10 +261,14 @@
                                             <option value="wrelative">Living with Relatives</option>
                                         </select>  
                                         </td>
-                                        
                                     </tr>
+                                    
                                     <tr>
                                         <th class ="">Contact Number</th>
+                                        <td style ="text-align: right; padding-right: 4%" ><input type="text" name="contact"  value = "<?php echo $row->Cellphnumber ?>"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class ="">Email </th>
                                         <td style ="text-align: right; padding-right: 4%" ><input type="text" name="contact"  value = "<?php echo $row->Cellphnumber ?>"></td>
                                     </tr>
                                     <tr>
@@ -284,6 +289,7 @@
                                         <th class ="">House Unit/Number</th>
                                         <td style ="text-align: right; padding-right: 4%" >#<input type="text" name="hu" class = "" value = "<?php echo $row->houseUnit ?>"></td>
                                     </tr>
+                                    
                                 
                                     <tr>
                                         <th class ="">Purok</th>
