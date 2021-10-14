@@ -79,6 +79,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
     ?> 
             <!--breadcrumb-->
             
+            <div class="float-end">
             <div class="container mt-4 mx-5">
                 <nav aria-label="breadcrumb">
                     <nav aria-label="breadcrumb">
@@ -90,6 +91,10 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                     </nav>
                 </nav>
             </div>
+
+            </div>
+            
+        </nav>
     <div class="container-fluid my-4">
         <div class="row border mx-5 bg-white">
             <div class="row border-bottom g-0 py-1 px-3">

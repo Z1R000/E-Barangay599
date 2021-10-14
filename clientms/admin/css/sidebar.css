@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display&display=swap');
 *{
-    font-size: 1em;
+    font-size: 14px;
     padding:0;
     margin: 0;
     box-sizing: border-box;
@@ -10,6 +10,9 @@
 --main-text-color: #f7f7f7;
 --second-text-color:#000;
 --second-bg-color: rgb(235, 221, 221);
+}
+.blue{
+    background: #021f4e;
 }
 body{
 

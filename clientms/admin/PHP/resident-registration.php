@@ -96,18 +96,25 @@
     <?php 
         include ('../includes/sidebar.php');
     ?> 
-
-        <div class="container mt-3 mx-5">   
-            <nav aria-label="breadcrumb">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item fs-6"><a href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                        <li class="breadcrumb-item fs-6 active"><a href="admin-residence.php"><i class="fa fa-users"></i>&nbsp;Resident List</a></li>
-                        <li class="breadcrumb-item fs-6 active"><a href="#"><i class="fa fa-address-book text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
-                    </ol>
-                </nav>
-            </nav>
+        <div class="d-flex align-items-center">
+                <div class="container mx-5 mt-3">
+                    <nav aria-label="breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
+                            
+                                <li class="breadcrumb-item active"><a href="#"><i class="fa fa-address-book text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
+                            </ol>
+                        </nav>
+                    </nav>
+                </div>
+            </div>
         </div>
+    </nav>
+        
+
+      
         
         <form method="post"> 
             <div class="container-fluid py-3 px-5 mx-1">

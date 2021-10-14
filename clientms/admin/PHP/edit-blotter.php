@@ -1,5 +1,5 @@
 <?php 
-    $curr ="Create Blotter";
+    $curr ="Edit Blotter";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,13 +16,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
-    <link rel = "stylesheet" href="../CSS/sidebar.css" />
-    <link rel = "stylesheet" href = "../CSS/table.css"/>
-    <link rel= "stylesheet" href = "../CSS/scrollbar.css"/>
+    <link rel = "stylesheet" href="../css/sidebar.css" />
+    <link rel="stylesheet" href="../CSS/scrollbar.css">
+
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
     <style type = "text/css">
-      
         label{
             font-family:'Segoe UI';
         }
@@ -44,6 +43,28 @@
             color:white;
         }
 
+       table,tr,td,th{
+            border: 1px solid grey;
+        }
+        body,html{
+            height: 100%;
+        }
+        
+        .right{
+            height: auto;
+            max-height: 550px;
+            overflow-Y: auto;
+        }
+        .left{
+            height: auto;
+            max-height:250px;
+            overflow-Y: auto;
+        }
+        .white{
+            color:white;
+        }
+   
+                
     </style>
 </head>
 <body>
@@ -51,20 +72,27 @@
     <?php 
         include ('../includes/sidebar.php');
     ?> 
-    <form action="" method = "POST">
-            <!--breadcrumb-->
-        <div class="container mx-5 mt-3">
-            <nav aria-label="breadcrumb">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                        <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
-                        <li class="breadcrumb-item"><a  class= "text-decoration-none" href="admin-blotter.php"><i class="fa fa-gavel"></i>&nbsp;Blotters</a></li>
-                        <li class="breadcrumb-item active"><a href="#"><i class="fas fa-paste text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
-                    </ol>
-                </nav>
-            </nav>
+
+<div class="d-flex align-items-center">
+                <div class="container  mt-3">
+                    <nav aria-label="breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#service-choice" data-bs-toggle= "modal" role ="button"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="admin-blotter.php"><i class="fa fa-gavel"></i>&nbsp;Blotters</a></li>
+                            
+                            
+                                <li class="breadcrumb-item active"><a href="#"><i class="fa fa-edit text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
+                            </ol>
+                        </nav>
+                    </nav>
+                </div>
+            </div>
         </div>
+    </nav> 
+    <form action="" method = "POST">
+ 
         <div class="container-fluid  mx-auto px-2 py-1">
             <div class="row g-0 p-1">
                 <div class="row g-0 justify-content-center">
@@ -76,15 +104,16 @@
                             <div class="row px-2 g-2 px-3 pt-2 pb-3">
                                 <div class="col-md-5">
                                     <label for="rname"class= "fw-bold fs-6">Complainant Name: </label>
-                                    <input type="text" class="form-control" placeholder = "e.g Juan Dela Cruz" >
+                                    <input type="text" class="form-control" placeholder = "e.g Juan Dela Cruz">
+                                    <!--intellisence resident list-->
                                 </div>     
                                 <div class="col-md-5">
                                   
                                     
                                     <label for="btype"class= "fw-bold fs-6">Incident Type: </label>
                                     <select class="form-select input-sm" id = "btype" aria-label="Default select example">
-                                        <option >Select Blotter type</option>
-                                        <option value="homeowner" selected>Violence</option>
+                                        <option selected>Select Blotter type</option>
+                                        <option value="homeowner">Violence</option>
                                         <option value="caretaker">Vehicular Related</option>
                                         <option value="rental">Public Disturbance</option>
                                         <option value="wrelative">Littering</option>
@@ -110,7 +139,7 @@
                         
                             <div class="row g-2 px-3 py-2">
                                 <div class="col-md-10">
-                                    <label for="narrative" class= "fw-bold fs-6">Persons Involved: </label><br>
+                                    <label for="narrative" class= "fw-bold fs-6">Respondent/s Involved: </label><br>
                                     <textarea class= "form-control" type = "text" name="" id="respo"  cols="10" rows="1" style= "resize: none;" placeholder ="e.g Kagawad. Juan Dela Cruz"></textarea>
                                 </div>
                                 
@@ -204,9 +233,9 @@
                                     </div>
                                     <div class="col-md-4 col-sm-12 p-3">
                                         <div class="float-end">
-                                            <button class="btn btn-primary" data-bs-toggle="modal">
-                                             <i class="fa fa-save"></i>   Save</button>
+                                            <button type="button" href="#submit-record"  data-bs-toggle ="modal" role="modal"  class="btn btn-success">Submit</button>
                                         </div>
+                                        
                                         
                                     </div>
                                 </div>
@@ -219,15 +248,46 @@
                 </div>
             </div>
         </div>
-    
-    
-    </body>
-    <!--<script src = "../ckeditor/ckeditor.js"></script>
-    <script>
-        
-        CKEDITOR.replace('narrative')
-        
-    </script>-->
-
-
+    </form>
+    <?php
+        include('services.php');
+    ?>
+    <div class="modal fade" id = "submit-record" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 " style="background: #021f4e;">
+                    <div class="modal-header  white " style="background: #021f4e;">
+                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;New Blotter Record</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        <div class="row">
+                            <div class="col xl-4" align = "center">
+                                <i class="fa fa-suitcase"  style ="width: 10%;"></i>
+                            </div>
+                    
+                        </div>
+                        <div class="row">
+                            <p class = "fs-5 text-center">You are about to add a new record of blotter in the system. By clicking yes you attest to the legibility and credibility of the information supplied by the complainant.  Once saved some information will be unchangeable. <br><span class="text-muted fs-6"></span></p>
+                        </div>
+                        <div class="row justify-content-center" align = "center">
+                            
+                                <button type = "button" class="btn btn-success rounded my-1" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                    Yes I am certain
+                                </button>
+                                <button type = "button" class="btn btn-danger rounded" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                    No I am not
+                                </button>
+                            </form>
+                        </div>
+                
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+</body>
 </html>

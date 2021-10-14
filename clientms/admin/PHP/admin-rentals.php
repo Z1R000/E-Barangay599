@@ -1,5 +1,5 @@
 <?php 
-    $curr ="Rentals";
+    $curr ="Properties List";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,14 +16,63 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
-    <link rel = "stylesheet" href="../CSS/sidebar.css" />
-    <link rel = "stylesheet" href = "../CSS/table.css"/>
+    <link rel = "stylesheet" href="../css/sidebar.css" />
     <link rel="stylesheet" href="../CSS/scrollbar.css">
+
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
     <style type = "text/css">
-        
-       
+          table,td,tr,th{
+            border: 1px solid #333;
+            text-align: left;
+            font-size: 1em;
+            padding: 100px;
+            font-family: 'Noto Sans Display', sans-serif;
+            
+        }   
+        td{
+            vertical-align: middle;
+     
+        }
+        .btng{
+            width: 50px;
+        }
+
+        @media (max-width: 576px){
+            .row{
+                overflow-x: auto;
+            }
+            .dis{
+                font-size: 15px;
+            }
+            .ser{
+                width: 100%;
+            }
+           
+        }
+        .red{
+            background:#8B0000;
+            border: 1px solid #8B0000;
+        }
+        .white{
+            color: white;
+        }
+        .blue{
+            background: #012f4e;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+
+
+            .sidebar li .submenu{ 
+                list-style: none; 
+                margin: 0; 
+                padding: 0; 
+                padding-left: 1rem; 
+                padding-right: 1rem;
+            }
+
+          
+                
     </style>
 </head>
 <body>
@@ -31,391 +80,344 @@
     <?php 
         include ('../includes/sidebar.php');
     ?> 
-            <!--breadcrumb-->
-                    <div class="container mx-5">
+        <div class="d-flex align-items-center">
+                <div class="container  mt-3">
+                    <nav aria-label="breadcrumb">
                         <nav aria-label="breadcrumb">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-paperclip text-muted"></i></a>&nbsp;Services</li>
-                                    <li class="breadcrumb-item active"><a href="#"><i class="fa fa-address-book text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
-                                </ol>
-                            </nav>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#service-choice" data-bs-toggle= "modal" role ="button"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
+                                <li class="breadcrumb-item active"><a href="#"><i class="fa fa-list text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
+                            </ol>
                         </nav>
-                    </div>
-                
-                    <div class = "container-fluid">
-                        <div class="row">
-                            <div class="col-xl-8 col-sm-0">
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </nav>
+     <!--breadcrumb-->
+    <form action="#" method= "POST">
 
-                            </div>
-                            <div class="col-xl-4 col-sm-12 mt-2 mx-0">
-                                <div class ="nav justify-content-end">
-                                    <div class="btn-group" role="group">
-                                        <a href = "rental-record.php" class="btn btn-primary mx-1 my-1"><i class="fa fa-list"></i>&nbsp;Records</a>
-                                    </div>
-                                    <div class="btn-group" role="group">
-                                        <a href = "admin-Rrequest.php" class="btn btn-primary mx-1 my-1"><i class="fa fa-list"></i>&nbsp; Requests</a>
-                                    </div>
-                                    <div class="btn-group" role="group">
-                                        <a href = "#add-service" data-bs-toggle = "modal" role = "button" class="btn btn-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp; New Service</a>
-                                    </div>
-                                </div>
+        <div class="container-fluid mx-4  px-4 mb-5">
+
+            <div class="row g-0">
+                <div class="row gx-4 gy-2">
+                    <div class="mx-auto col-xl-12 ">
+                        <div class="row g-0  rounded-top border" style= "background: aliceblue">
+                            <div class="col-xl-6 py-2 px-2">
+                                <nav class="nav nav-pills flex-column  flex-sm-row">
+                                    <a class="flex-sm-fill  text-sm-center nav-link active " aria-current="page" href="#">Rental Properties </a>
+                                    <a class="flex-sm-fill text-sm-center nav-link " href="admin-rrecords.php">Rental Records</a>
+                                    <a class="flex-sm-fill text-sm-center nav-link " href="payment-logs-rental.php">Payment Logs</a>
+                                </nav>
                             </div>
                         </div>
-                    
-                        <div class="row">
-                            <div class="col-xl-12 col-md-12 col-lg-12 col-sm-12">
-                                <div class = "row my-2">
-                                    <div class="col-md-8">
-
+                        <div class="row g-0 border bg-white" >
+                            <div class = "row py-2 g-0 px-5">
+                                <div class="col-md-8 px-2">
+                                    <div class="btn-group" role="group">
+                                        <a href = "#new-property" data-bs-toggle="modal"  role="button" class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;New Property</a>
                                     </div>
-                                    <div class="col-md-4 " >
-                                        <form class = "d-flex">
-                                            
-                                                <input type = "text" class= "form-control" placeholder = "Search here">
-                                                <button type ="button" class = "btn btn-success" ><i class = "fa fa-search"></i></button>
-                                        </form>
 
-                                    </div>
-                                    
                                 </div>
-                            </div>
-
-                        </div>
-                     
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <table class = "table">
-                                    <thead style= "background:#021f4e">
-                                        <tr>
-                                            <td colspan = 5 class = "" style = "color: white" align = "center">Rental Services</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class = "light">
-                                            <th class = "">
-                                            Property Name
-                                            </th>
-                                            <th class = "">
-                                                Description
-                                            </th>
-                                            <th class = "">
-                                                Rate (Fee)
-                                            </th>
-                                            <th class = "">
-                                                Availability
-                                            </th>
-                                            <th class = "" >
-                                                Action
-                                            </th>
-                                        </tr>
-                                        <tr>
+                                <div class="col-md-4  px-2" >
+                                    <div class="d-flex">
                                 
-                                            <td class = "">
-                                                Basketball Court
-                                            </td>
-                                            <td class = "">
-                                                description..
-                                            </td>
-                                            <td class = "">
-                                                20.00 ₱
-                                            </td>
-                                            <td class = "">
-                                            Available
-                                            </td>
-                                            <td>
-                                                <div class = "actions" align = "center">
-                                                    <a href="#edit-service" class="btn btn-primary text-decoration-none my-1" data-bs-toggle = "modal" role = "button"><i class = "fa fa-edit"></i>&nbsp;<span id = "label">Update</span></a>
-        
-                                                    <a href="#verif-del" class="btn btn-danger text-decoration-none my-1" data-bs-toggle="modal" role button><i class ="fa fa-trash"></i>&nbsp;Delete</a>
-                                                </div>
-                                                                    
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                    <input type="text" name ="searchProp" placeholder = "Search property"class="form-control">
+                                    <button class= "btn btn-outline-info mx-1 my-1"><i class= "fa fa-search"></i></button>
 
+                                    </div>
+                            
+                                
+                                </div>
+                                
+                            </div>
+                            <div class="row border g-0">
+
+                                <div class="col-xl-11 mx-2  mx-auto py-3  px-2">
+                                        <table class="table bg-white table-hover "> 
+                                            <thead>
+                                                <tr>
+                                                    <td scope = "col" colspan = 4 style ="background: #012f6e; color: white; text-align: center">Properties List</td>
+                                                </tr>
+                                                <tr>
+                    
+                                                    <th style = "text-align: left;width: 20%;">Property Name</th>
+                                                    <th style = "text-align: left; width: 13%;">Rate <span class="ms-1 fs-6 text-muted"> (per hour)</span></th>
+                                                    <th style = "text-align: left; width: 13%;">Availablility</th>
+                                                    <th style = "text-align: center;width: 13%;">Action</th>
+                                        
+                                                </tr>
+                                            
+                                            </thead>           
+                                            <tbody class= "table-hover">
+                                                <tr>
+                                                    <td scope="col" style = "text-align: left">Basketball Court</td>
+                                                    <td scope="col" style = "text-align: left">20 PHP</td>
+                                                    <td scope="col" style = "text-align: left">Available</td>
+                                                    <td scope="col" style = "text-align: center">
+                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                <button  type="button" href ="#check-property" data-bs-toggle="modal" role="button" class="btn btng btn-primary"><i class = "fa fa-eye"></i></button>
+                                                            </div>
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                <a href ="#edit-property    " data-bs-toggle ="modal" role ="button" class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
+                                                            </div>
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                <a type="button" href ="#delete-prop" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                            </div>
+                                                        
+                                                    </td>
+
+                                                </tr>
+
+                                            </tbody>
+            
+                                        </table>                        
+                                </div>   
                             </div>
                             
                         </div>
+
+                    
+                        
+                    
                     </div>
-    <!--modals-->            
-    <div class="modal fade" id="add-blotter-type"  tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="add-blotter-type"><i class = "fa fa-plus"></i>&nbsp;New Blotter type</h5>
-                 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
+                
                 </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class = "image-fluid" align = "center">
-                            <img src = "../IMAGES/BARANGAY.png" class ="brand-logo" style = "width: 30px">
-                        </div>
-                    </div>
-                    <form method = "POST" action="#">
-                        <div class="row">
-                            <div class="col my-1">
-                                <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text">?</div>
-                                    </div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="New Blotter type here">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class ="row my-1">
-                            <div class ="col">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
-                                    <label class = "text-muted" for="floatingTextarea2">Blotter type description here</label>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                     <a  href = "#verif" role= "button" class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" >Save</a>
-                    <input type = "reset" class="btn btn-primary" >
-                    </form>
-                </div>
+            
             </div>
-        </div>
+            
     </div>
 
-    <!--blotter type addition verification-->
-    <div class="modal fade" id = "verif" tab-idndex = "-1">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content">
-                <div class="modal-header bg-warning">
-                    <h5 class="modal-title" id="delete-cert">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
-                    
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body px-5">
-                    <p class = "fs-4">New property is about to be added,<br>Click "Yes" if certain?</p>
-                </div>
-                <div class="modal-footer">
-                    <form method = "POST" action = "#">
-                    <input type = "button" class="btn btn-success"  name = "yes" value ="Yes">
-                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal"  value = "No">
-                    </form>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--blotter addition record verification modal-->
-    <div class="modal fade" id = "verif-brecord" tab-idndex = "-1">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="delete-cert">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
-                    
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body px-5">
-                    <p class = "fs-4">New  about to be created,<br>Click "Yes" if certain</p>
-                </div>
-                <div class="modal-footer">
-                    <form method = "POST" action = "#">
-                    <input type = "button" class="btn btn-success"  name = "yes" value ="Yes">
-                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal"  value = "No">
-                    </form>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--feeupdate verificationn modal-->
-  
-    <!-- update verification modal-->
-    <div class="modal fade" id = "verif-update" tab-idndex = "-1">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="delete-cert">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
-                    
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body px-5">
-                    <p class = "fs-4">Confirm property update<br>Click "Yes" if certain</p>
-                </div>
-                <div class="modal-footer">
-                    <form method = "POST" action = "#">
-                    <input type = "button" class="btn btn-success"  name = "yes" value ="Yes">
-                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal"  value = "No">
-                    </form>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--delete verification modal-->
-    <div class="modal fade" id = "verif-del" tab-idndex = "-1">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="delete-cert">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
-                    
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body px-5">
-                    <p class = "fs-4">Confirm service deletion<br>Click "Yes" if certain</p>
-                </div>
-                <div class="modal-footer">
-                    <form method = "POST" action = "#">
-                    <input type = "button" class="btn btn-success"  name = "yes" value ="Yes">
-                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal"  value = "No">
-                    </form>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
+    </form>
    
+    <!--modal-->
 
-    <!--populate cells requiring data from blotter db, 
-        this is add-blotter record modal-->
-    <div class="modal fade" id="edit-service"  tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="add-blotter-type"><i class = "fa fa-edit"></i>&nbsp;599 Property</h5>
-                 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class = "image-fluid" align = "center">
-                            <img src = "../IMAGES/BARANGAY.png" class ="brand-logo" style = "width: 30px">
-                        </div>
-                    </div>
-                    <form method = "POST" action="#">
-                   
+    <div class="modal fade" id = "delete-prop" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-danger" >
+                    <div class="modal-header  white ">
+                        <h5 class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
                         
-                            <div class="row">
-                                <div class="col-md-8 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-address-book"></i></a></div>
-                                    </div>
-                                    <input type="text" class="form-control"  placeholder="Property name">
-                                </div>
-                            </div>
-                     
-                      
-                            <div class="col-md-4 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-credit-card"></i></a></div>
-                                    </div>
-                                    <input type="text" class="form-control"  placeholder="Service fee">
-                                </div>
-                            </div>
-                        </div>
-                        
-                      
-                        <div class ="row my-1">
-                            <div class ="col">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
-                                    <label class = "text-muted" for="floatingTextarea2">Service description here</label>
-                                </div>
-                            </div>
-                        </div>
-
-                       
-
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                <div class="modal-footer">
-                     <a  href = "#verif-update" role= "button" class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" >Save</a>
-                    <input type = "reset" class="btn btn-primary" >
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--populate with db data check blotter case modal-->
-
-    
-    
-
-    <!-- db populate edit blotter case modal -->
-    <div class="modal fade" id="add-service"  tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="add-blotter-type"><i class = "fa fa-plus"></i>&nbsp;New Property</h5>
-                 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class = "image-fluid" align = "center">
-                            <img src = "../IMAGES/BARANGAY.png" class ="brand-logo" style = "width: 30px">
-                        </div>
-                    </div>
-                    <form method = "POST" action="#">
-                   
-                        
+                    <div class="modal-body bg-white">
                         <div class="row">
-                            <div class="col-md-8 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-address-book"></i></a></div>
-                                    </div>
-                                    <input type="text" class="form-control"  placeholder="Service name">
-                                </div>
+                            <div class="col xl-4" align = "center">
+                                <img src="../images/trash.png" alt="trash" class= " img-fluid " style ="width: 10%;">
                             </div>
-                     
-                      
-                            <div class="col-md-4 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-credit-card"></i></a></div>
-                                    </div>
-                                    <input type="text" class="form-control"  placeholder="Service fee">
-                                </div>
-                            </div>
+                    
                         </div>
-                        
-                      
-                        <div class ="row my-1">
-                            <div class ="col">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
-                                    <label class = "text-muted" for="floatingTextarea2">Service description here</label>
-                                </div>
-                            </div>
+                        <div class="row">
+                            <p class = "fs-4 text-center">You are about to delete an existing property, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
                         </div>
-
-                       
-
+                        <div class="row justify-content-center" align = "center">
+                            <form method = "POST" action = "#">
+                                <button type = "button" class="btn btn-success rounded-circle" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                    <i class= 'fa fa-check '></i>
+                                </button>
+                                <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                    <i class= "fa fa-times"></i>
+                                </button>
+                            </form>
+                        </div>
+                
                     </div>
-                <div class="modal-footer">
-                     <a  href = "#verif-brecord" role= "button" class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" >Save</a>
-                    <input type = "reset" class="btn btn-primary" >
-                    </form>
+                    <div class="modal-footer">
+                        
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+       
+        <!--<div class="modal fade" id = "check-property" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 blue ">
+                    <div class="modal-header blue white ">
+                        <h5 class="modal-title" id="item">&nbsp;<i class = "fa fa-eye"></i>&nbsp;&nbsp;Basketball Court</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        <div class="row">
+                            <div class="col xl-6" align = "center">
+                                <img src="../images/court-sample.jpeg" alt="trash" class= " img-fluid rounded " style ="width: 100%;">
+                            </div>
+                    
+                        </div>
+                        <div class="row">
+                            <p class = "fs-4 text-center">Basketball Court<br></p>
+                        </div>
+                                        
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        
 
+    <form action="" method ="POST">
+        <div class="modal fade" id = "edit-property" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 blue">
+                    <div class="modal-header blue white ">
+                        <h5 class="modal-title" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Basketball Court</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white ">
+                        <div class="row">
+                            <div class="col-xl-6" >
+                                <label for="prate" class="fs-5 fw-bold">Property Rate</label>
+                                <div class="d-flex">    
+                                    
+                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Rate">
+                                    <div class="fs-5 fw-bold">PHP</div>  
+                               </div> 
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-8" >
+                                <label for="pname" class="fs-5 fw-bold">Property Name</label>
+                                <input type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-8" >  
+                                <label for="status" class="fs-5 fw-bold">Property Availablility</label>
+                                <select name="" class="form-control" id="status">
+                                    <option value="avail">Available</option>
+                                    <option value="noavail">Not Available</option>
+                                </select>
+                            </div>
+                        </div>
 
+                        <div class="row " align="center">
+                            <div class="col-md-5  mx-auto my-2">
+                                <button type ="button" role = "button" class="btn btn-outline-primary" >
+                                    <i class="fa fa-save"></i>
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    
+                        
+                                        
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <?php
+        include('services.php');
+    ?>
+    <form action="" method ="POST">
+        <div class="modal fade" id = "new-property" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 blue">
+                    <div class="modal-header blue white ">
+                        <h5 class="modal-title" >&nbsp;<i class = "fa fa-plus"></i>&nbsp;&nbsp;New Property</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white ">
+                        <div class="row">
+                            <div class="col-xl-6" >
+                                <label for="prate" class="fs-5 fw-bold">Property Rate</label>
+                                <div class="d-flex">    
+                                    
+                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Rate">
+                                    <div class="fs-5 fw-bold">PHP</div>  
+                               </div> 
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-8" >
+                                <label for="pname" class="fs-5 fw-bold">Property Name</label>
+                                <input type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-8" >  
+                                <label for="status" class="fs-5 fw-bold">Property Availablility</label>
+                                <select name="" class="form-control" id="status">
+                                    <option value="avail">Available</option>
+                                    <option value="noavail">Not Available</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row " align="center">
+                            <div class="col-md-5  mx-auto my-2">
+                                <button type ="button" role = "button" class="btn btn-outline-primary" >
+                                    <i class="fa fa-check me-1"></i>
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    
+                        
+                                        
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="modal fade" id = "check-property" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 blue">
+                    <div class="modal-header blue white ">
+                        <h5 class="modal-title" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Basketball Court</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white ">
+                        <div class="row">
+                            <div class="col-xl-6" >
+                                <label for="prate" class="fs-5 fw-bold">Property Rate</label>
+                                <div class="d-flex">    
+                                    
+                                    <input readonly type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Rate">
+                                    <div class="fs-5 fw-bold">PHP</div>  
+                               </div> 
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-8" >
+                                <label for="pname" class="fs-5 fw-bold">Property Name</label>
+                                <input readonly  type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-8" >  
+                                <label for="status" class="fs-5 fw-bold">Property Availablility</label>
+                                <select name="" class="form-control" id="status" disabled>
+                                    <option value="avail">Available</option>
+                                    <option value="noavail">Not Available</option>
+                                </select>
+                            </div>
+                        </div>
+
+                     
+                        
+                                        
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
 
     
+
 </body>
 </html>

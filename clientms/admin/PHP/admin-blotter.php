@@ -1,8 +1,6 @@
 <?php 
-    $curr ="Blotters";
+    $curr ="Blotter";
 ?>
-
-<!-- supply with the selected record's information -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,19 +16,21 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
-    <link rel = "stylesheet" href="../CSS/sidebar.css" />
-    <link rel = "stylesheet" href = "../CSS/table.css"/>
-    <link rel= "stylesheet" href = "../CSS/scrollbar.css"/>
+    <link rel = "stylesheet" href="../css/sidebar.css" />
+    <link rel="stylesheet" href="../CSS/scrollbar.css">
+
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
     <style type = "text/css">
-        table,tr,td,th{
+       table,tr,td,th{
             border: 1px solid grey;
         }
         body,html{
             height: 100%;
         }
-        
+        .blue{
+            background: #012f4e;
+        }
         .right{
             height: auto;
             max-height: 550px;
@@ -44,7 +44,27 @@
         .white{
             color:white;
         }
-
+        @media (max-width: 576px){
+            .btnx{
+              margin-bottom: 10px;
+            }
+          
+            .row {
+                overflow-x: auto;
+            }
+            .dis{
+                font-size: 15px;
+            }
+            .ser{
+                width: 100%;
+            }
+            .sepa{
+              overflow-x: auto;
+            }
+           
+           
+        }
+                
     </style>
 </head>
 <body>
@@ -52,22 +72,24 @@
     <?php 
         include ('../includes/sidebar.php');
     ?> 
-            <!--breadcrumb-->
-        <div class="container mx-5 mt-3">
-            <nav aria-label="breadcrumb">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                        <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
-                      
-                        <li class="breadcrumb-item active"><a href="#"><i class="fa fa-gavel text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
-                    </ol>
-                </nav>
-            </nav>
+    <div class="d-flex align-items-center">
+                <div class="container  mt-3">
+                    <nav aria-label="breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#service-choice" data-bs-toggle= "modal" role ="button"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
+                            
+                                <li class="breadcrumb-item active"><a href="#"><i class="fa fa-gavel text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
+                            </ol>
+                        </nav>
+                    </nav>
+                </div>
+            </div>
         </div>
-
-
-        <div class="container-fluid mx-4  px-4 mb-5">
+    </nav> 
+ 
+    <div class="container-fluid mx-4  px-4 mb-5">
         <div class="row g-0">
             <div class="row gx-4 gy-2">
                 <div class="mx-auto col-xl-12 ">
@@ -163,7 +185,9 @@
     </form>
    
     <!--modal-->
-
+        <?php
+            include('services.php');
+        ?>
        
         <div class="modal fade" id = "delete-record" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
@@ -204,7 +228,7 @@
 
         <div class="modal fade" id = "blotter-choice" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 blue ">
+                <div class="modal-content g-0 blue">
                     <div class="modal-header blue white">
                         <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-user"></i>&nbsp;&nbsp;Complainant Type</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -239,9 +263,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    <!-- walk-in modal-->
-    
+        </div>  
     
 </body>
 </html>
