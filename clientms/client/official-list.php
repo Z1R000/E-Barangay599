@@ -115,8 +115,8 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                             <table class="table"> <thead style="background-color: #021f4e;">
                                  <th><span style="color: #fff; font-size: 120%;">Barangay Position</span></th> 
                                  <th><span style="color: #fff; font-size: 120%;">Official Name</span></th>
-                                 <th><span style="color: #fff; font-size: 120%;">Time of Duty</span></th>
-								 <th><span style="color: #fff; font-size: 120%;">End of Duty</span></th>
+                                 <th><span style="color: #fff; font-size: 120%;">Day of Duty</span></th>
+								 
                                   </tr>
                                    </thead>
                                     <tbody>
@@ -137,7 +137,6 @@ foreach($results as $row)
                                         <td style="color: black;"><?php  echo htmlentities($row->BarangayPosition);?></td>
                                          <td style="color: black;"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?></td>
                                          <td><input type="time" name="td" value="<?php  echo $row->dutyTime;?>" class="form-control" required='true' readonly='true' style="border:none; color: black; "></td>
-										 <td><input type="time" name="td" value="<?php  echo $row->endDuty;?>" class="form-control" required='true' readonly='true' style="border:none; color: black;"></td>
                                      </tr>
                                      <?php $cnt=$cnt+1;}} ?>
                                      </tbody> </table> 
