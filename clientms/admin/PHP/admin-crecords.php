@@ -111,7 +111,7 @@
                                 <a class="flex-sm-fill  text-sm-center nav-link  " aria-current="page" href="admin-certificate.php">Certificates List</a>
                                 
                                 <a class="flex-sm-fill text-sm-center nav-link active " href="#">Certification Records</a>
-                                <a class="flex-sm-fill text-sm-center nav-link " href="payment-logs-certificate.php">Payments</a>
+                                   <a class="flex-sm-fill text-sm-center nav-link " href="payment-logs-certificates.php">Payments</a>
         
                             </nav>
 
@@ -173,6 +173,10 @@
                                                 <td scope="col" style = "text-align: left">10-12-2021</td>
                                                 <td scope="col" style = "text-align: left">015-22</td>
                                                 <td scope="col" style = "text-align: center">
+                                                
+                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                            <a type="" href ="temp-cert.php"class="btn btng btn-primary"><i class = "fa fa-edit"></i></a>
+                                                        </div>
                                                     
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                             <a type="" href ="temp-cert.php"class="btn btng btn-success"><i class = "fa fa-print"></i></a>
