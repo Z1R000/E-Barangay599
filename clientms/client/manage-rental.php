@@ -158,7 +158,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
                                         $cnt = 1;
                                         if ($query->rowCount() > 0) {
-                                            foreach ($results as $row) {               ?>
+                                            foreach ($results as $row) {?>
                                                 <tr class="active">
                                                     <td style="color: #000;"><?php echo htmlentities($row->rentalName); ?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($row->LastName); ?>, <?php echo htmlentities($row->FirstName); ?> <?php echo htmlentities($row->MiddleName); ?></td>
