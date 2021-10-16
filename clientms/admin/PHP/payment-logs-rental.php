@@ -1,231 +1,246 @@
-<?php 
-    $curr ="Properties List";
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $curr;?></title>
-   
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<div class="row g-0 shadow-lg bg-light border-end border-start border-bottom border-secondary " >
+                                    <div class="col-md-6 px-3 py-5 " style= "max-height: 450px;overflow-y:auto;">
+                                        <table class= "table pay border border-secondary shadow-md">
+                                            <thead class="bg-primary white">
+                                            <tr>
+                                                <td>
+                                                    Requestor Name
+                                                </td>
+                                                <td>
+                                                    Rented Property
+                                                </td>
+                                                <td>
+                                                    Mode of payment
+                                                </td>
+                                                
+                                                <td>
+                                                    Proof of payment
+                                                </td>
+                                                
+                                                <td scope="col" style = "text-align: center">
+                                                    Actions
+                                                </td>
+                                                
+                                            </tr>
 
-    <link rel = "stylesheet" href="../css/sidebar.css" />
-    <link rel="stylesheet" href="../CSS/scrollbar.css">
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        Edward Newgate
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        Employment
+                                                    </td>
+                                                    <td>
+                                                    G-cash
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                            <a type="" href ="#"class="btn btn-primary" style= "padding:5px;"><i class = "fa fa-eye me-1"></i>Payment</a>
+                                                        </div>
+                                                    </td>
+                                                    <td  scope="col" style = "text-align: center;">
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                <a href ="#approve-proof"class="btn btn-success" data-bs-toggle=  "modal"><i class = "fa fa-check me-1"></i>Accept</a>
+                                                            </div>
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                <a type="button" href ="#decline-proof" data-bs-toggle = "modal" role = "button" class="btn  btn-danger"><i class = "fa fa-times-circle me-1"></i>Decline</a>
+                                                            </div>
 
-	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
+                                                    </td>
+                                                </tr>
 
-    <style type = "text/css">
-        table,td,tr,th{
-            border: 1px solid #333;
-            text-align: left;
-            font-size: 1em;
-            padding: 100px;
-            font-family: 'Noto Sans Display', sans-serif;
-            
-        }   
-        td{
-            vertical-align: middle;
-     
-        }
-        .btng{
-            width: 40px;
-        }
-        body,html{
-            height: 100%;
-        }
+                                            
+                                            
+                                            </tbody>
+                                        
+                                        </table>
+                                    </div>
+                                <div class="col-md-6 border-start"style= "height: 100%;max-height: 450px;overflow-y:auto;" >
+                                    <form action="" action ="POST">
+                                        <div class="row g-0 px-4 py-5">
+                                            <div class="row">
+                                                <div class="col-md-7 ">
+                                                    <label for="payname" class="fs-5">Requestor Name</label>
+                                                    <input id = "payname" type="text" class= "form-control" placeholder = "Payor Name"  readonly>
+                                                </div>
+                                            
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 ">
+                                                    <label for="payed" class="fs-5">Rate <span class= "text-muted fs-6">(per Hour)</span></label>
+                                                    <input id = "payed" type="text" class= "form-control" placeholder = "Payor Name" value = "20" style= "width: 100%;"readonly> 
+                                                </div>
+                                                <div class="col-md-4 ">
+                                                    <label for="payed" class="fs-5">Duration <span class= "fs-6 text-muted">(in hours)</span></label>
+                                                    <input id = "payed" type="text" class= "form-control" placeholder = "Payor Name" value = "1" style= "width: 100%;"readonly> 
+                                                </div>
 
-        @media (max-width: 576px){
-            .row{
-                overflow-x: auto;
-            }
-            .dis{
-                font-size: 15px;
-            }
-            .ser{
-                width: 100%;
-            }
-           
-        }
-        .red{
-            background:#8B0000;
-            border: 1px solid #8B0000;
-        }
-        .white{
-            color: white;
-        }
-        .blue{
-            background: #012f4e;
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-5 ">
+                                                    <label for="payid" class="fs-5">Payment ID</label>
+                                                    <input id = "payid" type="text" class= "form-control" placeholder = "Payor Name" value = "213213123" readonly>
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <label for="payed" class="fs-5">Amount Paid</label>
+                                                    <input id = "payed" type="text" class= "form-control" value = "20" style= "width: 100%;"readonly> 
+                                                </div>
+                                                <div class="col-md-3 " class="fs-5">
+                                                    <label for="payed" class= "fs-5">Payable</label>
+                                                    <input id = "payed" type="text" class= "form-control"  value = "20" style= "width: 100%;"readonly> 
+                                                </div>
+                                                <label for="payed" class="fs-5 mb-2">Proof of Payment- <a href= "../images/proof.jpg" download target = "_blank" class= "text-decoration-none"><i class= "fa fa-download"></i>Download proof</label></a>
+                                                
+                                                <div class="row justify-content-center text-center">
+                                                    <div class="col-md-4">
+                                                        
+                                                        <a align ="center" href = "#proof" data-bs-toggle ="modal" style= "max-height: 400px"><img src="../images/proof.jpg" alt="proof of payment" class= "img-fluid"></a>
+                                                       
+                                                        
+                                                
+
+                                                    
+                                                    </div>
+
+                                                </div>
+                                          
+                                                
+                                            
+                                            </div>
+                           
+                                        </div>
 
 
-            .sidebar li .submenu{ 
-                list-style: none; 
-                margin: 0; 
-                padding: 0; 
-                padding-left: 1rem; 
-                padding-right: 1rem;
-            }
+                                    </form>
+                                </div>
 
-          
-                
-    </style>
-</head>
-<body>
-
-    <?php 
-        include ('../includes/sidebar.php');
-    ?> 
-    <div class="d-flex align-items-center">
-                <div class="container  mt-3">
-                    <nav aria-label="breadcrumb">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#service-choice" data-bs-toggle= "modal" role ="button"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
-                            
-                                <li class="breadcrumb-item active"><a href="#"><i class="fa fa-list text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
-                            </ol>
-                        </nav>
-                    </nav>
+        <!--modal-->
+        <div class="modal fade" id = "proof" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-info ">
+                    <div class="modal-header bg-danger bg-transparent ">
+                        <h5 class="modal-title" >&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Proof of payment</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white" align = "center">
+                            <img src="../images/proof.jpg" alt="">
+                    </div>
+                   
                 </div>
             </div>
         </div>
-    </nav>
 
-     <!--breadcrumb-->
-    <form action="#" method= "POST">
+
         
-        <div class="container-fluid mx-4  px-4 mb-5">
-
-            <div class="row g-0">
-                <div class="row gx-4 gy-2">
-                    <div class="mx-auto col-xl-12 ">
-                        <div class="row g-0  rounded-top border" style= "background: aliceblue">
-                            <div class="col-xl-6 py-2 px-2  ">
-                                <nav class="nav nav-pills flex-column  flex-sm-row">
-                                    <a class="flex-sm-fill  text-sm-center nav-link  " aria-current="page" href="admin-rentals.php">Rental Properties</a>
-                                    
-                                    <a class="flex-sm-fill text-sm-center nav-link  " href="admin-rrecords.php">Rental Records</a>
-                                    <a class="flex-sm-fill text-sm-center nav-link  active" href="payment-logs-rental.php">Payment logs</a>
-                                </nav>
-                            </div>
-                        </div>
-                        <div class="row g-0 border bg-white" >
-                        
-
-                            <div class = "row py-2 g-0 px-5">
-                                <div class="col-md-8 px-2">
-                                    
-                                    <div class="btn-group" role="group">
-                                        <a href = "#"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;Walk-in rental</a>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-4  px-2" >
-                                    <div class="d-flex">
-                                
-                                    <input type="text" name ="searchProp" placeholder = "Search property"class="form-control">
-                                    <button class= "btn btn-outline-info mx-1 my-1"><i class= "fa fa-search"></i></button>
-
-                                    </div>
-                            
-                                
-                                </div>
-                                
-                            </div>
-                            <div class="row border g-0">
-
-                                <div class="col-xl-11 mx-2  mx-auto py-3  px-2">
-                                        <table class="table bg-white table-hover "> 
-                                            <thead>
-                                                <tr>
-                                                    <td scope = "col" colspan = 8 style ="background: #012f6e; color: white; text-align: center">Properties List</td>
-                                                </tr>
-                                                <tr>
-                    
-                                                    <th style = "text-align: left;">Requestor Name</th>
-                                                    <th style = "text-align: left; ">Mode of Payment </th>
-                                                    <th style = "text-align: left; ">Payment ID </th>
-                                                    <th style = "text-align: left; ">Attachment</th>
-                                                    <th style = "text-align: left;;">Amount Paid</th>
-                                                    <th style = "text-align: left;">Amount Payable</th>
-                                                    <th style = "text-align: left;">Date Submitted</th>
-                                                    <th style = "text-align: center;">Action</th>
-                                        
-                                                </tr>
-                                            
-                                            </thead>           
-                                            <tbody class= "table-hover">
-                                                <tr>
-                                                    <td scope="col" style = "text-align: left">Tobirama Uchiha</td>
-                                                    <td scope="col" style = "text-align: left">G-cash</td>
-                                                    <td scope="col" style = "text-align: left">#2123213</td>
-                                                    <td scope="col" style = "text-align: left"><a href = "#">proof of payment</a></td>
-                                                    <td scope="col" style = "text-align: left">50.00 PHP</td>
-                                                    <td scope = "col" style = "text-align: left;">50.00 PHP</td>
-                                                    <td scope="col" style = "text-align: left">10-14-2021</td>
-
-                                                    <td scope="col" style = "text-align: center">
-                                                      
-                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                <a href ="#edit-record    " data-bs-toggle ="modal" role ="button" class="btn btng rounded-circle btn-success"><i class = "fa fa-check"></i></a>
-                                                            </div>
-                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                <a type="button" href ="#delete-prop" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger rounded-circle"><i class = "fa fa-times"></i></a>
-                                                            </div>
-                                                        
-                                                    </td>
-
-                                                </tr>
-
-                                            </tbody>
-            
-                                        </table>                        
-                                </div>   
-                            </div>
-                            
-                        </div>
-
-                    
-                        
-                    
-                    </div>
-                
-                </div>
-            
-            </div>
-            
-    </div>
-
-    </form>
-   
-    <!--modal-->
-
-    <div class="modal fade" id = "delete-prop" tab-idndex = "-1">
+        <div class="modal fade" id = "approve-proof" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 bg-danger" >
-                    <div class="modal-header  white ">
-                        <h5 class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
+                <div class="modal-content g-0 bg-success ">
+                    <div class="modal-header bg-success  ">
+                        <h5 class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Accept payment?</h5>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">
-                        <div class="row">
-                            <div class="col xl-4" align = "center">
-                                <img src="../images/trash.png" alt="trash" class= " img-fluid " style ="width: 10%;">
-                            </div>
-                    
+                        
+                        <div class="row mt-2">
+                            <form action="" method = "POST">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="dname">Requestor Name</label>
+                                        <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
+
+                                    </div>
+                           
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-5">
+                                        <label for="contac">Contact Number</label>
+                                        <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
+                   
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="emails" >Email Address</label>
+                                        <input id = "emails" type="text" class="form-control" value = "juanDelaC@gmail.com" readonly>
+                                        
+                                    
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                        <label for="remarks" >Remarks</label>
+                                        <div class="col-md-11">
+                                            <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <label for="floatingTextarea2">Remarks here (max 10 words)</label>
+                                                
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                                <div class="row mt-2">
+                                    <label for="remarks" >Mode of delivery <i class= "fa fa-envelope"></i></label>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="sms">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                SMS
+                                            </label>
+                                            </div>
+                                            <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="em" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                E-mail
+                                            </label>
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Walk-in
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                    
+                                </div>
+                                <div class="row justify-content-center" align = "center">
+                                    
+                                    <div class="col-mx-6">
+                                        <button href ="#dec-val" type = "button" class="btn btn-success rounded-circle" data-bs-dismiss ="modal" data-bs-toggle= "modal" >
+                                            <i class= 'fa fa-paper-plane py-1'></i>
+                                        </button>
+                                        <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times"></i>
+                                        </button>
+                                
+                                    </div>
+                                    
+                                </div>  
+                            </form>
+
                         </div>
+                      
+                
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id = "dec-val" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-danger ">
+                    <div class="modal-header bg-danger bg-transparent ">
+                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                       
                         <div class="row">
-                            <p class = "fs-4 text-center">You are about to delete an existing property, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
+                            <p class = "fs-4 text-center">You are about to decline a proof of payment, do you wish to proceed sending decline message?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
                         </div>
                         <div class="row justify-content-center" align = "center">
                             <form method = "POST" action = "#">
@@ -245,148 +260,96 @@
                 </div>
             </div>
         </div>
-        <?php
-        
-            include('services.php');
-        ?>
-       
-        <!--<div class="modal fade" id = "check-property" tab-idndex = "-1">
+
+
+        <div class="modal fade" id = "decline-proof" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 blue ">
-                    <div class="modal-header blue white ">
-                        <h5 class="modal-title" id="item">&nbsp;<i class = "fa fa-eye"></i>&nbsp;&nbsp;Basketball Court</h5>
+                <div class="modal-content g-0 bg-danger ">
+                    <div class="modal-header bg-danger bg-transparent ">
+                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Declining payment?</h5>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">
-                        <div class="row">
-                            <div class="col xl-6" align = "center">
-                                <img src="../images/court-sample.jpeg" alt="trash" class= " img-fluid rounded " style ="width: 100%;">
-                            </div>
-                    
-                        </div>
-                        <div class="row">
-                            <p class = "fs-4 text-center">Basketball Court<br></p>
-                        </div>
-                                        
-                    </div>
-                    <div class="modal-footer">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>-->
-        
+                        <div class="row mt-2">
+                            <form action="" method = "POST">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="dname">Requestor Name</label>
+                                        <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
 
-    <form action="" method ="POST">
-        <div class="modal fade" id = "edit-record" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content g-0 blue">
-                    <div class="modal-header blue white ">
-                        <h5 class="modal-title" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Basketball Court</h5>
-                        
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-white ">
-                        <div class="row">
-                            <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
-                                <div class="d-flex">    
-                                    
-                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "e.g Juan Dela Cruz">
-                                    
-                               </div> 
-                            </div>
-                            <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
-                                <div class="d-flex">    
-                                    
-                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "e.g Juan Dela Cruz">
-                                    
-                               </div> 
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-8" >
-                                <label for="pname" class="fs-5 fw-bold">Property Name</label>
-                                <input type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-8" >  
-                                <label for="status" class="fs-5 fw-bold">Property Availablility</label>
-                                <select name="" class="form-control" id="status">
-                                    <option value="avail">Available</option>
-                                    <option value="noavail">Not Available</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row " align="center">
-                            <div class="col-md-5  mx-auto my-2">
-                                <button type ="button" role = "button" class="btn btn-outline-primary" >
-                                    <i class="fa fa-save"></i>
-                                    Save
-                                </button>
-                            </div>
-                        </div>
-                    
-                        
+                                    </div>
+                           
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-5">
+                                        <label for="contac">Contact Number</label>
+                                        <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="emails" >Email Address</label>
+                                        <input id = "emails" type="text" class="form-control" value = "juanDelaC@gmail.com" readonly>
                                         
-                    </div>
-                    <div class="modal-footer">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    <div class="modal fade" id = "check-property" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 blue">
-                    <div class="modal-header blue white ">
-                        <h5 class="modal-title" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Basketball Court</h5>
-                        
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-white ">
-                        <div class="row">
-                            <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Property Rate</label>
-                                <div class="d-flex">    
                                     
-                                    <input readonly type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Rate">
-                                    <div class="fs-5 fw-bold">PHP</div>  
-                               </div> 
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-8" >
-                                <label for="pname" class="fs-5 fw-bold">Property Name</label>
-                                <input readonly  type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-8" >  
-                                <label for="status" class="fs-5 fw-bold">Property Availablility</label>
-                                <select name="" class="form-control" id="status" disabled>
-                                    <option value="avail">Available</option>
-                                    <option value="noavail">Not Available</option>
-                                </select>
-                            </div>
-                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="decreason" >Decline Reason</label>
+                                        <select name="" id="decreason" class= "form-control">
+                                            <option value="">Insufficient payment</option>
+                                            <option value="">Invalid proof sent</option>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                        <label for="remarks" >Remarks</label>
+                                        <div class="col-md-11">
+                                            <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <label for="floatingTextarea2">Remarks here (max 10 words)</label>
+                                                
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                                <div class="row mt-2">
+                                    <label for="remarks" >Mode of delivery <i class= "fa fa-envelope"></i></label>
+                                    <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    SMS
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    E-mail
+                                                </label>  
+                                            </div>
+                              
 
-                        <div class="row " align="center">
-                            <div class="col-md-5  mx-auto my-2">
-                                <button type ="button" role = "button" class="btn btn-outline-primary" >
-                                    <i class="fa fa-save"></i>
-                                    Save
-                                </button>
-                            </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row justify-content-center" align = "center">
+                                    
+                                    <div class="col-mx-6">
+                                        <button href ="#dec-val" type = "button" class="btn btn-success rounded-circle" data-bs-dismiss ="modal" data-bs-toggle= "modal" >
+                                            <i class= 'fa fa-paper-plane py-1'></i>
+                                        </button>
+                                        <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times"></i>
+                                        </button>
+                                
+                                    </div>
+                                    
+                                </div>  
+                            </form>
+
                         </div>
-                    
-                        
-                                        
+                      
+                
                     </div>
                     <div class="modal-footer">
                         
@@ -394,8 +357,3 @@
                 </div>
             </div>
         </div>
-
-    
-
-</body>
-</html>

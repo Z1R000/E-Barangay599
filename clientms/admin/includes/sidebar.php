@@ -123,7 +123,7 @@
                         <a href="admin-officials.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-6"><i class="fa fa-id-card" aria-hidden="true"></i> 599 Officials</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-6"><i
+                        <a href="admin-announcement.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-6"><i
                             class="fas fa-comment-dots me-2"></i>Announcements</a>
                     </li>
                     <li class="nav-item">

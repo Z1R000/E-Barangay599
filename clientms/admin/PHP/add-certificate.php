@@ -141,11 +141,10 @@
             </div>
         </div>
     </nav>
-      <form action="temp-cert.php"method ="POST">
+    <form action="temp-cert.php"method ="POST">
         <div class="container-fluid mb-3 ms-1 mx-5">
           <div class="row mx-1  py-2">
-            <div class="col-xl-4 mx-auto  rounded-top white">
-              
+            <div class="col-xl-5 mx-auto  rounded-top white">
               <div class="row ">
                 <div class="fs-6 text-center mt-3"  style= "background: #012f6e">
                   <span class ="white">
@@ -159,26 +158,21 @@
                 <form action="" method = "POST">
                   <div class="row gx-3 gy-1 px-5">
                     <label for="cname" class= "black fw-bold">Certification Name</label>
-                    <input id = "cname" class ="form-control" type="text" placeholder = "Certfication Name">
+                    <input id = "cname" class ="form-control" type="text" placeholder = "Certfication Name" name= "cname">
                     <label for="cname" class= "black fw-bold">Certification Fee</label>
                     <input id = "cname" class ="form-control" type="text" placeholder = "Certfication fee">
              
                   </div>
-                  <div class="row gy-2 mx-2 my-2 px-4">
-                    <label for="cert-inf" class= "black fw-bold">Certification Contents</label>
-                    <textarea class= "" name="cert-info-1" id="cert-inf" cols="20" rows="4" style= "resize: none" placeholder= "Paragraph 1"></textarea>
+                  <div class="row gy-2 mx-2 my-2 ">
+                    <div class="col-md-12 mx-auto">
+                      <label for="cert-inf" class= "black fw-bold">Certification Contents</label>
+                      <textarea class= "" name="cert-info" id="cert-inf" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1"><p style= "text-indent: 25px;"></p></textarea>
 
-                  </div>
-                  <div class="row gy-2 mx-2 my-2 px-4">
+
+                    </div>
                    
-                    <textarea class= "" name="cert-info-2" id="cert-inf" cols="20" rows="4" style= "resize: none" placeholder= "Paragraph 2"></textarea>
-
                   </div>
-                  <div class="row gy-2 mx-2 my-2 px-4">
-           
-                    <textarea class= "" name="cert-info-3" id="cert-inf" cols="20" rows="4" style= "resize: none" placeholder= "Paragraph 3"></textarea>
-
-                  </div>
+                
                 </form>
               </div>
             </div>
@@ -189,11 +183,9 @@
               
                 <div class="row">
                 <div class="embed-responsive embed-responsive-16by9">
-                  <iframe class="embed-responsive-item" id = "frame" src="prev-temp.php"></iframe>
+                  <iframe class="embed-responsive-item" id = "frame" src="temp-cert.php"></iframe>
                 </div>
            
-
-                
             </div>
           
           </div>
@@ -256,11 +248,9 @@
             </div>
         </div>
         <script src = '../ckeditor/ckeditor.js'></script>
-        <!--<script>
+        <script>
           CKEDITOR.replace('cert-info');
-          CKEDITOR.resize('none');
-
-        </script>-->
+        </script>
  
 </body>
 </html>

@@ -91,11 +91,11 @@
  
     <div class="container-fluid mx-4  px-4 mb-5">
         <div class="row g-0">
-            <div class="row gx-4 gy-2">
+            <div class="row gx-4 gy-2 ">
                 <div class="mx-auto col-xl-12 ">
-                    <div class="row g-0  rounded-top border white" style= "background: #021f4e">
+                    <div class="row g-0  rounded-top border white border-start border-end border-bottom border-secondary" style= "background: #021f4e">
                         <div class="col-xl-2  px-2  ">
-                            <div class="row">
+                            <div class="row ">
                                 <h5 class="flex-sm-fill  text-sm-center nav-link  " aria-current="page" >
                                     <i class= "fa fa-suitcase"></i> Blotter Records</h5>
                             </div>
@@ -104,7 +104,7 @@
                         </div>
                         
                     </div>
-                    <div class="row g-0 border bg-white" >
+                    <div class="row g-0 border bg-white border-start border-end border-bottom border-secondary" >
                       
 
                         <div class = "row py-2 g-0 px-3">

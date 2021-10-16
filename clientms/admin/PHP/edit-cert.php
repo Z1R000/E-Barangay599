@@ -1,5 +1,5 @@
 <?php 
-    $curr ="Update certificate";
+    $curr ="New certificate";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -121,19 +121,17 @@
     </style>
 </head>
 <body>
-
     <?php 
         include ('../includes/sidebar.php');
     ?> 
      <!--breadcrumb-->
-      
      <div class="d-flex align-items-center">
                 <div class="container  mt-3">
                     <nav aria-label="breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#service-choice" data-bs-toggle= "modal" role ="button"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
                                 <li class="breadcrumb-item"><a  class= "text-decoration-none" href="admin-certificate.php"><i class="fa fa-file"></i>&nbsp;Certificates</a></li>
                                 <li class="breadcrumb-item active"><a href="#"><i class="fa fa-list text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
                             </ol>
@@ -143,11 +141,10 @@
             </div>
         </div>
     </nav>
-      <form action="temp-cert.php"method ="POST">
+    <form action="temp-cert.php"method ="POST">
         <div class="container-fluid mb-3 ms-1 mx-5">
           <div class="row mx-1  py-2">
-            <div class="col-xl-4 mx-auto  rounded-top white">
-              
+            <div class="col-xl-5 mx-auto  rounded-top white">
               <div class="row ">
                 <div class="fs-6 text-center mt-3"  style= "background: #012f6e">
                   <span class ="white">
@@ -161,41 +158,34 @@
                 <form action="" method = "POST">
                   <div class="row gx-3 gy-1 px-5">
                     <label for="cname" class= "black fw-bold">Certification Name</label>
-                    <input id = "cname" class ="form-control" type="text" placeholder = "Certfication Name">
-                    <label for="cname" class= "black fw-bold">Certification Fee</label>
-                    <input id = "cname" class ="form-control" type="text" placeholder = "Certfication fee">
+                    <input id = "cname" class ="form-control" type="text" placeholder = "Certfication Name" name= "cname" value =  "Barangay Clearance">
+                    <label for="cname" class= "black fw-bold" >Certification Fee</label>
+                    <input id = "cname" class ="form-control" value = "20"type="text" placeholder = "Certfication fee">
              
                   </div>
-                  <div class="row gy-2 mx-2 my-2 px-4">
-                    <label for="cert-inf" class= "black fw-bold">Certification Contents</label>
-                    <textarea class= "" name="cert-info-1" id="cert-inf" cols="20" rows="4" style= "resize: none" placeholder= "Paragraph 1"></textarea>
+                  <div class="row gy-2 mx-2 my-2 ">
+                    <div class="col-md-12 mx-auto">
+                      <label for="cert-inf" class= "black fw-bold">Certification Contents</label>
+                      <textarea class= "" name="cert-info" id="cert-inf" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1">hudassss</textarea>
 
-                  </div>
-                  <div class="row gy-2 mx-2 my-2 px-4">
+
+                    </div>
                    
-                    <textarea class= "" name="cert-info-2" id="cert-inf" cols="20" rows="4" style= "resize: none" placeholder= "Paragraph 2"></textarea>
-
                   </div>
-                  <div class="row gy-2 mx-2 my-2 px-4">
-           
-                    <textarea class= "" name="cert-info-3" id="cert-inf" cols="20" rows="4" style= "resize: none" placeholder= "Paragraph 3"></textarea>
-
-                  </div>
+                
                 </form>
               </div>
             </div>
             <div class="col-xl-6 mx-auto pt-1 ">
                 <div class="fs-6 fw-bold">Certificate Template</div>
-                <button type = "button" href = "#update-cert" data-bs-toggle = "modal" role= "button"class = "btn btnx btn-primary mb-1"><i class= "fas fa-save me-2"></i>Save Update</button>
+                <button type = "button" href = "#save-cert" data-bs-toggle = "modal" role= "button"class = "btn btnx btn-primary mb-1"><i class= "fas fa-save me-2"></i>Save</button>
                 <button type = "submit" class = "btn btnx  btn-primary mb-1"><i class= "fas fa-eye me-2"></i>Preview</button>
               
                 <div class="row">
                 <div class="embed-responsive embed-responsive-16by9">
-                  <iframe class="embed-responsive-item" id = "frame" src="prev-temp.php"></iframe>
+                  <iframe class="embed-responsive-item" id = "frame" src="temp-cert.php"></iframe>
                 </div>
            
-
-                
             </div>
           
           </div>
@@ -203,11 +193,11 @@
 
         </div>
 
-        <div class="modal fade" id = "update-cert" tab-idndex = "-1">
+        <div class="modal fade" id = "save-cert" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-info ">
                     <div class="modal-header bg-info white ">
-                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Update Certificate</h5>    
+                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;New Certificate</h5>    
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">
@@ -218,7 +208,7 @@
                     
                         </div>
                         <div class="row">
-                            <p class = "fs-4 text-center">A certification record is about to be updated, do you wish to continue?<br></p>
+                            <p class = "fs-4 text-center">A new certificate template is about to be made, do you wish to continue?<br></p>
                         </div>
                 
                     </div>
@@ -249,7 +239,7 @@
                     
                         </div>
                         <div class="row">
-                            <p class = "fs-4 text-center">Certificate Successfully Updated.<br></p>
+                            <p class = "fs-4 text-center">New Certificate Successfully added.<br></p>
                         </div>
                 
                     </div>
@@ -257,12 +247,9 @@
                 </div>
             </div>
         </div>
-        <?php include('services.php');?>
         <script src = '../ckeditor/ckeditor.js'></script>
-        <!--<script>
+        <script>
           CKEDITOR.replace('cert-info');
-          CKEDITOR.resize('none');
-
         </script>
  
 </body>

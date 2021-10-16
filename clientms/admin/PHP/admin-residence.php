@@ -95,6 +95,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
             </div>
             
         </nav>
+
+        
     <div class="container-fluid my-4">
         <div class="row border mx-5 bg-white">
             <div class="row border-bottom g-0 py-1 px-3">
