@@ -50,6 +50,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         }
         
         @media (max-width: 576px){
+            .tab-pane .row{
+                overflow-x: auto;
+            }
             .right{
                 margin: auto;
             }
@@ -173,10 +176,10 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                     <div class="row g-0  rounded-top border bg-white">
                         <div class="col-xl-8 py-2 px-2  ">
                             <nav class="nav nav-pills flex-column  flex-sm-row">
-                                <a class="flex-sm-fill  text-sm-center nav-link active" aria-current="page" href="#">Personal Details</a>
-                                <a class="flex-sm-fill text-sm-center nav-link" href="view-resident-cases.php">Cases</a>
-                                <a class="flex-sm-fill text-sm-center nav-link" href="view-resident-certifications.php">Certifications Availed</a>
-                                <a class="flex-sm-fill text-sm-center nav-link" href="view-resident-services.php">Services Availed</a>
+                                <a class="flex-sm-fill  text-sm-center nav-link active" aria-current="page" href="#personal" data-bs-toggle ="tab">Personal Details</a>
+                                <a class="flex-sm-fill text-sm-center nav-link" href="#cases" data-bs-toggle ="tab">Cases</a>
+                                <a class="flex-sm-fill text-sm-center nav-link" href="#cert" data-bs-toggle ="tab">Certifications Availed</a>
+                                <a class="flex-sm-fill text-sm-center nav-link" href="#services" data-bs-toggle ="tab" >Services Availed</a>
         
         
                             </nav>
@@ -184,11 +187,11 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                         </div>
                         
                     </div>
-                    <div class="row g-0 border bg-white" >
-                    
-                        <div class="col-xl-11 mx-2  mx-auto  px-2">
-                            
-                            <table class="table my-3" >
+                    <div class="tab-content">
+                        <div class="tab-pane active" id = "personal">
+                            <div class="row g-0 border bg-white" >        
+                                <div class="col-xl-11 mx-2  mx-auto  px-2">       
+                                    <table class="table my-3" >
                                     <tr>
                                         <th class ="">Resident Type</th>
                                         <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->ResidentType);?></td>
@@ -196,6 +199,10 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <tr>
                                         <th class ="">Contact No.</th>
                                         <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->Cellphnumber);?></td>
+                                    </tr>
+                                    <tr>
+                                        <th class ="">Contact No.</th>
+                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->Email);?></td>
                                     </tr>
                                     <tr>
                                         <th class ="">First</th>
@@ -242,11 +249,184 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                         <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->vPrecinct);?></td>
                                     </tr>
 
-                            </table>
-							<?php $cnt=$cnt+1;}} ?>
+                                     </table>
+
+                                    <?php $cnt=$cnt+1;}} ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="cases">
+                        <div class="row g-0 border bg-white" >
+                            <div class="col-xl-11 mx-2  mx-auto  px-2">
+                                <div class="row  g-0 ">
+                                    <div class="col-xl-12 mx-2  mx-auto py-3  px-2">
+                                        <table class="table shadow-sm  bg-white table-hover bor "> 
+                                            <thead class = "bg-light">
+                                            
+                                                <tr>
+                                                    <th class= "bor" style = "text-align: left">Status</th>
+                                                    <th class= "bor" style = "text-align: left">Incident Type</th>
+                                                    <th class= "bor" style = "text-align: left">Date Time Reported</th>
+                                                    <th class= "bor" style = "text-align: left">Incident's Estimated Time </th>
+                                                    <th class= "bor" style = "text-align: center">Actions</th>
+                                                
+                                                </tr>
+                                        
+                                            </thead>           
+                                            <tbody class= "table-hover">
+                                                <tr>
+                                                    <td class= "bor" scope="col" style = "text-align: left">On-going</td>
+                                                    <td class= "bor" scope="col" style = "text-align: left">Public Disturbance</td>
+                                                    <td class= "bor" scope="col" style = "text-align: left">12-10-2021</td>
+                                                    <td class= "bor" scope="col" style = "text-align: left">6:00pm</td>
+                                                    <td  class= "bor"   scope="col" style = "text-align: center">
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                <a type="" href ="blotter-report.php"class="btn btng btn-primary"><i class = "fa fa-print"></i></a>
+                                                            </div>
+                                                        
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                <a href ="edit-blotter.php"class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
+                                                            </div>
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                <a type="button" href ="#delete-blotter-record" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                            </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>                        
+                                    </div>   
+                                </div>
+                            </div>
+                               
                         </div>
                       
+                            
+                                
+                        
+                        </div>
+                        <div class="tab-pane" id="cert">
+                            <div class="row g-0 border bg-white" > 
+                                <div class="col-xl-11 mx-2  mx-auto  px-2">
+                                    <div class="row  g-0">
+                                        <div class="col-xl-12 mx-2  mx-auto py-3">
+                                            <table class="table bg-white table-hover bor "> 
+                                                <thead class ="bg-light">
+                                                    <tr class="bor">
+                
+                                                        <th class = "bor" style = "text-align: left">Status</th>
+                                                        <th class= "bor" style = "text-align: left">Payment Method</th>
+                                                        <th class = "bor" style = "text-align: left">Purpose</th>
+                                                        <th class = "bor" style = "text-align: left">Requested Certificate</th>
+                                                        <th class = "bor" style = "text-align: left">Certificate fee</th>
+                                                        <th class = "bor" style = "text-align: left">Date</th>
+                                                        <th class = "bor" style = "text-align: left">Barangay Certification #</th>
+                                                        <th class = "bor" style = "text-align: center">Actions</th>
+                                                    </tr>        
+                                                </thead>           
+
+                                                <tbody class= "table-hover">
+                                                    <tr>
+                                                        <td class = "bor" scope="col" style = "text-align: left">Settled</td>
+                                                        <td class = "bor" scope="col" style = "text-align: left">g-cash</td>
+                                                        <td class = "bor" scope="col" style = "text-align: left">For employment</td>
+                                                        <td class = "bor" scope="col" style = "text-align: left">Barangay Clearance</td>
+                                                        <td class = "bor" scope="col" style = "text-align: left">30 PHP</td>
+                                                        <td class = "bor" scope="col" style = "text-align: left">10-12-2021</td>
+                                                        <td class = "bor" scope="col" style = "text-align: left">015-22</td>
+                                                        <td class = "bor" scope="col" style = "text-align: center">
+                                                            
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="" href ="temp-cert.php"class="btn btng btn-success"><i class = "fa fa-print"></i></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                                </div>
+                                                            
+                                                        </td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>                        
+                                        </div>   
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </div>
+                        <div class="tab-pane" id="services">
+                        <div class="row g-0 border bg-white" >
+                    
+                    <div class="col-xl-11 mx-2  mx-auto  px-2">
+                        <div class="row g-0">
+
+                            <div class="col-xl-12 mx-2  mx-auto py-3 ">
+                                <table class="table bg-white table-hover bor "> 
+                                    <thead class="bg-light">
+                                      
+                                        <tr>
+
+                        
+                                            <th style = "text-align: left; ">Requested Service/Rental</th>
+                                            <th style = "text-align: left; ">Mode of payment</th>
+                                            <th style = "text-align: left;;">Date of rental</th>
+                                            <th style = "text-align: left;">Duration</th>
+                                            <th style = "text-align: left;">Rate</th>
+                                            <th style = "text-align: left;">Status</th>
+                                            
+                                        
+                                        
+                                            <th style = "text-align: center;">Action</th>
+                                
+                                        </tr>
+                                    
+                                    </thead>           
+                                    <tbody class= "table-hover">
+                                        <tr>
+                                          
+                                            <td scope="col" style = "text-align: left">Barangay van</td>
+                                            <td scope="col" style = "text-align: left">G-cash</td>
+                                            <td scope="col" style = "text-align: left">10-13-2021, 6:00am</td>
+                                            <td scope="col" style = "text-align: left">2 hrs</td>
+                                            <td style = "text-align: left;">40.00 PHP</td>
+                                            <td scope="col" style = "text-align: left">On-going</td>
+
+                                            <td scope="col" style = "text-align: center">
+                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                        <button  type="button" href ="#check-property" data-bs-toggle="modal" role="button" class="btn btng btn-primary"><i class = "fa fa-eye"></i></button>
+                                                    </div>
+                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                        <a href ="#edit-record    " data-bs-toggle ="modal" role ="button" class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
+                                                    </div>
+                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                        <a type="button" href ="#delete-prop" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                    </div>
+                                                
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>                        
+                            </div>   
+                        </div>  
                     </div>
+                  
+                </div>
+                
+            
+            </div>
+        
+                            
+                                
+                        
+                        </div>
+
+
+
+
+
+                    </div>
+                   
                     
                 
                 </div>
@@ -255,6 +435,47 @@ if (strlen($_SESSION['clientmsaid']==0)) {
           
         </div>
     </div>
+
+
+    <!--modal-->
+
+    <div class="modal fade" id = "delete-blotter-record" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-danger ">
+                    <div class="modal-header bg-danger white ">
+                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        <div class="row">
+                            <div class="col xl-4" align = "center">
+                                <img src="../images/trash.png" alt="trash" class= " img-fluid " style ="width: 10%;">
+                            </div>
+                    
+                        </div>
+                        <div class="row">
+                            <p class = "fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
+                        </div>
+                        <div class="row justify-content-center" align = "center">
+                            <form method = "POST" action = "#">
+                                <button type = "button" class="btn btn-success rounded-circle" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                    <i class= 'fa fa-check '></i>
+                                </button>
+                                <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                    <i class= "fa fa-times"></i>
+                                </button>
+                            </form>
+                        </div>
+                
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
             
            
                 

@@ -1,359 +1,246 @@
-<?php
-    $curr = "Certificates";
-
-?>
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Hello, world!</title>
+    <style>
+       .btn_round {
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 35px;
+  margin-left: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+.btn_round:hover {
+  color: #fff;
+  background: #6b4acc;
+  border: 1px solid #6b4acc;
+}
 
-    <link rel="stylesheet" href="../CSS/sidebar.css" />
-    <link rel = "stylesheet" href = "../CSS/table.css"/>
-    <link rel = "stylesheet" href = "../CSS/scrollbar.css">
-	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
+.btn_content_outer {
+  display: inline-block;
+  width: 85%;
+}
+.close_c_btn {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  line-height: 30px;
+  border-radius: 50%;
+  background: #ededed;
+  border: 1px solid #ccc;
+  color: #ff5c5c;
+  text-align: center;
+  cursor: pointer;
+}
 
-    <title>Certificates</title>
-   
+.add_icon {
+  padding: 10px;
+  border: 1px dashed #aaa;
+  display: inline-block;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.add_group_btn {
+  display: flex;
+}
+.add_group_btn i {
+  font-size: 32px;
+  display: inline-block;
+  margin-right: 10px;
+}
 
+.add_group_btn span {
+  margin-top: 8px;
+}
+.add_group_btn,
+.clone_sub_task {
+  cursor: pointer;
+}
 
-    <style type = "text/css">
+.sub_task_append_area .custom_square {
+  cursor: move;
+}
 
-        
+.del_btn_d {
+  display: inline-block;
+  position: absolute;
+  right: 20px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 18px;
+}
     </style>
-
-</head>
-
-<body>
-        <?php
-            include('../includes/sidebar.php');
-        ?>
-            <div class="container mx-5">
-
-                <nav aria-label="breadcrumb">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-paperclip text-muted"></i></a>&nbsp;Services</li>
-                            <li class="breadcrumb-item active"><a href="#"><i class="fa fa-file text-muted"></i></a>&nbsp;Certificates</li>
-                        </ol>
-                    </nav>
-                </nav>
+  </head>
+  <body>
+   <!--<div class="container-fluid">
+      <ul class="nav nav-tabs">
+         <li class="nav-item"><a  class="nav-link active"data-bs-toggle = "tab" href="#one">one</a></li>
+         <li class="nav-item"><a  class="nav-link "data-bs-toggle = "tab" href="#two">two</a></li>
+         <li class="nav-item"><a href="" class="nav-link ">Tree</a></li>
+      </ul>
+      <div class="tab-content" >
+         <div class="tab-pane active" id = "one">
+            <div class="row">
+               <div class="col p-4">
+                     ukinanam
+               </div>
             </div>
-       
-                
-            <div class="container-fluid mb-2">
-                        <div class = "row">
-                            <div class="col-md-4">
-
-                            </div>
-                            <div class="col-md-4">
-                                
-                            </div>
-                            <div class="col-md-4 mt-2 mx-0">
-
-                                <div class ="nav justify-content-end mx-0">
-                            
-                                    <div class="btn-group" role="group">
-                                        <a href = "certification-records.php"  class="btn btn-primary mx-1 my-1"><i class="fa fa-list"></i>&nbsp; Records</a>
-                                    </div>
-
-                                    <div class="btn-group" role="group" >
-                                        <a href = "admin-Crequest.php" class="btn btn-primary mx-1 my-1" ><i class="fa fa-list"></i>&nbsp;Requests</a>
-                                    </div>
-                            
-                            
-                                    <div class="btn-group" role="group">
-                                        <a href = "#add" data-bs-toggle = "modal" role = "button" class="btn btn-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;Add Certificate</a>
-                                    </div>
-                                
-                                 </div>
-                            </div>
-                        </div>
-                        <div class="row my-2">
-                            <div class="col-xl-5">
-
-                            </div>
-                            <div class = "col-xl-7">
-                                <form class ="d-flex justify-content-end">
-                                    <input type = "text" class = "form-control border border-success"  id = "search-form" placeholder = "Search certificate here" >
-                                    <a href = "#" class = "a btn btn-success"data-bs-toggle="tooltip" data-bs-placement="top" title="Search"><i class = "fa fa-search" ></i></a>
-                                </form>                            
-                            </div>
+         </div>
+     
+      
+         <div class="tab-pane" id = "two">
+            <div class="row">
+               <div class="col p-4">
+                     3000
+               </div>
+            </div>
+         </div>
+         </div>
+   </div>-->
+   <div class="container py-4">
+  <div class="row">
+    <div class="col-md-12 form_sec_outer_task border">
+      <div class="row">
+        <div class="col-md-12 bg-light p-2 mb-3">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <h4 class="frm_section_n">Form Title</h4>
                 </div>
+              </div>
             </div>
-        
-            <div class = "container-fluid">
-                <table class = "table">
-                    <thead class="table" style = "background-color: #021f4e;">
-                      <tr>
-                          <td colspan = 5 class = "" style = "color: white" align = "center">Table of Certificates</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <tr class = "light">
-                            <th class = "">
-                                Certification Name
-                            </td>
-                            <th class = "">
-                                Certification Description
-                            </td>
-                            <th class = "">
-                                Certification Fee
-                            </td>
-                            <th class = "" >Action
-                            </td>
-                        </tr>
-                        <tr>
-                         
-                            <td class = "">
-                                Sample Certificate
-                            </td>
-                            <td class = "">
-                                description....
-                            </td>
-                            <td class = "">
-                                20.00 ₱
-                            </td>
-                            <td>
-                                <div class = "actions" align = "center">
-                                   
-                                    <a href="#edit" class="btn btn-primary text-decoration-none my-1" style = "color: white"  data-bs-toggle="modal"role="button"><i class = "fa fa-edit"></i>&nbsp;Update</a>
-                                    <a href="#delete" class="btn btn-danger text-decoration-none my-1" data-bs-toggle="modal" role button><i class ="fa fa-trash"></i>&nbsp;Delete</a>
-                                </div>
-                                                               
-                            </td>
-                        </tr>
-                    </tbody>
-                  </table>
-            </div>
+          </div>
         </div>
-    <!-- /#page-content-wrapper -->
-    </div>
-
-    <div class="modal fade" id="edit"  tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-
-                    <h5 class="modal-title" id="edit-cert"><i class = "fa fa-pen"></i>&nbsp;Edit Certificate</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class = "image-fluid" align = "center">
-                            <img src = "../IMAGES/BARANGAY.png" class ="brand-logo" style = "width: 30px">
-                        </div>
-                    </div>
-                    <form method = "POST" action="#">
-                        <div class = "row">
-                            <div class="col-md-8 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-address-book"></i></a></div>
-                                    </div>
-                                    <input type="text" class="form-control"  placeholder="Service name">
-                                </div>
-                            </div>
-                     
-                      
-                            <div class="col-md-4 my-1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <div class="input-group-text"><a  disabled><i class ="fa fa-credit-card"></i></a></div>
-                                    </div>
-                                    <input type="text" class="form-control"  placeholder="Service fee">
-                                </div>
-                            </div>
-                       
-                        </div>
-                        
-                        <div class ="row my-1">
-                            <div class ="col">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px"></textarea>
-                                    <label class = "text-muted" for="floatingTextarea2">Certificate description here</label>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <a href = "#verif-edit" data-bs-toggle = "modal" role = "button" data-bs-dismiss = "modal" class = "btn btn-primary">Save</a>
-                    <input type = "reset" class="btn btn-primary" >
-                    </form>
-                </div>
-            </div>
+        <div class="col-md-6">
+          <label>Mobile No.</label>
         </div>
-    </div>
-
-    <div class="modal fade" id = "verif-edit" tab-idndex = "-1">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="verif-edit">&nbsp;<i class = "fa fa-question"></i>&nbsp;&nbsp;Certificate Update</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p class = "fs-4">You are about to update a certification<br> Click "Yes" if certain?</p>
-                </div>
-                <div class="modal-footer">
-                    <form method = "POST" action = "#">
-                    <input type = "button" class="btn btn-success"  name = "delete" value ="Yes">
-                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal"  value = "No">
-                    </form>
-                    </form>
-                </div>
-            </div>
+        <div class="col-md-4">
+          <label> Type </label>
         </div>
-    </div>
-
-    <div class="modal fade" id = "verif-add" tab-idndex = "-1">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="verif-add">&nbsp;<i class = "fa fa-question"></i>&nbsp;&nbsp;New Certificate</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p class = "fs-4">You are about to update a certification<br> Click "Yes" if certain?</p>
-                </div>
-                <div class="modal-footer">
-                    <form method = "POST" action = "#">
-                    <input type = "button" class="btn btn-success"  name = "delete" value ="Yes">
-                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal"  value = "No">
-                    </form>
-                    </form>
-                </div>
+      </div>
+      <div class="col-md-12 p-0">
+        <div class="col-md-12 form_field_outer p-0">
+          <div class="row form_field_outer_row">
+            <div class="form-group col-md-6">
+              <input type="text" class="form-control w_90" name="mobileb_no[]" id="mobileb_no_1" placeholder="Enter mobiel no." />
             </div>
+            <div class="form-group col-md-4">
+              <select name="no_type[]" id="no_type_1" class="form-control">
+                <option>--Select type--</option>
+                <option>Personal No.</option>
+                <option>Company No.</option>
+                <option>Parents No.</option>
+              </select>
+            </div>
+            <div class="form-group col-md-2 add_del_btn_outer">
+              <button class="btn_round add_node_btn_frm_field" title="Copy or clone this row">
+                <i class="fas fa-copy"></i>
+              </button>
+
+              <button class="btn_round remove_node_btn_frm_field" disabled>
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+    <div class="row ml-0 bg-light mt-3 border py-3">
+      <div class="col-md-12">
+        <button class="btn btn-outline-lite py-0 add_new_frm_field_btn"><i class="fas fa-plus add_icon"></i> Add New field row</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
     
-
-
-   
-
-
-    <div class="modal fade" id = "delete" tab-idndex = "-1">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="delete-cert">&nbsp;<i class = "fa fa-trash"></i>&nbsp;&nbsp;Are you sure</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p class = "fs-4">You are about to delete a certification<br> Click "Yes" if certain?</p>
-                </div>
-                <div class="modal-footer">
-                    <form method = "POST" action = "#">
-                    <input type = "button" class="btn btn-success"  name = "delete" value ="Yes">
-                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal"  value = "No">
-                    </form>
-
-                    </form>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="add"  tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-
-                        <h5 class="modal-title" id="edit-cert"><i class = "fa fa-plus"></i>&nbsp;Add Certificate</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class = "image-fluid" align = "center">
-                                <img src = "../IMAGES/BARANGAY.png" class ="brand-logo" style = "width: 30px">
-                            </div>
-                        </div>
-                        <form method = "POST" action="#">
-                                <div class = "row">
-                                    <div class="col-md-8 my-1">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><a  disabled><i class ="fa fa-address-book"></i></a></div>
-                                            </div>
-                                            <input type="text" class="form-control"  placeholder="Service name">
-                                        </div>
-                                    </div>
-                        
-                                    <div class="col-md-4 my-1">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><a  disabled><i class ="fa fa-credit-card"></i></a></div>
-                                            </div>
-                                            <input type="text" class="form-control"  placeholder="Service fee">
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class ="row my-1">
-                                <div class ="col">
-                                        <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px"></textarea>
-                                        <label class = "text-muted" for="floatingTextarea2">Certificate description here</label>
-                                        </div>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a href = "#verif-add" data-bs-toggle = "modal" role = "button" data-bs-dismiss = "modal" class = "btn btn-primary">Save</a>
-                        <input type = "reset" class="btn btn-primary" >
-                        </form>
-                    </div>
-                </div>
-            </div>
-    </div>
-   
-
-    <div class="modal fade" id = "verif" tab-idndex = "-1">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="delete-cert">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="row">
-                        <div class = "image-fluid" align = "center">
-                            <img src = "../IMAGES/BARANGAY.png" class ="brand-logo" style = "width: 30px">
-                        </div>
-                    </div>
-                <div class="modal-body">
-                    <p class = "fs-4">New Certificate is about to be created<br>Click yes button if you are certain ?</p>
-                </div>
-                <div class="modal-footer">
-                    <form method = "POST" action = "#">
-                    <input type = "button" class="btn btn-success"  name = "yes" value ="Yes">
-                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal"  value = "No">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-   
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <script>
-        var el = document.getElementById("wrapper");
-        var toggleButton = document.getElementById("menu-toggle");
+       ///======Clone method
+      $(document).ready(function () {
+      $("body").on("click", ".add_node_btn_frm_field", function (e) {
+         var index = $(e.target).closest(".form_field_outer").find(".form_field_outer_row").length + 1;
+         var cloned_el = $(e.target).closest(".form_field_outer_row").clone(true);
 
-        toggleButton.onclick = function () {
-            el.classList.toggle("toggled");
-        };
+         $(e.target).closest(".form_field_outer").last().append(cloned_el).find(".remove_node_btn_frm_field:not(:first)").prop("disabled", false);
+
+         $(e.target).closest(".form_field_outer").find(".remove_node_btn_frm_field").first().prop("disabled", true);
+
+         //change id
+         $(e.target)
+            .closest(".form_field_outer")
+            .find(".form_field_outer_row")
+            .last()
+            .find("input[type='text']")
+            .attr("id", "mobileb_no_" + index);
+
+         $(e.target)
+            .closest(".form_field_outer")
+            .find(".form_field_outer_row")
+            .last()
+            .find("select")
+            .attr("id", "no_type_" + index);
+
+         console.log(cloned_el);
+         //count++;
+      });
+      });   
+      $(document).ready(function(){ $("body").on("click",".add_new_frm_field_btn", function (){ console.log("clicked"); var index = $(".form_field_outer").find(".form_field_outer_row").length + 1; $(".form_field_outer").append(`
+      <div class="row form_field_outer_row">
+      <div class="form-group col-md-6">
+         <input type="text" class="form-control w_90" name="mobileb_no[]" id="mobileb_no_${index}" placeholder="Enter mobiel no." />
+      </div>
+      <div class="form-group col-md-4">
+         <select name="no_type[]" id="no_type_${index}" class="form-control">
+            <option>--Select type--</option>
+            <option>Personal No.</option>
+            <option>Company No.</option>
+            <option>Parents No.</option>
+         </select>
+      </div>
+      <div class="form-group col-md-2 add_del_btn_outer">
+         <button class="btn_round add_node_btn_frm_field" title="Copy or clone this row">
+            <i class="fas fa-copy"></i>
+         </button>
+
+         <button class="btn_round remove_node_btn_frm_field" disabled>
+            <i class="fas fa-trash-alt"></i>
+         </button>
+      </div>
+      </div>
+      `); $(".form_field_outer").find(".remove_node_btn_frm_field:not(:first)").prop("disabled", false); $(".form_field_outer").find(".remove_node_btn_frm_field").first().prop("disabled", true); }); });
+
+      $(document).ready(function () {
+      //===== delete the form fieed row
+      $("body").on("click", ".remove_node_btn_frm_field", function () {
+         $(this).closest(".form_field_outer_row").remove();
+         console.log("success");
+      });
+      });
     </script>
-</body>
-
+    
+  </body>
 </html>

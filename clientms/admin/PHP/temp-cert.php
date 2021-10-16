@@ -1,4 +1,23 @@
+<?php
+    $content = "";
+    $name = "";
+    if (!isset($_POST['cert-info'])){
+        $content = "----Supply Text  here---";
+    }
 
+    else{
+      $content  = $_POST['cert-info'];
+    }
+
+    if (!isset($_POST['cname'])){
+      $name = "Certification  Name";
+
+    }
+    else{
+      $name =$_POST['cname'];
+    }
+   
+?>
 
 
 <!DOCTYPE html>
@@ -215,7 +234,7 @@
            
         </div>
         <aside class="col position-relative border" style = "padding: 1.5%;">
-          <h2 class="text-center"><b>Certification Name</b></h2>
+          <h2 class="text-center"><b><?php echo $name?></b></h2>
           <div class="text-center"></div>
           <!--supply name of customer--> 
           <div class="text-center fs-5"><b></b></div>
@@ -229,10 +248,8 @@
           <div class="my-1">
               <!--Supply initially with description in db-->
               <p align = "justify" id = "indent">This is to certify that <strong>Requestor Name</strong> for their <strong>certification type</strong> </p>
-              <p align = "justify" id = "indent">-----supplied texts here----</p>
-              <p align = "justify" id = "indent">-----supplied texts here if necessary----</p>
-              <p align = "justify" id = "indent">-----supplied texts here if necessary----</p>
-              </p>
+              <p align = "justify" id = "indent"><?php echo $content;?></p>
+
 
               <p id = "indent">
               Issued this <strong>(date)<!--supply date-->)</strong>
@@ -265,7 +282,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td class = "text-muted">Barangay Captain</td>
+                      <td class = "text-muted">Punong Barangay</td>
                     </tr>
                   </table><br>
               </div>
@@ -276,6 +293,32 @@
               
               <div class="float-start">
                 <table>
+                <tr>
+                    <td>
+
+                      <br>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><br></td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid black">
+                  </tr>
+                  
+                  <tr>
+                    <td>
+                        Kagawad Name <!--Supply from secretary postions db-->
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class = "text-muted">
+                      Kagawad on Duty
+                    </td>
+                  </tr>
+                  <tr>
+
+                        
+                  </tr>
                   <tr>
                     <td>
                       Prepared by: 

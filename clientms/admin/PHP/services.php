@@ -6,7 +6,7 @@
     }
 </style>
 
-<div class="modal fade" id = "service-choice" tab-idndex = "-1">
+        <div class="modal fade" id = "service-choice" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-info">
                     <div class="modal-header bg-info white">

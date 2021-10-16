@@ -1,5 +1,5 @@
 <?php 
-    $curr ="Certificate List";
+    $curr ="Certifications";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +23,7 @@
 
     <style type = "text/css">
           table,td,tr,th{
-            border: 1px solid #333;
+            border: 1px solid darkgrey;
             text-align: left;
             font-size: 1em;
             padding: 100px;
@@ -56,6 +56,27 @@
         }
         .white{
             color: white;
+        }
+        .pay{
+            border: 1px solid grey;
+        }
+        @media print{
+            body * {
+                visibility: hidden;
+            }
+            .btng{
+                visibility: hidden;
+            }
+            .print-container , .print-container * {
+                visibility: visible;
+            }
+            .print-container {
+                border:0;
+                padding:1cm;
+                position: absolute;
+                top:0;
+                left:0;
+            }
         }
         @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
 
@@ -101,101 +122,279 @@
         
 
     <form action="view-cert.php" method= "POST">
-        <div class="container-fluid mx-4  px-4 mb-5">
+    <div class="container-fluid mx-4  px-4 mb-5">
         <div class="row g-0">
             <div class="row gx-4 gy-2">
                 <div class="mx-auto col-xl-12  ">
-                    <div class="row g-0  shadow-sm rounded-top border" style= "background: aliceblue">
-                        <div class="col-xl-4 py-2 px-2  ">
+                    <div class="row g-0  shadow-sm rounded-top border" style= "background: #012f4e; color: white">
+                        <div class="col-xl-6 py-2 px-2  ">
                             <nav class="nav nav-pills flex-column  flex-sm-row">
-                                <a class="flex-sm-fill  text-sm-center nav-link active " aria-current="page" href="#">Certificates List</a>
-                                <a class="flex-sm-fill text-sm-center nav-link " href="admin-crecords.php">Certification Records</a>
-                                <a class="flex-sm-fill text-sm-center nav-link " href="payment-logs-certificate.php">Payments</a>
+                                <a class="flex-sm-fill  text-sm-center nav-link active fs-5 white" aria-current="page" href="#certlist" data-bs-toggle = "tab">Certificates List</a>
+                                <a class="flex-sm-fill text-sm-center nav-link fs-5 white" href="#crecords" data-bs-toggle = "tab">Certification Records</a>
+                                <a class="flex-sm-fill text-sm-center nav-link fs-5 white" href="#holding"data-bs-toggle="tab">Payments</a>
                             
-        
-                            
-        
                             </nav>
 
                         </div>
                         
                     </div>
-                    <div class="row g-0 shadow-sm border bg-white" >
-                      
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="certlist">
+                            <form action="" method = "POST">
+                                <div class="row g-0 border-start border-end border-bottom border-secondary shadow-lg bg-white" >
 
-                        <div class = "row py-2 g-0 px-5">
-                            <div class="col-md-8 px-2">
-                                  
-                                <div class="btn-group" role="group">
-                                    <a href = "add-certificate.php"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;New Certificate</a>
-                                </div>
+                                    <div class = "row py-2 g-0 px-5">
+                                        <div class="col-md-8 px-2">
+                                            
+                                            <div class="btn-group" role="group">
+                                                <a href = "add-certificate.php"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;New Certificate</a>
+                                            </div>
 
-                            </div>
-                            <div class="col-md-4  px-2" >
-                                <div class="d-flex">
-                             
-                                <input type="text" name ="searchCert" placeholder = "Search Record"class="form-control">
-                                <button class= "btn btn-outline-info mx-1 my-1"><i class= "fa fa-search"></i></button>
-
-                                </div>
-                        
-                            
-                            </div>
-                            
-                        </div>
-                        <div class="row border g-0">
-                            <div class="col-xl-11 mx-2  mx-auto py-3  px-2">
-                                    <table class="table bg-white table-hover "> 
-                                        <thead>
-                                            <tr>
-                                                <td scope = "col" colspan = 3 style ="background: #012f6e; color: white; text-align: center">Certificates List</td>
-                                            </tr>
-                                            <tr>
-                
-                                                <th style = "text-align: left">Certification Name</th>
-                                                <th style = "text-align: left">Certification Fee</th>
-                                                <th style = "text-align: center">Action</th>
-                                    
-                                            </tr>
+                                        </div>
+                                        <div class="col-md-4  px-2" >
+                                            <div class="d-flex">
                                         
-                                        </thead>           
-                                        <tbody class= "table-hover">
-                                            <tr>
-                                                <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                <td scope="col" style = "text-align: left">20 PHP</td>
-                                                <td scope="col" style = "text-align: center">
-                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <button type = "submit" type="button" class="btn btng btn-primary"><i class = "fa fa-eye"></i></button>
-                                                        </div>
-                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="" href ="edit-cert.php"class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
-                                                        </div>
-                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="button" href ="#delete-cert" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
-                                                        </div>
-                                                    
-                                                </td>
+                                            <input type="text" name ="searchCert" placeholder = "Search Record"class="form-control">
+                                            <button class= "btn btn-outline-info mx-1 my-1" ;><i class= "fa fa-search"></i></button>
 
+                                            </div>
+                                    
+                                        
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row border g-0">
+                                        <div class="col-xl-11 mx-2  mx-auto py-3  px-2">
+                                            <table class="table bg-white table-hover shadow-sm border "> 
+                                                <thead>
+                                                    <tr>
+                                                        <td scope = "col" colspan = 3 style ="background: #012f6e; color: white; text-align: center">Certificates List</td>
+                                                    </tr>
+                                                    <tr>
+                        
+                                                        <th style = "text-align: left">Certification Name</th>
+                                                        <th style = "text-align: left">Certification Fee</th>
+                                                        <th style = "text-align: center">Action</th>
+                                            
+                                                    </tr>
+                                                
+                                                </thead>           
+                                                <tbody class= "table-hover">
+                                                    <tr>
+                                                        <td scope="col" style = "text-align: left">Barangay Clearance</td>
+                                                        <td scope="col" style = "text-align: left">20 PHP</td>
+                                                        <td scope="col" style = "text-align: center">
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <button type = "submit" type="button" class="btn btng btn-primary"><i class = "fa fa-eye"></i></button>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="" href ="edit-cert.php"class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="#delete-cert" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                                </div>
+                                                            
+                                                        </td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>                        
+                                        </div>   
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane" id="crecords">
+                            <div class="row g-0 border-start border-end border-bottom border-secondary shadow-lg bg-white" >
+                                <div class = "row py-2 g-0 px-3">
+                                    <div class="col-md-8 ">
+                                            <div class="btn-group" role="group">
+                                                <a href = "#walk-in"  data-bs-toggle ="modal" role = "button"class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;Walk-in certification</a>
+                                            </div>
+                                            <div class="btn-group" role="group">
+                                                <a href = "#"  onclick="window.print()" data-bs-toggle ="modal" role = "button"class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-cog"></i>&nbsp;Generate report</a>
+                                            </div>
+                                    </div>
+                                    <div class="col-md-4  px-2" >
+                                        <div class="d-flex">
+                                            <input type="text" name ="searchCert" placeholder = "Search Certificate"class="form-control">
+                                            <button class= "btn btn-outline-info mx-1 my-1"><i class= "fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="row border g-0">
+                                    <div class="col-xl-12 mx-2  mx-auto py-3  px-3 print-container">
+                                        <table class="table bg-white table-hover shadow-sm border "> 
+                                            <thead>
+                                                <tr>
+                                                    <td scope = "col" colspan = 9 style ="background: #012f6e; color: white; text-align: center">Certification Records</td>
+                                                </tr>
+                                                <tr>
+                                                    <th style = "text-align: left">BCN #</th>
+                                                    <th style = "text-align: left">Status</th>
+                                                    <th style = "text-align: left">Requestor's Name</th>
+                                                    <th style = "text-align: left">Payment Method</th>
+                                                    <th style = "text-align: left">Purpose</th>
+                                                    <th style = "text-align: left">Requested Certificate</th>
+                                                    <th style = "text-align: left">Certificate fee</th>
+                                                    <th style = "text-align: left">Date</th>
+                                                    <th style = "text-align: center">Actions</th>
+                                                    
+                                                </tr>
+                                            </thead>           
+                                            <tbody class= "table-hover">
+                                                <tr>
+                                                    <td scope="col" style = "text-align: left">015-22</td>
+                                                    <td scope="col" style = "text-align: left">On-Going</td>
+                                                    <td scope="col" style = "text-align: left">ekoc omsim</td>
+                                                    <td scope="col" style = "text-align: left">g-cash</td>
+                                                    <td scope="col" style = "text-align: left">For employment</td>
+                                                    <td scope="col" style = "text-align: left">Barangay Clearance</td>
+                                                    <td scope="col" style = "text-align: left">30 PHP</td>
+                                                    <td scope="col" style = "text-align: left">10-12-2021</td>
+                                                  
+                                                    <td scope="col" style = "text-align: center">
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                <a type="" href ="edit-cert-record.php"class="btn btng btn-primary"><i class = "fa fa-edit"></i></a>
+                                                            </div>
+                                                        
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                <a type="" href ="temp-cert.php"class="btn btng btn-success"><i class = "fa fa-print"></i></a>
+                                                            </div>
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                            </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>                        
+                                    </div>   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="holding">
+                            <div class="row g-0 border-start border-end border-bottom border-secondary shadow-lg bg-white" >
+                                <div class="col-md-6 px-3 py-5 " style= "max-height: 450px;overflow-y:auto;">
+                                    <table class= "table pay border shadow-sm">
+                                        <thead class="bg-primary white">
+                                        <tr>
+                                            <td>
+                                                Requestor Name
+                                            </td>
+                                            <td>
+                                                Requested Certificate
+                                            </td>
+                                            <td>
+                                                Mode of payment
+                                            </td>
+                                            
+                                            
+                                            <td>
+                                                Proof of payment
+                                            </td>
+                                            
+                                            <td scope="col" style = "text-align: center">
+                                                Actions
+                                            </td>
+                                            
+                                        </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Edward Newgate
+                                                </td>
+                                                
+                                                <td>
+                                                    Employment
+                                                </td>
+                                                <td>
+                                                   G-cash
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                        <a type="" style= "padding: 5px;"href ="#"class="btn btn-primary"><i class = "fa fa-eye me-1"></i>Payment</a>
+                                                    </div>
+                                                </td>
+                                                <td  scope="col" style = "text-align: center">
+                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                            <a href ="#approve-proof"class="btn btn-success" data-bs-toggle=  "modal"><i class = "fa fa-check me-1"></i>Accept</a>
+                                                        </div>
+                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                            <a type="button" href ="#decline-proof" data-bs-toggle = "modal" role = "button" class="btn  btn-danger"><i class = "fa fa-times-circle me-1"></i>Decline</a>
+                                                        </div>
+
+                                                </td>
                                             </tr>
 
+                                           
+                                           
                                         </tbody>
-         
-                                    </table>                        
-                            </div>   
-                        </div>
-                        
-                    </div>
+                                     
+                                    </table>
+                                </div>
+                                <div class="col-md-6 border"style= "height: 100%;max-height: 450px;overflow-y:auto;" >
+                                    <form action="" action ="POST">
+                                        <div class="row g-0 px-4 py-5">
+                                            <div class="row">
+                                                <div class="col-md-7 ">
+                                                    <label for="payname" class="fs-5">Requestor Name</label>
+                                                    <input id = "payname" type="text" class= "form-control" placeholder = "Payor Name"  readonly>
+                                                </div>
+                                            
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-5 ">
+                                                    <label for="payid" class="fs-5">Payment ID</label>
+                                                    <input id = "payid" type="text" class= "form-control" placeholder = "Payor Name" value = "213213123" readonly>
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <label for="payed" class="fs-5">Amount Paid</label>
+                                                    <input id = "payed" type="text" class= "form-control" placeholder = "Payor Name" value = "50" style= "width: 100%;"readonly> 
+                                                </div>
+                                                <div class="col-md-3 " class="fs-5">
+                                                    <label for="payed" class= "fs-5">Payable</label>
+                                                    <input id = "payed" type="text" class= "form-control" placeholder = "Payor Name" value = "50" style= "width: 100%;"readonly> 
+                                                </div>
+                                                <label for="payed" class="fs-5 mb-2">Proof of Payment- <a href= "../images/proof.jpg" download target = "_blank" class= "text-decoration-none"><i class= "fa fa-download"></i>Download proof</label></a>
+                                                
+                                                <div class="row justify-content-center text-center">
+                                                    <div class="col-md-4">
+                                                        
+                                                        <a align ="center" href = "#proof" data-bs-toggle ="modal" style= "max-height: 400px"><img src="../images/proof.jpg" alt="proof of payment" class= "img-fluid"></a>
+                                                       
+                                                        
+                                                
 
-                   
-                    
-                
-                </div>
-            
-            </div>
-          
-        </div>
-        
+                                                    
+                                                    </div>
+
+                                                </div>
+                                          
+                                                
+                                            
+                                            </div>
+                           
+                                        </div>
+
+
+                                    </form>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="release">
+
+                        </div>
+                    </div>  
+                </div>           
+            </div> 
+        </div> 
     </div>
+   
+
 
     </form>
    
@@ -205,11 +404,250 @@
         include ('services.php');
     
     ?>
-    
+    <!--modal-payment-->
+ 
+        <div class="modal fade" id = "decline-proof" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-danger ">
+                    <div class="modal-header bg-danger bg-transparent ">
+                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Declining payment?</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        <div class="row mt-2">
+                            <form action="" method = "POST">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="dname">Requestor Name</label>
+                                        <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
+
+                                    </div>
+                           
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-5">
+                                        <label for="contac">Contact Number</label>
+                                        <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="emails" >Email Address</label>
+                                        <input id = "emails" type="text" class="form-control" value = "juanDelaC@gmail.com" readonly>
+                                        
+                                    
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="decreason" >Decline Reason</label>
+                                        <select name="" id="decreason" class= "form-control">
+                                            <option value="">Insufficient payment</option>
+                                            <option value="">Invalid proof sent</option>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                        <label for="remarks" >Remarks</label>
+                                        <div class="col-md-11">
+                                            <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <label for="floatingTextarea2">Remarks here (max 10 words)</label>
+                                                
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                                <div class="row mt-2">
+                                    <label for="remarks" >Mode of delivery <i class= "fa fa-envelope"></i></label>
+                                    <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    SMS
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    E-mail
+                                                </label>  
+                                            </div>
+                              
+
+                                    </div>
+                                    
+                                </div>
+                                <div class="row justify-content-center" align = "center">
+                                    
+                                    <div class="col-mx-6">
+                                        <button href ="#dec-val" type = "button" class="btn btn-success rounded-circle" data-bs-dismiss ="modal" data-bs-toggle= "modal" >
+                                            <i class= 'fa fa-paper-plane py-1'></i>
+                                        </button>
+                                        <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times"></i>
+                                        </button>
+                                
+                                    </div>
+                                    
+                                </div>  
+                            </form>
+
+                        </div>
+                      
+                
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id = "proof" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-info ">
+                    <div class="modal-header bg-danger bg-transparent ">
+                        <h5 class="modal-title" >&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Proof of payment</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white" align = "center">
+                            <img src="../images/proof.jpg" alt="">
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id = "approve-proof" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-success ">
+                    <div class="modal-header bg-success  ">
+                        <h5 class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Accept payment?</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        
+                        <div class="row mt-2">
+                            <form action="" method = "POST">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="dname">Requestor Name</label>
+                                        <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
+
+                                    </div>
+                           
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-5">
+                                        <label for="contac">Contact Number</label>
+                                        <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
+                   
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="emails" >Email Address</label>
+                                        <input id = "emails" type="text" class="form-control" value = "juanDelaC@gmail.com" readonly>
+                                        
+                                    
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                        <label for="remarks" >Remarks</label>
+                                        <div class="col-md-11">
+                                            <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <label for="floatingTextarea2">Remarks here (max 10 words)</label>
+                                                
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                                <div class="row mt-2">
+                                    <label for="remarks" >Mode of delivery <i class= "fa fa-envelope"></i></label>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="sms">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                SMS
+                                            </label>
+                                            </div>
+                                            <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="em" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                E-mail
+                                            </label>
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Walk-in
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                    
+                                </div>
+                                <div class="row justify-content-center" align = "center">
+                                    
+                                    <div class="col-mx-6">
+                                        <button href ="#dec-val" type = "button" class="btn btn-success rounded-circle" data-bs-dismiss ="modal" data-bs-toggle= "modal" >
+                                            <i class= 'fa fa-paper-plane py-1'></i>
+                                        </button>
+                                        <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times"></i>
+                                        </button>
+                                
+                                    </div>
+                                    
+                                </div>  
+                            </form>
+
+                        </div>
+                      
+                
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id = "dec-val" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-danger ">
+                    <div class="modal-header bg-danger bg-transparent ">
+                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                       
+                        <div class="row">
+                            <p class = "fs-4 text-center">You are about to decline a proof of payment, do you wish to proceed sending decline message?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
+                        </div>
+                        <div class="row justify-content-center" align = "center">
+                            <form method = "POST" action = "#">
+                                <button type = "button" class="btn btn-success rounded-circle" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                    <i class= 'fa fa-check '></i>
+                                </button>
+                                <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                    <i class= "fa fa-times"></i>
+                                </button>
+                            </form>
+                        </div>
+                
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    <!--end-payments-->
+
     <div class="modal fade" id = "delete-cert" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger ">
-                    <div class="modal-header bg-danger white ">
+                    <div class="modal-header bg-danger bg-transparent ">
                         <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -242,7 +680,106 @@
                 </div>
             </div>
         </div>
-    
+<form method = "POST" action = "#">
+
+<div class="modal fade" id = "walk-in" tab-idndex = "-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content g-0 blue" >
+            <div class="modal-header blue white ">
+                <h5 class="modal-title" id="delete">&nbsp;<i class = "far fa-copy"></i>&nbsp;&nbsp;Walk in Certification</h5>
+                
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body py-4 bg-white">
+                <div class="row ">
+                    <div class="col-md-4">
+                        
+                        <label for="ctype"class="fs-6 fw-bold">Certification Type</label>
+                        <div class="d-flex">
+                            <select class= "select form-control" name="" id="ctype">
+                                <option  selected>Avaiable certifications</option>
+                                <option value="gcash">Employment</option>
+                                <option value="cash">Indigency</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-4">
+                        
+                        <label for="rname"class="fs-6 fw-bold">Certification Fee</label>
+                        <div class="d-flex">
+                            <input type="text" class="form-control me-2 w-50" id="rname" value  = "20.00" readonly>
+                            <div class="fs-5">
+                                PHP
+                            </div>
+                        </div>
+                        
+                    </div>
+                  
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="rname"class="fs-6 fw-bold">Requestor Name</label>
+                        <input type="text" class="form-control" id="rname" placeholder ="e.g Juan Dela Cruz">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="purp" class= "fs-6 fw-bold">Business name 
+                            <small class="text-muted">(If business related)</small> </label>
+                        <input type="text" class="form-control" id="rname" placeholder ="e.g Manong Store"> 
+                   </div>
+                   
+        
+                </div>
+               <div class="row">
+                   <div class="col-md-6">
+                        <label for="purp" class= "fs-6 fw-bold">Purposes</label>
+                            <select class= "select form-control" name="" id="purp">
+                                <option  selected>Purposes</option>
+                                <option value="ent">For entertainment</option>
+                                <option value="med">For medical reasons</option>
+                            </select>
+                   </div>
+                   <div class="col-md-6">
+                        <label for="pmethod"class= "fs-6 fw-bold">Mode of Payment</label>
+                        <select class= "select form-control" name="" id="pmethod">
+                            <option  selected>Modes of payment</option>
+                            <option value="gcash">G-cash</option>
+                            <option value="cash">Cash</option>
+                        </select>
+                    </div>
+                 
+               </div>
+               <div class="col-md-6">
+                        <label for="pmethod"class= "fs-6 fw-bold">Status</label>
+                        <select class= "select form-control" name="" id="pmethod">
+                            <option  selected>Status of certification</option>
+                            <option value="gcash">Settled</option>
+                            <option value="cash">Unsettled</option>
+                            <option value="cash">Dismissed</option>
+                        </select>
+                    </div>
+        
+            </div>
+            <div class="modal-footer py-0">
+                        <button type = "submit" class="btn btn-success rounded"  name = "Submit" value ="Submit">
+                            Submit
+                        </button>
+                        <button type = "button" class="btn btn-danger rounded" data-bs-dismiss ="modal" role  ="button"  name = "Cancel" value ="Cancel">
+                            Discard                                    
+                        </button>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function walkin(){
+        document.getElementId('sms').disabled = true;
+        document.getElementId('em').disabled = true;
+        
+    }
+
+</script>
 
 </body>
 </html>

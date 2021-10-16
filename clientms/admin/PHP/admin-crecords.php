@@ -175,7 +175,7 @@
                                                 <td scope="col" style = "text-align: center">
                                                 
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="" href ="temp-cert.php"class="btn btng btn-primary"><i class = "fa fa-edit"></i></a>
+                                                            <a type="" href ="edit-cert-record.php"class="btn btng btn-primary"><i class = "fa fa-edit"></i></a>
                                                         </div>
                                                     
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
