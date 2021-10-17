@@ -144,7 +144,7 @@
     <form action="edit-cert-temp.php"method ="POST">
         <div class="container-fluid mb-3 ms-1 mx-auto px-5">
           <div class="row mx-1  py-2">
-            <div class="col-xl-6 mx-auto shadow-sm  rounded-top white">
+            <div class="col-xl-5 mx-auto shadow-sm  rounded-top white">
               <div class="row ">
                 <div class="fs-6 text-center mt-3"  style= "background: #012f6e">
                   <span class ="white">
@@ -159,10 +159,11 @@
                   <div class="row gx-3 gy-1 px-5">
                     <label for="cname" class= "black fw-bold">Request Name</label>
                     <input id = "cname" class ="form-control"type="text" placeholder = "Requestor Name" name= "cnrame">
-                    <label for="cname" class= "black fw-bold">Payment Method</label>
+                    <label for="cname" class= "black fw-bold">Status</label>
                     <select id = "cname" class ="form-control" name= "cmeth">
-                        <option name="" id="">Cash</option>
-                        <option name="" id="">G-cash</option>
+                        <option name="" id="">Settled</option>
+                        <option name="" id="">Unsettled</option>
+                        <option name="" id="">Cancelled</option>
                     </select>
                     <label for="purp" class= "black fw-bold">Purpose</label>
                     <select id = "purp" class ="form-control" name= "cmeth">

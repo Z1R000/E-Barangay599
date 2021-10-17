@@ -5,7 +5,9 @@
     include('includes/dbconnection.php');
     if (strlen($_SESSION['clientmsaid']==0)) {
     header('location:logout.php');
-    } 
+    }else{
+
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -407,6 +409,6 @@
                 </div>
             </div>
 
-    
+    <?php } ?>
 </body>
 </html>

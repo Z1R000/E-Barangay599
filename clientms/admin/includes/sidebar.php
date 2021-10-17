@@ -49,7 +49,7 @@
             padding-right: 1rem;
         }
         
-        @media (max-width:576px){
+        @media (max-width:1197px){
                 .banner{
                     display:none;
                 }

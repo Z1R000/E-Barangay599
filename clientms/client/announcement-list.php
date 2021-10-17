@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
-include('includes/dbconnection.php');
+include ('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsuid']==0)) {
   header('location:logout.php');
   } else{
@@ -34,7 +34,6 @@ if (strlen($_SESSION['clientmsuid']==0)) {
         element.addEventListener('click', function (e) {
         let nextEl = element.nextElementSibling;
         let parentEl  = element.parentElement;	
-
         if(nextEl) {
             e.preventDefault();	
             let mycollapse = new bootstrap.Collapse(nextEl);
@@ -70,8 +69,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
     background-color: white;
     overflow-x:auto;
     }
-
-             
+        
     </style>
 
 </head>
@@ -123,8 +121,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                                 <h1 class='testfont' style='float: left; margin:25px;    color: #021f4e;'>Announcement</h1>";
 								$sDate = $row->announcementDate;
 								$eDate = $row->endDate;
-                            
-
+    
 						?>
                         <h4 class="testfont" style="float: right; font-family: Segoe UI; margin: 25px; color: #021f4e; text-align: justify;">
                             For <?php  echo date('l, j F Y - h:i A', strtotime($sDate));?> <br> To <?php  echo date('l, j F Y - h:i A', strtotime($eDate));?>
