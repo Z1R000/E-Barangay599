@@ -207,7 +207,7 @@
                                 <div class="row justify-content-center" align = "center">
                                     
                                     <div class="col-mx-6">
-                                        <button href ="#dec-val" type = "button" class="btn btn-success rounded-circle" data-bs-dismiss ="modal" data-bs-toggle= "modal" >
+                                        <button href ="#" type = "button" class="btn btn-success rounded-circle" data-bs-dismiss ="modal" data-bs-toggle= "modal" >
                                             <i class= 'fa fa-paper-plane py-1'></i>
                                         </button>
                                         <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">

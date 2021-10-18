@@ -23,7 +23,7 @@
                                                         <th style = "text-align: left;">Service Status</th>
                                                         <th style = "text-align: left;">Requestor Name</th>
                                                         <th style = "text-align: left; ">Requested Service </th>
-                                                        <th style = "text-align: left; ">Mode of payment</th>
+                                                       
                                                         <th style = "text-align: left;;">Service Fee</th>
                                                         <th style = "text-align: left;;">Date recorded</th>
 
@@ -37,7 +37,7 @@
                                                         <td scope="col" style = "text-align: left">On-going</td>
                                                         <td scope="col" style = "text-align: left">Tobirama Uchiha</td>
                                                         <td scope="col" style = "text-align: left">Drug Seminar</td>
-                                                        <td scope="col" style = "text-align: left">G-cash</td>
+                                                        
                                                         <td style = "text-align: left;">40.00 PHP</td>
                                                         <td scope="col" style = "text-align: left">10/16/2021,21:12:08</td>
                                                                        
@@ -447,7 +447,7 @@
                                 <div class="row justify-content-center" align = "center">
                                     
                                     <div class="col-mx-6">
-                                        <button href ="#dec-val" type = "button" class="btn btn-success rounded-circle" data-bs-dismiss ="modal" data-bs-toggle= "modal" >
+                                        <button href ="#" type = "button" class="btn btn-success rounded-circle" data-bs-dismiss ="modal"  >
                                             <i class= 'fa fa-paper-plane py-1'></i>
                                         </button>
                                         <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">

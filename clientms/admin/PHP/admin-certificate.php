@@ -100,8 +100,6 @@
 
     ?> 
      <!--breadcrumb-->
- 
-
             <div class="d-flex align-items-center">
                 <div class="container mx-5 mt-3">
                     <nav aria-label="breadcrumb">
@@ -127,11 +125,11 @@
             <div class="row gx-4 gy-2">
                 <div class="mx-auto col-xl-12  ">
                     <div class="row g-0  shadow-sm rounded-top border" style= "background: #012f4e; color: white">
-                        <div class="col-xl-6 py-2 px-2  ">
+                        <div class="col-xl-5 py-2 px-2  ">
                             <nav class="nav nav-pills flex-column  flex-sm-row">
                                 <a class="flex-sm-fill  text-sm-center nav-link active fs-5 white" aria-current="page" href="#certlist" data-bs-toggle = "tab">Certificates List</a>
                                 <a class="flex-sm-fill text-sm-center nav-link fs-5 white" href="#crecords" data-bs-toggle = "tab">Certification Records</a>
-                                <a class="flex-sm-fill text-sm-center nav-link fs-5 white" href="#holding"data-bs-toggle="tab">Payments</a>
+                       
                             
                             </nav>
 
@@ -190,6 +188,8 @@
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                                     <a type="" href ="edit-cert.php"class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
                                                                 </div>
+                                                                   
+                                                               
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                                     <a type="button" href ="#delete-cert" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
                                                                 </div>
@@ -228,13 +228,13 @@
                                         <table class="table bg-white table-hover shadow-sm border "> 
                                             <thead>
                                                 <tr>
-                                                    <td scope = "col" colspan = 9 style ="background: #012f6e; color: white; text-align: center">Certification Records</td>
+                                                    <td scope = "col" colspan = 8 style ="background: #012f6e; color: white; text-align: center">Certification Records</td>
                                                 </tr>
                                                 <tr>
                                                     <th style = "text-align: left">BCN #</th>
                                                     <th style = "text-align: left">Status</th>
                                                     <th style = "text-align: left">Requestor's Name</th>
-                                                    <th style = "text-align: left">Payment Method</th>
+                                                   
                                                     <th style = "text-align: left">Purpose</th>
                                                     <th style = "text-align: left">Requested Certificate</th>
                                                     <th style = "text-align: left">Certificate fee</th>
@@ -248,7 +248,7 @@
                                                     <td scope="col" style = "text-align: left">015-22</td>
                                                     <td scope="col" style = "text-align: left">On-Going</td>
                                                     <td scope="col" style = "text-align: left">ekoc omsim</td>
-                                                    <td scope="col" style = "text-align: left">g-cash</td>
+                                                   
                                                     <td scope="col" style = "text-align: left">For employment</td>
                                                     <td scope="col" style = "text-align: left">Barangay Clearance</td>
                                                     <td scope="col" style = "text-align: left">30 PHP</td>
@@ -262,6 +262,9 @@
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                                 <a type="" href ="temp-cert.php"class="btn btng btn-success"><i class = "fa fa-print"></i></a>
                                                             </div>
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn btng btn-info"><i class = "fa fa-paper-plane white"></i></a>
+                                                                </div> 
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                                 <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
                                                             </div>
@@ -285,10 +288,7 @@
                                             <td>
                                                 Requested Certificate
                                             </td>
-                                            <td>
-                                                Mode of payment
-                                            </td>
-                                            
+                                          
                                             
                                             <td>
                                                 Proof of payment
@@ -727,6 +727,7 @@
                             <small class="text-muted">(If business related)</small> </label>
                         <input type="text" class="form-control" id="rname" placeholder ="e.g Manong Store"> 
                    </div>
+                 
                    
         
                 </div>
@@ -740,13 +741,15 @@
                             </select>
                    </div>
                    <div class="col-md-6">
-                        <label for="pmethod"class= "fs-6 fw-bold">Mode of Payment</label>
-                        <select class= "select form-control" name="" id="pmethod">
-                            <option  selected>Modes of payment</option>
-                            <option value="gcash">G-cash</option>
-                            <option value="cash">Cash</option>
-                        </select>
+                        <label for="cap" class= "fs-6 fw-bold">Capital</label>
+                            <select class= "select form-control" name="" id="cap">
+                                <option  selected>< 10,000 </option>
+                                <option value="ent">>10, 000</option>
+                                <option value="med">>100,000</option>
+                            </select>
+                      
                     </div>
+           
                  
                </div>
                <div class="col-md-6">
@@ -772,6 +775,113 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id = "approve-transac" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-success ">
+                    <div class="modal-header bg-success  ">
+                        <h5 class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Send Proof of transaction</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        
+                        <div class="row mt-2">
+                            <form action="" method = "POST">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="dname">Requestor Name</label>
+                                        <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
+
+                                    </div>
+                           
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-5">
+                                        <label for="contac">Contact Number</label>
+                                        <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
+                   
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="emails" >Email Address</label>
+                                        <input id = "emails" type="text" class="form-control" value = "juanDelaC@gmail.com" readonly>
+                                        
+                                    
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-5">
+                                        <label for="ars">Acquired rental/service</label>
+                                        <input id = "crs" type="text" class="form-control" value = "Marriage" readonly>
+                   
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="emails" >Payment Status</label>
+                                        <input id = "emails" type="text" class="form-control" value = "Settled + amount payed" readonly>
+                                       
+                                    
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                        <label for="remarks" >Remarks</label>
+                                        <div class="col-md-11">
+                                            <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <label for="floatingTextarea2">Remarks here (max 10 words)</label>
+                                                
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                                <div class="row mt-2">
+                                    <label for="remarks" >Mode of delivery <i class= "fa fa-envelope"></i></label>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="sms">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                SMS
+                                            </label>
+                                            </div>
+                                            <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="em" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                E-mail
+                                            </label>
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Walk-in
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                    
+                                </div>
+                                <div class="row justify-content-center" align = "center">
+                                    
+                                    <div class="col-mx-6">
+                                        <button href ="#" type = "button" class="btn btn-success rounded-circle" data-bs-dismiss ="modal"  >
+                                            <i class= 'fa fa-paper-plane py-1'></i>
+                                        </button>
+                                        <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times"></i>
+                                        </button>
+                                
+                                    </div>
+                                    
+                                </div>  
+                            </form>
+
+                        </div>
+                      
+                
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
 <script>
     function walkin(){
         document.getElementId('sms').disabled = true;

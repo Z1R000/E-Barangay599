@@ -83,8 +83,9 @@ body{
 
 
 #page-content-wrapper {
-    height: auto;
+    height: 100%;
     overflow-x:hidden;
+
     margin-left:15rem;
     min-width: 100vw;
     -webkit-transition: margin 0.25s ease-out;

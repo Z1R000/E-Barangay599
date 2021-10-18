@@ -17,13 +17,13 @@
                                             <table class="table bg-white border border-secondary table-hover "> 
                                                 <thead>
                                                     <tr>
-                                                        <td scope = "col" colspan = 8 style ="background: #012f6e; color: white; text-align: center">Rental Records</td>
+                                                        <td scope = "col" colspan = 7 style ="background: #012f6e; color: white; text-align: center">Rental Records</td>
                                                     </tr>
                                                     <tr>
                                                         <th style = "text-align: left;">Rental Status</th>
                                                         <th style = "text-align: left;">Requestor Name</th>
                                                         <th style = "text-align: left; ">Requested Property </th>
-                                                        <th style = "text-align: left; ">Mode of payment</th>
+                                         
                                                         <th style = "text-align: left;;">Date of rental</th>
                                                         <th style = "text-align: left;">Rental Duration</th>
                                                         <th style = "text-align: left;">Rate</th>
@@ -41,7 +41,7 @@
                                                         <td scope="col" style = "text-align: left">On-going</td>
                                                         <td scope="col" style = "text-align: left">Tobirama Uchiha</td>
                                                         <td scope="col" style = "text-align: left">Barangay van</td>
-                                                        <td scope="col" style = "text-align: left">G-cash</td>
+                                         
                                                         <td scope="col" style = "text-align: left">10/16/2021,21:12:08</td>
                                                         <td scope="col" style = "text-align: left">2 hrs</td>
                                                         <td style = "text-align: left;">40.00 PHP</td>
@@ -112,14 +112,15 @@
                           
                         </div>
                         <div class="row">
-                            <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Mode of payment</label>
-                                <select name="" class="form-control" id="status">
-                                    <option value="avail">G-cash</option>
-                                    <option value="noavail">Cash</option>
-                               
-                                </select>
+                        <div class="col-xl-6" >
+                                <label for="prate" class="fs-5 fw-bold">Rental Status</label>
+                                    <select name="" class="form-control" id="status">
+                                        <option value="avail">On going</option>
+                                        <option value="noavail">Settled</option>
+                                
+                                    </select>
                             </div>
+                          
                             <div class="col-xl-6" >
                                 <label for="prate" class="fs-5 fw-bold">Date today</label>
                                 <input type="text"  id = "date" class="form-control me-2" name ="date" readonly>
@@ -130,14 +131,7 @@
                             
                         </div>
                         <div class="row">
-                            <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Rental Status</label>
-                                    <select name="" class="form-control" id="status">
-                                        <option value="avail">On going</option>
-                                        <option value="noavail">Settled</option>
-                                
-                                    </select>
-                            </div>
+                         
                         </div>
                        
                
@@ -465,7 +459,7 @@
                                 <div class="row justify-content-center" align = "center">
                                     
                                     <div class="col-mx-6">
-                                        <button href ="#dec-val" type = "button" class="btn btn-success rounded-circle" data-bs-dismiss ="modal" data-bs-toggle= "modal" >
+                                        <button href ="#" type = "button" class="btn btn-success rounded-circle" data-bs-dismiss ="modal"  >
                                             <i class= 'fa fa-paper-plane py-1'></i>
                                         </button>
                                         <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">

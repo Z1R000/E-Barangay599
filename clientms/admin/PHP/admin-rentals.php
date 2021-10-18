@@ -103,11 +103,11 @@
                 <div class="row gx-4 gy-2">
                     <div class="mx-auto col-xl-12 ">
                         <div class="row g-0  rounded-top border" style= "background: #012f4e">
-                            <div class="col-xl-6 py-2 px-2">
+                            <div class="col-xl-5 py-2 px-2">
                                 <nav class="nav nav-pills flex-column  flex-sm-row">
                                     <a class="flex-sm-fill  text-sm-center nav-link fs-5 active white"  href="#properties" data-bs-toggle = "tab">Rental Properties </a>
                                     <a class="flex-sm-fill text-sm-center nav-link  fs-5 white" data-bs-toggle = "tab" href="#rentalrecords">Rental Records</a>
-                                    <a class="flex-sm-fill text-sm-center nav-link fs-5 white" data-bs-toggle = "tab" href="#paymentrecs">Payment Logs</a>
+                                
                                 </nav>
                             </div>
                         </div>
