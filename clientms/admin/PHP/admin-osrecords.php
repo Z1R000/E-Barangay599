@@ -101,33 +101,23 @@
                          
                         </div>
                         <div class="row">
-                            <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Mode of payment</label>
-                                <select name="" class="form-control" id="status">
-                                    <option value="avail">G-cash</option>
-                                    <option value="noavail">Cash</option>
-                                </select>
-                            </div>
+                           
                             <div class="col-xl-6" >
                                 <label for="prate" class="fs-5 fw-bold">Date today</label>
                                 <input type="text"  id = "date" class="form-control me-2" name ="date" readonly>
                               
                             </div>
-                        </div>
-                        <div class="row">
-                            
-                        </div>
-                        <div class="row">
                             <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Service Status</label>
+                            <label for="prate" class="fs-5 fw-bold">Service Status</label>
                                     <select name="" class="form-control" id="status">
                                         <option value="avail">On going</option>
                                         <option value="noavail">Settled</option>
                                 
                                     </select>
+                            
                             </div>
                         </div>
-                       
+                    
                
                  
 
@@ -185,33 +175,23 @@
                          
                         </div>
                         <div class="row">
-                            <div class="col-xl-6" >
-                                <label for="mop" class="fs-5 fw-bold">Mode of payment</label>
-                                <select name="" class="form-control" id="mop">
-                                    <option value="avail">G-cash</option>
-                                    <option value="noavail">Cash</option>
-                                </select>
-                            </div>
+                           
                             <div class="col-xl-6" >
                                 <label for="prate" class="fs-5 fw-bold">Date today</label>
                                 <input type="text"  id = "date" class="form-control me-2" name ="date" readonly>
                               
                             </div>
-                        </div>
-                        <div class="row">
-                            
-                        </div>
-                        <div class="row">
                             <div class="col-xl-6" >
-                                <label for="ss" class="fs-5 fw-bold">Service Status</label>
+                            <label for="ss" class="fs-5 fw-bold">Service Status</label>
                                     <select name="" class="form-control" id="ss">
                                         <option value="avail">On going</option>
                                         <option value="noavail">Settled</option>
                                 
                                     </select>
-                            </div>
+                              
+                              </div>
                         </div>
-                       
+              
                
                  
 
@@ -273,17 +253,20 @@
                          
                         </div>
                         <div class="row">
-                            <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Mode of payment</label>
-                                <select name="" class="form-control" id="status" disabled>
-                                    <option value="avail">G-cash</option>
-                                    <option value="noavail">Cash</option>
-                                </select>
-                            </div>
+                            
                             <div class="col-xl-6" >
                                 <label for="prate" class="fs-5 fw-bold">Date today</label>
                                 <input type="text"  id = "date" class="form-control me-2" name ="date" readonly>
                               
+                            </div>
+                            <div class="col-xl-6" >
+                            <label for="prate" class="fs-5 fw-bold">Service Status</label>
+                                    <select name="" class="form-control" id="status" disabled>
+                                        <option value="avail">On going</option>
+                                        <option value="noavail">Settled</option>
+                                
+                                    </select>
+                                
                             </div>
                         </div>
                         <div class="row">
@@ -291,12 +274,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Service Status</label>
-                                    <select name="" class="form-control" id="status" disabled>
-                                        <option value="avail">On going</option>
-                                        <option value="noavail">Settled</option>
-                                
-                                    </select>
+                             
                             </div>
                         </div>
                        

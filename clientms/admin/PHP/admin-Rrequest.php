@@ -24,18 +24,24 @@
 <body>
     <?php include('../includes/sidebar.php');
     ?>
-        <div class="container mx-5">
-                <nav aria-label="breadcrumb">
+           <div class="d-flex align-items-center">
+                <div class="container mx-5 mt-3">
                     <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-book text-muted"></i></a>&nbsp;Requests</li>
-                            <li class="breadcrumb-item active"><a href="#"><i class="fa fa-list text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
-                        </ol>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#service-choice" data-bs-toggle= "modal" role ="button"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
+                                
+                            
+                                <li class="breadcrumb-item active"><a href="#"><i class="fa fa-list text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
+                            </ol>
+                        </nav>
                     </nav>
-                </nav>
+                </div>
             </div>
-
+        </div>
+    </nav>
+        
 
             <div class="container-fluid mb-2">
                         <div class = "row">
