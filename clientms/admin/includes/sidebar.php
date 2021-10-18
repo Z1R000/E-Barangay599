@@ -113,9 +113,9 @@
                         <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text fw-bold nav-link fs-6">
                             <i class="fas fa-book my-0 me-2"></i>Request</a>
                         <ul class="submenu collapse">
-                            <li><a class="nav-link fs-6" href="admin-Crequest.php">Certification Request </a></li>
-                            <li><a class="nav-link fs-6" href="admin-Rrequest.php">Rental Request</a></li>
-                            <li><a class="nav-link fs-6" href="admin-OSrequest.php">Other Service Request </a></li>
+                            <li><a class="nav-link fs-6" href="admin-cert-request.php">Certification Request </a></li>
+                            <li><a class="nav-link fs-6" href="admin-rental-request.php">Rental Request</a></li>
+                            <li><a class="nav-link fs-6" href="admin-other-request.php">Other Service Request </a></li>
                         </ul>
                     </li>
                     
@@ -127,8 +127,8 @@
                             class="fas fa-comment-dots me-2"></i>Announcements</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-6"><i
-                            class="fas fa-cog me-2"></i>Barangay Content</a>
+                        <a href="admin-e-content.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-6"><i
+                            class="fas fa-cog me-1"></i>E-barangay</a>
                     </li>
                   
                   

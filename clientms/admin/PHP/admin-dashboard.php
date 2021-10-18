@@ -99,7 +99,7 @@
                 <div class="row g-3">
                     <div class="row g-3 px-2"  >
                         <div class="row g-3 my-2">
-                            <div class="col-md-3 left rounded border shadow-md bg-primary">
+                            <div class="col-md-3 left rounded border shadow-lg bg-primary">
                                 <div class="row g-3">
                                     <div class="p-3 bg-primary  d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
@@ -124,7 +124,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3 left rounded border shadow-md blue">
+                            <div class="col-md-3 left rounded border shadow-lg blue">
                                 <div class="row g-3">
                                     <div class="p-3 blue d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
@@ -148,7 +148,7 @@
                                     <a class = "text-inner text-decoration-none" href = "admin-rrequest.php"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
                                 </div>
                             </div>
-                            <div class="col-md-3 rounded left border shadow-md bg-success">
+                            <div class="col-md-3 rounded left border shadow-lg bg-success">
                                 <div class="row g-3">
                                     <div class="p-3 bg-success d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
@@ -182,7 +182,7 @@
                     </div>
                     <div class="row g-3 "  >
                         <div class="row g-3 my-1">
-                            <div class="col-md-3 left rounded border shadow-md bg-warning">
+                            <div class="col-md-3 left rounded border shadow-lg  bg-warning">
                                 <div class="row g-3">
                                     <div class="p-3 bg-warning  d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
@@ -222,7 +222,7 @@
                                     <a class = "text-inner text-decoration-none" href = "#"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
                                 </div>
                             </div>
-                            <div class="col-md-3 rounded left border shadow-md minor">
+                            <div class="col-md-3 rounded left border shadow-lg minor">
                                 <div class="row g-3">
                                     <div class="p-3 minor d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
@@ -264,7 +264,7 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-md-3  rounded border left shadow-md voters">
+                            <div class="col-md-3  rounded border left shadow-lg voters">
                                 <div class="row g-3">
                                     <div class="p-3 voters  d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
@@ -308,7 +308,7 @@
                     </div>
                     <div class="row g-3 "  >
                         <div class="row g-3 my-1">
-                            <div class="col-md-3 left rounded border shadow-md bg-info">
+                            <div class="col-md-3 left rounded border shadow-lg bg-info">
                                 <div class="row g-3">
                                     <div class="p-3 bg-info  d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
@@ -343,7 +343,7 @@
                                     <a class = "text-inner text-decoration-none" href = "#"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
                                 </div>
                             </div>
-                            <div class="col-md-3 rounded left border shadow-md bg-danger">
+                            <div class="col-md-3 rounded left border shadow-lg bg-danger">
                                 <div class="row g-3">
                                     <div class="p-3 bg-danger d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
@@ -380,7 +380,7 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-md-3 left rounded border shadow-md officials">
+                            <div class="col-md-3 left rounded border shadow-lg officials">
                                 <div class="row g-3">
                                     <div class="p-3 officials  d-flex justify-content-around align-items-center ">
                                         <div class = "text-inner">
