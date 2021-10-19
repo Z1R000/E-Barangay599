@@ -39,14 +39,12 @@ if(isset($_POST['login']))
 
 
 	<link rel="icon" href="images/Barangay.png" type="image/icon type">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 	
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
 	
 	<style type = "text/css">
 		*{
@@ -70,6 +68,7 @@ if(isset($_POST['login']))
 			box-shadow: 5px 10px 10px #00000f; 
 		
 			border-radius: 20px;
+			
 		
 			
 			
@@ -251,17 +250,18 @@ if(isset($_POST['login']))
 
 </head>
 <body>
-	<div align = center>
-	<div class ="container">
+	<?php include('navbar.php');?>
+	<div class ="container  mx-auto text-center">
 		<div class = "container-sm" align = center>
 			<img src = "../images/admin-logo.png" class = "img-fluid">
 			
 			<!--<h4>Barangay 599, Zone 59, District VI</h4>-->
 			<h4>E-barangay - 599</h4>
 			<h5>Admin Login<h5>
+		</div>
+		<div class="row">
 			
 		</div>
-
 		<form id="login" method="POST" name="login">
 			<div class="mb-3">
 				<div class="input-group mb-3">
@@ -277,6 +277,7 @@ if(isset($_POST['login']))
 					</svg></span>
 					<input type="password" class="form-control shadow-none" placeholder="Password" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="password" required="true">
 				</div>
+				<p><a href="../../index.php" class= "fs-6"><i>Home</i></a></p>
 				<p>Forgot password? <a href="forgot-password.php"><i>Click here</i></a></p>
 				<div align = "center">
 					<input class = "btn-primary" type="submit" onclick="myFunction()" value="LOGIN" name="login" class="sub">
@@ -284,7 +285,6 @@ if(isset($_POST['login']))
 		</form>
 		<br>
 		<p>Disclaimer: This website uses cookies </p>
-	</div>
 	</div>
 	
 </body>

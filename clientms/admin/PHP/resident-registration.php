@@ -133,15 +133,19 @@
                             
                                 <label for="rtype" class="col-form-label fw-bold fs-6">Resident Type</label>
                                     
-                                    <select class="form-select input-sm" name = "residenttype" aria-label="Default select example" required>
-                                        <option value='' disabled selected>--Select Resident Type--</option>
-                                        <option value="homeowner">Home Owner</option>
-                                        <option value="caretaker">Care taker</option>
-                                        <option value="rental">Rental/Boarder</option>
-                                        <option value="wrelative">Living with Relatives</option>
-                                    </select>
+                                <select class="form-select input-sm" aria-label="Default select example" id="test"onchange="showDiv('hidden_div', this)">
+                                <option value='' disabled selected>--Select Resident Type--</option>
+                                <option value="homeowner">Home Owner</option>
+                                <option value="caretaker">Care taker</option>
+                                <option value="rental">Rental/Boarder</option>
+                                <option value="wrelative">Living with Relatives</option>
+                            </select>
                         
                         
+                        </div>
+                        <div class="row-g-0" id="hidden_div">
+                            <label class="col-form-label fw-bold">Home Owner Name</label>
+                            <input type="text" class="form-control" placeholder="Home Owner Name:" id="residenttype" required />
                         </div>
                     
                         <div class="row g-0 ">
@@ -520,7 +524,32 @@
             </div>
         </div>
     </div>-->
-            
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js">
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("select").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+    </script>
+
+<script type="text/javascript">
+    function showDiv(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'rental' ? 'block' : 'none';
+    }
+</script>
+
         
                 
             
