@@ -246,7 +246,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                             <label for="rtype" class="col-form-label fw-bold fs-6">Resident Type</label>
 
-                            <select class="form-select input-sm" aria-label="Default select example" id="test"onchange="showDiv('hidden_div', this)" required>
+                            <select class="form-select input-sm" aria-label="Default select example" id="test"onchange="showDiv('hidden_div', this)">
                                 <option value='' disabled selected>--Select Resident Type--</option>
                                 <option value="homeowner">Home Owner</option>
                                 <option value="caretaker">Care taker</option>
