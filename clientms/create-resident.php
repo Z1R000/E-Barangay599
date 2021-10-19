@@ -139,6 +139,10 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
             padding-right: 1rem;
         }
 
+        #hidden_div {
+            display: none;
+        }
+
         .box {
             padding: 10px;
             display: none;
@@ -186,6 +190,11 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
     </style>
 
 </head>
+<script type="text/javascript">
+    function showDiv(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'rental' ? 'block' : 'none';
+    }
+</script>
 
 <body>
     <div class="d-flex align-items-center">
@@ -237,7 +246,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                             <label for="rtype" class="col-form-label fw-bold fs-6">Resident Type</label>
 
-                            <select class="form-select input-sm" name="residenttype" aria-label="Default select example" required>
+                            <select class="form-select input-sm" aria-label="Default select example" id="test"onchange="showDiv('hidden_div', this)" required>
                                 <option value='' disabled selected>--Select Resident Type--</option>
                                 <option value="homeowner">Home Owner</option>
                                 <option value="caretaker">Care taker</option>
@@ -247,7 +256,10 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
 
                         </div>
-
+                        <div class="row-g-0" id="hidden_div">
+                            <label class="col-form-label fw-bold">Home Owner Name</label>
+                            <input type="text" class="form-control" placeholder="Home Owner Name:" id="residenttype" required />
+                        </div>
                         <div class="row g-0 ">
 
                             <label for="gend" class="col-form-label fw-bold">Gender</label>
@@ -416,10 +428,10 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                     <div class="row  gx-4 py-2 justify-content-start">
 
 
-                        
+
 
                         <div class="col-xl-6 g-0 border">
-                            <a href="index.php"  class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
+                            <a href="index.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
                         </div>
 
                         <div class="col-xl-6 g-0 border">
@@ -427,7 +439,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                         </div>
 
                     </div>
-                    
+
                 </div>
     </form>
 
