@@ -313,8 +313,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                 <thead class ="bg-light">
                                                     <tr class="bor">
                 
-                                                        <th class = "bor" style = "text-align: left">Status</th>
-                                                        <th class= "bor" style = "text-align: left">Payment Method</th>
+                                                        <th class = "bor" style = "text-align: left">BCN</th>
+                                                        <th class= "bor" style = "text-align: left">Status</th>
                                                         <th class = "bor" style = "text-align: left">Purpose</th>
                                                         <th class = "bor" style = "text-align: left">Requested Certificate</th>
                                                         <th class = "bor" style = "text-align: left">Certificate fee</th>
@@ -326,8 +326,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 
                                                 <tbody class= "table-hover">
                                                     <tr>
+                                                        <td class = "bor" scope="col" style = "text-align: left">102-22</td>
                                                         <td class = "bor" scope="col" style = "text-align: left">Settled</td>
-                                                        <td class = "bor" scope="col" style = "text-align: left">g-cash</td>
+                                         
                                                         <td class = "bor" scope="col" style = "text-align: left">For employment</td>
                                                         <td class = "bor" scope="col" style = "text-align: left">Barangay Clearance</td>
                                                         <td class = "bor" scope="col" style = "text-align: left">30 PHP</td>
@@ -367,8 +368,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 
                         
                                             <th style = "text-align: left; ">Requested Service/Rental</th>
-                                            <th style = "text-align: left; ">Mode of payment</th>
-                                            <th style = "text-align: left;;">Date of rental</th>
+                                            <th style = "text-align: left;">Date of rental</th>
                                             <th style = "text-align: left;">Duration</th>
                                             <th style = "text-align: left;">Rate</th>
                                             <th style = "text-align: left;">Status</th>
@@ -384,7 +384,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                         <tr>
                                           
                                             <td scope="col" style = "text-align: left">Barangay van</td>
-                                            <td scope="col" style = "text-align: left">G-cash</td>
                                             <td scope="col" style = "text-align: left">10-13-2021, 6:00am</td>
                                             <td scope="col" style = "text-align: left">2 hrs</td>
                                             <td style = "text-align: left;">40.00 PHP</td>
