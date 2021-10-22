@@ -1,4 +1,6 @@
+
 <div style="background-color: #021f4e;" id="sidebar-wrapper">
+
             
 <div class="sidebar-heading text-center py-1 second-text fs-5 fw-bold border-bottom">
              <br>Barangay 599 <br>E-barangay<br>
@@ -10,6 +12,7 @@
                 
                 
             </div>
+            
 
             <nav class="sidebar py-2 mb-4">
 
@@ -49,3 +52,4 @@
                 </ul>
             </nav>
         </div>
+        
