@@ -169,148 +169,160 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                 </div>
                 <div class="container-fluid px-4">
                     <div style="background-color: aliceblue;border-radius: 25px;border:1px solid black;padding: 25px;">
-                        <div class="graph-visual tables-main">
-
-                            <h1 class="testfont"> Certificate Request </h1>
-                            <div class="graph" style="border-radius: 15px;">
-                                <div class="form-body">
-                                    <form method="post" style="font-size:1.25em;">
-                                        <table style="width: 100%;">
-                                            <tr>
-                                                <th><span class="anothertestfont" style="color: #021f4e;">Choose Certificate</th>
-                                                <br>
-                                                <th><span style="color: #021f4e;"></th>
-                                                <th><span class="anothertestfont" style="color: #021f4e;">Certificate Price</th>
-
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <?php
-                                                    $sql = "SELECT ID, CertificateName, CertificatePrice from tblcertificate";
-                                                    $query = $dbh->prepare($sql);
-                                                    $query->execute();
-                                                    $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                                    if ($query->rowCount() > 0) {
-                                                        echo "<select  name='certid' id='certid' class='form-control select2 dropdownstyle' required='true' style='padding: 1px; font-size: 1em; width: 90%;'>
-													<option value=''>Choose Certificate</option>";
-                                                        foreach ($results as $row) {
-                                                            echo "<option value='$row->ID'>$row->CertificateName</option>";
-                                                        } ?>
-                                                </td>
-                                                <td style='color: black;'></td>
-                                                <td style='color: black;'>
-                                                <?php echo "$row->CertificatePrice</td>";
-
-                                                        echo "</select>";
-                                                    }
-                                                ?>
-                                                </td>
-
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <div class="1 2 3 4 9 10 11 12 13 14 15 16 17 18 101 102 103 104 105 box">
-
-                                                        <table>
-                                                            <tr>
-                                                                <td>Purpose:</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><select id="typeofuse">
-                                                                        <option value="100">-Choose-</option>
-                                                                        <option value="101">Personal Use</option>
-                                                                        <option value="102">Business Use</option>
-                                                                        <option value="103">Reference</option>
-                                                                        <option value="104">Financing</option>
-                                                                        <option value="105">Local Employment</option>
-                                                                    </select></td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                    <div class="5 6 7 8 102 box">
-
-                                                        <table style="width: 130%;">
-                                                            <tr>
-                                                                <td>Business Name:</td>
-                                                                <td>Business Address:</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><input type="text" style="width: 90%;"></td>
-                                                                <td><input type="text" style="width: 90%;"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><br></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Business Capital</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <input type="radio" id="10b" name="capital" value="6">
-                                                                    <label for="10b" style="color: black;">Php10,000-below</label><br>
-                                                                    <input type="radio" id="101" name="capital" value="7">
-                                                                    <label for="101" style="color: black;">Php10,001-Php100-000</label><br>
-                                                                    <input type="radio" id="10a" name="capital" value="8">
-                                                                    <label for="10a" style="color: black;">Php100,001-Above</label><br>
-                                                                </td>
-                                                            </tr>
-
-                                                        </table>
-                                                    </div>
-
-                                                </td>
-
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h3 class="testfont">Choose payment option:</h3>
-                                                    <select>
-
-                                                        <option disabled selected>-Choose payment option-</option>
-                                                        <option>Cash</option>
-                                                        <option>G-Cash</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-
-                                                <td><label>
-                                                        <br>
-                                                        <button type="submit" class="btn btn-default" name="submit" id="submit" style="color: white; background-color: #021f4e; border: 1px; width: 200%; border-radius:25px;">Create</button>
-                                                    </label></td>
-
-
-                                                <td style="color: black;"></td>
-                                                <td>
-
-                                                </td>
-                                            </tr>
-
-                                        </table>
-
-
-
-                                </div>
-
-                                </form>
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <label for="date" class="fw-bold fs-6">Date today</label>
+                                <input type="text" id="date" class="form-control" readonly>
                             </div>
                         </div>
 
+                        <div class="row g-3 ">
+                            <div class="col-md-6">
+
+                                <label for="rname" class="fs-6 fw-bold">Requestor Name</label>
+                                <input type="text" class="form-control" id="rname" placeholder="e.g Juan Dela Cruz">
+
+                            </div>
+                            <div class="col-md-6">
+                                <label for="purp" class="fs-6 fw-bold">Purposes</label>
+                                <select class="select form-control" name="" id="purp">
+                                    <option selected>Purposes</option>
+                                    <option value="ent">For entertainment</option>
+                                    <option value="med">For medical reasons</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-4">
+
+                                <label for="ctype" class="fs-6 fw-bold">Certification Type</label>
+                                <div class="d-flex">
+                                    <select class="select form-control" name="" id="ctype" onchange="showDiv('hidden_div',this)">
+                                        <option selected>--Avaiable certifications--</option>
+                                        <option value="emp">Employment</option>
+                                        <option value="ind">Indigency</option>
+                                        <option value="Business">Business</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="rname" class="fs-6 fw-bold">Certification Fee</label>
+                                <div class="d-flex">
+                                    <div class="input-group">
+                                        <button class="btn btn-secondary text-white" disabled>
+                                            ₱
+                                        </button>
+                                        <input type="text" class="form-control me-2 w-50" style="text-align: right;" id="rname" value="20.00" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="ctype" class="fs-6 fw-bold">Mode of Payment</label>
+                                <div class="d-flex">
+                                    <select class="select form-control" name="" id="mop" onchange="showDiv('hidden_div',this)">
+                                        <option selected>--Select--</option>
+                                        <option value="gc">G-Cash</option>
+                                        <option value="cash">Cash</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="row" id="hidden_div">
+
+                            <div class="col-md-6">
+                                <label for="purp" class="fs-6 fw-bold">Business name
+                                    <small class="text-muted">(If business related)</small> </label>
+                                <input type="text" class="form-control" id="rname" placeholder="e.g Manong Store">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="cap" class="fs-6 fw-bold">Capital</label>
+                                <select class="select form-control" name="" id="cap">
+                                    <option selected>
+                                        < 10,000 </option>
+                                    <option value="ent">>10, 000</option>
+                                    <option value="med">>100,000</option>
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+
                     </div>
-                    <!-- /#page-content-wrapper -->
+                    <div class="modal-footer py-0">
+                        <button type="submit" class="btn btn-success rounded" name="Submit" value="Submit">
+                            Submit
+                        </button>
+                        <button type="button" class="btn btn-danger rounded" data-bs-dismiss="modal" role="button" name="Cancel" value="Cancel">
+                            Discard
+                        </button>
+                        </form>
+                    </div>
+
                 </div>
+                <!-- /#page-content-wrapper -->
+            </div>
 
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-                <script>
-                    var el = document.getElementById("wrapper");
-                    var toggleButton = document.getElementById("menu-toggle");
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+            <script>
+                var el = document.getElementById("wrapper");
+                var toggleButton = document.getElementById("menu-toggle");
 
-                    toggleButton.onclick = function() {
-                        el.classList.toggle("toggled");
-                    };
-                </script>
+                toggleButton.onclick = function() {
+                    el.classList.toggle("toggled");
+                };
+            </script>
+            <script>
+                var today = new Date();
+                var mm = today.getMonth() + 1;
+                var dd = today.getDay();
+                var yy = today.getFullYear();
+
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+
+                var dtd = mm + '/' + dd + '/' + yy;
+                document.getElementById('date').value = dtd;
+
+                function walkin() {
+                    document.getElementId('sms').disabled = true;
+                    document.getElementId('em').disabled = true;
+
+                }
+            </script>
+            <script>
+                $(document).ready(function() {
+                    $("select").change(function() {
+                        $(this).find("option:selected").each(function() {
+                            var optionValue = $(this).attr("value");
+                            if (optionValue) {
+                                $(".box").not("." + optionValue).hide();
+                                $("." + optionValue).show();
+                            } else {
+                                $(".box").hide();
+                            }
+                        });
+                    }).change();
+                });
+            </script>
+            <script type="text/javascript">
+                function showDiv(divId, element) {
+                    document.getElementById(divId).style.display = element.value == 'Business' ? 'flex' : 'none';
+                }
+            </script>
     </body>
 
     </html>
