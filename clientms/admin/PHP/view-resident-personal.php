@@ -33,12 +33,12 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         table,td,tr,th{
             
             text-align: left;
-            font-size: 1em;
-            padding: 100px;
+            font-size: 1.10em;
             font-family: 'Noto Sans Display', sans-serif;
+            vertical-align: middle;
             
         }
-
+     
         .white{
             color: white;
         }
@@ -47,6 +47,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         }
         .right{
             margin-left: 8.5%;
+        }
+        .er{
+            border-radius: 10px 10px 0px 0px;
         }
         
         @media (max-width: 576px){
@@ -101,85 +104,123 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 				$cnt=1;
 				if($query->rowCount() > 0)
 				{
-				foreach($results as $row)
+				    foreach($results as $row)
 				{               
 			?>
-    <div class="container-fluid mx-4 px-5">
-        <div class="row g-0 mx-2">
-            <div class="row g-3">
-                <div class="mx-auto col-xl-10 white   ">
-                    <div class="row g-0  rounded-top " style= "background-color:#021f4e">
-                        <div class="fs-5 px-3 py-1">
-                            Resident #<?php  echo htmlentities($row->ID);?>
+
+            <div class="container-fluid px-5">
+                    <div class="row px-5">
+                        <div class="col-xl-5"></div>
+                        <div class="col-xl-7">
+                            <div class="float-end">
+                                <a href="#" onclick = "window.history.back();" class="link link-primary text-decoration-none fs-4"><i class="fa fa-arrow-circle-left me-2"></i>Go back</a>
+                            </div>
+                            
                         </div>
                     </div>
-                    <div class="row g-0 border bg-white">
-                        <div class="col-xl-3 py-3 border-end" align = "center">
-                      
-                            <img src="../images/user-res.png" alt="resident" style ="width: 105px; height: 100px;">
-                            <div class = "fs-6 black"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?></div>
-                            
-                        </div>
-                        <div class="col-xl-4 mx-2  px-2">
-                            
-                            <table class="table my-3">
-                                    <tr>
-                                        <th class =""><i class ="fa fa-calendar me-2"></i>Age</th>
-                                        <td><?php $gbd = $row->BirthDate;
-												  $gbd = date('Y-m-d', strtotime($gbd));
-												  $today = date('Y-m-d');
-												  $diff = date_diff(date_create($gbd), date_create($today));
-												  echo $diff->format('%y');?></td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="" > <i class= "fa fa-venus-mars me-1"></i> Gender</th>
-                                        <td><?php  echo htmlentities($row->Gender);?></td>
-                                    </tr>
-                        
-                                    <tr>
-                                        <th class ="" > <i class= "fa fa-heart me-1"></i> Civil Status</th>
-                                        <td><?php  echo htmlentities($row->CivilStatus);?></td>
-                                    </tr>
-                        
-                            </table>
-                           
-                        </div>
-                        <div class="col-xl-4 mx-2">
-                            
-                            <table class="table my-3">
-                                    <tr>
-                                        <th class =""><i class ="fa fa-birthday-cake me-2"></i>Birthdate</th>
-                                        <td><?php $bd = $row->BirthDate; echo date('j F Y', strtotime($bd));?></td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="" > <i class= "fa fa-info me-1"></i> Status</th>
-                                        <td>Active</td>
-                                    </tr>
-                        
-                                    
-                            </table>
-                           
-                        </div>
-                    </div>
-                    
-                
-                </div>
-            
             </div>
-          
-        </div>
-    </div>
-    <div class="container-fluid mx-4 px-5 mb-5">
+            <?php
+                 $gbd = $row->BirthDate;
+                  $gbd = date('Y-m-d', strtotime($gbd));
+                  $today = date('Y-m-d');
+                  $diff = date_diff(date_create($gbd), date_create($today));
+                 
+                ?>
+                  
+        
+            <div class="container-fluid mx-auto px-5 mt-3 mb-2">
+                <div class="row g-0 mx-2">
+                    <div class="row g-0 ">
+                        <div class="mx-auto col-xl-10 white   ">
+                            <div class="row g-0  rounded-top "  style= "background-color:#021f4e">
+                        
+                                <div class="fs-5 text-white py-2 px-2">
+                                        <i class="fa fa-id-card-alt fa-1x me-1">
+                                        </i>
+                                        Resident Number <?php echo htmlentities($row->ID);?>
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                        <div class="row g-0 ">
+                            <div class="col-xl-10 bg-white mx-auto text-center">
+                            <label for="" class= "text-center fs-6 text-muted small">Resident's Full Name</label>
+                                <div class="display-6 border-bottom text-center py-2">
+                                    <?php echo htmlentities($row->LastName." ". $row->FirstName." ".$row->MiddleName);?>
+                                    
+                                </div>
+
+                            </div>
+                           
+                        </div>
+                        <div class="row g-0 ">
+                            <div class="col-xl-10 bg-white mx-auto text-center">
+                                <div class="row g-0">
+                                            <div class="col-xl-10 mx-auto">
+                                                <table class="table ">
+                                                    <tbody class= "" style = "padding: 40px;">
+                                                        <tr >
+                                                            
+                                                            <th  style = "padding-top: 5px; padding-bottom:5px;">
+                                                                <i class="fa fa-mobile-alt fa-1x me-2"></i>Contact Number
+                                                            </th>
+                                                            <td style= "text-align: right; padding-top: 10px; padding-bottom:10px;">
+                                                                <?php echo htmlentities($row->Cellphnumber);?>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            
+                                                            <th style = "padding-top: 5px; padding-bottom:5px;">
+                                                                <i class="fa fa-at fa-1x me-1"></i>Email Address
+                                                            </th>
+                                                            <td style= "text-align: right;padding-top: 10px; padding-bottom:10px;">
+                                                                <?php echo htmlentities($row->Email);?>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            
+                                                                <th style = "padding-top: 5px; padding-bottom:5px;">
+                                                                    <i class="fa fa-map-marker-alt fa-1x me-1"></i>
+                                                                    Address
+                                                                </th>
+                                                                <td style = "padding-top: 5px; padding-bottom:5px;text-align:right">
+                                                                    <?php echo htmlentities("#".$row->houseUnit." Purok ".$row->Purok." ".$row->streetName." Street");?>
+                                                                </td>
+                                                        </tr>
+                                                        <tr>
+                                                            
+                                                            <th style = "padding-top: 10px; padding-bottom:10px;">
+                                                                <i class="fa fa-birthday-cake fa-1x me-1"></i>
+                                                                Date of Birth
+                                                            </th>
+                                                            <td style = "padding-top: 10px; padding-bottom:10px;text-align:right">
+                                                                <?php echo $gbd;?>
+                                                            </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        
+                                </div>
+
+                            </div>
+                           
+                        </div>
+                </div>
+            </div>
+
+    <div class="container-fluid mx-auto px-5 mb-5">
         <div class="row g-0 mx-2">
             <div class="row g-2">
-                <div class="mx-auto col-xl-10 ">
+                <div class="mx-auto col-xl-11 ">
                     <div class="row g-0  rounded-top border bg-white">
                         <div class="col-xl-8 py-2 px-2  ">
                             <nav class="nav nav-pills flex-column  flex-sm-row">
-                                <a class="flex-sm-fill  text-sm-center nav-link active" aria-current="page" href="#personal" data-bs-toggle ="tab">Personal Details</a>
-                                <a class="flex-sm-fill text-sm-center nav-link" href="#cases" data-bs-toggle ="tab">Cases</a>
-                                <a class="flex-sm-fill text-sm-center nav-link" href="#cert" data-bs-toggle ="tab">Certifications Availed</a>
-                                <a class="flex-sm-fill text-sm-center nav-link" href="#services" data-bs-toggle ="tab" >Services Availed</a>
+                                <a class="flex-sm-fill  fs-5 text-sm-center nav-link active" aria-current="page" href="#personal" data-bs-toggle ="tab">Personal Details</a>
+                                <a class="flex-sm-fill fs-5 text-sm-center nav-link" href="#cases" data-bs-toggle ="tab">Cases</a>
+                                <a class="flex-sm-fill fs-5 text-sm-center nav-link" href="#cert" data-bs-toggle ="tab">Certifications Availed</a>
+                                <a class="flex-sm-fill fs-5 text-sm-center nav-link" href="#services" data-bs-toggle ="tab" >Services Availed</a>
         
         
                             </nav>
@@ -187,70 +228,135 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                         </div>
                         
                     </div>
-                    <div class="tab-content">
+                    
+                    
+             
+                    <div class="tab-content shadow-sm">
+                        
+           
                         <div class="tab-pane active" id = "personal">
-                            <div class="row g-0 border bg-white" >        
-                                <div class="col-xl-11 mx-2  mx-auto  px-2">       
-                                    <table class="table my-3" >
-                                    <tr>
-                                        <th class ="">Resident Type</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->ResidentType);?></td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="">Contact No.</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->Cellphnumber);?></td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="">Contact No.</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->Email);?></td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="">First</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->FirstName);?></td>
-                                    </tr>
-                                
-                                    
-                                    <tr>
-                                        <th class ="">Middle Name</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->MiddleName);?></td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="">Last Name</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->LastName);?></td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="">House Unit/Number</th>
-                                        <td style ="text-align: right; padding-right: 4%" >#<?php  echo htmlentities($row->houseUnit);?></td>
-                                    </tr>
-                                
-                                    <tr>
-                                        <th class ="">Purok</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->Purok);?></td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="">Street</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->streetName);?></td>
-                                    </tr>
+                            <div class="row g-0 bg-white px-4 ">
+                                <div class="row gy-0 gx-0  ps-3 mt-3 bg-info er border border-info shadow-sm">
+
                                  
-                                    <tr>
-                                        <th class ="">TIN</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->tinNumber);?></td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="">SSS number</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->sssNumber);?></td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="">Voter Status </th>
-                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->voter);?></td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="">Voter Precinct </th>
-                                        <td style ="text-align: right; padding-right: 4%" ><?php  echo htmlentities($row->vPrecinct);?></td>
-                                    </tr>
+                                </div>
+                                <div class="row g-0 border-bottom border-start  mb-5 rounded-bottom shadow">
+                                    <div class="row g-0">
+                                        
+                                        <div class="row g-0 mb-5 py-5 px-5 ">
+                                            <div class="col-xl-12  border-start  shadow-sm">
+                                                
+                                                <table class="table ">
+                                                    <thead class= " bg-light text-center">
+                                                    <tr>
+                                                        <th colspan= 2 class= "text-center">
+                                                            <i class="fa fa-street-view">
 
-                                     </table>
+                                                            </i>
+                                                            Residency Information
+                                                        </th>
+                                                    </tr>
 
+                                                    </thead>
+                                                    <tbody class= "" style = "padding: 10px;">
+                                                        <tr>
+                                                            
+                                                            <th>
+                                                                <i class=""></i>Residency Type
+                                                            </th>
+                                                            <td  style= "text-align: right; padding-top: 15px; padding-bottom:15px;">
+                                                                <?php echo htmlentities($row->ResidentType);?>
+                                                            </td>
+                                                        </tr>
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-xl-12  border-end border-bottom shadow-sm">
+                                            <table class="table  ">
+                                                    <thead class= " bg-light text-center">
+                                                    <tr>
+                                                        <th colspan= 2 class= "text-center">
+                                                            <i class="fa fa-user">
+
+                                                            </i>
+                                                            Personal Information
+                                                        </th>
+                                                    </tr>
+
+                                                    </thead>
+                                                    <tbody class= " mt-2" style = "padding: 10px;">
+                                                    
+                                                       
+                                                        <tr>
+                                                            
+                                                            <th>
+                                                                Gender
+                                                            </th>
+                                                            <td  style= "text-align: right; padding-top: 15px; padding-bottom:15px;">
+                                                                <?php echo htmlentities($row->Gender);?>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            
+                                                            <th>
+                                                                Civil Status
+                                                            </th>
+                                                            <td style= "text-align: right; padding-top: 15px; padding-bottom:15px;">
+                                                                <?php echo htmlentities($row->CivilStatus);?>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                        <tr>
+                                                            
+                                                            <th>
+                                                                Voter Status
+                                                            </th>
+                                                            <td  style= "text-align: right; padding-top: 15px; padding-bottom:15px;">
+                                                                <?php echo htmlentities($row->voter);?>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            
+                                                            <th>
+                                                                Voter Precinct
+                                                            </th>
+                                                            <td  style= "text-align: right; padding-top: 15px; padding-bottom:15px;">
+                                                                <?php echo htmlentities($row->vPrecinct);?>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            
+                                                            <th>
+                                                                SSS number
+                                                            </th>
+                                                            <td  style= "text-align: right; padding-top: 15px; padding-bottom:15px;">
+                                                                <?php echo htmlentities($row->sssNumber);?>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            
+                                                            <th>
+                                                                TIN number
+                                                            </th>
+                                                            <td  style= "text-align: right; padding-top: 15px; padding-bottom:15px;">
+                                                                <?php echo htmlentities($row->tinNumber);?>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                    
+                                                    </tbody>
+                                                </table>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-0 bg-white" >        
+                                <div class="col-xl-11 mx-2  mx-auto  px-2">       
+                           
                                     <?php $cnt=$cnt+1;}} ?>
                                 </div>
                             </div>

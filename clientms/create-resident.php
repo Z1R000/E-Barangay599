@@ -208,6 +208,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
 
     <form method="post">
+        
         <div id="page-content-wrapper">
             <div class="container-fluid py-3 px-5 mx-1">
                 <div class="container-fluid banner" align="center">

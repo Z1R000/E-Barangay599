@@ -145,6 +145,13 @@ echo "<script>alert('Email id or Mobile no is invalid');</script>";
 					<!--Pili kayo style-->
 				
 					</div>
+					<label for="code" class="fs-5 text-secondary">n digit reset code</label>
+					<div class="input-group">
+						
+						<input type="password" class="form-control" name = "pas1" id= "pas1" placeholder = "1234">
+                      
+					
+					</div>
                     <label for="pas1" class="fs-5 text-secondary">New Password</label>
 					<div class="input-group">
 						

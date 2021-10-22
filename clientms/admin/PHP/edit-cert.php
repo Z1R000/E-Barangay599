@@ -1,5 +1,5 @@
 <?php 
-    $curr ="New certificate";
+    $curr ="Edit certificate";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -154,7 +154,7 @@
                 </div>
               </div>
               
-              <div class="row bg-white">
+              <div class="row bg-white pb-5 shadow-sm">
                 <form action="" method = "POST">
                   <div class="row gx-3 gy-1 px-5">
                     <label for="cname" class= "black fw-bold">Certification Name</label>
@@ -179,7 +179,7 @@
             <div class="col-xl-6 mx-auto pt-1 ">
                 <div class="fs-6 fw-bold">Certificate Template</div>
                 <button type = "button" href = "#save-cert" data-bs-toggle = "modal" role= "button"class = "btn btnx btn-primary mb-1"><i class= "fas fa-save me-2"></i>Save</button>
-                <button type = "submit" class = "btn btnx  btn-primary mb-1"><i class= "fas fa-eye me-2"></i>Preview</button>
+                <button type = "button" onclick = "window.history.back()" class = "btn btnx  btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</button>
               
                 <div class="row">
                 <div class="embed-responsive embed-responsive-16by9">
@@ -197,7 +197,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-info ">
                     <div class="modal-header bg-info white ">
-                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;New Certificate</h5>    
+                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Update Certificate</h5>    
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">
@@ -208,16 +208,22 @@
                     
                         </div>
                         <div class="row">
-                            <p class = "fs-4 text-center">A new certificate template is about to be made, do you wish to continue?<br></p>
+                            <p class = "fs-4 text-center">A new certificate template is about to be updated, do you wish to continue?<br></p>
+                        </div>
+                      <div class="row justify-content-center" align = "center">
+
+                          <div class="col-xl-6">
+
+                          
+                            <input type = "submit" class="btn btn-success" href= "#success" data-bs-toggle="modal" data-bs-dismiss = "modal"  name = "conf" value ="Confirm">
+                               <input type = "submit" class="btn btn-primary" href= "#success" data-bs-dismiss = "modal"  name = "canc" value ="Cancel">
+                               </div>
+                        </form>
                         </div>
                 
                     </div>
                     <div class="modal-footer">
-                        <form method = "POST" action = "#">
-                            <input type = "submit" class="btn btn-success" href= "#success" data-bs-toggle="modal" data-bs-dismiss = "modal"  name = "conf" value ="Confirm">
-                               <input type = "submit" class="btn btn-primary" href= "#success" data-bs-dismiss = "modal"  name = "canc" value ="Cancel">
-          
-                        </form>
+                     
                     </div>
                 </div>
             </div>
@@ -228,7 +234,7 @@
             <div class="modal-dialog modal-dialog-centered modal-sm">
                 <div class="modal-content g-0 bg-success ">
                     <div class="modal-header bg-success white ">
-                        <h5 class="modal-title" id="delete">&nbsp;<i class = ""></i>&nbsp;&nbsp;Success</h5>    
+                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-save me-2"></i>&nbsp;&nbsp;Success</h5>    
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">
@@ -239,7 +245,7 @@
                     
                         </div>
                         <div class="row">
-                            <p class = "fs-4 text-center">New Certificate Successfully added.<br></p>
+                            <p class = "fs-4 text-center"> Certificate Successfully Updated.<br></p>
                         </div>
                 
                     </div>

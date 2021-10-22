@@ -73,7 +73,7 @@
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
 
     <link rel = "stylesheet" href="../css/sidebar.css" />
     <link rel="stylesheet" href="../css/scrollbar.css">
@@ -88,6 +88,17 @@
         }
         .white{
             color: white;
+        }
+        .er{
+            border-radius: 20px 20px 0px 0px;
+            padding-right:3%;
+            padding-left: 3%;
+
+        }
+        @media(max-width: 786px){
+            .er{
+                padding: 0px;
+            }
         }
     </style>
 </head>
@@ -112,418 +123,310 @@
             </div>
         </div>
     </nav>
+<form action="" method = "POST"></form>
+                <div class="container-fluid px-5">
+                    <div class="row px-5">
+                        <div class="col-xl-5"></div>
+                        <div class="col-xl-7">
+                            <div class="float-end">
+                                <a href="#" onclick = "window.history.back();" class="link link-primary text-decoration-none fs-4"><i class="fa fa-arrow-circle-left me-2"></i>Cancel Registration</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                
+                </div>
+                    <div class="container-fluid py-2 px-5 mx-auto ">
+                        <div class="row  g-0 gy-2 px-5">
+                            <div class="row g-0 bg-primary py-1  er" >
+                                    
+                            </div>
+                                <div class="row border border-warning g-0 bg-light pb-4 rounded er shadow-lg">
+                                    <div class="row g-0  mb-4">
+
+                                        <div class="display-6 py-2 ps-3">
+                                            Personal Information <span class=" fs-4 text-danger">(Fields with '*' are required otherwise not)</span>
+                                            <br>
+                                            <span class ="text-muted fs-6"> 
+    
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="row g-0 ps-4 pe-2 ps-2">
+
+                                        <div class="row g-0 mb-3 px-4">
+                                            <label for="fname" class="col-xl-2 fs-4 py-0"> <span class= "text-danger fs-5">*</span>First Name<br><span class= "fs-6 text-muted small"> (Unang Pangalan)</span></label>
+                                            
+                                            <div class="col-xl-8 col-sm-12">
+                                            <br>
+                            
+                                                
+                                                <input id = "fname" type="text" class="form-control">
+                                                <label for="" class="text-muted fs-6 small"> Place name suffix like Jr. Sr. after first name (e.g Juan Sr., Juan Jr) if any</label>
+                                            </div>
+                                        </div>
+                                        <div class="row g-0 mb-3 px-4">
+                                            <label for="mname" class="col-xl-2 fs-4 py-0"><span class= "text-danger fs-5">*</span>Middle Name<br><span class= "fs-6 text-muted small"> (Gitnang Pangalan)</span></label>
+                                            
+                                            <div class="col-xl-8 col-sm-12">
+                                            <br>
+                                                <input type="text" id = "mname" class="form-control">
+                                                <label for="" class="text-muted fs-6 small">If born without middle name place "N/A" or "-"</label>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row g-0 mb-3 px-4">
+                                                <label for="lname" class="col-xl-2 fs-4 py-0"> <span class= "text-danger fs-5">*</span>Last Name<br><span class= "fs-6 text-muted small"> (Apelyido)</span></label>
+                                            
+                                                <div class="col-xl-8 col-sm-12">
+                                                <br>
+                                                    <input type="text" id = "lname"class="form-control">
+                                                    <label for="" class="text-muted fs-6 small"></label>
+                                                </div>
+                                        </div>
+
+                                        <div class="row g-0 mb-3 px-4">
+                                            <label for="bday" class="col-xl-2 fs-4 py-0"><span class= "text-danger fs-5">*</span>Date of Birth<br><span class= "fs-6 text-muted small"> (Araw ng kapakanakan)</span></label>
+                                            
+                                            <div class="col-xl-5 col-sm-12">
+                                            <br>
+                                                <input type="date" id = "bday"class="form-control">
+                                                <label for="" class="text-muted fs-6 small">Format: day/month/year</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row g-0 mb-3 px-4">
+                                        
+                                            <label for="gender" class="col-sm-2 col-form-label  fs-4"><span class= "text-danger fs-5">*</span>Gender<br><span class= "fs-6 text-muted small"> (Kasarian)</span></label>
+                                                <div class="col-xl-5 col-sm-12">
+                                                    <br>
+                                                    <select id ="gender" class="form-select input-sm" aria-label="Default select example" id="gender"onchange="showDiv('hidden_div', this)">
+                                                        <option value="">--Select Gender--</option>
+                                                        <option value="m">Male (lalake)</option>
+                                                        <option value="f">Female (Babae)</option>
+                                                
+                                                    </select>
+                                                </div>
+                                         </div>
+                                         <div class="row g-0 mb-3 px-4">
+                                        
+                                        <label for="gender" class="col-sm-2 col-form-label  fs-4"><span class= "text-danger fs-5">*</span>Voter's Status<br><span class= "fs-6 text-muted small"> (Pagkabotante)</span></label>
+                                            <div class="col-xl-5">
+                                                <br>
+                                                <select class="form-select input-sm" aria-label="Default select example" id="gender"onchange="showprecinct('precinct', this)">
+                                                    <option value="">--Select--</option>
+                                                    <option value="reg">Registered</option>
+                                                    <option value="unreg">Unregistered</option>
+                                                </select>
+                                                <label for="" class="text-muted fs-6 small">To deter whether this person is voter</label>
+                                            </div>
+                                            <div class="col-xl-4 mx-2" id="precinct">
+                                                    <label class="fs-5">Precinct Number</label>
+                                                    <select class="form-select input-sm"  >
+                                                    <option value="">--Select--</option>
+                                                    <option value="1a">1-A</option>
+                                                    <option value="2a">2-A</option>
+                                                </select>
+                                                 
+                                                </div>
+                                        </div>
+
+
+                                        <div class="row g-0 mb-3 px-4">
+                                        
+                                            <label for="cs" class="col-sm-2 col-form-label  fs-4"><span class= "text-danger fs-5">*</span>Civil Status<br><span class= "fs-6 text-muted small"> (Kalagayang Sibil)</span></label>
+                                                <div class="col-xl-5">
+                                                    <br>
+                                                    <select class="form-select input-sm" aria-label="Default select example" id="cs"onchange="showDiv('hidden_div', this)">
+                                                        <option value="">--Select Status--</option>
+                                                        <option value="sin">Single</option>
+                                                        <option value="mar">Married</option>
+                                                        <option value="sep">Separated</option>
+                                                    </select> 
+                                                </div>
+                                        </div>
+                                        <div class="row g-0 my-3">
+                                            <div class="fs-4">For Employees <span class= "fs-6 text-muted"> (Optional, leave blank if resident does not have)</span></div>
+                                            
+                                        </div>
+                                        
+                                        <div class="row g-0 mb-3 px-4">
+                                            <div class="col-xl-5 col-sm-12">
+                                                <div class="input-group">
+                                                    <label for="" class="mx-2 fs-4 small">SSS number</label>
+                                                    <input type="text" id = "lname"class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-5 col-sm-12">
+                                                <div class="input-group">
+                                                    <label for="" class="mx-2 fs-4 small">TIN number</label>
+                                                    <input type="text" id = "lname"class="form-control">
+                                                </div>
+                                            </div>                                       
+                                        </div>
+                                </div>
+                                     
+                                               
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="container-fluid py-2 px-5 mx-auto mt-4">
+                        <div class="row  g-0 gy-2 px-5 ">
+                            <div class="row g-0 bg-primary py-1  er" >
+                                    
+                            </div>
+                            <div class="row border border-warning g-0 bg-light pb-4 shadow-lg rounded er">
+                                <div class="row g-0  mb-4">
+
+                                    <div class="display-6 py-2 ps-3">
+                                        Barangay Residency Information<span class=" fs-4 text-danger"> (Required)</span>
+                                    </div>
+                                </div>
+                                <div class="row g-0 ps-4 pe-2 ps-2">
+                                    <div class="row g-0 mb-3 px-4">
+                                        
+                                        <label for="cs" class="col-sm-2 col-form-label  fs-4">Type of<Br> Residency<br><span class= "fs-6 text-muted small"> (Uri ng residente)</span></label>
+                                        
+                                            <div class="col-xl-5">
+                                                <br>
+                                                <select class="form-select input-sm" aria-label="Default select example" onchange="showDiv('hidden_div', this)">
+                                                    <option value='' disabled selected>--Select Resident Type--</option>
+                                                    <option value="homeowner">Home Owner</option>
+                                                    <option value="caretaker">Care taker</option>
+                                                    <option value="rental">Rental/Boarder</option>
+                                                    <option value="wrelative">Living with Relatives</option>
+                                                </select>
+                                                <div class="col-6" id="hidden_div">
+                                                    <label class="col-form-label fs-5">Home Owner Name</label>
+                                                    <input type="text" class="form-control" placeholder="" id="residenttype" required />
+                                                </div>
+
+                        
+                                            
+                                            </div>
+                                            <div class="row g-0 mb-3">
+                                            <label for="cs" class=" col-form-label  fs-4">Purok Information</label>
+                                        
+                                                <div class="col-xl-5 col-sm-12">
+                                                    <div class="input-group">
+                                                        <label for="" class="mx-2 fs-5 small">Purok Number&nbsp;</label>
+                                                        <select class="form-select" name = "purok" id = "purok" aria-label="Default select example">
+                                                        <option value=''selected disabled>--Purok Number--</option>
+                                                        <option value="1">Purok 1</option>
+                                                        <option value="2">Purok 2</option>
+                                                        <option value="3">Purok 3</option>
+                                                    </select> 
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-sm-12">
+                                                    <div class="input-group">
+                                                        <label for="" class="mx-2 fs-5 small">Street</label>
+                                                        <input id = "street" type="text" class="form-control">
+                                                    </div>
+                                                </div>                                       
+                                            </div>
+                                        </div>
+                                           
+                                           
+                                    
+                             
+                                    <div class="row g-0 mb-3 px-4">
+                                        <label for="hUnit" class="col-xl-2 fs-4 py-0">House Unit/<br>Lot Number<br><span class= "fs-6 text-muted small"> (Numero ng bahay)</span></label>
+                                        
+                                        <div class="col-xl-8 col-sm-12">
+                                        <br>
+                                            <input type="text" id = "hUnit" class="form-control">
+                                            <label for="" class="text-muted fs-6 small">House unit  or lot number of the residents household</label>
+                                        </div>
+                                    </div>
+                                   
+                            </div>
+                        </div>  
+
+                    </div>
+                </div>
+                <div class="container-fluid py-2 px-5 mx-auto  mt-4 pb-5">
+                        <div class="row  g-0 gy-2 px-5 ">
+                            <div class="row g-0 bg-primary py-1  er" >
+                                    
+                            </div>
+                            <div class="row border border-warning g-0 bg-light shadow-lg pb-4 rounded er">
+                                <div class="row g-0  mb-5 ">
+
+                                    <div class="display-6 py-2 ps-3">
+                                       Contact Information <span class=" fs-4 text-info">(Optional, leave blank if resident does not have)</span>
+                                    </div>
+                                </div>
+                                <div class="row g-0 ps-4  ps-2">
+                                   
+                                    <div class="row g-0 mb-3 px-4">
+                                        <label for="cn" class="col-xl-2 fs-4 py-0">Contact Number<br><span class= "fs-6 text-muted small"> (Numero sa cellphone)</span></label>
+                                        
+                                        <div class="col-xl-5 col-sm-12">
+                                        <br>
+                                            <input type="text" id = "cn" class="form-control">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row g-0 mb-3 px-4">
+                                        <label for="em" class="col-xl-2 fs-4 py-0">E-mail Address<br><span class= "fs-6 text-muted small"> (Emayl na ginagamit)</span></label>
+                                        
+                                        <div class="col-xl-5 col-sm-12">
+                                        <br>
+                                            <input type="text" id = "em" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row g-0 px-4 mb-2">
+                                        <div class="fs-4 ">
+                                            For E-barangay Account
+                                        </div>
+                                    </div>
+                                    <div class="row g-0 mb-3 px-4">
+                                        <label for="pas" class="col-xl-2 fs-4 py-0">Password </label>
+                                        
+                                        <div class="col-xl-4 col-sm-12">
+                                        
+                                            <input type="text" id = "pas" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row g-0 mb-3 px-4">
+                                        <label for="cf" class="col-xl-2 fs-4 py-0">Confirm Password </label>
+                                        
+                                        <div class="col-xl-4 col-sm-12">
+                                            <br>
+                                            <input type="text" id = "cf" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g-0">
+                                     <div class="col-9">
+
+                                     </div>
+                                     <div class="col-xl-3 ">
+                                        
+                                            <a class="btn btn-success form-control">
+                                                Submit
+                                            </a>
+
+                                      
+                                    </div>
+                                </div>
+                            </div>  
+                       
+                        </div>
+                        
+                    </div>
+                    
+    </form>
+
+    
         
 
       
-        
-        <form method="post"> 
-            <div class="container-fluid py-3 px-5 mx-1">
-                    
-                        
-                <div class="row gx-4 border bg-info py-2 ">
-                    <div class="fs-5 text-center white">
-                       <i class= "fa fa-address-book me-2" ></i> Resident Registration Form 
-                    </div>
-
-
-                </div>
-                <div class="row gx-4 border bg-white">
-                    <div class="col-xl-4 px-5 pb-5 pt-2 border-end">
-                        <div class="row g-0">
-                            
-                                <label for="rtype" class="col-form-label fw-bold fs-6">Resident Type</label>
-                                    
-                                <select class="form-select input-sm" aria-label="Default select example" id="test"onchange="showDiv('hidden_div', this)">
-                                <option value='' disabled selected>--Select Resident Type--</option>
-                                <option value="homeowner">Home Owner</option>
-                                <option value="caretaker">Care taker</option>
-                                <option value="rental">Rental/Boarder</option>
-                                <option value="wrelative">Living with Relatives</option>
-                            </select>
-                        
-                        
-                        </div>
-                        <div class="row-g-0" id="hidden_div">
-                            <label class="col-form-label fw-bold">Home Owner Name</label>
-                            <input type="text" class="form-control" placeholder="Home Owner Name:" id="residenttype" required />
-                        </div>
-                    
-                        <div class="row g-0 ">
-                            
-                                <label for="gend" class="col-form-label fw-bold">Gender</label>
-                                    
-                                    <select class="form-select" name = "gend" aria-label="Default select example">
-                                        <option value='' disabled selected>--Select gender--</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                        
-                        
-                        </div>
-                        <div class="row g-0 ">
-                            
-                            <label for="fname" class="col-form-label fw-bold">First Name</label>
-                            <input type="text" name = "fname" class = "form-control" placeholder ="First name" required>
-
-                    
-                        </div>
-                        <div class="row g-0 ">
-                            
-                            <label for="mname" class="col-form-label fw-bold">Middle Name</label>
-                            <input type="text" name = "mname" class = "form-control" placeholder ="Middle name" required>
-
-                        </div>
-                        <div class="row g-0 ">
-                            
-                            <label for="lname" class="col-form-label fw-bold">Last Name</label>
-                            <input type="text" name = "lname" class = "form-control" placeholder ="Last name" required>
-
-                        </div>
-                        <div class="row g-0 ">
-                            
-                            <label for="suf" class="col-form-label fw-bold">Name Suffix</label>
-                            <input type="text" name = "suf" class = "form-control" placeholder ="E.g 1st, 2nd, Jr., Sr...." required>
-                            <!--<select class="form-select" id = "suf" aria-label="Default select example">
-                                        <option  class= "text-muted" selected >E.g 1st, 2nd, Jr., Sr....</option>
-                                        <option value="1st">1st</option>
-                                        <option value="2nd">2nd</option>
-                                        <option value="3rd">3rd</option>
-                                        <option value="sr">Sr.</option>
-                                        <option value="jr">Jr.</option>
-                                        
-                            </select>-->  
-                            
-
-                        </div>
-                        <div class="row g-0">
-                            
-                            <label for="bdate" class="col-form-label fw-bold">Birth Date</label>
-                            <input type="date" name = "bdate" class = "form-control" placeholder ="Birthdate">
-
-                        </div>
-                        <div class="row g-0 ">
-                            
-                            <label for= "cstatus" class="col-form-label fw-bold">Civil Status</label>
-                            <select class="form-select" name = "cstatus" aria-label="Default select example">
-                                        <option value=''selected disabled>--Civil Status--</option>
-                                        <option value="Single">Single</option>
-                                        <option value="Married">Married</option>
-                                        <option value="Separated">Separated</option>
-                                        <option value="Widow">Widow/widdower</option>
-                            </select>        
-                        </div>
-
-
-                      
-                    </div>
-                <div class="col-xl-4 px-5 pb-5 pt-2">
-                    <div class="row g-0 ">
-                                   
-                                   <label for= "prk" class="col-form-label fw-bold">Purok</label>
-                                   <select class="form-select" name = "prk" aria-label="Default select example">
-                                        <option value=''selected disabled>--Purok Number--</option>
-                                        <option value="1">Purok 1</option>
-                                        <option value="2">Purok 2</option>
-                                        <option value="3">Purok 3</option>
-                                    </select>        
-       
-                        </div>
-
-                        
-                        <div class="row g-0 ">
-                                   
-                            <label for= "strt" class="col-form-label fw-bold">Street</label>
-                       
-                                   <select class="form-select" name = "strt" aria-label="Default select example">
-                                        <option value=''selected disabled>--Street Name--</option>
-                                        <option value="s1">Street 1</option>
-                                        <option value="s2">Street 2</option>
-                                    </select>        
-       
-
-                        </div>
-                        
-                        <div class="row g-0 ">
-                                   
-                                   <label for= "hunit" class="col-form-label fw-bold">House unit/Lot number</label>
-                                   <input type="text" name = "hunit"class = "form-control" placeholder ="House unit/Lot no. here">
-       
-                        </div>
-                        <div class="row g-0 ">
-                                   
-                                   <label for= "contact" class="col-form-label fw-bold">Contact Number</label>
-                                   <input type="text" name = "contact"class = "form-control" placeholder ="Contact Number">
-       
-                        </div>
-                        <div class="row g-0 ">
-                                   
-                                   <label for= "tin" class="col-form-label fw-bold">TIN</label>
-                                   <input type="text" name = "tin"class = "form-control" placeholder ="TIN here">
-       
-                        </div>
-                        <div class="row g-0 ">
-                                   
-                                   <label for= "sss" class="col-form-label fw-bold">SSS number</label>
-                                   <input type="text" name = "sss" class = "form-control" placeholder ="SSS number here">
-       
-                        </div>
-                        <div class="row g-0 ">
-                                   
-                                   <label for= "voter" class="col-form-label fw-bold">Voter Status</label>
-                                   <select class="form-select" name = "voter" aria-label="Default select example">
-                                        <option value=''selected disabled>--Voter Status--</option>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                    </select>        
-       
-                        </div>
-                        <div class="row g-0 ">
-                                   
-                                   <label for= "vp" class="col-form-label fw-bold">Precinct Number</label>
-                                   <select class="form-select" name = "vp" aria-label="Default select example">
-                                        <option value=''selected disabled>--Voter's Precinct--</option>
-                                        <option value="50-A">50-A</option>
-                                        <option value="51-A">51-A</option>
-                                    </select>        
-       
-                        </div>
-                 
-
-                </div>
-                <div class="col-xl-4 px-5 pb-5 pt-2 border-start">
-                        <div class="row g-0 ">
-                                   
-                            <label for= "email" class="col-form-label fw-bold">E-mail Address</label>
-                            <input type="text" name = "email" class = "form-control" placeholder ="Email Address">
-
-                        </div>
-                        <div class="row g-0 ">
-                                   
-                                   <label for= "pass" class="col-form-label fw-bold">Password</label>
-                                   <input type="password" name = "password" class = "form-control" placeholder ="Password">
-       
-                        </div>
-                        <div class="row g-0 ">
-                                   
-                                   <label for= "cpass" class="col-form-label fw-bold">Confirm Password</label>
-                                   <input type="password" name = "cpass" class = "form-control" placeholder ="Confirm Password">
-       
-                        </div>
-                     
-                        
-             
-                </div>
-                <div class="row  gx-4 py-2 justify-content-end">
-                          
-                                <div class="col-xl-3 g-0 border">
-                                    <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
-                                </div>
-                    
-                    </div>
-            </div>
-        </form>
-
-        
-
-
-    <!--<div class="container-fluid mx-3 px-5">
-        <div class="row px-5 ">
-            <div class="row g-0 mt-4 border bg-white">
-                <div class="row g-0 p-3 border-bottom">
-                    <div class="col-xl-10 mx-auto  ">
-                        <div class="fs-6 text-center fw-bold">
-                            <i class = "fa fa-user me-2 "></i>Resident Registration
-                        </div>
-                    </div>
-
-
-                </div>
-            <div class="row">
-
-               
-                <form class="row g-3">
-                    <div class="row gx-3">
-                        <div class="col-xl-3">
-                            Resident Type
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Select resident type</option>
-                                <option value="homeowner">Home Owner</option>
-                                <option value="caretaker">Care taker</option>
-                                <option value="rental">Rental/Boarder</option>
-                                <option value="wrelative">Living with Relatives</option>
-                                <option value="wrelative">Others</option>
-                                
-                            </select>
-                            
-                        </div>
-                        <div class="col-xl-3">
-
-                        </div>
-                        <div class="col-xl-3">
-                            <div class=" mb-1">
-                                Gender
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                <label class="form-check-label" for="inlineRadio1">Male</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                <label class="form-check-label" for="inlineRadio2">Female</label>
-                                </div>
-                              
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="row gx-3 gy-2">
-                        <div class="col-xl-4">
-                            First Name
-                            <input type="text" class = "form-control" placeholder ="First name here">
-                            
-                        </div>
-                        <div class="col-xl-4">
-                            Middle Name
-                            <input type="text" class = "form-control" placeholder ="Middle name here">
-                        
-                                
-                        </div>
-                        <div class="col-xl-4">
-                        
-                            Last Name
-                            <input type="text" class = "form-control" placeholder ="Last name here">
-                        </div>
-                        
-                       
-                    </div>
-
-                    <div class="row gx-3 gy-2">
-                        <div class="col-xl-4">
-                            Purok
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Purok number </option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                
-                            </select>
-                            
-                        </div>
-                        <div class="col-xl-4">
-                            House Unit/Unit No.
-                            <input type="text" class = "form-control" placeholder ="House number/Unit no. here">
-                        
-                                
-                        </div>
-                        <div class="col-xl-4">
-                        
-                            Street Name
-                            <input type="text" class = "form-control" placeholder ="Street name here">
-                        </div>
-                        
-                       
-                    </div>
-                    
-                    
-                </form>
-                <div class="row gx-3 gy-2">
-                        
-                        <div class="col-xl-3">
-                            Birth Place
-                            <input type="text" class = "form-control" placeholder ="Birth place here">
-                        
-                                
-                        </div>
-                        <div class="col-xl-3">
-                            Birthdate    
-                            <input type="date" class = "form-control" placeholder ="">
-                        </div>
-                        <div class="col-xl-3">
-                            TIN
-                            <input type="text" class = "form-control" placeholder ="TIN here">
-                        </div>
-                        <div class="col-xl-3">
-                            SSS
-                            <input type="text" class = "form-control" placeholder ="SSS number here">
-                        </div>
-
-
-                  
-                        
-                       
-                </div>
-                <div class="row gx-3 gy-2">
-                        <div class="col-xl-3">
-                            Civil status
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Civil status </option>
-                                <option value="1">Married</option>
-                                <option value="2">Single</option>
-                                <option value="3">Widow</option>
-                                <option value="3">Separated</option>
-                               
-                                
-                            </select>
-                            
-                        </div>
-                        
-                        <div class="col-xl-3">
-                            <div class="mb-1 mx-5">
-                                A registered voter ?
-                            </div>
-                            <div class="form-check form-check-inline mx-5 ">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                <label class="form-check-label" for="inlineRadio1">Yes</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                <label class="form-check-label" for="inlineRadio2">No</label>
-                            </div>
-                              
-                        </div>
-                      
-                        <div class="col-xl-2">
-                             Precint Number   
-                            <input type="text" class = "form-control" placeholder ="Precinct Number">
-                        </div>
-                </div>
-                <div class="row gx-3 gy-2">
-                        <div class="col-xl-3">
-                            Email Address
-                            <input type="text" class = "form-control" placeholder ="Email Address Here">
-                        
-                                
-                        </div>
-                        <div class="col-xl-3">
-                            Password
-                            <input type="text" class = "form-control" placeholder ="Password">
-                        
-                                
-                        </div>
-
-
-                </div>
-                <div class="row mt-3 mb-5">
-                    <div class="col-xl-8">
-
-                    </div>
-                    <div class="col-xl-4">
-                        <div class="float-end">
-                            <button type= "button" class ="btn btn-outline-success">Submit</button>
-                        </div>
-                        
-                    </div>
-                </div>
-                    
-                </form>
-              
-            </div>
-        </div>
-    </div>-->
+     
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js">
@@ -547,6 +450,9 @@
 <script type="text/javascript">
     function showDiv(divId, element) {
         document.getElementById(divId).style.display = element.value == 'rental' ? 'block' : 'none';
+    }
+    function showprecinct(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'reg' ? 'inline' : 'none';
     }
 </script>
 

@@ -129,6 +129,7 @@ echo "<script>alert('Email id or Mobile no is invalid');</script>";
 	<?php
 		include('navbar.php');
 	?>
+<form action = "reset-password.php" method  ="POST">
 	<div class="container  px-5 py-5">
 		<div class="row justify-content-center">
 			<div class="col-xl-4 col-lg-6 col-md-8 col-xs-12 col-sm-10 rounded bg-white rounded">
@@ -144,16 +145,14 @@ echo "<script>alert('Email id or Mobile no is invalid');</script>";
 					<p class= "text-dark">Please input your barangay admin account e-mail here. This is to help you retrieve your account</p>
 					<!--Pili kayo style-->
 					<div class="form-floating mb-3">
-					<input type="email" class="form-control" style= "padding-left: 5px" id="floatingInput" placeholder="name@example.com">
-					<label for="floatingInput px-2">  Email address</label>
-					</div>
+					
 					<div class="input-group">
 						<button class="btn btn-secondary disabled">
 							<i class="fa fa-envelope">
 
 							</i>
 						</button>
-						<input type="email" class="form-control" name = "emadd" placeholder = "E-barangay e-mail address">
+						<input type="emai" class="form-control" name = "emadd" placeholder = "E-barangay e-mail address">
 					</div>
 					</div>
 				</div>
@@ -169,7 +168,7 @@ echo "<script>alert('Email id or Mobile no is invalid');</script>";
 							</button>
 						</div>
 						<div class="btn-group">
-							<button class="btn btn-info">
+							<button type = "submit" class="btn btn-info">
 								Submit
 							</button>
 						</div>
@@ -181,6 +180,7 @@ echo "<script>alert('Email id or Mobile no is invalid');</script>";
 			</div>
 		</div>
 	</div>
+	</form>
 	
 </body>
 </html>

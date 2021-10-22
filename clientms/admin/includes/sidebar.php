@@ -78,7 +78,7 @@
                 <img src = "../IMAGES/admin-logo.png" class = "py-1"style = "width: 60px;"><br>
           
                 <div class="btn-group my-2" role="group" aria-label="Basic example">
-                    <a type = " button" class = "btn border-danger link-danger fs-6" ><i class = "fa fa-power-off"></i>&nbsp;Logout </a>          
+                    <a type = " button" href="#" class = "btn border-danger link-danger fs-6" ><i class = "fa fa-power-off"></i>&nbsp;Logout </a>          
                 </div>
                 
                 

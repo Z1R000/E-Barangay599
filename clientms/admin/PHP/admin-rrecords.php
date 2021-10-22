@@ -25,8 +25,8 @@
                                                         <th style = "text-align: left; ">Requested Property </th>
                                          
                                                         <th style = "text-align: left;;">Date of rental</th>
-                                                        <th style = "text-align: left;">Rental Duration</th>
-                                                        <th style = "text-align: left;">Rate</th>
+                                                        <th style = "text-align: left;">Rental Duration (hours)</th>
+                                                        <th style = "text-align: left;">Rate (Pesos)</th>
                                                        
                                                         
                                                     
@@ -43,8 +43,8 @@
                                                         <td scope="col" style = "text-align: left">Barangay van</td>
                                          
                                                         <td scope="col" style = "text-align: left">10/16/2021,21:12:08</td>
-                                                        <td scope="col" style = "text-align: left">2 hrs</td>
-                                                        <td style = "text-align: left;">40.00 PHP</td>
+                                                        <td scope="col" style = "text-align: right">2</td>
+                                                        <td style = "text-align: right;">10,040.00 </td>
                                                        
 
                                                         <td scope="col" style = "text-align: center">
@@ -63,6 +63,8 @@
                                                                 </div>  
                                                         </td>
                                                     </tr>
+                                            
+                                                   
                                                 </tbody>
                                             </table>                        
                                         </div>   
