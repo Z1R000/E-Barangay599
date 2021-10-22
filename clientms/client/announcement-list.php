@@ -118,7 +118,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                                 
                                 echo "
                                 <div class = 'mb-3 table-responsive' style='background-color:aliceblue;border:1px solid black;  border-radius:4px; overflow: hidden;'>
-                                <h1 class='testfont' style='float: left; margin:25px;    color: #021f4e;'>Announcement</h1>";
+                                <h1 class='testfont' style='float: left; margin:25px;color: #021f4e;'>Announcement</h1>";
 								$sDate = $row->announcementDate;
 								$eDate = $row->endDate;
     
