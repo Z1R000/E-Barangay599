@@ -45,12 +45,7 @@ border-radius: 100%;
 
 
 
-#wrapper {
-    
-    overflow-x: hidden;
-    background-color: rgb(204, 198, 198);
 
-}
 
 
 
@@ -76,7 +71,9 @@ border-radius: 100%;
 }
 
 body{
-    background-color: rgb(204, 198, 198);
+    height: 100%;
+    background-image: url('../images/bg.png');
+    background-size: cover;
 }
 
 #sidebar-wrapper .list-group {
@@ -87,6 +84,9 @@ body{
 }
 
 #page-content-wrapper {
+    height: 100%;
+    overflow-x:hidden;
+    background: url('../images/bg.jpg');
     margin-left:15rem;
     min-width: 100vw;
     -webkit-transition: margin 0.25s ease-out;
@@ -158,13 +158,16 @@ body{
       font-size: 25px;   
     }
     h3.testfont{
-        font-size: 15px;
+        font-size: 10px;
     }
     h2.testfont{
-        font-size: 25px;
+        font-size: 15px;
     }
     h4.testfont{
         font-size: 12px;
+    }
+    h1.testfont{
+        font-size: 10px; 
     }
     span.anothertestfont{
         font-size: 20px;
@@ -196,14 +199,17 @@ body{
       font-size: 35px;   
     }
     h3.testfont{
-        font-size: 25px;
+        font-size: 15px;
     }
     h2.testfont{
-        font-size: 30px;
+        font-size: 20px;
     
     }
     h4.testfont{
         font-size: 18px;
+    }
+    h1.testfont{
+        font-size: 20px; 
     }
     span.anothertestfont{
         font-size: 25px;
