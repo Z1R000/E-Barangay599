@@ -8,7 +8,7 @@
         opacity: 100%;
     }
 </style>
-<nav class="navbar navbar-expand-lg navbar-dark op ">
+<nav class="navbar navbar-expand-lg navbar-dark op mb-5 ">
   <div class="container-fluid opacity-25">
     <a class="navbar-brand" href="#"><img src="../images/barangay.png" alt="" style= "width: 28px;"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,3 +32,9 @@
     </div>
   </div>
 </nav>
+
+
+
+<div class="container-fluid pula">
+
+</div>

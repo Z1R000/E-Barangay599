@@ -204,15 +204,12 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                         <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn btn-danger"> <i class = "fa fa-trash"></i></button>
                                     </div>
-                                </td>
-                            
-                            
+                                </td>                         
                             </tr>
                             <?php $cnt=$cnt+1;}}}else{?>   
                             </tbody>
                         </table>
                     </div>
-
                 </div>
 				<!--END SEARCH -->
 				<div class="row g-1 px-5">
@@ -229,7 +226,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <th   scope="col">Purok</th>
                                     <th  scope="col">Street </th>
                                     <th   scope="col">Action </th>
-                                </tr>
+                                </tr>   
                             </thead>
                             <tbody>
                             <tr>
@@ -277,11 +274,14 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                             </tbody>
                         </table>
                     </div>
+                    <!--<div class="row  border justiy-content-center">
+                       
+                        <div class="col-xl-4"></div>
+                        <div class="col-xl-4"></div>
+                        <div class="col-xl-4"><a class= "" href = "#"> <i class="fas fa-forward fa-2x text-primary"></i></a></div>
+                    </div>-->
 
                 </div>
-				
-                
-            
         </div>
         
     </div>

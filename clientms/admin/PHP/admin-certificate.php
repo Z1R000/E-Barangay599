@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+  
 
     <link rel = "stylesheet" href="../css/sidebar.css" />
     <link rel="stylesheet" href="../CSS/scrollbar.css">
@@ -129,6 +129,7 @@
                             <nav class="nav nav-pills flex-column  flex-sm-row">
                                 <a class="flex-sm-fill  text-sm-center nav-link active fs-5 white" aria-current="page" href="#certlist" data-bs-toggle = "tab">Certificates List</a>
                                 <a class="flex-sm-fill text-sm-center nav-link fs-5 white" href="#crecords" data-bs-toggle = "tab">Certification Records</a>
+                                <a class="flex-sm-fill text-sm-center nav-link fs-5 white" href="#holding" data-bs-toggle = "tab">Payment Logs</a>
                        
                             
                             </nav>
@@ -228,16 +229,17 @@
                                         <table class="table bg-white table-hover shadow-sm border "> 
                                             <thead>
                                                 <tr>
-                                                    <td scope = "col" colspan = 8 style ="background: #012f6e; color: white; text-align: center">Certification Records</td>
+                                                    <td scope = "col" colspan = 9 style ="background: #012f6e; color: white; text-align: center">Certification Records</td>
                                                 </tr>
                                                 <tr>
                                                     <th style = "text-align: left">BCN #</th>
                                                     <th style = "text-align: left">Status</th>
                                                     <th style = "text-align: left">Requestor's Name</th>
-                                                   
+                                             
                                                     <th style = "text-align: left">Purpose</th>
                                                     <th style = "text-align: left">Requested Certificate</th>
                                                     <th style = "text-align: left">Certificate fee</th>
+                                                    <th style = "text-align: left">Mode of Payment</th>
                                                     <th style = "text-align: left">Date</th>
                                                     <th style = "text-align: center">Actions</th>
                                                     
@@ -248,10 +250,11 @@
                                                     <td scope="col" style = "text-align: left">015-22</td>
                                                     <td scope="col" style = "text-align: left">On-Going</td>
                                                     <td scope="col" style = "text-align: left">ekoc omsim</td>
-                                                   
+                                                    
                                                     <td scope="col" style = "text-align: left">For employment</td>
                                                     <td scope="col" style = "text-align: left">Barangay Clearance</td>
                                                     <td scope="col" style = "text-align: left">30 PHP</td>
+                                                    <td scope="col" style = "text-align: left">G-cash</td>
                                                     <td scope="col" style = "text-align: left">10-12-2021</td>
                                                   
                                                     <td scope="col" style = "text-align: center">
@@ -287,6 +290,10 @@
                                             </td>
                                             <td>
                                                 Requested Certificate
+                                            </td>
+                                             
+                                            <td>
+                                              Mode of Payment
                                             </td>
                                           
                                             
@@ -526,57 +533,81 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body py-4 bg-white">
-                <div class="row ">
-                    <div class="col-md-4">
-                        
-                        <label for="ctype"class="fs-6 fw-bold">Certification Type</label>
-                        <div class="d-flex">
-                            <select class= "select form-control" name="" id="ctype">
-                                <option  selected>Avaiable certifications</option>
-                                <option value="gcash">Employment</option>
-                                <option value="cash">Indigency</option>
-                            </select>
+                    <div class="row">
+                        <div class="col-xl-4">
+                            <label for="date" class="fw-bold fs-6" >Date today</label>
+                            <input type="text" id= "date" class="form-control" readonly>
                         </div>
-                        
                     </div>
-                    <div class="col-md-4">
+              
+                    <div class="row g-3 ">
+                        <div class="col-md-6">
+                    
+                            <label for="rname"class="fs-6 fw-bold">Requestor Name</label>
+                            <input type="text" class="form-control" id="rname" placeholder ="e.g Juan Dela Cruz">
                         
-                        <label for="rname"class="fs-6 fw-bold">Certification Fee</label>
-                        <div class="d-flex">
-                            <input type="text" class="form-control me-2 w-50" id="rname" value  = "20.00" readonly>
-                            <div class="fs-5">
-                                PHP
+                        </div>
+                        <div class="col-md-4">
+                            <label for="purp" class= "fs-6 fw-bold">Purposes</label>
+                                <select class= "select form-control" name="" id="purp">
+                                    <option  selected>Purposes</option>
+                                    <option value="ent">For entertainment</option>
+                                    <option value="med">For medical reasons</option>
+                                </select>
                             </div>
-                        </div>
-                        
                     </div>
-                  
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="rname"class="fs-6 fw-bold">Requestor Name</label>
-                        <input type="text" class="form-control" id="rname" placeholder ="e.g Juan Dela Cruz">
+                    <div class="row">
+               
+                            <div class="col-md-4">
+                                
+                                <label for="ctype"class="fs-6 fw-bold">Certification Type</label>
+                                <div class="d-flex">
+                                    <select class= "select form-control" name="" id="ctype" onchange= "showDiv('hidden_div',this)">
+                                        <option  selected>--Avaiable certifications--</option>
+                                        <option value="emp">Employment</option>
+                                        <option value="ind">Indigency</option>
+                                        <option value="Business">Business</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="rname"class="fs-6 fw-bold">Certification Fee</label>
+                                <div class="d-flex">
+                                    <div class="input-group">
+                                        <button class="btn btn-secondary text-white" disabled>
+                                        ₱
+                                        </button>
+                                        <input type="text" class="form-control me-2 w-50" style = "text-align: right;" id="rname" value  = "20.00" readonly>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="col-md-4">
+                                <label for="ctype"class="fs-6 fw-bold">Mode of Payment</label>
+                                <div class="d-flex">
+                                    <select class= "select form-control" name="" id="mop" onchange= "showDiv('hidden_div',this)">
+                                        <option  selected>--Select--</option>
+                                        <option value="gc">G-Cash</option>
+                                        <option value="cash">Cash</option>
+                       
+                                    </select>
+                                </div>
+                            </div>
+                   
+
                     </div>
-                    <div class="col-md-6">
+                
+               
+          
+               <div class="row" id = "hidden_div">
+                           
+                    <div class="col-md-6" >
                         <label for="purp" class= "fs-6 fw-bold">Business name 
                             <small class="text-muted">(If business related)</small> </label>
                         <input type="text" class="form-control" id="rname" placeholder ="e.g Manong Store"> 
                    </div>
-                 
                    
-        
-                </div>
-               <div class="row">
-                   <div class="col-md-6">
-                        <label for="purp" class= "fs-6 fw-bold">Purposes</label>
-                            <select class= "select form-control" name="" id="purp">
-                                <option  selected>Purposes</option>
-                                <option value="ent">For entertainment</option>
-                                <option value="med">For medical reasons</option>
-                            </select>
-                   </div>
-                   <div class="col-md-6">
-                        <label for="cap" class= "fs-6 fw-bold">Capital</label>
+                   <div class="col-md-6" >
+                        <label for="cap" class= "fs-6 fw-bold" >Capital</label>
                             <select class= "select form-control" name="" id="cap">
                                 <option  selected>< 10,000 </option>
                                 <option value="ent">>10, 000</option>
@@ -587,15 +618,7 @@
            
                  
                </div>
-               <div class="col-md-6">
-                        <label for="pmethod"class= "fs-6 fw-bold">Status</label>
-                        <select class= "select form-control" name="" id="pmethod">
-                            <option  selected>Status of certification</option>
-                            <option value="gcash">Settled</option>
-                            <option value="cash">Unsettled</option>
-                            <option value="cash">Dismissed</option>
-                        </select>
-                    </div>
+            
         
             </div>
             <div class="modal-footer py-0">
@@ -718,12 +741,52 @@
             </div>
         </div>
 <script>
+    var today = new Date();
+    var mm = today.getMonth() + 1;
+    var dd = today.getDay();
+    var yy = today.getFullYear();
+    
+    if (mm<10){
+        mm = '0'+ mm;
+    }
+    if (dd <10){
+        dd = '0' + dd;
+    }
+
+    var  dtd= mm + '/' + dd + '/' + yy;
+    document.getElementById('date').value = dtd;
+
     function walkin(){
         document.getElementId('sms').disabled = true;
         document.getElementId('em').disabled = true;
         
     }
+    
 
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js">
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("select").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+    </script>
+
+<script type="text/javascript">
+    function showDiv(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'Business' ? 'flex' : 'none';
+    }
+   
 </script>
 
 </body>
