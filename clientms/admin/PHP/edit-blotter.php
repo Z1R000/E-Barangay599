@@ -226,7 +226,7 @@
                                       <option value="dismissed">Dismissed</option>
                                   </select>
                               </div>   
-                              <div class="col-md-5">
+                              <div class="col-md-6">
                                   
                                     
                                   <label for="btype"class= "fw-bold fs-6">Incident Type: </label>
@@ -243,16 +243,16 @@
                                 
                             </div>
                            
-                            <div class="row g-0 py-2 px-3">
+                            <div class="row gx-3 py-2 px-3">
                                 
-                                <div class="col-md-5 ms-2 ">
+                                <div class="col-md-5 ">
                                     
                                     <label for="narrative" class= "fw-bold fs-6">Incident Date and time</label>
                                     <input type="datetime-local" class="form-control" name='inciDate-start'>
                 
 
                                 </div>
-                                <div class="col-md-5 ms-2">
+                                <div class="col-md-6 ms-2">
                                     <label for="narrative" class= "fw-bold fs-6">Incident Location</label>
                                     <input type="text" class="form-control" name='inciAdd' placeholder='e.g Near Purok 2 along the road'>
                 

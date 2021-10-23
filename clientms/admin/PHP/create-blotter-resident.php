@@ -130,7 +130,7 @@
                     <div class="col-xl-10  px-3 py-2">
                         <div class="row g-0 my-2 bg-white shadow-sm">
                             <div class="row border g-0 rounded-top px-2 py-0 bg-primary">
-                                <div class= "fs-5 py-1 white" id="step-2">Step 2: Respondent/s <span class="fs-6">(attending barangay personnel)</span></div>
+                                <div class= "fs-5 py-1 white" id="step-2">Step 2:Attending barangay personnel <span class="fs-6"></span></div>
                             </div>
                         
                             <div class="row g-2 px-3 py-2 shadow" style = "max-height: 400px; overflow-y: auto;  ">
