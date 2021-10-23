@@ -8,8 +8,8 @@
       } else{
         if(isset($_POST['submit']))
         {
-        $eid=intval($_GET['editid']);
-        $clientmsaid=$_SESSION['clientmsaid'];
+            $eid=intval($_GET['editid']);
+            $clientmsaid=$_SESSION['clientmsaid'];
             $rest=$_POST['rest'];
             $lname=$_POST['lname'];
             $fname=$_POST['fname'];
@@ -27,24 +27,24 @@
             $tin=$_POST['tin'];
             $bdt=$_POST['bdt'];
         
-        $sql="update tblresident set ResidentType=:rest, Purok=:prk, houseUnit=:hu, streetName=:stn, LastName=:lname, FirstName=:fname, MiddleName=:mname, houseUnit=:hu, streetName=:stn, Purok=:prk, Cellphnumber=:contact, CivilStatus=:cstat, voter=:vstat, Email=:email where ID=:eid";
-        $query=$dbh->prepare($sql);
-        $query->bindParam(':rest',$rest,PDO::PARAM_STR);
-        $query->bindParam(':vstat',$vstat,PDO::PARAM_STR);
-        $query->bindParam(':lname',$lname,PDO::PARAM_STR);
-        $query->bindParam(':fname',$fname,PDO::PARAM_STR);
-        $query->bindParam(':mname',$mname,PDO::PARAM_STR);
-        $query->bindParam(':hu',$hu,PDO::PARAM_STR);
-        $query->bindParam(':stn',$stn,PDO::PARAM_STR);
-        $query->bindParam(':prk',$prk,PDO::PARAM_STR);
-        $query->bindParam(':contact',$contact,PDO::PARAM_STR);
-        $query->bindParam(':cstat',$cstat,PDO::PARAM_STR);
-        $query->bindParam(':email',$email,PDO::PARAM_STR);
-        $query->bindParam(':eid',$eid,PDO::PARAM_STR);
-        $query->execute();
-        echo '<script>alert("Resident detail has been updated")</script>';
-        echo "<script type='text/javascript'> document.location ='edit-resident-account.php?editid=" + $eid + "'; </script>";
-            }
+            $sql="update tblresident set ResidentType=:rest, Purok=:prk, houseUnit=:hu, streetName=:stn, LastName=:lname, FirstName=:fname, MiddleName=:mname, houseUnit=:hu, streetName=:stn, Purok=:prk, Cellphnumber=:contact, CivilStatus=:cstat, voter=:vstat, Email=:email where ID=:eid";
+            $query=$dbh->prepare($sql);
+            $query->bindParam(':rest',$rest,PDO::PARAM_STR);
+            $query->bindParam(':vstat',$vstat,PDO::PARAM_STR);
+            $query->bindParam(':lname',$lname,PDO::PARAM_STR);
+            $query->bindParam(':fname',$fname,PDO::PARAM_STR);
+            $query->bindParam(':mname',$mname,PDO::PARAM_STR);
+            $query->bindParam(':hu',$hu,PDO::PARAM_STR);
+            $query->bindParam(':stn',$stn,PDO::PARAM_STR);
+            $query->bindParam(':prk',$prk,PDO::PARAM_STR);
+            $query->bindParam(':contact',$contact,PDO::PARAM_STR);
+            $query->bindParam(':cstat',$cstat,PDO::PARAM_STR);
+            $query->bindParam(':email',$email,PDO::PARAM_STR);
+            $query->bindParam(':eid',$eid,PDO::PARAM_STR);
+            $query->execute();
+            echo '<script>alert("Resident detail has been updated")</script>';
+            echo "<script type='text/javascript'> document.location ='edit-resident-account.php?editid=" + $eid + "'; </script>";
+        }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,10 +57,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-
+    
     <link rel = "stylesheet" href="../css/sidebar.css" />
     <link rel="stylesheet" href="../css/scrollbar.css">
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
@@ -70,7 +67,7 @@
         table,td,tr,th{
             
             text-align: left;
-            font-size: 1em;
+            font-size: 1.10em;
             padding: 100px;
             font-family: 'Noto Sans Display', sans-serif;
             
@@ -124,61 +121,229 @@
             </div>
         </div>
     </nav>
-   
-    <div class="container-fluid mx-auto px-5">
-        <div class="row g-0 mx-2">
-            <div class="row g-3">
-                <div class="mx-auto col-xl-10 white  ">
-                <form method="post"> 
-                    <?php
-                        $eid=$_GET['editid'];
-                        $sql="SELECT * from tblresident where ID=:eid";
-                        $query = $dbh -> prepare($sql);
-                        $query->bindParam(':eid',$eid,PDO::PARAM_STR);
-                        $query->execute();
-                        $results=$query->fetchAll(PDO::FETCH_OBJ);
-                        $cnt=1;
-                        if($query->rowCount() > 0)
-                        {
-                        foreach($results as $row)
-                        {               
-                    ?>
-                    <div class="row g-0 rounded-top"  style= "background-color:#021f4e">
-                        <div class="fs-5 px-3 py-1">
-                            Resident #<?php echo $row->ID; ?>
+    <?php
+        $eid=$_GET['editid'];
+        $sql="SELECT * from tblresident where ID=:eid";
+        $query = $dbh -> prepare($sql);
+        $query->bindParam(':eid',$eid,PDO::PARAM_STR);
+        $query->execute();
+        $results=$query->fetchAll(PDO::FETCH_OBJ);
+        $cnt=1;
+        if($query->rowCount() > 0){
+            foreach($results as $row)
+            {   
+                
+                $gbd = $row->BirthDate;
+                $gbd = date('Y-m-d', strtotime($gbd));
+                $today = date('Y-m-d');
+                $diff = date_diff(date_create($gbd), date_create($today));
+    ?>
+      <div class="container-fluid px-5">
+                    <div class="row px-5">
+                        <div class="col-xl-5"></div>
+                        <div class="col-xl-7">
+                            <div class="float-end">
+                                <a href="#" onclick = "window.history.back();" class="link link-primary text-decoration-none fs-4"><i class="fa fa-arrow-circle-left me-2"></i>Go back</a>
+                            </div>
+                            
                         </div>
                     </div>
-                    <div class="row g-0 border bg-white">
-                        <div class="col-xl-3 py-3 border-end" align = "center">
-                      
-                            <img src="../images/user-res.png" alt="resident" style ="width: 105px; height: 100px;">
-                            <div class = "fs-6 black"><?php echo "$row->FirstName "; echo "$row->MiddleName "; echo $row->LastName; ?></div>
-                            
+            </div>
+    
+    <div class="container-fluid mx-auto px-5 mb-5">
+        <div class="row g-0 mx-2 ">
+            <div class="row g-3 ">
+                <div class="mx-auto col-xl-10 white  ">
+                <form method="post"> 
+                    <div class="row g-0 rounded-top"  style= "background-color:#021f4e">
+                        <div class="fs-5 px-3 py-1"> <i class="fa fa-id-card-alt fa-1x me-1">
+                                        </i>
+                            Resident <?php echo $row->ID; ?>
                         </div>
-                        <div class="col-xl-4 mx-2  px-2">
-                            
-                            <table class="table my-3">
-                                    <tr>
-                                        <th class =""><i class ="fa fa-calendar me-2"></i>Age</th>
-                                        <td>
-                                            <?php 
-                                                $gbd = $row->BirthDate;
-                                                $gbd = date('Y-m-d', strtotime($gbd));
-                                                $today = date('Y-m-d');
-                                                $diff = date_diff(date_create($gbd), date_create($today));
-                                                echo $diff->format('%y'); 
-                                            ?>
+                    </div>
+                        <div class="row g-0  bg-white shadow-lg">
+                            <div class="col-xl-12 py-2 border-end" align = "center">
+                                <button type = "button" onclick ="editname();"class="btn-primary btn">
+                                    <i class="fa fa-edit me-2"></i>Edit Full Name
+                                </button>
+                                <div class="row g-0"></div>
+                                    <div class="text-center  py-2">
+                                        <div class="input-group">
+                                            <input type="text" id ="lname" class="form-control display-6 " value = "<?php echo $row->LastName;?>"
+                                            readonly
+                                            style = "font-size: 2em;text-align:center;width: 10%">
+                                            <input type="text" id = "fname" class="form-control display-6 " value = "<?php echo $row->FirstName;?>"
+                                            readonly
+                                            style = "font-size: 2em;text-align:center ;width: 11%">
+
+                                            <input type="text" id= "mname" class="form-control display-6 " value = "<?php echo $row->MiddleName;?>"
+                                            readonly
+                                            style = "font-size: 2em;text-align:center;width: 12%">
+                                            
+                                            <input type="text" id= "suf" class="form-control display-6 " value = "<?php echo $row->suffix;?>"
+                                            readonly
+                                            style = "font-size: 2em;text-align:center;width: 4%" placeholder = "suffix">
+                                        </div>
+                                    </div>      
+                                </div>
+                            <script>
+                                function editname(){
+                                    var fname = document.getElementById('fname');
+                                    var mname = document.getElementById('mname');
+                                    var lname = document.getElementById('lname');
+                                    var suf = document.getElementById('suf');
+
+                                    if((fname.readOnly == true)&&(lname.readOnly == true)&&(mname.readOnly == true)&&(suf.readOnly== true)){
+                                        fname.readOnly = false;
+                                        lname.readOnly = false;
+                                        mname.readOnly = false;
+                                        suf.readOnly = false;
+                                        
+                                    }
+                                    else{
+                                        fname.readOnly = true;
+                                        lname.readOnly = true;
+                                        mname.readOnly = true;
+                                        suf.readOnly = true;
+                                    }
+                                }
+                                
+                            </script>
+                        <div class="col-xl-10 mx-auto px-2">
+                            <table class="table">
+                                   <tr>
+                                        <td colspan = 3 class= "text-center bg-info text-white">
+                                                <i class= "fa fa-thumbtack me-2"></i>
+                                                Contact Information
+                                        </td>
+                                    </tr>
+                                    <tr>                  
+                                        <th  style = "padding-top: 5px; padding-bottom:5px;">
+                                            <i class="fa fa-mobile-alt fa-1x me-2"></i>Contact Number
+                                        </th>
+                                        <td style= "text-align: right; padding-top: 5px; padding-bottom:5px;" colspan= 2>
+                                            <input class="form-control" value = "<?php echo htmlentities($row->Cellphnumber);?>"
+                                            style = "width: 50%; float: right;text-align: right">
+                                        </td>
+                                    </tr>
+                                    <tr>                    
+                                        <th style = "padding-top: 5px; padding-bottom:5px;">
+                                            <i class="fa fa-at fa-1x me-1"></i>Email Address
+                                        </th>
+                                        <td style= "text-align: right;padding-top: 5px; padding-bottom:5px;" colspan= 2>
+                                            <input class = "form-control" value = "<?php echo htmlentities($row->Email);?>"
+                                            style = "width: 50%; float: right;text-align: right">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th class ="" > <i class= "fa fa-venus-mars me-1"></i> Gender</th>
-                                        <td><?php echo $row->Gender; ?></td>
+                                        <td colspan = 3 class= "text-center bg-info text-white">
+                                            <i class= "fa fa-street-view me-2"></i>Barangay Residency Information
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <i class="fa fa-home fa-1x me-1"></i>
+                                            Residency Type
+                                        </th>
+                                        <td>
+                                        <div class="col-6 px-1" id="hidden_div" style = "width: 50%; float: right;text-align: right">
+                                        
+                                        <input type="text" class="form-control" placeholder="" id="residenttype" required />
+                                    </div>
+                                            <select class="form-select input-sm" aria-label="Default select example" style = "width: 50%; float: right;text-align: right"onchange="showDiv('hidden_div', this)">
+                                                    <option value="<?php echo htmlentities($row->ResidentType)?>"><?php echo htmlentities($row->ResidentType)?></option>
+                                                    <option value="House Owner">House Owner</option>
+                                                    <option value="caretaker">Care taker</option>
+                                                    <option value="Rental/Boarder">Rental/Boarder</option>
+                                                    <option value="wrelative">Living with Relatives</option>
+                                                </select>
+                                                
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        
+                                        <th style = "padding-top: 5px; padding-bottom:5px;" >
+                                            <i class="fa fa-map-marker-alt fa-1x me-1"></i>
+                                                    Address
+                                        </th>
+
+                                        <td style = "padding-top: 5px; padding-bottom:5px;text-align:right" colspan= 2>
+                                            <?php echo htmlentities("#".$row->houseUnit." Purok ".$row->Purok." ".$row->streetName." Street");?>
+                                            <button type = "button" class= "btn btn-primary" onclick = "editAdd()">
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+
+                                            <script>
+                                            function editAdd(){
+                                                var hide = document.getElementById('hide')
+                                                if (hide.style.display == "none"){
+                                                    hide.style.display  = "block";
+                                                }
+                                                else{
+                                                    hide.style.display = "none";
+                                                }
+                                                
+                                            }
+                                        </script>
+                                       
+                                        </td>
+                                      
+                                    </tr>
+                                    </table>
+                                    <div class="row justify-content-center" id = "hide" style = "display:none;">
+                                        <div class="row">
+                                                <div class="col-xl-4 my-1">  
+                                                    <input id = "hNum" type="text" class= "form-control" value ="<?php echo htmlentities($row->houseUnit)?>"  style= "text-align: right">
+                    
+                                                </div>   
+                                                <div class="col-xl-4 my-1">
+                                                    <input id = "purokNum" type="text" class= "form-control" value = "<?php echo htmlentities($row->Purok);?>" style= "text-align: right">
+                                                </div>
+                                                <div class="col-xl-4 my-1">    
+                                                    <input id = "stName"type="text" class= "form-control" value = "<?php echo htmlentities($row->streetName)?>"  style= "text-align: right">
+                                                </div>   
+                                     
+                                        </div>
+                                        <div class="row my-2 justify-content-center">
+                                            <div class="col-xl-4" align ="center">
+                                                <button class="btn-success btn"><i class="fa fa-save me-2"></i>Save Changes</button>
+                                            </div>
+                                        </div>
+                                         
+                                </div>
+                                <table class= "table">
+                                    <tr>
+                                        <th colspan = 3 class= "bg-info text-center text-white">
+                                            <i class = "fa fa-user"></i>
+                                            Personal Information
+                                        </th>
+                                    </tr>
+                                    <th style = "padding-top: 10px; padding-bottom:10px;">
+                                            Date of Birth
+                                    </th>
+                                    <td style = "padding-top: 10px; padding-bottom:10px;text-align:right" colspan = 2>
+                                            <?php echo $gbd;?>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                        <th class ="" >Gender</th>
+                                       
+                                        <td style= "text-align: right;padding-top: 5px; padding-bottom:5px;" colspan= 2>
+                                        <select  name="cstatus"  class="form-select select2" required='true' style = "width: 50%; float: right;text-align: right">
+                                            <option value="<?php  echo htmlentities($row->Gender);?>"><?php  echo htmlentities($row->Gender);?></option>
+                                            <option value="Single">Female</option>
+                                       
+                                        </select>
+                                
+                                        </td>
+                                    
                                     </tr>
                         
+
                                     <tr>
-                                        <th class ="" > <i class= "fa fa-heart me-1"></i> Civil Status</th>
+                                        <th class ="" > Civil Status</th>
                                         <td>
-                                        <select  name="cstatus"  class="form-control select2" required='true' style="padding: 1px; width: 90%; font-size: 90%; color: black;">
+                                        <select  name="cstatus"  class="form-select select2" required='true' style = "width: 50%; float: right;text-align: right">
                                             <option value="<?php  echo htmlentities($row->CivilStatus);?>"><?php  echo htmlentities($row->CivilStatus);?></option>
                                             <option value="Single">Single</option>
                                             <option value="Married">Married</option>
@@ -188,167 +353,92 @@
                                         </select>
                                         </td>
                                     </tr>
-                        
-                            </table>
-                           
-                        </div>
-                        <div class="col-xl-4 mx-2">
-                            
-                            <table class="table my-3">
-                                    <tr>
-                                        <th class =""><i class ="fa fa-birthday-cake me-2"></i>Birthdate</th>
-                                        <td>
-                                            <?php 
-                                                $gbd = $row->BirthDate;
-                                                $gbd = date('j F Y', strtotime($gbd));
-                                                echo $gbd;
-                                            ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="" > <i class= "fa fa-info me-1"></i> Status</th>
-                                        <td>
-                                            <select>
-                                                <option value="Active" selected>Active</option>
-                                                <option value="Inactive" >Inactive</option>
-                                                <option value="Inactive" >Deceased</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                        
                                     
+                                    <tr>
+                                        <th class ="" > Voter Status</th>
+                                        <td>
+                                        <div class="col-xl-4 mx-2" id="precinct" style="display:none;">
+                                           
+                                                    <select class="form-select input-sm ms-2"  style = "width: 30%; float: right;text-align: right">
+                                                    <option value="">--Select--</option>
+                                                    <option value="1a">1-A</option>
+                                                    <option value="2a">2-A</option>
+                                                </select>
+                                                 
+                                                </div>
+                                        <select class="form-select input-sm" aria-label="Default select example" id="gender"onchange="showprecinct('precinct', this)" style = "width: 50%; float: right;text-align: right">
+                                                    <option value="<?php echo htmlentities($row->voter);?>"><?php echo htmlentities($row->voter);?></option>
+                                                    <option value="reg">Registered</option>
+                                                    <option value="unreg">Unregistered</option>
+                                                </select>
+                                           
+                                            </div>
+                                    </tr>
+                                    <tr>                    
+                                        <th style = "padding-top: 5px; padding-bottom:5px;">
+                                            SSS Number
+                                        </th>
+                                        <td style= "text-align: right;padding-top: 5px; padding-bottom:5px;" colspan= 2>
+                                            <input class = "form-control" value = "<?php echo htmlentities($row->sssNumber);?>"
+                                            style = "width: 50%; float: right;text-align: right">
+                                        </td>
+                                    </tr>
+                                    <tr>                    
+                                        <th style = "padding-top: 5px; padding-bottom:5px;">
+                                            TIN Number
+                                        </th>
+                                        <td style= "text-align: right;padding-top: 5px; padding-bottom:5px;" colspan= 2>
+                                            <input class = "form-control" value = "<?php echo htmlentities($row->tinNumber);?>"
+                                            style = "width: 50%; float: right;text-align: right">
+                                        </td>
+                                    </tr>
                             </table>
-                           
                         </div>
                     </div>
-                    
-                
-                </div>
-                <?php $cnt=$cnt+1;}} ?>
-            </div>
-                        </form>
-          
-        </div>
-    </div>
-    <div class="container-fluid mx-auto px-5 mb-5">
-        <div class="row g-0 mx-2">
-            <div class="row g-2">
-                <div class="mx-auto col-xl-10 ">
-                    <div class="row g-0  rounded-top border bg-white">
-                        <div class="col-xl-2 py-2 px-2  ">
-                            <nav class="nav nav-pills flex-column  flex-sm-row">
-                                <a class="flex-sm-fill  text-sm-center nav-link active" aria-current="page" href="#">Personal Details</a>
-                               
-                              
-                            </nav>
 
-                        </div>
-                        
-                    </div>
-                    <div class="row g-0 border bg-white" >
-                    
-                        <div class="col-xl-11 mx-2  mx-auto  px-2">
-                            
-                            <table class="table my-3" >
-                                    <tr>
-                                        <th class ="">Resident Type</th>
-                                        <td style ="text-align: right; padding-right: 4%" > 
-                                        <select class="form-select input-sm" style="width: 50%; float: right;" name = "rest" aria-label="Default select example">
-                                            <option value="<?php  echo htmlentities($row->ResidentType);?>"><?php  echo htmlentities($row->ResidentType);?></option>
-                                            <option value="homeowner">Home Owner</option>
-                                            <option value="caretaker">Care taker</option>
-                                            <option value="rental">Rental/Boarder</option>
-                                            <option value="wrelative">Living with Relatives</option>
-                                        </select>  
-                                        </td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <th class ="">Contact Number</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><input type="text" name="contact"  value = "<?php echo $row->Cellphnumber ?>"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="">Email </th>
-                                        <td style ="text-align: right; padding-right: 4%" ><input type="text" name="contact"  value = "<?php echo $row->Cellphnumber ?>"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="">First Name</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><input type="text" name="fname" class = "" value = "<?php echo $row->FirstName ?>"></td>
-                                    </tr>
-                                
-                                    
-                                    <tr>
-                                        <th class ="">Middle Name</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><input type="text" name="mname" class = "" value = "<?php echo $row->MiddleName ?>"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="">Last Name</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><input type="text" name="lname" class = "" value = "<?php echo $row->LastName ?>"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="">House Unit/Number</th>
-                                        <td style ="text-align: right; padding-right: 4%" >#<input type="text" name="hu" class = "" value = "<?php echo $row->houseUnit ?>"></td>
-                                    </tr>
-                                    
-                                
-                                    <tr>
-                                        <th class ="">Purok</th>
-                                        <td style ="text-align: right; padding-right: 4%" >
-                                            <select name="prk" id = "purok" aria-label="Default select example">
-                                                <option value="<?php echo $row->Purok ?>">Purok <?php echo $row->Purok ?></option>
-                                                <option value="1">Purok 1</option>
-                                                <option value="2">Purok 2</option>
-                                                <option value="3">Purok 3</option>
-                                            </select>      
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="">Street</th>
-                                        <td  style ="text-align: right; padding-right: 4%">
-                                            <select name="stn" id = "vp" aria-label="Default select example">
-                                                <option value="<?php echo $row->streetName ?>"><?php echo $row->streetName ?></option>
-                                                <option value="s1">Street 1</option>
-                                                <option value="s2">Street 2</option>
-                                            </select>
-                                        </td>    
-       
-                                       
-                                    </tr>
-                                  
-                                    <tr>
-                                        <th class ="">TIN</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><?php echo $row->tinNumber ?></td>
-                                    </tr>
-                                    <tr>
-                                        <th class ="">SSS number</th>
-                                        <td style ="text-align: right; padding-right: 4%" ><?php echo $row->sssNumber ?></td>
-                                    </tr>
+                    <div class="row g-0 my-2 justify-content-end">
+                            <div class="col-xl-4" align ="right">
+                                <button type = "button" onclick ="editname();"class="btn-primary btn form-control">
+                                    <i class="fa fa-save  me-2"></i>Save Changes
+                                </button>
 
-                            </table>
-                           
-                        </div>
-              
+                            </div>
                       
-                    </div>
-                    <div class="row my-2 justify-content-end">
-                        <div class="col-8">
-
                         </div>
-                        <div class="col-4">
-                            <input type="submit" class="form-control btn btn-outline-primary" name = "submit"value = "Save Changes">
-                        </div>
-                    </div>
-                    
-                
                 </div>
-            
+                <?php $cnt=$cnt+1; }} ?>
             </div>
-          
-        </div>
+        </form>
     </div>
-            
-           
-                
+ </div>
+    
+
+    <script>
+        $(document).ready(function() {
+            $("select").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+    </script>
+
+<script type="text/javascript">
+    function showDiv(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'Rental/Boarder' ? 'block' : 'none';
+    }
+    function showprecinct(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'reg' ? 'inline' : 'none';
+    }
+</script>
+
+                  
     
 
     

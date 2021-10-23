@@ -96,9 +96,20 @@ if (strlen($_SESSION['clientmsaid']==0)) {
             
         </nav>
 
+        <div class="container-fluid px-5">
+                    <div class="row px-5">
+                        <div class="col-xl-5"></div>
+                        <div class="col-xl-7">
+                            <div class="float-end">
+                                <a href="admin-dashboard.php"  class="link link-primary text-decoration-none fs-4"><i class="fa fa-arrow-circle-left me-2"></i>Go back</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+            </div>
         
-    <div class="container-fluid my-4">
-        <div class="row border mx-5 bg-white">
+    <div class="container-fluid my-4  ">
+        <div class="row border mx-5 bg-white shadow-lg">
             <div class="row border-bottom g-0 py-1 px-3">
                 <h4 class="fs-5">
                     <i class ="fa fa-chart-bar"></i>
@@ -122,7 +133,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 
                 <div class = "row g-1 px-5">
               
-                    <div class="col-xl-12 col-md-12 col-sm-12">
+                    <div class="col-xl-12 col-md-12 col-sm-12 ">
                         <div class = "row my-2">
                             <div class="col-md-8">
                                   
@@ -146,6 +157,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                         </div>
                     </div>
                 </div>
+               
 				<?php
 					if(isset($_POST['search']))
 					{ 
@@ -153,9 +165,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 					$sdata=$_POST['searchdata'];
 				?>
 				<h4 align="center">Result for "<?php echo $sdata;?>"</h4>
-
                 <div class="row g-1 px-5">
-                    
                     <div class="col-xl-12 col-md-12 col-sm-12 ">
                         <table class="table bg-white rounded shadow-sm  table-hover">
                             <thead>
@@ -212,6 +222,29 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                     </div>
                 </div>
 				<!--END SEARCH -->
+                    <div class="container-fluid px-5 my-3">
+                        <div class="row px-5 g-0 mt-2  ">
+                            <div class="row shadow-lg g-0">
+
+                            
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-primary">Purok 1</button>
+                                <button type="button" class="btn btn-primary">Purok 2</button>
+                                <button type="button" class="btn btn-primary">Purok 3</button>
+                                <button type="button" class="btn btn-primary">Purok 4</button>
+                                <button type="button" class="btn btn-primary">Purok 5</button>
+                                <button type="button" class="btn btn-primary">Purok 6</button>
+
+                                <button type="button" class="btn btn-primary">Purok 7</button>
+                                <button type="button" class="btn btn-primary">Purok 8</button>
+                                <button type="button" class="btn btn-primary">Purok 9</button>
+                                <button type="button" class="btn btn-primary">Purok 10</button>
+                            </div>
+                        </div>     
+                    </div>
+
+                </div>
+               
 				<div class="row g-1 px-5">
                     
                     <div class="col-xl-12 col-md-12 col-sm-12 ">

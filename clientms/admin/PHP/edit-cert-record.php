@@ -1,5 +1,5 @@
 <?php 
-    $curr ="New certificate";
+    $curr ="Update Certificate Record";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -146,26 +146,29 @@
           <div class="row mx-1  py-2">
             <div class="col-xl-5 mx-auto shadow-sm  rounded-top white">
               <div class="row ">
-                <div class="fs-6 text-center mt-3"  style= "background: #012f6e">
-                  <span class ="white">
+                <div class="fs-4 text-center mt-3"  style= "background: #012f6e">
                     Certificate Information
-                  </span>
-                 
                 </div>
               </div>
               
               <div class="row bg-white pt-2 pb-5 mb-3">
                 <form  action="" method = "POST">
                   <div class="row gx-3 gy-1 px-5">
-                    <label for="cname" class= "black fw-bold">Request Name</label>
+                    <label for="cname" class= "black fw-bold fs-5">Request Name</label>
                     <input id = "cname" class ="form-control"type="text" placeholder = "Requestor Name" name= "cnrame">
-                    <label for="cname" class= "black fw-bold">Status</label>
+                    <label for="cname" class= "black fw-bold fs-5">Mode of Payment</label>
+                    <select id = "cname" class ="form-control" name= "cmeth">
+                        <option name="" id="">Cash</option>
+                        <option name="" id="">G-cash</option>
+                    
+                    </select>
+                    <label for="cname" class= "black fw-bold fs-5">Status</label>
                     <select id = "cname" class ="form-control" name= "cmeth">
                         <option name="" id="">Settled</option>
                         <option name="" id="">Unsettled</option>
                         <option name="" id="">Cancelled</option>
                     </select>
-                    <label for="purp" class= "black fw-bold">Purpose</label>
+                    <label for="purp" class= "black fw-bold fs-5">Purpose</label>
                     <select id = "purp" class ="form-control" name= "cmeth">
                         <option name="" id="" selected>for....</option>
                         <option name="" id="">for DSWD</option>
@@ -173,30 +176,30 @@
                         <option name="" id="">for Employment purposes</option>
                         <option name="" id="">for loaning</option>
                     </select>
-                    <label for="cname" class= "black fw-bold">Certification fee</label>
+                    <label for="cname" class= "black fw-bold fs-5">Certification fee</label>
                     <input id = "cname" class ="form-control" type="text" placeholder = "Certfication fee" name= "cname">
-                    <label for="cname" class= "black fw-bold">Date</label>
+                    <label for="cname" class= "black fw-bold fs-5">Date</label>
                     <input id = "cname" class ="form-control" type="datetime-local" placeholder = "Date of certification" name= "cdate">
-                    <label for="cname" class= "black fw-bold">Barangay Certification number</label>
+                    <label for="cname" class= "black fw-bold fs-5">Barangay Certification number</label>
                     <input id = "cname" class ="form-control" type="text" placeholder = "bcn-###-##" name= "cname" readonly>
-                    <label for="cname" class= "black fw-bold">Business name <span class= "text-muted fs-6">For business related only</span></label>
+                    <label for="cname" class= "black fw-bold fs-5">Business name <span class= "text-muted fs-6">( For business related only )</span></label>
                     <input id = "cname" class ="form-control" type="text" placeholder = "business name here" name= "cname">
-                    <label for="cname" class= "black fw-bold">Kagwad on duty</label>
-                    <select id = "kod" class ="form-control" name= "cmeth">
+                    <label for="cname" class= "black fw-bold fs-5">Kagwad on duty</label>
+                    <select id = "kod" class ="form-control " name= "cmeth">
                         <option name="" id="" selected>Kagawad on duty</option>
                         <option name="" id="">CRISANTO G. LORICA</option>
                         <option name="" id="">ALEXANDER S. CEÑO</option>
                         <option name="" id="">ALBERTO P. RAMOS</option>
                         <option name="" id="">JAIME S. CHOY</option>
                     </select>
-                    <label for="cn
+                    
                     
               
              
                   </div>
                   <div class="row gy-2 mx-2 my-2 ">
                     <div class="col-md-12 mx-auto">
-                      <label for="cert-inf" class= "black fw-bold">Certification Contents</label>
+                      <label for="cert-inf" class= "black fw-bold fs-5">Certification Contents</label>
                       <textarea class= "" name="cert-info" id="cert-inf" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1">hudassss</textarea>
 
 
@@ -208,7 +211,7 @@
               </div>
             </div>
             <div class="col-xl-6 mx-auto pt-1 ">
-                <div class="fs-6 fw-bold">Certificate Template</div>
+                <div class="fs-4 fw-bold">Certificate Template</div>
                 <button type = "button" href = "#save-cert" data-bs-toggle = "modal" role= "button"class = "btn btnx btn-primary mb-1"><i class= "fas fa-save me-2"></i>Save</button>
                 <button type = "button" onclick = "window.history.back();" class = "btn btnx  btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</button>
               
@@ -228,7 +231,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-info ">
                     <div class="modal-header bg-info white ">
-                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;New Certificate</h5>    
+                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Edit Certificate</h5>    
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">

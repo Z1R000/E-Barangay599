@@ -155,16 +155,16 @@
                                     <div class="row g-0 ps-4 pe-2 ps-2">
 
                                         <div class="row g-0 mb-3 px-4">
-                                            <label for="fname" class="col-xl-2 fs-4 py-0"> <span class= "text-danger fs-5">*</span>First Name<br><span class= "fs-6 text-muted small"> (Unang Pangalan)</span></label>
-                                            
-                                            <div class="col-xl-8 col-sm-12">
-                                            <br>
-                            
+                                                <label for="fname" class="col-xl-2 fs-4 py-0"> <span class= "text-danger fs-5">*</span>First Name<br><span class= "fs-6 text-muted small"> (Unang Pangalan)</span></label>
+                                                
+                                                <div class="col-xl-8 col-sm-12">
+                                                <br>
                                                 
                                                 <input id = "fname" type="text" class="form-control">
-                                                <label for="" class="text-muted fs-6 small"> Place name suffix like Jr. Sr. after first name (e.g Juan Sr., Juan Jr) if any</label>
+                                                <label for="" class="text-muted fs-6 small"> Place a space between if you have second or third name(e.g Juan Dela)</label>
                                             </div>
                                         </div>
+                                       
                                         <div class="row g-0 mb-3 px-4">
                                             <label for="mname" class="col-xl-2 fs-4 py-0"><span class= "text-danger fs-5">*</span>Middle Name<br><span class= "fs-6 text-muted small"> (Gitnang Pangalan)</span></label>
                                             
@@ -183,6 +183,14 @@
                                                     <input type="text" id = "lname"class="form-control">
                                                     <label for="" class="text-muted fs-6 small"></label>
                                                 </div>
+                                        </div>
+                                        <div class="row g-0 mb-3 px-4">
+                                                <label for="fname" class="col-xl-2 fs-4 py-0"> <span class= "text-danger fs-5"></span>Suffix<br><span class= "fs-6 text-muted small"> (Kadugsong ng pangalan)</span></label>
+                                                <div class="col-xl-5 col-sm-12">
+                                                <br>
+                                                <input id = "fname" type="text" class="form-control">
+                                                <label for="" class="text-muted fs-6 small">For residents with suffix (e.g Juan Dela Cruz Jr., Juan Dela Cruz III</label>
+                                            </div>
                                         </div>
 
                                         <div class="row g-0 mb-3 px-4">
@@ -428,9 +436,7 @@
       
      
 
-
-<script src="https://code.jquery.com/jquery-3.5.1.min.js">
-    </script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
         $(document).ready(function() {
             $("select").change(function() {

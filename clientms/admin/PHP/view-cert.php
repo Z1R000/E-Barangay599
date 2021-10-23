@@ -1,4 +1,23 @@
+<?php
+    $content = "";
+    $name = "";
+    if (!isset($_POST['cert-info'])){
+        $content = "----Supply Text  here---";
+    }
 
+    else{
+      $content  = $_POST['cert-info'];
+    }
+
+    if (!isset($_POST['cname'])){
+      $name = "Certification  Name";
+
+    }
+    else{
+      $name =$_POST['cname'];
+    }
+   
+?>
 
 
 <!DOCTYPE html>
@@ -14,17 +33,18 @@
   <title>business Clearance</title>
   <style>
     html,body {
-      background: url('../images/Barangaybackground.png');
+
       height: 100%;
       font-family:'arial';
+      font-size: 17px;
     }
     .custom-container {
       font-family:'arial';
       margin: auto;
-      width:8.5in;
-      max-height: 11in;
-      padding: .8cm;
-      border:1px solid #d3d3d3;
+      width:8in;
+      height: 10in;
+      padding: .5cm 1cm;  
+
       
     }
     header .fs-5 {
@@ -45,11 +65,11 @@
       padding:0 80px;
     }
     .note span {
-      padding:0 30px;
+  
       border-bottom: 1px solid #333;
     }
     .form-check-input {
-      border: 1px solid transparent ;
+
       box-shadow:none;
       padding:8px;
       margin-right:5px
@@ -88,31 +108,36 @@
     .blue{
       border-bottom: 3px solid #0f162e;
     }
-    
+    .bottom{
+      position: absolute;
+      bottom:0px;
+    }
   </style>
 </head>
 <body>
   <main class="py-5">
     <div class="container justify-content-start">
-        <a href="admin-certificate.php" class="link-primary"><i class= "fas fa-arrow-left me-2"></i>Go back</a>
+        <a href="#" onclick= 'history.back();' class="link-primary"><i class= "fas fa-arrow-left me-2"></i>Go back</a>
         
     </div>
     <div class="container d-flex justify-content-center mb-3">
       <button class="btn btn-primary" onclick="window.print()"><i class= "fa fa-print me-3"></i>Print</strongutton>
     </div>
 
-    <section class="custom-container print-container bg-white">
+    <section class="custom-container   print-container bg-white">
       <!-- header -->
       <header class="row pb-4 blue ">
 
-        <div class="row mx-2 g-0">
+        <div class="row  g-0">
             <div class="col-3 justify-content-center">
                 <img src="../images/Barangay.png" style ="width: 150px" >
             </div>
             <div class="col-6 text-center ">
-                <h5>BARANGAY 599, ZONE 59, DISTRICT VI</h5>
-                <h5>OFFICE OF THE SANGGUNIANG BARANGAY</h5>
+                <h4>BARANGAY 599, ZONE 59, DISTRICT VI</h4>
+                <h4>OFFICE OF THE SANGGUNIANG BARANGAY</h4>
                 <h6>#4745 Peralta St. V. Mapa Sta. Mesa, Manila
+                </h6>
+                <h6>Barangay Contact Number
                 </h6>
             </div>
 
@@ -128,38 +153,88 @@
       <!-- header -->
 
       <!-- body -->
-      <div class="row" style="min-height: 850px;">
-        <div class="col-4 border left" style  = "text-align: center;">
-            <ul class = "mt-2 fw-bold">
-              <li id = "post">Punong Barangay</li>
-              <li>Jose Milo L. Lacatan</li>
+      <div class="row g-4" style="min-height: 11in;">
+      
+        <div class="col-4 border pt-3  mx-auto left text-center text-uppercase">
+            <div class="row">
+              <ul class= "mt-3 ">
+                <li class= "fs-6 fw-bold" id="post">
+                  Punong Barangay
+                </li>
+                <li class= "fs-6 ">
+                  JOSE MILO L. LACATAN
+
+                </li>
             </ul>
-            <ul class= "fw-bold ">
-              <li id = "post">Kagawad</li>
-              <li>K- Erwin L. Sampaga</li>
-              <li>A- Alberto P. Ramos</li>
-              <li>G- Florante V. Bonagua</li>
-              <li>A- Crisanto G. Lorica</li>
-              <li>W- Alexander S. Ce</li>
-              <li>A- Nelson L. Labrador</li>
-              <li>D- Marivic Villareal</li>              
+            <table class= "mt-2 px-2 ">
+              <tr>
+
+                <td colspan=2 class= "fs-6 fw-bold  "id = "post">Kagawad</td>
+              </tr>
+              <tr>
+              <td class= "fs-6" style= "padding-top:30px;padding-right: 10px;">K</td>
+                <td class= "fs-6 " style= "padding-top:30px;float:left">Erwin L. Sampaga</td>
+              </tr>
+              <tr>
+                <td class= "fs-6" style= "padding-top:30px;padding-right: 10px;">A</td>
+                <td class= "fs-6" style= "padding-top:30px;float:left">Alberto P. Ramos</td>
+              </tr>
+              <tr>
+              <td class= "fs-6" style= "padding-top:30px; padding-right: 10px;">G</td>
+                <td class= "fs-6" style= "padding-top:30px; float:left">Florante V. Bonagua</td>
+              </tr>
+              <tr>
+              <td class= "fs-6" style= "padding-top:30px; padding-right: 10px;">A</td>
+                <td class= "fs-6" style= "padding-top:30px;float:left">Crisanto G. Lorica</td>
+              </tr>
+              <tr>
+              <td class= "fs-6" style= "padding-top:30px; padding-right: 10px;">W</td>
+                <td class= "fs-6" style= "padding-top:30px; float:left">Alexander S. Ceño</td>
+              </tr>
+              <tr>
+              <td class= "fs-6" style= "padding-top:30px; padding-right: 10px;">A</td>
+                <td class= "fs-6" style= "padding-top:30px;float:left">Nelson L. Labrador</td>
+              </tr>
+              <tr>
+              <td class= "fs-6" style= "padding-top:30px; padding-right: 10px;">D</td>
+                <td class= "fs-6" style= "padding-top:30px;float:left">Marivic M. Villareal</td>
+              </tr>
+
+              
+               
+            </table>            
+            <ul class= "mt-4 blue">
+                <li class= "fs-6 fw-bold" id="post">
+                  SK CHAIRMAN
+                </li>
+                <li class= "fs-6 mb-4">
+                  MIKO CUSTODIO
+                </li>
             </ul>
-            <ul style = "border-bottom: 2px solid #000;">
-              <li id = "post">Sk Chairman</li>
-              <li >Miko Custodio</li>
+
+            <ul class= "">
+                <li class= "fs-6 fw-bold" id="post">
+                  SECRETARY
+                </li>
+                <li class= "fs-6 ">
+                MARIA CECILIA C. DELA CRUZ
+                </li>
+                <li class= "fs-6 fw-bold" id="post">
+                  Treasurer
+                </li>
+                <li class= "fs-6 ">
+                MELDA G. PADILLA
+                </li>
             </ul>
-    
-            <ul class= "fw-bold">
-              <li id = "post">Secretary</li>
-              <li>Maria Cecilia C. Dela Cruz</li>
-            </ul>
-            <ul class= "fw-bold">
-              <li id = "post" >Treasure</li>
-              <li>Imelda G. Padilla</li>
-            </ul>
+       
+            <h5>
+              <i style = "color:#012f4e">NOT VALID WITHOUT SEAL</i>
+            </h5>
+            </div>
+           
         </div>
-        <aside class="col position-relative border" style = "padding: 1.8%;">
-          <h2 class="text-center"><b>Certification Name</b></h2>
+        <aside class="col position-relative border" style = "padding: 1.5%;">
+          <h2 class="text-center"><b><?php echo $name?></b></h2>
           <div class="text-center"></div>
           <!--supply name of customer--> 
           <div class="text-center fs-5"><b></b></div>
@@ -173,10 +248,8 @@
           <div class="my-1">
               <!--Supply initially with description in db-->
               <p align = "justify" id = "indent">This is to certify that <strong>Requestor Name</strong> for their <strong>certification type</strong> </p>
-              <p align = "justify" id = "indent">-----supplied texts here----</p>
-              <p align = "justify" id = "indent">-----supplied texts here if necessary----</p>
-              <p align = "justify" id = "indent">-----supplied texts here if necessary----</p>
-              </p>
+              <p align = "justify" id = "indent"><?php echo $content;?></p>
+
 
               <p id = "indent">
               Issued this <strong>(date)<!--supply date-->)</strong>
@@ -209,7 +282,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td class = "text-muted">Barangay Captain</td>
+                      <td class = "text-muted">Punong Barangay</td>
                     </tr>
                   </table><br>
               </div>
@@ -220,6 +293,32 @@
               
               <div class="float-start">
                 <table>
+                <tr>
+                    <td>
+
+                      <br>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><br></td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid black">
+                  </tr>
+                  
+                  <tr>
+                    <td>
+                        Kagawad Name <!--Supply from secretary postions db-->
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class = "text-muted">
+                      Kagawad on Duty
+                    </td>
+                  </tr>
+                  <tr>
+
+                        
+                  </tr>
                   <tr>
                     <td>
                       Prepared by: 
@@ -254,7 +353,7 @@
         </div>
         
         <div class = "row w-100  mx-2 my-3">
-          <div class = "col" style  = "margin: auto">
+          <div class = "col bottom" style  = "margin: auto">
             <h5 align = "center" id = "post"><b><i>"Serbisyong Totoo at tapat Barangay Aasenso"</i></b></h5>
           </div>
         </div>       

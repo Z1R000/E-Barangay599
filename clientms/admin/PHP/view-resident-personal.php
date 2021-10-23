@@ -107,7 +107,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 				    foreach($results as $row)
 				{               
 			?>
-
             <div class="container-fluid px-5">
                     <div class="row px-5">
                         <div class="col-xl-5"></div>
@@ -124,16 +123,12 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                   $gbd = date('Y-m-d', strtotime($gbd));
                   $today = date('Y-m-d');
                   $diff = date_diff(date_create($gbd), date_create($today));
-                 
                 ?>
-                  
-        
-            <div class="container-fluid mx-auto px-5 mt-3 mb-2">
-                <div class="row g-0 mx-2">
+            <div class="container-fluid mx-auto px-5 mt-3 mb-2 ">
+                <div class="row g-0 mx-2 ">
                     <div class="row g-0 ">
                         <div class="mx-auto col-xl-10 white   ">
                             <div class="row g-0  rounded-top "  style= "background-color:#021f4e">
-                        
                                 <div class="fs-5 text-white py-2 px-2">
                                         <i class="fa fa-id-card-alt fa-1x me-1">
                                         </i>
@@ -142,7 +137,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                             </div>
                          </div>
                     </div>
-                        <div class="row g-0 ">
+                        <div class="row g-0  ">
                             <div class="col-xl-10 bg-white mx-auto text-center">
                             <label for="" class= "text-center fs-6 text-muted small">Resident's Full Name</label>
                                 <div class="display-6 border-bottom text-center py-2">
@@ -154,7 +149,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                            
                         </div>
                         <div class="row g-0 ">
-                            <div class="col-xl-10 bg-white mx-auto text-center">
+                            <div class="col-xl-10 bg-white mx-auto text-center shadow-lg">
                                 <div class="row g-0">
                                             <div class="col-xl-10 mx-auto">
                                                 <table class="table ">
@@ -178,7 +173,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            
                                                                 <th style = "padding-top: 5px; padding-bottom:5px;">
                                                                     <i class="fa fa-map-marker-alt fa-1x me-1"></i>
                                                                     Address
@@ -188,7 +182,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                 </td>
                                                         </tr>
                                                         <tr>
-                                                            
                                                             <th style = "padding-top: 10px; padding-bottom:10px;">
                                                                 <i class="fa fa-birthday-cake fa-1x me-1"></i>
                                                                 Date of Birth
@@ -196,7 +189,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                             <td style = "padding-top: 10px; padding-bottom:10px;text-align:right">
                                                                 <?php echo $gbd;?>
                                                             </td>
-                                                    </tr>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
 
@@ -236,11 +229,11 @@ if (strlen($_SESSION['clientmsaid']==0)) {
            
                         <div class="tab-pane active" id = "personal">
                             <div class="row g-0 bg-white px-4 ">
-                                <div class="row gy-0 gx-0  ps-3 mt-3 bg-info er border border-info shadow-sm">
+                                <div class="row gy-0 gx-0  ps-3 mt-3 bg-info er border border-info shadow-lg">
 
                                  
                                 </div>
-                                <div class="row g-0 border-bottom border-start  mb-5 rounded-bottom shadow">
+                                <div class="row g-0 border-bottom border-start  mb-5 rounded-bottom shadow-sm">
                                     <div class="row g-0">
                                         
                                         <div class="row g-0 mb-5 py-5 px-5 ">

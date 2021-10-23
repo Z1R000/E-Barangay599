@@ -33,7 +33,7 @@
   <title>business Clearance</title>
   <style>
     html,body {
-      background: url('../images/Barangaybackground.png');
+
       height: 100%;
       font-family:'arial';
       font-size: 17px;
@@ -42,9 +42,9 @@
       font-family:'arial';
       margin: auto;
       width:8in;
-      height: 14in;
+      height: 10in;
       padding: .5cm 1cm;  
-      border:1px solid #d3d3d3;
+
       
     }
     header .fs-5 {

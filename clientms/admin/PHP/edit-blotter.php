@@ -95,6 +95,18 @@
         </div>
     </nav> 
     <form action="" method = "POST">
+                <div class="container-fluid px-5">
+                    <div class="row px-5">
+                        <div class="col-xl-5"></div>
+                        <div class="col-xl-7">
+                            <div class="float-end">
+                                <a href="#" onclick = "window.history.back();" class="link link-primary text-decoration-none fs-4"><i class="fa fa-arrow-circle-left me-2"></i>Cancel Blotter Update</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                
+                </div>
  
         <div class="container-fluid  mx-auto px-2 py-1">
             <div class="row g-0 p-1">
@@ -105,23 +117,12 @@
                                 <div class= "fs-5 py-1 white">Step 1: Complaint Details</div>
                             </div>
                             <div class="row px-2 g-2 px-3 pt-2 pb-3">
-                                <div class="col-md-5">
+                                <div class="col-md-6">
                                     <label for="rname"class= "fw-bold fs-6">Complainant Name: </label>
                                     <input type="text" class="form-control" placeholder = "e.g Juan Dela Cruz">
                                     <!--intellisence resident list-->
                                 </div>     
-                                <div class="col-md-5">
-                                  
-                                    
-                                    <label for="btype"class= "fw-bold fs-6">Incident Type: </label>
-                                    <select class="form-select input-sm" id = "btype" aria-label="Default select example">
-                                        <option selected>Select Blotter type</option>
-                                        <option value="homeowner">Violence</option>
-                                        <option value="caretaker">Vehicular Related</option>
-                                        <option value="rental">Public Disturbance</option>
-                                        <option value="wrelative">Littering</option>
-                                    </select>
-                                </div>        
+                                 
                                 
                             </div>
                         
@@ -133,20 +134,18 @@
                 </div>
          
                 <div class="row g-0 justify-content-center">
-                
                     <div class="col-xl-10  px-3 py-2">
                         <div class="row g-0 my-2 bg-white shadow-sm">
                             <div class="row border g-0 rounded-top px-2 py-0 bg-primary">
                                 <div class= "fs-5 py-1 white" id="step-2">Step 2: Respondent/s <span class="fs-6">(attending barangay personnel)</span></div>
                             </div>
                         
-                            <div class="row g-2 px-3 py-2">
+                            <div class="row g-2 px-3 py-2 shadow" style = "max-height: 400px; overflow-y: auto;  ">
                             
                                 <div class="col-md-10 form_field_outer p-0 form_sec_outer_task " >
-                                    <div class="row form_field_outer_row"  style= "max-height: 400px;">
-                                       
-                                    <div class="row">
-                                            <div class="col-lg-5">
+                                    <div class="row form_field_outer_row" >  
+                                        <div class="row" >
+                                            <div class="col-lg-8">
                                                 <div id="inputFormRow">
                                                     <div class="input-group mb-3">
                                                         <Select type="text" name="kag[]" class="form-select" placeholder="" >
@@ -154,52 +153,55 @@
                                                                 <option value="">Kagawad 1</option>
                                                                 <option value="">Kagawad 2</option>
                                                         </select>
-                                                                    
-                                                            <button id="removekag" type="button" class="btn btn-danger" disabled>Remove</button>
-                                                 
+                                           
+                                                            <div class="btn-group mx-2">
+                                                                <button id="removekag" type="button" class="btn btn-danger" disabled>Remove</button>
+                                                            </div>
+                                                            <div class="btn-group mx-2">
+                                                                <button id="addkag" type="button" class="btn btn-info white"><i class= "fa fa-plus me-2"></i>Add Respondent</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
+                                                    <div id="newRow"></div>
                                                 </div>
-
-                                                <div id="newRow"></div>
-                                                <button id="addkag" type="button" class="btn btn-info white"><i class= "fa fa-plus me-2"></i>Add Respondent</button>
                                             </div>
                                         </div>
-                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="row g-0 justify-content-center">     
+                        <div class="col-xl-10  px-3 py-2">
+                            <div class="row g-0 my-2 bg-white shadow-sm" >
+                                <div class="row border g-0 rounded-top px-2 py-0 bg-primary">
+                                    <div class= "fs-5 py-1 white" id="step-2">Step 3: Involved Persons <span class="fs-6">(e.g Juan Dela Cruz, Asiong Salonga..)</span></div>
+                                </div>
+                            
+                                <div class="row g-2 px-2 py-2" style = "max-height: 400px; overflow-y: auto;  ">
+                                    <div class="col-lg-10">
+                                        <div class="row" >
+                                            <div class="col-lg-8">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" name="kag[]" class="form-control" placeholder="Involved person 1" >  
+                                                    <div class="btn-group mx-2">
+                                                        <button id="removeper" type="button" class="btn btn-danger" disabled>Remove</button> 
+                                                    </div>      
+                                                    <div class="btn-group mx-1"> 
+                                                        <button id="addper" type="button" class="btn btn-info white"><i class= "fa fa-plus me-2"></i> Add Involved</button>   
+                                                    </div>  
+                                                </div>
+                                                <div id="newRow2"></div>
+                                            </div>
                                         </div>
                                     </div>
-                                
-                            </div>
-                    
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="row g-0 justify-content-center">
-                
-                <div class="col-xl-10  px-3 py-2">
-                    <div class="row g-0 my-2 bg-white shadow-sm">
-                        <div class="row border g-0 rounded-top px-2 py-0 bg-primary">
-                            <div class= "fs-5 py-1 white" id="step-2">Step 3: Involved Persons <span class="fs-6">(e.g Juan Dela Cruz, Asiong Salonga..)</span></div>
-                        </div>
-                    
-                        <div class="row g-2 px-2 py-2">
-                       
-                            <div class="col-lg-4">
-                                <div class="input-group mb-3">
-                                    <input type="text" name="kag[]" class="form-control" placeholder="Involved person 1" >            
-                                    <button id="removeper" type="button" class="btn btn-danger" disabled>Remove</button>         
-                                </div>
-                                <div id="newRow2"></div>
-                                        <button id="addper" type="button" class="btn btn-info white"><i class= "fa fa-plus me-2"></i> Add Involved</button>
-                                </div>
+                                </diV>
                             </div>
                         </div>
-                
-                        </div>
-
                     </div>
-                </div>
+                
             
 
                 <div class="row g-0 justify-content-center">
@@ -210,7 +212,7 @@
                                 <div class= "fs-5 py-1 white" id="step-2">Step 4: Incident Information <span class="fs-6">(Details regarding the incident)</span></div>
                             </div>
                             
-                            <div class="row g-0 py-2 px-3">
+                            <div class="row gx-3 py-2 px-3">
                                 
                                 <div class="col-md-5 ms-2">
                                   
@@ -224,7 +226,18 @@
                                       <option value="dismissed">Dismissed</option>
                                   </select>
                               </div>   
-                                
+                              <div class="col-md-5">
+                                  
+                                    
+                                  <label for="btype"class= "fw-bold fs-6">Incident Type: </label>
+                                  <select class="form-select input-sm" id = "btype" aria-label="Default select example">
+                                      <option selected>Select Blotter type</option>
+                                      <option value="homeowner">Violence</option>
+                                      <option value="caretaker">Vehicular Related</option>
+                                      <option value="rental">Public Disturbance</option>
+                                      <option value="wrelative">Littering</option>
+                                  </select>
+                              </div>  
                        
 
                                 
@@ -324,7 +337,7 @@
         var x = 0;
         // add row
         $("#addkag").click(function () {
-            if (x>=6){
+            if (x>=50){
                 alert('There are only 7 kagawads');
             }else{
             
@@ -352,7 +365,7 @@
         var g = 2;
 
         $("#addper").click(function () {
-            if (g>=6){
+            if (g>=50){
                 alert('Over the limit');
            
             }else{
