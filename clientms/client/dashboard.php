@@ -126,7 +126,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
 </head>
 
-<body> 
+<body>
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div>
@@ -141,7 +141,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
             <div class="container-fluid banner" align="center">
                 <div class="row">
                     <div class="col-xl-3 px-1 ">
-                        <div class="float-left">
+                        <div class="float-start" style="margin-left:50px;">
                             <img src="../images/barangay.png" style="width: 100px;">
                         </div>
 
@@ -151,7 +151,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                             OFFICE OF THE SANGGUNIANG BARANGAY</h3>
                     </div>
                     <div class="col-xl-3">
-                        <div class="float-right">
+                        <div class="float-end" style="margin-right:50px;">
                             <img src="../images/maynila.png" style="width: 100px;">
                         </div>
 
