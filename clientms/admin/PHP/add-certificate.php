@@ -146,26 +146,25 @@
           <div class="row mx-1  py-2">
             <div class="col-xl-5 mx-auto  rounded-top white">
               <div class="row ">
-                <div class="fs-6 text-center mt-3"  style= "background: #012f6e">
-                  <span class ="white">
-                    Certificate Information
-                  </span>
+                <div class="fs-4 text-center mt-3"  style= "background: #012f6e">
                  
+                    Certificate Information
+             
                 </div>
               </div>
               
               <div class="row bg-white pb-5 shadow-sm">
                 <form action="" method = "POST">
-                  <div class="row gx-3 gy-1 px-5">
-                    <label for="cname" class= "black fw-bold">Certification Name</label>
-                    <input id = "cname" class ="form-control" type="text" placeholder = "Certfication Name" name= "cname">
-                    <label for="cname" class= "black fw-bold">Certification Fee</label>
-                    <input id = "cname" class ="form-control" type="text" placeholder = "Certfication fee">
+                  <div class="row gx-3 gy-1 px-4">
+                    <label for="cname" class= "black fw-bold fs-5">Certification Name</label>
+                    <input id = "cname" class ="form-control fs-5" type="text" placeholder = "Certfication Name" name= "cname">
+                    <label for="cname" class= "black fw-bold fs-5">Certification Fee</label>
+                    <input id = "cname" class ="form-control fs-5" type="text" placeholder = "Certfication fee">
              
                   </div>
                   <div class="row gy-2 mx-2 my-2 ">
                     <div class="col-md-12 mx-auto">
-                      <label for="cert-inf" class= "black fw-bold">Certification Contents</label>
+                      <label for="cert-inf" class= "black fw-bold fs-5">Certification Contents</label>
                       <textarea class= "" name="cert-info" id="cert-inf" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1"><p style= "text-indent: 25px;"></p></textarea>
 
 
@@ -177,7 +176,7 @@
               </div>
             </div>
             <div class="col-xl-6 mx-auto pt-1 ">
-                <div class="fs-6 fw-bold">Certificate Template</div>
+                <div class="fs-4 fw-bold">Certificate Template</div>
                 <button type = "button" href = "#save-cert" data-bs-toggle = "modal" role= "button"class = "btn btnx btn-primary mb-1"><i class="fa fa-download me-2"></i>Create</button>
                 <a  href = "#" onclick = "window.history.back()" class = "btn btnx btn-secondary text-white mb-1"><i class="fa fa-sign-out-alt me-1"></i>Cancel</a>
 

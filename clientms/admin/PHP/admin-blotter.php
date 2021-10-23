@@ -110,7 +110,7 @@
                         <div class = "row py-2 g-0 px-3">
                             <div class="col-md-8 px-1">
                                 <div class="btn-group" role="group">
-                                    <a href = "#blotter-choice" data-bs-toggle= "modal" role = "button" class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;New Case</a>
+                                    <a href = "create-blotter-resident.php"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;New Case</a>
                                 </div>
                             </div>
                             <div class="col-md-4  px-2" >
@@ -130,10 +130,9 @@
                                     <table class="table bg-white table-hover "> 
                                         <thead class = "bg-light">
                                             <tr>
-                                           
+                                        
                                             </tr>
                                             <tr>
-                
                                                 <th style = "text-align: left">Status</th>
                                                 <th style = "text-align: left">Complainant</th>
                                                 <th style = "text-align: left">Incident Type</th>
@@ -141,7 +140,6 @@
                                                 <th style = "text-align: left">Incident's Estimated Time </th>
                                                 <th style = "text-align: center">Actions</th>
                                                 
-                                    
                                             </tr>
                                         
                                         </thead>           
@@ -157,14 +155,14 @@
                                                 <td scope="col" style = "text-align: left">6:00pm</td>
                                                 <td scope="col" style = "text-align: center">
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="" href ="blotter-report.php"class="btn btng btn-primary"><i class = "fa fa-print"></i></a>
+                                                            <a type="" href ="blotter-report.php"class="btn btng btn-primary"><i class = "fa fa-print me-2"></i> Report</a>
                                                         </div>
                                                     
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a href ="edit-blotter.php"class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
+                                                            <a href ="edit-blotter.php"class="btn btng btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
                                                         </div>
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash me-2"></i>Delete</a>
                                                         </div>
                                                     
                                                 </td>
@@ -223,44 +221,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id = "blotter-choice" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 blue">
-                    <div class="modal-header blue white">
-                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-user"></i>&nbsp;&nbsp;Complainant Type</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-white">
-                        <div class="row  px-2">
-                            <div class="col xl-4 px-3" align = "center">
-                                <img src="../images/resident-logo.png" alt="trash" class= " img-fluid " style ="width: 40%;">
-                                
-                            <div class="row">
-                                    <a type = "button" href="create-blotter-resident.php" class="btn btn-outline-info rounded"  name = "resident" value ="resident">
-                                        599 resident
-                                    </a>
-                                </div>                           
-                            </div>
-
-                            <div class="col xl-4 px-3" align = "center">
-                                <img src="../images/outsider.png" alt="trash" class= " img-fluid " style ="width: 40%;">
-                                <div class="row">
-                                    <a class="btn btn-outline-info rounded" href ="create-blotter-outsider.php"  name = "outsider" value ="outsider">
-                                        Outsider
-                                    </a>
-                                </div>   
-                            </div>
-                            
-                        </div>
-                 
-                
-                    </div>
-                    <div class="modal-footer">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>  
+      
     
 </body>
 </html>

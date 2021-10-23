@@ -138,14 +138,14 @@
                                                     echo htmlentities($renreq);
                                                 ?>	
                                             </h4>
-                                            <p class = "text-inner fs-5 card-text " href ="#">Rental <br>Requests</p>
+                                            <p class = "text-inner fs-5 card-text " href ="">Rental <br>Requests</p>
                                         </div>
                                             <i class="fas fa-archive fs-1 logo  p-4"></i>
                                             
                                     </div>
                                 </div>
                                 <div class="row border-top g-0 ">
-                                    <a class = "text-inner text-decoration-none" href = "admin-rrequest.php"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
+                                    <a class = "text-inner text-decoration-none" href = "admin-rental-request.php"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
                                 </div>
                             </div>
                             <div class="col-md-3 rounded left border shadow-lg bg-success">
@@ -162,7 +162,7 @@
                                                     echo htmlentities($certreq);
                                                 ?>	
                                             </h4>
-                                            <p class = "text-inner fs-5 card-text " href ="">Certification Requests</p>
+                                            <p class = "text-inner fs-5 card-text " href ="">Certification<br> Requests</p>
                                         </div>
                                             <i class="fas fa-folder fa-folder fs-1 logo  p-4 "></i>
                                             
@@ -170,7 +170,7 @@
                                     </div>
                                 </div>
                                 <div class="row border-top g-0 ">
-                                    <a class = "text-inner text-decoration-none" href = "admin-crequest.php"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
+                                    <a class = "text-inner text-decoration-none" href = "admin-cert-request.php"> <div class="fs-6">More info&nbsp;<i class = 'fa fa-arrow-circle-right'></i></a></div>
                                 </div>
                                 
                             </div>

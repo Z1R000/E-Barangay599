@@ -191,15 +191,15 @@
                                                         <td scope="col" style = "text-align: left">20 PHP</td>
                                                         <td scope="col" style = "text-align: center">
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <button type = "submit" type="button" class="btn btng btn-primary"><i class = "fa fa-eye"></i></button>
+                                                                    <button type = "submit" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</button>
                                                                 </div>
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a type="" href ="edit-cert.php"class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
+                                                                    <a type="" href ="edit-cert.php"class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
                                                                 </div>
                                                                    
                                                                
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a type="button" href ="#delete-cert" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                                    <a type="button" href ="#delete-cert" data-bs-toggle = "modal" role = "button" class="btn  btn-danger"><i class = "fa fa-trash me-2"></i>Delete</a>
                                                                 </div>
                                                             
                                                         </td>
@@ -266,17 +266,17 @@
                                                   
                                                     <td scope="col" style = "text-align: center">
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                <a type="" href ="edit-cert-record.php"class="btn btng btn-primary"><i class = "fa fa-edit"></i></a>
+                                                                <a type="" href ="edit-cert-record.php"class="btn btn-primary"><i class = "fa fa-edit me-2"></i>Edit</a>
                                                             </div>
                                                         
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                <a type="" href ="temp-cert.php"class="btn btng btn-success"><i class = "fa fa-print"></i></a>
+                                                                <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print me-2"></i>Print</a>
                                                             </div>
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn btng btn-info"><i class = "fa fa-paper-plane white"></i></a>
+                                                                    <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane me-2 white"></i>Send</a>
                                                                 </div> 
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                                <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash me-1"></i>Delete</a>
                                                             </div>
                                                     </td>
                                                 </tr>
@@ -333,13 +333,12 @@
                                                     </div>
                                                 </td>
                                                 <td  scope="col" style = "text-align: center">
-                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a href ="#approve-proof"class="btn btn-success" data-bs-toggle=  "modal"><i class = "fa fa-check me-1"></i>Accept</a>
+                                                        <div class="btn-group me-1 mb-1  " role="group" aria-label="First group">
+                                                            <a href ="#approve-proof "class="btn btn-success mx-3" data-bs-toggle=  "modal" style = "width: 100px;"><i class = "fa fa-check me-1 "></i>Accept</a>
                                                         </div>
-                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="button" href ="#decline-proof" data-bs-toggle = "modal" role = "button" class="btn  btn-danger"><i class = "fa fa-times-circle me-1"></i>Decline</a>
+                                                        <div class="btn-group me-1 mb-1  " role="group" aria-label="First group">
+                                                            <a href ="#decline-proof "class="btn btn-danger mx-3" data-bs-toggle=  "modal" style= "width: 100px;"><i class = "fa fa-times fa-1x me-2 "></i>Decline</a>
                                                         </div>
-
                                                 </td>
                                             </tr>
 
@@ -357,20 +356,29 @@
                                                     <label for="payname" class="fs-5">Requestor Name</label>
                                                     <input id = "payname" type="text" class= "form-control" placeholder = "Payor Name"  readonly>
                                                 </div>
-                                            
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-5 ">
                                                     <label for="payid" class="fs-5">Payment ID</label>
-                                                    <input id = "payid" type="text" class= "form-control" placeholder = "Payor Name" value = "213213123" readonly>
+                                                    <input id = "payid" type="text" class= "form-control" placeholder = "Payor Name" value = "213213123" readonly style = "text-align: right;">
                                                 </div>
                                                 <div class="col-md-3 ">
                                                     <label for="payed" class="fs-5">Amount Paid</label>
-                                                    <input id = "payed" type="text" class= "form-control" placeholder = "Payor Name" value = "50" style= "width: 100%;"readonly> 
+                                                    <div class="input-group">
+                                                        <button class="btn btn-secondary disabled">₱</button>
+                                                        <input id = "payed" type="text" class= "form-control" placeholder = "Payor Name" value = "50" style= "text-align: right"readonly > 
+
+                                                    </div>
+                                               
                                                 </div>
                                                 <div class="col-md-3 " class="fs-5">
                                                     <label for="payed" class= "fs-5">Payable</label>
-                                                    <input id = "payed" type="text" class= "form-control" placeholder = "Payor Name" value = "50" style= "width: 100%;"readonly> 
+                                                    <div class="input-group">
+                                                        <button class="btn btn-secondary disabled">₱</button>
+                                                        <input id = "payed" type="text" class= "form-control" placeholder = "Payor Name" value = "50" style= "text-align: right"readonly> 
+
+                                                    </div>
+                                                   
                                                 </div>
                                                 <label for="payed" class="fs-5 mb-2">Proof of Payment- <a href= "../images/proof.jpg" download target = "_blank" class= "text-decoration-none"><i class= "fa fa-download"></i>Download proof</label></a>
                                                 
@@ -455,7 +463,23 @@
                 </div>
             </div>
         </div>
- 
+        <div class="modal fade" id = "proof" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 border-0 border-bottom border-transparent ">
+                    <div class="modal-header  bg-transparent border-bottom border-white  ">
+                        
+                        <button type="button" class="btn-close btn-primary" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-transparent border-0" align = "center" >
+                    <img src="../images/proof.jpg" alt="proof of payment">
+                       
+                       
+                
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
         
    
        
@@ -556,15 +580,23 @@
                         </div>
                         <div class="col-md-4">
                             <label for="purp" class= "fs-6 fw-bold">Purposes</label>
-                                <select class= "select form-control" name="" id="purp">
+                                <select class= "select form-control" name="" id="purp" onchange = "showOthers('other_txt',this);">
                                     <option  selected>Purposes</option>
                                     <option value="ent">For entertainment</option>
                                     <option value="med">For medical reasons</option>
+                                    <option value="others">Others</option>
                                 </select>
                             </div>
                     </div>
-                    <div class="row">
-               
+                    <div class="row g-3 mt-1" id = "other_txt">
+                        <div class="col-xl-6">
+
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder= "Specify a purpose here">
+                        </div>
+                    </div>
+                        <div class="row">
                             <div class="col-md-4">
                                 
                                 <label for="ctype"class="fs-6 fw-bold">Certification Type</label>
@@ -595,15 +627,11 @@
                                         <option  selected>--Select--</option>
                                         <option value="gc">G-Cash</option>
                                         <option value="cash">Cash</option>
-                       
                                     </select>
                                 </div>
                             </div>
-                   
+                        </div>
 
-                    </div>
-                
-               
           
                <div class="row" id = "hidden_div">
                            
@@ -640,20 +668,22 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id = "approve-transac" tab-idndex = "-1">
+
+
+<div class="modal fade" id = "approve-proof" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-success ">
                     <div class="modal-header bg-success  ">
-                        <h5 class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Send Proof of transaction</h5>
+                        <h5 class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Send proof acceptance message</h5>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">
                         
-                        <div class="row mt-2">
+                        <div class="row mt-2 mx-2">
                             <form action="" method = "POST">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <label for="dname">Requestor Name</label>
                                         <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
 
@@ -661,7 +691,7 @@
                            
                                 </div>
                                 <div class="row mt-2">
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <label for="contac">Contact Number</label>
                                         <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
                    
@@ -675,9 +705,9 @@
                                     </div>
                                 </div>
                                 <div class="row mt-2">
-                                    <div class="col-md-5">
-                                        <label for="ars">Acquired rental/service</label>
-                                        <input id = "crs" type="text" class="form-control" value = "Marriage" readonly>
+                                    <div class="col-md-6">
+                                        <label for="ars">Acquired Certification</label>
+                                        <input id = "crs" type="text" class="form-control" value = "Employment" readonly>
                    
                                        
                                     </div>
@@ -690,7 +720,7 @@
                                 </div>
                                 <div class="row mt-2">
                                         <label for="remarks" >Remarks</label>
-                                        <div class="col-md-11">
+                                        <div class="col-md-12">
                                             <div class="form-floating">
                                             <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
                                             <label for="floatingTextarea2">Remarks here (max 10 words)</label>
@@ -725,7 +755,204 @@
                                 <div class="row justify-content-center" align = "center">
                                     
                                     <div class="col-mx-6">
-                                        <button href ="#" type = "button" class="btn btn-success rounded-circle" data-bs-dismiss ="modal"  >
+                                        <button href ="#" type = "button" class="btn btn-success" data-bs-dismiss ="modal"  >
+                                            <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
+                                        </button>
+                                        <button type = "button" class="btn btn-danger" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times"></i> Discard
+                                        </button>
+                                
+                                    </div>
+                                    
+                                </div>  
+                            </form>
+
+                        </div>
+                      
+                
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id = "approve-transac" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-success ">
+                    <div class="modal-header bg-success  ">
+                        <h5 class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Send Proof of transaction</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        
+                         
+                    <div class="row mt-2 mx-2">
+                            <form action="" method = "POST">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="dname">Requestor Name</label>
+                                        <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
+
+                                    </div>
+                           
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6">
+                                        <label for="contac">Contact Number</label>
+                                        <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
+                   
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="emails" >Email Address</label>
+                                        <input id = "emails" type="text" class="form-control" value = "juanDelaC@gmail.com" readonly>
+                                        
+                                    
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6">
+                                        <label for="ars">Acquired Certification</label>
+                                        <input id = "crs" type="text" class="form-control" value = "Employment" readonly>
+                   
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="emails" >Payment Status</label>
+                                        <input id = "emails" type="text" class="form-control" value = "Settled + amount payed" readonly>
+                                       
+                                    
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                        <label for="remarks" >Remarks</label>
+                                        <div class="col-md-12">
+                                            <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <label for="floatingTextarea2">Remarks here (max 10 words)</label>
+                                                
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                                <div class="row mt-2">
+                                    <label for="remarks" >Mode of delivery <i class= "fa fa-envelope"></i></label>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="sms">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                SMS
+                                            </label>
+                                            </div>
+                                            <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="em" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                E-mail
+                                            </label>
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Walk-in
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                    
+                                </div>
+                                <div class="row justify-content-center" align = "center">
+                                    
+                                    <div class="col-mx-6">
+                                        <button href ="#" type = "button" class="btn btn-success" data-bs-dismiss ="modal"  >
+                                            <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
+                                        </button>
+                                        <button type = "button" class="btn btn-danger" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times"></i> Discard
+                                        </button>
+                                
+                                    </div>
+                                    
+                                </div>  
+                            </form>
+
+                        </div>
+                      
+                
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id = "decline-proof" tab-idndex = "-1">
+
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-danger ">
+                    <div class="modal-header bg-danger bg-transparent ">
+                        <h5 class="modal-title text-white" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Send proof decline reason</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body bg-white">
+                        <div class="row mt-2 mx-2">
+                            <form action="" method = "POST">
+                                <div class="row g-0">
+                                    <div class="col-md-6">
+                                        <label for="dname">Requestor Name</label>
+                                        <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
+
+                                    </div>
+                           
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6">
+                                        <label for="contac">Contact Number</label>
+                                        <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="emails" >Email Address</label>
+                                        <input id = "emails" type="text" class="form-control" value = "juanDelaC@gmail.com" readonly>
+                                        
+                                    
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+
+                                        <label for="remarks" >Remarks</label>
+                                        <div class="col-md-12">
+                                            <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <label for="floatingTextarea2">Remarks here (max 10 words)</label>
+                                                
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                                <div class="row mt-2">
+                                    <label for="remarks" >Mode of delivery <i class= "fa fa-envelope"></i></label>
+                                    <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    SMS
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    E-mail
+                                                </label>  
+                                            </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row justify-content-center" align = "center">
+                                    
+                                    <div class="col-mx-6">
+                                        <button href ="" onclick = "alert('Decline Message Sent')" type = "button" class="btn btn-success rounded-circle" data-bs-dismiss ="modal" data-bs-toggle= "modal" >
                                             <i class= 'fa fa-paper-plane py-1'></i>
                                         </button>
                                         <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
@@ -793,7 +1020,9 @@
     function showDiv(divId, element) {
         document.getElementById(divId).style.display = element.value == 'Business' ? 'flex' : 'none';
     }
-   
+    function showOthers(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';
+    }
 </script>
 
 </body>
