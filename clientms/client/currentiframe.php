@@ -11,6 +11,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 <html lang="en">
 <body>
 <div class='container-fluid px-4 mb-3'>
+    <label></label>
 <?php 
 							$sql ="SELECT distinct tblannouncement.ID, tblannouncement.announcement, tblannouncement.announcementDate, tblannouncement.endDate, tblannouncement.adminID, tbladmin.BarangayPosition, tblresident.LastName from tblannouncement join tbladmin on tblannouncement.adminID = tbladmin.ID join tblresident on tbladmin.ID = tblresident.ID where tblannouncement.announcementDate <= now() and tblannouncement.endDate >= now() order by tblannouncement.ID desc";
 							$query = $dbh -> prepare($sql);
@@ -21,7 +22,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                                 
                                 echo "
                                 <div class = 'mb-3 table-responsive' style='background-color:aliceblue;border:1px solid black;  border-radius:4px; overflow: hidden;'>
-                                <h1 class='h1font' style='float: left; margin:25px; font-family:Segoe UI;   color: #021f4e;'>Announcement</h1>";
+                                <h1 class='h1font' style='float: left; margin:25px; font-family:Segoe UI;   color: #021f4e;'>Latest Announcement</h1>";
 								$sDate = $row->announcementDate;
 								$eDate = $row->endDate;
                             
