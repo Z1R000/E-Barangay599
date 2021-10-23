@@ -28,7 +28,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 
 						?>
                         <h4 class="testfont" style="float: right; font-family: Segoe UI; margin: 25px; color: #021f4e; text-align: justify;">
-                            For <?php  echo date('l, j F Y - h:i A', strtotime($sDate));?> <br> To <?php  echo date('l, j F Y - h:i A', strtotime($eDate));?>
+                            <?php  echo date('l, j F Y - h:i A', strtotime($sDate));?> <br>
                         </h4>
                         <br><br><br><br><br>
                         <div class="testulit" style="border-radius: 25px; ">
