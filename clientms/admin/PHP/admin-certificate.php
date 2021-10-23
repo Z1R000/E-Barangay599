@@ -1,5 +1,12 @@
 <?php 
     $curr ="Certifications";
+	session_start();
+	error_reporting(0);
+	$curr = "Announcements";
+	include('includes/dbconnection.php');
+	if (strlen($_SESSION['clientmsaid']==0)) {
+	  header('location:logout.php');    
+	  } else{
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -1020,3 +1027,4 @@
 
 </body>
 </html>
+	  <?php } ?>

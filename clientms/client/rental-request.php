@@ -145,6 +145,28 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
             <!-- Page Content -->
             <div id="page-content-wrapper">
+                <div class="container-fluid banner" align="center">
+                    <div class="row">
+                        <div class="col-xl-3 px-1 ">
+                            <div class="float-start" style="margin-left:50px;">
+                                <img src="../images/barangay.png" style="width: 100px;">
+                            </div>
+
+                        </div>
+                        <div class="col-xl-6 " align="center">
+                            <h3 class="py-4">BARANGAY 599, ZONE 59, DISTRICT VI <br>
+                                OFFICE OF THE SANGGUNIANG BARANGAY</h3>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="float-end" style="margin-right:50px;">
+                                <img src="../images/maynila.png" style="width: 100px;">
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
                 <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                     <div class="d-flex align-items-center">
                         <i class="fa fa-align-justify secondary-text fs-4 me-3" id="menu-toggle"></i>
@@ -171,86 +193,62 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                     <div style="background-color: aliceblue;border-radius: 25px;border:1px solid black;padding: 25px;">
                         <div class="graph-visual tables-main">
 
-                            <h1 class="testfont"> Rental Request </h1>
-                            <div class="graph" style="border-radius: 15px;">
-                                <div class="form-body">
-                                    <form method="post" style="font-size:1.25em;">
-                                        <table style="width: 100%;">
-                                            <tr>
-                                                <th><span class="anothertestfont" style="color: #021f4e; ">Choose Rental</th>
-                                                <br>
-                                                
-                                                <th><span class="anothertestfont" style="color: #021f4e;">Rental Price</th>
-
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <?php
-                                                    $sql = "SELECT ID, CertificateName, CertificatePrice from tblcertificate";
-                                                    $query = $dbh->prepare($sql);
-                                                    $query->execute();
-                                                    $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                                    if ($query->rowCount() > 0) {
-                                                        echo "<select  name='certid' id='certid' class='form-control select2 dropdownstyle' required='true' style='padding: 1px; margin-left:1px;font-size: 1.3em; width: 90%;'>
-													<option value=''disabled selected>Choose Rental</option>";
-                                                        foreach ($results as $row) {
-                                                            echo "<option value='$row->ID'>$row->CertificateName</option>";
-                                                        } ?>
-                                                </td>
-                                                
-                                                <td style='color: black;'>
-                                                <?php echo "$row->CertificatePrice</td>";
-
-                                                        echo "</select>";
-                                                    }
-                                                ?>
-                                                </td>
-
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                <div class="form-group"> <h2 for="exampleInputEmail1" style="color: #021f4e;">Rental Start-Date:</h2> <input type="datetime-local" name="rsdate" value="" id="date" placeholder="Rental Start Date" class="form-control" required='true' style="font-size: 2vh; width: 90%;"> </div>
-                                                <div class="form-group"> <h2 for="exampleInputEmail1" style="color: #021f4e;">Rental End-Date:</h2> <input type="datetime-local" name="redate" value="" id="date" placeholder="Rental End Date" class="form-control" required='true' style="font-size: 2vh; width: 90%;"> </div>
-                                                </td>
-                                                <td>
-                                                
-                                                </td>
-
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h3 class="testfont">Choose payment option:</h3>
-                                                    <select>
-
-                                                        <option disabled selected>-Choose payment option-</option>
-                                                        <option>Cash</option>
-                                                        <option>G-Cash</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-
-                                                <td><label>
-                                                        <br>
-                                                        <button type="submit" class="btn btn-default" name="submit" id="submit" style="color: white; background-color: #021f4e; border: 1px; width: 200%; border-radius:25px;">Create</button>
-                                                    </label></td>
+                            <div class="modal-body bg-white ">
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
+                                        <div class="d-flex">
+                                            <input type="text" id="prate" class="form-control me-2" name="pRate" placeholder="Requestor Name" readonly>
+                                            <!--Naka disable pero dito ilalagay yung name dapat ni client-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
 
 
-                                                <td style="color: black;"></td>
-                                                <td>
-
-                                                </td>
-                                            </tr>
-
-                                        </table>
-
-
+                                    <div class="col-xl-6">
+                                        <label for="prate" class="fs-5 fw-bold">Duration<span class="text-muted fs-6">(in hours)</span></label>
+                                        <div class="d-flex">
+                                            <input type="number" min=0 ; id="prate" class="form-control me-2" name="pRate" placeholder="0.00">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <label for="prate" class="fs-5 fw-bold">Rate<span class="text-muted fs-6">(per hour)</span></label>
+                                        <div class="d-flex">
+                                            <input type="text" id="prate" class="form-control me-2" name="pRate" placeholder="0.00" readonly>
+                                        </div>
+                                    </div>
 
                                 </div>
+                                <div class="row">
+                                    <div class="col-xl-4">
+                                        <label for="status" class="fs-5 fw-bold">Property to rent</label>
+                                        <select name="" class="form-control" id="status">
+                                            <option value="avail">Barangay Van</option>
+                                            <option value="noavail">Patrol</option>
+                                            <option value="noavail">Basketball court</option>
+                                        </select>
+                                    </div>
 
-                                </form>
+                                    <div class="col-xl-4">
+                                        <label for="prate" class="fs-5 fw-bold">Date of Rental</label>
+                                        <input type="date" id="date" class="form-control me-2" name="date">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="rname" class="fs-6 fw-bold">Purpose</label>
+                                        <input type="text" class="form-control" id="rname" placeholder="Please indicate purpose for rental:">
+                                    </div>
+
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-xl-6 ">
+                                        <a href="index.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
+                                    </div>
+                                    <div class="col-xl-6 ">
+                                        <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
