@@ -69,7 +69,19 @@ if (strlen($_SESSION['clientmsuid']==0)) {
     background-color: white;
     overflow-x:auto;
     }
-        
+    @media (max-width:576px) {
+            .banner {
+                display: none;
+            }
+
+            .right {
+                margin-left: 5%;
+            }
+
+            .dis {
+                display: flex;
+            }
+        }
     </style>
 
 </head>
@@ -81,6 +93,29 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
+        
+        <div class="container-fluid banner" align = "center">
+                <div class="row">
+                    <div class="col-xl-3 px-1 ">
+                        <div class="float-start" style="margin-left:50px;">
+                            <img src = "../images/barangay.png" style ="width: 100px;">
+                        </div>
+                        
+                    </div>
+                    <div class="col-xl-6 " align = "center">
+                        <h3 class= "py-4">BARANGAY 599, ZONE 59, DISTRICT VI <br>
+                            OFFICE OF THE SANGGUNIANG BARANGAY</h3>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="float-end" style="margin-right:50px;">
+                        <img src = "../images/maynila.png" style ="width: 100px;">
+                        </div>
+                            
+                        
+                    </div>
+                </div>
+                
+            </div>
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
@@ -124,7 +159,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
     
 						?>
                         <h4 class="testfont" style="float: right; font-family: Segoe UI; margin: 25px; color: #021f4e; text-align: justify;">
-                            For <?php  echo date('l, j F Y - h:i A', strtotime($sDate));?> <br> To <?php  echo date('l, j F Y - h:i A', strtotime($eDate));?>
+                            <?php  echo date('l, j F Y - h:i A', strtotime($sDate));?> <br> 
                         </h4>
                         <br><br><br><br>
                         <div class="testulit" style="border-radius: 25px; ">
