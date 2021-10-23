@@ -122,6 +122,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
             <?php
                  $gbd = $row->BirthDate;
                   $gbd = date('Y-m-d', strtotime($gbd));
+				  $gbds = date('F j, Y', strtotime($gbd));
                   $today = date('Y-m-d');
                   $diff = date_diff(date_create($gbd), date_create($today));
                  
@@ -137,7 +138,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 <div class="fs-5 text-white py-2 px-2">
                                         <i class="fa fa-id-card-alt fa-1x me-1">
                                         </i>
-                                        Resident Number <?php echo htmlentities($row->ID);?>
+                                        Resident #<?php echo htmlentities($row->ID);?>
                                 </div>
                             </div>
                          </div>
@@ -146,7 +147,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                             <div class="col-xl-10 bg-white mx-auto text-center">
                             <label for="" class= "text-center fs-6 text-muted small">Resident's Full Name</label>
                                 <div class="display-6 border-bottom text-center py-2">
-                                    <?php echo htmlentities($row->LastName." ". $row->FirstName." ".$row->MiddleName);?>
+                                    <?php echo "$row->LastName, $row->FirstName $row->MiddleName";?>
                                     
                                 </div>
 
@@ -194,7 +195,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                 Date of Birth
                                                             </th>
                                                             <td style = "padding-top: 10px; padding-bottom:10px;text-align:right">
-                                                                <?php echo $gbd;?>
+                                                                <?php echo $gbds;?>
                                                             </td>
                                                     </tr>
                                                     </tbody>
