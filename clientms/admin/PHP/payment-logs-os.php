@@ -43,10 +43,10 @@
                                                     </td>
                                                     <td  scope="col" style = "text-align: center;">
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                <a href ="#approve-proof"class="btn btn-success" data-bs-toggle=  "modal"><i class = "fa fa-eye me-1"></i>Accept</a>
+                                                                <a href ="#approve-proof"class="btn btn-success" data-bs-toggle=  "modal" style= "width:100px;"><i class = "fa fa-eye me-1"></i>Accept</a>
                                                             </div>
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                <a type="button" href ="#decline-proof" data-bs-toggle = "modal" role = "button" class="btn  btn-danger"><i class = "fa fa-times-circle me-1"></i>Decline</a>
+                                                                <a type="button" href ="#decline-proof" data-bs-toggle = "modal" role = "button" class="btn  btn-danger" style= "width:100px;"><i class = "fa fa-times-circle me-1" ></i>Decline</a>
                                                             </div>
 
                                                     </td>
@@ -110,9 +110,9 @@
         <!--modal-->
         <div class="modal fade" id = "proof" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 bg-info ">
+                <div class="modal-content g-0 ">
                     <div class="modal-header bg-danger bg-transparent ">
-                        <h5 class="modal-title" >&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Proof of payment</h5>
+        
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -136,10 +136,10 @@
                     </div>
                     <div class="modal-body bg-white">
                         
-                        <div class="row mt-2">
+                        <div class="row mt-2 ms-2 me-3">
                             <form action="" method = "POST">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <label for="dname">Requestor Name</label>
                                         <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
 
@@ -147,7 +147,7 @@
                            
                                 </div>
                                 <div class="row mt-2">
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <label for="contac">Contact Number</label>
                                         <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
                    
@@ -161,8 +161,22 @@
                                     </div>
                                 </div>
                                 <div class="row mt-2">
+                                    <div class="col-md-6">
+                                        <label for="ars">Acquired Service</label>
+                                        <input id = "crs" type="text" class="form-control" value = "Marriage" readonly>
+                   
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="emails" >Payment Status</label>
+                                        <input id = "emails" type="text" class="form-control" value = "Settled + amount payed" readonly>
+                                       
+                                    
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
                                         <label for="remarks" >Remarks</label>
-                                        <div class="col-md-11">
+                                        <div class="col-md-12">
                                             <div class="form-floating">
                                             <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
                                             <label for="floatingTextarea2">Remarks here (max 10 words)</label>
@@ -261,10 +275,10 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">
-                        <div class="row mt-2">
+                        <div class="row mt-2 ms-2 me-3">
                             <form action="" method = "POST">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <label for="dname">Requestor Name</label>
                                         <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
 
@@ -272,7 +286,7 @@
                            
                                 </div>
                                 <div class="row mt-2">
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <label for="contac">Contact Number</label>
                                         <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
                                     </div>
@@ -282,18 +296,24 @@
                                         
                                     
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <label for="decreason" >Decline Reason</label>
-                                        <select name="" id="decreason" class= "form-control">
+                                        <select name="" id="decreason" class= "form-select" onclick = "showOthersdec('other_txt-dec',this)">
                                             <option value="">Insufficient payment</option>
                                             <option value="">Invalid proof sent</option>
-                                            <option value=""></option>
+                                            <option value="others">Others</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="row g-0 my-2" id = "other_txt-dec" style= "display:none;">
+                                 
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" placeholder= "Specify a reason here">
                                     </div>
                                 </div>
                                 <div class="row mt-2">
                                         <label for="remarks" >Remarks</label>
-                                        <div class="col-md-11">
+                                        <div class="col-md-12">
                                             <div class="form-floating">
                                             <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
                                             <label for="floatingTextarea2">Remarks here (max 10 words)</label>

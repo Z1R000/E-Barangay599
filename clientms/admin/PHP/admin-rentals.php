@@ -105,14 +105,17 @@
                         <div class="row g-0  rounded-top border" style= "background: #012f4e">
                             <div class="col-xl-5 py-2 px-2">
                                 <nav class="nav nav-pills flex-column  flex-sm-row">
-                                    <a class="flex-sm-fill  text-sm-center nav-link fs-5 active white"  href="#properties" data-bs-toggle = "tab">Rental Properties </a>
-                                    <a class="flex-sm-fill text-sm-center nav-link  fs-5 white" data-bs-toggle = "tab" href="#rentalrecords">Rental Records</a>
+                                   
+                                    <a class="flex-sm-fill text-sm-center nav-link  fs-5 white active" data-bs-toggle = "tab" href="#rentalrecords">Rental Records</a>
+                                    <a class="flex-sm-fill text-sm-center nav-link  fs-5 white" data-bs-toggle = "tab" href="#paymentrecs">Payment Logs</a>
+                                    <a class="flex-sm-fill  text-sm-center nav-link fs-5  white"  href="#properties" data-bs-toggle = "tab">Rental Properties </a>
+                                
                                 
                                 </nav>
                             </div>
                         </div>
                         <div class="tab-content">
-                                <div class="tab-pane active" id="properties">
+                                <div class="tab-pane" id="properties">
                                     <div class="row g-0 border-start border-end border-bottom border-secondary bg-white" >
                                         <div class = "row py-2 g-0 px-5">
                                             <div class="col-md-8 px-2">
@@ -138,10 +141,11 @@
                                                         </tr>
                                                         <tr>
                             
-                                                            <th style = "text-align: left;width: 20%;">Property Name</th>
-                                                            <th style = "text-align: left; width: 13%;">Rate <span class="ms-1 fs-6 text-muted"> (per hour)</span></th>
-                                                            <th style = "text-align: left; width: 13%;">Availablility</th>
-                                                            <th style = "text-align: center;width: 13%;">Action</th>
+                                                            <th style = "text-align: left;">Property Name</th>
+                                                            <th style = "text-align: left; ;">Availablility</th>
+                                                            <th style = "text-align: left; ">Rate <span class="ms-1 fs-6 text-muted"> (per hour)</span></th>
+                                                           
+                                                            <th style = "text-align: center;">Action</th>
                                                 
                                                         </tr>
                                                     
@@ -149,17 +153,18 @@
                                                     <tbody class= "table-hover">
                                                         <tr>
                                                             <td scope="col" style = "text-align: left">Basketball Court</td>
-                                                            <td scope="col" style = "text-align: left">20 PHP</td>
                                                             <td scope="col" style = "text-align: left">Available</td>
+                                                            <td scope="col" style = "text-align: right">₱ 20</td>
+                                                         
                                                             <td scope="col" style = "text-align: center">
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                        <button  type="button" href ="#check-property" data-bs-toggle="modal" role="button" class="btn btng btn-primary"><i class = "fa fa-eye"></i></button>
+                                                                        <button  type="button" href ="#check-property" data-bs-toggle="modal" role="button" class="btn  btn-primary me-2"><i class = "fa fa-eye me-2"></i>View</button>
                                                                     </div>
                                                                     <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                        <a href ="#edit-property    " data-bs-toggle ="modal" role ="button" class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
+                                                                        <a href ="#edit-property    " data-bs-toggle ="modal" role ="button" class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
                                                                     </div>
                                                                     <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                        <a type="button" href ="#delete-prop" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                                        <a type="button" href ="#delete-prop" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash me-2"></i>Delete</a>
                                                                     </div>
                                                                     
                                                             </td>
@@ -170,7 +175,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="rentalrecords">
+                                <div class="tab-pane active" id="rentalrecords">
                                     <?php include('admin-rrecords.php');?>
                                     
                                     
@@ -270,21 +275,15 @@
                         <div class="row">
                             <div class="col-xl-6" >
                                 <label for="prate" class="fs-5 fw-bold">Property Rate</label>
-                                <div class="d-flex">    
-                                    
-                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Rate">
-                                    <div class="fs-5 fw-bold">PHP</div>  
+                                <div class="input-group">    
+                                    <button class="btn btn-secondary disabled">₱</button>
+                                    <input type="text" id = "prate" class="form-control" name ="pRate" placeholder= "Rate" style= "text-align:right">
                                </div> 
+
+                              
+
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-8" >
-                                <label for="pname" class="fs-5 fw-bold">Property Name</label>
-                                <input type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-8" >  
+                            <div class="col-xl-6" >  
                                 <label for="status" class="fs-5 fw-bold">Property Availablility</label>
                                 <select name="" class="form-control" id="status">
                                     <option value="avail">Available</option>
@@ -292,6 +291,14 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-xl-12" >
+                                <label for="pname" class="fs-5 fw-bold">Property Name</label>
+                                <input type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
+                            </div>
+                        </div>
+                        <div class="row">
+                                                    </div>
 
                         <div class="row " align="center">
                             <div class="col-md-5  mx-auto my-2">
@@ -326,30 +333,21 @@
                     </div>
                     <div class="modal-body bg-white ">
                         <div class="row">
-                            <div class="col-xl-6" >
+                            <div class="col-xl-5" >
                                 <label for="prate" class="fs-5 fw-bold">Property Rate</label>
-                                <div class="d-flex">    
-                                    
-                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Rate">
-                                    <div class="fs-5 fw-bold">PHP</div>  
+                                <div class="input-group">    
+                                    <button class="btn btn-secondary disabled">₱</button>
+                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Rate" style= "text-align: right;">
                                </div> 
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xl-8" >
+                            <div class="col-xl-12" >
                                 <label for="pname" class="fs-5 fw-bold">Property Name</label>
-                                <input type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
+                                <input type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the property to add">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xl-8" >  
-                                <label for="status" class="fs-5 fw-bold">Property Availablility</label>
-                                <select name="" class="form-control" id="status">
-                                    <option value="avail">Available</option>
-                                    <option value="noavail">Not Available</option>
-                                </select>
-                            </div>
-                        </div>
+                       
 
                         <div class="row " align="center">
                             <div class="col-md-5  mx-auto my-2">
@@ -374,7 +372,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 blue">
                     <div class="modal-header blue white ">
-                        <h5 class="modal-title" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Basketball Court</h5>
+                        <h5 class="modal-title" >&nbsp;<i class = "fa fa-eye"></i>&nbsp;&nbsp;Basketball Court</h5>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -382,27 +380,27 @@
                         <div class="row">
                             <div class="col-xl-6" >
                                 <label for="prate" class="fs-5 fw-bold">Property Rate</label>
-                                <div class="d-flex">    
-                                    
-                                    <input readonly type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Rate">
-                                    <div class="fs-5 fw-bold">PHP</div>  
+                                <div class="input-group">    
+                                    <button class="btn btn-secondary disabled">₱</button>
+                                    <input readonly type="text" id = "prate" class="form-control " name ="pRate" placeholder= "Rate" style = "text-align:right">
                                </div> 
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-8" >
-                                <label for="pname" class="fs-5 fw-bold">Property Name</label>
-                                <input readonly  type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-8" >  
+                            <div class="col-xl-6" >  
                                 <label for="status" class="fs-5 fw-bold">Property Availablility</label>
                                 <select name="" class="form-control" id="status" disabled>
                                     <option value="avail">Available</option>
                                     <option value="noavail">Not Available</option>
                                 </select>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12" >
+                                <label for="pname" class="fs-5 fw-bold">Property Name</label>
+                                <input readonly  type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
+                            </div>
+                        </div>
+                        <div class="row">
+                           
                         </div>
 
                      
@@ -416,6 +414,37 @@
             </div>
         </div>
         <form action="" method ="POST">
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js">
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("select").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+    </script>
+
+<script type="text/javascript">
+    function showDiv(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'Business' ? 'flex' : 'none';
+    }
+    function showOthersdec(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';
+    }
+    function showOtherspurp(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';
+    }
+</script>
+ 
 
 
 </body>

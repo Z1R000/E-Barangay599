@@ -24,6 +24,7 @@
     <style type = "text/css">
        table,tr,td,th{
             border: 1px solid grey;
+            font-size: 1.1em;
         }
         body,html{
             height: 100%;
@@ -151,8 +152,8 @@
                                          
                             
                                                 
-                                                <td scope="col" style = "text-align: left">12-10-2021</td>
-                                                <td scope="col" style = "text-align: left">6:00pm</td>
+                                                <td scope="col" style = "text-align: right">12-10-2021</td>
+                                                <td scope="col" style = "text-align: right">6:00pm</td>
                                                 <td scope="col" style = "text-align: center">
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                             <a type="" href ="blotter-report.php"class="btn btng btn-primary"><i class = "fa fa-print me-2"></i> Report</a>

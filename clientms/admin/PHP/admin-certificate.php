@@ -32,7 +32,7 @@
           table,td,tr,th{
             border: 1px solid darkgrey;
             text-align: left;
-            font-size: 1em;
+            font-size: 1.022em;
             padding: 100px;
             font-family: 'Noto Sans Display', sans-serif;
             
@@ -134,10 +134,10 @@
                     <div class="row g-0  shadow-sm rounded-top border" style= "background: #012f4e; color: white">
                         <div class="col-xl-5 py-2 px-2  ">
                             <nav class="nav nav-pills flex-column  flex-sm-row">
-                                <a class="flex-sm-fill  text-sm-center nav-link active fs-5 white" aria-current="page" href="#certlist" data-bs-toggle = "tab">Certificates List</a>
-                                <a class="flex-sm-fill text-sm-center nav-link fs-5 white" href="#crecords" data-bs-toggle = "tab">Certification Records</a>
+                               
+                                <a class="flex-sm-fill text-sm-center nav-link fs-5 white active" href="#crecords" data-bs-toggle = "tab">Certification Records</a>
                                 <a class="flex-sm-fill text-sm-center nav-link fs-5 white" href="#holding" data-bs-toggle = "tab">Payment Logs</a>
-                       
+                                <a class="flex-sm-fill  text-sm-center nav-link  fs-5 white" aria-current="page" href="#certlist" data-bs-toggle = "tab">Certificates List</a>
                             
                             </nav>
 
@@ -145,7 +145,7 @@
                         
                     </div>
                     <div class="tab-content">
-                        <div class="tab-pane active" id="certlist">
+                        <div class="tab-pane " id="certlist">
                             <form action="" method = "POST">
                                 <div class="row g-0 border-start border-end border-bottom border-secondary shadow-lg bg-white" >
 
@@ -170,7 +170,7 @@
                                         
                                     </div>
                                     <div class="row border g-0">
-                                        <div class="col-xl-11 mx-2  mx-auto py-3  px-2">
+                                        <div class="col-xl-8 mx-2  mx-auto py-3  px-2">
                                             <table class="table bg-white table-hover shadow-sm border "> 
                                                 <thead>
                                                     <tr>
@@ -188,7 +188,7 @@
                                                 <tbody class= "table-hover">
                                                     <tr>
                                                         <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                        <td scope="col" style = "text-align: left">20 PHP</td>
+                                                        <td scope="col" style = "text-align: right">₱ 20</td>
                                                         <td scope="col" style = "text-align: center">
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                                     <button type = "submit" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</button>
@@ -212,7 +212,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="tab-pane" id="crecords">
+                        <div class="tab-pane active" id="crecords">
                             <div class="row g-0 border-start border-end border-bottom border-secondary shadow-lg bg-white" >
                                 <div class = "row py-2 g-0 px-3">
                                     <div class="col-md-8 ">
@@ -260,9 +260,9 @@
                                                     
                                                     <td scope="col" style = "text-align: left">For employment</td>
                                                     <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                    <td scope="col" style = "text-align: left">30 PHP</td>
+                                                    <td scope="col" style = "text-align: right">₱ 30</td>
                                                     <td scope="col" style = "text-align: left">G-cash</td>
-                                                    <td scope="col" style = "text-align: left">10-12-2021</td>
+                                                    <td scope="col" style = "text-align: right">10-12-2021</td>
                                                   
                                                     <td scope="col" style = "text-align: center">
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
@@ -918,7 +918,21 @@
                                         
                                     
                                     </div>
+                                    <div class="col-md-12">
+                                        <label for="decreason" >Decline Reason</label>
+                                        <select name="" id="decreason" class= "form-select" onclick = "showOthersdec('other_txt-dec',this)">
+                                            <option value="">Insufficient payment</option>
+                                            <option value="">Invalid proof sent</option>
+                                            <option value="others">Others</option>
+                                        </select>
+                                    </div>
                                 </div>
+                                <div class="row g-0 my-2" id = "other_txt-dec" style= "display:none;">
+                                 
+                                 <div class="col-md-12">
+                                     <input type="text" class="form-control" placeholder= "Specify a purpose here">
+                                 </div>
+                             </div>
                                 <div class="row mt-2">
 
                                         <label for="remarks" >Remarks</label>
@@ -952,11 +966,11 @@
                                 <div class="row justify-content-center" align = "center">
                                     
                                     <div class="col-mx-6">
-                                        <button href ="" onclick = "alert('Decline Message Sent')" type = "button" class="btn btn-success rounded-circle" data-bs-dismiss ="modal" data-bs-toggle= "modal" >
-                                            <i class= 'fa fa-paper-plane py-1'></i>
+                                        <button href ="" onclick = "alert('Decline Message Sent')" type = "button" class="btn btn-success " data-bs-dismiss ="modal" data-bs-toggle= "modal" >
+                                            <i class= 'fa fa-paper-plane me-2 py-1'></i>Send
                                         </button>
-                                        <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
-                                            <i class= "fa fa-times"></i>
+                                        <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times me-2"></i>Discard
                                         </button>
                                 
                                     </div>
@@ -1021,6 +1035,9 @@
         document.getElementById(divId).style.display = element.value == 'Business' ? 'flex' : 'none';
     }
     function showOthers(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';
+    }
+    function showOthersdec(divId, element) {
         document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';
     }
 </script>

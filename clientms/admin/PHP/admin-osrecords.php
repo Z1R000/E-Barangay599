@@ -45,16 +45,16 @@
 
                                                         <td scope="col" style = "text-align: center">
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <button  type="button" href ="#check-srecord" data-bs-toggle="modal" role="button" class="btn btng btn-primary"><i class = "fa fa-eye"></i></button>
+                                                                    <button  type="button" href ="#check-srecord" data-bs-toggle="modal" role="button" class="btn  btn-primary"><i class = "fa fa-eye me-2"></i>View    </button>
                                                                 </div>
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a href ="#edit-srecord" data-bs-toggle ="modal" role ="button" class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
+                                                                    <a href ="#edit-srecord" data-bs-toggle ="modal" role ="button" class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
                                                                 </div>
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a type="button" href ="#delete-srecord" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                                    <a type="button" href ="#delete-srecord" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash me-2"></i>Delete</a>
                                                                 </div>        
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn btng btn-info"><i class = "fa fa-paper-plane white"></i></a>
+                                                                    <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info text-white"><i class = "fa fa-paper-plane  me-2"></i>Send</a>
                                                                 </div>  
                                                         </td>
                                                     </tr>
@@ -74,17 +74,28 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white ">
+                    <div class="row">
+                           
+                           <div class="col-xl-6" >
+                               <label for="prate" class="fs-5 fw-bold">Date today</label>
+                               <input type="date"  id = "date" class="form-control me-2" name ="date" >
+                             
+                           </div>
+                           
+                         
+                       </div>
+                   
                         <div class="row">
-                            <div class="col-xl-8" >
+                            <div class="col-xl-12" >
                                 <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
                                 <div class="d-flex">    
-                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Requestor Name">
+                                    <input type="text" id = "prate" class="form-control" name ="pRate" placeholder= "Requestor Name">
                                </div> 
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xl-4" >  
-                                <label for="status" class="fs-5 fw-bold">Property to rent</label>
+                            <div class="col-xl-6" >  
+                                <label for="status" class="fs-5 fw-bold">Service to Avail</label>
                                 <select name="" class="form-control" id="status">
                                     <option value="avail">Drug Seminar</option>
                                     <option value="noavail">Circumcision</option>
@@ -92,32 +103,18 @@
                                 </select>
                             </div>
 
-                            <div class="col-xl-4" >
-                                <label for="prate" class="fs-5 fw-bold">Service Fee  </label>
-                                <div class="d-flex">    
-                                    <input type="text" min =0 ; id = "prate" class="form-control me-2" name ="pRate" placeholder= "0.00" value = "20" readonly>
+                            <div class="col-xl-6" >
+                                <label for="prate" class="fs-5 fw-bold">Service Fee</label>
+                                <div class="input-group">
+                                    <button class="btn btn-secondary">
+                                    ₱ 
+                                    </button>    
+                                    <input type="text" min =0 ; id = "prate" class="form-control " name ="pRate" placeholder= "0.00" value = "20"  style = "text-align: right;" readonly>
                                </div> 
                             </div>
                          
                         </div>
-                        <div class="row">
-                           
-                            <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Date today</label>
-                                <input type="text"  id = "date" class="form-control me-2" name ="date" readonly>
-                              
-                            </div>
-                            <div class="col-xl-6" >
-                            <label for="prate" class="fs-5 fw-bold">Service Status</label>
-                                    <select name="" class="form-control" id="status">
-                                        <option value="avail">On going</option>
-                                        <option value="noavail">Settled</option>
-                                
-                                    </select>
-                            
-                            </div>
-                        </div>
-                    
+                  
                
                  
 
@@ -149,15 +146,35 @@
                     </div>
                     <div class="modal-body bg-white ">
                     <div class="row">
-                            <div class="col-xl-8" >
+                            <div class="col-xl-12" >
                                 <label for="rname" class="fs-5 fw-bold">Requestor Name</label>
                                 <div class="d-flex">    
-                                    <input type="text" id = "prate" class="form-control me-2" name ="rname" placeholder= "Requestor Name">
+                                    <input type="text" id = "prate" class="form-control" name ="rname" placeholder= "Requestor Name">
                                </div> 
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xl-4" >  
+                           
+                           <div class="col-xl-6" >
+                               <label for="prate" class="fs-5 fw-bold">Date today</label>
+                               <input type="date"  id = "date" class="form-control " name ="date" >
+                             
+                           </div>
+                           <div class="col-xl-6" >
+                           <label for="ss" class="fs-5 fw-bold">Service Status</label>
+                                   <select name="" class="form-control" id="ss">
+                                       <option value="avail">On going</option>
+                                       <option value="noavail">Settled</option>
+                               
+                                   </select>
+                             
+                             </div>
+                       </div>
+             
+              
+                
+                        <div class="row">
+                            <div class="col-xl-6" >  
                                 <label for="sa" class="fs-5 fw-bold">Service to avail</label>
                                 <select name="" class="form-control" id="sa">
                                     <option value="avail">Drug Seminar</option>
@@ -166,33 +183,17 @@
                                 </select>
                             </div>
 
-                            <div class="col-xl-4" >
+                            <div class="col-xl-6" >
                                 <label for="sfee" class="fs-5 fw-bold">Service Fee  </label>
-                                <div class="d-flex">    
-                                    <input type="text" min =0 ; id = "sfee" class="form-control me-2" name ="pRate" placeholder= "0.00" value = "20" readonly>
+                                <div class="input-group">   
+                                    <button class="btn btn-secondary disabled">
+                                    ₱
+                                    </button> 
+                                    <input type="text" min =0 ; id = "sfee" class="form-control " name ="pRate" placeholder= "0.00" value = "20" readonly style = "text-align: right;">
                                </div> 
                             </div>
                          
                         </div>
-                        <div class="row">
-                           
-                            <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Date today</label>
-                                <input type="text"  id = "date" class="form-control me-2" name ="date" readonly>
-                              
-                            </div>
-                            <div class="col-xl-6" >
-                            <label for="ss" class="fs-5 fw-bold">Service Status</label>
-                                    <select name="" class="form-control" id="ss">
-                                        <option value="avail">On going</option>
-                                        <option value="noavail">Settled</option>
-                                
-                                    </select>
-                              
-                              </div>
-                        </div>
-              
-               
                  
 
                        
@@ -221,42 +222,24 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 blue">
                     <div class="modal-header blue white ">
-                        <h5 class="modal-title white" >&nbsp;<i class = "fa fa-plus"></i>&nbsp;&nbsp;Rental record</h5>
+                        <h5 class="modal-title white" >&nbsp;<i class = "fa fa-eye"></i>&nbsp;&nbsp;Service Record</h5>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white ">
                     <div class="row">
-                            <div class="col-xl-8" >
+                            <div class="col-xl-12" >
                                 <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
                                 <div class="d-flex">    
-                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Requestor Name" readonly>
+                                    <input type="text" id = "prate" class="form-control " name ="pRate" placeholder= "Requestor Name" readonly>
                                </div> 
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-4" >  
-                                <label for="status" class="fs-5 fw-bold">Property to rent</label>
-                                <select name="" class="form-control" id="status" disabled>
-                                    <option value="avail">Drug Seminar</option>
-                                    <option value="noavail">Circumcision</option>
-                                    <option value="noavail">Marriage</option>
-                                </select>
-                            </div>
-
-                            <div class="col-xl-4" >
-                                <label for="prate" class="fs-5 fw-bold">Service Fee  </label>
-                                <div class="d-flex">    
-                                    <input type="text" min =0 ; id = "prate" class="form-control me-2" name ="pRate" placeholder= "0.00" value = "20" readonly>
-                               </div> 
-                            </div>
-                         
                         </div>
                         <div class="row">
                             
                             <div class="col-xl-6" >
                                 <label for="prate" class="fs-5 fw-bold">Date today</label>
-                                <input type="text"  id = "date" class="form-control me-2" name ="date" readonly>
+                                <input type="text"  id = "date" class="form-control " name ="date" readonly>
                               
                             </div>
                             <div class="col-xl-6" >
@@ -269,6 +252,28 @@
                                 
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-xl-6" >  
+                                <label for="status" class="fs-5 fw-bold">Property to rent</label>
+                                <select name="" class="form-control" id="status" disabled>
+                                    <option value="avail">Drug Seminar</option>
+                                    <option value="noavail">Circumcision</option>
+                                    <option value="noavail">Marriage</option>
+                                </select>
+                            </div>
+
+                            <div class="col-xl-6" >
+                                <label for="prate" class="fs-5 fw-bold">Service Fee</label>
+                                <div class="input-group">
+                                    <button class="btn btn-secondary disabled">
+                                    ₱
+                                    </button>    
+                                    <input type="text" min =0 ; id = "prate" class="form-control" name ="pRate" placeholder= "0.00" value = "20" style="text-align: right;"readonly>
+                               </div> 
+                            </div>
+                         
+                        </div>
+                        
                         <div class="row">
                             
                         </div>
@@ -350,10 +355,10 @@
                     </div>
                     <div class="modal-body bg-white">
                         
-                        <div class="row mt-2">
+                        <div class="row mt-2 ms-2 me-3">
                             <form action="" method = "POST">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <label for="dname">Requestor Name</label>
                                         <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
 
@@ -361,7 +366,7 @@
                            
                                 </div>
                                 <div class="row mt-2">
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <label for="contac">Contact Number</label>
                                         <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
                    
@@ -375,8 +380,8 @@
                                     </div>
                                 </div>
                                 <div class="row mt-2">
-                                    <div class="col-md-5">
-                                        <label for="ars">Acquired rental/service</label>
+                                    <div class="col-md-6">
+                                        <label for="ars">Acquired Service</label>
                                         <input id = "crs" type="text" class="form-control" value = "Marriage" readonly>
                    
                                        
@@ -390,7 +395,7 @@
                                 </div>
                                 <div class="row mt-2">
                                         <label for="remarks" >Remarks</label>
-                                        <div class="col-md-11">
+                                        <div class="col-md-12">
                                             <div class="form-floating">
                                             <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
                                             <label for="floatingTextarea2">Remarks here (max 10 words)</label>
@@ -425,11 +430,11 @@
                                 <div class="row justify-content-center" align = "center">
                                     
                                     <div class="col-mx-6">
-                                        <button href ="#" type = "button" class="btn btn-success rounded-circle" data-bs-dismiss ="modal"  >
-                                            <i class= 'fa fa-paper-plane py-1'></i>
+                                        <button href ="#" type = "button" class="btn btn-success " data-bs-dismiss ="modal"  >
+                                            <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
                                         </button>
-                                        <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
-                                            <i class= "fa fa-times"></i>
+                                        <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times me-2"></i>Discard
                                         </button>
                                 
                                     </div>

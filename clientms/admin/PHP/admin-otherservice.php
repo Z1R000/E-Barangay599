@@ -26,7 +26,7 @@
           table,td,tr,th{
            border: 1px solid darkgrey;
             text-align: left;
-            font-size: 1em;
+            font-size: 1.02em;
             padding: 100px;
             font-family: 'Noto Sans Display', sans-serif;
             
@@ -105,19 +105,21 @@
                         <div class="row g-0  rounded-top border" style= "background: #012f4e">
                             <div class="col-xl-5 py-2 px-2">
                                 <nav class="nav nav-pills flex-column  flex-sm-row">
-                                    <a class="flex-sm-fill  text-sm-center nav-link fs-5 active white"  href="#ser" data-bs-toggle = "tab">Offered Services </a>
-                                    <a class="flex-sm-fill text-sm-center nav-link  fs-5 white" data-bs-toggle = "tab" href="#srecords">Service Records</a>
+                                  
+                                    <a class="flex-sm-fill text-sm-center nav-link  fs-5 active white" data-bs-toggle = "tab" href="#srecords">Service Records</a>
+                                    <a class="flex-sm-fill text-sm-center nav-link  fs-5   white" data-bs-toggle = "tab" href="#paymentsrecs">Payment Logs</a>
+                                    <a class="flex-sm-fill  text-sm-center nav-link fs-5 white"  href="#ser" data-bs-toggle = "tab">Offered Services </a>
                              
                                 </nav>
                             </div>
                         </div>
                         <div class="tab-content">
-                                <div class="tab-pane active" id="ser">
+                                <div class="tab-pane" id="ser">
                                     <div class="row g-0 border-start border-end border-bottom border-secondary bg-white" >
                                         <div class = "row py-2 g-0 px-5">
                                             <div class="col-md-8 px-2">
                                                 <div class="btn-group" role="group">
-                                                    <a href = "#new-property" data-bs-toggle="modal"  role="button" class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;New Property</a>
+                                                    <a href = "#new-serv" data-bs-toggle="modal"  role="button" class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;New Service</a>
                                                 </div>
                                             </div>
                                             <div class="col-md-4  px-2" >
@@ -153,13 +155,13 @@
                                                             <td scope="col" style = "text-align: left">Available</td>
                                                             <td scope="col" style = "text-align: center">
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                        <button  type="button" href ="#check-property" data-bs-toggle="modal" role="button" class="btn btng btn-primary"><i class = "fa fa-eye"></i></button>
+                                                                        <button  type="button" href ="#check-service" data-bs-toggle="modal" role="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</button>
                                                                     </div>
                                                                     <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                        <a href ="#edit-property    " data-bs-toggle ="modal" role ="button" class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
+                                                                        <a href ="#edit-service" data-bs-toggle ="modal" role ="button" class="btn  btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
                                                                     </div>
                                                                     <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                        <a type="button" href ="#delete-prop" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                                        <a type="button" href ="#delete-service" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-tras me-2"></i>Delete</a>
                                                                     </div>
                                                             </td>
                                                         </tr>
@@ -169,12 +171,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="srecords">
+                                <div class="tab-pane active" id="srecords">
                                     <?php include('admin-osrecords.php');?>
                                     
                                     
                                 </div>      
-                                <div class="tab-pane" id="paymentrecs">
+                                <div class="tab-pane" id="paymentsrecs">
                                     <?php include ('payment-logs-os.php');?>
                                
                                 </div>
@@ -191,7 +193,7 @@
     <!--modal-->
    
 
-    <div class="modal fade" id = "delete-prop" tab-idndex = "-1">
+    <div class="modal fade" id = "delete-service" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger" >
                     <div class="modal-header  white ">
@@ -207,7 +209,7 @@
                     
                         </div>
                         <div class="row">
-                            <p class = "fs-4 text-center">You are about to delete an existing property, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
+                            <p class = "fs-4 text-center">You are about to delete an existing service, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
                         </div>
                         <div class="row justify-content-center" align = "center">
                             <form method = "POST" action = "#">
@@ -257,7 +259,7 @@
         
 
     <form action="" method ="POST">
-        <div class="modal fade" id = "edit-property" tab-idndex = "-1">
+        <div class="modal fade" id = "edit-service" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 blue">
                     <div class="modal-header blue white ">
@@ -269,27 +271,30 @@
                         <div class="row">
                             <div class="col-xl-6" >
                                 <label for="prate" class="fs-5 fw-bold">Service Fee</label>
-                                <div class="d-flex">    
-                                    
-                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Rate">
-                                    <div class="fs-5 fw-bold">PHP</div>  
+                                <div class="input-group">    
+                                    <button class="btn btn-secondary disable">
+                                    ₱
+                                    </button>
+                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Rate" style= "text-align: right;">
+                          
                                </div> 
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-8" >
-                                <label for="pname" class="fs-5 fw-bold">Service Name</label>
-                                <input type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-8" >  
+                            <div class="col-xl-6" >  
                                 <label for="status" class="fs-5 fw-bold">Service Availablility</label>
                                 <select name="" class="form-control" id="status">
                                     <option value="avail">Available</option>
                                     <option value="noavail">Not Available</option>
                                 </select>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12" >
+                                <label for="pname" class="fs-5 fw-bold">Service Name</label>
+                                <input type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
+                            </div>
+                        </div>
+                        <div class="row">
+                       
                         </div>
 
                         <div class="row " align="center">
@@ -315,7 +320,7 @@
         include('services.php');
     ?>
     <form action="" method ="POST">
-        <div class="modal fade" id = "new-property" tab-idndex = "-1">
+        <div class="modal fade" id = "new-serv" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 blue">
                     <div class="modal-header blue white ">
@@ -325,30 +330,24 @@
                     </div>
                     <div class="modal-body bg-white ">
                         <div class="row">
-                            <div class="col-xl-6" >
+                            <div class="col-xl-5" >
                                 <label for="prate" class="fs-5 fw-bold">Service Fee</label>
-                                <div class="d-flex">    
-                                    
-                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Rate">
-                                    <div class="fs-5 fw-bold">PHP</div>  
+                                <div class="input-group">    
+                                    <button class="btn btn-secondary disable">
+                                    ₱
+                                    </button>
+                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Rate"style= "text-align:right;">
+                  
                                </div> 
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xl-8" >
+                            <div class="col-xl-12" >
                                 <label for="pname" class="fs-5 fw-bold">Service Name</label>
                                 <input type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xl-8" >  
-                                <label for="status" class="fs-5 fw-bold">Service Availablility</label>
-                                <select name="" class="form-control" id="status">
-                                    <option value="avail">Available</option>
-                                    <option value="noavail">Not Available</option>
-                                </select>
-                            </div>
-                        </div>
+                       
 
                         <div class="row " align="center">
                             <div class="col-md-5  mx-auto my-2">
@@ -369,7 +368,7 @@
             </div>
         </div>
     </form>
-    <div class="modal fade" id = "check-property" tab-idndex = "-1">
+    <div class="modal fade" id = "check-service" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 blue">
                     <div class="modal-header blue white ">
@@ -381,27 +380,30 @@
                         <div class="row">
                             <div class="col-xl-6" >
                                 <label for="prate" class="fs-5 fw-bold">Service Fee</label>
-                                <div class="d-flex">    
-                                    
-                                    <input readonly type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Rate">
-                                    <div class="fs-5 fw-bold">PHP</div>  
+                                <div class="input-group">    
+                                    <button class="btn btn-secondary disable">
+                                    ₱
+                                    </button>
+                                    <input readonly type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Rate" style= "text-align:right;">
+                                
                                </div> 
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-8" >
-                                <label for="pname" class="fs-5 fw-bold">Service Name</label>
-                                <input readonly  type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-8" >  
+                            <div class="col-xl-6" >  
                                 <label for="status" class="fs-5 fw-bold">Service Availablility</label>
                                 <select name="" class="form-control" id="status" disabled>
                                     <option value="avail">Available</option>
                                     <option value="noavail">Not Available</option>
                                 </select>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12" >
+                                <label for="pname" class="fs-5 fw-bold">Service Name</label>
+                                <input readonly  type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
+                            </div>
+                        </div>
+                        <div class="row">
+                         
                         </div>
 
                      
@@ -415,7 +417,34 @@
             </div>
         </div>
         <form action="" method ="POST">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js">
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("select").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+    </script>
 
+<script type="text/javascript">
+    function showDiv(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'Business' ? 'flex' : 'none';
+    }
+    function showOthersdec(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';
+    }
+
+</script>
+ 
 
 </body>
 </html>
