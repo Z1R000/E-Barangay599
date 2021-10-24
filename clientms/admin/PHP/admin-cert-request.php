@@ -305,8 +305,12 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="emails" >Amount to pay</label>
-                                        <input id = "emails" type="text" class="form-control" value = "40 " readonly>
-                                       
+                                        <div class="input-group">
+                                            <button class="btn btn-secondary disabled">
+                                            ₱ 
+                                            </button>
+                                            <input id = "emails" type="text" class="form-control" value = "40 " readonly style= "text-align:right;">
+                                        </div>
                                     
                                     </div>
                                 </div>

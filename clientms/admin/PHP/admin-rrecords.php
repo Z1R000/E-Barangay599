@@ -17,15 +17,16 @@
                                             <table class="table bg-white border border-secondary table-hover "> 
                                                 <thead>
                                                     <tr>
-                                                        <td scope = "col" colspan = 8 style ="background: #012f6e; color: white; text-align: center">Rental Records</td>
+                                                        <td scope = "col" colspan = 9 style ="background: #012f6e; color: white; text-align: center">Rental Records</td>
                                                     </tr>
                                                     <tr>
-                                                        <th style = "text-align: left;">Rental Status</th>
+                                                        <th style = "text-align: left;"> Status</th>
                                                         <th style = "text-align: left;">Requestor Name</th>
                                                         <th style = "text-align: left; ">Requested Property </th>
+                                                        <th style = "text-align: left; ">Purpose </th>
                                                 
-                                                        <th style = "text-align: left;;">Date of rental</th>
-                                                        <th style = "text-align: left;">Rental Duration (hours)</th>
+                                                        <th style = "text-align: left;;">Date</th>
+                                                        <th style = "text-align: left;">Duration (hours)</th>
                                                         <th style = "text-align: left;">Rate (Pesos)</th>
                                                         <th style = "text-align: left; ">Mode of Payment </th>
                                                         <th style = "text-align: center;">Action</th>
@@ -38,6 +39,7 @@
                                                         <td scope="col" style = "text-align: left">On-going</td>
                                                         <td scope="col" style = "text-align: left">Tobirama Uchiha</td>
                                                         <td scope="col" style = "text-align: left">Barangay van</td>
+                                                        <td scope="col" style = "text-align: left">DSWD</td>
                                                         <td scope="col" style = "text-align: left">10/16/2021,21:12:08</td>
                                                         <td scope="col" style = "text-align: right">2</td>
                                                         <td style = "text-align: right;">₱ 10,040.00 </td>
@@ -70,7 +72,7 @@
 
 
         <div class="modal fade" id = "new-rental" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content g-0 blue">
                     <div class="modal-header blue white ">
                         <h5 class="modal-title white" >&nbsp;<i class = "fa fa-plus"></i>&nbsp;&nbsp;New Rental</h5>
@@ -102,11 +104,26 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="row g-3">
+                            <div class="col-xl-6">
+                                <label for="purp" class= "fs-6 fw-bold">Purposes</label>
+                                    <select class= "select form-select" name="" id="purp" onchange = "showOthers('others', this)">
+                                        <option  selected>Purposes</option>
+                                        <option value="ent">For entertainment</option>
+                                        <option value="med">For medical reasons</option>
+                                        <option value="others">Others</option>
+                                    </select>
+                            </div>
+                           <div class="col-xl-6" id ="others">
+                           <label for="purp" class= "fs-6 fw-bold">Purpose </label>
+                               <input type="text" class="form-control" placeholder = "Specify purpose here">
+                           </div>
+                        </div>
 
                         <div class="row">
                             <div class="col-xl-4" >  
                                 <label for="status" class="fs-5 fw-bold">Property to rent</label>
-                                <select name="" class="form-control" id="status">
+                                <select name="" class="form-select" id="status">
                                     <option value="avail">Barangay Van</option>
                                     <option value="noavail">Patrol</option>
                                     <option value="noavail">Basketball court</option>
@@ -162,7 +179,7 @@
             </div>
         </div>
         <div class="modal fade" id = "edit-rental" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content g-0 blue">
                     <div class="modal-header blue white ">
                         <h5 class="modal-title white" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Edit Rental</h5>
@@ -189,24 +206,40 @@
                             </div>
                        
                         <div class="row gx-2">
-                        <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Rental Status</label>
-                                    <select name="" class="form-control" id="status">
-                                        <option value="avail">On going</option>
-                                        <option value="noavail">Settled</option>
-                                
-                                    </select>
-                            </div>
-                                <div class="col-xl-6" >  
-                                    <label for="status" class="fs-5 fw-bold">Mode of payment</label>
-                                    <select name="" class="form-control" id="status">
-                                        <option value="g-cash">G-cash</option>
-                                        <option value="cash">Cash</option>
+                                <div class="col-xl-6" >
+                                    <label for="prate" class="fs-5 fw-bold">Rental Status</label>
+                                        <select name="" class="form-control" id="status">
+                                            <option value="avail">On going</option>
+                                            <option value="noavail">Settled</option>
                                     
-                                    </select>
+                                        </select>
+                                </div>
+                                <div class="col-xl-6" >  
+                                        <label for="status" class="fs-5 fw-bold">Mode of payment</label>
+                                        <select name="" class="form-control" id="status">
+                                            <option value="g-cash">G-cash</option>
+                                            <option value="cash">Cash</option>
+                                        
+                                        </select>
                                 </div>
 
                         </div>
+                        <div class="row g-3">
+                            <div class="col-xl-6">
+                                <label for="purp" class= "fs-6 fw-bold">Purposes</label>
+                                    <select class= "select form-select" name="" id="purp" onchange = "showOthersEdit('othersed', this)">
+                                        <option  selected>Purposes</option>
+                                        <option value="ent">For entertainment</option>
+                                        <option value="med">For medical reasons</option>
+                                        <option value="others">Others</option>
+                                    </select>
+                            </div>
+                           <div class="col-xl-6" id ="othersed">
+                           <label for="purp" class= "fs-6 fw-bold">Purpose </label>
+                               <input type="text" class="form-control" placeholder = "Specify purpose here">
+                           </div>
+                        </div>
+
                             
                             <div class="row">
                                 <div class="col-xl-4" >  
@@ -267,7 +300,7 @@
             </div>
         </div>
         <div class="modal fade" id = "check-rental" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content g-0 blue">
                     <div class="modal-header blue white ">
                         <h5 class="modal-title white" >&nbsp;<i class = "fa fa-eye"></i>&nbsp;&nbsp;Rental record</h5>
@@ -281,6 +314,15 @@
                                 <label for="prate" class="fs-5 fw-bold">Date of Rental</label>
                                 <input type="text"  id = "date" class="form-control " name ="date"value ="10/16/2021,21:12:08" readonly>
                                 
+                            </div>
+                            <div class="col-xl-6">
+                                <label for="purp" class= "fs-5 fw-bold">Purposes</label>
+                                    <select class= "select form-select" name="" id="purp" onchange = "showOthersEdit('othersed', this)" disabled>
+                                        <option  selected>Purposes</option>
+                                        <option value="ent">For entertainment</option>
+                                        <option value="med">For medical reasons</option>
+                                        <option value="others">Others</option>
+                                    </select>
                             </div>
                            
                         </div>
@@ -313,6 +355,8 @@
                                 </select>
                             </div>
                         </div>
+                 
+                        
                        
                         <div class="row">
                             <div class="col-xl-4" >  

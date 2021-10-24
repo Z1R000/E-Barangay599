@@ -205,7 +205,7 @@
                                          
                             
                                                 
-                                                <td scope="col" style = "text-align: left">0.00</td>
+                                                <td scope="col" style = "text-align: right">  ₱  0.00</td>
                                                 <td scope="col" style = "text-align: left">Employment</td>
                                                 <td scope="col" style = "text-align: left">10-19-2021</td>
                                                 
@@ -236,7 +236,246 @@
         </div>
 
     </div>
-    <?php include('accept-request.php');?>
+
+    <div class="modal fade" id = "approve-req" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-success ">
+                    <div class="modal-header bg-success  ">
+                        <h5 class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Request Accepted Message</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        
+                        <div class="row mt-2 ms-2 me-3">
+                            <form action="" method = "POST">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="dname">Requestor Name</label>
+                                        <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
+
+                                    </div>
+                           
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6">
+                                        <label for="contac">Contact Number</label>
+                                        <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
+                   
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="emails" >Email Address</label>
+                                        <input id = "emails" type="text" class="form-control" value = "juanDelaC@gmail.com" readonly>
+                                        
+                                    
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6">
+                                        <label for="ars">Requested Service</label>
+                                        <input id = "crs" type="text" class="form-control" value = "Seminar" readonly>
+                   
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="emails" >Amount to pay</label>
+                                        <div class="input-group">
+                                            <button class="btn btn-secondary disabled">
+                                            ₱ 
+                                            </button>
+                                            <input id = "emails" type="text" class="form-control" value = "40 " readonly style= "text-align:right;">
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                        <label for="remarks" >Remarks</label>
+                                        <div class="col-md-12">
+                                            <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <label for="floatingTextarea2">Remarks here (max 10 words)</label>
+                                                
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                                <div class="row mt-2">
+                                    <label for="remarks" >Mode of delivery <i class= "fa fa-envelope"></i></label>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="sms">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                SMS
+                                            </label>
+                                            </div>
+                                            <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="em">
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                E-mail
+                                            </label>
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+                                          
+                                        </div>
+
+                                    </div>
+                                    
+                                </div>
+                                <div class="row justify-content-center" align = "center">
+                                    
+                                    <div class="col-mx-6">
+                                        <button href ="#" type = "button" class="btn btn-success" data-bs-dismiss ="modal" onclick = "alert('Approval Message Sent')" >
+                                            <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
+                                        </button>
+                                        <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times me-2"></i>Discard
+                                        </button>
+                                
+                                    </div>
+                                    
+                                </div>  
+                            </form>
+
+                        </div>
+                      
+                
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id = "decline-req" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-danger ">
+                    <div class="modal-header bg-danger bg-transparent ">
+                        <h5 class="modal-title text-white" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Declining request?</h5>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        <div class="row mt-2 me-3 ms-2">
+                            <form action="" method = "POST">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="dname">Requestor Name</label>
+                                        <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
+
+                                    </div>
+                           
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6">
+                                        <label for="contac">Contact Number</label>
+                                        <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="emails" >Email Address</label>
+                                        <input id = "emails" type="text" class="form-control" value = "juanDelaC@gmail.com" readonly>
+                                        
+                                    
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="decreason" >Decline Reason</label>
+                                        <select name="" id="decreason" class= "form-select" onclick = "showOthersdec('other_txt-dec',this)">
+                                            <option value="">Insufficient payment</option>
+                                            <option value="">Invalid proof sent</option>
+                                            <option value="others">Others</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row g-0 my-2" id = "other_txt-dec" style= "display:none;">
+                                 
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" placeholder= "Specify a reason here">
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                        <label for="remarks" >Remarks</label>
+                                        <div class="col-md-12">
+                                            <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <label for="floatingTextarea2">Remarks here (max 10 words)</label>
+                                                
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                                <div class="row mt-2">
+                                    <label for="remarks" >Mode of delivery <i class= "fa fa-envelope"></i></label>
+                                    <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    SMS
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    E-mail
+                                                </label>  
+                                            </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row justify-content-center" align = "center">
+                                    
+                                    <div class="col-mx-6">
+                                        <button href ="" onclick = "alert('Decline Message Sent')" type = "button" class="btn btn-success " data-bs-dismiss ="modal" data-bs-toggle= "modal" >
+                                            <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
+                                        </button>
+                                        <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times me-2"></i> Discard
+                                        </button>
+                                
+                                    </div>
+                                    
+                                </div>  
+                            </form>
+
+                        </div>
+                      
+                
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js">
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("select").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+    </script>
+
+<script type="text/javascript">
+    function showDiv(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'Business' ? 'flex' : 'none';
+    }
+    function showOthers(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';
+    }
+    function showOthersdec(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';
+    }
+</script>
  
  
  
