@@ -255,37 +255,37 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                 <div class="container-fluid px-5 mx-auto">
                     <div class="row px-2  g-0" style= "border-radius: 10px 10px 0px 0px;">
                         <ul class="nav nav-pills py-2" id="pills-tab" role="tablist">
-                            <li class="nav-item px-1" role="presentation">
+                            <li class="nav-item px-1 py-2" role="presentation">
                                 <button class="btn btn-outline-primary active fs-5" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#all" type="button" role="tab" aria-controls="pills-home" aria-selected="true">All Residents</button>
                             </li>
-                            <li class="nav-item px-1 " role="presentation">
+                            <li class="nav-item px-1 py-2" role="presentation">
                                 <button class="btn btn-outline-primary fs-5" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#p1" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Purok 1</button>
                             </li>
-                            <li class="nav-item px-1 " role="presentation">
+                            <li class="nav-item px-1 py-2" role="presentation">
                                 <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p2" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 2</button>
                             </li>
-                            <li class="nav-item px-1" role="presentation">
+                            <li class="nav-item px-1 py-2" role="presentation">
                                 <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p3" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 3</button>
                             </li>
-                            <li class="nav-item px-1" role="presentation">
+                            <li class="nav-item px-1 py-2" role="presentation">
                                 <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p4" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 4</button>
                             </li>
-                            <li class="nav-item px-1" role="presentation">
+                            <li class="nav-item px-1 py-2" role="presentation">
                                 <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p5" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 5</button>
                             </li>
-                            <li class="nav-item px-1 " role="presentation">
+                            <li class="nav-item px-1 py-2" role="presentation">
                                 <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p6" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 6</button>
                             </li>
-                            <li class="nav-item px-1" role="presentation">
+                            <li class="nav-item px-1 py-2" role="presentation">
                                 <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p7" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 7</button>
                             </li>
-                            <li class="nav-item px-1" role="presentation">
+                            <li class="nav-item px-1 py-2" role="presentation">
                                 <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p8" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 8</button>
                             </li>
-                            <li class="nav-item px-1" role="presentation">
+                            <li class="nav-item px-1 py-2" role="presentation">
                                 <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p9" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 9</button>
                             </li>
-                            <li class="nav-item px-1" role="presentation">
+                            <li class="nav-item px-1 py-2" role="presentation">
                                 <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p10" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 10</button>
                             </li>
                         </ul>

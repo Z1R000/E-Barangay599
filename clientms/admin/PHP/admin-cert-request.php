@@ -298,8 +298,8 @@
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-md-6">
-                                        <label for="ars">Acquired Certificate</label>
-                                        <input id = "crs" type="text" class="form-control" value = "Marriage" readonly>
+                                        <label for="ars">Requested Certificate</label>
+                                        <input id = "crs" type="text" class="form-control" value = "Employement" readonly>
                    
                                        
                                     </div>
@@ -378,7 +378,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">
-                        <div class="row mt-2 me-2 ms-3">
+                        <div class="row mt-2 me-3 ms-2">
                             <form action="" method = "POST">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -399,7 +399,20 @@
                                         
                                     
                                     </div>
-                                   
+                                    <div class="col-md-12">
+                                        <label for="decreason" >Decline Reason</label>
+                                        <select name="" id="decreason" class= "form-select" onclick = "showOthersdec('other_txt-dec',this)">
+                                            <option value="">Insufficient payment</option>
+                                            <option value="">Invalid proof sent</option>
+                                            <option value="others">Others</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row g-0 my-2" id = "other_txt-dec" style= "display:none;">
+                                 
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" placeholder= "Specify a reason here">
+                                    </div>
                                 </div>
                                 <div class="row mt-2">
                                         <label for="remarks" >Remarks</label>
@@ -455,6 +468,62 @@
                 </div>
             </div>
         </div>
+
+
+
+        <script>
+    var today = new Date();
+    var mm = today.getMonth() + 1;
+    var dd = today.getDay();
+    var yy = today.getFullYear();
+    
+    if (mm<10){
+        mm = '0'+ mm;
+    }
+    if (dd <10){
+        dd = '0' + dd;
+    }
+
+    var  dtd= mm + '/' + dd + '/' + yy;
+    document.getElementById('date').value = dtd;
+
+    function walkin(){
+        document.getElementId('sms').disabled = true;
+        document.getElementId('em').disabled = true;
+        
+    }
+    
+
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js">
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("select").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+    </script>
+
+<script type="text/javascript">
+    function showDiv(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'Business' ? 'flex' : 'none';
+    }
+    function showOthers(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';
+    }
+    function showOthersdec(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';
+    }
+</script>
  
 </body>
 </html>
