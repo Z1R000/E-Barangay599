@@ -89,6 +89,10 @@
         .white{
             color: white;
         }
+        .in{
+            padding-left: 10.5%;
+            padding-right: 10.5%;
+        }
         .er{
             border-radius: 20px 20px 0px 0px;
             padding-right:3%;
@@ -98,6 +102,10 @@
         @media(max-width: 786px){
             .er{
                 padding: 0px;
+            }
+            .in{
+            padding-left: 5.3%;
+            padding-right: 4%;
             }
         }
     </style>
@@ -136,8 +144,8 @@
                     </div>
                 
                 </div>
-                    <div class="container-fluid py-2 px-5 mx-auto ">
-                        <div class="row  g-0 gy-2 px-5">
+                    <div class="container-fluid py-2  mx-auto in ">
+                        <div class="row  g-0 gy-2 px-2">
                             <div class="row g-0 bg-primary py-1  er" >
                                     
                             </div>
@@ -253,24 +261,25 @@
                                                     </select> 
                                                 </div>
                                         </div>
-                                        <div class="row g-0 my-3">
-                                            <div class="fs-4">For Employees <span class= "fs-6 text-muted"> (Optional, leave blank if resident does not have)</span></div>
-                                            
-                                        </div>
+                                   
                                         
                                         <div class="row g-0 mb-3 px-4">
-                                            <div class="col-xl-5 col-sm-12">
-                                                <div class="input-group">
-                                                    <label for="" class="mx-2 fs-4 small">SSS number</label>
-                                                    <input type="text" id = "lname"class="form-control">
+                                                <label for="sss" class="col-xl-2 fs-4 py-0">SSS Number<br></label>
+                                            
+                                                <div class="col-xl-6 col-sm-12">
+                                     
+                                                    <input type="text" id = "sss"class="form-control">
+                    
                                                 </div>
-                                            </div>
-                                            <div class="col-xl-5 col-sm-12">
-                                                <div class="input-group">
-                                                    <label for="" class="mx-2 fs-4 small">TIN number</label>
-                                                    <input type="text" id = "lname"class="form-control">
+                                        </div>
+                                        <div class="row g-0 mb-3 px-4">
+                                                <label for="tin" class="col-xl-2 fs-4 py-0">TIN Number</label>
+                                            
+                                                <div class="col-xl-6 col-sm-12">
+                                                
+                                                    <input type="text" id = "sss"class="form-control">
+                                                    <label for="tin" class="text-muted fs-6 small"></label>
                                                 </div>
-                                            </div>                                       
                                         </div>
                                 </div>
                                      
@@ -280,8 +289,8 @@
                 </div>
 
 
-                <div class="container-fluid py-2 px-5 mx-auto mt-4">
-                        <div class="row  g-0 gy-2 px-5 ">
+                <div class="container-fluid py-2  mx-auto mt-4 in">
+                        <div class="row  g-0 gy-2 px-2">
                             <div class="row g-0 bg-primary py-1  er" >
                                     
                             </div>
@@ -317,10 +326,10 @@
                                             <div class="row g-0 mb-3">
                                             <label for="cs" class=" col-form-label  fs-4">Purok Information</label>
                                         
-                                                <div class="col-xl-5 col-sm-12">
+                                                <div class="col-xl-5 col-sm-12 my-2">
                                                     <div class="input-group">
-                                                        <label for="" class="mx-2 fs-5 small">Purok Number&nbsp;</label>
-                                                        <select class="form-select" name = "purok" id = "purok" aria-label="Default select example">
+                                                        <label for="" class="mx-2 fs-5 small">Number&nbsp;</label>
+                                                        <select class="form-select" name = "purok" id = "purok" aria-label="Default select example" style ="width: 50%;">
                                                         <option value=''selected disabled>--Purok Number--</option>
                                                         <option value="1">Purok 1</option>
                                                         <option value="2">Purok 2</option>
@@ -329,10 +338,10 @@
                                                         
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-4 col-sm-12">
+                                                <div class="col-xl-5 col-sm-12 my-2">
                                                     <div class="input-group">
-                                                        <label for="" class="mx-2 fs-5 small">Street</label>
-                                                        <input id = "street" type="text" class="form-control">
+                                                        <label for="" class="mx-2 fs-5 small" >Street</label>
+                                                        <input id = "street" type="text" class="form-control" style ="width: 50%;">
                                                     </div>
                                                 </div>                                       
                                             </div>
@@ -356,8 +365,8 @@
 
                     </div>
                 </div>
-                <div class="container-fluid py-2 px-5 mx-auto  mt-4 pb-5">
-                        <div class="row  g-0 gy-2 px-5 ">
+                <div class="container-fluid py-2 in mx-auto  mt-4 pb-5">
+                        <div class="row  g-0 gy-2 px-2   ">
                             <div class="row g-0 bg-primary py-1  er" >
                                     
                             </div>
@@ -413,7 +422,7 @@
                                      <div class="col-9">
 
                                      </div>
-                                     <div class="col-xl-3 ">
+                                     <div class="col-xl-3 px-3">
                                         
                                             <a class="btn btn-success form-control">
                                                 Submit
