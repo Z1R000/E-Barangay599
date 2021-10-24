@@ -23,6 +23,7 @@
                                                         <th style = "text-align: left;">Service Status</th>
                                                         <th style = "text-align: left;">Requestor Name</th>
                                                         <th style = "text-align: left; ">Requested Service </th>
+                                                        <th style = "text-align: left; ">Purpose</th>
                                                        
                                                         <th style = "text-align: left;;">Service Fee</th>
                                                         <th style = "text-align: left;;">Date recorded</th>
@@ -37,8 +38,9 @@
                                                         <td scope="col" style = "text-align: left">On-going</td>
                                                         <td scope="col" style = "text-align: left">Tobirama Uchiha</td>
                                                         <td scope="col" style = "text-align: left">Drug Seminar</td>
+                                                        <td scope="col" style = "text-align: left">For Recreation</td>
                                                         
-                                                        <td style = "text-align: left;">40.00 PHP</td>
+                                                        <td style = "text-align: right;">₱ 40.00 </td>
                                                         <td scope="col" style = "text-align: left">10/16/2021,21:12:08</td>
                                                                        
                                                        
@@ -66,7 +68,7 @@
 
 
         <div class="modal fade" id = "new-service" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content g-0 blue">
                     <div class="modal-header blue white ">
                         <h5 class="modal-title white" >&nbsp;<i class = "fa fa-plus"></i>&nbsp;&nbsp;New Service Record</h5>
@@ -93,6 +95,7 @@
                                </div> 
                             </div>
                         </div>
+                        
                         <div class="row">
                             <div class="col-xl-6" >  
                                 <label for="status" class="fs-5 fw-bold">Service to Avail</label>
@@ -113,6 +116,22 @@
                                </div> 
                             </div>
                          
+                        </div>
+                        <div class="row gx-3">
+                            <div class="col-xl-6">
+                                    <label for="purp" class= "fs-5 fw-bold">Purposes</label>
+                                        <select class= "select form-select" name="" id="purp" onchange = "showOthersEdit('othersed', this)" >
+                                            <option  selected>Purposes</option>
+                                            <option value="ent">For entertainment</option>
+                                            <option value="med">For medical reasons</option>
+                                            <option value="others">Others</option>
+                                        </select>
+                                </div>
+                                <div class="col-xl-6" id ="othersed">
+                           <label for="purp" class= "fs-5 fw-bold">Purpose </label>
+                               <input type="text" class="form-control" placeholder = "Specify purpose here">
+                           </div>
+                       
                         </div>
                   
                

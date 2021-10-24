@@ -94,22 +94,21 @@ if (strlen($_SESSION['clientmsaid']==0)) {
     ?> 
             <!--breadcrumb-->
             
-            <div class="float-end">
-            <div class="container mt-4 mx-5">
-                <nav aria-label="breadcrumb">
+            <div class="d-flex align-items-center">
+                <div class="container  mt-3">
                     <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item fs-6"><a href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                         
-                            <li class="breadcrumb-item fs-6 active"><a href="#"><i class="fa fa-users text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
-                        </ol>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
+                               
+                                <li class="breadcrumb-item active"><a href="#"><i class="fa fa-users text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
+                            </ol>
+                        </nav>
                     </nav>
-                </nav>
+                </div>
             </div>
-
-            </div>
-            
-        </nav>
+        </div>
+    </nav>
 
         <div class="container-fluid px-5">
                     <div class="row px-5">
@@ -465,7 +464,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                         </li>
                                         <?php if($page_no < $total_no_of_pages){
                                             echo "<li><a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
-                                            } ?>
+                                            ?>
                                     </ul>
                                 </div>
                                 <!--<div class="row  border justiy-content-center">
@@ -1009,7 +1008,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                     </div>
                 </div>
             </div>
-
+                                      <?php  }?>
         
 
 

@@ -443,6 +443,12 @@
     function showOtherspurp(divId, element) {
         document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';
     }
+    function showOthers(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'others' ? 'block' : 'none';
+    }
+    function showOthersEdit(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'others' ? 'block' : 'none';
+    }
 </script>
  
 
