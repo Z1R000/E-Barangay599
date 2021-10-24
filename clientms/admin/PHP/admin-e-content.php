@@ -144,7 +144,7 @@
                 </div>
                 <div class="row g-0 bg-white shadow-lg ">
                     <div class="col-xl-6 p-3 ">
-                        <p class= "fs-5" style= "text-align: justify;">Textual contents of e-barangay 599 such as its history, e-barangay banner and title. </p>
+                        <p class= "fs-5" style= "text-align: justify;">Textual contents of e-barangay 599 such as its history, e-barangay texts etc.</p>
                     </div>
                     <div class="col-xl-6 text-center py-4">
                         <i class="fa fa-comments text-dark fa-5x"></i>
@@ -196,9 +196,7 @@
                                 <th>
                                     Session Start <i class= "fa fa-sign-in-alt ms-2"></i>
                                 </th>
-                                <th>
-                                    Activity <i class= "fa fa-book ms-2"></i>
-                                </th>
+                               
                                 <th>
                                     Session End <i class= "fa fa-sign-out-alt ms-2"></i>
                                 </th>
@@ -220,19 +218,7 @@
                                 <td>
                                     7:32 AM
                                 </td>
-                                <td>
-                                    <ul>
-                                        <li>
-                                            Rental
-                                        </li>
-                                        <li>
-                                            Other Service
-                                        </li>
-                                        <li>
-                                            Certification
-                                        </li>
-                                    </ul>
-                                </td>
+                               
                                 <td>
                                     5:58 PM
                                 </td>
@@ -250,15 +236,7 @@
                                 <td>
                                     9:47 AM
                                 </td>
-                                <td>
-                                    <ul>
-                                        
-                                        <li>
-                                            Blotter
-                                        </li>
-                                        
-                                    </ul>
-                                </td>
+                             
                                 <td>
                                     5:23 PM
                                 </td>
