@@ -1,8 +1,8 @@
                                 <div class="row g-0 border-end border-start border-bottom bg-white border-secondary" >
-                                        <div class = "row py-2 g-0 px-5">
+                                        <div class = "row py-2 g-0 ">
                                             <div class="col-md-8 px-2">
                                                 <div class="btn-group" role="group">
-                                                <a href = "#new-rental" data-bs-toggle ="modal"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;Walk-in rental</a>
+                                                <a href = "#new-rental" data-bs-toggle ="modal"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;Walk-in Rental</a>
                                             </div>
                                         </div>
                                         <div class="col-md-4  px-2" >
@@ -13,24 +13,21 @@
                                         </div>
                                     </div>
                                     <div class="row border g-0">
-                                        <div class="col-xl-11 mx-2  mx-auto py-3  px-2">
+                                        <div class="col-xl-12 mx-2  mx-auto py-3  px-2">
                                             <table class="table bg-white border border-secondary table-hover "> 
                                                 <thead>
                                                     <tr>
-                                                        <td scope = "col" colspan = 7 style ="background: #012f6e; color: white; text-align: center">Rental Records</td>
+                                                        <td scope = "col" colspan = 8 style ="background: #012f6e; color: white; text-align: center">Rental Records</td>
                                                     </tr>
                                                     <tr>
                                                         <th style = "text-align: left;">Rental Status</th>
                                                         <th style = "text-align: left;">Requestor Name</th>
                                                         <th style = "text-align: left; ">Requested Property </th>
-                                         
+                                                
                                                         <th style = "text-align: left;;">Date of rental</th>
                                                         <th style = "text-align: left;">Rental Duration (hours)</th>
                                                         <th style = "text-align: left;">Rate (Pesos)</th>
-                                                       
-                                                        
-                                                    
-                                                    
+                                                        <th style = "text-align: left; ">Mode of Payment </th>
                                                         <th style = "text-align: center;">Action</th>
                                             
                                                     </tr>
@@ -41,25 +38,25 @@
                                                         <td scope="col" style = "text-align: left">On-going</td>
                                                         <td scope="col" style = "text-align: left">Tobirama Uchiha</td>
                                                         <td scope="col" style = "text-align: left">Barangay van</td>
-                                         
                                                         <td scope="col" style = "text-align: left">10/16/2021,21:12:08</td>
                                                         <td scope="col" style = "text-align: right">2</td>
-                                                        <td style = "text-align: right;">10,040.00 </td>
+                                                        <td style = "text-align: right;">₱ 10,040.00 </td>
+                                                        <td scope="col" style = "text-align: right">Cash</td>
                                                        
 
                                                         <td scope="col" style = "text-align: center">
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <button  type="button" href ="#check-rental" data-bs-toggle="modal" role="button" class="btn btng btn-primary"><i class = "fa fa-eye"></i></button>
+                                                                    <button  type="button" href ="#check-rental" data-bs-toggle="modal" role="button" class="btn  btn-primary"><i class = "fa fa-eye me-2"></i>View</button>
                                                                 </div>
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a href ="#edit-rental    " data-bs-toggle ="modal" role ="button" class="btn btng btn-success"><i class = "fa fa-edit"></i></a>
+                                                                    <a href ="#edit-rental    " data-bs-toggle ="modal" role ="button" class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
                                                                 </div>
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a type="button" href ="#delete-rental" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash"></i></a>
+                                                                    <a type="button" href ="#delete-rental" data-bs-toggle = "modal" role = "button" class="btn  btn-danger"><i class = "fa fa-trash me-2"></i>Delete</a>
                                                                 </div>   
                                                                 
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn btng btn-info"><i class = "fa fa-paper-plane white"></i></a>
+                                                                    <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info text-white"><i class = "fa fa-paper-plane me-2 white"></i>Send</a>
                                                                 </div>  
                                                         </td>
                                                     </tr>
@@ -81,14 +78,31 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white ">
-                        <div class="row">
-                            <div class="col-xl-8" >
+                        
+                    <div class="row">
+                            
+                            <div class="col-xl-12" >
                                 <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
                                 <div class="d-flex">    
-                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Requestor Name">
+                                    <input type="text" id = "prate" class="form-control" name ="pRate" placeholder= "Requestor Name">
                                </div> 
                             </div>
                         </div>
+                        <div class="row">    
+                            <div class="col-xl-6" >
+                                <label for="prate" class="fs-5 fw-bold">Date of Rental</label>
+                                <input type="date"  id = "date" class="form-control " name ="date">
+                            </div>
+                            <div class="col-xl-6" >  
+                                <label for="status" class="fs-5 fw-bold">Mode of payment</label>
+                                <select name="" class="form-control" id="status">
+                                    <option value="g-cash">G-cash</option>
+                                    <option value="cash">Cash</option>
+                                
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-xl-4" >  
                                 <label for="status" class="fs-5 fw-bold">Property to rent</label>
@@ -99,37 +113,26 @@
                                 </select>
                             </div>
 
+
                             <div class="col-xl-4" >
                                 <label for="prate" class="fs-5 fw-bold">Duration<span class= "text-muted fs-6">(in hours)</span></label>
                                 <div class="d-flex">    
-                                    <input type="number" min =0 ; id = "prate" class="form-control me-2" name ="pRate" placeholder= "0.00" >
+                                    <input type="number" min =0 ; id = "prate" class="form-control me-2" name ="pRate" placeholder= "0.00" style= "text-align:right">
                                </div> 
                             </div>
+                          
                             <div class="col-xl-4" >
                                 <label for="prate" class="fs-5 fw-bold">Rate<span class= "text-muted fs-6">(per hour)</span></label>
-                                <div class="d-flex">    
-                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "0.00" readonly>
+                                <div class="input-group">
+                                    <button class="btn btn-secondary disabled">
+                                    ₱
+                                    </button>    
+                                    <input type="text" id = "prate" class="form-control " name ="pRate" placeholder= "0.00" readonly style= "text-align:right">
                                </div> 
                             </div>
                           
                         </div>
-                        <div class="row">
                      
-                          
-                            <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Date today</label>
-                                <input type="text"  id = "date" class="form-control me-2" name ="date" readonly>
-                              
-                            </div>
-                            <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Rental Status</label>
-                                    <select name="" class="form-control" id="status">
-                                        <option value="avail">On going</option>
-                                        <option value="noavail">Settled</option>
-                                
-                                    </select>
-                            </div>
-                        </div>
                         <div class="row">
                             
                         </div>
@@ -167,46 +170,26 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white ">
-                        <div class="row">
-                            <div class="col-xl-8" >
-                                <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
-                                <div class="d-flex">    
-                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Requestor Name">
-                               </div> 
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-4" >  
-                                <label for="status" class="fs-5 fw-bold">Property to rent</label>
-                                <select name="" class="form-control" id="status">
-                                    <option value="avail">Barangay Van</option>
-                                    <option value="noavail">Patrol</option>
-                                    <option value="noavail">Basketball court</option>
-                                </select>
-                            </div>
-
-                            <div class="col-xl-4" >
-                                <label for="prate" class="fs-5 fw-bold">Rate <span class= "text-muted fs-6">(per hour)</span></label>
-                                <div class="d-flex">    
-                                    <input type="number" min =0 ; id = "prate" class="form-control me-2" name ="pRate" placeholder= "0.00" >
-                               </div> 
-                            </div>
-                            <div class="col-xl-4" >
-                                <label for="prate" class="fs-5 fw-bold">Duration<span class= "text-muted fs-6">(in hours)</span></label>
-                                <div class="d-flex">    
-                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "0.00" readonly>
-                               </div> 
-                            </div>
-                          
-                        </div>
-                        <div class="row">
-                           
+                    <div class="row gx-2">
+                            
                             <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Date today</label>
-                                <input type="text"  id = "date-edit" class="form-control me-2" name ="date" value = "10/16/2021,21:12:08" readonly>
-                              
+                                <label for="prate" class="fs-5 fw-bold">Date of Rental</label>
+                                <input type="date"  id = "date-edit" class="form-control me-2" name ="date" value = "">
+                                
                             </div>
-                            <div class="col-xl-6" >
+                            
+                        </div>
+                        <div class="row gx-2">
+                                <div class="col-xl-12" >
+                                    <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
+                                    <div class="d-flex">    
+                                        <input type="text" id = "prate" class="form-control " name ="pRate" placeholder= "Requestor Name">
+                                </div> 
+                                </div>
+                            </div>
+                       
+                        <div class="row gx-2">
+                        <div class="col-xl-6" >
                                 <label for="prate" class="fs-5 fw-bold">Rental Status</label>
                                     <select name="" class="form-control" id="status">
                                         <option value="avail">On going</option>
@@ -214,54 +197,123 @@
                                 
                                     </select>
                             </div>
-                        </div>
-                        <div class="row">
+                                <div class="col-xl-6" >  
+                                    <label for="status" class="fs-5 fw-bold">Mode of payment</label>
+                                    <select name="" class="form-control" id="status">
+                                        <option value="g-cash">G-cash</option>
+                                        <option value="cash">Cash</option>
+                                    
+                                    </select>
+                                </div>
 
-                            
-                            
                         </div>
-                        <div class="row">
-                           
-                        </div>
-                       
-               
-                 
+                            
+                            <div class="row">
+                                <div class="col-xl-4" >  
+                                    <label for="status" class="fs-5 fw-bold">Property to rent</label>
+                                    <select name="" class="form-control" id="status">
+                                        <option value="avail">Barangay Van</option>
+                                        <option value="noavail">Patrol</option>
+                                        <option value="noavail">Basketball court</option>
+                                    </select>
+                                </div>
 
-                        <div class="row " align="center">
-                            <div class="col-md-5  mx-auto my-2">
-                                <button type ="button" role = "button" class="btn btn-outline-primary" >
-                                    <i class="fa fa-save me-1"></i>
-                                    Save
-                                </button>
+                                
+                                <div class="col-xl-4" >
+                                    <label for="prate" class="fs-5 fw-bold">Duration<span class= "text-muted fs-6">(in hours)</span></label>
+                                    <div class="d-flex">    
+                                        <input type="text" id = "prate" class="form-control " name ="pRate" placeholder= "0.00" style= "text-align:right" >
+                                </div> 
+                                </div>
+                                <div class="col-xl-4" >
+                                    <label for="prate" class="fs-5 fw-bold">Rate <span class= "text-muted fs-6">(per hour)</span></label>
+                                    <div class="input-group">    
+                                        <button class="btn btn-secondary disabled">
+                                        ₱
+                                        </button>
+                                        <input type="number" min =0 ; id = "prate" class="form-control" name ="pRate" placeholder= "0.00" style= "text-align:right" readonly>
+                                </div> 
+                                </div>
                             </div>
-                        </div>
+                            
+                            <div class="row">
+
+                                
+                                
+                            </div>
+                            <div class="row">
+                            
+                            </div>
+                        
+                
                     
+
+                            <div class="row " align="center">
+                                <div class="col-md-5  mx-auto my-2">
+                                    <button type ="button" role = "button" class="btn btn-outline-primary" >
+                                        <i class="fa fa-save me-1"></i>
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
                         
-                                        
+                            
+                                            
+                        </div>
+                        <div class="modal-footer">
+                            
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        
-                    </div>
-                </div>
             </div>
         </div>
         <div class="modal fade" id = "check-rental" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 blue">
                     <div class="modal-header blue white ">
-                        <h5 class="modal-title white" >&nbsp;<i class = "fa fa-plus"></i>&nbsp;&nbsp;Rental record</h5>
+                        <h5 class="modal-title white" >&nbsp;<i class = "fa fa-eye"></i>&nbsp;&nbsp;Rental record</h5>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white ">
-                        <div class="row">
-                            <div class="col-xl-8" >
+                        <div class="row gx-2">
+                            
+                            <div class="col-xl-6" >
+                                <label for="prate" class="fs-5 fw-bold">Date of Rental</label>
+                                <input type="text"  id = "date" class="form-control " name ="date"value ="10/16/2021,21:12:08" readonly>
+                                
+                            </div>
+                           
+                        </div>
+                        <div class="row gx-2">
+                            <div class="col-xl-12" >
                                 <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
                                 <div class="d-flex">    
-                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Requestor Name" readonly>
+                                    <input type="text" id = "prate" class="form-control" name ="pRate" placeholder= "Requestor Name" readonly>
                                </div> 
                             </div>
                         </div>
+
+                        <div class="row gx-2">
+                        <div class="col-xl-6" >
+                            <label for="prate" class="fs-5 fw-bold">Rental Status</label>
+                                    <select name="" class="form-control" id="status" disabled>
+                                        <option value="og">On going</option>
+                                        <option value="set">Settled</option>
+                                
+                                    </select>
+                            
+                            </div>
+
+                                <div class="col-xl-6">  
+                                <label for="status" class="fs-5 fw-bold">Mode of payment</label>
+                                <select name="" class="form-control" id="status" disabled>
+                                    <option value="g-cash">G-cash</option>
+                                    <option value="cash">Cash</option>
+                                
+                                </select>
+                            </div>
+                        </div>
+                       
                         <div class="row">
                             <div class="col-xl-4" >  
                                 <label for="status" class="fs-5 fw-bold">Property to rent</label>
@@ -271,38 +323,25 @@
                                     <option value="noavail">Basketball court</option>
                                 </select>
                             </div>
-
-                            <div class="col-xl-4" >
-                                <label for="prate" class="fs-5 fw-bold">Rate <span class= "text-muted fs-6">(per hour)</span></label>
-                                <div class="d-flex">    
-                                    <input type="number" min =0 ; id = "prate" class="form-control me-2" name ="pRate" placeholder= "0.00"  readonly>
-                               </div> 
-                            </div>
                             <div class="col-xl-4" >
                                 <label for="prate" class="fs-5 fw-bold">Duration<span class= "text-muted fs-6">(in hours)</span></label>
                                 <div class="d-flex">    
-                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "0.00" readonly>
+                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "0.00" readonly style= "text-align:right">
                                </div> 
                             </div>
+                            <div class="col-xl-4" >
+                                <label for="prate" class="fs-5 fw-bold">Rate <span class= "text-muted fs-6">(per hour)</span></label>
+                                <div class="input-group">
+                                    <button class="btn btn-secondary disabled">
+                                    ₱
+                                    </button>    
+                                    <input type="number" min =0 ; id = "prate" class="form-control " name ="pRate" placeholder= "0.00"  readonly style="text-align:right">
+                               </div> 
+                            </div>
+                            
                           
                         </div>
-                        <div class="row">
-                          
-                            <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Date today</label>
-                                <input type="text"  id = "date" class="form-control me-2" name ="date"value ="10/16/2021,21:12:08" readonly>
-                              
-                            </div>
-                            <div class="col-xl-6" >
-                            <label for="prate" class="fs-5 fw-bold">Rental Status</label>
-                                    <select name="" class="form-control" id="status" disabled>
-                                        <option value="og">On going</option>
-                                        <option value="set">Settled</option>
-                                
-                                    </select>
-                             
-                            </div>
-                        </div>
+                        
                         <div class="row">
                             
                         </div>
@@ -374,16 +413,16 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-success ">
                     <div class="modal-header bg-success  ">
-                        <h5 class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Send Proof of transaction</h5>
+                        <h5 class="modal-title white">&nbsp;<i class = "fa fa-paper-plane"></i>&nbsp;&nbsp;Send Proof of transaction</h5>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">
                         
-                        <div class="row mt-2">
+                        <div class="row mt-2 ms-2 me-3">
                             <form action="" method = "POST">
-                                <div class="row">
-                                    <div class="col-md-6">
+                                <div class="row ">
+                                    <div class="col-md-12">
                                         <label for="dname">Requestor Name</label>
                                         <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
 
@@ -391,7 +430,7 @@
                            
                                 </div>
                                 <div class="row mt-2">
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <label for="contac">Contact Number</label>
                                         <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
                    
@@ -405,9 +444,9 @@
                                     </div>
                                 </div>
                                 <div class="row mt-2">
-                                    <div class="col-md-5">
-                                        <label for="ars">Acquired rental/service</label>
-                                        <input id = "crs" type="text" class="form-control" value = "Marriage" readonly>
+                                    <div class="col-md-6">
+                                        <label for="ars">Acquired Rental</label>
+                                        <input id = "crs" type="text" class="form-control" value = "Basketball Court" readonly>
                    
                                        
                                     </div>
@@ -420,7 +459,7 @@
                                 </div>
                                 <div class="row mt-2">
                                         <label for="remarks" >Remarks</label>
-                                        <div class="col-md-11">
+                                        <div class="col-md-12">
                                             <div class="form-floating">
                                             <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
                                             <label for="floatingTextarea2">Remarks here (max 10 words)</label>
@@ -455,11 +494,11 @@
                                 <div class="row justify-content-center" align = "center">
                                     
                                     <div class="col-mx-6">
-                                        <button href ="#" type = "button" class="btn btn-success rounded-circle" data-bs-dismiss ="modal"  >
-                                            <i class= 'fa fa-paper-plane py-1'></i>
+                                        <button href ="#" type = "button" class="btn btn-success " data-bs-dismiss ="modal"  >
+                                            <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
                                         </button>
-                                        <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
-                                            <i class= "fa fa-times"></i>
+                                        <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times me-2"></i>Discard
                                         </button>
                                 
                                     </div>
@@ -501,7 +540,7 @@
                 sec = '0'+sec;
             }
             today =  mm + '/' + dd + '/' +yyyy + ',' +hr+ ':'+mn+':'+sec;
-            document.getElementById('date').value  = today;
+            //document.getElementById('date').value  = today;
           
         }
 

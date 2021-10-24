@@ -114,7 +114,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">
-                        <div class="row mt-2">
+                        <div class="row mt-2 me-3 ms-2">
                             <form action="" method = "POST">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -169,11 +169,11 @@
                                 <div class="row justify-content-center" align = "center">
                                     
                                     <div class="col-mx-6">
-                                        <button href ="" onclick = "alert('Decline Message Sent')" type = "button" class="btn btn-success rounded-circle" data-bs-dismiss ="modal" data-bs-toggle= "modal" >
-                                            <i class= 'fa fa-paper-plane py-1'></i>
+                                        <button href ="" onclick = "alert('Decline Message Sent')" type = "button" class="btn btn-success " data-bs-dismiss ="modal" data-bs-toggle= "modal" >
+                                            <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
                                         </button>
-                                        <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
-                                            <i class= "fa fa-times"></i>
+                                        <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times me-2"></i> Discard
                                         </button>
                                 
                                     </div>
