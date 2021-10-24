@@ -26,7 +26,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
         <link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
-        <title>Officials List</title>
+        <title>Rental Records</title>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 document.querySelectorAll('.sidebar .nav-link').forEach(function(element) {
@@ -81,6 +81,28 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
             <!-- Page Content -->
             <div id="page-content-wrapper">
+                <div class="container-fluid banner" align="center">
+                    <div class="row">
+                        <div class="col-xl-3 px-1 ">
+                            <div class="float-start" style="margin-left:50px;">
+                                <img src="../images/barangay.png" style="width: 100px;">
+                            </div>
+
+                        </div>
+                        <div class="col-xl-6 " align="center">
+                            <h3 class="py-4">BARANGAY 599, ZONE 59, DISTRICT VI <br>
+                                OFFICE OF THE SANGGUNIANG BARANGAY</h3>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="float-end" style="margin-right:50px;">
+                                <img src="../images/maynila.png" style="width: 100px;">
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
                 <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                     <div class="d-flex align-items-center">
                         <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
@@ -109,28 +131,28 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                     <div style="background-color: aliceblue;border-radius: 10px;padding: 25px;">
                         <h3 class="inner-tittle two">Rental Record List</h3>
                         <div class="col-xl-12 col-md-12 col-sm-12">
-                        <div class = "row my-2">
-                            <div class="col-md-8">
-                                  
-                                <div class="btn-group" role="group">
-                                    <a href = "resident-registration.php"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;New Rental Request</a>
+                            <div class="row my-2">
+                                <div class="col-md-8">
+
+                                    <div class="btn-group" role="group">
+                                        <a href="rental-request.php" class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;New Rental Request</a>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4 ">
+                                    <form class="d-flex" method="post" name="search" action="">
+                                        <p style="font-size:16px; color:red" align="center"> <?php if ($msg) {
+                                                                                                    echo $msg;
+                                                                                                }  ?> </p>
+
+                                        <input id="searchdata" type="text" class="form-control" name="searchdata" placeholder="Search here">
+                                        <button type="submit" class="btn btn-outline-info" name="search"><i class="fa fa-search"></i></button>
+                                    </form>
+
                                 </div>
 
                             </div>
-                            <div class="col-md-4 " >
-                                <form class = "d-flex" method="post" name="search" action="">
-									<p style="font-size:16px; color:red" align="center"> <?php if($msg){
-										echo $msg;
-									  }  ?> </p>
-                                        
-                                        <input id="searchdata" type = "text" class= "form-control" name="searchdata"placeholder = "Search here">
-                                        <button type ="submit" class = "btn btn-outline-info" name="search"><i class = "fa fa-search"></i></button>
-                                </form>
-
-                            </div>
-                            
                         </div>
-                    </div>
                         <div class="graph">
                             <div class="tables" style="overflow-x:auto;">
                                 <table class="table" border="1">
@@ -158,7 +180,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
                                         $cnt = 1;
                                         if ($query->rowCount() > 0) {
-                                            foreach ($results as $row) {?>
+                                            foreach ($results as $row) { ?>
                                                 <tr class="active">
                                                     <td style="color: #000;"><?php echo htmlentities($row->rentalName); ?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($row->LastName); ?>, <?php echo htmlentities($row->FirstName); ?> <?php echo htmlentities($row->MiddleName); ?></td>
@@ -170,7 +192,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                                     <td style="color: #000;"><?php echo htmlentities($row->requestDate); ?></td>
                                                     <td>
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="" href="edit-cert.php" class="btn btng btn-success"><i class="fa fa-edit"></i></a>
+                                                            <a type="" href="edit-rental-request.php" class="btn btng btn-success"><i class="fa fa-edit"></i></a>
                                                         </div>
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                             <a type="button" href="#delete-cert" data-bs-toggle="modal" role="button" class="btn btng btn-danger"><i class="fa fa-trash"></i></a>

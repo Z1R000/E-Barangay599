@@ -43,7 +43,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
         <link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
-        <title>Rental Request</title>
+        <title>Edit Rental Request</title>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 document.querySelectorAll('.sidebar .nav-link').forEach(function(element) {
@@ -170,7 +170,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                 <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                     <div class="d-flex align-items-center">
                         <i class="fa fa-align-justify secondary-text fs-4 me-3" id="menu-toggle"></i>
-                        <h2 class="fs-2 m-0">Rental Request</h2>
+                        <h2 class="fs-2 m-0">Edit Rental Request</h2>
 
                     </div>
 
@@ -186,7 +186,8 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                     <ol class="breadcrumb m-b-0" style="text-indent: 15px; margin-left: 2.5%;">
                         <li><a href="dashboard.php">Home</a></li>/
                         <li class="active">Request</li>/
-                        <li class="active">Rental Request</li>
+                        <li class="active"><a href="manage-rental.php">Rental Record</a></li>/
+                        <li class="active">Edit Rental Request</li>
                     </ol>
                 </div>
                 <div class="container-fluid px-4">
@@ -209,7 +210,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                     <div class="col-xl-6">
                                         <label for="prate" class="fs-5 fw-bold">Duration<span class="text-muted fs-6">(in hours)</span></label>
                                         <div class="d-flex">
-                                            <input type="number" min=0 ; id="prate" class="form-control me-2" name="pRate" placeholder="0.00">
+                                            <input type="number" min=0 ; id="prate" class="form-control me-2" name="pRate" placeholder="0.00" disabled>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
@@ -223,7 +224,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                 <div class="row">
                                     <div class="col-xl-4">
                                         <label for="status" class="fs-5 fw-bold">Property to rent</label>
-                                        <select name="" class="form-control" id="status">
+                                        <select name="" class="form-control" id="status" disabled>
                                             <option value="avail">Barangay Van</option>
                                             <option value="noavail">Patrol</option>
                                             <option value="noavail">Basketball court</option>
@@ -232,18 +233,28 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
                                     <div class="col-xl-4">
                                         <label for="prate" class="fs-5 fw-bold">Date of Rental</label>
-                                        <input type="date" id="date" class="form-control me-2" name="date">
+                                        <input type="date" id="date" class="form-control me-2" name="date" disabled>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="rname" class="fs-6 fw-bold">Purpose</label>
-                                        <input type="text" class="form-control" id="rname" placeholder="Please indicate purpose for rental:">
+                                        <input type="text" class="form-control" id="rname" placeholder="Please indicate purpose for rental:" disabled>
                                     </div>
 
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-xl-3">
+                                        <label for="formFileSm" class="form-label">Upload Proof of Payment<span class="fs-6 text-muted"> (JPEG or PNG format)</span></label>
 
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xl-3">
+                                        <input class="form-control form-control-sm" id="formFileSm" type="file">
+                                        <br>
                                     </div>
                                     <div class="col-xl-3 ">
 

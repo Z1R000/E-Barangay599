@@ -218,7 +218,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                         <div class="row" id="others_hidden">
                             <div class="col-md-6">
 
-                                
+
 
                             </div>
                             <div class="col-md-6">
@@ -291,18 +291,24 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
 
                         </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-xl-3">
 
+                            </div>
+                            <div class="col-xl-3 ">
+
+                            </div>
+                            <div class="col-xl-3 ">
+                                <a href="index.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
+                            </div>
+                            <div class="col-xl-3 ">
+                                <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
+                            </div>
+                        </div>
 
                     </div>
-                    <div class="modal-footer py-0">
-                        <button type="submit" class="btn btn-success rounded" name="Submit" value="Submit">
-                            Submit
-                        </button>
-                        <button type="button" class="btn btn-danger rounded" data-bs-dismiss="modal" role="button" name="Cancel" value="Cancel">
-                            Discard
-                        </button>
-                        </form>
-                    </div>
+
 
                 </div>
                 <!-- /#page-content-wrapper -->
@@ -358,8 +364,6 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                 function showDiv(divId, element) {
                     document.getElementById(divId).style.display = element.value == 'Business' ? 'flex' : 'none';
                 }
-
-                
             </script>
             <script>
                 function otherDiv(divId, element) {
