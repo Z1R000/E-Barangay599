@@ -28,33 +28,7 @@
 
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
-    <script>
-        $(document).ready(function () {
-  // Send Search Text to the server
-  $("#search").keyup(function () {
-    let searchText = $(this).val();
-    if (searchText != "") {
-      $.ajax({
-        url: "action.php",
-        method: "post",
-        data: {
-          query: searchText,
-        },
-        success: function (response) {
-          $("#show-list").html(response);
-        },
-      });
-    } else {
-      $("#show-list").html("");
-    }
-  });
-  // Set searched text in input field on click of search button
-  $(document).on("click", "a", function () {
-    $("#search").val($(this).text());
-    $("#show-list").html("");
-  });
-});
-    </script>
+    <script> src="script.js" </script>
 
     <style type = "text/css">
           table,td,tr,th{
@@ -581,12 +555,11 @@
                 </div>
             </div>
         </div>
-<form method = "POST">
+<form method = "post">
 
-<div class="modal fade" id = "walk-in" tab-idndex = "-1">
+<div class="" id = "walk-in" tab-idndex = "-1">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content g-0 blue" >
-            <?php ?>
             <div class="modal-header blue white ">
                 <h5 class="modal-title" id="delete">&nbsp;<i class = "far fa-copy"></i>&nbsp;&nbsp;Walk in Certification</h5>
                 
@@ -604,8 +577,7 @@
                         <div class="col-md-6">
                     
                             <label for="rname"class="fs-6 fw-bold">Requestor Name</label>
-                            <input type="text" class="form-control" id="search" name="Resident Name" placeholder ="e.g Juan Dela Cruz">
-                        
+                            <input type="text" class="form-control" id="search" name="search" placeholder ="e.g Juan Dela Cruz" autocomplete="off" required>                
                         </div>
                         <div class="col-md-6">
                             <label for="purp" class= "fs-6 fw-bold">Purposes</label>
@@ -680,10 +652,14 @@
                       
                     </div>
            
-                 
+                    <div class="col-md-5" style="position: relative;margin-top: -38px;margin-left: 215px;">
+        <div class="list-group" id="show-list">
+          <!-- Here autocomplete list will be display -->
+        </div>
+      </div>
                </div>
             
-        
+                
             </div>
             <div class="modal-footer py-0">
                         <button type = "submit" class="btn btn-success rounded"  name = "Submit" value ="Submit">
@@ -1070,7 +1046,6 @@
         document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';
     }
 </script>
-
 </body>
 </html>
 	  <?php } ?>
