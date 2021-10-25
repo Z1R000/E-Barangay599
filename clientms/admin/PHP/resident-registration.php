@@ -463,11 +463,25 @@
     </script>
 
 <script type="text/javascript">
-    function showDiv(divId, element) {
-        document.getElementById(divId).style.display = element.value == 'rental' ? 'block' : 'none';
+  function showDiv(divId, element) {
+        var rentype = document.getElementById('hm').value;
+        if (rentype == "Rental/Boarder"){
+            document.getElementById('rt').required =true;
+        }
+        else{
+            document.getElementById('rt').required =false;
+        }
+        document.getElementById(divId).style.display = element.value == 'Rental/Boarder' ? 'block' : 'none';
     }
     function showprecinct(divId, element) {
-        document.getElementById(divId).style.display = element.value == 'reg' ? 'inline' : 'none';
+        var vot = document.getElementById('voter').value;
+        if (vot == "Yes"){
+            document.getElementById('pres').required = true;
+        }
+        else{
+            document.getElementById('pres').required = false;  
+        }
+        document.getElementById(divId).style.display = element.value == 'Yes' ? 'inline' : 'none';
     }
 </script>
 

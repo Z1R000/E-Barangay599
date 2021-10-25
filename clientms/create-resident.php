@@ -152,6 +152,7 @@
                             } 
                             ?>
                     </div>
+                </div>
                         
 
     
@@ -185,7 +186,6 @@
                                         </div>
                                     </div>
                                     <div class="row g-0 ps-4 pe-2 ps-2">
-
                                         <div class="row g-0 mb-3 px-4">
                                                 <label for="fname" class="col-xl-2 fs-4 py-0"> <span class= "text-danger fs-5">*</span>First Name<br><span class= "fs-6 text-muted small"> (Unang Pangalan)</span></label>
                                                 
@@ -253,7 +253,7 @@
                                         <label for="gender" class="col-sm-2 col-form-label  fs-4"><span class= "text-danger fs-5">*</span>Voter's Status<br><span class= "fs-6 text-muted small"> (Pagkabotante)</span></label>
                                             <div class="col-xl-5">
                                                 <br>
-                                                <select class="form-select input-sm" aria-label="Default select example" id="voter" name="voter" onchange="showprecinct('precinct', this)" required>
+                                                <select class="form-select input-sm" aria-label="Default select example" id="voter" name="voter" onchange="showprecinct('precinct', this)" >
                                                     <option value="">--Select--</option>
                                                     <option value="Yes">Registered</option>
                                                     <option value="No">Unregistered</option>
@@ -262,7 +262,7 @@
                                             </div>
                                             <div class="col-xl-4 mx-2" id="precinct">
                                                     <label class="fs-5">Precinct Number</label>
-                                                    <select class="form-select input-sm" name="vp" required>
+                                                    <select class="form-select input-sm" name="vp" id = "pres">
                                                     <option value="">--Select--</option>
                                                     <option value="1a">1-A</option>
                                                     <option value="2a">2-A</option>
@@ -332,19 +332,18 @@
                                     <div class="row g-0 mb-3 px-4">
                                         
                                         <label for="cs" class="col-sm-2 col-form-label  fs-4">Type of<Br> Residency<br><span class= "fs-6 text-muted small"> (Uri ng residente)</span></label>
-                                        
                                             <div class="col-xl-5">
                                                 <br>
-                                                <select class="form-select input-sm" aria-label="Default select example" name="residenttype" onchange="showDiv('hidden_div', this)" required>
+                                                <select class="form-select input-sm" aria-label="Default select example" name="residenttype" onchange="showDiv('hidden_div', this)" required id = "rt">
                                                     <option value='' disabled selected>--Select Resident Type--</option>
                                                     <option value="House Owner">House Owner</option>
                                                     <option value="Care Taker">Care taker</option>
                                                     <option value="Rental/Boarder">Rental/Boarder</option>
                                                     <option value="Living with Relatives">Living with Relatives</option>
                                                 </select>
-                                                <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-xs-12" id="hidden_div">
+                                                <div class="col-xl-12 col-lg-6 col-md-8 col-sm-12 col-xs-12" id="hidden_div">
                                                     <label class="col-form-label fs-5">Home Owner Name</label>
-                                                    <input type="text" class="form-control" placeholder="" id="hm" name="hm" required />
+                                                    <input type="text" class="form-control" placeholder="" id="hm" name="hm"  />
                                                 </div>
 
                         
@@ -356,7 +355,7 @@
                                                 <div class="col-xl-5 col-sm-12 my-2 ">
                                                     <div class="input-group">
                                                         <label for="" class="mx-2 fs-5 small">Number&nbsp;</label>
-                                                        <select class="form-select" name = "prk" id = "prk" aria-label="Default select example" style ="width: 60%;" required>
+                                                        <select class="form-select" name = "prk" id = "prk" aria-label="Default select example" style ="width: 60%;" >
                                                         <option value=''selected disabled>--Purok Number--</option>
                                                         <?php 
                                                             $sqlp="select * from tbllistpurok";
@@ -476,12 +475,6 @@
                     
     </form>
 
-    
-        
-
-      
-     
-
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -501,20 +494,29 @@
 
 <script type="text/javascript">
     function showDiv(divId, element) {
+        var rentype = document.getElementById('hm').value;
+        if (rentype == "Rental/Boarder"){
+            document.getElementById('rt').required =true;
+        }
+        else{
+            document.getElementById('rt').required =false;
+        }
         document.getElementById(divId).style.display = element.value == 'Rental/Boarder' ? 'block' : 'none';
     }
     function showprecinct(divId, element) {
+        var vot = document.getElementById('voter').value;
+        if (vot == "Yes"){
+            document.getElementById('pres').required = true;
+        }
+        else{
+            document.getElementById('pres').required = false;  
+        }
         document.getElementById(divId).style.display = element.value == 'Yes' ? 'inline' : 'none';
     }
 </script>
 
         
-                
-            
-   
-
-
-    
+                  
 </body>
 </html>
 <?php }  ?>
