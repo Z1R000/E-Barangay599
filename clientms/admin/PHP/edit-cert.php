@@ -1,5 +1,11 @@
 <?php 
     $curr ="Edit certificate";
+    session_start();
+error_reporting(0);
+include('includes/dbconnection.php');
+if (strlen($_SESSION['clientmsaid']==0)) {
+  header('location:logout.php');
+  } else{
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +71,7 @@
           -moz-transform-origin: 0 0;
           -o-transform-origin: 0 0;
           -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;*/
+          transform-origin: 0 0;
         }
         
      
@@ -260,3 +266,4 @@
  
 </body>
 </html>
+<?php } #edit-cert ?>

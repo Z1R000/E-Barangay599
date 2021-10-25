@@ -1,5 +1,5 @@
 <?php
- 
+    include('includes/dbconnection.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,7 +78,7 @@
                 <img src = "../IMAGES/admin-logo.png" class = "py-1"style = "width: 60px;"><br>
           
                 <div class="btn-group my-2" role="group" aria-label="Basic example">
-                    <a type = " button" href="#" class = "btn border-danger link-danger fs-6" ><i class = "fa fa-power-off"></i>&nbsp;Logout </a>          
+                    <a type = " button" href="../../index.php" class = "btn border-danger link-danger fs-6" ><i class = "fa fa-power-off"></i>&nbsp;Logout </a>          
                 </div>
                 
                 
@@ -143,34 +143,46 @@
         
 
         <div id="page-content-wrapper">
-        <div class="container-fluid banner" align = "center">
-                <div class="row">
-                    <div class="col-xl-3 px-1 ">
-                        <div class="float-start">
-                            <img src = "../images/barangay.png" style ="width: 100px;">
-                        </div>
-                        
-                    </div>
-                    <div class="col-xl-6 " align = "center">
-                        <h3 class= "py-4">BARANGAY 599, ZONE 59, DISTRICT VI <br>
-                            OFFICE OF THE SANGGUNIANG BARANGAY</h3>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="float-end">
-                        <img src = "../images/maynila.png" style ="width: 100px;">
-                        </div>
-                            
-                        
-                    </div>
-                </div>
-                
+        <div class="container-fluid banner" align="center">
+                <?php 
+                    $sqls="select * from tblinformation";
+                    $querys=$dbh->prepare($sqls);
+                    $querys->execute();
+                    $resultss=$querys->fetchAll(PDO::FETCH_OBJ);
+                    echo "<div class='row'>
+                    <div class='col-xl-3 px-1'>
+                        <div class='float-start'>";
+                    if($querys->rowCount() > 0)
+                    {
+                        foreach($resultss as $rows)
+                        {
+                            echo "<img src='../$rows->Blogoone' style='width: 100px;'>";
+
+                            echo "</div>
+
+                            </div>";
+
+                            echo "<div class='col-xl-6' align='center'>
+                            <h3 class='py-4'>$rows->Baddress <br>
+                            $rows->Btitle</h3>
+                            </div>";
+
+                            echo "<div class='col-xl-3'>
+                                    <div class='float-end'>
+                                        <img src='../$rows->Blogotwo' style='width: 100px;'>
+                                    </div>
+                                </div>
+                            </div>";
+                        }
+                    } 
+                    ?>
             </div>
  
             <nav class="navbar navbar-expand-lg navbar-light border-top px-3 ">
                 <div class="container-fluid p-0">
                     <div class="d-flex align-items-center ">
                         <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
-                        <h2 class="fs-4 m-0"><?php echo $curr;?></h2>
+                        <h2 class="fs-4 m-0"><?php echo $curr; #sidebar?></h2>
                     </div>
                     
 
