@@ -2,7 +2,6 @@
     $curr ="Certifications";
 	session_start();
 	error_reporting(0);
-	$curr = "Announcements";
 	include('includes/dbconnection.php');
 	if (strlen($_SESSION['clientmsaid']==0)) {
 	  header('location:logout.php');    
@@ -27,8 +26,6 @@
     <link rel="stylesheet" href="../CSS/scrollbar.css">
 
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
-
-    <script> src="script.js" </script>
 
     <style type = "text/css">
           table,td,tr,th{
@@ -171,6 +168,7 @@
                                         </div>
                                         
                                     </div>
+                                   
                                     <div class="row border g-0">
                                         <div class="col-xl-11 mx-2  mx-auto py-3  px-2">
                                             <table class="table bg-white table-hover shadow-sm border "> 
@@ -188,25 +186,32 @@
                                                 
                                                 </thead>           
                                                 <tbody class= "table-hover">
-                                                    <tr>
-                                                        <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                        <td scope="col" style = "text-align: right">₱ 20</td>
-                                                        <td scope="col" style = "text-align: center">
-                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <button type = "submit" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</button>
-                                                                </div>
-                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a type="" href ="edit-cert.php"class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
+                                                <?php 
+                                                    $sqllist = "select * from tblcertificate";
+                                                    $checkclist = $dbh->prepare($sqllist);
+                                                    $checkclist->execute();
+                                                    $resultclist=$checkclist->fetchAll(PDO::FETCH_OBJ);
+                                                    foreach($resultclist as $rowclist)
+                                                            {  
+                                               
+                                                    echo "<tr>
+                                                        <td scope='col' style = 'text-align: left'>$rowclist->CertificateName</td>
+                                                        <td scope='col' style = 'text-align: right'>$rowclist->CertificatePrice</td>
+                                                        <td scope='col' style = 'text-align: center'>
+                                                            
+                                                                <div class='btn-group me-1 mb-1' role='group' aria-label='First group'>
+                                                                    <a type='' href ='edit-cert.php=viewid=<?php echo $row->ID;?>' class='btn btn-success'><i class = 'fa fa-edit me-2'></i>Edit</a>
                                                                 </div>
                                                                    
                                                                
-                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a type="button" href ="#delete-cert" data-bs-toggle = "modal" role = "button" class="btn  btn-danger"><i class = "fa fa-trash me-2"></i>Delete</a>
+                                                                <div class='btn-group me-1 mb-1' role='group' aria-label='First group'>
+                                                                    <a type='button' href ='#delete-cert' data-bs-toggle = 'modal' role = 'button' class='btn  btn-danger'><i class = 'fa fa-trash me-2'></i>Delete</a>
                                                                 </div>
                                                             
                                                         </td>
 
-                                                    </tr>
+                                                    </tr>";
+                                                 }?>
                                                 </tbody>
                                             </table>                        
                                         </div>   
@@ -555,11 +560,12 @@
                 </div>
             </div>
         </div>
-<form method = "post">
 
-<div class="" id = "walk-in" tab-idndex = "-1">
+
+<div class="modal fade" id = "walk-in" tab-idndex = "-1">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content g-0 blue" >
+        <form method="post">
             <div class="modal-header blue white ">
                 <h5 class="modal-title" id="delete">&nbsp;<i class = "far fa-copy"></i>&nbsp;&nbsp;Walk in Certification</h5>
                 
@@ -577,8 +583,13 @@
                         <div class="col-md-6">
                     
                             <label for="rname"class="fs-6 fw-bold">Requestor Name</label>
-                            <input type="text" class="form-control" id="search" name="search" placeholder ="e.g Juan Dela Cruz" autocomplete="off" required>                
+                            <input type="text" class="form-control" name="search" id="search" placeholder ="e.g Juan Dela Cruz" autocomplete="off" required>
+                            <div class="list-group" id="show-list" style="position: absolute;">
+                            <!-- Here autocomplete list will be display -->
+                            </div>
+                                        
                         </div>
+                        
                         <div class="col-md-6">
                             <label for="purp" class= "fs-6 fw-bold">Purposes</label>
                                 <select class= "select form-select" name="" id="purp" onchange = "showOthers('other_txt',this);">
@@ -588,6 +599,7 @@
                                     <option value="others">Others</option>
                                 </select>
                             </div>
+                    
                     </div>
                     <div class="row g-3 mt-1" id = "other_txt">
                         <div class="col-xl-6">
@@ -651,12 +663,6 @@
                             </select>
                       
                     </div>
-           
-                    <div class="col-md-5" style="position: relative;margin-top: -38px;margin-left: 215px;">
-        <div class="list-group" id="show-list">
-          <!-- Here autocomplete list will be display -->
-        </div>
-      </div>
                </div>
             
                 
@@ -668,11 +674,16 @@
                         <button type = "button" class="btn btn-danger rounded" data-bs-dismiss ="modal" role  ="button"  name = "Cancel" value ="Cancel">
                             Discard                                    
                         </button>
-                    </form>
+                    
             </div>
+            </form>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="script.js"></script>    
         </div>
+        
     </div>
 </div>
+
 
 
 <div class="modal fade" id = "approve-proof" tab-idndex = "-1">
@@ -1048,4 +1059,4 @@
 </script>
 </body>
 </html>
-	  <?php } ?>
+	  <?php } #admin-cert?>

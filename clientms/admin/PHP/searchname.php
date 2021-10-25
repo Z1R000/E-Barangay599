@@ -4,18 +4,25 @@ require_once('includes/dbconnection.php');
 
   if (isset($_POST['query'])) {
     $inpText = $_POST['query'];
-    $sql = 'SELECT * FROM tblresident WHERE FirstName LIKE :country OR MiddleName LIKE :country OR LastName LIKE :country OR Suffix LIKE :country';
-    $stmt = $dbh->prepare($sql);
+    $sqlcc = 'SELECT * FROM tblresident WHERE FirstName LIKE :country OR MiddleName LIKE :country OR LastName LIKE :country OR Suffix LIKE :country';
+    $stmt = $dbh->prepare($sqlcc);
     $stmt->execute(['country' => '%' . $inpText . '%']);
-    $result = $stmt->fetchAll();
+    $resultcc = $stmt->fetchAll();
 
-    if ($result) {
-      foreach ($result as $row) {
-        echo '<a href="#" class="list-group-item list-group-item-action border-1">' . $row['FirstName'] . $row['MiddleName'] . $row['LastName'] . $row['Suffix'] . '</a>';
+    if ($resultcc) {
+      foreach ($resultcc as $rowcc) {
+        echo "<a href='#' class='list-group-item list-group-item-action border-1'>";
+		echo $rowcc['FirstName'] . ' ';
+		echo $rowcc['MiddleName'] . ' ';
+		echo $rowcc['LastName'] . ' ';
+		echo $rowcc['Suffix'];
+		echo "</a>";
 		
       }
     } else {
       echo '<p class="list-group-item border-1">No Record</p>';
     }
-  }
+  
+}
+#searchname.php
 ?>
