@@ -28,6 +28,34 @@
 
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
+    <script>
+        $(document).ready(function () {
+  // Send Search Text to the server
+  $("#search").keyup(function () {
+    let searchText = $(this).val();
+    if (searchText != "") {
+      $.ajax({
+        url: "action.php",
+        method: "post",
+        data: {
+          query: searchText,
+        },
+        success: function (response) {
+          $("#show-list").html(response);
+        },
+      });
+    } else {
+      $("#show-list").html("");
+    }
+  });
+  // Set searched text in input field on click of search button
+  $(document).on("click", "a", function () {
+    $("#search").val($(this).text());
+    $("#show-list").html("");
+  });
+});
+    </script>
+
     <style type = "text/css">
           table,td,tr,th{
             border: 1px solid darkgrey;
@@ -553,11 +581,12 @@
                 </div>
             </div>
         </div>
-<form method = "POST" action = "#">
+<form method = "POST">
 
 <div class="modal fade" id = "walk-in" tab-idndex = "-1">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content g-0 blue" >
+            <?php ?>
             <div class="modal-header blue white ">
                 <h5 class="modal-title" id="delete">&nbsp;<i class = "far fa-copy"></i>&nbsp;&nbsp;Walk in Certification</h5>
                 
@@ -567,7 +596,7 @@
                     <div class="row">
                         <div class="col-xl-4">
                             <label for="date" class="fw-bold fs-6" >Date today</label>
-                            <input type="text" id= "date" class="form-control" readonly>
+                            <input type="text" class="form-control" value="<?php echo date("F j, Y"); ?>" readonly>
                         </div>
                     </div>
               
@@ -575,7 +604,7 @@
                         <div class="col-md-6">
                     
                             <label for="rname"class="fs-6 fw-bold">Requestor Name</label>
-                            <input type="text" class="form-control" id="rname" placeholder ="e.g Juan Dela Cruz">
+                            <input type="text" class="form-control" id="search" name="Resident Name" placeholder ="e.g Juan Dela Cruz">
                         
                         </div>
                         <div class="col-md-6">
@@ -722,7 +751,7 @@
                                         <label for="remarks" >Remarks</label>
                                         <div class="col-md-12">
                                             <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;resize: none;"></textarea>
                                             <label for="floatingTextarea2">Remarks here (max 10 words)</label>
                                                 
                                             </div>
@@ -830,7 +859,7 @@
                                         <label for="remarks" >Remarks</label>
                                         <div class="col-md-12">
                                             <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;resize: none;"></textarea>
                                             <label for="floatingTextarea2">Remarks here (max 10 words)</label>
                                                 
                                             </div>
@@ -938,7 +967,7 @@
                                         <label for="remarks" >Remarks</label>
                                         <div class="col-md-12">
                                             <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;resize: none;"></textarea>
                                             <label for="floatingTextarea2">Remarks here (max 10 words)</label>
                                                 
                                             </div>
