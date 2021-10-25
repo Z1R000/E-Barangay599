@@ -21,6 +21,10 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                         if (optionValue) {
                             $(".box").not("." + optionValue).hide();
                             $("." + optionValue).show();
+                            $('#purp').attr("required", true);
+                            $('#arname').attr("required", true);
+                            $('#businessnamerequired').attr("required", true);
+                            $('#capitalrequired').attr("required", true);
                         } else {
                             $(".box").hide();
                         }
@@ -197,116 +201,116 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                 <input type="text" id="date" class="form-control" readonly>
                             </div>
                         </div>
+                        <form>
+                            <div class="row g-3 ">
+                                <div class="col-md-6">
 
-                        <div class="row g-3 ">
-                            <div class="col-md-6">
+                                    <label for="rname" class="fs-6 fw-bold">Requestor Name</label>
+                                    <input type="text" class="form-control" id="rname" placeholder="e.g Juan Dela Cruz" readonly>
 
-                                <label for="rname" class="fs-6 fw-bold">Requestor Name</label>
-                                <input type="text" class="form-control" id="rname" placeholder="e.g Juan Dela Cruz">
-
-                            </div>
-                            <div class="col-md-6">
-                                <label for="purp" class="fs-6 fw-bold">Purposes/Submission Office</label>
-                                <select class="select form-control" name="" id="purp" onchange="otherDiv('others_hidden',this)">
-                                    <option selected disabled>Purposes/Submission Office</option>
-                                    <option value="ent">For entertainment</option>
-                                    <option value="med">For medical reasons</option>
-                                    <option value="oth">Others</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row" id="others_hidden">
-                            <div class="col-md-6">
-
-
-
-                            </div>
-                            <div class="col-md-6">
-
-                                <label for="rname" class="fs-6 fw-bold">Other Reasons</label>
-                                <input type="text" class="form-control" id="rname" placeholder="Please Specify:">
-
-                            </div>
-                        </div>
-                        <div class="row">
-
-                            <div class="col-md-4">
-
-                                <label for="ctype" class="fs-6 fw-bold">Certification Type</label>
-                                <div class="d-flex">
-                                    <select class="select form-control" name="" id="ctype" onchange="showDiv('hidden_div',this)">
-                                        <option selected>--Avaiable certifications--</option>
-                                        <option value="emp">Employment</option>
-                                        <option value="ind">Indigency</option>
-                                        <option value="Business">Business</option>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="purp" class="fs-6 fw-bold">Purposes/Submission Office</label>
+                                    <select class="select form-control" name="" id="purp" onchange="otherDiv('others_hidden',this)" required>
+                                        <option selected value="">Purposes/Submission Office</option>
+                                        <option value="ent">For entertainment</option>
+                                        <option value="med">For medical reasons</option>
+                                        <option value="oth">Others</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <label for="rname" class="fs-6 fw-bold">Certification Fee</label>
-                                <div class="d-flex">
-                                    <div class="input-group">
-                                        <button class="btn btn-secondary text-white" disabled>
-                                            ₱
-                                        </button>
-                                        <input type="text" class="form-control me-2 w-50" style="text-align: right;" id="rname" value="20.00" readonly>
+                            <div class="row" id="others_hidden">
+                                <div class="col-md-6">
+
+
+
+                                </div>
+                                <div class="col-md-6">
+
+                                    <label for="rname" class="fs-6 fw-bold">Other Reasons</label>
+                                    <input type="text" class="form-control" id="arname" placeholder="Please Specify:">
+
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-4">
+
+                                    <label for="ctype" class="fs-6 fw-bold">Certification Type</label>
+                                    <div class="d-flex">
+                                        <select class="select form-control" name="" id="ctype" onchange="showDiv('hidden_div',this)" required>
+                                            <option selected value="">--Avaiable certifications--</option>
+                                            <option value="emp">Employment</option>
+                                            <option value="ind">Indigency</option>
+                                            <option value="Business">Business</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="ctype" class="fs-6 fw-bold">Mode of Payment</label>
-                                <div class="d-flex">
-                                    <select class="select form-control" name="" id="mop" onchange="showDiv('hidden_div',this)">
-                                        <option selected>--Select--</option>
-                                        <option value="gc">G-Cash</option>
-                                        <option value="cash">Cash</option>
+                                <div class="col-md-2">
+                                    <label for="rname" class="fs-6 fw-bold">Certification Fee</label>
+                                    <div class="d-flex">
+                                        <div class="input-group">
+                                            <button class="btn btn-secondary text-white" disabled>
+                                                ₱
+                                            </button>
+                                            <input type="text" class="form-control me-2 w-50" style="text-align: right;" id="rname" value="20.00" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="ctype" class="fs-6 fw-bold">Mode of Payment</label>
+                                    <div class="d-flex">
+                                        <select class="select form-control" name="" id="mop" required>
+                                            <option selected value="">--Select--</option>
+                                            <option value="gc">G-Cash</option>
+                                            <option value="cash">Cash</option>
 
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+                            <div class="row" id="hidden_div">
+
+                                <div class="col-md-6">
+                                    <label for="purp" class="fs-6 fw-bold">Business name
+                                        <small class="text-muted">(If business related)</small> </label>
+                                    <input type="text" class="form-control" id="businessnamerequired" placeholder="e.g Manong Store">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="cap" class="fs-6 fw-bold">Capital</label>
+                                    <select class="select form-control" name="" id="capitalrequired">
+                                        <option selected value="">--Select Capital--</option>
+                                        <option value="less10k"> Less than 10,000 </option>
+                                        <option value="more10k"> More than 10, 000 </option>
+                                        <option value="more100k"> More than 100,000 </option>
                                     </select>
+
+                                </div>
+
+
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-xl-3">
+
+                                </div>
+                                <div class="col-xl-3 ">
+
+                                </div>
+                                <div class="col-xl-3 ">
+                                    <a href="dashboard.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
+                                </div>
+                                <div class="col-xl-3 ">
+                                    <input type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">
                                 </div>
                             </div>
-
-
-                        </div>
-
-
-
-                        <div class="row" id="hidden_div">
-
-                            <div class="col-md-6">
-                                <label for="purp" class="fs-6 fw-bold">Business name
-                                    <small class="text-muted">(If business related)</small> </label>
-                                <input type="text" class="form-control" id="rname" placeholder="e.g Manong Store">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="cap" class="fs-6 fw-bold">Capital</label>
-                                <select class="select form-control" name="" id="cap">
-                                    <option selected>
-                                        < 10,000 </option>
-                                    <option value="ent">>10, 000</option>
-                                    <option value="med">>100,000</option>
-                                </select>
-
-                            </div>
-
-
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-xl-3">
-
-                            </div>
-                            <div class="col-xl-3 ">
-
-                            </div>
-                            <div class="col-xl-3 ">
-                                <a href="index.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
-                            </div>
-                            <div class="col-xl-3 ">
-                                <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
-                            </div>
-                        </div>
-
+                        </form>
                     </div>
 
 
@@ -345,21 +349,8 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
                 }
             </script>
-            <script>
-                $(document).ready(function() {
-                    $("select").change(function() {
-                        $(this).find("option:selected").each(function() {
-                            var optionValue = $(this).attr("value");
-                            if (optionValue) {
-                                $(".box").not("." + optionValue).hide();
-                                $("." + optionValue).show();
-                            } else {
-                                $(".box").hide();
-                            }
-                        });
-                    }).change();
-                });
-            </script>
+
+
             <script type="text/javascript">
                 function showDiv(divId, element) {
                     document.getElementById(divId).style.display = element.value == 'Business' ? 'flex' : 'none';

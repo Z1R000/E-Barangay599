@@ -192,71 +192,74 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                 <div class="container-fluid px-4">
                     <div style="background-color: aliceblue;border-radius: 25px;border:1px solid black;padding: 25px;">
                         <div class="graph-visual tables-main">
+                            <form>
+                                <div class="modal-body bg-white ">
 
-                            <div class="modal-body bg-white ">
-                                <div class="row">
-                                    <div class="col-xl-6">
-                                        <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
-                                        <div class="d-flex">
-                                            <input type="text" id="prate" class="form-control me-2" name="pRate" placeholder="Requestor Name" readonly>
-                                            <!--Naka disable pero dito ilalagay yung name dapat ni client-->
+                                    <div class="row">
+                                        <div class="col-xl-6">
+                                            <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
+                                            <div class="d-flex">
+                                                <input type="text" id="prate" class="form-control me-2" name="pRate" placeholder="Requestor Name" readonly>
+                                                <!--Naka disable pero dito ilalagay yung name dapat ni client-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+
+                                        <div class="col-xl-6">
+                                            <label for="prate" class="fs-5 fw-bold">Duration<span class="text-muted fs-6">(in hours)</span></label>
+                                            <div class="d-flex">
+                                                <input type="number" min=0 ; id="prate" class="form-control me-2" name="pRate" placeholder="0.00" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <label for="prate" class="fs-5 fw-bold">Rate<span class="text-muted fs-6">(per hour)</span></label>
+                                            <div class="d-flex">
+                                                <input type="text" id="prate" class="form-control me-2" name="pRate" placeholder="0.00" readonly>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-4">
+                                            <label for="status" class="fs-5 fw-bold">Property to rent</label>
+                                            <select name="" class="form-control" id="status" required>
+                                                <option selected value="">--Select Property--</option>
+                                                <option value="avail">Barangay Van</option>
+                                                <option value="noavail">Patrol</option>
+                                                <option value="noavail">Basketball court</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-xl-4">
+                                            <label for="prate" class="fs-5 fw-bold">Date of Rental</label>
+                                            <input type="date" id="date" class="form-control me-2" name="date" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="rname" class="fs-6 fw-bold">Purpose</label>
+                                            <input type="text" class="form-control" id="rname" placeholder="Please indicate purpose for rental:" required>
+                                        </div>
+
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xl-3">
+
+                                        </div>
+                                        <div class="col-xl-3 ">
+
+                                        </div>
+                                        <div class="col-xl-3 ">
+                                            <a href="dashboard.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
+                                        </div>
+                                        <div class="col-xl-3 ">
+                                            <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-
-
-                                    <div class="col-xl-6">
-                                        <label for="prate" class="fs-5 fw-bold">Duration<span class="text-muted fs-6">(in hours)</span></label>
-                                        <div class="d-flex">
-                                            <input type="number" min=0 ; id="prate" class="form-control me-2" name="pRate" placeholder="0.00">
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-6">
-                                        <label for="prate" class="fs-5 fw-bold">Rate<span class="text-muted fs-6">(per hour)</span></label>
-                                        <div class="d-flex">
-                                            <input type="text" id="prate" class="form-control me-2" name="pRate" placeholder="0.00" readonly>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-xl-4">
-                                        <label for="status" class="fs-5 fw-bold">Property to rent</label>
-                                        <select name="" class="form-control" id="status">
-                                            <option value="avail">Barangay Van</option>
-                                            <option value="noavail">Patrol</option>
-                                            <option value="noavail">Basketball court</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-xl-4">
-                                        <label for="prate" class="fs-5 fw-bold">Date of Rental</label>
-                                        <input type="date" id="date" class="form-control me-2" name="date">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="rname" class="fs-6 fw-bold">Purpose</label>
-                                        <input type="text" class="form-control" id="rname" placeholder="Please indicate purpose for rental:">
-                                    </div>
-
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-xl-3">
-
-                                    </div>
-                                    <div class="col-xl-3 ">
-
-                                    </div>
-                                    <div class="col-xl-3 ">
-                                        <a href="index.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
-                                    </div>
-                                    <div class="col-xl-3 ">
-                                        <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
+                        </form>
 
                     </div>
                     <!-- /#page-content-wrapper -->
