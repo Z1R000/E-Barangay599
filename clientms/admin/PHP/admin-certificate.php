@@ -32,7 +32,7 @@
           table,td,tr,th{
             border: 1px solid darkgrey;
             text-align: left;
-            font-size: 1.022em;
+            font-size: 1em;
             padding: 100px;
             font-family: 'Noto Sans Display', sans-serif;
             
@@ -132,7 +132,7 @@
             <div class="row gx-4 gy-2">
                 <div class="mx-auto col-xl-12  ">
                     <div class="row g-0  shadow-sm rounded-top border" style= "background: #012f4e; color: white">
-                        <div class="col-xl-5 py-2 px-2  ">
+                        <div class="col-xl-6 py-2 px-2  ">
                             <nav class="nav nav-pills flex-column  flex-sm-row">
                                
                                 <a class="flex-sm-fill text-sm-center nav-link fs-5 white active" href="#crecords" data-bs-toggle = "tab">Certification Records</a>
@@ -170,7 +170,7 @@
                                         
                                     </div>
                                     <div class="row border g-0">
-                                        <div class="col-xl-8 mx-2  mx-auto py-3  px-2">
+                                        <div class="col-xl-11 mx-2  mx-auto py-3  px-2">
                                             <table class="table bg-white table-hover shadow-sm border "> 
                                                 <thead>
                                                     <tr>
@@ -232,7 +232,7 @@
                                 </div>
                             
                                 <div class="row border g-0">
-                                    <div class="col-xl-12 mx-2  mx-auto py-3  px-3 print-container">
+                                    <div class="col-xl-12 mx-2  mx-auto py-3 px-2 print-container">
                                         <table class="table bg-white table-hover shadow-sm border "> 
                                             <thead>
                                                 <tr>
@@ -241,11 +241,11 @@
                                                 <tr>
                                                     <th style = "text-align: left">BCN #</th>
                                                     <th style = "text-align: left">Status</th>
-                                                    <th style = "text-align: left">Requestor's Name</th>
+                                                    <th style = "text-align: left">Requestor</th>
                                              
                                                     <th style = "text-align: left">Purpose</th>
-                                                    <th style = "text-align: left">Requested Certificate</th>
-                                                    <th style = "text-align: left">Certificate fee</th>
+                                                    <th style = "text-align: left">Certification</th>
+                                                    <th style = "text-align: left">Fee</th>
                                                     <th style = "text-align: left">Mode of Payment</th>
                                                     <th style = "text-align: left">Date</th>
                                                     <th style = "text-align: center">Actions</th>
@@ -257,10 +257,10 @@
                                                     <td scope="col" style = "text-align: left">015-22</td>
                                                     <td scope="col" style = "text-align: left">On-Going</td>
                                                     <td scope="col" style = "text-align: left">ekoc omsim</td>
-                                                    
+
                                                     <td scope="col" style = "text-align: left">For employment</td>
                                                     <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                    <td scope="col" style = "text-align: right">₱ 30</td>
+                                                    <td scope="col" style = "text-align: right">₱ 300000</td>
                                                     <td scope="col" style = "text-align: left">G-cash</td>
                                                     <td scope="col" style = "text-align: right">10-12-2021</td>
                                                   
@@ -578,9 +578,9 @@
                             <input type="text" class="form-control" id="rname" placeholder ="e.g Juan Dela Cruz">
                         
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label for="purp" class= "fs-6 fw-bold">Purposes</label>
-                                <select class= "select form-control" name="" id="purp" onchange = "showOthers('other_txt',this);">
+                                <select class= "select form-select" name="" id="purp" onchange = "showOthers('other_txt',this);">
                                     <option  selected>Purposes</option>
                                     <option value="ent">For entertainment</option>
                                     <option value="med">For medical reasons</option>
@@ -592,7 +592,7 @@
                         <div class="col-xl-6">
 
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <input type="text" class="form-control" placeholder= "Specify a purpose here">
                         </div>
                     </div>
@@ -601,7 +601,7 @@
                                 
                                 <label for="ctype"class="fs-6 fw-bold">Certification Type</label>
                                 <div class="d-flex">
-                                    <select class= "select form-control" name="" id="ctype" onchange= "showDiv('hidden_div',this)">
+                                    <select class= "select form-select" name="" id="ctype" onchange= "showDiv('hidden_div',this)">
                                         <option  selected>--Avaiable certifications--</option>
                                         <option value="emp">Employment</option>
                                         <option value="ind">Indigency</option>
@@ -620,10 +620,10 @@
                                     </div>
                                 </div>
                             </div> 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="ctype"class="fs-6 fw-bold">Mode of Payment</label>
                                 <div class="d-flex">
-                                    <select class= "select form-control" name="" id="mop" onchange= "showDiv('hidden_div',this)">
+                                    <select class= "select form-select" name="" id="mop" onchange= "showDiv('hidden_div',this)">
                                         <option  selected>--Select--</option>
                                         <option value="gc">G-Cash</option>
                                         <option value="cash">Cash</option>
@@ -643,7 +643,7 @@
                    
                    <div class="col-md-6" >
                         <label for="cap" class= "fs-6 fw-bold" >Capital</label>
-                            <select class= "select form-control" name="" id="cap">
+                            <select class= "select form-select" name="" id="cap">
                                 <option  selected>< 10,000 </option>
                                 <option value="ent">>10, 000</option>
                                 <option value="med">>100,000</option>

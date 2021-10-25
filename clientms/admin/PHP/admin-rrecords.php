@@ -21,13 +21,13 @@
                                                     </tr>
                                                     <tr>
                                                         <th style = "text-align: left;"> Status</th>
-                                                        <th style = "text-align: left;">Requestor Name</th>
-                                                        <th style = "text-align: left; ">Requested Property </th>
+                                                        <th style = "text-align: left;">Requestor</th>
+                                                        <th style = "text-align: left; "> Property </th>
                                                         <th style = "text-align: left; ">Purpose </th>
                                                 
                                                         <th style = "text-align: left;;">Date</th>
-                                                        <th style = "text-align: left;">Duration (hours)</th>
-                                                        <th style = "text-align: left;">Rate (Pesos)</th>
+                                                        <th style = "text-align: left;">Duration</th>
+                                                        <th style = "text-align: left;">Rate</th>
                                                         <th style = "text-align: left; ">Mode of Payment </th>
                                                         <th style = "text-align: center;">Action</th>
                                             
@@ -41,7 +41,7 @@
                                                         <td scope="col" style = "text-align: left">Barangay van</td>
                                                         <td scope="col" style = "text-align: left">DSWD</td>
                                                         <td scope="col" style = "text-align: left">10/16/2021,21:12:08</td>
-                                                        <td scope="col" style = "text-align: right">2</td>
+                                                        <td scope="col" style = "text-align: right">2 hours</td>
                                                         <td style = "text-align: right;">₱ 10,040.00 </td>
                                                         <td scope="col" style = "text-align: right">Cash</td>
                                                        

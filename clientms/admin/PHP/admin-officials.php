@@ -39,6 +39,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         }
         tr,td,th{
             vertical-align: middle;
+            font-size:1.05em;
         }
          .pab{
             
@@ -88,6 +89,14 @@ if (strlen($_SESSION['clientmsaid']==0)) {
             position:absolute;
             top:30px;   
         }
+        .kan{
+            margin-left: 4.5%;
+        }
+        @media(max-width: 991px){
+            .kan{
+                margin-left: 1%;
+            }
+        }
       
                 
     </style>
@@ -113,12 +122,12 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         </div>
     </nav>  
     
-    <div class="container-fluid  mx-3 px-5">
-        <div class="row  g-0  pb-5" >
+    <div class="container-fluid  mx-2 px-3">
+        <div class="row  gx-0  pb-5" >
       
-                <div class="col-xl-3 col-lg-4 col-md-12 mb-3 shadow-lg rounded-3 border me-2 ">
-                    <div class="row g-0 bg-dark shadow-lg rounded-top border py-1 "></div>
-                        <div class="row g-0"  style= "background: aliceblue">
+                <div class="col-xl-3 col-lg-4 col-md-12 mb-3 shadow-lg rounded-3 kan border me-4">
+                    <div class="row g-0 bg-dark shadow-lg rounded-top border py-1 bg-dark "></div>
+                        <div class="row g-0 "  style= "background: aliceblue">
                             <div class = "text-left text-danger mt-2 border-bottom">
                                 <h4 class = "ms-3">
                                     Punong Barangay 
@@ -127,12 +136,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </div> 
                                 </h4>
                             </div>
-                            <div class="col-md-11 px-1 pb-4 mx-auto position-relative  ava" align= "center">
-                                <img src="../images/admin-logo.png" alt="" class="img-fluid rounded-circle ava"  style = "height: 135px">
-                            <div class="cam">
-                                <a href= "#change-dp" data-bs-toggle="modal" class= "text-decoration-none fs-5">Change Profile Picture<br> <i class= "fa fa-camera fs-5"></i></a>
-                            </div>
-                              
+                            <div class="col-md-11 px-1 pb-4 mx-auto position-relative " align= "center">
+                                <img src="../images/admin-logo.png" alt="" class="img-fluid rounded-circle "  style = "height: 135px">
+                          
                                 <div class= "text-center fs-3 text-secondary">Jose Milo L. Lacatan</div>
                             </div>
                         </div>
@@ -182,6 +188,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             Dec 25 2000
                                             </td>
                                         
+                                        </tr>
+                                        <tr class= "">
+                                            <th class =""><i class= "fa fa-check-square me-1"></i>Day/s of Duty</th>
+                                                <td colspan = 2 style ="text-align: right; padding-right: 6%;">
+                                                    M, T, W, TH, F, Sat, Sun
+                                                </td>
+                                            
                                         </tr>
                                         <tr class= "">
                                         
@@ -245,7 +258,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                         <tr>
                                             <td>
                                             
-                                            <a href = "#edit-sub" data-bs-toggle= "modal"class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
+                                            <a href = "#account" data-bs-toggle= "modal"class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
                                             </td>
                                           
                                             <td>
@@ -292,7 +305,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                         <tr>
                                             <td>
                                         
-                                            <a href = "#edit-sub" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
+                                            <a href = "#account" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
                                             </td>
                                            
                                             <td>
@@ -339,7 +352,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                         <tr>
                                             <td>
                                           
-                                            <a href = "#edit-sub" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
+                                            <a href = "#account" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
                                             </td>
                                           
                                             <td>
@@ -389,7 +402,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                         <tr>
                                             <td>
                                            
-                                            <a href = "#edit-sub" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
+                                            <a href = "#account" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
                                             </td>
                                              
                                             <td>
@@ -436,7 +449,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                         <tr>
                                             <td>
                                             
-                                            <a href = "#edit-sub"  data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
+                                            <a href = "#account"  data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
                                             </td>
                                             
                                             <td>
@@ -482,7 +495,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                        
                                         <tr>
                                             <td>
-                                                <a href = "#edit-sub" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
+                                                <a href = "#account" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
 
                                             </td>
                                              
@@ -533,7 +546,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                         <tr>
                                             <td>
                                           
-                                            <a href = "#edit-sub"  data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
+                                            <a href = "#account"  data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
                                             </td>
                                            
                                             <td>
@@ -580,7 +593,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                         <tr>
                                             <td>
                                                 
-                                            <a href = "#edit-sub" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
+                                            <a href = "#account" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
                                             </td>
                                           
                                             <td>
@@ -627,7 +640,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                         <tr>
                                             <td>
                                          
-                                            <a href = "#edit-sub" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
+                                            <a href = "#account" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
                                             </td>
                                            
                                             <td>
@@ -677,7 +690,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                         <tr>
                                             <td>
                                          
-                                            <a href = "#edit-sub" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
+                                            <a href = "#account" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
                                             </td>
                                            
                                             <td>

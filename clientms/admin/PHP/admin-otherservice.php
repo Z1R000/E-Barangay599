@@ -26,7 +26,7 @@
           table,td,tr,th{
            border: 1px solid darkgrey;
             text-align: left;
-            font-size: 1.02em;
+            font-size: 1em;
             padding: 100px;
             font-family: 'Noto Sans Display', sans-serif;
             
@@ -140,10 +140,10 @@
                                                         </tr>
                                                         <tr>
                             
-                                                            <th style = "text-align: left;width: 20%;">Service Name</th>
-                                                            <th style = "text-align: left; width: 13%;">Service Fee</th>
-                                                            <th style = "text-align: left; width: 13%;">Availablility</th>
-                                                            <th style = "text-align: center;width: 13%;">Action</th>
+                                                            <th style = "text-align: left;">Service Name</th>
+                                                            <th style = "text-align: left;">Service Fee</th>
+                                                            <th style = "text-align: left; ">Availablility</th>
+                                                            <th style = "text-align: center;">Action</th>
                                                 
                                                         </tr>
                                                     

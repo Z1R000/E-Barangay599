@@ -252,7 +252,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 				<!--END SEARCH -->
                 
                 <div class="container-fluid px-5 mx-auto">
-                    <div class="row px-2  g-0" style= "border-radius: 10px 10px 0px 0px;">
+                    <div class="row  g-0" style= "border-radius: 10px 10px 0px 0px;">
                         <ul class="nav nav-pills py-2" id="pills-tab" role="tablist">
                             <li class="nav-item px-1 py-2" role="presentation">
                                 <button class="btn btn-outline-primary active fs-5" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#all" type="button" role="tab" aria-controls="pills-home" aria-selected="true">All Residents</button>

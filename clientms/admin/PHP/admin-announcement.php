@@ -27,6 +27,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
     <link rel = "stylesheet" href="../css/sidebar.css" />
     <link rel="stylesheet" href="../CSS/scrollbar.css">
 
+
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
     <style type = "text/css">
@@ -34,8 +35,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         .pab{
             
             position: absolute;
-            top: 180px;
+            top: 120px;
             right: 5px;
+            margin: 20px;
         }
         .white{
             color: white;
@@ -43,6 +45,108 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         .row{
             overflow-y:
         }
+        .divfortable{
+            background-color: white;
+            overflow-x:auto;
+        }
+        .btn{
+            z-index: 2;
+        }
+      
+        @media (max-width:576px) {
+                .banner {
+                    display: none;
+                }
+
+                .right {
+                    margin-left: 5%;
+                }
+
+                .dis {
+                    display: flex;
+                }
+        }
+        @media screen and (max-width: 900px) {
+    h5.testfont {
+      font-size: 20px;
+    }
+    h1.h1font{
+      font-size: 25px;   
+    }
+    h3.testfont{
+        font-size: 10px;
+    }
+    h2.testfont{
+        font-size: 15px;
+    }
+    h4.testfont{
+        font-size: 12px;
+    }
+    h1.testfont{
+        font-size: 10px; 
+    }
+    span.anothertestfont{
+        font-size: 20px;
+    }
+    select.dropdownstyle{
+        width: 100px;
+        height: 30px;
+        overflow-y: hidden;
+    }
+    select.dropdownstyle option{
+        width: 100px;
+        height: 20px;
+        overflow-y: hidden;
+    }
+    td.pricefont{
+        font-size: 10px;
+    }
+    
+    
+  }
+
+
+
+  @media screen and (min-width: 601px) {
+    h5.testfont {
+      font-size: 30px;
+    }
+    h1.h1font{
+      font-size: 35px;   
+    }
+    h3.testfont{
+        font-size: 15px;
+    }
+    h2.testfont{
+        font-size: 20px;
+    
+    }
+    h4.testfont{
+        font-size: 18px;
+    }
+    h1.testfont{
+        font-size: 20px; 
+    }
+    span.anothertestfont{
+        font-size: 25px;
+    }
+    select.dropdownstyle{
+
+        width: 300px;
+        height: 40px;
+    }
+    select.dropdownstyle option{
+
+        width: 3000px;
+        height: 40px;
+    }
+    td.pricefont{
+        font-size: 20px;
+    }
+    
+
+  } 
+            
                 
     </style>
 </head>
@@ -69,47 +173,45 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         </div>
     </nav>
 
-    <div class="float-end pab position-fixed" data-bs-toggle="tooltip" data-bs-placement="top" title ="Create announcement" >
+    <div class="float-end pab position-fixed" style= "opacity:100%; z-index: 100;" data-bs-toggle="tooltip" data-bs-placement="top" title ="Create announcement" >
                 <button class="btn btn-primary fs-5 text-align-center   rounded-circle" data-bs-toggle= "modal" role= "button"href = "#create-ann" style= "padding: 10px;">
                     <i class= "fa fa-bullhorn me-2 fs-5 " ></i>
                 </button>
     </div>
 
-    <div class="container-fluid">
-        <div class="row g-0 px-5">
-
-            <h3>Announcement List</h3>
-           
-            <?php 
+    
+    <div class="container-fluid px-4">
+                        <?php 
 							$sql ="SELECT distinct tblannouncement.ID, tblannouncement.announcement, tblannouncement.announcementDate, tblannouncement.endDate, tblannouncement.adminID, tbladmin.BarangayPosition, tblresident.LastName from tblannouncement join tbladmin on tblannouncement.adminID = tbladmin.ID join tblresident on tbladmin.ID = tblresident.ID order by tblannouncement.ID Desc";
 							$query = $dbh -> prepare($sql);
 							$query->execute();
 							$results=$query->fetchAll(PDO::FETCH_OBJ);
 							foreach($results as $row)
 							{ 
-                                
+                                echo '     <div class="row">
+                                <div class="col-md-12">
+                                    <div class="float-end">
+                                        <div class="btn-group" role="group">
+                                            <button type= "button" href = "#edit-ann" data-bs-toggle = "modal"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-edit"></i>&nbsp;Edit </a>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                    <button type= "button" href = "#delete-ann" data-bs-toggle= "modal" class="btn btn-outline-danger mx-1 my-1"><i class="fa fa-trash"></i>&nbsp;Delete</button>
+                                    </div>
+    
+                                    </div>
+                                </div>
+                            </div>';
                                 echo "
-                                <div class = 'mb-3 shadow-sm rounded'  style='background-color:aliceblue;border:1px solid black;  border-radius:4px; overflow: auto;'>
-                                <h1 class='testfont' style='float: left; margin:25px;    color: #021f4e;'>Announcement</h1>";
+                                <div class = 'mb-3 table-responsive' style='background-color:aliceblue;border:1px solid black;  border-radius:4px; overflow: hidden;'>
+                                <h1 class='testfont' style='float: left; margin:25px;color: #021f4e;'>Announcement</h1>";
 								$sDate = $row->announcementDate;
 								$eDate = $row->endDate;
+                                
     
 						?>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="float-end">
-                                    <div class="btn-group" role="group">
-                                        <button type= "button" href = "#edit-ann" data-bs-toggle = "modal"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-edit"></i>&nbsp;Edit </a>
-                                </div>
-                                <div class="btn-group" role="group">
-                                <button type= "button" href = "#delete-ann" data-bs-toggle= "modal" class="btn btn-outline-danger mx-1 my-1"><i class="fa fa-trash"></i>&nbsp;Delete</button>
-                                </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <h4 class="testfont" style="float: right; font-family: Segoe UI; margin: 25px; color: #021f4e; text-align: justify;">
-                            For <?php  echo date('l, j F Y - h:i A', strtotime($sDate));?> <br> To <?php  echo date('l, j F Y - h:i A', strtotime($eDate));?>
+                   
+                        <h3 class="testfont" style="float: right; font-family: Segoe UI; margin: 25px; color: #021f4e; text-align: justify;">
+                            <?php  echo date('l, j F Y - h:i A', strtotime($sDate));?> <br> 
                         </h4>
                         <br><br><br><br>
                         <div class="testulit" style="border-radius: 25px; ">
@@ -122,11 +224,21 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                         
                         ?>
                        </div>
-        </div>
-    </div>
- 
+
+
+
+
+
+
+
+
+
 
 <?php } ?>
+
+
+
+
 
     <div class="modal fade" id = "create-ann" tab-idndex = "-1">
         <form action="">
