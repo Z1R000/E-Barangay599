@@ -142,7 +142,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                             <div class="col-xl-10 bg-white mx-auto text-center">
                             <label for="" class= "text-center fs-6 text-muted small">Resident's Full Name</label>
                                 <div class="display-6 border-bottom text-center py-2">
-                                    <?php echo "$row->LastName, $row->FirstName $row->MiddleName";?>
+                                    <?php echo "$row->LastName, $row->FirstName $row->MiddleName $row->Suffix";?>
                                     
                                 </div>
 
