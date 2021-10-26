@@ -6,6 +6,22 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
   } else{
+    if(isset($_POST['submit']))
+  {
+    $eid=intval($_GET['editid']);
+    $clientmsaid=$_SESSION['clientmsaid'];
+      $cn=$_POST['cn'];
+      $cp=$_POST['cp'];
+
+      $sql="update tblcertificate set CertificateName=:cn, CertificatePrice=:cp where ID=:eid";
+      $query=$dbh->prepare($sql);
+      $query->bindParam(':cn',$cn,PDO::PARAM_STR);
+      $query->bindParam(':cp',$cp,PDO::PARAM_STR);
+      $query->bindParam(':eid',$eid,PDO::PARAM_STR);
+      $query->execute();
+      echo '<script>alert("Certificate details has been updated")</script>';
+echo "<script type='text/javascript'> document.location ='edit-cert.php?editid=" , $eid ,"'; </script>";
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -147,7 +163,24 @@ if (strlen($_SESSION['clientmsaid']==0)) {
             </div>
         </div>
     </nav>
-    <form action="temp-cert.php"method ="POST">
+    
+    <form method ="POST">
+    <?php
+				$eid=$_GET['editid'];
+				$clientmsaid=$_SESSION['clientmsaid'];
+				$sql="select * from tblcertificate where ID=:eid";
+				$query = $dbh -> prepare($sql);
+				$query->bindParam(':eid',$eid,PDO::PARAM_STR);
+				$query->execute();
+
+				$results=$query->fetchAll(PDO::FETCH_OBJ);
+
+				$cnt=1;
+				if($query->rowCount() > 0)
+				{
+				    foreach($results as $row)
+				{               
+			?>
         <div class="container-fluid mb-3 ms-1 mx-5">
           <div class="row mx-1  py-2">
             <div class="col-xl-5 mx-auto  rounded-top white">
@@ -163,10 +196,10 @@ if (strlen($_SESSION['clientmsaid']==0)) {
               <div class="row bg-white pb-5 shadow-sm">
                 <form action="" method = "POST">
                   <div class="row gx-3 gy-1 px-5">
-                    <label for="cname" class= "black fw-bold">Certification Name</label>
-                    <input id = "cname" class ="form-control" type="text" placeholder = "Certfication Name" name= "cname" value =  "Barangay Clearance">
-                    <label for="cname" class= "black fw-bold" >Certification Fee</label>
-                    <input id = "cname" class ="form-control" value = "20"type="text" placeholder = "Certfication fee">
+                    <label for="cn" class= "black fw-bold">Certification Name</label>
+                    <input id = "cn" class ="form-control" type="text" placeholder = "Certfication Name" name= "cn" value =  "<?php echo htmlentities($row->CertificateName);?>">
+                    <label for="cp" class= "black fw-bold" >Certification Fee</label>
+                    <input id = "cp" name="cp" class ="form-control" value = "<?php echo htmlentities($row->CertificatePrice);?>" type="text" placeholder = "Certfication fee">
              
                   </div>
                   <div class="row gy-2 mx-2 my-2 ">
@@ -184,7 +217,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
             </div>
             <div class="col-xl-6 mx-auto pt-1 ">
                 <div class="fs-6 fw-bold">Certificate Template</div>
-                <button type = "button" href = "#save-cert" data-bs-toggle = "modal" role= "button"class = "btn btnx btn-primary mb-1"><i class= "fas fa-save me-2"></i>Save</button>
+                <button type = "submit" href = "#save-cert" data-bs-toggle = "modal" role= "button" name="submit" id="submit" class = "btn btnx btn-primary mb-1"><i class= "fas fa-save me-2"></i>Save</button>
                 <button type = "button" onclick = "window.history.back()" class = "btn btnx  btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</button>
               
                 <div class="row">
@@ -198,6 +231,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         </form>
 
         </div>
+        <?php
+        }}?>
 
         <div class="modal fade" id = "save-cert" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
