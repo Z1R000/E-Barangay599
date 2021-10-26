@@ -17,9 +17,4 @@ $(document).ready(function () {
       $("#show-list").html("");
     }
   });
-  // Set searched text in input field on click of search button
-  $(document).on("click", "a", function () {
-    $("#search").val($(this).text());
-    $("#show-list").html("");
-  });
 });

@@ -1,5 +1,12 @@
 <?php 
     $curr ="Certifications";
+
+    $con = mysqli_connect("localhost","root","","clientmsdb");
+    if (mysqli_connect_errno())
+    {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    
+    }
 	session_start();
 	error_reporting(0);
 	include('includes/dbconnection.php');
@@ -224,7 +231,7 @@
                                 <div class = "row py-2 g-0 px-3">
                                     <div class="col-md-8 ">
                                             <div class="btn-group" role="group">
-                                                <a href = "#walk-in"  data-bs-toggle ="modal" role = "button"class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;Walk-in certification</a>
+                                                <a href = "#walk-in"  data-bs-toggle ="modal" role = "button"class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i></a>
                                             </div>
                                             <div class="btn-group" role="group">
                                                 <a href = "#"  onclick="window.print()" data-bs-toggle ="modal" role = "button"class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-cog"></i>&nbsp;Generate report</a>
@@ -591,9 +598,9 @@
                         </div>
                         
                         <div class="col-md-6">
-                            <label for="purp" class= "fs-6 fw-bold">Purposes</label>
-                                <select class= "select form-select" name="" id="purp" onchange = "showOthers('other_txt',this);">
-                                    <option  selected>Purposes</option>
+                            <label for="purp" class= "fs-6 fw-bold">Purpose</label>
+                                <select class= "select form-select" name="" id="purp" onchange = "showOthers('other_txt',this);" required>
+                                    <option  selected disabled>--Purpose--</option>
                                     <option value="ent">For entertainment</option>
                                     <option value="med">For medical reasons</option>
                                     <option value="others">Others</option>
@@ -614,11 +621,19 @@
                                 
                                 <label for="ctype"class="fs-6 fw-bold">Certification Type</label>
                                 <div class="d-flex">
-                                    <select class= "select form-select" name="" id="ctype" onchange= "showDiv('hidden_div',this)">
-                                        <option  selected>--Avaiable certifications--</option>
-                                        <option value="emp">Employment</option>
-                                        <option value="ind">Indigency</option>
-                                        <option value="Business">Business</option>
+                                    
+                                        <?php 
+                                            $cName = '';
+                                            $query = "SELECT * FROM tblcertificate";
+                                            $result = mysqli_query($con, $query);
+                                            while($row = mysqli_fetch_array($result))
+                                            {
+                                            $cName .= '<option value="'.$row["CertificateName"].'">'.$row["CertificateName"].'</option>';
+                                            }
+                                        ?>
+                                    <select class= "form-control action" name="ctype" id="ctype" onchange= "showDiv('hidden_div',this)" required>
+                                        <option  selected disabled>--Available Certifications--</option>
+                                        <?php echo $cName; ?>
                                     </select>
                                 </div>
                             </div>
@@ -629,15 +644,17 @@
                                         <button class="btn btn-secondary text-white" disabled>
                                         ₱
                                         </button>
-                                        <input type="text" class="form-control me-2 w-50" style = "text-align: right;" id="rname" value  = "20.00" readonly>
+                                        <select name="cprice" id="cprice" class="form-control action" disabled>
+                                            <option value='' selected disabled></option>
+                                        </select>
                                     </div>
                                 </div>
                             </div> 
                             <div class="col-md-6">
                                 <label for="ctype"class="fs-6 fw-bold">Mode of Payment</label>
                                 <div class="d-flex">
-                                    <select class= "select form-select" name="" id="mop" onchange= "showDiv('hidden_div',this)">
-                                        <option  selected>--Select--</option>
+                                    <select class= "select form-select" name="" id="mop" onchange= "showDiv('hidden_div',this)" required>
+                                        <option  selected disabled>--Select--</option>
                                         <option value="gc">G-Cash</option>
                                         <option value="cash">Cash</option>
                                     </select>
@@ -1048,7 +1065,16 @@
 
 <script type="text/javascript">
     function showDiv(divId, element) {
-        document.getElementById(divId).style.display = element.value == 'Business' ? 'flex' : 'none';
+        document.getElementById(divId).style.display = element.value == 'Business Permit' ? 'flex' : 'none';
+    }
+    function showDiv(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'Business Clearance Capital - Php10,000 Below' ? 'flex' : 'none';
+    }
+    function showDiv(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'Business Clearance Capital - Php10,001 - Php100-000' ? 'flex' : 'none';
+    }
+    function showDiv(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'Business Clearance Capital - Php100,001 - Above' ? 'flex' : 'none';
     }
     function showOthers(divId, element) {
         document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';
@@ -1060,3 +1086,27 @@
 </body>
 </html>
 	  <?php } #admin-cert?>
+      <script>
+$(document).ready(function(){
+ $('.action').change(function(){
+  if($(this).val() != '')
+  {
+   var action = $(this).attr("id");
+   var query = $(this).val();
+   var result = '';
+   if(action == "ctype")
+   {
+    result = 'cprice';
+   }
+   $.ajax({
+    url:"fetchdata.php",
+    method:"POST",
+    data:{action:action, query:query},
+    success:function(data){
+     $('#'+result).html(data);
+    }
+   })
+  }
+ });
+});
+</script>

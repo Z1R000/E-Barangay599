@@ -179,7 +179,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                     Address
                                                                 </th>
                                                                 <td style = "padding-top: 5px; padding-bottom:5px;text-align:right">
-                                                                    <?php echo htmlentities("#".$row->houseUnit." Purok ".$row->Purok." ".$row->streetName." Street");?>
+                                                                    <?php echo htmlentities("#".$row->houseUnit." Purok ".$row->Purok." ".$row->streetName." St.");?>
                                                                 </td>
                                                         </tr>
                                                         <tr>
