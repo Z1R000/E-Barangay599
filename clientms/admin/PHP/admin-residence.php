@@ -265,7 +265,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             
                                             ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
                                             <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> </td>
+                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                     <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
@@ -411,7 +411,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             
                                             ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
                                             <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> </td>
+                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                     <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
@@ -594,7 +594,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             
                                             ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
                                             <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> </td>
+                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                     <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
@@ -770,7 +770,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             
                                             ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
                                             <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> </td>
+                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                     <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
@@ -946,7 +946,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             
                                             ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
                                             <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> </td>
+                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                     <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
@@ -1122,7 +1122,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             
                                             ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
                                             <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> </td>
+                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                     <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
@@ -1300,7 +1300,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             
                                             ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
                                             <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> </td>
+                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                     <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
@@ -1477,7 +1477,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             
                                             ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
                                             <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> </td>
+                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                     <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
@@ -1655,7 +1655,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             
                                             ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
                                             <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> </td>
+                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                     <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
@@ -1832,7 +1832,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             
                                             ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
                                             <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> </td>
+                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                     <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
@@ -2009,7 +2009,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             
                                             ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
                                             <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> </td>
+                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                     <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
@@ -2186,7 +2186,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             
                                             ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
                                             <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> </td>
+                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                     <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>

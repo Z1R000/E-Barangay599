@@ -2,6 +2,12 @@
     $curr ="Resident Registration";
     session_start();
     error_reporting(0);
+    $con = mysqli_connect("localhost","root","","clientmsdb");
+if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  
+  }
     include('includes/dbconnection.php');
     if (strlen($_SESSION['clientmsaid']==0)) {
         header('location:logout.php');
@@ -354,23 +360,21 @@
                                         
                                                 <div class="col-xl-5 col-sm-12 my-2 ">
                                                     <div class="input-group">
-                                                        <label for="" class="mx-2 fs-5 small">Number&nbsp;</label>
-                                                        <select class="form-select" name = "prk" id = "prk" aria-label="Default select example" style ="width: 60%;" >
-                                                        <option value=''selected disabled>--Purok Number--</option>
-                                                        <?php 
-                                                            $sqlp="select * from tbllistpurok";
-                                                            $queryp = $dbh -> prepare($sqlp);
-                                                            $queryp->execute();
-                                                            $resultp=$queryp->fetchAll(PDO::FETCH_OBJ);
-                                                            if($queryp->rowCount() > 0)
-                                                            {
-                                                                foreach($resultp as $rowp)
-                                                                {  
-                                                                    echo "<option value='$rowp->pName'>$rowp->pName</option>";
-                                                                }
-                                                            }
+                                                        <label for="" class="mx-2 fs-5 small">Purok&nbsp;</label>
                                                         
+                                                        <?php
+                                                            // $con = mysqli_connect("localhost", "admin", "admin", "countrydb");
+                                                            $pName = '';
+                                                            $query = "SELECT pName FROM tbllistpurok";
+                                                            $result = mysqli_query($con, $query);
+                                                            while($row = mysqli_fetch_array($result))
+                                                            {
+                                                            $pName .= '<option value="'.$row["pName"].'">'.$row["pName"].'</option>';
+                                                            }
                                                         ?>
+                                                    <select class="form-control action" name = "prk" id = "prk" aria-label="Default select example" style ="width: 60%;" >
+                                                        <option value=''selected disabled>--Purok--</option>
+                                                        <?php echo $pName; ?>
                                                     </select> 
                                                         
                                                     </div>
@@ -378,7 +382,9 @@
                                                 <div class="col-xl-4 col-sm-12 my-2 ">
                                                     <div class="input-group">
                                                         <label for="" class="mx-2 fs-5 small">Street</label>
-                                                        <input id = "strt" type="text" name="strt" class="form-control">
+                                                        <select name="strt" id="strt" class="form-control action">
+                                                        <option value=''selected disabled>--Street--</option>
+                                                        </select>
                                                     </div>
                                                 </div>                                       
                                             </div>
@@ -514,10 +520,33 @@
         document.getElementById(divId).style.display = element.value == 'Yes' ? 'inline' : 'none';
     }
 </script>
-
-        
+       
                   
 </body>
 </html>
 <?php }  ?>
 <!--up-->
+<script>
+$(document).ready(function(){
+ $('.action').change(function(){
+  if($(this).val() != '')
+  {
+   var action = $(this).attr("id");
+   var query = $(this).val();
+   var result = '';
+   if(action == "prk")
+   {
+    result = 'strt';
+   }
+   $.ajax({
+    url:"fetchdata.php",
+    method:"POST",
+    data:{action:action, query:query},
+    success:function(data){
+     $('#'+result).html(data);
+    }
+   })
+  }
+ });
+});
+</script>
