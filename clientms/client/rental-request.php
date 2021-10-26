@@ -178,9 +178,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <!--User-->
-                    <?php include_once('includes/usertoggle.php'); ?>
-                    <!--User-->
+                    
                 </nav>
                 <div class="sub-heard-part">
                     <ol class="breadcrumb m-b-0" style="text-indent: 15px; margin-left: 2.5%;">
@@ -254,7 +252,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                             <a href="dashboard.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
                                         </div>
                                         <div class="col-xl-3 ">
-                                            <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
+                                            <input type="submit" class="form-control btn btn-outline-success" name="submit" id="submit"></input>
                                         </div>
                                     </div>
                                 </div>

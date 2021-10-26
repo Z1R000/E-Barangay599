@@ -250,6 +250,9 @@ echo "<script>alert('Invalid Details');</script>";
 </style>
 </head>
 <body>
+<?php
+	include('residentnavbar.php');
+	?>
 <div align = center>
 	<div class ="container">
 		<div class = "container-sm" align = center>
