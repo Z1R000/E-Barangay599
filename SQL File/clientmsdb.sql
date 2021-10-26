@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2021 at 09:19 PM
+-- Generation Time: Oct 26, 2021 at 09:22 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -159,9 +159,9 @@ INSERT INTO `tblcertificate` (`ID`, `Type`, `CertificateName`, `CertificatePrice
 (3, 1, 'Barangay Permit', '150', '2021-04-21 13:45:50'),
 (4, 1, 'Proof of Residency', '120', '2021-04-21 13:45:50'),
 (5, 2, 'Business Permit', '180', '2021-04-21 13:45:50'),
-(6, 2, 'Business Clearance Php10,000below', '100', '2021-04-21 13:45:50'),
-(7, 2, 'Business Clearance Php10,001-Php100-000', '500', '2021-04-21 14:25:51'),
-(8, 2, 'Business Clearance Php100,001-Above', '1000', '2021-04-21 14:25:51'),
+(6, 2, 'Business Clearance Capital - Php10,000 Below', '100', '2021-04-21 13:45:50'),
+(7, 2, 'Business Clearance Capital - Php10,001 - Php100-000', '500', '2021-04-21 14:25:51'),
+(8, 2, 'Business Clearance Capital - Php100,001 - Above', '1000', '2021-04-21 14:25:51'),
 (9, 1, 'Certificate of Good Moral', '90', '2021-04-21 14:25:51'),
 (10, 1, 'Lipat-bahay Clearance', '105', '2021-04-21 14:25:51'),
 (11, 1, 'Certificate of Acceptance', '56', '2021-04-21 14:25:51'),
@@ -389,18 +389,18 @@ CREATE TABLE `tblresident` (
 --
 
 INSERT INTO `tblresident` (`ID`, `Purok`, `houseUnit`, `streetName`, `Cellphnumber`, `Email`, `Password`, `CreationDate`, `voter`, `vPrecinct`, `ResidentType`, `LastName`, `Suffix`, `FirstName`, `MiddleName`, `BirthPlace`, `Gender`, `sssNumber`, `tinNumber`, `CivilStatus`, `BirthDate`, `HomeName`) VALUES
-(1, 1, 534, 'Pitong Gatang', 2147483647, 'ledes@gmail.com', '123', '2021-04-12 19:36:11', 'Yes', '123', 'Rental/Boarder', 'Ledesma', '', 'Marithess', 'Cortez', 'Manila', 'Male', 123123123, 1231321, 'Single', '2012-04-05 00:00:00', ''),
-(2, 2, 213, 'Pacheco', 2147483647, 'kim@gmail.com', '123', '2021-04-12 19:36:11', 'No', '', 'House Owner', 'Dela Cruz', 'Jr.', 'Kim', 'Renzo', 'Manila', 'Female', 312123321, 3123123, 'Married', '2012-04-18 00:00:00', ''),
-(3, 3, 323, 'Peralta', 19823719, 'verg@gmail.com', '123', '2021-04-12 20:14:26', 'No', '', 'Care Taker', 'Viray', '', 'Vergel', 'Sallan', 'Manila', 'Male', 123123123, 3212312, 'Single', '2015-04-01 00:00:00', ''),
-(4, 4, 543, 'Panday Pira', 21315123, 'sallan@gmail.com', '123', '2021-04-20 07:49:54', 'Yes', '123', 'Living with Relatives', 'Sallan', '', 'Arnold', 'Clavio', 'Manila', 'Female', 12512312, 12315123, 'Married', '2011-04-01 00:00:00', ''),
-(5, 5, 124, 'Perpekto', 123123, 'nathan@gmail.com', '123', '2021-04-20 08:22:54', 'Yes', '123', 'Rental/Boarder', 'Morales', '', 'Nathan', 'Pacquiao', 'Manila', 'Male', 123123, 12315123, 'Married', '2008-02-20 00:00:00', ''),
-(6, 6, 622, 'Batasan', 6123124, 'villanueva@gmail.com', '1233', '2021-05-07 08:40:27', 'No', '', 'Care Taker', 'Villanueva', '', 'John Carlo', 'Wanto', 'Mindanao', 'Male', 25723523, 16245, 'Married', '2013-02-07 00:00:00', ''),
-(7, 7, 722, 'Maligaya', 1436245, 'uy@gmail.com', '123', '2021-05-07 08:42:16', 'No', '', 'Living with Relatives', 'Uy', '', 'Wilvin', 'Voltaire', 'Visayas', 'Female', 45145451, 61451451, 'Married', '2013-01-07 00:00:00', ''),
-(8, 8, 888, 'Mandaluyong', 1245145124, 'celestial@gmail.com', '123', '2021-05-07 08:49:54', 'Yes', '8971248', 'Care Taker', 'Celestial', '', 'Jayvee', 'Dragon', 'Tondo', 'Male', 1451451345, 14561456, 'Separated', '2012-06-07 00:00:00', ''),
-(9, 9, 999, 'Varona', 134561, 'velasco@gmail.com', '123', '2021-05-07 08:51:28', 'Yes', '2147483647', 'House Owner', 'Velasco', '', 'Sheena', 'Marie', 'Manila', 'Female', 1641461346, 1435614, 'Married', '2011-01-07 00:00:00', ''),
-(10, 10, 100, 'Batangas', 1645612345, 'ligs@gmail.com', '123', '2021-05-07 08:52:28', 'Yes', '514512345', 'Living with Relatives', 'Ligutom', '', 'Zyra', 'Ligs', 'Manila', 'Female', 1451345134, 1451243513, 'Widow', '2014-01-07 00:00:00', ''),
-(11, 10, 891, 'Sobremonte', 1243521345, 'demesa@gmail.com', '123', '2021-05-08 02:28:15', 'Yes', '21452435', 'House Owner', 'Demesa', '', 'Adrian', 'Villanueva', 'Macaraeg', 'Female', 1254125412, 12341234, 'Married', '2016-05-08 00:00:00', ''),
-(12, 2, 522, 's1', 121514, 'ronald@gmail.com', '123', '2021-10-13 16:57:10', 'Yes', '50-A', 'House Owner', 'Celestial', '', 'Ronald', 'Clavio', NULL, 'Male', 1451345134, 1451345, 'Single', '1954-02-10 00:00:00', '');
+(1, 1, 534, 'Old Sta. Mesa', 2147483647, 'ledes@gmail.com', '123', '2021-04-12 19:36:11', 'Yes', '123', 'Rental/Boarder', 'Ledesma', '', 'Marithess', 'Cortez', 'Manila', 'Male', 123123123, 1231321, 'Single', '2012-04-05 00:00:00', ''),
+(2, 2, 213, 'Peralta 2', 2147483647, 'kim@gmail.com', '123', '2021-04-12 19:36:11', 'No', '', 'House Owner', 'Dela Cruz', 'Jr.', 'Kim', 'Renzo', 'Manila', 'Female', 312123321, 3123123, 'Married', '2012-04-18 00:00:00', ''),
+(3, 3, 323, 'Narra', 19823719, 'verg@gmail.com', '123', '2021-04-12 20:14:26', 'No', '', 'Care Taker', 'Viray', '', 'Vergel', 'Sallan', 'Manila', 'Male', 123123123, 3212312, 'Single', '2015-04-01 00:00:00', ''),
+(4, 4, 543, 'Mangga', 21315123, 'sallan@gmail.com', '123', '2021-04-20 07:49:54', 'Yes', '123', 'Living with Relatives', 'Sallan', '', 'Arnold', 'Clavio', 'Manila', 'Female', 12512312, 12315123, 'Married', '2011-04-01 00:00:00', ''),
+(5, 5, 124, 'Sarmiento', 123123, 'nathan@gmail.com', '123', '2021-04-20 08:22:54', 'Yes', '123', 'Rental/Boarder', 'Morales', '', 'Nathan', 'Pacquiao', 'Manila', 'Male', 123123, 12315123, 'Married', '2008-02-20 00:00:00', ''),
+(6, 6, 622, 'Peralta Int.', 6123124, 'villanueva@gmail.com', '1233', '2021-05-07 08:40:27', 'No', '', 'Care Taker', 'Villanueva', '', 'John Carlo', 'Wanto', 'Mindanao', 'Male', 25723523, 16245, 'Married', '2013-02-07 00:00:00', ''),
+(7, 7, 722, 'Mangga Ext.', 1436245, 'uy@gmail.com', '123', '2021-05-07 08:42:16', 'No', '', 'Living with Relatives', 'Uy', '', 'Wilvin', 'Voltaire', 'Visayas', 'Female', 45145451, 61451451, 'Married', '2013-01-07 00:00:00', ''),
+(8, 8, 888, 'Dita', 1245145124, 'celestial@gmail.com', '123', '2021-05-07 08:49:54', 'Yes', '8971248', 'Care Taker', 'Celestial', '', 'Jayvee', 'Dragon', 'Tondo', 'Male', 1451451345, 14561456, 'Separated', '2012-06-07 00:00:00', ''),
+(9, 9, 999, 'Narra', 134561, 'velasco@gmail.com', '123', '2021-05-07 08:51:28', 'Yes', '2147483647', 'House Owner', 'Velasco', '', 'Sheena', 'Marie', 'Manila', 'Female', 1641461346, 1435614, 'Married', '2011-01-07 00:00:00', ''),
+(10, 10, 100, 'Sampaloc', 1645612345, 'ligs@gmail.com', '123', '2021-05-07 08:52:28', 'Yes', '514512345', 'Living with Relatives', 'Ligutom', '', 'Zyra', 'Ligs', 'Manila', 'Female', 1451345134, 1451243513, 'Widow', '2014-01-07 00:00:00', ''),
+(11, 10, 891, 'Narra', 1243521345, 'demesa@gmail.com', '123', '2021-05-08 02:28:15', 'Yes', '21452435', 'House Owner', 'Demesa', '', 'Adrian', 'Villanueva', 'Macaraeg', 'Female', 1254125412, 12341234, 'Married', '2016-05-08 00:00:00', ''),
+(12, 2, 522, 'Peralta 3', 121514, 'ronald@gmail.com', '123', '2021-10-13 16:57:10', 'Yes', '50-A', 'House Owner', 'Celestial', '', 'Ronald', 'Clavio', NULL, 'Male', 1451345134, 1451345, 'Single', '1954-02-10 00:00:00', '');
 
 -- --------------------------------------------------------
 
