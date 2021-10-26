@@ -207,7 +207,7 @@
                                                         <td scope='col' style = 'text-align: center'>
                                                             
                                                                 <div class='btn-group me-1 mb-1' role='group' aria-label='First group'>
-                                                                    <a type='' href ='edit-cert.php=viewid=<?php echo $row->ID;?>' class='btn btn-success'><i class = 'fa fa-edit me-2'></i>Edit</a>
+                                                                    <a type='' href ='edit-Cert.php?editid=$rowclist->ID' class='btn btn-success'><i class = 'fa fa-edit me-2'></i>Edit</a>
                                                                 </div>
                                                                    
                                                                
