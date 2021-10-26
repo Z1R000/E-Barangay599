@@ -129,9 +129,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!--User-->
-				<?php include_once('includes/usertoggle.php');?>
-                <!--User-->
+                
             </nav>
             <div class="sub-heard-part">
                 <ol class="breadcrumb m-b-0"style="text-indent: 15px; margin-left: 2.5%;">
