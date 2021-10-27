@@ -118,9 +118,9 @@
                         <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text  nav-link fs-6">
                             <i class="fas fa-book my-0 me-2"></i>Request</a>
                         <ul class="submenu collapse">
-                            <li><a class="nav-link fs-6" href="admin-cert-request.php">Certification Request </a></li>
-                            <li><a class="nav-link fs-6" href="admin-rental-request.php">Rental Request</a></li>
-                            <li><a class="nav-link fs-6" href="admin-other-request.php">Other Service Request </a></li>
+                            <li><a class="nav-link fs-6" href="admin-cert-request.php">Certification</a></li>
+                            <li><a class="nav-link fs-6" href="admin-rental-request.php">Rental</a></li>
+                            <li><a class="nav-link fs-6" href="admin-other-request.php">Other Service</a></li>
                         </ul>
                     </li>
                     

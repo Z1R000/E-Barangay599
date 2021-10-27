@@ -188,7 +188,6 @@
 
                                                 <th style = "text-align: left">Requestor Name</th>
                                                 <th style = "text-align: left">Requested Certificate</th>
-                                                <th style = "text-align: left">Certification Fee</th>
                                                 <th style = "text-align: left">Purpose </th>
                                                 <th style = "text-align: left">Business Name </th>
                                                 <th style = "text-align: left">Date </th>
@@ -204,10 +203,6 @@
                   
                                                 <td scope="col" style = "text-align: left"><a href = "#">Mang Berting</a></td>
                                                 <td scope="col" style = "text-align: left">Indigency</td>
-                                         
-                            
-                                                
-                                                <td scope="col" style = "text-align: left">0.00</td>
                                                 <td scope="col" style = "text-align: left">Employment</td>
                                                 <td scope="col" style = "text-align: left">N/a</td>
                                                 <td scope="col" style = "text-align: left">10-19-2021</td>
@@ -231,7 +226,7 @@
                                          
                             
                                                 
-                                                <td scope="col" style = "text-align: left">0.00</td>
+                                           
                                                 <td scope="col" style = "text-align: left">Business</td>
                                                 <td scope="col" style = "text-align: left">Sari sari store ni berto</td>
                                                 <td scope="col" style = "text-align: left">10-19-2021</td>
@@ -253,6 +248,18 @@
                                 </div>   
                             </div>
                         </div>
+                    </div>
+                    <div class="row py-2">
+
+                        <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                        </nav>
                     </div>
                 </div>
             </div> 

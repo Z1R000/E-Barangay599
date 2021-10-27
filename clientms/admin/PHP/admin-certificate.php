@@ -50,10 +50,14 @@
         .btng{
             width: 50px;
         }
+      
 
         @media (max-width: 576px){
             .row{
                 overflow-x: auto;
+            }
+            .wal{
+                display:none;
             }
             .dis{
                 font-size: 15px;
@@ -119,9 +123,8 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#service-choice" data-bs-toggle= "modal" role ="button"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#service-choice" data-bs-toggle= "modal" role ="button"><i class="fa fa-hand-paper"></i>&nbsp;Services</a></li>
                                 
-                            
                                 <li class="breadcrumb-item active"><a href="#"><i class="fa fa-list text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
                             </ol>
                         </nav>
@@ -220,6 +223,17 @@
                                         </div>   
                                     </div>
                                 </div>
+                                <div class="row py-2">
+                                <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                                </nav>
+                                </div>
                             </form>
                         </div>
                         <div class="tab-pane active" id="crecords">
@@ -276,17 +290,17 @@
                                                   
                                                     <td scope="col" style = "text-align: center">
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                <a type="" href ="edit-cert-record.php"class="btn btn-primary"><i class = "fa fa-edit me-2"></i>Edit</a>
+                                                                <a type="" href ="edit-cert-record.php"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
                                                             </div>
                                                         
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print me-2"></i>Print</a>
+                                                                <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
                                                             </div>
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane me-2 white"></i>Send</a>
+                                                                    <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane mx-1 white"></i><span class="wal">Send</span></a>
                                                                 </div> 
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash me-1"></i>Delete</a>
+                                                                <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
                                                             </div>
                                                     </td>
                                                 </tr>
@@ -294,6 +308,18 @@
                                         </table>                        
                                     </div>   
                                 </div>
+                                
+                            </div>
+                            <div class="row py-2">
+                                                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                        </nav>
                             </div>
                         </div>
                         <div class="tab-pane" id="holding">
@@ -337,17 +363,17 @@
                                                 <td>
                                                    G-cash
                                                 </td>
-                                                <td>
+                                                <td class= "text-center">
                                                     <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                        <a type="" style= "padding: 5px;"href ="#"class="btn btn-primary"><i class = "fa fa-eye me-1"></i>Payment</a>
+                                                        <a type="" style= "padding: 1px; width:100px;"href ="#"class="btn btn-primary"><i class = "fa fa-eye me-1"></i><span class= "wal">Payment</span></a>
                                                     </div>
                                                 </td>
                                                 <td  scope="col" style = "text-align: center">
                                                         <div class="btn-group me-1 mb-1  " role="group" aria-label="First group">
-                                                            <a href ="#approve-proof "class="btn btn-success mx-3" data-bs-toggle=  "modal" style = "width: 100px;"><i class = "fa fa-check me-1 "></i>Accept</a>
+                                                            <a href ="#approve-proof "class="btn btn-success mx-3" data-bs-toggle=  "modal" style = "width: 100px;"><i class = "fa fa-check mx-1 "></i><span class= "wal">Accept</span></a>
                                                         </div>
                                                         <div class="btn-group me-1 mb-1  " role="group" aria-label="First group">
-                                                            <a href ="#decline-proof "class="btn btn-danger mx-3" data-bs-toggle=  "modal" style= "width: 100px;"><i class = "fa fa-times fa-1x me-2 "></i>Decline</a>
+                                                            <a href ="#decline-proof "class="btn btn-danger mx-3" data-bs-toggle=  "modal" style= "width: 100px;"><i class = "fa fa-times fa-1x mx-1 "></i><span class= "wal"> Decline</span></a>
                                                         </div>
                                                 </td>
                                             </tr>

@@ -53,6 +53,8 @@
         }
         .hov{
             cursor: pointer;
+            height: 300px;
+            margin-bottom: 50px;
         }
         .hov:hover a{
             background:#173b67;
@@ -74,13 +76,11 @@
         }
 
         @media (max-width: 576px){
+            
             .btnx{
               margin-bottom: 10px;
             }
-          
-            .row {
-                overflow-x: auto;
-            }
+         
             .dis{
                 font-size: 15px;
             }
@@ -136,9 +136,9 @@
             </div>
         </div>
     </nav>
-    <div class="container-fluid  px-5">
-        <div class="row g-0 pt-2 px-5 mb-5 justify-content-center">
-            <div class="col-xl-4 hov px-3">
+    <div class="container-fluid  px-4">
+        <div class="row g-2 pt-2 px-5 mb-5 justify-content-center">
+            <div class="col-xl-4 hov px-3" >
                 <div class="row g-0 shadow-lg  py-1 px-2 border-bottom bg-dark text-white rounded-top fs-5">
                     Barangay's Information
                 </div>
@@ -155,13 +155,13 @@
 
                 </div>
             </div>
-            <div class="col-xl-4 hov px-3">
+            <div class="col-xl-4 col-lg-4 hov px-3">
                     <div class="row g-0 py-1 px-2 border-bottom bg-primary text-white rounded-top fs-5">
                         E-barangay Media
                     </div>
                     <div class="row g-0 bg-white shadow-lg ">
                         <div class="col-xl-6 p-3">
-                            <p class= "fs-5" style= "text-align: justify;">Images of E-barangay System such as the logos of the Barangay and its city.</p>
+                            <p class= "fs-5" style= "text-align: justify;">Images of E-barangay System such as the logos of the Barangay and where the it resides.</p>
                         </div>
                         <div class="col-xl-6 text-center py-4">
                             <i class="fa fa-images text-primary fa-5x"></i>
@@ -178,7 +178,7 @@
                     </div>
                     <div class="row g-0 bg-white shadow-lg ">
                         <div class="col-xl-6 p-3">
-                            <p class= "fs-5" style= "text-align: justify;">Manage the list of streets within the puroks of the barangay. Incase it is called for.</p>
+                            <p class= "fs-5" style= "text-align: justify;">Manage the list of streets within the puroks of the barangay. Incase it is needed by the barangay.</p>
                         </div>
                         <div class="col-xl-6 text-center py-4">
                             <i class="fa fa-map text-success fa-5x"></i>

@@ -42,23 +42,23 @@
                                                         <td scope="col" style = "text-align: left">DSWD</td>
                                                         <td scope="col" style = "text-align: left">10/16/2021,21:12:08</td>
                                                         <td scope="col" style = "text-align: right">2 hours</td>
-                                                        <td style = "text-align: right;">₱ 10,040.00 </td>
+                                                        <td style = "text-align: right;">₱10,040.00 </td>
                                                         <td scope="col" style = "text-align: right">Cash</td>
                                                        
 
                                                         <td scope="col" style = "text-align: center">
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <button  type="button" href ="#check-rental" data-bs-toggle="modal" role="button" class="btn  btn-primary"><i class = "fa fa-eye me-2"></i>View</button>
+                                                                    <button  type="button" href ="#check-rental" data-bs-toggle="modal" role="button" class="btn  btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></button>
                                                                 </div>
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a href ="#edit-rental    " data-bs-toggle ="modal" role ="button" class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
+                                                                    <a href ="#edit-rental    " data-bs-toggle ="modal" role ="button" class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
                                                                 </div>
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a type="button" href ="#delete-rental" data-bs-toggle = "modal" role = "button" class="btn  btn-danger"><i class = "fa fa-trash me-2"></i>Delete</a>
+                                                                    <a type="button" href ="#delete-rental" data-bs-toggle = "modal" role = "button" class="btn  btn-danger"><i class = "fa fa-trash mx-1"></i><span class = "wal">Delete</span></a>
                                                                 </div>   
                                                                 
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info text-white"><i class = "fa fa-paper-plane me-2 white"></i>Send</a>
+                                                                    <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info text-white"><i class = "fa fa-paper-plane mx-1 white"></i><span class= "wal">Send</span></a>
                                                                 </div>  
                                                         </td>
                                                     </tr>
@@ -68,6 +68,18 @@
                                             </table>                        
                                         </div>   
                                     </div>
+                                </div>
+                                <div class="row py-2">
+
+                                <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                                </nav>
                                 </div>
 
 

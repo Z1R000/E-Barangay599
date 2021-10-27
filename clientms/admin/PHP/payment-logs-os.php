@@ -38,15 +38,15 @@
                                                     </td>
                                                     <td>
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="" href ="#"class="btn btn-primary" style= "padding:5px;"><i class = "fa fa-eye me-1"></i>Payment</a>
+                                                            <a type="" href ="#"class="btn btn-primary" style= "padding:2px;width:100px;"><i class = "fa fa-eye mx-1" ></i><span class= "wal">Payment</span></a>
                                                         </div>
                                                     </td>
                                                     <td  scope="col" style = "text-align: center;">
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                <a href ="#approve-proof"class="btn btn-success" data-bs-toggle=  "modal" style= "width:100px;"><i class = "fa fa-eye me-1"></i>Accept</a>
+                                                                <a href ="#approve-proof"class="btn btn-success" data-bs-toggle=  "modal" style= "width:100px;"><i class = "fa fa-eye mx-1"></i><span class= "wal">Accept</a>
                                                             </div>
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                <a type="button" href ="#decline-proof" data-bs-toggle = "modal" role = "button" class="btn  btn-danger" style= "width:100px;"><i class = "fa fa-times-circle me-1" ></i>Decline</a>
+                                                                <a type="button" href ="#decline-proof" data-bs-toggle = "modal" role = "button" class="btn  btn-danger" style= "width:100px;"><i class = "fa fa-times-circle mx-1" ></i><span class= "wal">Decline</span></a>
                                                             </div>
 
                                                     </td>

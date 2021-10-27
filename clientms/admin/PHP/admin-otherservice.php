@@ -17,7 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
     <link rel = "stylesheet" href="../css/sidebar.css" />
-    <link rel="stylesheet" href="../CSS/scrollbar.css">
+    <link rel="stylesheet" href="../CSS/scroll.css">
 
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
@@ -26,7 +26,7 @@
           table,td,tr,th{
            border: 1px solid darkgrey;
             text-align: left;
-            font-size: 1em;
+            font-size: 0.95em;
             padding: 100px;
             font-family: 'Noto Sans Display', sans-serif;
             
@@ -48,6 +48,9 @@
             }
             .ser{
                 width: 100%;
+            }
+            .wal{
+                display:none;
             }
            
         }
@@ -87,7 +90,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#service-choice" data-bs-toggle= "modal" role ="button"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#service-choice" data-bs-toggle= "modal" role ="button"><i class="fa fa-hand-paper"></i>&nbsp;Services</a></li>
                                 <li class="breadcrumb-item active"><a href="#"><i class="fa fa-list text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
                             </ol>
                         </nav>
@@ -106,9 +109,9 @@
                             <div class="col-xl-5 py-2 px-2">
                                 <nav class="nav nav-pills flex-column  flex-sm-row">
                                   
-                                    <a class="flex-sm-fill text-sm-center nav-link  fs-5 active white" data-bs-toggle = "tab" href="#srecords">Service Records</a>
-                                    <a class="flex-sm-fill text-sm-center nav-link  fs-5   white" data-bs-toggle = "tab" href="#paymentsrecs">Payment Logs</a>
-                                    <a class="flex-sm-fill  text-sm-center nav-link fs-5 white"  href="#ser" data-bs-toggle = "tab">Offered Services </a>
+                                    <a class="flex-sm-fill text-sm-center nav-link  fs-6 active white" data-bs-toggle = "tab" href="#srecords">Service Records</a>
+                                    <a class="flex-sm-fill text-sm-center nav-link  fs-6   white" data-bs-toggle = "tab" href="#paymentsrecs">Payment Logs</a>
+                                    <a class="flex-sm-fill  text-sm-center nav-link fs-6 white"  href="#ser" data-bs-toggle = "tab">Offered Services </a>
                              
                                 </nav>
                             </div>
@@ -155,13 +158,13 @@
                                                             <td scope="col" style = "text-align: left">Available</td>
                                                             <td scope="col" style = "text-align: center">
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                        <button  type="button" href ="#check-service" data-bs-toggle="modal" role="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</button>
+                                                                        <button  type="button" href ="#check-service" data-bs-toggle="modal" role="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class = "wal">View</span></button>
                                                                     </div>
                                                                     <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                        <a href ="#edit-service" data-bs-toggle ="modal" role ="button" class="btn  btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
+                                                                        <a href ="#edit-service" data-bs-toggle ="modal" role ="button" class="btn  btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
                                                                     </div>
                                                                     <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                        <a type="button" href ="#delete-service" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-tras me-2"></i>Delete</a>
+                                                                        <a type="button" href ="#delete-service" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class = "wal">Delete</span></a>
                                                                     </div>
                                                             </td>
                                                         </tr>
@@ -169,7 +172,21 @@
                                                 </table>                        
                                             </div>   
                                         </div>
+                                        
                                     </div>
+                                    <div class="row py-2">
+
+<nav aria-label="Page navigation example">
+<ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+</ul>
+</nav>
+</div>
+
                                 </div>
                                 <div class="tab-pane active" id="srecords">
                                     <?php include('admin-osrecords.php');?>
