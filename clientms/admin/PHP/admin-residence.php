@@ -163,6 +163,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 									  }  ?> </p>
                                         <div class="input-group">
                                              <input id="searchdata" type = "text" class= "form-control" name="searchdata"placeholder = "Search here">
+                                             <div class="list-group" id="show-list" style="position: absolute;">
+                                            <!-- Here autocomplete list will be display -->
+                                            </div>  
                                              <button type ="submit" class = "btn btn-outline-info" name="search"><i class = "fa fa-search"></i></button>
                                              <div class="btn-group px-1" role="group">
                                 <a href = "admin-residence.php"  class="btn btn-outline-primary"><i class = "fa fa-window-close"></i>&nbsp;Clear</a>&nbsp;&nbsp;
@@ -172,7 +175,33 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                        
                                         
                                 </form>
-                                
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+      $(document).ready(function () {
+  // Send Search Text to the server
+  $("#searchdata").keyup(function () {
+    let searchText = $(this).val();
+    if (searchText != "") {
+      $.ajax({
+        url: "searchname.php",
+        method: "post",
+        data: {
+          query: searchText,
+        },
+        success: function (response) {
+          $("#show-list").html(response);
+        },
+      });
+    } else {
+      $("#show-list").html("");
+    }
+  });
+  $(document).on("click", "#clicks", function () {
+    $("#searchdata").val($(this).text());
+    $("#show-list").html("");
+  });
+});
+  </script>    
 
                             </div>
                             <div class="col-md-2">
@@ -225,7 +254,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                 $next_page = $page_no + 1;
                                                 $adjacents = "2";
                                                 
-                                                $count = "SELECT * FROM tblresident where tblresident.LastName like '%$sdata%'";
+                                                $count = "SELECT * FROM tblresident where tblresident.LastName like '%$sdata%' or tblresident.Suffix like '%$sdata%' or tblresident.FirstName like '%$sdata%' or tblresident.MiddleName like '%$sdata%'";
                                                 $queryc = $dbh -> prepare($count);
                                                 $queryc->execute();
                                                 $resultc=$queryc->fetchAll(PDO::FETCH_OBJ);
@@ -234,7 +263,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                 $second_last = $total_no_of_pages - 1;
                                                 
                                                 
-                                                $sql="SELECT * from tblresident where tblresident.LastName like '%$sdata%' LIMIT $offset, $total_records_per_page";
+                                                $sql="SELECT * from tblresident where tblresident.LastName like '%$sdata%' or tblresident.Suffix like '%$sdata%' or tblresident.FirstName like '%$sdata%' or tblresident.MiddleName like '%$sdata%' LIMIT $offset, $total_records_per_page";
                                                 $query = $dbh -> prepare($sql);
                                                 $query->execute();
                                                 $results=$query->fetchAll(PDO::FETCH_OBJ);

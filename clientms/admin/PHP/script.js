@@ -17,4 +17,8 @@ $(document).ready(function () {
       $("#show-list").html("");
     }
   });
+  $(document).on("click", "#clicks", function () {
+    $("#search").val($(this).text());
+    $("#show-list").html("");
+  });
 });

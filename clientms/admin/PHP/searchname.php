@@ -11,11 +11,13 @@ require_once('includes/dbconnection.php');
 
     if ($resultcc) {
       foreach ($resultcc as $rowcc) {
-        echo "<a href='#' class='list-group-item list-group-item-action border-1'>";
+        echo "<a href='#' id='clicks' class='list-group-item list-group-item-action border-1'>";
+        echo $rowcc['LastName'] . ' ';
+        echo $rowcc['Suffix'] . ' ';
 		echo $rowcc['FirstName'] . ' ';
-		echo $rowcc['MiddleName'] . ' ';
-		echo $rowcc['LastName'] . ' ';
-		echo $rowcc['Suffix'];
+		echo $rowcc['MiddleName'];
+		
+
 		echo "</a>";
 		
       }
