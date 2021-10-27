@@ -158,10 +158,10 @@
                     <div class="row g-0 rounded-top"  style= "background-color:#021f4e">
                         <div class="fs-5 px-3 py-1"> <i class="fa fa-id-card-alt fa-1x me-1">
                                         </i>
-                            Resident <?php echo $row->ID; ?>
+                                Resident <?php echo $row->ID; ?>
+                            </div>
                         </div>
-                    </div>
-                        <div class="row g-0  bg-white shadow-lg">
+                        <div class="row g-0  bg-white shadow-sm">
                             <div class="col-xl-12 py-2 border-end" align = "center">
                                 <button type = "button" onclick ="editname();"class="btn-primary btn">
                                     <i class="fa fa-edit me-2"></i>Edit Full Name
@@ -169,18 +169,18 @@
                                 <div class="row g-0"></div>
                                     <div class="text-center  py-2">
                                         <div class="input-group">
-                                            <input type="text" id ="lname" class="form-control display-6 " value = "<?php echo $row->LastName;?>"
+                                            <input type="text" id ="lname" class="form-control display-6 border-0" value = "<?php echo $row->LastName;?>"
                                             readonly
                                             style = "font-size: 2em;text-align:center;width: 10%">
-                                            <input type="text" id = "fname" class="form-control display-6 " value = "<?php echo $row->FirstName;?>"
+                                            <input type="text" id = "fname" class="form-control display-6  border-0" value = "<?php echo $row->FirstName;?>"
                                             readonly
                                             style = "font-size: 2em;text-align:center ;width: 11%">
 
-                                            <input type="text" id= "mname" class="form-control display-6 " value = "<?php echo $row->MiddleName;?>"
+                                            <input type="text" id= "mname" class="form-control display-6  border-0" value = "<?php echo $row->MiddleName;?>"
                                             readonly
                                             style = "font-size: 2em;text-align:center;width: 12%">
                                             
-                                            <input type="text" id= "suf" class="form-control display-6 " value = "<?php echo $row->suffix;?>"
+                                            <input type="text" id= "suf" class="form-control display-6  border-0" value = "<?php echo $row->suffix;?>"
                                             readonly
                                             style = "font-size: 2em;text-align:center;width: 4%" placeholder = "suffix">
                                         </div>

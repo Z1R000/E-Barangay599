@@ -38,7 +38,7 @@
           table,td,tr,th{
             border: 1px solid darkgrey;
             text-align: left;
-            font-size: 1em;
+            font-size: 14px;
             padding: 100px;
             font-family: 'Noto Sans Display', sans-serif;
             
@@ -141,10 +141,10 @@
                         <div class="col-xl-6 py-2 px-2  ">
                             <nav class="nav nav-pills flex-column  flex-sm-row">
                                
-                                <a class="flex-sm-fill text-sm-center nav-link fs-5 white active" href="#crecords" data-bs-toggle = "tab">Certification Records</a>
-                                <a class="flex-sm-fill text-sm-center nav-link fs-5 white" href="#holding" data-bs-toggle = "tab">Payment Logs</a>
-                                <a class="flex-sm-fill  text-sm-center nav-link  fs-5 white" aria-current="page" href="#certlist" data-bs-toggle = "tab">Certificates List</a>
-                            
+                                <a class="flex-sm-fill text-sm-center nav-link fs-6 white active" href="#crecords" data-bs-toggle = "tab">Certification Records</a>
+                                <a class="flex-sm-fill text-sm-center nav-link fs-6 white" href="#holding" data-bs-toggle = "tab">Payment Logs</a>
+                                <a class="flex-sm-fill  text-sm-center nav-link  fs-6 white" aria-current="page" href="#certlist" data-bs-toggle = "tab">Certificates List</a>
+    
                             </nav>
 
                         </div>
@@ -170,8 +170,6 @@
                                             <button class= "btn btn-outline-info mx-1 my-1" ;><i class= "fa fa-search"></i></button>
 
                                             </div>
-                                    
-                                        
                                         </div>
                                         
                                     </div>
@@ -184,11 +182,9 @@
                                                         <td scope = "col" colspan = 3 style ="background: #012f6e; color: white; text-align: center">Certificates List</td>
                                                     </tr>
                                                     <tr>
-                        
                                                         <th style = "text-align: left">Certification Name</th>
                                                         <th style = "text-align: left">Certification Fee</th>
                                                         <th style = "text-align: center">Action</th>
-                                            
                                                     </tr>
                                                 
                                                 </thead>           
@@ -631,14 +627,14 @@
                                             $cName .= '<option value="'.$row["CertificateName"].'">'.$row["CertificateName"].'</option>';
                                             }
                                         ?>
-                                    <select class= "form-control action" name="ctype" id="ctype" onchange= "showDiv('hidden_div',this)" required>
+                                    <select class= "form-control action" name="ctype" id="ctype" onchange= "showHid('hidden_div',this)" required>
                                         <option  selected disabled>--Available Certifications--</option>
                                         <?php echo $cName; ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <label for="rname"class="fs-6 fw-bold">Certification Fee</label>
+                                <label for="rname"class="fs-6 fw-bold"> Fee</label>
                                 <div class="d-flex">
                                     <div class="input-group">
                                         <button class="btn btn-secondary text-white" disabled>
@@ -653,7 +649,7 @@
                             <div class="col-md-6">
                                 <label for="ctype"class="fs-6 fw-bold">Mode of Payment</label>
                                 <div class="d-flex">
-                                    <select class= "select form-select" name="" id="mop" onchange= "showDiv('hidden_div',this)" required>
+                                    <select class= "select form-select" name="" id="mop"  required>
                                         <option  selected disabled>--Select--</option>
                                         <option value="gc">G-Cash</option>
                                         <option value="cash">Cash</option>
@@ -661,27 +657,25 @@
                                 </div>
                             </div>
                         </div>
-
-          
-               <div class="row" id = "hidden_div">
-                           
-                    <div class="col-md-6" >
-                        <label for="purp" class= "fs-6 fw-bold">Business name 
-                            <small class="text-muted">(If business related)</small> </label>
-                        <input type="text" class="form-control" id="rname" placeholder ="e.g Manong Store"> 
-                   </div>
-                   
-                   <div class="col-md-6" >
-                        <label for="cap" class= "fs-6 fw-bold" >Capital</label>
-                            <select class= "select form-select" name="" id="cap">
-                                <option  selected>< 10,000 </option>
-                                <option value="ent">>10, 000</option>
-                                <option value="med">>100,000</option>
-                            </select>
-                      
-                    </div>
-               </div>
-            
+                        <div class="row" id = "hidden_div" style= "display:none;">
+                                    
+                                <div class="col-md-6" >
+                                    <label for="purp" class= "fs-6 fw-bold">Business name 
+                                        <small class="text-muted">(If business related)</small> </label>
+                                    <input type="text" class="form-control" id="rname" placeholder ="e.g Manong Store"> 
+                            </div>
+                            
+                            <div class="col-md-6" >
+                                    <label for="cap" class= "fs-6 fw-bold" >Capital</label>
+                                        <select class= "select form-select" name="" id="cap">
+                                            <option  selected>< 10,000 </option>
+                                            <option value="ent">>10, 000</option>
+                                            <option value="med">>100,000</option>
+                                        </select>
+                                
+                                </div>
+                        </div>
+                        
                 
             </div>
             <div class="modal-footer py-0">
@@ -1064,17 +1058,28 @@
     </script>
 
 <script type="text/javascript">
-    function showDiv(divId, element) {
-        document.getElementById(divId).style.display = element.value == 'Business Permit' ? 'flex' : 'none';
-    }
-    function showDiv(divId, element) {
-        document.getElementById(divId).style.display = element.value == 'Business Clearance Capital - Php10,000 Below' ? 'flex' : 'none';
-    }
-    function showDiv(divId, element) {
-        document.getElementById(divId).style.display = element.value == 'Business Clearance Capital - Php10,001 - Php100-000' ? 'flex' : 'none';
-    }
-    function showDiv(divId, element) {
-        document.getElementById(divId).style.display = element.value == 'Business Clearance Capital - Php100,001 - Above' ? 'flex' : 'none';
+    function showHid(divId, element) {
+        var bus = document.getElementById('ctype').value;
+        if (bus == 'Business Clearance Capital - Php10,000 Below'){
+            document.getElementById(divId).style.display = 'flex';    
+        }
+        else if (bus == "Business Permit") {
+            document.getElementById(divId).style.display = 'flex';  
+        }
+        else if (bus == "Business Clearance Capital - Php10,001 - Php100-000") {
+            document.getElementById(divId).style.display = 'flex';  
+        }
+        else if (bus == "Business Clearance Capital - Php100,001 - Above") {
+            document.getElementById(divId).style.display = 'flex';  
+        }
+   
+        
+        else{
+            document.getElementById(divId).style.display = 'none';
+        }
+        
+    
+       
     }
     function showOthers(divId, element) {
         document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';

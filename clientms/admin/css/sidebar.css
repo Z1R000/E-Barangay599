@@ -12,12 +12,12 @@
 --second-bg-color: rgb(235, 221, 221);
 }
 .blue{
-    background: #021f4e;
+    background: #1c1c1d;
 }
 body{
 
     height: 100%;
-    background-image: url('../images/bg.png');
+  
     background-size: cover;
 
 }
@@ -106,7 +106,7 @@ body{
 
 .list-group-item {
     border: none;
-    padding: 20px 30px;
+    padding: 13px 40px;
 }
 
 .list-group-item.active {
@@ -146,3 +146,18 @@ body{
 
 
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+  
+  /* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #0124fe; 
+}
+  

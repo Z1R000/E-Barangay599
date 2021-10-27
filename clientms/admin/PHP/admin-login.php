@@ -143,12 +143,13 @@ s   				background: #f00;
 	<?php
 		include('navbar.php');
 	?>
+
     <form action=""method = "POST" id = "login" name = "login">
-	<div class="container  px-5 py-5 ">
+	<div class="container  px-5 py-1 ">
 		<div class="row justify-content-center ">
-			<div class="col-xl-4 col-lg-6 col-md-8 col-xs-12 col-sm-10   shado bg-white rounded" style= "z-index: 2;">
+			<div class="col-xl-4 col-lg-6 col-md-8 col-xs-12 col-sm-10   shadow-sm bg-white rounded" style= "z-index: 2;">
 				<div class="row  pt-2">
-                    <div class="col-xl-5 col-lg-4 col-md-4 col-xs-4 mx-auto text-center">
+                    <div class="col-xl-5 col-lg-4 col-md-4 col-xs-4 mx-auto text-center py-5">
                         <img src = "../images/admin-logo.png" class = "img-fluid logo" style ="width: 130px;">
                     </div>
 				</div>
@@ -174,7 +175,6 @@ s   				background: #f00;
                         <button class="btn btn-secondary bg-secondary disabled"><i class="fa fa-lock"></i></button>
 						<input type="password" class="form-control shadow-none" id ="pas2" placeholder="Password" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="password" required="true"  >
                         <a class="btn btn-secondary border-start-0 bg-transparent" onclick = "showpas2();"><i class="fa fa-eye link-primary"></i></a>
-					
 					</div>
 				</div>
 				<div class="row py-2 g-0">
