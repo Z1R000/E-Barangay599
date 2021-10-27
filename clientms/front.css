@@ -44,7 +44,6 @@ body{
 .masthead{
     
     background-image: url('images/bann.png');
-    height: 500px;
     z-index: 2;
     background-size: cover;
     background-repeat: no-repeat;

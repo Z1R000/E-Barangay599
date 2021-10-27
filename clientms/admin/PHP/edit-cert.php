@@ -20,7 +20,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
       $query->bindParam(':eid',$eid,PDO::PARAM_STR);
       $query->execute();
       echo '<script>alert("Certificate details has been updated")</script>';
-echo "<script type='text/javascript'> document.location ='edit-cert.php?editid=" , $eid ,"'; </script>";
+      echo "<script type='text/javascript'> document.location ='edit-cert.php?editid=" , $eid ,"'; </script>";
   }
 ?>
 <!DOCTYPE html>
@@ -205,7 +205,7 @@ echo "<script type='text/javascript'> document.location ='edit-cert.php?editid="
                   <div class="row gy-2 mx-2 my-2 ">
                     <div class="col-md-12 mx-auto">
                       <label for="cert-inf" class= "black fw-bold">Certification Contents</label>
-                      <textarea class= "" name="cert-info" id="cert-inf" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1">hudassss</textarea>
+                      <textarea class= "" name="cert-info" id="cert-inf" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1"></textarea>
 
 
                     </div>
@@ -217,7 +217,7 @@ echo "<script type='text/javascript'> document.location ='edit-cert.php?editid="
             </div>
             <div class="col-xl-6 mx-auto pt-1 ">
                 <div class="fs-6 fw-bold">Certificate Template</div>
-                <button type = "submit" href = "#save-cert" data-bs-toggle = "modal" role= "button" name="submit" id="submit" class = "btn btnx btn-primary mb-1"><i class= "fas fa-save me-2"></i>Save</button>
+                <button type = "button" href = "#save-cert" data-bs-toggle = "modal" role= "button" name="submit" id="submit" class = "btn btnx btn-primary mb-1"><i class= "fas fa-save me-2"></i>Save</button>
                 <button type = "button" onclick = "window.history.back()" class = "btn btnx  btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</button>
               
                 <div class="row">
@@ -228,8 +228,7 @@ echo "<script type='text/javascript'> document.location ='edit-cert.php?editid="
             </div>
           
           </div>
-        </form>
-
+      
         </div>
         <?php
         }}?>
@@ -256,7 +255,7 @@ echo "<script type='text/javascript'> document.location ='edit-cert.php?editid="
                           <div class="col-xl-6">
 
                           
-                            <input type = "submit" class="btn btn-success" href= "#success" data-bs-toggle="modal" data-bs-dismiss = "modal"  name = "conf" value ="Confirm">
+                            <input type = "submit"  class="btn btn-success" href= "#success" data-bs-toggle="modal" data-bs-dismiss = "modal"  name = "conf" value ="Confirm">
                                <input type = "submit" class="btn btn-primary" href= "#success" data-bs-dismiss = "modal"  name = "canc" value ="Cancel">
                                </div>
                         </form>
@@ -269,14 +268,14 @@ echo "<script type='text/javascript'> document.location ='edit-cert.php?editid="
                 </div>
             </div>
         </div>
-
+        
 
         <div class="modal fade" id = "success" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-sm">
                 <div class="modal-content g-0 bg-success ">
                     <div class="modal-header bg-success white ">
                         <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-save me-2"></i>&nbsp;&nbsp;Success</h5>    
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="submit"  name = "submit" class="btn-close"  aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">
                         <div class="row">
@@ -294,6 +293,8 @@ echo "<script type='text/javascript'> document.location ='edit-cert.php?editid="
                 </div>
             </div>
         </div>
+      </form>
+
         <script src = '../ckeditor/ckeditor.js'></script>
         <script>
           CKEDITOR.replace('cert-info');

@@ -372,16 +372,16 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"  >
                                 <div class="row" >
-                                    <div class="col-xl-12" style= "overflow:auto;">
-
-                                    
+                                    <div class="col-xl-12" style= "overflow:auto;">                                    
                                     <table class="table bg-white rounded shadow-sm  table-hover ">
                                   
                                         <thead>
                                             <tr>
                                                 <th  scope="col">
                                                     Status  </th>
-                                                <th   scope="col">Name </th>
+                                                <th   scope="col">Name <span class="float-end"><button class ="btn p-0">
+
+                                                <i class="fa fa-sort"></i></button></span> </th>
                                                 <th   scope="col">Age </th>
                                                 <th   scope="col">Gender </th>
                                                 <th   scope="col">Purok</th>
@@ -410,7 +410,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                 $total_records=$queryc->rowCount();
                                                 $total_no_of_pages = ceil($total_records / $total_records_per_page);
                                                 $second_last = $total_no_of_pages - 1;
-                                                
                                                 
                                                 $sql="SELECT * from tblresident LIMIT $offset, $total_records_per_page";
                                                 $query = $dbh -> prepare($sql);
