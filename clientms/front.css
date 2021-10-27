@@ -22,7 +22,7 @@
     }
   }
 .op{
-    background: rgba(0,0,0,0.8);
+    
     position: fixed;
     width: 100%;
     z-index: 9;
@@ -32,6 +32,7 @@ li{
 }
 body{
     background:whitesmoke;
+    overflow-x: hidden;
     
 }
 .bg-heb{
@@ -41,10 +42,11 @@ body{
 }
 
 .masthead{
-    background-image: url('images/bg-599.jpg');
-    height: 600px;
+    
+    background-image: url('images/bann.png');
+    height: 500px;
     z-index: 2;
-    background-size:100% 600px;
+    background-size: cover;
     background-repeat: no-repeat;
 }
 .rh{
@@ -103,7 +105,27 @@ h1,h2,h3{
     display:none;
     height:360px;
   }
-}		
+}
+
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0124fe; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #03061a; 
+}
 /*anything bigger e.g tv screen*/
 @media (min-width:1201px){
   .carousel {

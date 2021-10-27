@@ -25,13 +25,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
     <link rel = "stylesheet" href="../css/sidebar.css" />
-    <link rel="stylesheet" href="../CSS/scrollbar.css">
+    <link rel="stylesheet" href="../CSS/scroll.css">
 
 
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
     <style type = "text/css">
-    
+  
         .pab{
             
             position: absolute;
@@ -392,8 +392,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
             </form>
         </div>
 
-       
-
+  
         <div class="modal fade" id = "delete-ann" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger" >

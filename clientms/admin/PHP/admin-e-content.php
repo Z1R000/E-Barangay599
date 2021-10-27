@@ -138,13 +138,13 @@
     </nav>
     <div class="container-fluid  px-5">
         <div class="row g-0 pt-2 px-5 mb-5 justify-content-center">
-            <div class="col-xl-5 hov px-3">
+            <div class="col-xl-4 hov px-3">
                 <div class="row g-0 shadow-lg  py-1 px-2 border-bottom bg-dark text-white rounded-top fs-5">
                     Barangay's Information
                 </div>
                 <div class="row g-0 bg-white shadow-lg ">
                     <div class="col-xl-6 p-3 ">
-                        <p class= "fs-5" style= "text-align: justify;">Textual contents of e-barangay 599 such as its history, e-barangay texts etc.</p>
+                        <p class= "fs-5" style= "text-align: justify;">Textual contents of e-barangay 599 such as its history, e-barangay texts for banner etc.</p>
                     </div>
                     <div class="col-xl-6 text-center py-4">
                         <i class="fa fa-comments text-dark fa-5x"></i>
@@ -155,7 +155,7 @@
 
                 </div>
             </div>
-            <div class="col-xl-5 hov px-3">
+            <div class="col-xl-4 hov px-3">
                     <div class="row g-0 py-1 px-2 border-bottom bg-primary text-white rounded-top fs-5">
                         E-barangay Media
                     </div>
@@ -172,13 +172,31 @@
                     </div>
                     
             </div>
+            <div class="col-xl-4 hov px-3">
+                    <div class="row g-0 py-1 px-2 border-bottom bg-success text-white rounded-top fs-5">
+                        Puroks List
+                    </div>
+                    <div class="row g-0 bg-white shadow-lg ">
+                        <div class="col-xl-6 p-3">
+                            <p class= "fs-5" style= "text-align: justify;">Manage the list of streets within the puroks of the barangay. Incase it is called for.</p>
+                        </div>
+                        <div class="col-xl-6 text-center py-4">
+                            <i class="fa fa-map text-success fa-5x"></i>
+                        </div>
+                    </div>
+                    <div class="row g-0 text-center bg-success rounded-bottom">
+                        <a class= "link link-primary text-white fs-5 text-decoration-none" href ="manage-purok.php" >Manage<i class= "fa fa-edit ms-2"></i></a>
+                    </div>
+                    
+            </div>
+      
       
         </div>
-        <div class="row g-0 pt-2 px-5 mb-5 justify-content-center">
-            <div class="row g-0 bg-secondary py-2 text-white rounded-top px-3">
+        <div class="row g-0 pt-2 px-5 mb-5 justify-content-center ">
+            <div class="row g-0 bg-secondary py-2 text-white rounded-top  px-3">
                 <div class= "fs-5"><i class= "fa fa-eye me-2"></i>Log In audits</div>
             </div>
-            <div class="row g-0 bg-white justify-content-center p-2">
+            <div class="row g-0 bg-white justify-content-center p-2 shadow-lg">
                 <div class="col-xl-11 mt-2" style= "max-height: 600px; overflow-y:auto;">
                     <table class= "table">
                         <thead class= "bg-light">
@@ -261,7 +279,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">
-                     
                         <div class="row py-2">
                             <div class="col-md-6">
                                 <label for = "etitle" class= "fs-5 fw-bold">E-barangay Title</label>

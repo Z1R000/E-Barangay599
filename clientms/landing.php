@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="../css/scrollbar.css">
+    <link rel="stylesheet" href="../admin/css/scrollbar.css">
     <link rel="stylesheet" href="front.css">
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -23,7 +24,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark op positon-fixed mb-5">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark op positon-fixed mb-5 ">
   <div class="container-fluid opacity-25">
     <a class="navbar-brand" href="#"><img src="admin/images/barangay.png" alt="" style= "width: 28px;"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,10 +52,11 @@
   </div>
   
 </nav>
-<div class="masthead p-5">
+<br><br>
+<div class="masthead p-5"  style= "margin-bottom:100px;">
     <div class="container px-3 position-relative">
         <div class="row justify-content-center">
-            <div class="col-xl-8 col-lg-10 col-md-10 col-sm-12 col-xs-12 border bg-heb rounded">
+            <div class="col-xl-8 col-lg-10 col-md-10 col-sm-12 col-xs-12 border-0 bg-heb rounded">
                 <h2 class= " text-center text-white p-1">
                     WELCOME TO BARANGAY 599's: E-barangay Information Management System
                 </h2>

@@ -22,7 +22,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
     <link rel = "stylesheet" href="../css/sidebar.css" />
-    <link rel="stylesheet" href="../css/scrollbar.css">
+    <link rel="stylesheet" href="../css/scroll.css">
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
     <style type = "text/css">
@@ -30,16 +30,12 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         table,td,tr,th{
             border: 1px solid #d3d3d3;
             text-align: left;
-            font-size: 1.08em;
+            font-size: 1.02em;
         
             font-family: 'Noto Sans Display', sans-serif;
             
         }
-        .ov{
-            min-width: 576px;
-            overflow-y:auto;
-        }
-
+     
        
         .action{
           
@@ -53,14 +49,17 @@ if (strlen($_SESSION['clientmsaid']==0)) {
             table{
                 overflow-y: auto;
             }
-            .ov{
-                overflow-y:auto;
+            .wal{
+                display:none;
             }
             .dis{
                 font-size: 15px;
             }
             .ser{
                 width: 100%;
+            }
+            .btnx{
+                width:50px;
             }
            
         }
@@ -145,34 +144,40 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                     </div>
                 </div>-->
 
-                <div class = "row g-1 px-5">
+                <div class = "row g-1 px-3">
               
                     <div class="col-xl-12 col-md-12 col-sm-12 ">
                         <div class = "row my-2">
-                            <div class="col-md-6">
+                            <div class="col-md-6" >
                                   
                                 <div class="btn-group" role="group">
-                                    <a href = "resident-registration.php"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;New Resident</a>
+                                    <a href = "admin-registrations.php"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-archive"></i>&nbsp;Pending Requests</a>
                                 </div>
 
                             </div>
                             
-                            <div class="col-md-4 " >
+                            <div class="col-md-6"  >
                                 <form class = "d-flex" method="post" name="search" action="">
 									<p style="font-size:16px; color:red" align="center"> <?php if($msg){
 										echo $msg;
 									  }  ?> </p>
+                                        <div class="input-group">
+                                             <input id="searchdata" type = "text" class= "form-control" name="searchdata"placeholder = "Search here">
+                                             <button type ="submit" class = "btn btn-outline-info" name="search"><i class = "fa fa-search"></i></button>
+                                             <div class="btn-group px-1" role="group">
+                                <a href = "admin-residence.php"  class="btn btn-outline-primary"><i class = "fa fa-window-close"></i>&nbsp;Clear</a>&nbsp;&nbsp;
+                                </div>
+                                 
+                                        </div>
+                                       
                                         
-                                        <input id="searchdata" type = "text" class= "form-control" name="searchdata"placeholder = "Search here">
-                                        <button type ="submit" class = "btn btn-outline-info" name="search"><i class = "fa fa-search"></i></button>
                                 </form>
+                                
 
                             </div>
                             <div class="col-md-2">
                                   
-                                <div class="btn-group" role="group">
-                                <a href = "admin-residence.php"  class="btn btn-outline-primary"><i class = "fa fa-window-close"></i>&nbsp;Clear</a>&nbsp;&nbsp;
-                                </div>
+                                
 
                             </div>
                             
@@ -334,12 +339,15 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id = "all">
-                        <div class="container-fluid" style= "overflow-x:auto">
+                        <div class="container-fluid">
                             <div class="row g-1 px-5">
-                                <div class="col-xl-12 col-md-12 col-sm-12 ">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"  >
                                 <div class="row" >
+                                    <div class="col-xl-12" style= "overflow:auto;">
+
+                                    
                                     <table class="table bg-white rounded shadow-sm  table-hover ">
-                                    <div class="" style= "overflow-x:auto">
+                                  
                                         <thead>
                                             <tr>
                                                 <th  scope="col">
@@ -414,13 +422,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
+                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
+                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash me-2"></i>Delete</button>
+                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</button>
                                                 </div>
                                             </td>
                                         
@@ -515,14 +523,16 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </div>-->
                                 </div>
                             </div>
+                        </div>
                     </div>
                     <div class="tab-pane fade show" id="p1">
                         <div class="container-fluid" style= "overflow-x:auto">
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
                                     <div class="" style= "overflow-x:auto">
+                                    <table class="table bg-white rounded shadow-sm  table-hover ">
+                                    
                                         <thead>
                                             <tr>
                                                 <th  scope="col">
@@ -597,13 +607,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
+                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span> </a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
+                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span> </a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash me-2"></i>Delete</button>
+                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
                                                 </div>
                                             </td>
                                         
@@ -690,6 +700,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     </div>
                                 </div>
                             </div>
+                            </div>
                         </div>                       
                     
                     <div class="tab-pane fade show" id="p2">
@@ -697,8 +708,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
+                                    <div class="col" style= "overflow-x:auto">
                                     <table class="table bg-white rounded shadow-sm  table-hover ">
-                                    <div class="" style= "overflow-x:auto">
+                                    
                                         <thead>
                                             <tr>
                                                 <th  scope="col">
@@ -773,13 +785,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
+                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btnx btn-primary"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
+                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success btnx"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash me-2"></i>Delete</button>
+                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
                                                 </div>
                                             </td>
                                         
@@ -867,14 +879,15 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </div>
                             </div>
                         </div>
-       
+                    </div>
                     <div class="tab-pane fade show" id="p3">
                     <div class="container-fluid" style= "overflow-x:auto">
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
+                                    <div class="col" style= "overflow-x:auto">
                                     <table class="table bg-white rounded shadow-sm  table-hover ">
-                                    <div class="" style= "overflow-x:auto">
+                                    
                                         <thead>
                                             <tr>
                                                 <th  scope="col">
@@ -949,13 +962,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
+                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary btnx"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
+                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success btnx"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash me-2"></i>Delete</button>
+                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
                                                 </div>
                                             </td>
                                         
@@ -1042,15 +1055,16 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     </div>
                                 </div>
                             </div>
-                        
+                        </div>
                     </div>
                     <div class="tab-pane fade show" id="p4">
                     <div class="container-fluid" style= "overflow-x:auto">
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
                                     <div class="" style= "overflow-x:auto">
+                                    <table class="table bg-white rounded shadow-sm  table-hover ">
+                                    
                                         <thead>
                                             <tr>
                                                 <th  scope="col">
@@ -1125,13 +1139,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
+                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btnx btn-primary"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
+                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success btnx"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash me-2"></i>Delete</button>
+                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
                                                 </div>
                                             </td>
                                         
@@ -1219,7 +1233,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </div>
                             </div>
                         </div>
-
+                    </div>
                         
                    
                     <div class="tab-pane fade show" id="p5">
@@ -1227,8 +1241,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
                                     <div class="" style= "overflow-x:auto">
+                                    <table class="table bg-white rounded shadow-sm  table-hover ">
+                                
                                         <thead>
                                             <tr>
                                                 <th  scope="col">
@@ -1303,13 +1318,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
+                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btnx btn-primary"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
+                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success btnx"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash me-2"></i>Delete</button>
+                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
                                                 </div>
                                             </td>
                                         
@@ -1397,6 +1412,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </div>
                             </div>
                         </div>
+                    </div>
                         
                    
                     <div class="tab-pane fade show" id="p6">
@@ -1404,8 +1420,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
                                     <div class="" style= "overflow-x:auto">
+                                    <table class="table bg-white rounded shadow-sm  table-hover ">
+                                    
                                         <thead>
                                             <tr>
                                                 <th  scope="col">
@@ -1480,13 +1497,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
+                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary btnx"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span> </a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
+                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success btnx"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash me-2"></i>Delete</button>
+                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
                                                 </div>
                                             </td>
                                         
@@ -1574,7 +1591,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </div>
                             </div>
                         </div>
-                        
+                    </div>
                    
 
                      <div class="tab-pane fade show" id="p7">
@@ -1658,13 +1675,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
+                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btnx btn-primary"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
+                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success btnx"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash me-2"></i>Delete</button>
+                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
                                                 </div>
                                             </td>
                                         
@@ -1759,8 +1776,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
                                     <div class="" style= "overflow-x:auto">
+                                    <table class="table bg-white rounded shadow-sm  table-hover ">
+                                    
                                         <thead>
                                             <tr>
                                                 <th  scope="col">
@@ -1835,13 +1853,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
+                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btnx btn-primary"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
+                                                    <a type="button btnx" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash me-2"></i>Delete</button>
+                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
                                                 </div>
                                             </td>
                                         
@@ -1929,15 +1947,16 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </div>
                             </div>
                         </div>
-                        
+                    </div>
                     
                     <div class="tab-pane fade show" id="p9">
                     <div class="container-fluid " style= "overflow-x:auto">
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
                                     <div class="" style= "overflow-x:auto">
+                                    <table class="table bg-white rounded shadow-sm  table-hover ">
+                             
                                         <thead>
                                             <tr>
                                                 <th  scope="col">
@@ -2012,13 +2031,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
+                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btnx btn-primary"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
+                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success btnx"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash me-2"></i>Delete</button>
+                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
                                                 </div>
                                             </td>
                                         
@@ -2106,15 +2125,16 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </div>
                             </div>
                         </div>
-                        
+                    </div>
                   
                     <div class="tab-pane fade" id="p10">
                     <div class="container-fluid" style= "overflow-x:auto">
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
                                     <div class="" style= "overflow-x:auto">
+                                    <table class="table bg-white rounded shadow-sm  table-hover ">
+                                    
                                         <thead>
                                             <tr>
                                                 <th  scope="col">
@@ -2189,13 +2209,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
                                             <td  class ="action" scope="col">
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
+                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary btnx"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
+                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success btnx"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
                                                 </div>
                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash me-2"></i>Delete</button>
+                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
                                                 </div>
                                             </td>
                                         
@@ -2283,7 +2303,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </div>
                             </div>
                         </div>
-                        
+                    </div>
                   
                 </div>
 

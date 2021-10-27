@@ -259,9 +259,29 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                 <i class=""></i>Residency Type
                                                             </th>
                                                             <td  style= "text-align: right; padding-top: 15px; padding-bottom:15px;">
-                                                                <?php echo htmlentities($row->ResidentType);?>
+                                                                <?php 
+                                                                    $rtype= $row->ResidentType;
+                                                                
+                                                                echo $rtype;?>
                                                             </td>
+                                                    
                                                         </tr>
+                                                        <?php
+                                                            if ($rtype == "Rental/Boarder"){
+                                                                echo ' <tr>
+                                                            
+                                                                <th>
+                                                                    <i class=""></i>Home Owner
+                                                                </th>
+                                                                <td style= "text-align: right; padding-top: 15px; padding-bottom:15px;">
+                                                                '.$row->HomeName.'
+                                                                
+                                                            
+                                                                </td>
+                                                        
+                                                            </tr>';
+                                                            }
+                                                        ?>
                                                         
                                                     </tbody>
                                                 </table>

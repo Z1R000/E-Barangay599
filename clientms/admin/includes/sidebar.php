@@ -6,12 +6,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-
-    
-
     <script>
-        
+
         document.addEventListener("DOMContentLoaded", function(){
         document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
         element.addEventListener('click', function (e) {
@@ -45,7 +41,7 @@
             list-style: none; 
             margin: 0; 
             padding: 0; 
-            padding-left: 1rem; 
+            padding-left: 3rem; 
             padding-right: 1rem;
         }
         
@@ -76,32 +72,41 @@
             <div class="sidebar-heading text-center py-2 second-text fs-5 fw-bold border-bottom">
              <br>Barangay 599 <br>E-barangay<br>
                 <img src = "../IMAGES/admin-logo.png" class = "py-1"style = "width: 60px;"><br>
-          
+                <div class="btn-group">
+                    <a href="#" class="btn btn-transparent"><i class="fa fa-user text-primary"></i></a>
+                    
+                    <a href="#" class="btn btn-transparent"><i class="fa fa-cog text-primary"></i></a>
+                    <a href="#" class="btn btn-transparent shadow-0"><i class="fa fa-bell text-primary"></i></a>
+                </div>
+                <br>
                 <div class="btn-group my-2" role="group" aria-label="Basic example">
-                    <a type = " button" href="../../index.php" class = "btn border-danger link-danger fs-6" ><i class = "fa fa-power-off"></i>&nbsp;Logout </a>          
+                    <a type = " button" href = "../../landing.php"  class = "btn btn-outline-danger fs-6" ><i class = "fa fa-power-off"></i>&nbsp;Logout </a>          
                 </div>
                 
                 
             </div>
 
-            <nav class="sidebar ">
+            <nav class="sidebar">
 
                 <ul class="nav flex-column" id="nav_accordion">
                     <li class="nav-item">
-                        <a href="admin-dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-6"><i
+                        <a href="admin-dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text"><i
                             class="fas fa-tachometer-alt me-2"></i>Dashboard </a>    
                         
                     </li>
 
-                    <li class="nav-item has-submenu">
-                        <a href="admin-residence.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-6"><i
-                            class="fas fa-users me-2"></i>599 Residence</a>                        
-                       
-                    </li>
 
                     <li class="nav-item has-submenu">
-                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text fw-bold nav-link fs-6">
-                            <i class="fas fa-paperclip my-0 me-2"></i>Services</a>
+                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text nav-link fs-6">
+                            <i class="fas fa-users my-0 me-2"></i>Residence</a>
+                        <ul class="submenu collapse">
+                            <li><a class="nav-link fs-6" href="admin-residence.php">Resident List</a></li>
+                            <li><a class="nav-link fs-6" href="admin-registrations.php">Registrations</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text nav-link fs-6">
+                            <i class="fas fa-hand-paper my-0 me-2"></i>Services</a>
                         <ul class="submenu collapse">
                             <li><a class="nav-link fs-6" href="admin-certificate.php">Certification </a></li>
                             <li><a class="nav-link fs-6" href="admin-blotter.php">Blotter </a></li>
@@ -110,7 +115,7 @@
                         </ul>
                     </li>
                     <li class="nav-item has-submenu">
-                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text fw-bold nav-link fs-6">
+                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text  nav-link fs-6">
                             <i class="fas fa-book my-0 me-2"></i>Request</a>
                         <ul class="submenu collapse">
                             <li><a class="nav-link fs-6" href="admin-cert-request.php">Certification Request </a></li>
@@ -120,14 +125,14 @@
                     </li>
                     
                     <li class="nav-item">
-                        <a href="admin-officials.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-6"><i class="fa fa-id-card" aria-hidden="true"></i> 599 Officials</a>
+                        <a href="admin-officials.php" class="list-group-item list-group-item-action bg-transparent second-text "><i class="fa fa-id-card" aria-hidden="true"></i> 599 Officials</a>
                     </li>
                     <li class="nav-item">
-                        <a href="admin-announcement.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-6"><i
+                        <a href="admin-announcement.php" class="list-group-item list-group-item-action bg-transparent second-text "><i
                             class="fas fa-comment-dots me-2"></i>Announcements</a>
                     </li>
                     <li class="nav-item">
-                        <a href="admin-e-content.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-6"><i
+                        <a href="admin-e-content.php" class="list-group-item list-group-item-action bg-transparent second-text "><i
                             class="fas fa-cog me-1"></i>E-barangay</a>
                     </li>
                   
@@ -163,8 +168,8 @@
                             </div>";
 
                             echo "<div class='col-xl-6' align='center'>
-                            <h3 class='py-4'>$rows->Baddress <br>
-                            $rows->Btitle</h3>
+                            <h5 class='py-4 ' style= 'spacing:10px;'>$rows->Baddress <br>
+                            $rows->Btitle</h5>
                             </div>";
 
                             echo "<div class='col-xl-3'>
