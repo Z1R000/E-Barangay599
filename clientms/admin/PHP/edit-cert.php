@@ -218,7 +218,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
             <div class="col-xl-6 mx-auto pt-1 ">
                 <div class="fs-6 fw-bold">Certificate Template</div>
                 <button type = "button" href = "#save-cert" data-bs-toggle = "modal" role= "button" name="submit" id="submit" class = "btn btnx btn-primary mb-1"><i class= "fas fa-save me-2"></i>Save</button>
-                <button type = "button" onclick = "window.history.back()" class = "btn btnx  btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</button>
+                <a type = "button" href = "admin-certificate.php" class = "btn btnx  btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</a>
               
                 <div class="row">
                 <div class="embed-responsive embed-responsive-16by9">
@@ -256,7 +256,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 
                           
                             <input type = "submit"  class="btn btn-success" href= "#success" data-bs-toggle="modal" data-bs-dismiss = "modal"  name = "conf" value ="Confirm">
-                               <input type = "submit" class="btn btn-primary" href= "#success" data-bs-dismiss = "modal"  name = "canc" value ="Cancel">
+                               <input type = "button" class="btn btn-primary" href= "#success" data-bs-dismiss = "modal"  name = "canc" value ="Cancel">
                                </div>
                         </form>
                         </div>

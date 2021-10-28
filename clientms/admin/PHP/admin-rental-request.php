@@ -83,9 +83,7 @@
               margin-bottom: 10px;
             }
           
-            .row {
-                overflow-x: auto;
-            }
+          
             .dis{
                 font-size: 15px;
             }
@@ -178,8 +176,8 @@
                             
                         </div>
                         <div class="row g-0">
-                            <div class="col-xl-11 mx-2  mx-auto py-3  px-2">
-                                    <table class="table bg-white table-hover "> 
+                            <div class="col-xl-11 mx-2  mx-auto py-3  px-2" style= "overflow-x:auto;">
+                                    <table class="table bg-white table-hover table-bordered " style= "min-width:900px"> 
                                         <thead class = "bg-light">
                                             <tr>
                                            

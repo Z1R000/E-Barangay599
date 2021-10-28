@@ -23,8 +23,8 @@
 
     <style type = "text/css">
        table,tr,td,th{
-            border: 1px solid grey;
-            font-size: 1.1em;
+            border: 1px solid #d3d3d3;
+            font-size: 1em;
         }
         body,html{
             height: 100%;
@@ -50,11 +50,11 @@
               margin-bottom: 10px;
             }
           
-            .row {
-                overflow-x: auto;
-            }
             .dis{
                 font-size: 15px;
+            }
+            .wal{
+                display:none;
             }
             .ser{
                 width: 100%;
@@ -109,7 +109,7 @@
                       
 
                         <div class = "row py-2 g-0 px-3">
-                            <div class="col-md-8 px-1">
+                            <div class="col-md-8 px-1" >
                                 <div class="btn-group" role="group">
                                     <a href = "create-blotter-resident.php"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;New Case</a>
                                 </div>
@@ -127,8 +127,8 @@
                             
                         </div>
                         <div class="row g-0">
-                            <div class="col-xl-11 mx-2  mx-auto py-3  px-2">
-                                    <table class="table bg-white table-hover "> 
+                            <div class="col-xl-12 mx-2  mx-auto py-3  px-2" style= "overflow-x:auto">
+                                    <table class="table bg-white table-hover table-bordered  " style= "min-width: 1200px;"> 
                                         <thead class = "bg-light">
                                             <tr>
                                         
@@ -156,14 +156,14 @@
                                                 <td scope="col" style = "text-align: right">6:00pm</td>
                                                 <td scope="col" style = "text-align: center">
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="" href ="blotter-report.php"class="btn btng btn-primary"><i class = "fa fa-print me-2"></i> Report</a>
+                                                            <a type="" href ="blotter-report.php"class="btn btng btn-primary"><i class = "fa fa-print mx-1"></i><span class="wal"> Report</span></a>
                                                         </div>
                                                     
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a href ="edit-blotter.php"class="btn btng btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
+                                                            <a href ="edit-blotter.php"class="btn btng btn-success"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
                                                         </div>
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash me-2"></i>Delete</a>
+                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
                                                         </div>
                                                     
                                                 </td>
