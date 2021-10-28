@@ -135,8 +135,8 @@
                                             
                                         </div>
                                         <div class="row  g-0">
-                                            <div class="col-xl-11 mx-2  mx-auto py-3  px-2">
-                                                <table class="table bg-white table-hover "> 
+                                            <div class="col-xl-11 mx-2  mx-auto py-3  px-2" style= "overflow-x:auto;">
+                                                <table class="table bg-white table-hover " style= "min-width: 1000px"> 
                                                     <thead>
                                                         <tr>
                                                             <td scope = "col" colspan = 4 style ="background: #012f6e; color: white; text-align: center">List of services</td>

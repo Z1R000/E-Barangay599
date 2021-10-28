@@ -227,7 +227,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                 <br>
                 <div class="row g-1 px-5">
                     <div class="col-xl-12 col-md-12 col-sm-12 ">
-                    <table class="table bg-white rounded shadow-sm  table-hover">
+                    <table class="table bg-white rounded shadow-sm  table-hover table-bordered">
                             <thead>
                                 <tr>
                                     <th  scope="col">
@@ -272,8 +272,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                 $cnt=1;
                                                 if($query->rowCount() > 0)
                                                 {
-                                                foreach($results as $row)
-                                                {               
+                                                    foreach($results as $row)
+                                                    {               
                                             ?>
                                             <td  class ="small" scope="col">
                                                 <i class ="fa fa-circle link-success me-1"></i>
@@ -372,20 +372,22 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"  >
                                 <div class="row" >
-                                    <div class="col-xl-12" style= "overflow:auto;">                                    
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
-                                  
+                                    <div class="col-xl-12" style= "overflow:auto;" id = "res_table">                                    
+                                        <table class="table bg-white rounded shadow-sm  table-hover table-bordered " style = "min-width: 1000px;">
                                         <thead>
                                             <tr>
-                                                <th  scope="col">
-                                                    Status  </th>
-                                                <th   scope="col">Name <span class="float-end"><button class ="btn p-0">
+                                                <th  scope="col">Status</th>
+                                                <th   scope="col">Name <span class="float-end"><a  class= "column_sort text-secondary" data-order = "desc" id = "LastName"> <i id = "sortname" class="fa fa-sort"></i></a></span> </th>
 
-                                                <i class="fa fa-sort"></i></button></span> </th>
-                                                <th   scope="col">Age </th>
-                                                <th   scope="col">Gender </th>
-                                                <th   scope="col">Purok</th>
-                                                <th  scope="col">Street </th>
+                                                <th   scope="col">Age <span class="float-end"><a  class= "column_sort text-secondary" data-order = "desc" id = "BirthDate"> <i id = "sortage" class="fa fa-sort"></i></a></span> </th>
+
+                                                <th   scope="col">Gender <span class="float-end"><a class= "column_sort text-secondary" data-order = "desc" id = "Gender"> <i id = "sortgender" class="fa fa-sort"></i></a></span> </th>
+
+                                                <th   scope="col">Purok <span class="float-end"><a class= "column_sort text-secondary" data-order = "desc" id = "Purok"> <i id = "sortname" class="fa fa-sort"></i></a></span> </th>
+                                                
+                                                <th   scope="col">Street <span class="float-end"><a  class= "column_sort text-secondary" data-order = "desc" id = "streetName"> <i id = "sortst" class="fa fa-sort"></i></a></span> </th>
+                                               
+                                               
                                                 <th   scope="col">Action </th>
                                             </tr>   
                                         </thead>
@@ -411,7 +413,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                 $total_no_of_pages = ceil($total_records / $total_records_per_page);
                                                 $second_last = $total_no_of_pages - 1;
                                                 
-                                                $sql="SELECT * from tblresident LIMIT $offset, $total_records_per_page";
+                                                $sql="SELECT * from tblresident order by id desc LIMIT $offset, $total_records_per_page";
                                                 $query = $dbh -> prepare($sql);
                                                 $query->execute();
                                                 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -464,7 +466,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                         </tr>
                                         <?php $cnt=$cnt+1;}}?>   
                                         </tbody>
-                                    </table>
+                                        </table>
+                                    </div>
                                     <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
                                         <strong>Page <?php echo $page_no." of ".$total_no_of_pages; ?></strong>
                                     </div>
@@ -538,28 +541,20 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                         <?php if($page_no < $total_no_of_pages){
                                             echo "<li><a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
                                         }?>
-                                    </ul>
-                                    </div>
-                                    
-                                    
-                                </div>
-                                <!--<div class="row  border justiy-content-center">
-                                
-                                    <div class="col-xl-4"></div>
-                                    <div class="col-xl-4"></div>
-                                    <div class="col-xl-4"><a class= "" href = "#"> <i class="fas fa-forward fa-2x text-primary"></i></a></div>
-                                </div>-->
-                                </div>
+                                    </ul>     
+                            </div>
+                        </div>
                             </div>
                         </div>
                     </div>
+                  
                     <div class="tab-pane fade show" id="p1">
                         <div class="container-fluid" style= "overflow-x:auto">
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
                                     <div class="" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
+                                    <table class="table bg-white rounded shadow-sm  table-hover table-bordered " style = "min-width: 1000px;">
                                     
                                         <thead>
                                             <tr>
@@ -737,7 +732,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
                                     <div class="col" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
+                                    <table class="table bg-white rounded shadow-sm table-bordered table-hover " style = "min-width: 1000px;">
                                     
                                         <thead>
                                             <tr>
@@ -914,7 +909,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
                                     <div class="col" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
+                                    <table class="table bg-white rounded shadow-sm table-bordered table-hover " style = "min-width: 1000px;">
                                     
                                         <thead>
                                             <tr>
@@ -1091,7 +1086,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
                                     <div class="" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
+                                    <table class="table bg-white rounded shadow-sm  table-hover table-bordered " style = "min-width: 1000px;">
                                     
                                         <thead>
                                             <tr>
@@ -1270,7 +1265,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
                                     <div class="" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
+                                    <table class="table bg-white rounded shadow-sm  table-hover table-bordered " style = "min-width: 1000px;">
                                 
                                         <thead>
                                             <tr>
@@ -1449,7 +1444,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
                                     <div class="" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
+                                    <table class="table bg-white rounded shadow-sm table-bordered table-hover " style = "min-width: 1000px;">
                                     
                                         <thead>
                                             <tr>
@@ -1627,8 +1622,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
                                     <div class="" style= "overflow-x:auto">
+                                    <table class="table bg-white rounded shadow-sm  table-bordered table-hover res-table" style = "min-width: 1000px;">
+                                    
                                         <thead>
                                             <tr>
                                                 <th  scope="col">
@@ -1797,7 +1793,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </div>
                             </div>
                         </div>
-                        
+                    </div>
                    
                     <div class="tab-pane fade show" id="p8">
                     <div class="container-fluid" style= "overflow-x:auto">
@@ -1805,7 +1801,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
                                     <div class="" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
+                                    <table class="table bg-white rounded shadow-sm table-bordered table-hover" style = "min-width: 1000px;">
                                     
                                         <thead>
                                             <tr>
@@ -1983,7 +1979,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
                                     <div class="" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
+                                    <table class="table bg-white rounded shadow-sm table-bordered table-hover " style = "min-width: 1000px;">
                              
                                         <thead>
                                             <tr>
@@ -2161,7 +2157,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
                                     <div class="" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm  table-hover ">
+                                    <table class="table bg-white rounded shadow-sm table-bordered table-hover " style = "min-width: 1000px;">
                                     
                                         <thead>
                                             <tr>
@@ -2376,11 +2372,28 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                     </div>
                 </div>
             </div>
-                                      <?php  }?>
+        <?php  }?>
+        <script>  
+        $(document).ready(function(){  
+            $(document).on('click', '.column_sort', function(){  
+                var column_name = $(this).attr("id");  
+                var order = $(this).data('order');
+                var arrow = '';  
+            
+           $.ajax({  
+                url:"sortRes.php",  
+                method:"POST",  
+                data:{column_name:column_name, order:order},  
+                success:function(data)  
+                {  
+                     $('#res_table').html(data); 
         
+                }  
+           })  
+      });  
+ });  
+ </script>  
 
-
-        
-    </body>
-    </html>
+</body>
+</html>
     <!--up-->

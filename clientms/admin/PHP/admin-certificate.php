@@ -53,9 +53,7 @@
       
 
         @media (max-width: 576px){
-            .row{
-                overflow-x: auto;
-            }
+            
             .wal{
                 display:none;
             }
@@ -177,9 +175,9 @@
                                         
                                     </div>
                                    
-                                    <div class="row border g-0">
+                                    <div class="row border g-0"  style= "overflow-x:auto;">
                                         <div class="col-xl-11 mx-2  mx-auto py-3  px-2">
-                                            <table class="table bg-white table-hover shadow-sm border "> 
+                                            <table class="table bg-white table-hover shadow-sm border " style= "min-width: 1000px;"> 
                                                 <thead>
                                                     <tr>
                                                         <td scope = "col" colspan = 3 style ="background: #012f6e; color: white; text-align: center">Certificates List</td>
@@ -256,8 +254,8 @@
                                 </div>
                             
                                 <div class="row border g-0">
-                                    <div class="col-xl-12 mx-2  mx-auto py-3 px-2 print-container">
-                                        <table class="table bg-white table-hover shadow-sm border "> 
+                                    <div class="col-xl-12 mx-2  mx-auto py-3 px-2 print-container" style= "overflow-x:auto">
+                                        <table class="table bg-white table-hover shadow-sm border " style = "min-width: 1000px;"> 
                                             <thead>
                                                 <tr>
                                                     <td scope = "col" colspan = 9 style ="background: #012f6e; color: white; text-align: center">Certification Records</td>

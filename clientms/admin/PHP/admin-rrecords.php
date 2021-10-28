@@ -13,8 +13,8 @@
                                         </div>
                                     </div>
                                     <div class="row border g-0">
-                                        <div class="col-xl-12 mx-2  mx-auto py-3  px-2">
-                                            <table class="table bg-white border border-secondary table-hover "> 
+                                        <div class="col-xl-12 mx-2  mx-auto py-3  px-2" style= "overflow-x:auto;">
+                                            <table class="table bg-white border border-secondary table-hover " style= "min-width: 1100px;"> 
                                                 <thead>
                                                     <tr>
                                                         <td scope = "col" colspan = 9 style ="background: #012f6e; color: white; text-align: center">Rental Records</td>

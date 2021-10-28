@@ -89,7 +89,7 @@
 
                 
                 <div class="col px-3 py-3" style= "overflow-x: auto;">
-                    <table class="table table-striped border bg-light table-hover">
+                    <table class="table table-striped border bg-light table-hover" style = "min-width: 1000px;">
                         <thead style = "vertical-algin: middle">
                             <tr>
                                 <th>
@@ -154,7 +154,10 @@
                         </div>
                 </div>
      
-            <div class="row">
+            </div>
+            
+            </div>
+            <div class="row py-2">
 
             
             <div class="col">
@@ -167,8 +170,6 @@
                         <li class="page-item"><a class="page-link" href="#">Next</a></li>
                     </ul>
                 </nav>
-            </div>
-            </div>
             </div>
         </div>
     </div>

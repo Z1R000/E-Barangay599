@@ -83,9 +83,7 @@
               margin-bottom: 10px;
             }
           
-            .row {
-                overflow-x: auto;
-            }
+      
             .dis{
                 font-size: 15px;
             }
@@ -164,7 +162,7 @@
                             <div class="col-md-8 px-1">
                               
                             </div>
-                            <div class="col-md-4  px-2" >
+                            <div class="col-md-4 px-4  " >
                                 <div class="d-flex">
                             
                                 <input type="text" name ="searchCert" placeholder = "Search Record" class="form-control">
@@ -177,8 +175,8 @@
                             
                         </div>
                         <div class="row g-0">
-                            <div class="col-xl-11 mx-2  mx-auto py-3  px-2">
-                                    <table class="table bg-white table-hover "> 
+                            <div class="col-xl-11 mx-2  mx-auto py-3  px-2" style= "overflow-x:auto;">
+                                    <table class="table bg-white table-hover table-bordered" style= "min-width: 900px;"> 
                                         <thead class = "bg-light">
                                             <tr>
                                            
