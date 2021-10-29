@@ -12,14 +12,15 @@ if (strlen($_SESSION['clientmsaid']==0)) {
     $clientmsaid=$_SESSION['clientmsaid'];
       $cn=$_POST['cn'];
       $cp=$_POST['cp'];
+      $ct=$_POST['cert-info'];
 
-      $sql="update tblcertificate set CertificateName=:cn, CertificatePrice=:cp where ID=:eid";
+      $sql="update tblcertificate set CertificateName=:cn, CertificatePrice=:cp, CertText=:ct where ID=:eid";
       $query=$dbh->prepare($sql);
       $query->bindParam(':cn',$cn,PDO::PARAM_STR);
       $query->bindParam(':cp',$cp,PDO::PARAM_STR);
+      $query->bindParam(':ct',$ct,PDO::PARAM_STR);
       $query->bindParam(':eid',$eid,PDO::PARAM_STR);
       $query->execute();
-      echo '<script>alert("Certificate details has been updated")</script>';
       echo "<script type='text/javascript'> document.location ='edit-cert.php?editid=" , $eid ,"'; </script>";
   }
 ?>
@@ -205,7 +206,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                   <div class="row gy-2 mx-2 my-2 ">
                     <div class="col-md-12 mx-auto">
                       <label for="cert-inf" class= "black fw-bold">Certification Contents</label>
-                      <textarea class= "" name="cert-info" id="cert-inf" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1"></textarea>
+                      <textarea class= "" name="cert-info" id="cert-inf" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1" value=""><?php echo htmlentities($row->CertText);?></textarea>
 
 
                     </div>

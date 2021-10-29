@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2021 at 09:22 PM
+-- Generation Time: Oct 28, 2021 at 03:30 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -146,6 +146,7 @@ CREATE TABLE `tblcertificate` (
   `Type` int(11) NOT NULL,
   `CertificateName` varchar(200) DEFAULT NULL,
   `CertificatePrice` varchar(200) DEFAULT NULL,
+  `CertText` varchar(500) NOT NULL,
   `CreationDate` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -153,25 +154,25 @@ CREATE TABLE `tblcertificate` (
 -- Dumping data for table `tblcertificate`
 --
 
-INSERT INTO `tblcertificate` (`ID`, `Type`, `CertificateName`, `CertificatePrice`, `CreationDate`) VALUES
-(1, 1, 'Barangay Certificate', '121', '2021-04-21 13:45:50'),
-(2, 1, 'Barangay Clearance', '30', '2021-04-21 13:45:50'),
-(3, 1, 'Barangay Permit', '150', '2021-04-21 13:45:50'),
-(4, 1, 'Proof of Residency', '120', '2021-04-21 13:45:50'),
-(5, 2, 'Business Permit', '180', '2021-04-21 13:45:50'),
-(6, 2, 'Business Clearance Capital - Php10,000 Below', '100', '2021-04-21 13:45:50'),
-(7, 2, 'Business Clearance Capital - Php10,001 - Php100-000', '500', '2021-04-21 14:25:51'),
-(8, 2, 'Business Clearance Capital - Php100,001 - Above', '1000', '2021-04-21 14:25:51'),
-(9, 1, 'Certificate of Good Moral', '90', '2021-04-21 14:25:51'),
-(10, 1, 'Lipat-bahay Clearance', '105', '2021-04-21 14:25:51'),
-(11, 1, 'Certificate of Acceptance', '56', '2021-04-21 14:25:51'),
-(12, 1, 'Certificate of Cohabitation', '113', '2021-04-21 14:25:51'),
-(13, 1, 'Certificate of Indigency', '356', '2021-04-21 14:25:51'),
-(14, 1, 'Certificate to File Action', '250', '2021-04-21 14:25:51'),
-(15, 1, 'Barangay ID', '50', '2021-04-21 14:28:00'),
-(16, 1, 'Medical Assistance/Senior Citizen', '100', '2021-04-21 14:28:00'),
-(17, 1, 'Referral Recommendation', '50', '2021-04-21 14:28:00'),
-(18, 1, 'Filling Fee', '80', '2021-04-21 14:28:00');
+INSERT INTO `tblcertificate` (`ID`, `Type`, `CertificateName`, `CertificatePrice`, `CertText`, `CreationDate`) VALUES
+(1, 1, 'Barangay Certificate', '121', '<p>sad</p>\r\n', '2021-04-21 13:45:50'),
+(2, 1, 'Barangay Clearance', '30', '', '2021-04-21 13:45:50'),
+(3, 1, 'Barangay Permit', '150', '', '2021-04-21 13:45:50'),
+(4, 1, 'Proof of Residency', '120', '', '2021-04-21 13:45:50'),
+(5, 2, 'Business Permit', '180', '', '2021-04-21 13:45:50'),
+(6, 2, 'Business Clearance Capital - Php10,000 Below', '100', '', '2021-04-21 13:45:50'),
+(7, 2, 'Business Clearance Capital - Php10,001 - Php100-000', '500', '', '2021-04-21 14:25:51'),
+(8, 2, 'Business Clearance Capital - Php100,001 - Above', '1000', '', '2021-04-21 14:25:51'),
+(9, 1, 'Certificate of Good Moral', '90', '', '2021-04-21 14:25:51'),
+(10, 1, 'Lipat-bahay Clearance', '105', '', '2021-04-21 14:25:51'),
+(11, 1, 'Certificate of Acceptance', '56', '', '2021-04-21 14:25:51'),
+(12, 1, 'Certificate of Cohabitation', '113', '', '2021-04-21 14:25:51'),
+(13, 1, 'Certificate of Indigency', '356', '', '2021-04-21 14:25:51'),
+(14, 1, 'Certificate to File Action', '250', '', '2021-04-21 14:25:51'),
+(15, 1, 'Barangay ID', '50', '', '2021-04-21 14:28:00'),
+(16, 1, 'Medical Assistance/Senior Citizen', '100', '', '2021-04-21 14:28:00'),
+(17, 1, 'Referral Recommendation', '50', '', '2021-04-21 14:28:00'),
+(18, 1, 'Filling Fee', '80', '', '2021-04-21 14:28:00');
 
 -- --------------------------------------------------------
 
@@ -391,9 +392,9 @@ CREATE TABLE `tblresident` (
 INSERT INTO `tblresident` (`ID`, `Purok`, `houseUnit`, `streetName`, `Cellphnumber`, `Email`, `Password`, `CreationDate`, `voter`, `vPrecinct`, `ResidentType`, `LastName`, `Suffix`, `FirstName`, `MiddleName`, `BirthPlace`, `Gender`, `sssNumber`, `tinNumber`, `CivilStatus`, `BirthDate`, `HomeName`) VALUES
 (1, 1, 534, 'Old Sta. Mesa', 2147483647, 'ledes@gmail.com', '123', '2021-04-12 19:36:11', 'Yes', '123', 'Rental/Boarder', 'Ledesma', '', 'Marithess', 'Cortez', 'Manila', 'Male', 123123123, 1231321, 'Single', '2012-04-05 00:00:00', ''),
 (2, 2, 213, 'Peralta 2', 2147483647, 'kim@gmail.com', '123', '2021-04-12 19:36:11', 'No', '', 'House Owner', 'Dela Cruz', 'Jr.', 'Kim', 'Renzo', 'Manila', 'Female', 312123321, 3123123, 'Married', '2012-04-18 00:00:00', ''),
-(3, 3, 323, 'Narra', 19823719, 'verg@gmail.com', '123', '2021-04-12 20:14:26', 'No', '', 'Care Taker', 'Viray', '', 'Vergel', 'Sallan', 'Manila', 'Male', 123123123, 3212312, 'Single', '2015-04-01 00:00:00', ''),
-(4, 4, 543, 'Mangga', 21315123, 'sallan@gmail.com', '123', '2021-04-20 07:49:54', 'Yes', '123', 'Living with Relatives', 'Sallan', '', 'Arnold', 'Clavio', 'Manila', 'Female', 12512312, 12315123, 'Married', '2011-04-01 00:00:00', ''),
-(5, 5, 124, 'Sarmiento', 123123, 'nathan@gmail.com', '123', '2021-04-20 08:22:54', 'Yes', '123', 'Rental/Boarder', 'Morales', '', 'Nathan', 'Pacquiao', 'Manila', 'Male', 123123, 12315123, 'Married', '2008-02-20 00:00:00', ''),
+(3, 3, 323, 'Narra', 19823719, 'verg@gmail.com', '123', '2021-04-12 20:14:26', 'No', '', 'Care Taker', 'Viray', 'Sr.', 'Vergel', 'Sallan', 'Manila', 'Male', 123123123, 3212312, 'Single', '2015-04-01 00:00:00', ''),
+(4, 4, 543, 'Mangga', 21315123, 'sallan@gmail.com', '123', '2021-04-20 07:49:54', 'Yes', '123', 'Living with Relatives', 'Sallan', 'Jr.', 'Arnold', 'Clavio', 'Manila', 'Female', 12512312, 12315123, 'Married', '2011-04-01 00:00:00', ''),
+(5, 5, 124, 'Sarmiento', 123123, 'nathan@gmail.com', '123', '2021-04-20 08:22:54', 'Yes', '123', 'Rental/Boarder', 'Morales', 'Sr.', 'Nathan', 'Pacquiao', 'Manila', 'Male', 123123, 12315123, 'Married', '2008-02-20 00:00:00', ''),
 (6, 6, 622, 'Peralta Int.', 6123124, 'villanueva@gmail.com', '1233', '2021-05-07 08:40:27', 'No', '', 'Care Taker', 'Villanueva', '', 'John Carlo', 'Wanto', 'Mindanao', 'Male', 25723523, 16245, 'Married', '2013-02-07 00:00:00', ''),
 (7, 7, 722, 'Mangga Ext.', 1436245, 'uy@gmail.com', '123', '2021-05-07 08:42:16', 'No', '', 'Living with Relatives', 'Uy', '', 'Wilvin', 'Voltaire', 'Visayas', 'Female', 45145451, 61451451, 'Married', '2013-01-07 00:00:00', ''),
 (8, 8, 888, 'Dita', 1245145124, 'celestial@gmail.com', '123', '2021-05-07 08:49:54', 'Yes', '8971248', 'Care Taker', 'Celestial', '', 'Jayvee', 'Dragon', 'Tondo', 'Male', 1451451345, 14561456, 'Separated', '2012-06-07 00:00:00', ''),
