@@ -114,7 +114,7 @@
                     <div class="col-xl-10 px-3">
                         <div class="row g-0 my-2 bg-white shadow-sm">
                             <div class="row border-bottom shadow-sm g-0 rounded-top px-2 py-0 bg-primary">
-                                <div class= "fs-5 py-1 white">Step 1: Complaint Details</div>
+                                <div class= "fs-5 py-1 white">Complaint Details</div>
                             </div>
                             <div class="row px-2 g-2 px-3 pt-2 pb-3">
                                 <div class="col-md-6">
@@ -137,7 +137,7 @@
                     <div class="col-xl-10  px-3 py-2">
                         <div class="row g-0 my-2 bg-white shadow-sm">
                             <div class="row border g-0 rounded-top px-2 py-0 bg-primary">
-                                <div class= "fs-5 py-1 white" id="step-2">Step 2: Respondent/s <span class="fs-6">(attending barangay personnel)</span></div>
+                                <div class= "fs-5 py-1 white" id="step-2">Respondent/s <span class="fs-6">(attending barangay personnel)</span></div>
                             </div>
                         
                             <div class="row g-2 px-3 py-2 shadow" style = "max-height: 400px; overflow-y: auto;  ">
@@ -177,7 +177,7 @@
                         <div class="col-xl-10  px-3 py-2">
                             <div class="row g-0 my-2 bg-white shadow-sm" >
                                 <div class="row border g-0 rounded-top px-2 py-0 bg-primary">
-                                    <div class= "fs-5 py-1 white" id="step-2">Step 3: Involved Persons <span class="fs-6">(e.g Juan Dela Cruz, Asiong Salonga..)</span></div>
+                                    <div class= "fs-5 py-1 white" id="step-2">Involved Persons <span class="fs-6">(e.g Juan Dela Cruz, Asiong Salonga..)</span></div>
                                 </div>
                             
                                 <div class="row g-2 px-2 py-2" style = "max-height: 400px; overflow-y: auto;  ">
@@ -209,7 +209,7 @@
                     <div class="col-xl-10  px-3 ">
                         <div class="row g-0 my-2 bg-white shadow-sm">
                             <div class="row border g-0 rounded-top px-2 py-0 bg-primary">
-                                <div class= "fs-5 py-1 white" id="step-2">Step 4: Incident Information <span class="fs-6">(Details regarding the incident)</span></div>
+                                <div class= "fs-5 py-1 white" id="step-2">Incident Information <span class="fs-6">(Details regarding the incident)</span></div>
                             </div>
                             
                             <div class="row gx-3 py-2 px-3">
