@@ -8,33 +8,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $curr;?></title>
-   
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-
-    <link rel = "stylesheet" href="../css/sidebar.css" />
-    <link rel="stylesheet" href="../CSS/scroll.css">
+ 
+    <?php
+        include('link.php');
+    ?>
+    <script>
+           $(document).ready(function() {
+        $('#srec').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+                'copy', 'excel', 'pdf', 'print'
+            ]
+        } );
+    } );
+    </script>
 
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
     <style type = "text/css">
-      
-          table,td,tr,th{
-           border: 1px solid darkgrey;
-            text-align: left;
-            font-size: 0.95em;
-            padding: 100px;
-            font-family: 'Noto Sans Display', sans-serif;
-            
-        }   
-        td{
-            vertical-align: middle;
-     
-        }
+        
         .btng{
             width: 50px;
         }
@@ -85,7 +77,7 @@
         include ('../includes/sidebar.php');
     ?> 
         <div class="d-flex align-items-center">
-                <div class="container  mt-3">
+                <div class="container  mt-3 ">
                     <nav aria-label="breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
@@ -101,57 +93,62 @@
     </nav>
      <!--breadcrumb-->
     <form action="#" method= "POST">
-        <div class="container-fluid mx-4  px-4 mb-5">
-            <div class="row g-0">
-                <div class="row gx-4 gy-2">
-                    <div class="mx-auto col-xl-12 ">
-                        <div class="row g-0  rounded-top border" style= "background: #012f4e">
-                            <div class="col-xl-5 py-2 px-2">
-                                <nav class="nav nav-pills flex-column  flex-sm-row">
-                                  
-                                    <a class="flex-sm-fill text-sm-center nav-link  fs-6 active white" data-bs-toggle = "tab" href="#srecords">Service Records</a>
-                                    <a class="flex-sm-fill text-sm-center nav-link  fs-6   white" data-bs-toggle = "tab" href="#paymentsrecs">Payment Logs</a>
-                                    <a class="flex-sm-fill  text-sm-center nav-link fs-6 white"  href="#ser" data-bs-toggle = "tab">Offered Services </a>
-                             
-                                </nav>
-                            </div>
-                        </div>
+        <div class="container-fluid px-5 mb-5">
+                <div class="row">
+                    <div class="col-xl-2">
+                        <ul class="nav nav-pills flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href = "#srecords" aria-current="page" href="#" data-bs-toggle= "tab">Service Records</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#paymentsrecs" data-bs-toggle = "tab">Payment Logs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#ser" data-bs-toggle = "tab">Service List </a>
+                            </li>
+                        </ul>   
+                    </div>
+                    <div class="col-xl-10">
                         <div class="tab-content">
-                                <div class="tab-pane" id="ser">
-                                    <div class="row g-0 border-start border-end border-bottom border-secondary bg-white" >
-                                        <div class = "row py-2 g-0 px-5">
-                                            <div class="col-md-8 px-2">
-                                                <div class="btn-group" role="group">
-                                                    <a href = "#new-serv" data-bs-toggle="modal"  role="button" class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus"></i>&nbsp;New Service</a>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4  px-2" >
-                                                <div class="d-flex">
-                                                    <input type="text" name ="searchProp" placeholder = "Search property"class="form-control">
-                                                    <button class= "btn btn-outline-info mx-1 my-1"><i class= "fa fa-search"></i></button>
+                            <div class="tab-pane fade show active" id = "srecords">
 
+                                <?php include ('admin-osrecords.php');?>
+                       
+        
+                            </div>
+                            <div class="tab-pane fade show" id = "paymentsrecs">
+                                <?php
+                                    include('payment-logs-os.php');
+                                ?>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show" id="ser">
+                                    <div class="container g-0 pt-2">
+                                        <div class="row bg-599 text-white rounded-top">
+                                            <div class="fs-5 px-2"><i class="fa fa-hands-helping mx-1"></i>Available Services</div>
+                                        </div>
+                                        <div class="row border-end border-start border-bottom">
+                                            <div class="row pb-2 px-4 g-0 justify-content-end">
+                                                <div class="col-3 ">
+                                                    <div class="btn-group float-end">
+                                                        <a href = "#new-rental"  data-bs-toggle ="modal" role = "button"class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus mx-1"></i><span class= "wal">New Service</span></a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            
-                                        </div>
-                                        <div class="row  g-0">
-                                            <div class="col-xl-11 mx-2  mx-auto py-3  px-2" style= "overflow-x:auto;">
-                                                <table class="table bg-white table-hover " style= "min-width: 1000px"> 
-                                                    <thead>
-                                                        <tr>
-                                                            <td scope = "col" colspan = 4 style ="background: #012f6e; color: white; text-align: center">List of services</td>
-                                                        </tr>
-                                                        <tr>
-                            
-                                                            <th style = "text-align: left;">Service Name</th>
-                                                            <th style = "text-align: left;">Service Fee</th>
-                                                            <th style = "text-align: left; ">Availablility</th>
-                                                            <th style = "text-align: center;">Action</th>
-                                                
-                                                        </tr>
-                                                    
-                                                    </thead>           
-                                                    <tbody class= "table-hover">
+                                            <div class="row">
+                                                <div class="col-xl-12" style ="overflow:auto;">
+
+                                                    <table class= "table table-bordered table-striped" style= "min-width: 900px;">
+                                                        
+                                                        <thead class= "bg-light">
+                                                            <tr>
+                                                                <th style = "text-align: left;">Service Name</th>
+                                                                <th style = "text-align: left;">Service Fee</th>
+                                                                <th style = "text-align: left; ">Availablility</th>
+                                                                <th style = "text-align: center;">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
                                                         <tr>
                                                             <td scope="col" style = "text-align: left">Seminar (droga)</td>
                                                             <td scope="col" style = "text-align: left">20 PHP</td>
@@ -168,40 +165,33 @@
                                                                     </div>
                                                             </td>
                                                         </tr>
-                                                    </tbody>
-                                                </table>                        
-                                            </div>   
+                                                        <tr>
+                                                            <td scope="col" style = "text-align: left">Seminar (droga)</td>
+                                                            <td scope="col" style = "text-align: left">20 PHP</td>
+                                                            <td scope="col" style = "text-align: left">Available</td>
+                                                            <td scope="col" style = "text-align: center">
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                        <button  type="button" href ="#check-service" data-bs-toggle="modal" role="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class = "wal">View</span></button>
+                                                                    </div>
+                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                        <a href ="#edit-service" data-bs-toggle ="modal" role ="button" class="btn  btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
+                                                                    </div>
+                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                        <a type="button" href ="#delete-service" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class = "wal">Delete</span></a>
+                                                                    </div>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
-                                        
-                                    </div>
-                                    <div class="row py-2">
-
-<nav aria-label="Page navigation example">
-<ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-</ul>
-</nav>
-</div>
-
-                                </div>
-                                <div class="tab-pane active" id="srecords">
-                                    <?php include('admin-osrecords.php');?>
-                                    
-                                    
-                                </div>      
-                                <div class="tab-pane" id="paymentsrecs">
-                                    <?php include ('payment-logs-os.php');?>
-                               
-                                </div>
-                        </div>
                             </div>
+                            
                         </div>
-                    </div> 
-                </div>     
+
+                    </div>
+                
             </div>         
         </div>
 </div>
@@ -434,7 +424,7 @@
             </div>
         </div>
         <form action="" method ="POST">
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js">
+
     </script>
     <script>
         $(document).ready(function() {

@@ -1,4 +1,62 @@
-<div class="row g-0 border-end border-start border-bottom bg-white border-secondary" >
+
+                                 <div class="container g-0 pt-2">
+                                        <div class="row bg-599 text-white rounded-top">
+                                            <div class="fs-5 px-2"><i class="fa fa-clipboard-list mx-1"></i>Service Records</div>
+
+                                        </div>
+                                        <div class="row bg-white border-end border-start border-bottom py-3">
+                                            <div class="row pb-2 px-4 g-0 justify-content-end">
+                                            <div class="col-3 ">
+                                                <div class="btn-group float-end">
+                                                <a href = "#new-service"  data-bs-toggle ="modal" role = "button"class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus mx-1"></i><span class= "wal">Walk-in Service</span></a>
+                                                </div>
+                                            </div>
+                                            <div class="row g-0">
+                                                <table class= "table table-bordered table-striped "id = "srec">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style = "text-align: left;">Status</th>
+                                                            <th style = "text-align: left;">Requestor</th>
+                                                            <th style = "text-align: left; ">Service </th>        
+                                                            <th style = "text-align: left;"> Fee</th>
+                                                            <th style = "text-align: left;;">Date</th>
+                                                            <th style = "text-align: center;">Action</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody><tr>
+                                                        <td scope="col" style = "text-align: left">On-going</td>
+                                                        <td scope="col" style = "text-align: left">Tobirama Uchiha</td>
+                                                        <td scope="col" style = "text-align: left">Drug Seminar</td>
+                                                        <td style = "text-align: right;">₱40.00 </td>
+                                                        <td scope="col" style = "text-align: left">10/16/2021,21:12:08</td>
+                                                        
+                                                        <td scope="col" style = "text-align: center">
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <button  type="button" href ="#check-srecord" data-bs-toggle="modal" role="button" class="btn  btn-primary"><i class = "fa fa-eye mx-1"></i><span class ="wal">View</span>    </button>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a href ="#edit-srecord" data-bs-toggle ="modal" role ="button" class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class = "wal">Edit</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="#delete-srecord" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</span></a>
+                                                                </div>        
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info text-white"><i class = "fa fa-paper-plane  mx-1"></i><span class= "wal">Send</span></a>
+                                                                </div>  
+                                                        </td>
+                                                        </tr>
+                                                    </tbody>
+
+                                                </table>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                           
+
+<!--<div class="row g-0 border-end border-start border-bottom bg-white border-secondary" >
                                 <div class = "row py-2 g-0 ">
                                             <div class="col-md-8 px-2">
                                                 <div class="btn-group" role="group">
@@ -78,7 +136,7 @@
         <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
     </nav>
-    </div>   
+    </div> -->
 
 
 
@@ -86,7 +144,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content g-0 blue">
                     <div class="modal-header blue white ">
-                        <h5 class="modal-title white" >&nbsp;<i class = "fa fa-plus"></i>&nbsp;&nbsp;New Service Record</h5>
+                        <div class="modal-title white" >&nbsp;<i class = "fa fa-plus"></i>&nbsp;&nbsp;New Service Record</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -181,7 +239,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content g-0 blue">
                     <div class="modal-header blue white ">
-                        <h5 class="modal-title white" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Edit Service Record</h5>
+                        <div class="modal-title white" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Edit Service Record</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -295,7 +353,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content g-0 blue">
                     <div class="modal-header blue white ">
-                        <h5 class="modal-title white" >&nbsp;<i class = "fa fa-eye"></i>&nbsp;&nbsp;Service Record</h5>
+                        <div class="modal-title white" >&nbsp;<i class = "fa fa-eye"></i>&nbsp;&nbsp;Service Record</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>

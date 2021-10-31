@@ -9,13 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $curr;?></title>
    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-
+    <?php
+    
+        include('link.php');
+    ?>
+    <script>
+          $(document).ready(function() {
+        $('#reqc').DataTable();
+    } );
+    </script>
+    
     <link rel = "stylesheet" href="../css/sidebar.css" />
     <link rel="stylesheet" href="../CSS/scrollbar.css">
 
@@ -25,9 +28,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
         table,td,tr,th{
             border: 1px solid #d3d3d3;
-            text-align: left;
-            font-size: 1em;
-            padding: 100px;
+          
             font-family: 'Noto Sans Display', sans-serif;
             
         }
@@ -147,40 +148,21 @@
                     <div class="row g-0  rounded-top border white border-start border-end border-bottom border-secondary" style= "background: #021f4e">
                         <div class="col-xl-5  px-2  ">
                             <div class="row ">
-                                <h5 class="flex-sm-fill  text-sm-left nav-link  " aria-current="page" >
-                                    <i class= "fa fa-exclamation-circle me-2"></i>Certification Request</h5>
+                                <div class="flex-sm-fill  text-sm-left py-1 fs-5 " aria-current="page" >
+                                    <i class= "fa fa-exclamation-circle me-2"></i>Certification Request</div>
                             </div>
         
 
                         </div>
                         
                     </div>
-                    <div class="row g-0 border bg-white border-start border-end border-bottom border-secondary" >
-                      
-
-                        <div class = "row py-2 g-0 px-3">
-                            <div class="col-md-8 px-1">
-                              
-                            </div>
-                            <div class="col-md-4 px-4  " >
-                                <div class="d-flex">
-                            
-                                <input type="text" name ="searchCert" placeholder = "Search Record" class="form-control">
-                                <button class= "btn btn-outline-info mx-1 my-1"><i class= "fa fa-search"></i></button>
-
-                                </div>
+                    <div class="row g-0 border bg-white border-start border-end border-bottom " >
                         
-                            
-                            </div>
-                            
-                        </div>
-                        <div class="row g-0">
-                            <div class="col-xl-11 mx-2  mx-auto py-3  px-2" style= "overflow-x:auto;">
-                                    <table class="table bg-white table-hover table-bordered" style= "min-width: 900px;"> 
+                            <div class="col px-5 py-3" style= "overflow-x:auto;" >
+                               
+                                    <table class="table bg-white table-hover table-bordered" id = "reqc" style= "min-width: 1000px;"> 
                                         <thead class = "bg-light">
-                                            <tr>
-                                           
-                                            </tr>
+                                        
                                             <tr>
                 
 
@@ -247,20 +229,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row py-2">
-
-                        <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div> 
+                 </div> 
         </div>
 
 
@@ -504,7 +473,7 @@
     
 
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js">
+
     </script>
     <script>
         $(document).ready(function() {

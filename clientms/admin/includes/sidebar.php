@@ -73,10 +73,10 @@
              <br>Barangay 599 <br>E-barangay<br>
                 <img src = "../IMAGES/admin-logo.png" class = "py-1"style = "width: 60px;"><br>
                 <div class="btn-group">
-                    <a href="#" class="btn btn-transparent"><i class="fa fa-user text-primary"></i></a>
+                    <a href="#" class="btn btn-transparent"><i class="fa fa-user fs-4 text-primary"></i></a>
                     
-                    <a href="#" class="btn btn-transparent"><i class="fa fa-cog text-primary"></i></a>
-                    <a href="#" class="btn btn-transparent shadow-0"><i class="fa fa-bell text-primary"></i></a>
+                    <a href="#" class="btn btn-transparent"><i class="fa fa-cog  fs-4 text-primary"></i></a>
+                    <a href="#" class="btn btn-transparent shadow-0"><i class="fa fa-bell fs-4 text-primary"></i></a>
                 </div>
                 <br>
                 <div class="btn-group my-2" role="group" aria-label="Basic example">

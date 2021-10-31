@@ -1,22 +1,4 @@
-<?php 
-    $curr ="Manage Puroks";
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $curr;?></title>
-   
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-   
-    <link rel = "stylesheet" href="../css/sidebar.css" />
-    <link rel="stylesheet" href="../CSS/scrollbar.css">
 
-	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
     <style type = "text/css">
       @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@500&display=swap'); 
@@ -35,31 +17,13 @@
           
                 
     </style>
-</head>
-<body>
-    <?php 
-        include ('../includes/sidebar.php');
-    ?> 
+
      <!--breadcrumb-->
-     <div class="d-flex align-items-center">
-                <div class="container  mt-3">
-                    <nav aria-label="breadcrumb">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                      
-                                <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-e-content.php"><i class="fa fa-cog"></i>&nbsp;E Content</a></li>
-                                <li class="breadcrumb-item active"><a href="#"><i class="fa fa-map  text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
-                            </ol>
-                        </nav>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </nav>
+     
 <form action="purok-streets.php" method = "GET">
-    <div class="container-fluid border ">
-        <div class="row g-3 p-5  border justify-content-center">
+    <div class="row bg-light py-3">
+    <div class="container ">
+        <div class="row g-3   justify-content-center">
             
 
        
@@ -207,7 +171,4 @@
         </div>
     </form>
 
-
-   
-</body>
-</html>
+    </div></div>

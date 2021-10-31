@@ -1,4 +1,122 @@
-<div class="row g-0 shadow-lg bg-light border-end border-start border-bottom border-secondary " >
+                                <div class="container g-0 mb-5">
+                                    <div class="row shadow-sm py-1 bg-599 text-white rounded-top">
+                                        <div class="fs-5 px-2"><i class="fa fa-money-bill mx-1"></i>Payment Logs</div>
+                                    </div>
+                                        <div class="row bg-white py-4 border-start border-bottom border-end">
+                                            <div class="col-xl-6" style = "overflow:auto;">
+                                                <table class= "table table-striped table-bordered" id = "cpay" style = "min-width: 200px;max-heigth: 600px">
+                                                    <thead>
+                                                            <th style = "text-align: left">Rental</th>
+                                                            <th style = "text-align: left">Requestor</th>
+                                                            <th style = "text-align: left">Proof of Payment</th>
+                                                 
+                                                       </thead>  
+                                                        <tbody>
+                                                                <tr>
+                                                                    <td scope="col" style = "text-align: left">Barangay Van</td>
+                                                                    
+                                                                    <td scope="col" style = "text-align: left">ekoc omsim</td>
+                                                                    <td class= "text-center">
+                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                        <a type="" style= " width:100px;"href ="#"class="link link-light bg-primary rounded"><i class = "fa fa-eye me-1"></i><span class= "wal">Payment</span></a>
+                                                                    </div>
+                                                                    </td>
+                                                                    
+                                                        
+                                                                    
+                                                                </tr>
+                                                                <tr>
+                                                                    <td scope="col" style = "text-align: left">Barangay Hall</td>
+                                                                    
+                                                                    <td scope="col" style = "text-align: left">ekoc omsim</td>
+                                                                    <td class= "text-center">
+                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                        <a type="" style= " width:100px;"href ="#"class="link link-light bg-primary rounded"><i class = "fa fa-eye me-1"></i><span class= "wal">Payment</span></a>
+                                                                    </div>
+                                                                    </td>
+                                                                    
+                                                        
+                                                                    
+                                                                </tr>
+                                                                <tr>
+                                                                    <td scope="col" style = "text-align: left">Library</td>
+                                                                    
+                                                                    <td scope="col" style = "text-align: left">ekoc omsim</td>
+                                                                    <td class= "text-center">
+                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                        <a type="" style= " width:100px;"href ="#"class="link link-light  bg-primary rounded"><i class = "fa fa-eye me-1"></i><span class= "wal">Payment</span></a>
+                                                                    </div>
+                                                                    </td>
+                                                                    
+                                                        
+                                                                    
+                                                                </tr>
+                                                        </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-xl-6" style= "overflow: auto;">
+                                            <div class="row g-0 px-1" style= "max-height: 600px;">
+                                                    <div class="row" >
+                                                    <div class="col-md-5 ">
+                                                            <label for="payid" class="fs-5">Payment ID</label>
+                                                            <input id = "payid" type="text" class= "form-control" placeholder = "Payor Name" value = "213213123" readonly style = "text-align: left;">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 ">
+                                                            <label for="payname" class="fs-5">Requestor Name</label>
+                                                            <input id = "payname" type="text" class= "form-control" placeholder = "Payor Name"  readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                     
+                                                        <div class="col-md-6 ">
+                                                            <label for="payed" class="fs-5">Paid</label>
+                                                            <div class="input-group">
+                                                                <button class="btn btn-secondary disabled">₱</button>
+                                                                <input id = "payed" type="text" class= "form-control" placeholder = "Payor Name" value = "50" style= "text-align: right"readonly > 
+
+                                                            </div>
+                                                    
+                                                        </div>
+                                                        <div class="col-md-6 " class="fs-5">
+                                                            <label for="payed" class= "fs-5">Payable</label>
+                                                            <div class="input-group">
+                                                                <button class="btn btn-secondary disabled">₱</button>
+                                                                <input id = "payed" type="text" class= "form-control" placeholder = "Payor Name" value = "50" style= "text-align: right"readonly> 
+
+                                                            </div>
+                                                        
+                                                        </div>
+                                                        <label for="payed" class="fs-5 mb-2">Proof of Payment- <a href= "../images/proof.jpg" download target = "_blank" class= "text-decoration-none"><i class= "fa fa-download"></i>Download proof</label></a>
+                                                        
+                                                        <div class="row justify-content-center text-center">
+                                                            <div class="col-md-4"> 
+                                                                <a align ="center" href = "#proof" data-bs-toggle ="modal" style= "max-height: 400px"><img src="../images/proof.jpg" alt="proof of payment" class= "img-fluid"></a>
+                                                            </div>
+                                                        </div>                                                    
+                                                    </div>
+                                                    <div class="row justify-content-end">
+                                                        <div class="col" align= "right">
+
+                                         
+                                                        <div class="btn-group">
+                                                        <div class="btn-group  mb-1  " role="group" aria-label="First group">
+                                                            <a href ="#approve-proof "class="btn btn-success mx-1" data-bs-toggle=  "modal" style = ""><i class = "fa fa-check mx-1 "></i><span class= "wal">Accept</span></a>
+                                                        </div>
+                                                            <div class="btn-group  mb-1  " role="group" aria-label="First group">
+                                                            <a href ="#decline-proof "class="btn btn-danger mx-1" data-bs-toggle=  "modal" style= ""><i class = "fa fa-times fa-1x mx-1 "></i><span class= "wal"> Decline</span></a>
+                                                        </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>                     
+                                            </div>
+                                    </div>
+                                    </div>                        
+    
+              
+
+<!--<div class="row g-0 shadow-lg bg-light border-end border-start border-bottom border-secondary " >
                                     <div class="col-md-6 px-3 py-5 " style= "max-height: 450px;overflow-y:auto;">
                                         <table class= "table pay border border-secondary shadow-md">
                                             <thead class="bg-primary white">
@@ -113,7 +231,7 @@
 
 
                                     </form>
-                                </div>
+                                </div>-->
 
         <!--modal-->
         <div class="modal fade" id = "proof" tab-idndex = "-1">
