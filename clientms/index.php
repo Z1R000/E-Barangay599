@@ -4,8 +4,8 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-
+	<title>Welcome </title>
+    <link rel="icon" href="admin/images/Barangay.png" type="image/icon type">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
@@ -13,33 +13,75 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="../admin/css/scrollbar.css">
     <link rel="stylesheet" href="front.css">
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
+            .bg-bar{
+            background-image: url('admin/images/barangaybackground.png');
+            background-size: cover;
+            
 
+        }
+        .bg-599{
+            background: #012f4e;
+            color:#fff;
+        }
+        .color-599{
+            color:#012f4e;
+        }
+        .abs{
+            margin:0;
+            padding: 0;
+            right: -100px;
+            left: 0px;
+            top:120px;
+            bottom: px;
+
+        }
+        .abs img{
+            width: 300px;
+        }
+        .cmor{
+            border-radius: 30px;
+            width: 100px;
+            
+        }
+        .cmor:hover{
+            background:white;
+            color: #000;
+        }
     </style>
     
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark op positon-fixed mb-5 ">
+<nav class="navbar navbar-expand-lg navbar-dark bg-599 op positon-fixed mb-5 ">
   <div class="container-fluid opacity-25">
-    <a class="navbar-brand" href="#"><img src="admin/images/barangay.png" alt="" style= "width: 28px;"></a>
+    <a class="navbar-brand " href="#"><img src="admin/images/barangay.png" alt="" style= "width: 30px;"><span class= "px-1 fs-6">Barangay 599</span></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse opacity-100" id="navbarText">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
         <li class="nav-item fs-6">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item fs-6">
-          <a class="nav-link" href="#">About Us</a>
+          <a class="nav-link" href="#au">About Us</a>
         </li>
         <li class="nav-item fs-6">
-          <a class="nav-link" href="#">Contact Us</a>
+          <a class="nav-link" href="#contact">Contact Us</a>
+        </li>
+        <li class="nav-item dropdown fs-6">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle= "dropdown">More</a>
+          <ul class= "dropdown-menu">
+            <li><a class="dropdown-item" href="#of">Features</a></li>
+            <li><a class="dropdown-item" href="create-resident.php">Register</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Separated link</a></li>
+
+          </ul>
         </li>
       </ul>
     
@@ -53,30 +95,175 @@
   
 </nav>
 <br><br>
-<div class="masthead p-5"  style= "margin-bottom:100px;">
-    <div class="container px-3 position-relative">
-        <div class="row justify-content-center">
-            <div class="col-xl-8 col-lg-10 col-md-10 col-sm-12 col-xs-12 border-0 bg-heb rounded">
-                <h2 class= " text-center text-white p-1">
-                    WELCOME TO BARANGAY 599's: E-barangay Information Management System
-                </h2>
-                <div class="row justify-content-center text-center" >
-                    <label for = "reg" class = "text-white">A resident of the barangay but not yet registered?</label>
-                    <div class="col-xl-3 mx-auto" align ="center">
-                        <div class="btn-group mx-auto my-2" >
-                            <a class= "btn btn-primary w-100" href = "create-resident.php" id = "reg" target = "_blank">
-                        Click Here
-                    </a>
+<div class="masthead p-2 mb-3">
+    <div class="container px-1">
+        <div class="row">
+           <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12 py-5 mt-5 align-items-center">
+               <div class="row">
+                    <div class="display-6 text-uppercase text-white " style= "letter-spacing: 1.9px;">
+                        Welcome to  BARANGAY 599, ZONE 59, DISTRICT VI : E-barangay Information Management System
+                    </div>
+               </div>
+                <div class="row my-2">
+                    <div class="col-xl-6 text-white">
+
+                    <label for="" class="fs-6 small">Resident of the barangay but not yet registered ?</label><br>
+                    <div class="btn-group my-2">
+                        <a href="create-resident.php" class="btn btn-primary">Click Here !</a>
+                    </div>
+                    </div>
                 </div>
-            </div>
-                
-                </div>
-                
-            </div>
-        </div>
+           </div>
+         
+           </div>
+           </div>
+           </div>
+       </div>
     </div>    
 </div>
-<section class="features-icons bg-light text-center py-5 ">
+
+<section class= "offer mt-5" id = "of">
+                <h2 class="page-section-heading text-center fs-4 text-uppercase" >What we Offer</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom divider-light">
+                    <div class="divider-custom-line bg-599"></div>
+                    <div class="divider-custom-icon "><i class="fas fa-question fa-2x"></i></div>
+                    <div class="divider-custom-line bg-599"></div>
+                </div>
+                <div class="container text-center">
+                <div class="row  py-3 px-5">
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi-window m-auto"></i></div>
+                            <h3>Fully Responsiveness</h3>
+                            <p class="lead mb-0">The system can cater to on any device, regardless of screen size!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex" ><i class="bi bi-shield m-auto "></i></div>
+                            <h3>Security</h3>
+                            <p class="lead mb-0">Ensures the protection of all user's information handled by the system.  </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex" ><i class="bi-terminal m-auto"></i></div>
+                            <h3>Convenience</h3>
+                            <p class="lead mb-0">Descriptive features which can easily be comprehended by the users.</p>
+                        </div>
+                    </div>
+                    <div class="row p-5 justify-content-center">
+                  
+                    <div class="col-lg-12 border-bottom">
+                        
+                    </div>
+                          
+                    </div>
+                </div>
+                
+                </div>
+
+</section>
+<section class="bg-white text-white py-5 mb-5 border" id = "au"> 
+                <h2 class="page-section-heading text-center fs-4 text-uppercase text-dark">About Us</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom divider-light">
+                    <div class="divider-custom-line bg-599"></div>
+                    <div class="divider-custom-icon "><i class="fas fa-scroll fa-2x"></i></div>
+                    <div class="divider-custom-line bg-599"></div>
+                </div>
+    <div class="container-fluid px-5">
+        <div class="container mx-auto">
+            <div class="row g-0 py-1">
+                <div class="col-xl-11 col-lg-10 mx-auto border border-0 fs-5 rounded text-center about-us px-5" style= "letter-spacing: 3px;">
+                Barangay 599 has been one of the forerunning barangays along the streets of “Victorino Mapa” and as stated by a corresponding local of the barangay it has been established way before she was born which was during the early 1970’s and since then, not many integrations were made nor committed by the municipality. According to the barangay’s secretary, there are about 5,600 registered citizens. Barangay 599’s roster of officials is composed of the Barangay Chairman (Jose Milo L. Lacatan), Barangay Secretary (Maria Cecilia C. Dela Cruz),.<span id = "dot">....</span><span style= "display:none;" id= "simor">  SK Chairman and Kagawads (Erwin L. Sampaga, Florante V. Bonagua, Crisantro G. Lorica, Alexander S. Ceño, Nelson L. Labrador, Marivic Villareal). Supporting these leaders are the 20 barangay enforcers, 20 “lupontagapamayapa’s”, 3 advisers and being composed of 10 puroks, 10 purok leaders. However, mostly the secretary’s team and the chairman handle the processes, queries, and requests of their residents..</span>
+                <div class="col-xl-3 mx-auto mt-4 mb-2">
+                    <div class="btn-group">
+                        <a  onclick ="seemor();" id = "semorbtn" class="btn btn-outline-light text-white">See More</a>
+                    </div>
+                </div>
+                </div>
+                <script>
+                    function seemor(){
+                        var x = document.getElementById('dot');
+                        var y= document.getElementById('simor');
+                        var z= document.getElementById('semorbtn');
+
+                        if (x.style.display=== "none"){
+                            x.style.display = "inline";
+                            z.innerHTML ="See More";
+                            y.style.display = "none";
+                        }
+                        else{
+                            x.style.display = "none";
+                            z.innerHTML ="See Less";
+                            y.style.display = "inline";
+                        }
+
+                    }
+                    
+                </script>
+            
+            </div>
+        </div>
+
+    </div>
+</section>
+<section class="contact bg-info py-4">
+                <h2 class="page-section-heading text-center fs-4 text-uppercase text-white" id= "contact">Contact Us</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom divider-light">
+                    <div class="divider-custom-line bg-599"></div>
+                    <div class="divider-custom-icon "><i class="fas fa-phone-square fa-2x"></i></div>
+                    <div class="divider-custom-line bg-599"></div>
+                </div>
+                <div class="container mx-auto">
+                    <div class="row g-2 justify-content-center">
+                        <div class="col-xl-3  ">
+                            <div class="text-center py-3 bg-light rounded" style= "height: 190px;max-height: 250px;">
+                                <i class="fa fa-mobile-alt fa-4x">
+                                </i>
+                                <br>
+                                <p class= "text-center fs-4 px-3" >
+                                    Contact us here: 09123456789
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-xl-3"><div class="text-center py-3 bg-light rounded" style= "height: 190px;max-height: 250px;">
+                                <i class="fab fa-facebook fa-4x">
+                                </i>
+                                <br>
+                                <p class= "text-center fs-4 px-3" >
+                                    Contact us here: <a href ="#" class= "text-decoration-none"> facebook.com/BRGY-599</a>
+                                </p>
+                            </div></div>
+                    </div>
+                    <div class="row g-2 my-1 justify-content-center">
+                        <div class="col-xl-3  ">
+                            <div class="text-center py-3 bg-light rounded" style= "height: 190px;max-height: 220px;">
+                                <i class="fa fa-compass fa-4x">
+                                </i>
+                                <br>
+                                <p class= "text-center fs-4 px-3" >
+                                    Contact us here:<Br> Victorino Mapa Sta Mesa Manila
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-xl-3"><div class="text-center py-3 bg-light rounded" style= "height: 190px;max-height: 250px;">
+                                <i class="fa fa-at fa-4x">
+                                </i>
+                                <br>
+                                <p class= "text-center fs-4" >
+                                    Contact us here: barangay599@gmail.com
+                                </p>
+                            </div></div>
+                    </div>
+                </div>
+
+</section>
+<!--
+<section class="features-icons bg-light text-center ">
             <div class="container">
                 <div class="row border-bottom border-primary pb-3 text-center">
                     <h4>E-barangay 599 is...</h4>
@@ -155,47 +342,127 @@
         </div>
     </div>
 </div>
+<section class="features-icons py-2 bg-white text-center">
+            
+<div class="container">
+<div class="row  border-primary pb-3 text-center">
+                    <h4>Barangay 599 Official's Roster</h4>
+                </div>
+  <div class="row g-2 justify-content-center">
+    <div class="col-2 ">
+        <div class="row g-0 shadow-lg">
+            <div class="row g-0 bg-599  rounded-top">
+                <div class="fs-5">Punong Barangay</div>
+            </div>
+            <div class="row g-0 justify-content-center bg-bar">
+                <div class="col-8 p-3 my-2">
+                    <img src="admin/images/user-res.png" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="row g-0 bg-light text-dark">
+                <div class="fs-5">Jose Milo L. Lacatan</div>
+            </div>
+        </div>
+    </div>
+    
+  </div>
+</div>
+            
+<div class="container py-2">
+    
+  <div class="row g-2 justify-content-center">
+    <div class="col-2"   >
+        <div class="row g-0 shadow-lg" >
+            <div class="row g-0 bg-599  rounded-top">
+                <div class="fs-5">Sk Chairman</div>
+            </div>
+            <div class="row g-0 justify-content-center bg-bar">
+                <div class="col-8 p-3 my-2">
+                    <img src="admin/images/user-res.png" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="row g-0 bg-light text-dark align-items-center"style= "height: 60px;">
+                <div class="fs-5">Miko M Custodio</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="row g-0 shadow-lg">
+            <div class="row g-0 bg-599  rounded-top">
+                <div class="fs-5">Secretary</div>
+            </div>
+            <div class="row g-0 justify-content-center bg-bar">
+                <div class="col-8 p-3 my-2">
+                    <img src="admin/images/user-res.png" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="row g-0 bg-light text-dark align-items-center" style= "height: 60px;">
+                <div class="fs-5">Maria Cecilia C. Dela Cruz</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-2">
+    <div class="row g-0 shadow-lg">
+            <div class="row g-0 bg-599  rounded-top">
+                <div class="fs-5">Treasurer</div>
+            </div>
+            <div class="row g-0 justify-content-center bg-bar">
+                <div class="col-8 p-3 my-2">
+                    <img src="admin/images/user-res.png" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="row g-0 bg-light text-dark">
+                <div class="fs-5">Imelda G. Padilla</div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+        
+</section>
+-->
 <div class="row">
     <br><br><br>
     <br><br><br>
     <br><br><br>
 
 
-</div>
+</div> 
 
-<footer class="footer bg-dark border-top">
+
+<footer class="footer bg-599  border-top">
             <div class="container foot">
                 <div class="row">
                     <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
                         <ul class="list-inline mb-2">
-                            <li class="list-inline-item"><a href="#!">About</a></li>
-                            <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Contact</a></li>
-                            <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Terms of Use</a></li>
-                            <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Privacy Policy</a></li>
+                            <li class="list-inline-item"><a href="#au">About</a></li>
+                          
+                            <li class="list-inline-item"><a href="#contact">Contact</a></li>
+                            <li class="list-inline-item"></li>
+                      
                         </ul>
-                        <p class="text-muted small mb-4 mb-lg-0">&copy; E-barangay 599 2021. All Rights Reserved.</p>
+                        <p class="text-muted  mb-4 mb-lg-0">&copy; E-barangay 599 2021. All Rights Reserved.</p>
                     </div>
                     <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                         <ul class="list-inline mb-0">
                             <li class="list-inline-item me-4">
-                                <a href="#!"><i class="bi-facebook fs-3"></i></a>
+                                <a href="#!"><i class="bi-facebook fs-4"></i></a>
                             </li>
                             <li class="list-inline-item me-4">
-                                <a href="#!"><i class="bi-telephone fs-3"></i></a>
+                                <a href="#!"><i class="fa fa-at fs-4"></i></a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="#!"><i class="bi-window fs-3"></i></a>
+                                <a href="#!"><i class="fa fa-compass fs-4"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!"><i class="fa fa-mobile-alt fs-4"></i></a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </footer>
-
-
+   
 
 
 <div class="modal fade" id = "signin-choice" tab-idndex = "-1">
