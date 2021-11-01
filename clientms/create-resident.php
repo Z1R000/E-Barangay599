@@ -293,6 +293,17 @@ if (mysqli_connect_errno())
                                                 </div>
                                         </div>
                                         <div class="row g-0 mb-3 px-4">
+                                        
+                                        <label for="cs" class="col-sm-2 col-form-label  fs-4">Attach Valid ID <br><span class= "fs-6 text-muted small"> (Aydentipikasyon)</span></label>
+                                            <div class="col-xl-5">
+                                                <br>
+                                                <div class="mb-3">
+                                                
+                                                <input class="form-control form-control " id="formFileSm" type="file">
+                                                </div>
+                                            </div>
+                                    </div>
+                                        <div class="row g-0 mb-3 px-4">
                                                 <label for="sss" class="col-xl-2 fs-4 py-0">SSS Number<br></label>
                                             
                                                 <div class="col-xl-6 col-sm-12">
@@ -460,7 +471,27 @@ if (mysqli_connect_errno())
                                             <input type="password" id = "confirm_password" class="form-control">
                                         </div>
                                     </div>
+                                    <div class="row g-0 mb-3 px-4">
+                                    
+                                        <div class="col-xl-6 col-sm-12">
+                                       
+                                        <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="privacy">
+                                        <label class="form-check-label fs-6" for="privacy">
+                                            I have read and agreed with the <a href ="privacy-policy.php" target="_blank"><i>privacy policy</i></a>
+                                        </label>
+                                        </div>
+                                        <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            Checked checkbox
+                                        </label>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
+                                
                                 <div class="row g-0">
                                      <div class="col-9">
 
