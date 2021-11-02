@@ -178,7 +178,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    
+
                 </nav>
                 <div class="sub-heard-part">
                     <ol class="breadcrumb m-b-0" style="text-indent: 15px; margin-left: 2.5%;">
@@ -245,7 +245,16 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                         <label for="formFileSm" class="form-label">Upload Proof of Payment<span class="fs-6 text-muted"> (JPEG or PNG format)</span></label>
 
                                     </div>
+                                    <div class="col-xl-3">
 
+                                    </div>
+                                    <div class="col-xl-3">
+                                        <label for="ctype" class="fs-6 fw-bold">Payment Details</label>
+
+                                    </div>
+                                    <div class="col-xl-3">
+
+                                    </div>
 
                                 </div>
 
@@ -253,6 +262,32 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                     <div class="col-xl-3">
                                         <input class="form-control form-control-sm" id="formFileSm" type="file">
                                         <br>
+                                    </div>
+                                    <div class="col-xl-3">
+
+                                    </div>
+                                    <div class="col-xl-3">
+                                        <img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
+
+                                    </div>
+                                    <div class="col-xl-1">
+
+                                        <img src="images/images.jpg" alt="Girl in a jacket" width="80" height="80">
+
+
+                                    </div>
+                                    <div class="col-xl-2">
+
+
+
+                                        <label for="ctype" style="font-size:130%; font-weight:600;">Francine Voltaire Ledesma <br><span style="font-size:90%;font-style:italic; font-weight:600;"> 09056602669</span></label>
+                                    </div>
+
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-xl-3">
+
                                     </div>
                                     <div class="col-xl-3 ">
 
