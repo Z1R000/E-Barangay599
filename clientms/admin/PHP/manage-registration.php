@@ -1,5 +1,5 @@
 <?php 
-    $curr ="Resident Registration";
+    $curr ="Manage Registration";
     session_start();
     error_reporting(0);
     $con = mysqli_connect("localhost","root","","clientmsdb");
@@ -9,64 +9,66 @@ if (mysqli_connect_errno())
   
   }
     include('includes/dbconnection.php');
-    
-        if(isset($_POST['submit']))
-    {
-          
-    $residenttype=$_POST['residenttype'];
-    $prk=$_POST['prk'];
-    $hunit=$_POST['hunit'];
-    $voter=$_POST['voter'];
-    $password=$_POST['password'];
-    $lname=$_POST['lname'];
-    $sf=$_POST['sf'];
-    $fname=$_POST['fname'];
-    $mname=$_POST['mname'];
-    $gend=$_POST['gend'];
-    $bdate=$_POST['bdate'];
-    $strt=$_POST['strt'];
-    $contact=$_POST['contact'];
-    $tin=$_POST['tin'];
-    $sss=$_POST['sss'];
-    $cstatus=$_POST['cstatus'];
-    $email=$_POST['email'];
-    $vp=$_POST['vp'];
-    $hm=$_POST['hm'];
-    
-    $sql="insert into tblresidentrequest (ResidentType,Purok,houseUnit,voter,LastName,Suffix,FirstName,MiddleName,Gender,BirthDate,streetName,Cellphnumber,tinNumber,sssNumber,CivilStatus,Email,Password,vPrecinct,HomeName)
-        values(:residenttype,:prk,:hunit,:voter,:lname,:sf,:fname,:mname,:gend,:bdate,:strt,:contact,:tin,:sss,:cstatus,:email,:password,:vp,:hm)";
-    $query=$dbh->prepare($sql);
-    $query->bindParam(':residenttype',$residenttype,PDO::PARAM_STR);
-    $query->bindParam(':prk',$prk,PDO::PARAM_STR);
-    $query->bindParam(':sf',$sf,PDO::PARAM_STR);
-    $query->bindParam(':hunit',$hunit,PDO::PARAM_STR);
-    $query->bindParam(':voter',$voter,PDO::PARAM_STR);
-    $query->bindParam(':vp',$vp,PDO::PARAM_STR);
-    $query->bindParam(':lname',$lname,PDO::PARAM_STR);
-    $query->bindParam(':fname',$fname,PDO::PARAM_STR);
-    $query->bindParam(':mname',$mname,PDO::PARAM_STR);
-    $query->bindParam(':gend',$gend,PDO::PARAM_STR);
-    $query->bindParam(':bdate',$bdate,PDO::PARAM_STR);
-    $query->bindParam(':strt',$strt,PDO::PARAM_STR);
-    $query->bindParam(':contact',$contact,PDO::PARAM_STR);
-    $query->bindParam(':tin',$tin,PDO::PARAM_STR);
-    $query->bindParam(':sss',$sss,PDO::PARAM_STR);
-    $query->bindParam(':hm',$hm,PDO::PARAM_STR);
-    $query->bindParam(':cstatus',$cstatus,PDO::PARAM_STR);
-    $query->bindParam(':email',$email,PDO::PARAM_STR);
-    $query->bindParam(':password',$password,PDO::PARAM_STR);
-    $query->execute();
-
-    $LastInsertId=$dbh->lastInsertId();
-    if ($LastInsertId>0) {
-        echo '<script>alert("Resident request has been sent.")</script>';
-    echo "<script>window.location.href ='create-resident.php'</script>";
-    }
-    else
-        {
-            echo '<script>alert("Something Went Wrong. Please try again")</script>';
-        }
-    }
+    if (strlen($_SESSION['clientmsaid']==0)) {
+        header('location:logout.php');
+        } else{
+            if(isset($_POST['submit']))
+            {
+                  
+            $residenttype=$_POST['residenttype'];
+            $prk=$_POST['prk'];
+            $hunit=$_POST['hunit'];
+            $voter=$_POST['voter'];
+            $password=$_POST['password'];
+            $lname=$_POST['lname'];
+            $sf=$_POST['sf'];
+            $fname=$_POST['fname'];
+            $mname=$_POST['mname'];
+            $gend=$_POST['gend'];
+            $bdate=$_POST['bdate'];
+            $strt=$_POST['strt'];
+            $contact=$_POST['contact'];
+            $tin=$_POST['tin'];
+            $sss=$_POST['sss'];
+            $cstatus=$_POST['cstatus'];
+            $email=$_POST['email'];
+            $vp=$_POST['vp'];
+            $hm=$_POST['hm'];
+            
+            $sql="insert into tblresident (ResidentType,Purok,houseUnit,voter,LastName,Suffix,FirstName,MiddleName,Gender,BirthDate,streetName,Cellphnumber,tinNumber,sssNumber,CivilStatus,Email,Password,vPrecinct,HomeName)
+                values(:residenttype,:prk,:hunit,:voter,:lname,:sf,:fname,:mname,:gend,:bdate,:strt,:contact,:tin,:sss,:cstatus,:email,:password,:vp,:hm)";
+            $query=$dbh->prepare($sql);
+            $query->bindParam(':residenttype',$residenttype,PDO::PARAM_STR);
+            $query->bindParam(':prk',$prk,PDO::PARAM_STR);
+            $query->bindParam(':sf',$sf,PDO::PARAM_STR);
+            $query->bindParam(':hunit',$hunit,PDO::PARAM_STR);
+            $query->bindParam(':voter',$voter,PDO::PARAM_STR);
+            $query->bindParam(':vp',$vp,PDO::PARAM_STR);
+            $query->bindParam(':lname',$lname,PDO::PARAM_STR);
+            $query->bindParam(':fname',$fname,PDO::PARAM_STR);
+            $query->bindParam(':mname',$mname,PDO::PARAM_STR);
+            $query->bindParam(':gend',$gend,PDO::PARAM_STR);
+            $query->bindParam(':bdate',$bdate,PDO::PARAM_STR);
+            $query->bindParam(':strt',$strt,PDO::PARAM_STR);
+            $query->bindParam(':contact',$contact,PDO::PARAM_STR);
+            $query->bindParam(':tin',$tin,PDO::PARAM_STR);
+            $query->bindParam(':sss',$sss,PDO::PARAM_STR);
+            $query->bindParam(':hm',$hm,PDO::PARAM_STR);
+            $query->bindParam(':cstatus',$cstatus,PDO::PARAM_STR);
+            $query->bindParam(':email',$email,PDO::PARAM_STR);
+            $query->bindParam(':password',$password,PDO::PARAM_STR);
+            $query->execute();
+        
+            $LastInsertId=$dbh->lastInsertId();
+            if ($LastInsertId>0) {
+                echo '<script>alert("Resident has been added.")</script>';
+            echo "<script>window.location.href ='resident-registration.php'</script>";
+            }
+            else
+                {
+                    echo '<script>alert("Something Went Wrong. Please try again")</script>';
+                }
+            }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,19 +83,19 @@ if (mysqli_connect_errno())
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    
 
 
-
+    <link rel = "stylesheet" href="../css/sidebar.css" />
     <link rel="stylesheet" href="../css/scrollbar.css">
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
     <style type = "text/css">
-        body{
-            background:aliceblue;
-
+        .input-sm{
+            font-size: 16px;
         }
-       
+        .form-sm{
+            font-size: 16px;
+        }
         .white{
             color: white;
         }
@@ -112,61 +114,58 @@ if (mysqli_connect_errno())
                 padding: 0px;
             }
             .in{
-                padding-left: 2.3%;
-                padding-right: 2%;
-            }
-            .dis{
-                display:none;
+            padding-left: 5.3%;
+            padding-right: 4%;
             }
         }
     </style>
 </head>
 <body>
-<div class="container-fluid banner" align="center">
-                        <?php 
-                            $sql1="select * from tblinformation";
-                            $query1=$dbh->prepare($sql1);
-                            $query1->execute();
-                            $results1=$query1->fetchAll(PDO::FETCH_OBJ);
-                            echo "<div class='row'>
-                            <div class='col-xl-3 px-1 dis'>
-                                <div class='float-start'>";
-                            if($query1->rowCount() > 0)
-                            {
-                                foreach($results1 as $row1)
-                                {
-                                    echo "<img src='$row1->Blogoone' style='width: 100px;'>";
 
-                                    echo "</div>
-
-                                    </div>";
-
-                                    echo "<div class='col-xl-6' align='center'>
-                                    <h3 class='py-4'>$row1->Baddress <br>
-                                    $row1->Btitle</h3>
-                                    </div>";
-
-                                    echo "<div class='col-xl-3 dis'>
-                                            <div class='float-end'>
-                                                <img src='$row1->Blogotwo' style='width: 100px;'>
-                                            </div>
-                                        </div>
-                                    </div>";
-                                }
-                            } 
-                            ?>
-                    </div>
+    <?php 
+        include ('../includes/sidebar.php');
+    ?> 
+        <div class="d-flex align-items-center">
+                <div class="container mx-5 mt-3">
+                    <nav aria-label="breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="admin-registrations.php"><i class="fa fa-archive"></i>&nbsp;Resident Registration</a></li>
+                            
+                                <li class="breadcrumb-item active"><a href="#"><i class="fa fa-check-circle text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
+                            </ol>
+                        </nav>
+                    </nav>
                 </div>
-                        
+            </div>
+        </div>
+    </nav>
 
-    
+
+    <?php
+				$eid=$_GET['editid'];
+				$clientmsaid=$_SESSION['clientmsaid'];
+				$sql="select * from tblresidentrequest where ID=:eid";
+				$query = $dbh -> prepare($sql);
+				$query->bindParam(':eid',$eid,PDO::PARAM_STR);
+				$query->execute();
+
+				$results=$query->fetchAll(PDO::FETCH_OBJ);
+
+				$cnt=1;
+				if($query->rowCount() > 0)
+				{
+				    foreach($results as $row)
+				{               
+			?>
             <form method = "POST">
                 <div class="container-fluid px-5">
                     <div class="row px-5">
                         <div class="col-xl-5"></div>
                         <div class="col-xl-7">
                             <div class="float-end">
-                                <a href="#" onclick = "window.history.back();" class="link link-primary text-decoration-none fs-4"><i class="fa fa-arrow-circle-left me-2"></i>Cancel Registration</a>
+                                <a href="admin-registrations.php" onclick = "window.history.back();" class="link link-primary text-decoration-none fs-4"><i class="fa fa-arrow-circle-left me-2"></i>Cancel Registration</a>
                             </div>
                             
                         </div>
@@ -196,7 +195,7 @@ if (mysqli_connect_errno())
                                                 <div class="col-xl-8 col-sm-12">
                                                 <br>
                                                 
-                                                <input id = "fname" name="fname" type="text" class="form-control" required>
+                                                <input id = "fname" name="fname" type="text" class="form-control" required value="<?php echo $row->FirstName; ?>">
                                                 <label for="" class="text-muted fs-6 small"> Place a space between if you have second or third name(e.g Juan Dela)</label>
                                             </div>
                                         </div>
@@ -206,7 +205,7 @@ if (mysqli_connect_errno())
                                             
                                             <div class="col-xl-8 col-sm-12">
                                             <br>
-                                                <input type="text" id = "mname" class="form-control" name="mname" value="">
+                                                <input type="text" id = "mname" class="form-control" name="mname" value="<?php echo $row->MiddleName; ?>">
                                                 <label for="" class="text-muted fs-6 small">If born without middle name just leave blank.</label>
                                             </div>
                                         </div>
@@ -216,7 +215,7 @@ if (mysqli_connect_errno())
                                             
                                                 <div class="col-xl-8 col-sm-12">
                                                 <br>
-                                                    <input type="text" id = "lname" class="form-control" name="lname" required>
+                                                    <input type="text" id = "lname" class="form-control" name="lname" required value="<?php echo $row->LastName; ?>">
                                                     <label for="" class="text-muted fs-6 small"></label>
                                                 </div>
                                         </div>
@@ -224,17 +223,20 @@ if (mysqli_connect_errno())
                                                 <label for="fname" class="col-xl-2 fs-4 py-0"> <span class= "text-danger fs-5"></span>Suffix<br><span class= "fs-6 text-muted small"> (Kadugsong ng pangalan)</span></label>
                                                 <div class="col-xl-5 col-sm-12">
                                                 <br>
-                                                <input id = "sf" type="text" class="form-control" name="sf" value="">
+                                                <input id = "sf" type="text" class="form-control" name="sf" value="<?php echo $row->Suffix; ?>">
                                                 <label for="" class="text-muted fs-6 small">For residents with suffix (e.g Juan Dela Cruz Jr., Juan Dela Cruz III</label>
                                             </div>
                                         </div>
-
+                                        <?php 
+                                            $bdateset = $row->BirthDate; 
+                                            $bdatesets = date('Y-m-d', strtotime($bdateset));
+                                        ?>
                                         <div class="row g-0 mb-3 px-4">
-                                            <label for="bday" class="col-xl-2 fs-4 py-0"><span class= "text-danger fs-5">*</span>Date of Birth<br><span class= "fs-6 text-muted small"> (Araw ng kapakanakan)</span></label>
+                                            <label for="bdate" class="col-xl-2 fs-4 py-0"><span class= "text-danger fs-5">*</span>Date of Birth<br><span class= "fs-6 text-muted small"> (Araw ng kapakanakan)</span></label>
                                             
                                             <div class="col-xl-5 col-sm-12">
                                             <br>
-                                                <input type="date" id = "bdate" class="form-control" name="bdate" required>
+                                                <input type="date" id = "bdate" class="form-control" name="bdate" required value="<?php echo $bdatesets; ?>">
                                                 <label for="" class="text-muted fs-6 small">Format: day/month/year</label>
                                             </div>
                                         </div>
@@ -244,10 +246,21 @@ if (mysqli_connect_errno())
                                             <label for="gender" class="col-sm-2 col-form-label  fs-4"><span class= "text-danger fs-5">*</span>Gender<br><span class= "fs-6 text-muted small"> (Kasarian)</span></label>
                                                 <div class="col-xl-5 col-sm-12">
                                                     <br>
-                                                    <select id ="gend" name="gend" class="form-select input-sm" aria-label="Default select example" id="gender"onchange="showDiv('hidden_div', this)" required>
-                                                        <option value="">--Select Gender--</option>
-                                                        <option value="Male">Male (lalake)</option>
-                                                        <option value="Female">Female (Babae)</option>
+                                                    <select id ="gend" name="gend" class="form-select input-sm" aria-label="Default select example" id="gender" required>
+                                                        <option value="" disabled>--Select Gender--</option>
+
+                                                        <?php 
+                                                            $gend = $row->Gender;
+                                                            if ($gend =="Female"){
+                                                                echo '<option value="Male">Male (lalake)</option>
+                                                                <option value="Female" selected>Female (Babae)</option>';
+                                                            }
+                                                            else{
+                                                                echo '<option value="Male" selected>Male (lalake)</option>
+                                                                <option value="Female">Female (Babae)</option>';
+                                                            }
+                                                        ?>
+                                                        
                                                 
                                                     </select>
                                                 </div>
@@ -258,19 +271,29 @@ if (mysqli_connect_errno())
                                             <div class="col-xl-5">
                                                 <br>
                                                 <select class="form-select input-sm" aria-label="Default select example" id="voter" name="voter" onchange="showprecinct('precinct', this)" >
-                                                    <option value="">--Select--</option>
-                                                    <option value="Yes">Registered</option>
-                                                    <option value="No">Unregistered</option>
+                                                    <option value="" disabled>--Select--</option>
+
+                                                    <?php 
+                                                            $vo = $row->voter;
+                                                            if ($vo =="Yes"){
+                                                                echo '<option value="Yes" selected>Registered</option>
+                                                                <option value="No">Unregistered</option>';
+                                                            }
+                                                            else{
+                                                                echo '<option value="Yes">Registered</option>
+                                                                <option value="No" selected>Unregistered</option>';
+                                                            }
+                                                        ?>
+
+                                                    
                                                 </select>
                                                 <label for="" class="text-muted fs-6 small">To deter whether this person is voter</label>
                                             </div>
                                             <div class="col-xl-4 mx-2" id="precinct">
                                                     <label class="fs-5">Precinct Number</label>
-                                                    <select class="form-select input-sm" name="vp" id = "pres">
-                                                    <option value="">--Select--</option>
-                                                    <option value="1a">1-A</option>
-                                                    <option value="2a">2-A</option>
-                                                </select>
+                                                    <br>
+                                                    <input type="text" name="vp" class="form-control" id = "pres" value="<?php echo $row->vPrecinct; ?>">
+                                                    
                                                  
                                                 </div>
                                         </div>
@@ -281,12 +304,35 @@ if (mysqli_connect_errno())
                                             <label for="cs" class="col-sm-2 col-form-label  fs-4"><span class= "text-danger fs-5">*</span>Civil Status<br><span class= "fs-6 text-muted small"> (Kalagayang Sibil)</span></label>
                                                 <div class="col-xl-5">
                                                     <br>
-                                                    <select class="form-select input-sm" aria-label="Default select example" id="cstatus" name="cstatus" onchange="showDiv('hidden_div', this)" required>
-                                                        <option value="">--Select Status--</option>
-                                                        <option value="Single">Single</option>
-                                                        <option value="Married">Married</option>
-                                                        <option value="Separated">Separated</option>
-                                                        <option value="Widowed">Widowed</option>
+                                                    <select class="form-select input-sm" aria-label="Default select example" id="cstatus" name="cstatus" required>
+                                                        <option value="" disabled>--Select Status--</option>
+                                                        <?php 
+                                                            $cstat = $row->CivilStatus;
+                                                            if ($cstat =="Single"){
+                                                                echo '<option value="Single" selected >Single</option>
+                                                                <option value="Married">Married</option>
+                                                                <option value="Separated">Separated</option>
+                                                                <option value="Widowed">Widowed</option>';
+                                                            }
+                                                            else if ($cstat =="Married"){
+                                                                echo '<option value="Single">Single</option>
+                                                                <option value="Married" selected>Married</option>
+                                                                <option value="Separated">Separated</option>
+                                                                <option value="Widowed">Widowed</option>';
+                                                            }
+                                                            else if ($cstat =="Separated"){
+                                                                echo '<option value="Single">Single</option>
+                                                                <option value="Married">Married</option>
+                                                                <option value="Separated" selected>Separated</option>
+                                                                <option value="Widowed">Widowed</option>';
+                                                            }
+                                                            else if ($cstat =="Widowed"){
+                                                                echo '<option value="Single">Single</option>
+                                                                <option value="Married">Married</option>
+                                                                <option value="Separated">Separated</option>
+                                                                <option value="Widowed" selected>Widowed</option>';
+                                                            }
+                                                        ?>
                                                     </select> 
                                                 </div>
                                         </div>
@@ -306,7 +352,7 @@ if (mysqli_connect_errno())
                                             
                                                 <div class="col-xl-6 col-sm-12">
                                      
-                                                    <input type="text" id = "sss" name="sss" class="form-control">
+                                                    <input type="text" id = "sss" name="sss" class="form-control" value="<?php echo $row->sssNumber; ?>">
                     
                                                 </div>
                                         </div>
@@ -315,7 +361,7 @@ if (mysqli_connect_errno())
                                             
                                                 <div class="col-xl-6 col-sm-12">
                                                 
-                                                    <input type="text" id = "tin" name="tin" class="form-control">
+                                                    <input type="text" id = "tin" name="tin" class="form-control" value="<?php echo $row->tinNumber; ?>">
                                                     <label for="tin" class="text-muted fs-6 small"></label>
                                                 </div>
                                         </div>
@@ -350,15 +396,38 @@ if (mysqli_connect_errno())
                                             <div class="col-xl-5">
                                                 <br>
                                                 <select class="form-select input-sm" aria-label="Default select example" name="residenttype" onchange="showDiv('hidden_div', this)" required id = "rt">
-                                                    <option value='' disabled selected>--Select Resident Type--</option>
-                                                    <option value="House Owner">House Owner</option>
-                                                    <option value="Care Taker">Care taker</option>
-                                                    <option value="Rental/Boarder">Rental/Boarder</option>
-                                                    <option value="Living with Relatives">Living with Relatives</option>
+                                                    <option value="" disabled>--Select Resident Type--</option>
+                                                    <?php 
+                                                            $rst = $row->ResidentType;
+                                                            if ($rst =="House Owner"){
+                                                                echo '<option value="House Owner" selected>House Owner</option>
+                                                                <option value="Care Taker">Care taker</option>
+                                                                <option value="Rental/Boarder">Rental/Boarder</option>
+                                                                <option value="Living with Relatives">Living with Relatives</option>';
+                                                            }
+                                                            else if ($rst =="Care Taker"){
+                                                                echo '<option value="House Owner">House Owner</option>
+                                                                <option value="Care Taker" selected>Care taker</option>
+                                                                <option value="Rental/Boarder">Rental/Boarder</option>
+                                                                <option value="Living with Relatives">Living with Relatives</option>';
+                                                            }
+                                                            else if ($rst =="Rental/Boarder"){
+                                                                echo '<option value="House Owner">House Owner</option>
+                                                                <option value="Care Taker">Care taker</option>
+                                                                <option value="Rental/Boarder" selected>Rental/Boarder</option>
+                                                                <option value="Living with Relatives">Living with Relatives</option>';
+                                                            }
+                                                            else if ($rst =="Living with Relatives"){
+                                                                echo '<option value="House Owner">House Owner</option>
+                                                                <option value="Care Taker">Care taker</option>
+                                                                <option value="Rental/Boarder">Rental/Boarder</option>
+                                                                <option value="Living with Relatives" selected>Living with Relatives</option>';
+                                                            }
+                                                        ?>
                                                 </select>
                                                 <div class="col-xl-12 col-lg-6 col-md-8 col-sm-12 col-xs-12" id="hidden_div">
                                                     <label class="col-form-label fs-5">Home Owner Name</label>
-                                                    <input type="text" class="form-control" placeholder="" id="hm" name="hm"  />
+                                                    <input type="text" class="form-control" placeholder="" id="hm" name="hm"  value="<?php echo $row->HomeName; ?>"/>
                                                 </div>
 
                         
@@ -374,25 +443,50 @@ if (mysqli_connect_errno())
                                                         <?php
                                                             // $con = mysqli_connect("localhost", "admin", "admin", "countrydb");
                                                             $pName = '';
+                                                            $prksel = $row->Purok;
                                                             $query = "SELECT pName FROM tbllistpurok";
                                                             $result = mysqli_query($con, $query);
-                                                            while($row = mysqli_fetch_array($result))
+                                                            while($rowz = mysqli_fetch_array($result))
                                                             {
-                                                            $pName .= '<option value="'.$row["pName"].'">'.$row["pName"].'</option>';
+                                                                $prkv = $rowz["pName"];
+                                                                if ($prkv == $prksel){
+                                                                    $pName .= '<option value="'.$rowz["pName"].'" selected>'.$rowz["pName"].'</option>';
+                                                                }else{
+                                                                    $pName .= '<option value="'.$rowz["pName"].'">'.$rowz["pName"].'</option>';
+                                                                }
+                                                                
                                                             }
                                                         ?>
                                                     <select class="form-control action" name = "prk" id = "prk" aria-label="Default select example" style ="width: 60%;" >
-                                                        <option value=''selected disabled>--Purok--</option>
-                                                        <?php echo $pName; ?>
+                                                        <option value='' disabled>--Purok--</option>
+                                                        <?php echo $pName;?>
                                                     </select> 
                                                         
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-4 col-sm-12 my-2 ">
                                                     <div class="input-group">
-                                                        <label for="" class="mx-2 fs-5 small">Street</label>
+                                                        <label for="" class="mx-2 fs-5 small">Street </label>
                                                         <select name="strt" id="strt" class="form-control action">
-                                                        <option value=''selected disabled>--Street--</option>
+                                                            <?php
+                                                                // $con = mysqli_connect("localhost", "admin", "admin", "countrydb");
+                                                                $sName = '';
+                                                                $ssel = $row->streetName;
+                                                                $prkcheck = $row->Purok;
+                                                                $query1 = "SELECT streetName FROM tblstreet WHERE Purok ='".$prkcheck."'";
+                                                                $result1 = mysqli_query($con, $query1);
+                                                                while($rowx = mysqli_fetch_array($result1))
+                                                                {
+                                                                    $ssels = $rowx["streetName"];
+                                                                    if ($ssel == $ssels){
+                                                                        $sName .= '<option value="'.$rowx["streetName"].'" selected>'.$rowx["streetName"].'</option>';
+                                                                    }else{
+                                                                        $sName .= '<option value="'.$rowx["streetName"].'">'.$rowx["streetName"].'</option>';
+                                                                    }
+                                                                    
+                                                                }
+                                                                echo $sName;
+                                                            ?>
                                                         </select>
                                                     </div>
                                                 </div>                                       
@@ -407,7 +501,7 @@ if (mysqli_connect_errno())
                                         
                                         <div class="col-xl-8 col-sm-12">
                                         <br>
-                                            <input type="number" id = "hunit" name="hunit" class="form-control" required>
+                                            <input type="number" id = "hunit" name="hunit" class="form-control" required value="<?php echo $row->houseUnit;?>">
                                             <label for="" class="text-muted fs-6 small">House unit  or lot number of the residents household</label>
                                         </div>
                                     </div>
@@ -436,7 +530,7 @@ if (mysqli_connect_errno())
                                         
                                         <div class="col-xl-5 col-sm-12">
                                         <br>
-                                            <input type="tel" id = "contact" name="contact" class="form-control" pattern="[0]{1}[9]{1}[0-9]{9}" placeholder="09" title="Contact number should start with 09">
+                                            <input type="tel" id = "contact" name="contact" class="form-control" pattern="[0]{1}[9]{1}[0-9]{9}" placeholder="09" title="Contact number should start with 09" value="<?php echo $row->Cellphnumber;?>">
                                         </div>
                                     </div>
                                     
@@ -445,48 +539,10 @@ if (mysqli_connect_errno())
                                         
                                         <div class="col-xl-5 col-sm-12">
                                         <br>
-                                            <input type="text" id = "email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                                            <input type="text" id = "email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value="<?php echo $row->Email;?>">
                                         </div>
                                     </div>
-                                    <div class="row g-0 px-4 mb-2">
-                                        <div class="fs-4 ">
-                                            For E-barangay 599 Account
-                                        </div>
-                                    </div>
-                                    <div class="row g-0 mb-3 px-4">
-                                        <label for="pas" class="col-xl-2 fs-4 py-0"><span class= "text-danger fs-5">*</span>Password </label>
-                                        
-                                        <div class="col-xl-4 col-sm-12">
-                                        
-                                            <input type="password" id = "password" name="password" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="row g-0 mb-3 px-4">
-                                        <label for="cf" class="col-xl-2 fs-4 py-0"><span class= "text-danger fs-5">*</span>Confirm Password </label>
-                                        
-                                        <div class="col-xl-4 col-sm-12">
-                                            <br>
-                                            <input type="password" id = "confirm_password" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row g-0 mb-3 px-4">
                                     
-                                        <div class="col-xl-6 col-sm-12">
-                                       
-                                        <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="privacy">
-                                        <label class="form-check-label fs-6" for="privacy">
-                                            I have read and agreed with the <a href ="privacy-policy.php" target="_blank"><i>privacy policy</i></a>
-                                        </label>
-                                        </div>
-                                        <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Checked checkbox
-                                        </label>
-                                        </div>
-                                        </div>
-                                    </div>
                                     
                                 </div>
                                 
@@ -510,7 +566,13 @@ if (mysqli_connect_errno())
                     
     </form>
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    
+        
+
+      
+     
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
         $(document).ready(function() {
             $("select").change(function() {
@@ -551,11 +613,9 @@ if (mysqli_connect_errno())
         document.getElementById(divId).style.display = element.value == 'Yes' ? 'inline' : 'none';
     }
 </script>    
-       
-                  
 </body>
 </html>
-<!--up-->
+<?php }}}  ?>
 <script>
 $(document).ready(function(){
  $('.action').change(function(){
@@ -569,7 +629,7 @@ $(document).ready(function(){
     result = 'strt';
    }
    $.ajax({
-    url:"fetchdata.php",
+    url:"fetchdataman.php",
     method:"POST",
     data:{action:action, query:query},
     success:function(data){
