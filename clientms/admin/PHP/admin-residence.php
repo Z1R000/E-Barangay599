@@ -5,6 +5,8 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
   } else{
+    $connect = mysqli_connect("localhost", "root", "", "clientmsdb");  
+    
   	?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,9 +19,12 @@ if (strlen($_SESSION['clientmsaid']==0)) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+    
+    <script src="script/searchshowpage.js"></script>  
+    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>            
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />  
 
     <link rel = "stylesheet" href="../css/sidebar.css" />
     <link rel="stylesheet" href="../css/scroll.css">
@@ -70,19 +75,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         .white{
             color: white;
         }
-		.pagination{display:inline-block;padding-left:0;margin:20px 0;border-radius:4px}
-		.pagination>li{display:inline}
-		.pagination>li>a,.pagination>li>span{position:relative;float:left;padding:6px 12px;margin-left:-1px;line-height:1.42857143;color:#337ab7;text-decoration:none;background-color:#fff;border:1px solid #ddd}
-		.pagination>li:first-child>a,.pagination>li:first-child>span{margin-left:0;border-top-left-radius:4px;border-bottom-left-radius:4px}
-		.pagination>li:last-child>a,.pagination>li:last-child>span{border-top-right-radius:4px;border-bottom-right-radius:4px}
-		.pagination>li>a:focus,.pagination>li>a:hover,.pagination>li>span:focus,.pagination>li>span:hover{z-index:2;color:#23527c;background-color:#eee;border-color:#ddd}
-		.pagination>.active>a,.pagination>.active>a:focus,.pagination>.active>a:hover,.pagination>.active>span,.pagination>.active>span:focus,.pagination>.active>span:hover{z-index:3;color:#fff;cursor:default;background-color:#337ab7;border-color:#337ab7}
-		.pagination>.disabled>a,.pagination>.disabled>a:focus,.pagination>.disabled>a:hover,.pagination>.disabled>span,.pagination>.disabled>span:focus,.pagination>.disabled>span:hover{color:#777;cursor:not-allowed;background-color:#fff;border-color:#ddd}
-		.pagination-lg>li>a,.pagination-lg>li>span{padding:10px 16px;font-size:18px;line-height:1.3333333}
-		.pagination-lg>li:first-child>a,.pagination-lg>li:first-child>span{border-top-left-radius:6px;border-bottom-left-radius:6px}
-		.pagination-lg>li:last-child>a,.pagination-lg>li:last-child>span{border-top-right-radius:6px;border-bottom-right-radius:6px}
-		.pagination-sm>li>a,.pagination-sm>li>span{padding:5px 10px;font-size:12px;line-height:1.5}.pagination-sm>li:first-child>a,.pagination-sm>li:first-child>span{border-top-left-radius:3px;border-bottom-left-radius:3px}
-		.pagination-sm>li:last-child>a,.pagination-sm>li:last-child>span{border-top-right-radius:3px;border-bottom-right-radius:3px}
     </style>
 </head>
 <body>
@@ -155,174 +147,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </div>
 
                             </div>
-                            
-                            <div class="col-md-6"  >
-                                <form class = "d-flex" method="post" name="search" action="">
-									<p style="font-size:16px; color:red" align="center"> <?php if($msg){
-										echo $msg;
-									  }  ?> </p>
-                                        <div class="input-group">
-                                             <input id="searchdata" type = "text" class= "form-control" name="searchdata"placeholder = "Search here">
-                                             <div class="list-group" id="show-list" style="position: absolute;">
-                                            <!-- Here autocomplete list will be display -->
-                                            </div>  
-                                             <button type ="submit" class = "btn btn-outline-info" name="search"><i class = "fa fa-search"></i></button>
-                                             <div class="btn-group px-1" role="group">
-                                <a href = "admin-residence.php"  class="btn btn-outline-primary"><i class = "fa fa-window-close"></i>&nbsp;Clear</a>&nbsp;&nbsp;
-                                </div>
-                                 
-                                        </div>
-                                       
-                                        
-                                </form>
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script>
-      $(document).ready(function () {
-  // Send Search Text to the server
-  $("#searchdata").keyup(function () {
-    let searchText = $(this).val();
-    if (searchText != "") {
-      $.ajax({
-        url: "searchname.php",
-        method: "post",
-        data: {
-          query: searchText,
-        },
-        success: function (response) {
-          $("#show-list").html(response);
-        },
-      });
-    } else {
-      $("#show-list").html("");
-    }
-  });
-  $(document).on("click", "#clicks", function () {
-    $("#searchdata").val($(this).text());
-    $("#show-list").html("");
-  });
-});
-  </script>    
 
-                            </div>
-                            <div class="col-md-2">
-                                  
-                                
-
-                            </div>
                             
                         </div>
                     </div>
                 </div>
                                     
-               
-				<?php
-					if(isset($_POST['search']))
-					{ 
-
-					$sdata=$_POST['searchdata'];
-				?>
-                    
-				<h4 align="center">Result for "<?php echo $sdata;?>"</h4><br>
-                </div>
-                <br>
-                <div class="row g-1 px-5">
-                    <div class="col-xl-12 col-md-12 col-sm-12 ">
-                    <table class="table bg-white rounded shadow-sm  table-hover table-bordered">
-                            <thead>
-                                <tr>
-                                    <th  scope="col">
-                                        Status  </th>
-                                    <th   scope="col">Name </th>
-                                    <th   scope="col">Age </th>
-                                    <th   scope="col">Gender </th>
-                                    <th   scope="col">Purok</th>
-                                    <th  scope="col">Street </th>
-                                    <th   scope="col">Action </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                            <?php
-                                                if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-                                                    $page_no = $_GET['page_no'];
-                                                    } else {
-                                                        $page_no = 1;
-                                                        }
-                                                $total_records_per_page = 10;
-                                                $offset = ($page_no-1) * $total_records_per_page;
-                                                $previous_page = $page_no - 1;
-                                                $next_page = $page_no + 1;
-                                                $adjacents = "2";
-                                                
-                                                $count = "SELECT * FROM tblresident where tblresident.LastName like '%$sdata%' or tblresident.Suffix like '%$sdata%' or tblresident.FirstName like '%$sdata%' or tblresident.MiddleName like '%$sdata%'";
-                                                $queryc = $dbh -> prepare($count);
-                                                $queryc->execute();
-                                                $resultc=$queryc->fetchAll(PDO::FETCH_OBJ);
-                                                $total_records=$queryc->rowCount();
-                                                $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                                                $second_last = $total_no_of_pages - 1;
-                                                
-                                                
-                                                $sql="SELECT * from tblresident where tblresident.LastName like '%$sdata%' or tblresident.Suffix like '%$sdata%' or tblresident.FirstName like '%$sdata%' or tblresident.MiddleName like '%$sdata%' LIMIT $offset, $total_records_per_page";
-                                                $query = $dbh -> prepare($sql);
-                                                $query->execute();
-                                                $results=$query->fetchAll(PDO::FETCH_OBJ);
-                                                
-                                                
-                                                $cnt=1;
-                                                if($query->rowCount() > 0)
-                                                {
-                                                    foreach($results as $row)
-                                                    {               
-                                            ?>
-                                            <td  class ="small" scope="col">
-                                                <i class ="fa fa-circle link-success me-1"></i>
-                                                Active
-                                            </td>
-                                            
-                                            <td  scope="col"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?> <?php  echo htmlentities($row->Suffix);?></td>
-                                            <td  scope = "col"><?php $gbd = $row->BirthDate;
-                                                            $gbd = date('Y-m-d', strtotime($gbd));
-                                                            $today = date('Y-m-d');
-                                                            $diff = date_diff(date_create($gbd), date_create($today));
-                                                            echo $diff->format('%y');?></td>
-                                            <td    scope="col"><i class = "fa <?php 
-                                            $gend = htmlentities($row->Gender);
-                                            $gen = "fa fa-venus link-danger ";
-                                            if ($gend =="Female"){
-                                                echo $gen;
-                                            }
-                                            else{
-                                                $gen = "fa fa-mars link-info ";  
-                                                echo $gen;
-                                            }
-                                            
-                                            ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
-                                            <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
-                                            <td  class ="action" scope="col">
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye me-2"></i>View</a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit me-2"></i>Edit</a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash me-2"></i>Delete</button>
-                                                </div>
-                                            </td>
-                                        
-                                        
-                                        </tr>
-                            <?php $cnt=$cnt+1;}}}else{?>   
-                            </tbody>
-                        </table>
-                        
-                    </div>
-                </div>
             
-                
-				<!--END SEARCH -->
                 
                 <div class="container-fluid px-5 mx-auto">
                     <div class="row  g-0" style= "border-radius: 10px 10px 0px 0px;">
@@ -361,1075 +192,501 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p10" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 10</button>
                             </li>
                         </ul>
-                        
-               
-
                     </div>
                 </div>
+
+                <?php $query ="SELECT * FROM tblresident ORDER BY LastName ASC";  
+                        $result = mysqli_query($connect, $query);  ?>
+
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id = "all">
                         <div class="container-fluid">
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"  >
-                                <div class="row" >
-                                    <div class="col-xl-12" style= "overflow:auto;" id = "res_table">                                    
-                                        <table class="table bg-white rounded shadow-sm  table-hover table-bordered " style = "min-width: 1000px;">
-                                        <thead>
-                                            <tr>
-                                                <th  scope="col">Status</th>
-                                                <th   scope="col">Name <span class="float-end"><a  class= "column_sort text-secondary" data-order = "desc" id = "LastName"> <i id = "sortname" class="fa fa-sort"></i></a></span> </th>
+                                    <div class="row" >
+                                        <div class="col-xl-12" style= "overflow:auto;" id = "res_table">                                    
+                                            <div class="table-responsive">  
+                                                <table id="alldata" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <thead>
+                                                    <tr>
+                                                        <th>Status</th>
+                                                        <th>Name</th>
 
-                                                <th   scope="col">Age <span class="float-end"><a  class= "column_sort text-secondary" data-order = "desc" id = "BirthDate"> <i id = "sortage" class="fa fa-sort"></i></a></span> </th>
+                                                        <th>Age</th>
 
-                                                <th   scope="col">Gender <span class="float-end"><a class= "column_sort text-secondary" data-order = "desc" id = "Gender"> <i id = "sortgender" class="fa fa-sort"></i></a></span> </th>
+                                                        <th>Gender</th>
 
-                                                <th   scope="col">Purok <span class="float-end"><a class= "column_sort text-secondary" data-order = "desc" id = "Purok"> <i id = "sortname" class="fa fa-sort"></i></a></span> </th>
-                                                
-                                                <th   scope="col">Street <span class="float-end"><a  class= "column_sort text-secondary" data-order = "desc" id = "streetName"> <i id = "sortst" class="fa fa-sort"></i></a></span> </th>
-                                               
-                                               
-                                                <th   scope="col">Action </th>
-                                            </tr>   
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <?php
-                                                if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-                                                    $page_no = $_GET['page_no'];
-                                                    } else {
-                                                        $page_no = 1;
-                                                        }
-                                                $total_records_per_page = 10;
-                                                $offset = ($page_no-1) * $total_records_per_page;
-                                                $previous_page = $page_no - 1;
-                                                $next_page = $page_no + 1;
-                                                $adjacents = "2";
-                                                
-                                                $count = "SELECT * FROM tblresident";
-                                                $queryc = $dbh -> prepare($count);
-                                                $queryc->execute();
-                                                $resultc=$queryc->fetchAll(PDO::FETCH_OBJ);
-                                                $total_records=$queryc->rowCount();
-                                                $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                                                $second_last = $total_no_of_pages - 1;
-                                                
-                                                $sql="SELECT * from tblresident order by id desc LIMIT $offset, $total_records_per_page";
-                                                $query = $dbh -> prepare($sql);
-                                                $query->execute();
-                                                $results=$query->fetchAll(PDO::FETCH_OBJ);
-                                                
-                                                
-                                                $cnt=1;
-                                                if($query->rowCount() > 0)
-                                                {
-                                                foreach($results as $row)
-                                                {               
-                                            ?>
-                                            <td  class ="small" scope="col">
-                                                <i class ="fa fa-circle link-success me-1"></i>
-                                                Active
-                                            </td>
-                                            
-                                            <td  scope="col"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?> <?php  echo htmlentities($row->Suffix);?></td>
-                                            <td  scope = "col"><?php $gbd = $row->BirthDate;
-                                                            $gbd = date('Y-m-d', strtotime($gbd));
-                                                            $today = date('Y-m-d');
-                                                            $diff = date_diff(date_create($gbd), date_create($today));
-                                                            echo $diff->format('%y');?></td>
-                                            <td    scope="col"><i class = "fa <?php 
-                                            $gend = htmlentities($row->Gender);
-                                            $gen = "fa fa-venus link-danger ";
-                                            if ($gend =="Female"){
-                                                echo $gen;
-                                            }
-                                            else{
-                                                $gen = "fa fa-mars link-info ";  
-                                                echo $gen;
-                                            }
-                                            
-                                            ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
-                                            <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
-                                            <td  class ="action" scope="col">
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</button>
-                                                </div>
-                                            </td>
-                                        
-                                        
-                                        </tr>
-                                        <?php $cnt=$cnt+1;}}?>   
-                                        </tbody>
-                                        </table>
+                                                        <th>Purok</th>
+                                                        
+                                                        <th>Street</th>
+                                                    
+                                                    
+                                                        <th>Action </th>
+                                                    </tr>   
+                                                </thead>
+                                                    <?php  
+                                                    while($row = mysqli_fetch_array($result))  
+                                                    {  
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle link-success me-1"></i>
+                                                                    Active
+                                                                </td>
+                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+
+                                                                $gbd = $row["BirthDate"];
+                                                                $gbd = date('Y-m-d', strtotime($gbd));
+                                                                $today = date('Y-m-d');
+                                                                $diff = date_diff(date_create($gbd), date_create($today));
+                                                          
+                                                        echo '
+                                                                <td>'.$diff->format('%y').'</td>  
+                                                                <td><i class = "fa';
+                                                                $gend = $row["Gender"];
+                                                                $gen = "fa fa-venus link-danger ";
+                                                                if ($gend =="Female"){
+                                                                    echo $gen;
+                                                                }
+                                                                else{
+                                                                    $gen = "fa fa-mars link-info ";  
+                                                                    echo $gen;
+                                                                }
+                                                        echo 'me-2"> </i>'.$row["Gender"].'</td>  
+                                                                <td>'.$row["Purok"].'</td>  
+                                                                <td>'.$row["streetName"].'</td>  
+                                                                <td  class ="action" scope="col">
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a href  = "view-resident-personal.php?viewid='.$row["ID"].'" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid='.$row["ID"].'"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</button>
+                                                                </div>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';  
+                                                    }  
+                                                    ?>  
+                                                </table>  
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-                                        <strong>Page <?php echo $page_no." of ".$total_no_of_pages; ?></strong>
-                                    </div>
-                                    <ul class="pagination">
-                                        <?php // if($page_no > 1){ echo "<li><a href='?page_no=1'>First Page</a></li>"; } ?>
-                                        
-                                        <li <?php if($page_no <= 1){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no > 1){ echo "href='?page_no=$previous_page'"; } ?>>Previous</a>
-                                        </li>
-                                        
-                                        <?php 
-                                        if ($total_no_of_pages <= 10){  	 
-                                            for ($counter = 1; $counter <= $total_no_of_pages; $counter++){
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                        }
-                                        elseif($total_no_of_pages > 10){
-                                            
-                                        if($page_no <= 4) {			
-                                        for ($counter = 1; $counter < 8; $counter++){		 
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                            echo "<li><a>...</a></li>";
-                                            echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-                                            }
-
-                                        elseif($page_no > 4 && $page_no < $total_no_of_pages - 4) {		 
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
-                                            for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {			
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                  
-                                        }
-                                        echo "<li><a>...</a></li>";
-                                        echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                        echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";      
-                                                }
-                                            
-                                            else {
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
-
-                                            for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                   
-                                                    }
-                                                }
-                                        }
-                                    ?>
-                                        
-                                        <li <?php if($page_no >= $total_no_of_pages){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no < $total_no_of_pages) { echo "href='?page_no=$next_page'"; } ?>>Next</a>
-                                        </li>
-                                        <?php if($page_no < $total_no_of_pages){
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
-                                        }?>
-                                    </ul>     
-                            </div>
-                        </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                   
+                    <?php $query ="SELECT * FROM tblresident WHERE Purok=1 ORDER BY LastName ASC";  
+                        $result = mysqli_query($connect, $query);  ?>
+
                     <div class="tab-pane fade show" id="p1">
                         <div class="container-fluid" style= "overflow-x:auto">
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
-                                    <div class="" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm  table-hover table-bordered " style = "min-width: 1000px;">
-                                    
-                                        <thead>
-                                            <tr>
-                                                <th  scope="col">
-                                                    Status  </th>
-                                                <th   scope="col">Name </th>
-                                                <th   scope="col">Age </th>
-                                                <th   scope="col">Gender </th>
-                                                <th   scope="col">Purok</th>
-                                                <th  scope="col">Street </th>
-                                                <th   scope="col">Action </th>
-                                            </tr>   
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <?php
-                                                if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-                                                    $page_no = $_GET['page_no'];
-                                                    } else {
-                                                        $page_no = 1;
-                                                        }
-                                                $total_records_per_page = 10;
-                                                $offset = ($page_no-1) * $total_records_per_page;
-                                                $previous_page = $page_no - 1;
-                                                $next_page = $page_no + 1;
-                                                $adjacents = "2";
-                                                
-                                                $count = "SELECT * FROM tblresident where Purok='1'";
-                                                $queryc = $dbh -> prepare($count);
-                                                $queryc->execute();
-                                                $resultc=$queryc->fetchAll(PDO::FETCH_OBJ);
-                                                $total_records=$queryc->rowCount();
-                                                $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                                                $second_last = $total_no_of_pages - 1;
-                                                
-                                                
-                                                $sql="SELECT * from tblresident where Purok='1' LIMIT $offset, $total_records_per_page";
-                                                $query = $dbh -> prepare($sql);
-                                                $query->execute();
-                                                $results=$query->fetchAll(PDO::FETCH_OBJ);
-                                                
-                                                
-                                                $cnt=1;
-                                                if($query->rowCount() > 0)
-                                                {
-                                                foreach($results as $row)
-                                                {               
-                                            ?>
-                                            <td  class ="small" scope="col">
-                                                <i class ="fa fa-circle link-success me-1"></i>
-                                                Active
-                                            </td>
-                                            
-                                            <td  scope="col"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?> <?php  echo htmlentities($row->Suffix);?></td>
-                                            <td  scope = "col"><?php $gbd = $row->BirthDate;
-                                                            $gbd = date('Y-m-d', strtotime($gbd));
-                                                            $today = date('Y-m-d');
-                                                            $diff = date_diff(date_create($gbd), date_create($today));
-                                                            echo $diff->format('%y');?></td>
-                                            <td    scope="col"><i class = "fa <?php 
-                                            $gend = htmlentities($row->Gender);
-                                            $gen = "fa fa-venus link-danger ";
-                                            if ($gend =="Female"){
-                                                echo $gen;
-                                            }
-                                            else{
-                                                $gen = "fa fa-mars link-info ";  
-                                                echo $gen;
-                                            }
-                                            
-                                            ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
-                                            <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
-                                            <td  class ="action" scope="col">
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span> </a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span> </a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
-                                                </div>
-                                            </td>
-                                        
-                                        
-                                        </tr>
-                                        <?php $cnt=$cnt+1;}}?>   
-                                        </tbody>
-                                    </table>
-                                    <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-                                        <strong>Page <?php echo $page_no." of ".$total_no_of_pages; ?></strong>
-                                    </div>
-                                    <ul class="pagination">
-                                        <?php // if($page_no > 1){ echo "<li><a href='?page_no=1'>First Page</a></li>"; } ?>
-                                        
-                                        <li <?php if($page_no <= 1){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no > 1){ echo "href='?page_no=$previous_page'"; } ?>>Previous</a>
-                                        </li>
-                                        
-                                        <?php 
-                                        if ($total_no_of_pages <= 10){  	 
-                                            for ($counter = 1; $counter <= $total_no_of_pages; $counter++){
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                        }
-                                        elseif($total_no_of_pages > 10){
-                                            
-                                        if($page_no <= 4) {			
-                                        for ($counter = 1; $counter < 8; $counter++){		 
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                            echo "<li><a>...</a></li>";
-                                            echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-                                            }
+                                        <div class="" style= "overflow-x:auto">
+                                            <div class="table-responsive">  
+                                                <table id="p1data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <thead>
+                                                    <tr>
+                                                        <th>Status</th>
+                                                        <th>Name</th>
 
-                                        elseif($page_no > 4 && $page_no < $total_no_of_pages - 4) {		 
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
-                                            for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {			
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                  
-                                        }
-                                        echo "<li><a>...</a></li>";
-                                        echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                        echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";      
-                                                }
-                                            
-                                            else {
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
+                                                        <th>Age</th>
 
-                                            for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                   
-                                                    }
-                                                }
-                                        }
-                                    ?>
-                                        
-                                        <li <?php if($page_no >= $total_no_of_pages){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no < $total_no_of_pages) { echo "href='?page_no=$next_page'"; } ?>>Next</a>
-                                        </li>
-                                        <?php if($page_no < $total_no_of_pages){
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
-                                        }?>
-                                    </ul>
+                                                        <th>Gender</th>
+
+                                                        <th>Purok</th>
+                                                        
+                                                        <th>Street</th>
+                                                    
+                                                    
+                                                        <th>Action </th>
+                                                    </tr>   
+                                                </thead>
+                                                    <?php  
+                                                    while($row = mysqli_fetch_array($result))  
+                                                    {  
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle link-success me-1"></i>
+                                                                    Active
+                                                                </td>
+                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+
+                                                                $gbd = $row["BirthDate"];
+                                                                $gbd = date('Y-m-d', strtotime($gbd));
+                                                                $today = date('Y-m-d');
+                                                                $diff = date_diff(date_create($gbd), date_create($today));
+                                                          
+                                                        echo '
+                                                                <td>'.$diff->format('%y').'</td>  
+                                                                <td><i class = "fa';
+                                                                $gend = $row["Gender"];
+                                                                $gen = "fa fa-venus link-danger ";
+                                                                if ($gend =="Female"){
+                                                                    echo $gen;
+                                                                }
+                                                                else{
+                                                                    $gen = "fa fa-mars link-info ";  
+                                                                    echo $gen;
+                                                                }
+                                                        echo 'me-2"> </i>'.$row["Gender"].'</td>  
+                                                                <td>'.$row["Purok"].'</td>  
+                                                                <td>'.$row["streetName"].'</td>  
+                                                                <td  class ="action" scope="col">
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a href  = "view-resident-personal.php?viewid='.$row["ID"].'" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid='.$row["ID"].'"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</button>
+                                                                </div>
+                                                                </td> 
+                                                        </tr>  
+                                                        ';  
+                                                    }  
+                                                    ?>  
+                                                </table>  
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            </div>
-                        </div>                       
+                        </div>
+                    </div>     
+                    
+                    <?php $query ="SELECT * FROM tblresident WHERE Purok=2 ORDER BY LastName ASC";  
+                        $result = mysqli_query($connect, $query);  ?>
                     
                     <div class="tab-pane fade show" id="p2">
-                    <div class="container-fluid" style= "overflow-x:auto">
+                        <div class="container-fluid" style= "overflow-x:auto">
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
-                                    <div class="col" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm table-bordered table-hover " style = "min-width: 1000px;">
-                                    
-                                        <thead>
-                                            <tr>
-                                                <th  scope="col">
-                                                    Status  </th>
-                                                <th   scope="col">Name </th>
-                                                <th   scope="col">Age </th>
-                                                <th   scope="col">Gender </th>
-                                                <th   scope="col">Purok</th>
-                                                <th  scope="col">Street </th>
-                                                <th   scope="col">Action </th>
-                                            </tr>   
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <?php
-                                                if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-                                                    $page_no = $_GET['page_no'];
-                                                    } else {
-                                                        $page_no = 1;
-                                                        }
-                                                $total_records_per_page = 10;
-                                                $offset = ($page_no-1) * $total_records_per_page;
-                                                $previous_page = $page_no - 1;
-                                                $next_page = $page_no + 1;
-                                                $adjacents = "2";
-                                                
-                                                $count = "SELECT * FROM tblresident where Purok='2'";
-                                                $queryc = $dbh -> prepare($count);
-                                                $queryc->execute();
-                                                $resultc=$queryc->fetchAll(PDO::FETCH_OBJ);
-                                                $total_records=$queryc->rowCount();
-                                                $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                                                $second_last = $total_no_of_pages - 1;
-                                                
-                                                
-                                                $sql="SELECT * from tblresident where Purok='2' LIMIT $offset, $total_records_per_page";
-                                                $query = $dbh -> prepare($sql);
-                                                $query->execute();
-                                                $results=$query->fetchAll(PDO::FETCH_OBJ);
-                                                
-                                                
-                                                $cnt=1;
-                                                if($query->rowCount() > 0)
-                                                {
-                                                foreach($results as $row)
-                                                {               
-                                            ?>
-                                            <td  class ="small" scope="col">
-                                                <i class ="fa fa-circle link-success me-1"></i>
-                                                Active
-                                            </td>
-                                            
-                                            <td  scope="col"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?> <?php  echo htmlentities($row->Suffix);?></td>
-                                            <td  scope = "col"><?php $gbd = $row->BirthDate;
-                                                            $gbd = date('Y-m-d', strtotime($gbd));
-                                                            $today = date('Y-m-d');
-                                                            $diff = date_diff(date_create($gbd), date_create($today));
-                                                            echo $diff->format('%y');?></td>
-                                            <td    scope="col"><i class = "fa <?php 
-                                            $gend = htmlentities($row->Gender);
-                                            $gen = "fa fa-venus link-danger ";
-                                            if ($gend =="Female"){
-                                                echo $gen;
-                                            }
-                                            else{
-                                                $gen = "fa fa-mars link-info ";  
-                                                echo $gen;
-                                            }
-                                            
-                                            ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
-                                            <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
-                                            <td  class ="action" scope="col">
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btnx btn-primary"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success btnx"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
-                                                </div>
-                                            </td>
-                                        
-                                        
-                                        </tr>
-                                        <?php $cnt=$cnt+1;}}?>   
-                                        </tbody>
-                                    </table>
-                                    <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-                                        <strong>Page <?php echo $page_no." of ".$total_no_of_pages; ?></strong>
-                                    </div>
-                                    <ul class="pagination">
-                                        <?php // if($page_no > 1){ echo "<li><a href='?page_no=1'>First Page</a></li>"; } ?>
-                                        
-                                        <li <?php if($page_no <= 1){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no > 1){ echo "href='?page_no=$previous_page'"; } ?>>Previous</a>
-                                        </li>
-                                        
-                                        <?php 
-                                        if ($total_no_of_pages <= 10){  	 
-                                            for ($counter = 1; $counter <= $total_no_of_pages; $counter++){
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                        }
-                                        elseif($total_no_of_pages > 10){
-                                            
-                                        if($page_no <= 4) {			
-                                        for ($counter = 1; $counter < 8; $counter++){		 
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                            echo "<li><a>...</a></li>";
-                                            echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-                                            }
+                                        <div class="col" style= "overflow-x:auto">
+                                            <div class="table-responsive">  
+                                                <table id="p2data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <thead>
+                                                    <tr>
+                                                        <th>Status</th>
+                                                        <th>Name</th>
 
-                                        elseif($page_no > 4 && $page_no < $total_no_of_pages - 4) {		 
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
-                                            for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {			
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                  
-                                        }
-                                        echo "<li><a>...</a></li>";
-                                        echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                        echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";      
-                                                }
-                                            
-                                            else {
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
+                                                        <th>Age</th>
 
-                                            for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                   
-                                                    }
-                                                }
-                                        }
-                                    ?>
-                                        
-                                        <li <?php if($page_no >= $total_no_of_pages){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no < $total_no_of_pages) { echo "href='?page_no=$next_page'"; } ?>>Next</a>
-                                        </li>
-                                        <?php if($page_no < $total_no_of_pages){
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
-                                        }?>
-                                    </ul>
+                                                        <th>Gender</th>
+
+                                                        <th>Purok</th>
+                                                        
+                                                        <th>Street</th>
+                                                    
+                                                    
+                                                        <th>Action </th>
+                                                    </tr>   
+                                                </thead>
+                                                    <?php  
+                                                    while($row = mysqli_fetch_array($result))  
+                                                    {  
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle link-success me-1"></i>
+                                                                    Active
+                                                                </td>
+                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+
+                                                                $gbd = $row["BirthDate"];
+                                                                $gbd = date('Y-m-d', strtotime($gbd));
+                                                                $today = date('Y-m-d');
+                                                                $diff = date_diff(date_create($gbd), date_create($today));
+                                                          
+                                                        echo '
+                                                                <td>'.$diff->format('%y').'</td>  
+                                                                <td><i class = "fa';
+                                                                $gend = $row["Gender"];
+                                                                $gen = "fa fa-venus link-danger ";
+                                                                if ($gend =="Female"){
+                                                                    echo $gen;
+                                                                }
+                                                                else{
+                                                                    $gen = "fa fa-mars link-info ";  
+                                                                    echo $gen;
+                                                                }
+                                                        echo 'me-2"> </i>'.$row["Gender"].'</td>  
+                                                                <td>'.$row["Purok"].'</td>  
+                                                                <td>'.$row["streetName"].'</td>  
+                                                                <td  class ="action" scope="col">
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a href  = "view-resident-personal.php?viewid='.$row["ID"].'" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid='.$row["ID"].'"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</button>
+                                                                </div>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';  
+                                                    }  
+                                                    ?>  
+                                                </table>  
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <?php $query ="SELECT * FROM tblresident WHERE Purok=3 ORDER BY LastName ASC";  
+                        $result = mysqli_query($connect, $query);  ?>
+
                     <div class="tab-pane fade show" id="p3">
-                    <div class="container-fluid" style= "overflow-x:auto">
+                        <div class="container-fluid" style= "overflow-x:auto">
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
-                                    <div class="col" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm table-bordered table-hover " style = "min-width: 1000px;">
-                                    
-                                        <thead>
-                                            <tr>
-                                                <th  scope="col">
-                                                    Status  </th>
-                                                <th   scope="col">Name </th>
-                                                <th   scope="col">Age </th>
-                                                <th   scope="col">Gender </th>
-                                                <th   scope="col">Purok</th>
-                                                <th  scope="col">Street </th>
-                                                <th   scope="col">Action </th>
-                                            </tr>   
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <?php
-                                                if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-                                                    $page_no = $_GET['page_no'];
-                                                    } else {
-                                                        $page_no = 1;
-                                                        }
-                                                $total_records_per_page = 10;
-                                                $offset = ($page_no-1) * $total_records_per_page;
-                                                $previous_page = $page_no - 1;
-                                                $next_page = $page_no + 1;
-                                                $adjacents = "2";
-                                                
-                                                $count = "SELECT * FROM tblresident where Purok='3'";
-                                                $queryc = $dbh -> prepare($count);
-                                                $queryc->execute();
-                                                $resultc=$queryc->fetchAll(PDO::FETCH_OBJ);
-                                                $total_records=$queryc->rowCount();
-                                                $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                                                $second_last = $total_no_of_pages - 1;
-                                                
-                                                
-                                                $sql="SELECT * from tblresident where Purok='3' LIMIT $offset, $total_records_per_page";
-                                                $query = $dbh -> prepare($sql);
-                                                $query->execute();
-                                                $results=$query->fetchAll(PDO::FETCH_OBJ);
-                                                
-                                                
-                                                $cnt=1;
-                                                if($query->rowCount() > 0)
-                                                {
-                                                foreach($results as $row)
-                                                {               
-                                            ?>
-                                            <td  class ="small" scope="col">
-                                                <i class ="fa fa-circle link-success me-1"></i>
-                                                Active
-                                            </td>
-                                            
-                                            <td  scope="col"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?> <?php  echo htmlentities($row->Suffix);?></td>
-                                            <td  scope = "col"><?php $gbd = $row->BirthDate;
-                                                            $gbd = date('Y-m-d', strtotime($gbd));
-                                                            $today = date('Y-m-d');
-                                                            $diff = date_diff(date_create($gbd), date_create($today));
-                                                            echo $diff->format('%y');?></td>
-                                            <td    scope="col"><i class = "fa <?php 
-                                            $gend = htmlentities($row->Gender);
-                                            $gen = "fa fa-venus link-danger ";
-                                            if ($gend =="Female"){
-                                                echo $gen;
-                                            }
-                                            else{
-                                                $gen = "fa fa-mars link-info ";  
-                                                echo $gen;
-                                            }
-                                            
-                                            ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
-                                            <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
-                                            <td  class ="action" scope="col">
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary btnx"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success btnx"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
-                                                </div>
-                                            </td>
-                                        
-                                        
-                                        </tr>
-                                        <?php $cnt=$cnt+1;}}?>   
-                                        </tbody>
-                                    </table>
-                                    <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-                                        <strong>Page <?php echo $page_no." of ".$total_no_of_pages; ?></strong>
-                                    </div>
-                                    <ul class="pagination">
-                                        <?php // if($page_no > 1){ echo "<li><a href='?page_no=1'>First Page</a></li>"; } ?>
-                                        
-                                        <li <?php if($page_no <= 1){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no > 1){ echo "href='?page_no=$previous_page'"; } ?>>Previous</a>
-                                        </li>
-                                        
-                                        <?php 
-                                        if ($total_no_of_pages <= 10){  	 
-                                            for ($counter = 1; $counter <= $total_no_of_pages; $counter++){
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                        }
-                                        elseif($total_no_of_pages > 10){
-                                            
-                                        if($page_no <= 4) {			
-                                        for ($counter = 1; $counter < 8; $counter++){		 
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                            echo "<li><a>...</a></li>";
-                                            echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-                                            }
+                                        <div class="col" style= "overflow-x:auto">
+                                            <div class="table-responsive">  
+                                                <table id="p3data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <thead>
+                                                    <tr>
+                                                        <th>Status</th>
+                                                        <th>Name</th>
 
-                                        elseif($page_no > 4 && $page_no < $total_no_of_pages - 4) {		 
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
-                                            for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {			
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                  
-                                        }
-                                        echo "<li><a>...</a></li>";
-                                        echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                        echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";      
-                                                }
-                                            
-                                            else {
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
+                                                        <th>Age</th>
 
-                                            for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                   
-                                                    }
-                                                }
-                                        }
-                                    ?>
-                                        
-                                        <li <?php if($page_no >= $total_no_of_pages){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no < $total_no_of_pages) { echo "href='?page_no=$next_page'"; } ?>>Next</a>
-                                        </li>
-                                        <?php if($page_no < $total_no_of_pages){
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
-                                        }?>
-                                    </ul>
+                                                        <th>Gender</th>
+
+                                                        <th>Purok</th>
+                                                        
+                                                        <th>Street</th>
+                                                    
+                                                    
+                                                        <th>Action </th>
+                                                    </tr>   
+                                                </thead>
+                                                    <?php  
+                                                    while($row = mysqli_fetch_array($result))  
+                                                    {  
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle link-success me-1"></i>
+                                                                    Active
+                                                                </td>
+                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+
+                                                                $gbd = $row["BirthDate"];
+                                                                $gbd = date('Y-m-d', strtotime($gbd));
+                                                                $today = date('Y-m-d');
+                                                                $diff = date_diff(date_create($gbd), date_create($today));
+                                                          
+                                                        echo '
+                                                                <td>'.$diff->format('%y').'</td>  
+                                                                <td><i class = "fa';
+                                                                $gend = $row["Gender"];
+                                                                $gen = "fa fa-venus link-danger ";
+                                                                if ($gend =="Female"){
+                                                                    echo $gen;
+                                                                }
+                                                                else{
+                                                                    $gen = "fa fa-mars link-info ";  
+                                                                    echo $gen;
+                                                                }
+                                                        echo 'me-2"> </i>'.$row["Gender"].'</td>  
+                                                                <td>'.$row["Purok"].'</td>  
+                                                                <td>'.$row["streetName"].'</td>  
+                                                                <td  class ="action" scope="col">
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a href  = "view-resident-personal.php?viewid='.$row["ID"].'" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid='.$row["ID"].'"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</button>
+                                                                </div>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';  
+                                                    }  
+                                                    ?>  
+                                                </table>  
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <?php $query ="SELECT * FROM tblresident WHERE Purok=4 ORDER BY LastName ASC";  
+                        $result = mysqli_query($connect, $query);  ?>
+
                     <div class="tab-pane fade show" id="p4">
-                    <div class="container-fluid" style= "overflow-x:auto">
+                        <div class="container-fluid" style= "overflow-x:auto">
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
-                                    <div class="" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm  table-hover table-bordered " style = "min-width: 1000px;">
-                                    
-                                        <thead>
-                                            <tr>
-                                                <th  scope="col">
-                                                    Status  </th>
-                                                <th   scope="col">Name </th>
-                                                <th   scope="col">Age </th>
-                                                <th   scope="col">Gender </th>
-                                                <th   scope="col">Purok</th>
-                                                <th  scope="col">Street </th>
-                                                <th   scope="col">Action </th>
-                                            </tr>   
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <?php
-                                                if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-                                                    $page_no = $_GET['page_no'];
-                                                    } else {
-                                                        $page_no = 1;
-                                                        }
-                                                $total_records_per_page = 10;
-                                                $offset = ($page_no-1) * $total_records_per_page;
-                                                $previous_page = $page_no - 1;
-                                                $next_page = $page_no + 1;
-                                                $adjacents = "2";
-                                                
-                                                $count = "SELECT * FROM tblresident where Purok='4'";
-                                                $queryc = $dbh -> prepare($count);
-                                                $queryc->execute();
-                                                $resultc=$queryc->fetchAll(PDO::FETCH_OBJ);
-                                                $total_records=$queryc->rowCount();
-                                                $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                                                $second_last = $total_no_of_pages - 1;
-                                                
-                                                
-                                                $sql="SELECT * from tblresident where Purok='4' LIMIT $offset, $total_records_per_page";
-                                                $query = $dbh -> prepare($sql);
-                                                $query->execute();
-                                                $results=$query->fetchAll(PDO::FETCH_OBJ);
-                                                
-                                                
-                                                $cnt=1;
-                                                if($query->rowCount() > 0)
-                                                {
-                                                foreach($results as $row)
-                                                {               
-                                            ?>
-                                            <td  class ="small" scope="col">
-                                                <i class ="fa fa-circle link-success me-1"></i>
-                                                Active
-                                            </td>
-                                            
-                                            <td  scope="col"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?> <?php  echo htmlentities($row->Suffix);?></td>
-                                            <td  scope = "col"><?php $gbd = $row->BirthDate;
-                                                            $gbd = date('Y-m-d', strtotime($gbd));
-                                                            $today = date('Y-m-d');
-                                                            $diff = date_diff(date_create($gbd), date_create($today));
-                                                            echo $diff->format('%y');?></td>
-                                            <td    scope="col"><i class = "fa <?php 
-                                            $gend = htmlentities($row->Gender);
-                                            $gen = "fa fa-venus link-danger ";
-                                            if ($gend =="Female"){
-                                                echo $gen;
-                                            }
-                                            else{
-                                                $gen = "fa fa-mars link-info ";  
-                                                echo $gen;
-                                            }
-                                            
-                                            ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
-                                            <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
-                                            <td  class ="action" scope="col">
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btnx btn-primary"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success btnx"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
-                                                </div>
-                                            </td>
-                                        
-                                        
-                                        </tr>
-                                        <?php $cnt=$cnt+1;}}?>   
-                                        </tbody>
-                                    </table>
-                                    <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-                                        <strong>Page <?php echo $page_no." of ".$total_no_of_pages; ?></strong>
-                                    </div>
-                                    <ul class="pagination">
-                                        <?php // if($page_no > 1){ echo "<li><a href='?page_no=1'>First Page</a></li>"; } ?>
-                                        
-                                        <li <?php if($page_no <= 1){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no > 1){ echo "href='?page_no=$previous_page'"; } ?>>Previous</a>
-                                        </li>
-                                        
-                                        <?php 
-                                        if ($total_no_of_pages <= 10){  	 
-                                            for ($counter = 1; $counter <= $total_no_of_pages; $counter++){
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                        }
-                                        elseif($total_no_of_pages > 10){
-                                            
-                                        if($page_no <= 4) {			
-                                        for ($counter = 1; $counter < 8; $counter++){		 
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                            echo "<li><a>...</a></li>";
-                                            echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-                                            }
+                                        <div class="" style= "overflow-x:auto">
+                                            <div class="table-responsive">  
+                                                <table id="p4data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <thead>
+                                                    <tr>
+                                                        <th>Status</th>
+                                                        <th>Name</th>
 
-                                        elseif($page_no > 4 && $page_no < $total_no_of_pages - 4) {		 
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
-                                            for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {			
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                  
-                                        }
-                                        echo "<li><a>...</a></li>";
-                                        echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                        echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";      
-                                                }
-                                            
-                                            else {
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
+                                                        <th>Age</th>
 
-                                            for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                   
-                                                    }
-                                                }
-                                        }
-                                    ?>
-                                        
-                                        <li <?php if($page_no >= $total_no_of_pages){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no < $total_no_of_pages) { echo "href='?page_no=$next_page'"; } ?>>Next</a>
-                                        </li>
-                                        <?php if($page_no < $total_no_of_pages){
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
-                                        }?>
-                                    </ul>
+                                                        <th>Gender</th>
+
+                                                        <th>Purok</th>
+                                                        
+                                                        <th>Street</th>
+                                                    
+                                                    
+                                                        <th>Action </th>
+                                                    </tr>   
+                                                </thead>
+                                                    <?php  
+                                                    while($row = mysqli_fetch_array($result))  
+                                                    {  
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle link-success me-1"></i>
+                                                                    Active
+                                                                </td>
+                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+
+                                                                $gbd = $row["BirthDate"];
+                                                                $gbd = date('Y-m-d', strtotime($gbd));
+                                                                $today = date('Y-m-d');
+                                                                $diff = date_diff(date_create($gbd), date_create($today));
+                                                          
+                                                        echo '
+                                                                <td>'.$diff->format('%y').'</td>  
+                                                                <td><i class = "fa';
+                                                                $gend = $row["Gender"];
+                                                                $gen = "fa fa-venus link-danger ";
+                                                                if ($gend =="Female"){
+                                                                    echo $gen;
+                                                                }
+                                                                else{
+                                                                    $gen = "fa fa-mars link-info ";  
+                                                                    echo $gen;
+                                                                }
+                                                        echo 'me-2"> </i>'.$row["Gender"].'</td>  
+                                                                <td>'.$row["Purok"].'</td>  
+                                                                <td>'.$row["streetName"].'</td>  
+                                                                <td  class ="action" scope="col">
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a href  = "view-resident-personal.php?viewid='.$row["ID"].'" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid='.$row["ID"].'"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</button>
+                                                                </div>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';  
+                                                    }  
+                                                    ?>  
+                                                </table>  
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                        
+
+                    <?php $query ="SELECT * FROM tblresident WHERE Purok=5 ORDER BY LastName ASC";  
+                        $result = mysqli_query($connect, $query);  ?>                        
                    
                     <div class="tab-pane fade show" id="p5">
-                    <div class="container-fluid" style= "overflow-x:auto">
+                        <div class="container-fluid" style= "overflow-x:auto">
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
-                                    <div class="" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm  table-hover table-bordered " style = "min-width: 1000px;">
-                                
-                                        <thead>
-                                            <tr>
-                                                <th  scope="col">
-                                                    Status  </th>
-                                                <th   scope="col">Name </th>
-                                                <th   scope="col">Age </th>
-                                                <th   scope="col">Gender </th>
-                                                <th   scope="col">Purok</th>
-                                                <th  scope="col">Street </th>
-                                                <th   scope="col">Action </th>
-                                            </tr>   
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <?php
-                                                if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-                                                    $page_no = $_GET['page_no'];
-                                                    } else {
-                                                        $page_no = 1;
-                                                        }
-                                                $total_records_per_page = 10;
-                                                $offset = ($page_no-1) * $total_records_per_page;
-                                                $previous_page = $page_no - 1;
-                                                $next_page = $page_no + 1;
-                                                $adjacents = "2";
-                                                
-                                                $count = "SELECT * FROM tblresident where Purok='5'";
-                                                $queryc = $dbh -> prepare($count);
-                                                $queryc->execute();
-                                                $resultc=$queryc->fetchAll(PDO::FETCH_OBJ);
-                                                $total_records=$queryc->rowCount();
-                                                $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                                                $second_last = $total_no_of_pages - 1;
-                                                
-                                                
-                                                $sql="SELECT * from tblresident where Purok='5' LIMIT $offset, $total_records_per_page";
-                                                $query = $dbh -> prepare($sql);
-                                                $query->execute();
-                                                $results=$query->fetchAll(PDO::FETCH_OBJ);
-                                                
-                                                
-                                                $cnt=1;
-                                                if($query->rowCount() > 0)
-                                                {
-                                                foreach($results as $row)
-                                                {               
-                                            ?>
-                                            <td  class ="small" scope="col">
-                                                <i class ="fa fa-circle link-success me-1"></i>
-                                                Active
-                                            </td>
-                                            
-                                            <td  scope="col"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?> <?php  echo htmlentities($row->Suffix);?></td>
-                                            <td  scope = "col"><?php $gbd = $row->BirthDate;
-                                                            $gbd = date('Y-m-d', strtotime($gbd));
-                                                            $today = date('Y-m-d');
-                                                            $diff = date_diff(date_create($gbd), date_create($today));
-                                                            echo $diff->format('%y');?></td>
-                                            <td    scope="col"><i class = "fa <?php 
-                                            $gend = htmlentities($row->Gender);
-                                            $gen = "fa fa-venus link-danger ";
-                                            if ($gend =="Female"){
-                                                echo $gen;
-                                            }
-                                            else{
-                                                $gen = "fa fa-mars link-info ";  
-                                                echo $gen;
-                                            }
-                                            
-                                            ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
-                                            <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
-                                            <td  class ="action" scope="col">
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btnx btn-primary"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success btnx"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
-                                                </div>
-                                            </td>
-                                        
-                                        
-                                        </tr>
-                                        <?php $cnt=$cnt+1;}}?>   
-                                        </tbody>
-                                    </table>
-                                    <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-                                        <strong>Page <?php echo $page_no." of ".$total_no_of_pages; ?></strong>
-                                    </div>
-                                    <ul class="pagination">
-                                        <?php // if($page_no > 1){ echo "<li><a href='?page_no=1'>First Page</a></li>"; } ?>
-                                        
-                                        <li <?php if($page_no <= 1){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no > 1){ echo "href='?page_no=$previous_page'"; } ?>>Previous</a>
-                                        </li>
-                                        
-                                        <?php 
-                                        if ($total_no_of_pages <= 10){  	 
-                                            for ($counter = 1; $counter <= $total_no_of_pages; $counter++){
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                        }
-                                        elseif($total_no_of_pages > 10){
-                                            
-                                        if($page_no <= 4) {			
-                                        for ($counter = 1; $counter < 8; $counter++){		 
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                            echo "<li><a>...</a></li>";
-                                            echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-                                            }
+                                        <div class="" style= "overflow-x:auto">
+                                            <div class="table-responsive">  
+                                                <table id="p5data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <thead>
+                                                    <tr>
+                                                        <th>Status</th>
+                                                        <th>Name</th>
 
-                                        elseif($page_no > 4 && $page_no < $total_no_of_pages - 4) {		 
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
-                                            for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {			
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                  
-                                        }
-                                        echo "<li><a>...</a></li>";
-                                        echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                        echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";      
-                                                }
-                                            
-                                            else {
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
+                                                        <th>Age</th>
 
-                                            for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                   
-                                                    }
-                                                }
-                                        }
-                                    ?>
-                                        
-                                        <li <?php if($page_no >= $total_no_of_pages){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no < $total_no_of_pages) { echo "href='?page_no=$next_page'"; } ?>>Next</a>
-                                        </li>
-                                        <?php if($page_no < $total_no_of_pages){
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
-                                        }?>
-                                    </ul>
+                                                        <th>Gender</th>
+
+                                                        <th>Purok</th>
+                                                        
+                                                        <th>Street</th>
+                                                    
+                                                    
+                                                        <th>Action </th>
+                                                    </tr>   
+                                                </thead>
+                                                    <?php  
+                                                    while($row = mysqli_fetch_array($result))  
+                                                    {  
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle link-success me-1"></i>
+                                                                    Active
+                                                                </td>
+                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+
+                                                                $gbd = $row["BirthDate"];
+                                                                $gbd = date('Y-m-d', strtotime($gbd));
+                                                                $today = date('Y-m-d');
+                                                                $diff = date_diff(date_create($gbd), date_create($today));
+                                                          
+                                                        echo '
+                                                                <td>'.$diff->format('%y').'</td>  
+                                                                <td><i class = "fa';
+                                                                $gend = $row["Gender"];
+                                                                $gen = "fa fa-venus link-danger ";
+                                                                if ($gend =="Female"){
+                                                                    echo $gen;
+                                                                }
+                                                                else{
+                                                                    $gen = "fa fa-mars link-info ";  
+                                                                    echo $gen;
+                                                                }
+                                                        echo 'me-2"> </i>'.$row["Gender"].'</td>  
+                                                                <td>'.$row["Purok"].'</td>  
+                                                                <td>'.$row["streetName"].'</td>  
+                                                                <td  class ="action" scope="col">
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a href  = "view-resident-personal.php?viewid='.$row["ID"].'" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid='.$row["ID"].'"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</button>
+                                                                </div>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';  
+                                                    }  
+                                                    ?>  
+                                                </table>  
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1437,535 +694,82 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                         </div>
                     </div>
                         
-                   
+                    <?php $query ="SELECT * FROM tblresident WHERE Purok=6 ORDER BY LastName ASC";  
+                        $result = mysqli_query($connect, $query);  ?>
+
                     <div class="tab-pane fade show" id="p6">
-                    <div class="container-fluid" style= "overflow-x:auto">
+                        <div class="container-fluid" style= "overflow-x:auto">
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
-                                    <div class="" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm table-bordered table-hover " style = "min-width: 1000px;">
-                                    
-                                        <thead>
-                                            <tr>
-                                                <th  scope="col">
-                                                    Status  </th>
-                                                <th   scope="col">Name </th>
-                                                <th   scope="col">Age </th>
-                                                <th   scope="col">Gender </th>
-                                                <th   scope="col">Purok</th>
-                                                <th  scope="col">Street </th>
-                                                <th   scope="col">Action </th>
-                                            </tr>   
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <?php
-                                                if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-                                                    $page_no = $_GET['page_no'];
-                                                    } else {
-                                                        $page_no = 1;
-                                                        }
-                                                $total_records_per_page = 10;
-                                                $offset = ($page_no-1) * $total_records_per_page;
-                                                $previous_page = $page_no - 1;
-                                                $next_page = $page_no + 1;
-                                                $adjacents = "2";
-                                                
-                                                $count = "SELECT * FROM tblresident where Purok='6'";
-                                                $queryc = $dbh -> prepare($count);
-                                                $queryc->execute();
-                                                $resultc=$queryc->fetchAll(PDO::FETCH_OBJ);
-                                                $total_records=$queryc->rowCount();
-                                                $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                                                $second_last = $total_no_of_pages - 1;
-                                                
-                                                
-                                                $sql="SELECT * from tblresident where Purok='6' LIMIT $offset, $total_records_per_page";
-                                                $query = $dbh -> prepare($sql);
-                                                $query->execute();
-                                                $results=$query->fetchAll(PDO::FETCH_OBJ);
-                                                
-                                                
-                                                $cnt=1;
-                                                if($query->rowCount() > 0)
-                                                {
-                                                foreach($results as $row)
-                                                {               
-                                            ?>
-                                            <td  class ="small" scope="col">
-                                                <i class ="fa fa-circle link-success me-1"></i>
-                                                Active
-                                            </td>
-                                            
-                                            <td  scope="col"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?> <?php  echo htmlentities($row->Suffix);?></td>
-                                            <td  scope = "col"><?php $gbd = $row->BirthDate;
-                                                            $gbd = date('Y-m-d', strtotime($gbd));
-                                                            $today = date('Y-m-d');
-                                                            $diff = date_diff(date_create($gbd), date_create($today));
-                                                            echo $diff->format('%y');?></td>
-                                            <td    scope="col"><i class = "fa <?php 
-                                            $gend = htmlentities($row->Gender);
-                                            $gen = "fa fa-venus link-danger ";
-                                            if ($gend =="Female"){
-                                                echo $gen;
-                                            }
-                                            else{
-                                                $gen = "fa fa-mars link-info ";  
-                                                echo $gen;
-                                            }
-                                            
-                                            ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
-                                            <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
-                                            <td  class ="action" scope="col">
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary btnx"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span> </a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success btnx"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
-                                                </div>
-                                            </td>
-                                        
-                                        
-                                        </tr>
-                                        <?php $cnt=$cnt+1;}}?>   
-                                        </tbody>
-                                    </table>
-                                    <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-                                        <strong>Page <?php echo $page_no." of ".$total_no_of_pages; ?></strong>
-                                    </div>
-                                    <ul class="pagination">
-                                        <?php // if($page_no > 1){ echo "<li><a href='?page_no=1'>First Page</a></li>"; } ?>
-                                        
-                                        <li <?php if($page_no <= 1){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no > 1){ echo "href='?page_no=$previous_page'"; } ?>>Previous</a>
-                                        </li>
-                                        
-                                        <?php 
-                                        if ($total_no_of_pages <= 10){  	 
-                                            for ($counter = 1; $counter <= $total_no_of_pages; $counter++){
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                        }
-                                        elseif($total_no_of_pages > 10){
-                                            
-                                        if($page_no <= 4) {			
-                                        for ($counter = 1; $counter < 8; $counter++){		 
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                            echo "<li><a>...</a></li>";
-                                            echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-                                            }
+                                        <div class="" style= "overflow-x:auto">
+                                            <div class="table-responsive">  
+                                                <table id="p6data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <thead>
+                                                    <tr>
+                                                        <th>Status</th>
+                                                        <th>Name</th>
 
-                                        elseif($page_no > 4 && $page_no < $total_no_of_pages - 4) {		 
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
-                                            for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {			
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                  
-                                        }
-                                        echo "<li><a>...</a></li>";
-                                        echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                        echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";      
-                                                }
-                                            
-                                            else {
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
+                                                        <th>Age</th>
 
-                                            for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                   
-                                                    }
-                                                }
-                                        }
-                                    ?>
-                                        
-                                        <li <?php if($page_no >= $total_no_of_pages){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no < $total_no_of_pages) { echo "href='?page_no=$next_page'"; } ?>>Next</a>
-                                        </li>
-                                        <?php if($page_no < $total_no_of_pages){
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
-                                        }?>
-                                    </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   
+                                                        <th>Gender</th>
 
-                     <div class="tab-pane fade show" id="p7">
-                     <div class="container-fluid" style= "overflow-x:auto">
-                            <div class="row g-1 px-5">
-                                <div class="col-xl-12 col-md-12 col-sm-12 ">
-                                    <div class="row" >
-                                    <div class="" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm  table-bordered table-hover res-table" style = "min-width: 1000px;">
-                                    
-                                        <thead>
-                                            <tr>
-                                                <th  scope="col">
-                                                    Status  </th>
-                                                <th   scope="col">Name </th>
-                                                <th   scope="col">Age </th>
-                                                <th   scope="col">Gender </th>
-                                                <th   scope="col">Purok</th>
-                                                <th  scope="col">Street </th>
-                                                <th   scope="col">Action </th>
-                                            </tr>   
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <?php
-                                                if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-                                                    $page_no = $_GET['page_no'];
-                                                    } else {
-                                                        $page_no = 1;
-                                                        }
-                                                $total_records_per_page = 10;
-                                                $offset = ($page_no-1) * $total_records_per_page;
-                                                $previous_page = $page_no - 1;
-                                                $next_page = $page_no + 1;
-                                                $adjacents = "2";
-                                                
-                                                $count = "SELECT * FROM tblresident where Purok='7'";
-                                                $queryc = $dbh -> prepare($count);
-                                                $queryc->execute();
-                                                $resultc=$queryc->fetchAll(PDO::FETCH_OBJ);
-                                                $total_records=$queryc->rowCount();
-                                                $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                                                $second_last = $total_no_of_pages - 1;
-                                                
-                                                
-                                                $sql="SELECT * from tblresident where Purok='7' LIMIT $offset, $total_records_per_page";
-                                                $query = $dbh -> prepare($sql);
-                                                $query->execute();
-                                                $results=$query->fetchAll(PDO::FETCH_OBJ);
-                                                
-                                                
-                                                $cnt=1;
-                                                if($query->rowCount() > 0)
-                                                {
-                                                foreach($results as $row)
-                                                {               
-                                            ?>
-                                            <td  class ="small" scope="col">
-                                                <i class ="fa fa-circle link-success me-1"></i>
-                                                Active
-                                            </td>
-                                            
-                                            <td  scope="col"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?> <?php  echo htmlentities($row->Suffix);?></td>
-                                            <td  scope = "col"><?php $gbd = $row->BirthDate;
-                                                            $gbd = date('Y-m-d', strtotime($gbd));
-                                                            $today = date('Y-m-d');
-                                                            $diff = date_diff(date_create($gbd), date_create($today));
-                                                            echo $diff->format('%y');?></td>
-                                            <td    scope="col"><i class = "fa <?php 
-                                            $gend = htmlentities($row->Gender);
-                                            $gen = "fa fa-venus link-danger ";
-                                            if ($gend =="Female"){
-                                                echo $gen;
-                                            }
-                                            else{
-                                                $gen = "fa fa-mars link-info ";  
-                                                echo $gen;
-                                            }
-                                            
-                                            ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
-                                            <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
-                                            <td  class ="action" scope="col">
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btnx btn-primary"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success btnx"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
-                                                </div>
-                                            </td>
-                                        
-                                        
-                                        </tr>
-                                        <?php $cnt=$cnt+1;}}?>   
-                                        </tbody>
-                                    </table>
-                                    <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-                                        <strong>Page <?php echo $page_no." of ".$total_no_of_pages; ?></strong>
-                                    </div>
-                                    <ul class="pagination">
-                                        <?php // if($page_no > 1){ echo "<li><a href='?page_no=1'>First Page</a></li>"; } ?>
-                                        
-                                        <li <?php if($page_no <= 1){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no > 1){ echo "href='?page_no=$previous_page'"; } ?>>Previous</a>
-                                        </li>
-                                        
-                                        <?php 
-                                        if ($total_no_of_pages <= 10){  	 
-                                            for ($counter = 1; $counter <= $total_no_of_pages; $counter++){
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                        }
-                                        elseif($total_no_of_pages > 10){
-                                            
-                                        if($page_no <= 4) {			
-                                        for ($counter = 1; $counter < 8; $counter++){		 
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                            echo "<li><a>...</a></li>";
-                                            echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-                                            }
+                                                        <th>Purok</th>
+                                                        
+                                                        <th>Street</th>
+                                                    
+                                                    
+                                                        <th>Action </th>
+                                                    </tr>   
+                                                </thead>
+                                                    <?php  
+                                                    while($row = mysqli_fetch_array($result))  
+                                                    {  
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle link-success me-1"></i>
+                                                                    Active
+                                                                </td>
+                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
 
-                                        elseif($page_no > 4 && $page_no < $total_no_of_pages - 4) {		 
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
-                                            for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {			
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                  
-                                        }
-                                        echo "<li><a>...</a></li>";
-                                        echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                        echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";      
-                                                }
-                                            
-                                            else {
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
-
-                                            for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                   
-                                                    }
-                                                }
-                                        }
-                                    ?>
-                                        
-                                        <li <?php if($page_no >= $total_no_of_pages){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no < $total_no_of_pages) { echo "href='?page_no=$next_page'"; } ?>>Next</a>
-                                        </li>
-                                        <?php if($page_no < $total_no_of_pages){
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
-                                        }?>
-                                    </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   
-                    <div class="tab-pane fade show" id="p8">
-                    <div class="container-fluid" style= "overflow-x:auto">
-                            <div class="row g-1 px-5">
-                                <div class="col-xl-12 col-md-12 col-sm-12 ">
-                                    <div class="row" >
-                                    <div class="" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm table-bordered table-hover" style = "min-width: 1000px;">
-                                    
-                                        <thead>
-                                            <tr>
-                                                <th  scope="col">
-                                                    Status  </th>
-                                                <th   scope="col">Name </th>
-                                                <th   scope="col">Age </th>
-                                                <th   scope="col">Gender </th>
-                                                <th   scope="col">Purok</th>
-                                                <th  scope="col">Street </th>
-                                                <th   scope="col">Action </th>
-                                            </tr>   
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <?php
-                                                if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-                                                    $page_no = $_GET['page_no'];
-                                                    } else {
-                                                        $page_no = 1;
-                                                        }
-                                                $total_records_per_page = 10;
-                                                $offset = ($page_no-1) * $total_records_per_page;
-                                                $previous_page = $page_no - 1;
-                                                $next_page = $page_no + 1;
-                                                $adjacents = "2";
-                                                
-                                                $count = "SELECT * FROM tblresident where Purok='8'";
-                                                $queryc = $dbh -> prepare($count);
-                                                $queryc->execute();
-                                                $resultc=$queryc->fetchAll(PDO::FETCH_OBJ);
-                                                $total_records=$queryc->rowCount();
-                                                $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                                                $second_last = $total_no_of_pages - 1;
-                                                
-                                                
-                                                $sql="SELECT * from tblresident where Purok='8' LIMIT $offset, $total_records_per_page";
-                                                $query = $dbh -> prepare($sql);
-                                                $query->execute();
-                                                $results=$query->fetchAll(PDO::FETCH_OBJ);
-                                                
-                                                
-                                                $cnt=1;
-                                                if($query->rowCount() > 0)
-                                                {
-                                                foreach($results as $row)
-                                                {               
-                                            ?>
-                                            <td  class ="small" scope="col">
-                                                <i class ="fa fa-circle link-success me-1"></i>
-                                                Active
-                                            </td>
-                                            
-                                            <td  scope="col"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?> <?php  echo htmlentities($row->Suffix);?></td>
-                                            <td  scope = "col"><?php $gbd = $row->BirthDate;
-                                                            $gbd = date('Y-m-d', strtotime($gbd));
-                                                            $today = date('Y-m-d');
-                                                            $diff = date_diff(date_create($gbd), date_create($today));
-                                                            echo $diff->format('%y');?></td>
-                                            <td    scope="col"><i class = "fa <?php 
-                                            $gend = htmlentities($row->Gender);
-                                            $gen = "fa fa-venus link-danger ";
-                                            if ($gend =="Female"){
-                                                echo $gen;
-                                            }
-                                            else{
-                                                $gen = "fa fa-mars link-info ";  
-                                                echo $gen;
-                                            }
-                                            
-                                            ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
-                                            <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
-                                            <td  class ="action" scope="col">
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btnx btn-primary"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button btnx" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
-                                                </div>
-                                            </td>
-                                        
-                                        
-                                        </tr>
-                                        <?php $cnt=$cnt+1;}}?>   
-                                        </tbody>
-                                    </table>
-                                    <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-                                        <strong>Page <?php echo $page_no." of ".$total_no_of_pages; ?></strong>
-                                    </div>
-                                    <ul class="pagination">
-                                        <?php // if($page_no > 1){ echo "<li><a href='?page_no=1'>First Page</a></li>"; } ?>
-                                        
-                                        <li <?php if($page_no <= 1){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no > 1){ echo "href='?page_no=$previous_page'"; } ?>>Previous</a>
-                                        </li>
-                                        
-                                        <?php 
-                                        if ($total_no_of_pages <= 10){  	 
-                                            for ($counter = 1; $counter <= $total_no_of_pages; $counter++){
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                        }
-                                        elseif($total_no_of_pages > 10){
-                                            
-                                        if($page_no <= 4) {			
-                                        for ($counter = 1; $counter < 8; $counter++){		 
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                            echo "<li><a>...</a></li>";
-                                            echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-                                            }
-
-                                        elseif($page_no > 4 && $page_no < $total_no_of_pages - 4) {		 
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
-                                            for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {			
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                  
-                                        }
-                                        echo "<li><a>...</a></li>";
-                                        echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                        echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";      
-                                                }
-                                            
-                                            else {
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
-
-                                            for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                   
-                                                    }
-                                                }
-                                        }
-                                    ?>
-                                        
-                                        <li <?php if($page_no >= $total_no_of_pages){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no < $total_no_of_pages) { echo "href='?page_no=$next_page'"; } ?>>Next</a>
-                                        </li>
-                                        <?php if($page_no < $total_no_of_pages){
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
-                                        }?>
-                                    </ul>
+                                                                $gbd = $row["BirthDate"];
+                                                                $gbd = date('Y-m-d', strtotime($gbd));
+                                                                $today = date('Y-m-d');
+                                                                $diff = date_diff(date_create($gbd), date_create($today));
+                                                          
+                                                        echo '
+                                                                <td>'.$diff->format('%y').'</td>  
+                                                                <td><i class = "fa';
+                                                                $gend = $row["Gender"];
+                                                                $gen = "fa fa-venus link-danger ";
+                                                                if ($gend =="Female"){
+                                                                    echo $gen;
+                                                                }
+                                                                else{
+                                                                    $gen = "fa fa-mars link-info ";  
+                                                                    echo $gen;
+                                                                }
+                                                        echo 'me-2"> </i>'.$row["Gender"].'</td>  
+                                                                <td>'.$row["Purok"].'</td>  
+                                                                <td>'.$row["streetName"].'</td>  
+                                                                <td  class ="action" scope="col">
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a href  = "view-resident-personal.php?viewid='.$row["ID"].'" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid='.$row["ID"].'"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</button>
+                                                                </div>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';  
+                                                    }  
+                                                    ?>  
+                                                </table>  
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1973,355 +777,331 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                         </div>
                     </div>
                     
-                    <div class="tab-pane fade show" id="p9">
-                    <div class="container-fluid " style= "overflow-x:auto">
+                    <?php $query ="SELECT * FROM tblresident WHERE Purok=7 ORDER BY LastName ASC";  
+                        $result = mysqli_query($connect, $query);  ?>
+
+                     <div class="tab-pane fade show" id="p7">
+                        <div class="container-fluid" style= "overflow-x:auto">
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
-                                    <div class="" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm table-bordered table-hover " style = "min-width: 1000px;">
-                             
-                                        <thead>
-                                            <tr>
-                                                <th  scope="col">
-                                                    Status  </th>
-                                                <th   scope="col">Name </th>
-                                                <th   scope="col">Age </th>
-                                                <th   scope="col">Gender </th>
-                                                <th   scope="col">Purok</th>
-                                                <th  scope="col">Street </th>
-                                                <th   scope="col">Action </th>
-                                            </tr>   
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <?php
-                                                if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-                                                    $page_no = $_GET['page_no'];
-                                                    } else {
-                                                        $page_no = 1;
-                                                        }
-                                                $total_records_per_page = 10;
-                                                $offset = ($page_no-1) * $total_records_per_page;
-                                                $previous_page = $page_no - 1;
-                                                $next_page = $page_no + 1;
-                                                $adjacents = "2";
-                                                
-                                                $count = "SELECT * FROM tblresident where Purok='9'";
-                                                $queryc = $dbh -> prepare($count);
-                                                $queryc->execute();
-                                                $resultc=$queryc->fetchAll(PDO::FETCH_OBJ);
-                                                $total_records=$queryc->rowCount();
-                                                $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                                                $second_last = $total_no_of_pages - 1;
-                                                
-                                                
-                                                $sql="SELECT * from tblresident where Purok='9' LIMIT $offset, $total_records_per_page";
-                                                $query = $dbh -> prepare($sql);
-                                                $query->execute();
-                                                $results=$query->fetchAll(PDO::FETCH_OBJ);
-                                                
-                                                
-                                                $cnt=1;
-                                                if($query->rowCount() > 0)
-                                                {
-                                                foreach($results as $row)
-                                                {               
-                                            ?>
-                                            <td  class ="small" scope="col">
-                                                <i class ="fa fa-circle link-success me-1"></i>
-                                                Active
-                                            </td>
-                                            
-                                            <td  scope="col"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?> <?php  echo htmlentities($row->Suffix);?></td>
-                                            <td  scope = "col"><?php $gbd = $row->BirthDate;
-                                                            $gbd = date('Y-m-d', strtotime($gbd));
-                                                            $today = date('Y-m-d');
-                                                            $diff = date_diff(date_create($gbd), date_create($today));
-                                                            echo $diff->format('%y');?></td>
-                                            <td    scope="col"><i class = "fa <?php 
-                                            $gend = htmlentities($row->Gender);
-                                            $gen = "fa fa-venus link-danger ";
-                                            if ($gend =="Female"){
-                                                echo $gen;
-                                            }
-                                            else{
-                                                $gen = "fa fa-mars link-info ";  
-                                                echo $gen;
-                                            }
-                                            
-                                            ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
-                                            <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
-                                            <td  class ="action" scope="col">
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btnx btn-primary"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success btnx"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
-                                                </div>
-                                            </td>
-                                        
-                                        
-                                        </tr>
-                                        <?php $cnt=$cnt+1;}}?>   
-                                        </tbody>
-                                    </table>
-                                    <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-                                        <strong>Page <?php echo $page_no." of ".$total_no_of_pages; ?></strong>
-                                    </div>
-                                    <ul class="pagination">
-                                        <?php // if($page_no > 1){ echo "<li><a href='?page_no=1'>First Page</a></li>"; } ?>
-                                        
-                                        <li <?php if($page_no <= 1){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no > 1){ echo "href='?page_no=$previous_page'"; } ?>>Previous</a>
-                                        </li>
-                                        
-                                        <?php 
-                                        if ($total_no_of_pages <= 10){  	 
-                                            for ($counter = 1; $counter <= $total_no_of_pages; $counter++){
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                        }
-                                        elseif($total_no_of_pages > 10){
-                                            
-                                        if($page_no <= 4) {			
-                                        for ($counter = 1; $counter < 8; $counter++){		 
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                            echo "<li><a>...</a></li>";
-                                            echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-                                            }
+                                        <div class="" style= "overflow-x:auto">
+                                            <div class="table-responsive">  
+                                                <table id="p7data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <thead>
+                                                    <tr>
+                                                        <th>Status</th>
+                                                        <th>Name</th>
 
-                                        elseif($page_no > 4 && $page_no < $total_no_of_pages - 4) {		 
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
-                                            for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {			
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                  
-                                        }
-                                        echo "<li><a>...</a></li>";
-                                        echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                        echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";      
-                                                }
-                                            
-                                            else {
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
+                                                        <th>Age</th>
 
-                                            for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                   
-                                                    }
-                                                }
-                                        }
-                                    ?>
-                                        
-                                        <li <?php if($page_no >= $total_no_of_pages){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no < $total_no_of_pages) { echo "href='?page_no=$next_page'"; } ?>>Next</a>
-                                        </li>
-                                        <?php if($page_no < $total_no_of_pages){
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
-                                        }?>
-                                    </ul>
+                                                        <th>Gender</th>
+
+                                                        <th>Purok</th>
+                                                        
+                                                        <th>Street</th>
+                                                    
+                                                    
+                                                        <th>Action </th>
+                                                    </tr>   
+                                                </thead>
+                                                    <?php  
+                                                    while($row = mysqli_fetch_array($result))  
+                                                    {  
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle link-success me-1"></i>
+                                                                    Active
+                                                                </td>
+                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+
+                                                                $gbd = $row["BirthDate"];
+                                                                $gbd = date('Y-m-d', strtotime($gbd));
+                                                                $today = date('Y-m-d');
+                                                                $diff = date_diff(date_create($gbd), date_create($today));
+                                                          
+                                                        echo '
+                                                                <td>'.$diff->format('%y').'</td>  
+                                                                <td><i class = "fa';
+                                                                $gend = $row["Gender"];
+                                                                $gen = "fa fa-venus link-danger ";
+                                                                if ($gend =="Female"){
+                                                                    echo $gen;
+                                                                }
+                                                                else{
+                                                                    $gen = "fa fa-mars link-info ";  
+                                                                    echo $gen;
+                                                                }
+                                                        echo 'me-2"> </i>'.$row["Gender"].'</td>  
+                                                                <td>'.$row["Purok"].'</td>  
+                                                                <td>'.$row["streetName"].'</td>  
+                                                                <td  class ="action" scope="col">
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a href  = "view-resident-personal.php?viewid='.$row["ID"].'" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid='.$row["ID"].'"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</button>
+                                                                </div>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';  
+                                                    }  
+                                                    ?>  
+                                                </table>  
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                  
-                    <div class="tab-pane fade" id="p10">
-                    <div class="container-fluid" style= "overflow-x:auto">
+
+                    <?php $query ="SELECT * FROM tblresident WHERE Purok=8 ORDER BY LastName ASC";  
+                        $result = mysqli_query($connect, $query);  ?>
+                   
+                    <div class="tab-pane fade show" id="p8">
+                        <div class="container-fluid" style= "overflow-x:auto">
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
-                                    <div class="" style= "overflow-x:auto">
-                                    <table class="table bg-white rounded shadow-sm table-bordered table-hover " style = "min-width: 1000px;">
-                                    
-                                        <thead>
-                                            <tr>
-                                                <th  scope="col">
-                                                    Status  </th>
-                                                <th   scope="col">Name </th>
-                                                <th   scope="col">Age </th>
-                                                <th   scope="col">Gender </th>
-                                                <th   scope="col">Purok</th>
-                                                <th  scope="col">Street </th>
-                                                <th   scope="col">Action </th>
-                                            </tr>   
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <?php
-                                                if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-                                                    $page_no = $_GET['page_no'];
-                                                    } else {
-                                                        $page_no = 1;
-                                                        }
-                                                $total_records_per_page = 10;
-                                                $offset = ($page_no-1) * $total_records_per_page;
-                                                $previous_page = $page_no - 1;
-                                                $next_page = $page_no + 1;
-                                                $adjacents = "2";
-                                                
-                                                $count = "SELECT * FROM tblresident where Purok='10'";
-                                                $queryc = $dbh -> prepare($count);
-                                                $queryc->execute();
-                                                $resultc=$queryc->fetchAll(PDO::FETCH_OBJ);
-                                                $total_records=$queryc->rowCount();
-                                                $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                                                $second_last = $total_no_of_pages - 1;
-                                                
-                                                
-                                                $sql="SELECT * from tblresident where Purok='10' LIMIT $offset, $total_records_per_page";
-                                                $query = $dbh -> prepare($sql);
-                                                $query->execute();
-                                                $results=$query->fetchAll(PDO::FETCH_OBJ);
-                                                
-                                                
-                                                $cnt=1;
-                                                if($query->rowCount() > 0)
-                                                {
-                                                foreach($results as $row)
-                                                {               
-                                            ?>
-                                            <td  class ="small" scope="col">
-                                                <i class ="fa fa-circle link-success me-1"></i>
-                                                Active
-                                            </td>
-                                            
-                                            <td  scope="col"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?> <?php  echo htmlentities($row->Suffix);?></td>
-                                            <td  scope = "col"><?php $gbd = $row->BirthDate;
-                                                            $gbd = date('Y-m-d', strtotime($gbd));
-                                                            $today = date('Y-m-d');
-                                                            $diff = date_diff(date_create($gbd), date_create($today));
-                                                            echo $diff->format('%y');?></td>
-                                            <td    scope="col"><i class = "fa <?php 
-                                            $gend = htmlentities($row->Gender);
-                                            $gen = "fa fa-venus link-danger ";
-                                            if ($gend =="Female"){
-                                                echo $gen;
-                                            }
-                                            else{
-                                                $gen = "fa fa-mars link-info ";  
-                                                echo $gen;
-                                            }
-                                            
-                                            ?> me-2"> </i><?php  echo htmlentities($row->Gender);?> </td>
-                                            <td   scope="col"><?php  echo htmlentities($row->Purok);?></td>
-                                            <td scope="col"><?php  echo htmlentities($row->streetName);?> St.</td>
-                                            <td  class ="action" scope="col">
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a href  = "view-resident-personal.php?viewid=<?php echo $row->ID;?>" type="button" class="btn btn-primary btnx"><i class = "fa fa-eye mx-1"></i><span class="wal">View</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <a type="button" href ="edit-resident-personal.php?editid=<?php echo $row->ID;?>"class="btn btn-success btnx"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                </div>
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger btnx"> <i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></button>
-                                                </div>
-                                            </td>
-                                        
-                                        
-                                        </tr>
-                                        <?php $cnt=$cnt+1;}}}?>   
-                                        </tbody>
-                                    </table>
-                                    <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-                                        <strong>Page <?php echo $page_no." of ".$total_no_of_pages; ?></strong>
+                                        <div class="" style= "overflow-x:auto">
+                                            <div class="table-responsive">  
+                                                <table id="p8data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <thead>
+                                                    <tr>
+                                                        <th>Status</th>
+                                                        <th>Name</th>
+
+                                                        <th>Age</th>
+
+                                                        <th>Gender</th>
+
+                                                        <th>Purok</th>
+                                                        
+                                                        <th>Street</th>
+                                                    
+                                                    
+                                                        <th>Action </th>
+                                                    </tr>   
+                                                </thead>
+                                                    <?php  
+                                                    while($row = mysqli_fetch_array($result))  
+                                                    {  
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle link-success me-1"></i>
+                                                                    Active
+                                                                </td>
+                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+
+                                                                $gbd = $row["BirthDate"];
+                                                                $gbd = date('Y-m-d', strtotime($gbd));
+                                                                $today = date('Y-m-d');
+                                                                $diff = date_diff(date_create($gbd), date_create($today));
+                                                          
+                                                        echo '
+                                                                <td>'.$diff->format('%y').'</td>  
+                                                                <td><i class = "fa';
+                                                                $gend = $row["Gender"];
+                                                                $gen = "fa fa-venus link-danger ";
+                                                                if ($gend =="Female"){
+                                                                    echo $gen;
+                                                                }
+                                                                else{
+                                                                    $gen = "fa fa-mars link-info ";  
+                                                                    echo $gen;
+                                                                }
+                                                        echo 'me-2"> </i>'.$row["Gender"].'</td>  
+                                                                <td>'.$row["Purok"].'</td>  
+                                                                <td>'.$row["streetName"].'</td>  
+                                                                <td  class ="action" scope="col">
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a href  = "view-resident-personal.php?viewid='.$row["ID"].'" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid='.$row["ID"].'"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</button>
+                                                                </div>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';  
+                                                    }  
+                                                    ?>  
+                                                </table>  
+                                            </div>
+                                        </div>
                                     </div>
-                                    <ul class="pagination">
-                                        <?php // if($page_no > 1){ echo "<li><a href='?page_no=1'>First Page</a></li>"; } ?>
-                                        
-                                        <li <?php if($page_no <= 1){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no > 1){ echo "href='?page_no=$previous_page'"; } ?>>Previous</a>
-                                        </li>
-                                        
-                                        <?php 
-                                        if ($total_no_of_pages <= 10){  	 
-                                            for ($counter = 1; $counter <= $total_no_of_pages; $counter++){
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                        }
-                                        elseif($total_no_of_pages > 10){
-                                            
-                                        if($page_no <= 4) {			
-                                        for ($counter = 1; $counter < 8; $counter++){		 
-                                                if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }
-                                            }
-                                            echo "<li><a>...</a></li>";
-                                            echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-                                            }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                                        elseif($page_no > 4 && $page_no < $total_no_of_pages - 4) {		 
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
-                                            for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {			
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                  
-                                        }
-                                        echo "<li><a>...</a></li>";
-                                        echo "<li><a href='?page_no=$second_last'>$second_last</a></li>";
-                                        echo "<li><a href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";      
-                                                }
-                                            
-                                            else {
-                                            echo "<li><a href='?page_no=1'>1</a></li>";
-                                            echo "<li><a href='?page_no=2'>2</a></li>";
-                                            echo "<li><a>...</a></li>";
+                    <?php $query ="SELECT * FROM tblresident WHERE Purok=9 ORDER BY LastName ASC";  
+                        $result = mysqli_query($connect, $query);  ?>
+                    
+                    <div class="tab-pane fade show" id="p9">
+                        <div class="container-fluid " style= "overflow-x:auto">
+                            <div class="row g-1 px-5">
+                                <div class="col-xl-12 col-md-12 col-sm-12 ">
+                                    <div class="row" >
+                                        <div class="" style= "overflow-x:auto">
+                                            <div class="table-responsive">  
+                                                <table id="p9data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <thead>
+                                                    <tr>
+                                                        <th>Status</th>
+                                                        <th>Name</th>
 
-                                            for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
-                                            if ($counter == $page_no) {
-                                            echo "<li class='active'><a>$counter</a></li>";	
-                                                    }else{
-                                            echo "<li><a href='?page_no=$counter'>$counter</a></li>";
-                                                    }                   
-                                                    }
-                                                }
-                                        }
-                                    ?>
-                                        
-                                        <li <?php if($page_no >= $total_no_of_pages){ echo "class='disabled'"; } ?>>
-                                        <a <?php if($page_no < $total_no_of_pages) { echo "href='?page_no=$next_page'"; } ?>>Next</a>
-                                        </li>
-                                        <?php if($page_no < $total_no_of_pages){
-                                            echo "<li><a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
-                                        }?>
-                                    </ul>
+                                                        <th>Age</th>
+
+                                                        <th>Gender</th>
+
+                                                        <th>Purok</th>
+                                                        
+                                                        <th>Street</th>
+                                                    
+                                                    
+                                                        <th>Action </th>
+                                                    </tr>   
+                                                </thead>
+                                                    <?php  
+                                                    while($row = mysqli_fetch_array($result))  
+                                                    {  
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle link-success me-1"></i>
+                                                                    Active
+                                                                </td>
+                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+
+                                                                $gbd = $row["BirthDate"];
+                                                                $gbd = date('Y-m-d', strtotime($gbd));
+                                                                $today = date('Y-m-d');
+                                                                $diff = date_diff(date_create($gbd), date_create($today));
+                                                          
+                                                        echo '
+                                                                <td>'.$diff->format('%y').'</td>  
+                                                                <td><i class = "fa';
+                                                                $gend = $row["Gender"];
+                                                                $gen = "fa fa-venus link-danger ";
+                                                                if ($gend =="Female"){
+                                                                    echo $gen;
+                                                                }
+                                                                else{
+                                                                    $gen = "fa fa-mars link-info ";  
+                                                                    echo $gen;
+                                                                }
+                                                        echo 'me-2"> </i>'.$row["Gender"].'</td>  
+                                                                <td>'.$row["Purok"].'</td>  
+                                                                <td>'.$row["streetName"].'</td>  
+                                                                <td  class ="action" scope="col">
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a href  = "view-resident-personal.php?viewid='.$row["ID"].'" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid='.$row["ID"].'"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</button>
+                                                                </div>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';  
+                                                    }  
+                                                    ?>  
+                                                </table>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php $query ="SELECT * FROM tblresident WHERE Purok=10 ORDER BY LastName ASC";  
+                        $result = mysqli_query($connect, $query);  ?>
+                  
+                    <div class="tab-pane fade" id="p10">
+                        <div class="container-fluid" style= "overflow-x:auto">
+                            <div class="row g-1 px-5">
+                                <div class="col-xl-12 col-md-12 col-sm-12 ">
+                                    <div class="row" >
+                                        <div class="" style= "overflow-x:auto">
+                                            <div class="table-responsive">  
+                                                <table id="p10data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <thead>
+                                                    <tr>
+                                                        <th>Status</th>
+                                                        <th>Name</th>
+
+                                                        <th>Age</th>
+
+                                                        <th>Gender</th>
+
+                                                        <th>Purok</th>
+                                                        
+                                                        <th>Street</th>
+                                                    
+                                                    
+                                                        <th>Action </th>
+                                                    </tr>   
+                                                </thead>
+                                                    <?php  
+                                                    while($row = mysqli_fetch_array($result))  
+                                                    {  
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle link-success me-1"></i>
+                                                                    Active
+                                                                </td>
+                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+
+                                                                $gbd = $row["BirthDate"];
+                                                                $gbd = date('Y-m-d', strtotime($gbd));
+                                                                $today = date('Y-m-d');
+                                                                $diff = date_diff(date_create($gbd), date_create($today));
+                                                          
+                                                        echo '
+                                                                <td>'.$diff->format('%y').'</td>  
+                                                                <td><i class = "fa';
+                                                                $gend = $row["Gender"];
+                                                                $gen = "fa fa-venus link-danger ";
+                                                                if ($gend =="Female"){
+                                                                    echo $gen;
+                                                                }
+                                                                else{
+                                                                    $gen = "fa fa-mars link-info ";  
+                                                                    echo $gen;
+                                                                }
+                                                        echo 'me-2"> </i>'.$row["Gender"].'</td>  
+                                                                <td>'.$row["Purok"].'</td>  
+                                                                <td>'.$row["streetName"].'</td>  
+                                                                <td  class ="action" scope="col">
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a href  = "view-resident-personal.php?viewid='.$row["ID"].'" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid='.$row["ID"].'"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
+                                                                </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</button>
+                                                                </div>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';  
+                                                    }  
+                                                    ?>  
+                                                </table>  
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -2372,28 +1152,73 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                     </div>
                 </div>
             </div>
-        <?php  }?>
-        <script>  
-        $(document).ready(function(){  
-            $(document).on('click', '.column_sort', function(){  
-                var column_name = $(this).attr("id");  
-                var order = $(this).data('order');
-                var arrow = '';  
-            
-           $.ajax({  
-                url:"sortRes.php",  
-                method:"POST",  
-                data:{column_name:column_name, order:order},  
-                success:function(data)  
-                {  
-                     $('#res_table').html(data); 
-        
-                }  
-           })  
-      });  
- });  
- </script>  
 
 </body>
 </html>
+<script>  
+ $(document).ready(function(){  
+      $('#alldata').DataTable();  
+ });  
+ </script>
+
+ <script>  
+ $(document).ready(function(){  
+      $('#p1data').DataTable();  
+ });  
+ </script>
+ 
+ <script>  
+ $(document).ready(function(){  
+      $('#p2data').DataTable();  
+ });  
+ </script>
+
+<script>  
+ $(document).ready(function(){  
+      $('#p3data').DataTable();  
+ });  
+ </script>
+
+<script>  
+ $(document).ready(function(){  
+      $('#p4data').DataTable();  
+ });  
+ </script>
+
+<script>  
+ $(document).ready(function(){  
+      $('#p5data').DataTable();  
+ });  
+ </script>
+
+<script>  
+ $(document).ready(function(){  
+      $('#p6data').DataTable();  
+ });  
+ </script>
+
+<script>  
+ $(document).ready(function(){  
+      $('#p7data').DataTable();  
+ });  
+ </script>
+
+<script>  
+ $(document).ready(function(){  
+      $('#p8data').DataTable();  
+ });  
+ </script>
+
+<script>  
+ $(document).ready(function(){  
+      $('#p9data').DataTable();  
+ });  
+ </script>
+
+<script>  
+ $(document).ready(function(){  
+      $('#p10data').DataTable();  
+ });  
+ </script>
+<?php }?>
     <!--up-->

@@ -69,7 +69,7 @@
             <div class="row g-0 row-cols-4 justify-content-start">
                 <div class="col">                
                     <div class="btn-group" role="group">
-                        <a href = "resident-registrations.php"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-user-plus"></i>&nbsp; New Resident</a>
+                        <a href = "resident-registration.php"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-user-plus"></i>&nbsp; New Resident</a>
                     </div>
                     </div>
 
@@ -90,7 +90,7 @@
                 
                 <div class="col px-3 py-3" style= "overflow-x: auto;">
                     <table class="table table-striped border bg-light table-hover" style = "min-width: 1000px;">
-                        <thead style = "vertical-algin: middle">
+                        <thead style = "vertical-align: middle">
                             <tr>
                                 <th>
                                     #
