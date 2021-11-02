@@ -16,39 +16,19 @@ if (strlen($_SESSION['clientmsaid']==0)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Residents</title>
    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
-    
-    <script src="script/searchshowpage.js"></script>  
-    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>            
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />  
-
-    <link rel = "stylesheet" href="../css/sidebar.css" />
-    <link rel="stylesheet" href="../css/scroll.css">
+  <?php include ('link.php')?>
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
     <style type = "text/css">
         
-        table,td,tr,th{
-            border: 1px solid #d3d3d3;
-            text-align: left;
-            font-size: 1.02em;
-        
-            font-family: 'Noto Sans Display', sans-serif;
-            
-        }
+ 
      
        
         .action{
-          
+            width: 30%;
             text-align: center;
         }
-        .btng{
-            width: 50px;
-        }
+        
         
         @media (max-width: 576px){
             table{
@@ -206,7 +186,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="col-xl-12" style= "overflow:auto;" id = "res_table">                                    
                                             <div class="table-responsive">  
-                                                <table id="alldata" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="alldata" class="table bg-white rounded shadow-sm  table-hover table-bordered "  style= "min-width: 1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -256,9 +236,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                 <td>'.$row["Purok"].'</td>  
                                                                 <td>'.$row["streetName"].'</td>  
                                                                 <td  class ="action" scope="col">
-                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a href  = "view-resident-personal.php?viewid='.$row["ID"].'" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
-                                                                </div>
+                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                        <a href  = "view-resident-personal.php?viewid='.$row["ID"].'" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                    </div>
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                                     <a type="button" href ="edit-resident-personal.php?editid='.$row["ID"].'"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
                                                                 </div>
@@ -283,13 +263,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                         $result = mysqli_query($connect, $query);  ?>
 
                     <div class="tab-pane fade show" id="p1">
-                        <div class="container-fluid" style= "overflow-x:auto">
+                        <div class="container-fluid" >
                             <div class="row g-1 px-5">
                                 <div class="col-xl-12 col-md-12 col-sm-12 ">
                                     <div class="row" >
-                                        <div class="" style= "overflow-x:auto">
-                                            <div class="table-responsive">  
-                                                <table id="p1data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                        <div class="" >
+                                            <div class="table-responsive" style= "overflow-x:auto">  
+                                                <table id="p1data" class="table bg-white  table-hover table-bordered " style= "min-width: 1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -300,14 +280,11 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                         <th>Gender</th>
 
                                                         <th>Purok</th>
-                                                        
-                                                        <th>Street</th>
-                                                    
-                                                    
-                                                        <th>Action </th>
+                                                        <th>Street</th> 
+                                                        <th class= "text-center">Action </th>
                                                     </tr>   
                                                 </thead>
-                                                    <?php  
+                                                <?php  
                                                     while($row = mysqli_fetch_array($result))  
                                                     {  
                                                         echo '  
@@ -342,17 +319,19 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                                     <a href  = "view-resident-personal.php?viewid='.$row["ID"].'" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
                                                                 </div>
-                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a type="button" href ="edit-resident-personal.php?editid='.$row["ID"].'"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
-                                                                </div>
-                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</button>
-                                                                </div>
-                                                                </td> 
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                <a type="button" href ="edit-resident-personal.php?editid='.$row["ID"].'"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
+                                                            </div>
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                <button type="button" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</button>
+                                                            </div>
+                                                        </td> 
                                                         </tr>  
                                                         ';  
                                                     }  
-                                                    ?>  
+                                                    ?> 
+                                                    </tbody> 
+                                                
                                                 </table>  
                                             </div>
                                         </div>
@@ -372,7 +351,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="col" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p2data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p2data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width: 1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -455,7 +434,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="col" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p3data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p3data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width: 1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -538,7 +517,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p4data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p4data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width: 1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -621,7 +600,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p5data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p5data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width: 1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -704,7 +683,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p6data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p6data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width: 1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -787,7 +766,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p7data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p7data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width:1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -870,7 +849,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p8data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p8data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width: 1000px">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -953,7 +932,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p9data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p9data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width: 1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -1036,7 +1015,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p10data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p10data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width: 1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
