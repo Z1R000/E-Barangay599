@@ -351,7 +351,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="col" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p2data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p2data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width: 1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -434,7 +434,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="col" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p3data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p3data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width: 1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -517,7 +517,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p4data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p4data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width: 1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -600,7 +600,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p5data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p5data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width: 1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -683,7 +683,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p6data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p6data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width: 1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -766,7 +766,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p7data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p7data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width:1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -849,7 +849,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p8data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p8data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width: 1000px">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -932,7 +932,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p9data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p9data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width: 1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
@@ -1015,7 +1015,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     <div class="row" >
                                         <div class="" style= "overflow-x:auto">
                                             <div class="table-responsive">  
-                                                <table id="p10data" class="table bg-white rounded shadow-sm  table-hover table-bordered ">  
+                                                <table id="p10data" class="table bg-white rounded shadow-sm  table-hover table-bordered " style= "min-width: 1000px;">  
                                                 <thead>
                                                     <tr>
                                                         <th>Status</th>
