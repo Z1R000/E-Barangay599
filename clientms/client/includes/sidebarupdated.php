@@ -1,7 +1,7 @@
 <div style="background-color: #021f4e;" id="sidebar-wrapper">
 
 
-    <div class="sidebar-heading text-center py-1 second-text fs-5 fw-bold border-bottom">
+    <div class="sidebar-heading text-center py-2 second-text fs-5 fw-bold border-bottom">
 
         <br>Barangay 599 <br>E-barangay<br>
         <img src="images/resident-logo.png" class="py-1" style="width: 60px;"><br>
@@ -10,11 +10,11 @@
 
         <div role="group">
             <br>
-            <a href=""><i class="fas fa-bell fs-2" title="Notifications"></i></a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="client-profile.php"><i class="fas fa-user fs-2" title="Profile"></i></a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="change-password.php"><i class="fas fa-cog fs-2" title="Change Password"></i></a>
+            <a href="client-profile.php"><i class="fas fa-user fs-3" title="Profile"></i></a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="change-password.php"><i class="fas fa-cog fs-3" title="Change Password"></i></a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href=""><i class="fas fa-bell fs-3" title="Notifications"></i></a>
             
         </div>
         <br>
