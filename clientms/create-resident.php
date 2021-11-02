@@ -9,9 +9,7 @@ if (mysqli_connect_errno())
   
   }
     include('includes/dbconnection.php');
-    if (strlen($_SESSION['clientmsaid']==0)) {
-        header('location:logout.php');
-        } else{
+    
         if(isset($_POST['submit']))
     {
           
@@ -555,7 +553,6 @@ if (mysqli_connect_errno())
                   
 </body>
 </html>
-<?php }  ?>
 <!--up-->
 <script>
 $(document).ready(function(){
