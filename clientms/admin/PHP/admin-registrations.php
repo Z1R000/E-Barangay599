@@ -1,5 +1,15 @@
 <?php 
     $curr ="Resident Registration";
+    session_start();
+    error_reporting(0);
+    include('includes/dbconnection.php');
+    if (strlen($_SESSION['clientmsaid']==0)) {
+    header('location:logout.php');
+    } else{
+        $connect = mysqli_connect("localhost", "root", "", "clientmsdb");
+        $query ="SELECT * FROM tblresidentrequest ORDER BY CreationDate ASC";  
+                        $result = mysqli_query($connect, $query);  
+        
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,12 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $curr;?></title>
    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-   
-    <link rel = "stylesheet" href="../css/sidebar.css" />
-    <link rel = "stylesheet" href ="../css/scroll.css">
+    <?php include ('link.php')?>
 
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
@@ -62,7 +67,6 @@
             </div>
         </div>
     </nav>
-<form action="registration-request.php">
     <div class="container-fluid py-3 px-5" >
         
         <div class="row gx-0 shadow-sm" >
@@ -89,90 +93,88 @@
 
                 
                 <div class="col px-3 py-3" style= "overflow-x: auto;">
-                    <table class="table table-striped border bg-light table-hover" style = "min-width: 1000px;">
-                        <thead style = "vertical-align: middle">
-                            <tr>
-                                <th>
-                                    #
-                                </th>
-                                <th>
-                                    Resident Name
-                                </th>
-                                <th>
-                                    Age
-                                </th>
-                                <th>
-                                    Gender
-                                </th>
-                             
-                                
-                                <th>
-                                    Date Submitted
-                                </th>
-                                <th class="text-center">
-                                    Action
-                                </th>
-                            </tr>                
-                        </thead>
-                        <tbody style= "vertical-align: middle;">
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    Mang Bert
-                                </td>
-                                <td >
-                                    45
-                                </td>
-                                <td>
-                                    Male
-                                </td>
-                                <td>
-                                    10-27-2021
-                                </td>
-                                <td class="text-center">
-                                    <div class="btn-group" >
-                                        <button class="btn-primary btn" type= "submit">
-                                            <i class="fa fa-check-circle mx-1 fa-1x">
-                                            </i><span class = "wal">Manage</span> 
-                                        </button>
-                                    </div>
-                                    
-                                </td>
-                            </tr>
-                            
-                        </tbody>
-                        <tfoot class= "py-2 bg-light text-center">
-                            <tr >
-                                <th colspan = 9>
-                                    End of table
-                                </th>
-                            </tr>    
-                        </tfoot>
-                        </table>
+                <div class="table-responsive">  
+                                                <table id="resreqdata" class="table bg-white rounded shadow-sm  table-hover table-bordered "  style= "min-width: 1000px;">  
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Name</th>
+
+                                                        <th>Age</th>
+
+                                                        <th>Gender</th>
+
+                                                        <th>Purok</th>
+                                                        
+                                                        <th>Street</th>
+
+                                                        <th>Registration Date</th>
+                                                    
+                                                        <th>Action </th>
+                                                    </tr>   
+                                                </thead>
+                                                    <?php  
+                                                    while($row = mysqli_fetch_array($result))  
+                                                    {  
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    '.$row["ID"].'
+                                                                </td>
+                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+
+                                                                $gbd = $row["BirthDate"];
+                                                                $gbd = date('Y-m-d', strtotime($gbd));
+                                                                $today = date('Y-m-d');
+                                                                $diff = date_diff(date_create($gbd), date_create($today));
+                                                          
+                                                        echo '
+                                                                <td>'.$diff->format('%y').'</td>  
+                                                                <td><i class = "fa';
+                                                                $gend = $row["Gender"];
+                                                                $gen = "fa fa-venus link-danger ";
+                                                                if ($gend =="Female"){
+                                                                    echo $gen;
+                                                                }
+                                                                else{
+                                                                    $gen = "fa fa-mars link-info ";  
+                                                                    echo $gen;
+                                                                }
+                                                        echo 'me-2"> </i>'.$row["Gender"].'</td>  
+                                                                <td>'.$row["Purok"].'</td>  
+                                                                <td>'.$row["streetName"].'</td>';
+                                                                
+                                                                $cbd = $row["CreationDate"];
+                                                                $cbds = date('F j, Y', strtotime($cbd));
+                                                        
+                                                        echo '
+                                                                <td>'.$cbds.'</td>  
+                                                                <td class="text-center">
+                                                                    <div class="btn-group" >
+                                                                        <a href="manage-registration.php?editid='.$row["ID"].'" class="btn-primary btn" >
+                                                                            <i class="fa fa-check-circle mx-1 fa-1x">
+                                                                            </i><span class = "wal">Manage</span> 
+                                                                        </a>
+                                                                    </div>
+                                                                </td> 
+                                                        </tr>  
+                                                        ';  
+                                                    }  
+                                                    ?>  
+                                                </table>  
+                                            </div>
                         </div>
                 </div>
      
             </div>
             
             </div>
-            <div class="row py-2">
-
-            
-            <div class="col">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
     </div>
-</form>
 </body>
 </html>
+<?php } ?>
+<script>  
+ $(document).ready(function(){  
+      $('#resreqdata').DataTable();  
+ });  
+ </script>
