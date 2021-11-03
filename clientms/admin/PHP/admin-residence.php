@@ -29,7 +29,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
             text-align: center;
         }
         
-        
+        .name{
+            width: 20%;
+        }
         @media (max-width: 576px){
             table{
                 overflow-y: auto;
@@ -222,7 +224,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                           
                                                         echo '
                                                                 <td>'.$diff->format('%y').'</td>  
-                                                                <td><i class = "fa';
+                                                                <td><i class = "';
                                                                 $gend = $row["Gender"];
                                                                 $gen = "fa fa-venus link-danger ";
                                                                 if ($gend =="Female"){
@@ -293,7 +295,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                     <i class ="fa fa-circle link-success me-1"></i>
                                                                     Active
                                                                 </td>
-                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+                                                                <td class= "name">'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
 
                                                                 $gbd = $row["BirthDate"];
                                                                 $gbd = date('Y-m-d', strtotime($gbd));
@@ -302,7 +304,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                           
                                                         echo '
                                                                 <td>'.$diff->format('%y').'</td>  
-                                                                <td><i class = "fa';
+                                                                <td><i class = "';
                                                                 $gend = $row["Gender"];
                                                                 $gen = "fa fa-venus link-danger ";
                                                                 if ($gend =="Female"){
@@ -378,7 +380,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                     <i class ="fa fa-circle link-success me-1"></i>
                                                                     Active
                                                                 </td>
-                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+                                                                <td class= "name">'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
 
                                                                 $gbd = $row["BirthDate"];
                                                                 $gbd = date('Y-m-d', strtotime($gbd));
@@ -387,7 +389,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                           
                                                         echo '
                                                                 <td>'.$diff->format('%y').'</td>  
-                                                                <td><i class = "fa';
+                                                                <td><i class = "';
                                                                 $gend = $row["Gender"];
                                                                 $gen = "fa fa-venus link-danger ";
                                                                 if ($gend =="Female"){
@@ -461,7 +463,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                     <i class ="fa fa-circle link-success me-1"></i>
                                                                     Active
                                                                 </td>
-                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+                                                                <td class= "name" >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
 
                                                                 $gbd = $row["BirthDate"];
                                                                 $gbd = date('Y-m-d', strtotime($gbd));
@@ -470,7 +472,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                           
                                                         echo '
                                                                 <td>'.$diff->format('%y').'</td>  
-                                                                <td><i class = "fa';
+                                                                <td><i class = "';
                                                                 $gend = $row["Gender"];
                                                                 $gen = "fa fa-venus link-danger ";
                                                                 if ($gend =="Female"){
@@ -544,7 +546,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                     <i class ="fa fa-circle link-success me-1"></i>
                                                                     Active
                                                                 </td>
-                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+                                                                <td class= "name" >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
 
                                                                 $gbd = $row["BirthDate"];
                                                                 $gbd = date('Y-m-d', strtotime($gbd));
@@ -553,7 +555,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                           
                                                         echo '
                                                                 <td>'.$diff->format('%y').'</td>  
-                                                                <td><i class = "fa';
+                                                                <td><i class = "';
                                                                 $gend = $row["Gender"];
                                                                 $gen = "fa fa-venus link-danger ";
                                                                 if ($gend =="Female"){
@@ -627,7 +629,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                     <i class ="fa fa-circle link-success me-1"></i>
                                                                     Active
                                                                 </td>
-                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+                                                                <td  class= "name">'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
 
                                                                 $gbd = $row["BirthDate"];
                                                                 $gbd = date('Y-m-d', strtotime($gbd));
@@ -636,7 +638,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                           
                                                         echo '
                                                                 <td>'.$diff->format('%y').'</td>  
-                                                                <td><i class = "fa';
+                                                                <td><i class = "';
                                                                 $gend = $row["Gender"];
                                                                 $gen = "fa fa-venus link-danger ";
                                                                 if ($gend =="Female"){
@@ -710,7 +712,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                     <i class ="fa fa-circle link-success me-1"></i>
                                                                     Active
                                                                 </td>
-                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+                                                                <td class= "name">'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
 
                                                                 $gbd = $row["BirthDate"];
                                                                 $gbd = date('Y-m-d', strtotime($gbd));
@@ -719,7 +721,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                           
                                                         echo '
                                                                 <td>'.$diff->format('%y').'</td>  
-                                                                <td><i class = "fa';
+                                                                <td><i class = "';
                                                                 $gend = $row["Gender"];
                                                                 $gen = "fa fa-venus link-danger ";
                                                                 if ($gend =="Female"){
@@ -793,7 +795,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                     <i class ="fa fa-circle link-success me-1"></i>
                                                                     Active
                                                                 </td>
-                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+                                                                <td class= "name">'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
 
                                                                 $gbd = $row["BirthDate"];
                                                                 $gbd = date('Y-m-d', strtotime($gbd));
@@ -876,7 +878,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                     <i class ="fa fa-circle link-success me-1"></i>
                                                                     Active
                                                                 </td>
-                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+                                                                <td class= "name" >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
 
                                                                 $gbd = $row["BirthDate"];
                                                                 $gbd = date('Y-m-d', strtotime($gbd));
@@ -885,7 +887,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                           
                                                         echo '
                                                                 <td>'.$diff->format('%y').'</td>  
-                                                                <td><i class = "fa';
+                                                                <td><i class = "';
                                                                 $gend = $row["Gender"];
                                                                 $gen = "fa fa-venus link-danger ";
                                                                 if ($gend =="Female"){
@@ -959,7 +961,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                     <i class ="fa fa-circle link-success me-1"></i>
                                                                     Active
                                                                 </td>
-                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+                                                                <td class= "name">'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
 
                                                                 $gbd = $row["BirthDate"];
                                                                 $gbd = date('Y-m-d', strtotime($gbd));
@@ -968,7 +970,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                           
                                                         echo '
                                                                 <td>'.$diff->format('%y').'</td>  
-                                                                <td><i class = "fa';
+                                                                <td><i class = "';
                                                                 $gend = $row["Gender"];
                                                                 $gen = "fa fa-venus link-danger ";
                                                                 if ($gend =="Female"){
@@ -1042,7 +1044,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                     <i class ="fa fa-circle link-success me-1"></i>
                                                                     Active
                                                                 </td>
-                                                                <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
+                                                                <td class= "name">'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
 
                                                                 $gbd = $row["BirthDate"];
                                                                 $gbd = date('Y-m-d', strtotime($gbd));
@@ -1051,7 +1053,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                           
                                                         echo '
                                                                 <td>'.$diff->format('%y').'</td>  
-                                                                <td><i class = "fa';
+                                                                <td><i class = "';
                                                                 $gend = $row["Gender"];
                                                                 $gen = "fa fa-venus link-danger ";
                                                                 if ($gend =="Female"){

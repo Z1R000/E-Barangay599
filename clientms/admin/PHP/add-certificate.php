@@ -65,7 +65,7 @@
           -moz-transform-origin: 0 0;
           -o-transform-origin: 0 0;
           -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;*/
+          transform-origin: 0 0;
         }
         
      

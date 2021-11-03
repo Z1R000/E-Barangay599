@@ -30,9 +30,44 @@
     $(document).ready(function() {
     $('#crec').DataTable( {
         dom: 'Bfrtip',
-        buttons: [
-                'copy', 'excel', 'pdf', 'print'
-            ]
+        buttons: {
+            buttons:[
+                {
+                    extend: 'print',
+                    text: 'Generate Report',
+                    className: 'btn btn-primary my-1',
+                    exportOptions: {columns: [ 0, 1, 2, 3,4, 5 ]}
+                
+                },
+            
+                {
+                    extend: 'excelHtml5',
+                    text: 'Excel File',
+                    className: 'btn-success my-1',
+                    exportOptions: {columns: [0,1,2,3,4,5]}
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: 'PDF file',
+                    className: 'btn-danger my-1',
+                    exportOptions: {columns: [ 0, 1, 2, 5 ]}
+                },
+                {
+                    extend: 'copyHtml5',
+                    text:'Copy',
+                    className: 'btn-secondary my-1',
+                    exportOptions: {columns: [0,1,2,3,4,5] }
+                },
+                
+            ],
+        dom: {
+            button:{
+                className: 'btn'
+            }
+        }
+
+        }
+       
         } );
     } );
     </script>
@@ -150,18 +185,18 @@
                                         <div class="fs-5 px-2"><i class="fa fa-copy mx-1"></i>Certification Records</div>
                                     </div>
                                 
-                               
                                     <div class="row py-2 bg-white border-start border-bottom border-end">
                                         <div class="row pb-2 px-4 g-0 justify-content-end">
                                             <div class="col-3 ">
                                                 <div class="btn-group float-end">
                                                 <a href = "#walk-in"  data-bs-toggle ="modal" role = "button"class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus mx-1"></i><span class= "wal">Walk-in Certification</span></a>
                                                 </div>
+                                                
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col" style = "overflow-x:auto;">
-                                                <table class= "table table-striped table-bordered" id = "crec" style = "min-width: 900px;">
+                                                <table class= "table table-striped table-bordered pt-2" id = "crec" style = "min-width: 900px;">
                                                     <thead>
 
                                                     

@@ -14,9 +14,43 @@
           $(document).ready(function() {
         $('#brecord').DataTable( {
         dom: 'Bfrtip',
-        buttons: [
-                'copy', 'excel', 'pdf', 'print'
-            ]
+        buttons: {
+            buttons:[
+                {
+                    extend: 'print',
+                    text: 'Generate Report',
+                    className: 'btn btn-primary my-1',
+                    exportOptions: {columns: [ 0, 1, 2, 3,4 ]}
+                
+                },
+            
+                {
+                    extend: 'excelHtml5',
+                    text: 'Excel File',
+                    className: 'btn-success my-1',
+                    exportOptions: {columns: [0,1,2,3,4]}
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: 'PDF file',
+                    className: 'btn-danger my-1',
+                    exportOptions: {columns: [ 0, 1, 2, 3,4 ]}
+                },
+                {
+                    extend: 'copyHtml5',
+                    text:'Copy',
+                    className: 'btn-secondary my-1',
+                    exportOptions: {columns: [0,1,2,3,4] }
+                },
+                
+            ],
+        dom: {
+            button:{
+                className: 'btn'
+            }
+        }
+
+        }
         } );
     } );
     </script>
