@@ -30,5 +30,11 @@
         .border-599{
             border: 1px solid #012f4e;
         }
+        /*.printer{
+            background-image: linear-gradient(to bottom, #ffffff,lime 100%) !important;
+            border:0;
+            color: #ffffff !important;
+
+        }*/
     
 </style>
