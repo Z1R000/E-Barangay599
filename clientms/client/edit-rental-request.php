@@ -194,23 +194,16 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
                             <div class="modal-body bg-white ">
                                 <div class="row">
-                                    <div class="col-xl-6">
-                                        <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
-                                        <div class="d-flex">
-                                            <input type="text" id="prate" class="form-control me-2" name="pRate" placeholder="Requestor Name" readonly>
-                                            <!--Naka disable pero dito ilalagay yung name dapat ni client-->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-
 
                                     <div class="col-xl-6">
-                                        <label for="prate" class="fs-5 fw-bold">Duration<span class="text-muted fs-6">(in hours)</span></label>
-                                        <div class="d-flex">
-                                            <input type="number" min=0 ; id="prate" class="form-control me-2" name="pRate" placeholder="0.00" disabled>
-                                        </div>
+                                        <label for="status" class="fs-5 fw-bold">Property to rent</label>
+                                        <select name="" class="form-control" id="status" disabled>
+                                            <option value="avail">Barangay Van</option>
+                                            <option value="noavail">Patrol</option>
+                                            <option value="noavail">Basketball court</option>
+                                        </select>
                                     </div>
+
                                     <div class="col-xl-6">
                                         <label for="prate" class="fs-5 fw-bold">Rate<span class="text-muted fs-6">(per hour)</span></label>
                                         <div class="d-flex">
@@ -221,23 +214,38 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-4">
-                                        <label for="status" class="fs-5 fw-bold">Property to rent</label>
-                                        <select name="" class="form-control" id="status" disabled>
-                                            <option value="avail">Barangay Van</option>
-                                            <option value="noavail">Patrol</option>
-                                            <option value="noavail">Basketball court</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-xl-4">
                                         <label for="prate" class="fs-5 fw-bold">Date of Rental</label>
                                         <input type="date" id="date" class="form-control me-2" name="date" disabled>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label for="rname" class="fs-6 fw-bold">Purpose</label>
-                                        <input type="text" class="form-control" id="rname" placeholder="Please indicate purpose for rental:" disabled>
+                                    <div class="col-xl-4">
+                                        <label for="prate" class="fs-5 fw-bold">Start Time <span class="text-muted fs-6">(ex: 12:30 pm)</span></label>
+                                        <div class="d-flex">
+                                            <input type="time" id="appt" name="appt-time" class="form-control me-2" value="12:30" disabled>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <label for="prate" class="fs-5 fw-bold">End Time <span class="text-muted fs-6">(ex: 12:30 pm)</span></label>
+                                        <div class="d-flex">
+                                            <input type="time" id="appt" name="appt-time" class="form-control me-2" value="12:30" disabled>
+
+                                        </div>
                                     </div>
 
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <label for="purpose" class="fs-5 fw-bold">Purpose</label>
+                                        <div class="d-flex">
+                                            <input type="text" id="purpose" class="form-control me-2" name="purpose" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <label for="total" class="fs-5 fw-bold">Total</label>
+                                        <div class="d-flex">
+                                            <input type="text" id="total" class="form-control me-2" name="total" placeholder="0.00" readonly disabled>
+                                        </div>
+                                    </div>
                                 </div>
                                 <br>
                                 <div class="row">
@@ -267,12 +275,12 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
                                     </div>
                                     <div class="col-xl-3">
-                                        <img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
+                                        <img src="images/barangaybackground.png" width="280" height="250">
 
                                     </div>
                                     <div class="col-xl-1">
 
-                                        <img src="images/images.jpg" alt="Girl in a jacket" width="80" height="80">
+                                        <img src="images/images.jpg" width="80" height="80">
 
 
                                     </div>
@@ -293,7 +301,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
                                     </div>
                                     <div class="col-xl-3 ">
-                                        <a href="index.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
+                                        <a href="manage-rental.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
                                     </div>
                                     <div class="col-xl-3 ">
                                         <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
