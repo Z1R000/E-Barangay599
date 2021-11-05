@@ -73,14 +73,14 @@
              <br>Barangay 599 <br>E-barangay<br>
                 <img src = "../IMAGES/admin-logo.png" class = "py-1"style = "width: 60px;"><br>
                 <div class="btn-group">
-                    <a href="#" class="btn btn-transparent"><i class="fa fa-user fs-4 text-primary"></i></a>
+                    <a href="client-profile.php" class="btn btn-transparent"><i class="fa fa-user fs-4 text-primary"></i></a>
                     
-                    <a href="#" class="btn btn-transparent"><i class="fa fa-cog  fs-4 text-primary"></i></a>
+                    <a href="change-password.php" class="btn btn-transparent"><i class="fa fa-cog  fs-4 text-primary"></i></a>
                     <a href="#" class="btn btn-transparent shadow-0"><i class="fa fa-bell fs-4 text-primary"></i></a>
                 </div>
                 <br>
                 <div class="btn-group my-2" role="group" aria-label="Basic example">
-                    <a type = " button" href = "../../landing.php"  class = "btn btn-outline-danger fs-6" ><i class = "fa fa-power-off"></i>&nbsp;Logout </a>          
+                    <a type = " button" href = "../../index.php"  class = "btn btn-outline-danger fs-6" ><i class = "fa fa-power-off"></i>&nbsp;Logout </a>          
                 </div>
                 
                 

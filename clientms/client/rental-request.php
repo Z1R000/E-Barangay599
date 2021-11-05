@@ -148,28 +148,37 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
             <!-- Page Content -->
             <div id="page-content-wrapper">
-                <div class="container-fluid banner" align="center">
-                    <div class="row">
-                        <div class="col-xl-3 px-1 ">
-                            <div class="float-start" style="margin-left:50px;">
-                                <img src="../images/barangay.png" style="width: 100px;">
-                            </div>
-
+            <?php
+                    $sql1 = "select * from tblinformation";
+                    $query1 = $dbh->prepare($sql1);
+                    $query1->execute();
+                    $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+                    if ($query1->rowCount() > 0) {
+                        foreach ($results1 as $row1) {
+                ?>
+            <div class="container-fluid banner" align="center">
+                <div class="row">
+                    <div class="col-xl-3 px-1 ">
+                        <div class="float-start" style="margin-left:50px;">
+                            <img src="../<?php echo $row1->Blogoone;?>" style="width: 100px;">
                         </div>
-                        <div class="col-xl-6 " align="center">
-                            <h3 class="py-4">BARANGAY 599, ZONE 59, DISTRICT VI <br>
-                                OFFICE OF THE SANGGUNIANG BARANGAY</h3>
-                        </div>
-                        <div class="col-xl-3">
-                            <div class="float-end" style="margin-right:50px;">
-                                <img src="../images/maynila.png" style="width: 100px;">
-                            </div>
 
-
-                        </div>
                     </div>
+                    <div class="col-xl-6 " align="center">
+                        <h3 class="py-4"><?php echo $row1->Baddress;?> <br>
+                        <?php echo $row1->Btitle;?></h3>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="float-end" style="margin-right:50px;">
+                            <img src="../<?php echo $row1->Blogotwo;?>" style="width: 100px;">
+                        </div>
 
+
+                    </div>
                 </div>
+
+            </div>
+            <?php }}?>
                 <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                     <div class="d-flex align-items-center">
                         <i class="fa fa-align-justify secondary-text fs-4 me-3" id="menu-toggle"></i>

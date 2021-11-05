@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
-if (strlen($_SESSION['clientmsuid'] == 0)) {
+if (strlen($_SESSION['clientmsaid'] == 0)) {
     header('location:logout.php');
 } else {
 ?>
@@ -43,7 +43,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
         <link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
-        <title>Client Profile</title>
+        <title>Admin Profile</title>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 document.querySelectorAll('.sidebar .nav-link').forEach(function(element) {
@@ -108,47 +108,17 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
     <body>
         <div class="d-flex" id="wrapper">
             <!-- Sidebar -->
-            <?php include_once('includes/sidebarupdated.php');     ?>
+            <?php include_once('../includes/sidebar.php');     ?>
+            <?php include('link.php') ?>
             <!-- /#sidebar-wrapper -->
 
             <!-- Page Content -->
             <div id="page-content-wrapper">
-                <div class="container-fluid banner" align="center">
-                    <?php
-                    $sql1 = "select * from tblinformation";
-                    $query1 = $dbh->prepare($sql1);
-                    $query1->execute();
-                    $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
-                    echo "<div class='row'>
-        <div class='col-xl-3 px-1 dis'>
-            <div class='float-start'>";
-                    if ($query1->rowCount() > 0) {
-                        foreach ($results1 as $row1) {
-                            echo "<img src='$row1->Blogoone' style='width: 100px;'>";
-
-                            echo "</div>
-
-                </div>";
-
-                            echo "<div class='col-xl-6' align='center'>
-                <h3 class='py-4'>$row1->Baddress <br>
-                $row1->Btitle</h3>
-                </div>";
-
-                            echo "<div class='col-xl-3 dis'>
-                        <div class='float-end'>
-                            <img src='$row1->Blogotwo' style='width: 100px;'>
-                        </div>
-                    </div>
-                </div>";
-                        }
-                    }
-                    ?>
-                </div>
+                
                 <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                     <div class="d-flex align-items-center">
                         <i class="fa fa-align-justify secondary-text fs-4 me-3" id="menu-toggle"></i>
-                        <h2 class="fs-2 m-0">Client Profile</h2>
+                        <h2 class="fs-2 m-0">Admin Profile</h2>
 
                     </div>
 
