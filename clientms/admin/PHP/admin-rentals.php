@@ -169,7 +169,7 @@
                                             <div class="row pb-2 px-4 g-0 justify-content-end">
                                                 <div class="col-3 ">
                                                     <div class="btn-group float-end">
-                                                        <a href = "#new-rental"  data-bs-toggle ="modal" role = "button"class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus mx-1"></i><span class= "wal">New Property</span></a>
+                                                        <a href = "#new-property"  data-bs-toggle ="modal" role = "button"class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus mx-1"></i><span class= "wal">New Property</span></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -342,9 +342,8 @@
             </div>
         </div>
     </form>
-    <?php
-        include('services.php');
-    ?>
+
+ 
     <form action="" method ="POST">
         <div class="modal fade" id = "new-property" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
@@ -432,7 +431,10 @@
                 </div>
             </div>
         </div>
-
+        
+    <?php
+        include('services.php');
+    ?>
 
     </script>
     <script>

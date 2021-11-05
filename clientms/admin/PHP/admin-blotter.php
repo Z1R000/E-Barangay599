@@ -137,7 +137,6 @@
                     <div class="row rounded-top text-white bg-599">
                         <div class="fs-5">
                             <i class="fa fa-suitcase mx-1">
-                             
                             </i>
                             Blotter Records
                         </div>
