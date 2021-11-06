@@ -245,7 +245,15 @@
                     <div class="modal-body bg-white" align = "center">
                             <img src="../images/proof.jpg" alt="">
                     </div>
-                   
+                   <div class="row">
+                       <div class="col-md-12">
+                            <div class="float-end px-4 py-3">
+                                <div class="btn-group">
+                                    <button class="btn-secondary btn">Done</button>
+                                </div>
+                            </div>
+                       </div>
+                   </div>
                 </div>
             </div>
         </div>
@@ -256,7 +264,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-success ">
                     <div class="modal-header bg-success  ">
-                        <h5 class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Accept payment?</h5>
+                        <div class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Accept payment?</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -336,13 +344,19 @@
                                 </div>
                                 <div class="row justify-content-center" align = "center">
                                     
-                                    <div class="col-mx-6">
+                                    <div class="col-md-12">
+                                        <div class="float-end">
+                                            <div class="btn-group">
                                         <button href ="#" type = "button" class="btn btn-success" data-bs-dismiss ="modal" data-bs-toggle= "modal" >
                                             <i class= 'fa fa-paper-plane me-2'> </i>Send
                                         </button>
+                                        </div>
+                                        <div class="btn-group">
                                         <button type = "button" class="btn btn-danger" data-bs-dismiss = "modal"  name = "no" value ="No">
                                             <i class= "fa fa-times me-2"></i>Discard
                                         </button>
+                                        </div>
+                                        </div>
                                 
                                     </div>
                                     
@@ -363,7 +377,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger ">
                     <div class="modal-header bg-danger bg-transparent ">
-                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
+                        <div class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -374,12 +388,20 @@
                         </div>
                         <div class="row justify-content-center" align = "center">
                             <form method = "POST" action = "#">
-                                <button type = "button" class="btn btn-success rounded-circle" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                    <i class= 'fa fa-check '></i>
-                                </button>
-                                <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
-                                    <i class= "fa fa-times"></i>
-                                </button>
+                                <div class="col-xl-12">
+                                    <div class="float-end">
+                                        <div class="btn-group">
+                                    <button type = "button" class="btn btn-success " data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                        <i class= 'fa fa-check mx-1 '></i>Confirm
+                                    </button>
+                                    </div>
+                                    <div class="btn-group">
+                                    <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                        <i class= "fa fa-times-circle mx-1"></i>Cancel
+                                    </button>
+                                    </div>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                 
@@ -396,7 +418,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger ">
                     <div class="modal-header bg-danger bg-transparent ">
-                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Declining payment?</h5>
+                        <div class="modal-title text-white" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Declining payment?</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -469,13 +491,19 @@
                                 </div>
                                 <div class="row justify-content-center" align = "center">
                                     
-                                    <div class="col-mx-6">
+                                    <div class="col-md-12">
+                                        <div class="float-end">
+                                            <div class="btn-group">
                                         <button href ="#dec-val" type = "button" class="btn btn-success" data-bs-dismiss ="modal" data-bs-toggle= "modal" >
                                             <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
                                         </button>
+                                        </div>
+                                        <div class="btn-group">
                                         <button type = "button" class="btn btn-danger" data-bs-dismiss = "modal"  name = "no" value ="No">
                                             <i class= "fa fa-times me-2"></i>Discard
                                         </button>
+                                        </div>
+                                        </div>
                                 
                                     </div>
                                     

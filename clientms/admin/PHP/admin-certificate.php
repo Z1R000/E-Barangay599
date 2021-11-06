@@ -406,7 +406,7 @@
                                                     <tr>
                                                         <th style = "text-align: left">Certification Name</th>
                                                         <th style = "text-align: left">Certification Fee</th>
-                                                        <th style = "text-align: center">Action</th>
+                                                        <th style = "text-align: center">Actions</th>
                                                     </tr>
                                                     </thead>  
                                                     <tbody class= "table-hover">
@@ -462,59 +462,7 @@
     
     ?>
     <!--modal-payment-->
-    <div class="modal fade" id = "delete-record" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 bg-danger" >
-                    <div class="modal-header  white ">
-                        <h5 class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
-                        
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-white">
-                        <div class="row">
-                            <div class="col xl-4" align = "center">
-                                <img src="../images/trash.png" alt="trash" class= " img-fluid " style ="width: 10%;">
-                            </div>
-                    
-                        </div>
-                        <div class="row">
-                            <p class = "fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
-                        </div>
-                        <div class="row justify-content-center" align = "center">
-                            <form method = "POST" action = "#">
-                                <button type = "button" class="btn btn-success rounded-circle" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                    <i class= 'fa fa-check '></i>
-                                </button>
-                                <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
-                                    <i class= "fa fa-times"></i>
-                                </button>
-                            </form>
-                        </div>
-                
-                    </div>
-                    <div class="modal-footer">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id = "proof" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 border-0 border-bottom border-transparent ">
-                    <div class="modal-header  bg-transparent border-bottom border-white  ">
-                        
-                        <button type="button" class="btn-close btn-primary" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-transparent border-0" align = "center" >
-                    <img src="../images/proof.jpg" alt="proof of payment">
-                       
-                       
-                
-                    </div>
-                  
-                </div>
-            </div>
-        </div>
+    
         
    
        
@@ -556,7 +504,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger ">
                     <div class="modal-header bg-danger bg-transparent ">
-                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
+                        <div class="modal-title text-white" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -570,14 +518,19 @@
                         <div class="row">
                             <p class = "fs-4 text-center">You are about to delete an existing certificate, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
                         </div>
-                        <div class="row justify-content-center" align = "center">
+                        <div class="row justify-content-center" >
                             <form method = "POST" action = "#">
-                                <button type = "button" class="btn btn-success rounded-circle" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                    <i class= 'fa fa-check '></i>
+                                <div class="col-12">
+                                <div class="float-end">
+                                
+                                <button type = "button" class="btn btn-success" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                    <i class= 'fa fa-check mx-1 '></i> Confirm
                                 </button>
-                                <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
-                                    <i class= "fa fa-times"></i>
+                                <button type = "button" class="btn btn-danger" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                    <i class= "fa fa-times mx-1"></i> Cancel
                                 </button>
+                                </div>
+                                </div>
                             </form>
                         </div>
                 
@@ -753,7 +706,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-success ">
                     <div class="modal-header bg-success  ">
-                        <h5 class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Send proof acceptance message</h5>
+                        <div class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Send proof acceptance message</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -831,14 +784,21 @@
                                 </div>
                                 <div class="row justify-content-center" align = "center">
                                     
-                                    <div class="col-mx-6">
+                                <div class="col-md-12">
+                                        <div class="float-end">
+                                        <div class="btn-group">
                                         <button href ="#" type = "button" class="btn btn-success" data-bs-dismiss ="modal"  >
                                             <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
                                         </button>
+                                        </div>
+                                        <div class="btn-group">
+
+                                        
                                         <button type = "button" class="btn btn-danger" data-bs-dismiss = "modal"  name = "no" value ="No">
                                             <i class= "fa fa-times"></i> Discard
                                         </button>
-                                
+                                        </div>
+                                        </div>
                                     </div>
                                     
                                 </div>  
@@ -858,7 +818,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-success ">
                     <div class="modal-header bg-success  ">
-                        <h5 class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Send Proof of transaction</h5>
+                        <div class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Send Proof of transaction</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -937,16 +897,23 @@
                                     </div>
                                     
                                 </div>
-                                <div class="row justify-content-center" align = "center">
+                                <div class="row justify-content-center" >
                                     
-                                    <div class="col-mx-6">
+                                    <div class="col-md-12">
+                                        <div class="float-end">
+                                        <div class="btn-group">
                                         <button href ="#" type = "button" class="btn btn-success" data-bs-dismiss ="modal"  >
                                             <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
                                         </button>
+                                        </div>
+                                        <div class="btn-group">
+
+                                        
                                         <button type = "button" class="btn btn-danger" data-bs-dismiss = "modal"  name = "no" value ="No">
                                             <i class= "fa fa-times"></i> Discard
                                         </button>
-                                
+                                        </div>
+                                        </div>
                                     </div>
                                     
                                 </div>  
@@ -962,13 +929,37 @@
                 </div>
             </div>
         </div>
+               <!--modal-->
+               <div class="modal fade" id = "proof" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 ">
+                    <div class="modal-header bg-danger bg-transparent ">
+        
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white" align = "center">
+                            <img src="../images/proof.jpg" alt="">
+                    </div>
+                   <div class="row">
+                       <div class="col-xl-12 p-3 px-4">
+                           <div class="float-end">
+                               <div class="btn-group">
+                                   <button class="btn btn-secondary" data-bs-dismiss = "modal">Done</button>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+            </div>
+        </div>
 
         <div class="modal fade" id = "decline-proof" tab-idndex = "-1">
 
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger ">
                     <div class="modal-header bg-danger bg-transparent ">
-                        <h5 class="modal-title text-white" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Send proof decline reason</h5>
+                        <div class="modal-title text-white" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Send proof decline reason</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -1041,15 +1032,21 @@
                                     
                                 </div>
                                 <div class="row justify-content-center" align = "center">
-                                    
-                                    <div class="col-mx-6">
-                                        <button href ="" onclick = "alert('Decline Message Sent')" type = "button" class="btn btn-success " data-bs-dismiss ="modal" data-bs-toggle= "modal" >
-                                            <i class= 'fa fa-paper-plane me-2 py-1'></i>Send
+                                <div class="col-md-12">
+                                        <div class="float-end">
+                                        <div class="btn-group">
+                                        <button href ="#" type = "button" class="btn btn-success" data-bs-dismiss ="modal"  >
+                                            <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
                                         </button>
-                                        <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
-                                            <i class= "fa fa-times me-2"></i>Discard
+                                        </div>
+                                        <div class="btn-group">
+
+                                        
+                                        <button type = "button" class="btn btn-danger" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times"></i> Discard
                                         </button>
-                                
+                                        </div>
+                                        </div>
                                     </div>
                                     
                                 </div>  

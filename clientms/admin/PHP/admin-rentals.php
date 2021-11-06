@@ -248,12 +248,21 @@
                         </div>
                         <div class="row justify-content-center" align = "center">
                             <form method = "POST" action = "#">
-                                <button type = "button" class="btn btn-success " data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                    <i class= 'fa fa-check mx-1'></i> Confirm
+                            <div class="col-xl-12">
+                                <div class="float-end">
+                                    <div class="btn-group">
+                                        <button type = "button" class="btn btn-success " data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                    <i class= 'fa fa-check mx-1'></i>Confirm
                                 </button>
+                                </div>
+                                <div class="btn-group">
                                 <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
-                                    <i class= "fa fa-times mx-1"></i> Cancel
+                                    <i class= "fa fa-times-circle mx-1"></i>Cancel
                                 </button>
+                                </div>
+                           
+                            </div>
+                            </div>
                             </form>
                         </div>
                 

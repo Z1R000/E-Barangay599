@@ -186,7 +186,7 @@
                                                 <td scope="col" style = "text-align: right">6:00pm</td>
                                                 <td scope="col" style = "text-align: center">
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="" href ="blotter-report.php"class="btn btng btn-primary"><i class = "fa fa-print mx-1"></i><span class="wal"> Report</span></a>
+                                                            <a type="" href ="blotter-report.php"class="btn btng btn-primary"><i class = "fa fa-print mx-1"></i><span class="wal"> Print</span></a>
                                                         </div>
                                                     
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
@@ -220,7 +220,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger ">
                     <div class="modal-header bg-danger white ">
-                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
+                        <div class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -235,13 +235,22 @@
                             <p class = "fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
                         </div>
                         <div class="row justify-content-center" align = "center">
-                            <form method = "POST" action = "#">
-                                <button type = "button" class="btn btn-success rounded-circle" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                    <i class= 'fa fa-check '></i>
+                        <form method = "POST" action = "#">
+                            <div class="col-xl-12">
+                                <div class="float-end">
+                                    <div class="btn-group">
+                                        <button type = "button" class="btn btn-success " data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                    <i class= 'fa fa-check mx-1'></i>Confirm
                                 </button>
-                                <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
-                                    <i class= "fa fa-times"></i>
+                                </div>
+                                <div class="btn-group">
+                                <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                    <i class= "fa fa-times-circle mx-1"></i>Cancel
                                 </button>
+                                </div>
+                           
+                            </div>
+                            </div>
                             </form>
                         </div>
                 

@@ -14,7 +14,7 @@
   <title>business Clearance</title>
   <style>
     html,body {
-      background: url('../images/Barangaybackground.png');
+     
       height: 100%;
       font-family:'arial';
     }

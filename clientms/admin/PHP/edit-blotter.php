@@ -71,7 +71,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#service-choice" data-bs-toggle= "modal" role ="button"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#service-choice" data-bs-toggle= "modal" role ="button"><i class="fa fa-hand-paper"></i>&nbsp;Services</a></li>
                                 <li class="breadcrumb-item"><a  class= "text-decoration-none" href="admin-blotter.php"><i class="fa fa-gavel"></i>&nbsp;Blotters</a></li>
                             
                             
@@ -84,23 +84,12 @@
         </div>
     </nav> 
     <form action="" method = "POST">
-    <div class="container-fluid px-5">
-                    <div class="row px-5">
-                        <div class="col-xl-5"></div>
-                        <div class="col-xl-7">
-                            <div class="float-end">
-                                <a href="#" onclick = "window.history.back();" class="link link-primary text-decoration-none fs-4"><i class="fa fa-arrow-circle-left me-2"></i>Cancel Blotter Filing</a>
-                            </div>
-                            
-                        </div>
-                    </div>
-                
-                </div>
+    
         <div class="container-fluid  mx-auto px-2 py-1  mb-5">
             <div class="row g-0 p-1">
                 <div class="row g-0 justify-content-center">
                     <div class="col-xl-10 px-3">
-                        <div class="row g-0 my-2 bg-white shadow-sm">
+                        <div class="row g-0 my-2 bg-white border shadow-sm">
                             <div class="row border-bottom  g-0 rounded-top px-2 py-0 bg-599">
                                 <div class= "fs-5 py-1 white">Step 1: Complaint Details</div>
                             </div>
@@ -117,7 +106,7 @@
                 </div>
                 <div class="row g-0 justify-content-center">
                     <div class="col-xl-10  px-3 py-2">
-                        <div class="row g-0 my-2 bg-white shadow-sm">
+                        <div class="row g-0 my-2 border bg-white shadow-sm">
                             <div class="row border g-0 rounded-top px-2 py-0 bg-599">
                                 <div class= "fs-5 py-1 white" id="step-2">Step 2:Attending barangay personnel <span class="fs-6"></span></div>
                             </div>
@@ -157,7 +146,7 @@
 
                     <div class="row g-0 justify-content-center">     
                         <div class="col-xl-10  px-3 py-2">
-                            <div class="row g-0 my-2 bg-white shadow-sm" >
+                            <div class="row g-0 my-2 bg-white border shadow-sm" >
                                 <div class="row border g-0 rounded-top px-2 py-0 bg-599">
                                     <div class= "fs-5 py-1 white" id="step-2">Step 3: Involved Persons <span class="fs-6">(e.g Juan Dela Cruz, Asiong Salonga..)</span></div>
                                 </div>
@@ -188,7 +177,7 @@
                 <div class="row g-0 justify-content-center">
                 
                     <div class="col-xl-10  px-3 ">
-                        <div class="row g-0 my-2 bg-white shadow-sm">
+                        <div class="row g-0 my-2 bg-white border shadow-sm">
                             <div class="row border g-0 rounded-top px-2 py-0 bg-599">
                                 <div class= "fs-5 py-1 white" id="step-2">Step 4: Incident Information <span class="fs-6">(Details regarding the incident)</span></div>
                             </div>
@@ -250,7 +239,7 @@
                                             <button type="button" href="#submit-record"  data-bs-toggle ="modal" role="modal"  class="btn btn-primary"><i class="fa fa-save mx-1"></i> Save</button>
                                             </div>
                                             <div class="btn-group">
-                                            <button type="button" href="#submit-record"  data-bs-toggle ="modal" role="modal"  class="btn btn-secondary"><i class="fa fa-arrow-circle-left mx-1"></i> Back</button>
+                                            <button type="button" onclick = "window.history.back()"  data-bs-toggle ="modal" role="modal"  class="btn btn-secondary"><i class="fa fa-arrow-circle-left mx-1"></i> Back</button>
                                             </div>
                                         </div>
                                         
@@ -271,10 +260,10 @@
         include('services.php');
     ?>
     <div class="modal fade" id = "submit-record" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 " style="background: #021f4e;">
-                    <div class="modal-header  white " style="background: #021f4e;">
-                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;New Blotter Record</h5>
+            <div class="modal-dialog modal-dialog-centered border-0 modal-md">
+                <div class="modal-content g-0 border-0">
+                    <div class="modal-header  border-599 bg-599 white ">
+                        <div class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Update Blotter Record Verification</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -286,23 +275,28 @@
                     
                         </div>
                         <div class="row">
-                            <p class = "fs-5 text-center">You are about to add a new record of blotter in the system. By clicking yes you attest to the legibility, truthfullness and credibility of the information supplied by the complainant.  Once saved some information will be unchangeable. <br><span class="text-muted fs-6"></span></p>
+                            <p class = "fs-5 text-center">You are about to override data recorded for this blotter case, Are you certain. <br><span class="text-muted fs-6"></span></p>
                         </div>
                         <div class="row justify-content-center" align = "center">
-                            
+                            <div class="col-xl-12">
+                                <div class="float-end">
+                                <div class="btn-group">
                                 <button type = "button" class="btn btn-success rounded my-1" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
                                     Yes, I am certain
                                 </button>
+                                </div>
+                                <div class="btn-group">
                                 <button type = "button" class="btn btn-danger rounded" data-bs-dismiss = "modal"  name = "no" value ="No">
                                     No, I am not
                                 </button>
+                                </div>  
+                                </div>
                             </form>
+                            </div>
                         </div>
                 
                     </div>
-                    <div class="modal-footer">
-                        
-                    </div>
+                   
                 </div>
             </div>
         </div>

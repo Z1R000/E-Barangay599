@@ -145,8 +145,8 @@
 
         <div class="modal fade" id = "new-rental" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content g-0 blue">
-                    <div class="modal-header blue white ">
+                <div class="modal-content g-0 border-0">
+                    <div class="modal-header border-599 bg-599 ">
                         <div class="modal-title white" >&nbsp;<i class = "fa fa-plus"></i>&nbsp;&nbsp;New Rental</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -240,10 +240,11 @@
                                     <div class="row " align= "right">
                                         <div class="col-md-12     mx-auto my-2">
                                             <button type ="button" role = "button" class="btn btn-success px-2" >
-                                                
+                                                <i class="fa fa-upload mx-1"></i>
                                                 Submit
                                             </button>
                                             <button type ="button" role = "button" class="btn btn-secondary px-2" data-bs-dismiss= "modal" >
+                                                <i class="fa fa-times-circle mx-1"></i>
                                                 Cancel
                                             </button>
                                         </div>
@@ -253,16 +254,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        
-                    </div>
+                  
                 </div>
             </div>
         </div>
         <div class="modal fade" id = "edit-rental" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content g-0 blue">
-                    <div class="modal-header blue white ">
+                <div class="modal-content g-0 border-0">
+                    <div class="modal-header border-599 bg-599 ">
                         <div class="modal-title white" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Edit Rental</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -359,9 +358,11 @@
                                         <div class="col-md-12     mx-auto my-2">
                                         
                                             <button type ="button" role = "button" style = "" class="btn btn-primary px-2" >
+                                                <i class= "fa fa-save mx-1"></i>
                                                 Save
                                             </button>
                                             <button type ="button" role = "button" class="btn btn-secondary px-2" data-bs-dismiss= "modal" >
+                                                <i class="fa fa-times-circle mx-1"></i>
                                                 Cancel
                                             </button>
                                         </div>
@@ -371,17 +372,15 @@
                             </div>
                         </div>
                     </div>
-                        <div class="modal-footer">
-                            
-                        </div>
+                   
                     </div>
 
             </div>
         </div>
         <div class="modal fade" id = "check-rental" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content g-0 blue">
-                    <div class="modal-header blue white ">
+                <div class="modal-content g-0 border-0">
+                    <div class="modal-header bg-599 boder-599 ">
                         <div class="modal-title white" >&nbsp;<i class = "fa fa-eye"></i>&nbsp;&nbsp;Rental record</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -484,9 +483,7 @@
                         
                                         
                     </div>
-                    <div class="modal-footer">
-                        
-                    </div>
+                   
                 </div>
             </div>
         </div>
@@ -497,7 +494,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger" >
                     <div class="modal-header  white ">
-                        <h5 class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
+                        <div class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -513,12 +510,21 @@
                         </div>
                         <div class="row justify-content-center" align = "center">
                             <form method = "POST" action = "#">
-                                <button type = "button" class="btn btn-success rounded-circle" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                    <i class= 'fa fa-check '></i>
+                            <div class="col-xl-12">
+                                <div class="float-end">
+                                    <div class="btn-group">
+                                        <button type = "button" class="btn btn-success " data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                    <i class= 'fa fa-check mx-1'></i>Confirm
                                 </button>
-                                <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
-                                    <i class= "fa fa-times"></i>
+                                </div>
+                                <div class="btn-group">
+                                <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                    <i class= "fa fa-times-circle mx-1"></i>Cancel
                                 </button>
+                                </div>
+                           
+                            </div>
+                            </div>
                             </form>
                         </div>
                 
@@ -534,7 +540,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-success ">
                     <div class="modal-header bg-success  ">
-                        <h5 class="modal-title white">&nbsp;<i class = "fa fa-paper-plane"></i>&nbsp;&nbsp;Send Proof of transaction</h5>
+                        <div class="modal-title white">&nbsp;<i class = "fa fa-paper-plane"></i>&nbsp;&nbsp;Send Proof of transaction</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -614,14 +620,20 @@
                                 </div>
                                 <div class="row justify-content-center" align = "center">
                                     
-                                    <div class="col-mx-6">
+                                    <div class="col-md-12">
+                                        <div class="float-end">
+
+                                        <div class="btn-group">
                                         <button href ="#" type = "button" class="btn btn-success " data-bs-dismiss ="modal"  >
                                             <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
                                         </button>
+                                        </div>
+                                        <div class="btn-group">
                                         <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
                                             <i class= "fa fa-times me-2"></i>Discard
                                         </button>
-                                
+                                        </div>
+                                        </div>
                                     </div>
                                     
                                 </div>  
