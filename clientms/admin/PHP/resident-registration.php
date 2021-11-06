@@ -147,7 +147,7 @@ if (mysqli_connect_errno())
                 <div class="col-xl-5"></div>
                 <div class="col-xl-7">
                     <div class="float-end">
-                        <a href="admin-residence.php" class="link link-primary text-decoration-none fs-4"><i class="fa fa-arrow-circle-left me-2"></i>Cancel Registration</a>
+                        <a href="admin-registrations.php" class="link link-primary text-decoration-none fs-4"><i class="fa fa-arrow-circle-left me-2"></i>Cancel Registration</a>
                     </div>
 
                 </div>
@@ -223,6 +223,15 @@ if (mysqli_connect_errno())
                             var today = new Date().toISOString().split('T')[0];
                             document.getElementsByName("bdate")[0].setAttribute('max', today);
                         </script>
+                        <div class="row g-0 mb-3 px-4">
+                            <label for="bdate" class="col-xl-2 fs-4 py-0"><span class="text-danger fs-5">*</span>Date of Birth<br><span class="fs-6 text-muted small"> (Araw ng kapakanakan)</span></label>
+
+                            <div class="col-xl-5 col-sm-12">
+                                <br>
+                                <input type="date" id="bdate" class="form-control" name="bdate" required value="<?php echo $bdatesets; ?>">
+                                <label for="" class="text-muted fs-6 small">Format: day/month/year</label>
+                            </div>
+                        </div>
 
                         <div class="row g-0 mb-3 px-4">
 
@@ -230,7 +239,7 @@ if (mysqli_connect_errno())
                             <div class="col-xl-5 col-sm-12">
                                 <br>
                                 <select id="gend" name="gend" class="form-select input-sm" aria-label="Default select example" id="gender" onchange="showDiv('hidden_div', this)" required>
-                                    <option value="">--Select Gender--</option>
+                                    <option value="" disabled>--Select Gender--</option>
                                     <option value="Male">Male (lalake)</option>
                                     <option value="Female">Female (Babae)</option>
 
@@ -243,7 +252,7 @@ if (mysqli_connect_errno())
                             <div class="col-xl-5">
                                 <br>
                                 <select class="form-select input-sm" aria-label="Default select example" id="voter" name="voter" onchange="showprecinct('precinct', this)">
-                                    <option value="">--Select--</option>
+                                    <option value="" disabled>--Select--</option>
                                     <option value="Yes">Registered</option>
                                     <option value="No">Unregistered</option>
                                 </select>
@@ -267,7 +276,7 @@ if (mysqli_connect_errno())
                             <div class="col-xl-5">
                                 <br>
                                 <select class="form-select input-sm" aria-label="Default select example" id="cstatus" name="cstatus" onchange="showDiv('hidden_div', this)" required>
-                                    <option value="">--Select Status--</option>
+                                    <option value="" disabled>--Select Status--</option>
                                     <option value="Single">Single</option>
                                     <option value="Married">Married</option>
                                     <option value="Separated">Separated</option>

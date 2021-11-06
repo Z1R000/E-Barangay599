@@ -579,6 +579,13 @@
 <div class="modal fade" id = "walk-in" tab-idex = "-1">
     <div class="modal-dialog modal-dialog-centered modal-lg" >
         <div class="modal-content g-0  "  >
+            <?php
+                 if(isset($_POST['submit']))
+                 {
+                    $clientmsaid=$_SESSION['clientmsaid'];
+                    $search = $_POST['search'];
+                 }
+            ?>
         <form method="post">
             <div class="modal-header bg-599 border-599 ">
                 <div class="modal-title text-white" id="delete ">&nbsp;<i class = "far fa-copy"></i>&nbsp;&nbsp;Walk in Certification</div>
@@ -606,7 +613,7 @@
                         
                         <div class="col-md-6">
                             <label for="purp" class= "fs-6 fw-bold">Purpose</label>
-                                <select class= "select form-select" name="" id="purp" onchange = "showOthers('other_txt',this);" required>
+                                <select class= "select form-select" name="purp" id="purp" onchange = "showOthers('other_txt',this);" required>
                                     <option  selected disabled>--Purpose--</option>
                                     <option value="ent">For entertainment</option>
                                     <option value="med">For medical reasons</option>
@@ -620,7 +627,7 @@
 
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder= "Specify a purpose here">
+                            <input type="text" class="form-control" name="other" id="other "placeholder= "Specify a purpose here">
                         </div>
                     </div>
                         <div class="row">
@@ -676,15 +683,7 @@
                                     <input type="text" class="form-control" id="rname" placeholder ="e.g Manong Store"> 
                             </div>
                             
-                            <div class="col-md-6" >
-                                    <label for="cap" class= "fs-6 fw-bold" >Capital</label>
-                                        <select class= "select form-select" name="" id="cap">
-                                            <option  selected>< 10,000 </option>
-                                            <option value="ent">>10, 000</option>
-                                            <option value="med">>100,000</option>
-                                        </select>
-                                
-                                </div>
+                            
                         </div>
                                    </div>
             <div class="modal-footer bg-white border-top-0 py-0">

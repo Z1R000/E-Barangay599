@@ -28,10 +28,11 @@ if (isset($_POST['submit'])) {
     $cstatus = $_POST['cstatus'];
     $email = $_POST['email'];
     $vp = $_POST['vp'];
+    $bp = $_POST['bp'];
     $hm = $_POST['hm'];
 
-    $sql = "insert into tblresidentrequest (ResidentType,Purok,houseUnit,voter,LastName,Suffix,FirstName,MiddleName,Gender,BirthDate,streetName,Cellphnumber,tinNumber,sssNumber,CivilStatus,Email,Password,vPrecinct,HomeName)
-        values(:residenttype,:prk,:hunit,:voter,:lname,:sf,:fname,:mname,:gend,:bdate,:strt,:contact,:tin,:sss,:cstatus,:email,:password,:vp,:hm)";
+    $sql = "insert into tblresidentrequest (ResidentType,Purok,houseUnit,voter,LastName,Suffix,FirstName,MiddleName,Gender,BirthDate,BirthPlace,streetName,Cellphnumber,tinNumber,sssNumber,CivilStatus,Email,Password,vPrecinct,HomeName)
+        values(:residenttype,:prk,:hunit,:voter,:lname,:sf,:fname,:mname,:gend,:bdate,:bp,:strt,:contact,:tin,:sss,:cstatus,:email,:password,:vp,:hm)";
     $query = $dbh->prepare($sql);
     $query->bindParam(':residenttype', $residenttype, PDO::PARAM_STR);
     $query->bindParam(':prk', $prk, PDO::PARAM_STR);
@@ -39,6 +40,7 @@ if (isset($_POST['submit'])) {
     $query->bindParam(':hunit', $hunit, PDO::PARAM_STR);
     $query->bindParam(':voter', $voter, PDO::PARAM_STR);
     $query->bindParam(':vp', $vp, PDO::PARAM_STR);
+    $query->bindParam(':bp', $bp, PDO::PARAM_STR);
     $query->bindParam(':lname', $lname, PDO::PARAM_STR);
     $query->bindParam(':fname', $fname, PDO::PARAM_STR);
     $query->bindParam(':mname', $mname, PDO::PARAM_STR);
@@ -57,7 +59,7 @@ if (isset($_POST['submit'])) {
     $LastInsertId = $dbh->lastInsertId();
     if ($LastInsertId > 0) {
         echo '<script>alert("Resident request has been sent.")</script>';
-        echo "<script>window.location.href ='create-resident.php'</script>";
+        echo "<script>window.location.href ='index.php'</script>";
     } else {
         echo '<script>alert("Something Went Wrong. Please try again")</script>';
     }
@@ -166,7 +168,7 @@ if (isset($_POST['submit'])) {
                 <div class="col-xl-5"></div>
                 <div class="col-xl-7">
                     <div class="float-end">
-                        <a href="#" onclick="window.history.back();" class="link link-primary text-decoration-none fs-4"><i class="fa fa-arrow-circle-left me-2"></i>Cancel Registration</a>
+                        <a href="index.php" class="link link-primary text-decoration-none fs-4"><i class="fa fa-arrow-circle-left me-2"></i>Cancel Registration</a>
                     </div>
 
                 </div>
@@ -242,6 +244,14 @@ if (isset($_POST['submit'])) {
                             var today = new Date().toISOString().split('T')[0];
                             document.getElementsByName("bdate")[0].setAttribute('max', today);
                         </script>
+
+                        <div class="row g-0 mb-3 px-4">
+                            <label for="fname" class="col-xl-2 fs-4 py-0"> <span class="text-danger fs-5"></span>Birth Place<br><span class="fs-6 text-muted small"> (Lugar ng kapanganakan)</span></label>
+                            <div class="col-xl-5 col-sm-12">
+                                <br>
+                                <input id="bp" type="text" class="form-control" name="bp" value="" required>
+                            </div>
+                        </div>
 
                         <div class="row g-0 mb-3 px-4">
 
