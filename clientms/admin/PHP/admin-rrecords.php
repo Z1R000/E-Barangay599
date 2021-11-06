@@ -271,12 +271,13 @@
                     <div class="row gx-3">
                                 <div class="col-xl-12" >
                                     <div class="row">
-                                        <div class="col-6 ">
+                                        <div class="col-xl-6 ">
                                             <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
                                             <div class="d-flex">    
                                             <input type="text" id = "prate" class="form-control" name ="pRate" placeholder= "Requestor Name">
                                             </div>
-                                            <div class="col-xl-12">
+                                        </div>
+                                            <div class="col-xl-6">
                                                 <label for="purp" class= "fs-6 fw-bold">Purposes</label>
                                                     <select class= "select form-select" name="" id="purp" onchange = "showOthersEdit('othersed', this)">
                                                         <option  selected>Purposes</option>
@@ -284,12 +285,13 @@
                                                         <option value="med">For medical reasons</option>
                                                         <option value="others">Others</option>
                                                     </select>
-                                            </div>
-                                        <div class="col-xl-6" id ="othersed">
+                                                    <div class="col-xl-12" id ="othersed">
                                         <label for="purp" class= "fs-6 fw-bold">Purpose </label>
                                             <input type="text" class="form-control" placeholder = "Specify purpose here">
                                         </div>
-                                        </div> 
+                                            </div>
+                                       
+                                      
                               
 
                                     </div>
@@ -353,9 +355,9 @@
                                             </select>
                                     </div>
                                     
-                                    <div class="row" align= "right">
+                                    <div class="row " align= "right">
                                         <div class="col-md-12     mx-auto my-2">
-                                            <button type ="button" role = "button" class="btn btn-success px-2" >
+                                        
                                             <button type ="button" role = "button" style = "" class="btn btn-primary px-2" >
                                                 Save
                                             </button>

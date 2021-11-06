@@ -21,6 +21,7 @@
                     extend: 'print',
                     title:'',
                     text: 'Generate Report',
+                    message:'The following data are reports of the rentals catered today by Barangay 599',
                     className: 'btn btn-primary my-1',
                     exportOptions: {columns: [ 0, 1, 2, 3,4 ]},
                     customize: function (win) {
@@ -47,18 +48,7 @@
                     className: 'btn-success my-1',
                     exportOptions: {columns: [0,1,2,3,4]}
                 },
-                {
-                    extend: 'pdfHtml5',
-                    text: 'PDF file',
-                    className: 'btn-danger my-1',
-                    exportOptions: {columns: [ 0, 1, 2, 3,4 ]}
-                },
-                {
-                    extend: 'copyHtml5',
-                    text:'Copy',
-                    className: 'btn-secondary my-1',
-                    exportOptions: {columns: [0,1,2,3,4] }
-                },
+              
                 
             ],
         dom: {
@@ -258,11 +248,11 @@
                         </div>
                         <div class="row justify-content-center" align = "center">
                             <form method = "POST" action = "#">
-                                <button type = "button" class="btn btn-success rounded-circle" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                    <i class= 'fa fa-check '></i>
+                                <button type = "button" class="btn btn-success " data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                    <i class= 'fa fa-check mx-1'></i> Confirm
                                 </button>
-                                <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
-                                    <i class= "fa fa-times"></i>
+                                <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                    <i class= "fa fa-times mx-1"></i> Cancel
                                 </button>
                             </form>
                         </div>
@@ -341,15 +331,25 @@
                         <div class="row">
                                                     </div>
 
-                        <div class="row " align="center">
-                            <div class="col-md-5  mx-auto my-2">
-                                <button type ="button" role = "button" class="btn btn-outline-primary" >
-                                    <i class="fa fa-save"></i>
+                      
+                                                    <div class="row ">
+                            <div class="col-md-12  mx-auto my-2">
+                                <div class="float-end">
+                                <div class="btn-group">
+                                <button type ="button" role = "button" class="btn btn-primary" >
+                                    <i class="fa fa-save me-1"></i>
                                     Save
                                 </button>
+                                </div>
+                                <div class="btn-group">
+                                <button type ="button" role = "button" class="btn btn-secondary" >
+                                    <i class="fa fa-times-circle me-1"></i>
+                                    Cancel
+                                </button>
+                                </div>
+                                </div>
                             </div>
                         </div>
-                    
                         
                                         
                     </div>
@@ -387,12 +387,22 @@
                         </div>
                        
 
-                        <div class="row " align="center">
-                            <div class="col-md-5  mx-auto my-2">
-                                <button type ="button" role = "button" class="btn btn-outline-primary" >
-                                    <i class="fa fa-check me-1"></i>
-                                    Submit
+                        <div class="row ">
+                            <div class="col-md-12  mx-auto my-2">
+                                <div class="float-end">
+                                <div class="btn-group">
+                                <button type ="button" role = "button" class="btn btn-success" >
+                                    <i class="fa fa-upload me-1"></i>
+                                    Upload
                                 </button>
+                                </div>
+                                <div class="btn-group">
+                                <button type ="button" role = "button" class="btn btn-secondary" >
+                                    <i class="fa fa-times-circle me-1"></i>
+                                    Cancel
+                                </button>
+                                </div>
+                                </div>
                             </div>
                         </div>
                     
@@ -409,7 +419,6 @@
                 <div class="modal-content g-0 blue">
                     <div class="modal-header blue white ">
                         <h5 class="modal-title" >&nbsp;<i class = "fa fa-eye"></i>&nbsp;&nbsp;Basketball Court</h5>
-                        
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white ">
@@ -436,6 +445,18 @@
                             </div>
                         </div>
                         <div class="row">
+                        <div class="col-md-12  mx-auto my-2">
+                                <div class="float-end">
+                               
+                                
+                                <div class="btn-group">
+                                <button type ="button" role = "button" data-bs-dismiss = "modal" class="btn btn-secondary" >
+                                 
+                                   Done
+                                </button>
+                                </div>
+                                </div>
+                            </div>
                            
                         </div>
 

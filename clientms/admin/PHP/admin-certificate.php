@@ -36,6 +36,7 @@
                     extend: 'print',
                     text: 'Generate Report',
                     className: 'btn btn-primary my-1',
+                    message:'The following data are report for the certifications catered by Barangay 599',
                     title:'',
                     exportOptions: {columns: [ 0, 1, 2, 3,4, 5 ]},
                 

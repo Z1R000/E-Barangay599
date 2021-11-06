@@ -422,16 +422,11 @@ if (isset($_POST['submit'])) {
                                 </div>
                             </div>
                         </div>
-
-
-
-
                         <div class="row g-0 mb-3 px-4">
                             <label for="hUnit" class="col-xl-2 fs-5 py-0">House Unit/<br>Lot Number<br><span class="fs-6 text-muted small"> (Numero ng bahay)</span></label>
-
                             <div class="col-xl-4 col-sm-12">
                                 <br>
-                                <input type="number" id="hunit" name="hunit" class="form-control" required>
+                                <input type="text" id="hunit" name="hunit" class="form-control" required>
                                 <label for="" class="text-muted fs-6 small">House unit or lot number of the residents household</label>
                             </div>
                         </div>

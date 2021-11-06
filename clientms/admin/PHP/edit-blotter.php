@@ -1,5 +1,5 @@
 <?php 
-    $curr ="Edit Blotter";
+    $curr ="Edit Blotter Record";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,18 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $curr;?></title>
    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
- 
-    
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
-    <link rel = "stylesheet" href="../css/sidebar.css" />
-    <link rel="stylesheet" href="../CSS/scrollbar.css">
-    <link rel="stylesheet" href="../css/dominp.css"/>
+    <?php include('link.php');?>
 
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
@@ -76,7 +65,7 @@
         include ('../includes/sidebar.php');
     ?> 
 
-<div class="d-flex align-items-center">
+        <div class="d-flex align-items-center">
                 <div class="container  mt-3">
                     <nav aria-label="breadcrumb">
                         <nav aria-label="breadcrumb">
@@ -95,52 +84,45 @@
         </div>
     </nav> 
     <form action="" method = "POST">
-                <div class="container-fluid px-5">
+    <div class="container-fluid px-5">
                     <div class="row px-5">
                         <div class="col-xl-5"></div>
                         <div class="col-xl-7">
                             <div class="float-end">
-                                <a href="#" onclick = "window.history.back();" class="link link-primary text-decoration-none fs-4"><i class="fa fa-arrow-circle-left me-2"></i>Cancel Blotter Update</a>
+                                <a href="#" onclick = "window.history.back();" class="link link-primary text-decoration-none fs-4"><i class="fa fa-arrow-circle-left me-2"></i>Cancel Blotter Filing</a>
                             </div>
                             
                         </div>
                     </div>
                 
                 </div>
- 
-        <div class="container-fluid  mx-auto px-2 py-1">
+        <div class="container-fluid  mx-auto px-2 py-1  mb-5">
             <div class="row g-0 p-1">
                 <div class="row g-0 justify-content-center">
                     <div class="col-xl-10 px-3">
                         <div class="row g-0 my-2 bg-white shadow-sm">
-                            <div class="row border-bottom shadow-sm g-0 rounded-top px-2 py-0 bg-primary">
-                                <div class= "fs-5 py-1 white">Complaint Details</div>
+                            <div class="row border-bottom  g-0 rounded-top px-2 py-0 bg-599">
+                                <div class= "fs-5 py-1 white">Step 1: Complaint Details</div>
                             </div>
-                            <div class="row px-2 g-2 px-3 pt-2 pb-3">
-                                <div class="col-md-6">
+                            <div class="row px-2 g-2 px-3 pt-2 pb-3 ">
+                                <div class="col-md-5">
                                     <label for="rname"class= "fw-bold fs-6">Complainant Name: </label>
                                     <input type="text" class="form-control" placeholder = "e.g Juan Dela Cruz">
                                     <!--intellisence resident list-->
                                 </div>     
-                                 
-                                
+                                    
                             </div>
-                        
-
                         </div>
-
                     </div>
-                   
                 </div>
-         
                 <div class="row g-0 justify-content-center">
                     <div class="col-xl-10  px-3 py-2">
                         <div class="row g-0 my-2 bg-white shadow-sm">
-                            <div class="row border g-0 rounded-top px-2 py-0 bg-primary">
-                                <div class= "fs-5 py-1 white" id="step-2">Respondent/s <span class="fs-6">(attending barangay personnel)</span></div>
+                            <div class="row border g-0 rounded-top px-2 py-0 bg-599">
+                                <div class= "fs-5 py-1 white" id="step-2">Step 2:Attending barangay personnel <span class="fs-6"></span></div>
                             </div>
                         
-                            <div class="row g-2 px-3 py-2 shadow" style = "max-height: 400px; overflow-y: auto;  ">
+                            <div class="row g-2 px-3 py-2" style = "max-height: 400px; overflow-y: auto;  ">
                             
                                 <div class="col-md-10 form_field_outer p-0 form_sec_outer_task " >
                                     <div class="row form_field_outer_row" >  
@@ -155,10 +137,10 @@
                                                         </select>
                                            
                                                             <div class="btn-group mx-2">
-                                                                <button id="removekag" type="button" class="btn btn-danger" disabled>Remove</button>
+                                                                <button id="removekag" type="button" class="btn btn-secondary" disabled>Remove</button>
                                                             </div>
                                                             <div class="btn-group mx-2">
-                                                                <button id="addkag" type="button" class="btn btn-info white"><i class= "fa fa-plus me-2"></i>Add Respondent</button>
+                                                                <button id="addkag" type="button" class="btn btn-primary "><i class= "fa fa-plus me-2"></i>Add Respondent</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -176,8 +158,8 @@
                     <div class="row g-0 justify-content-center">     
                         <div class="col-xl-10  px-3 py-2">
                             <div class="row g-0 my-2 bg-white shadow-sm" >
-                                <div class="row border g-0 rounded-top px-2 py-0 bg-primary">
-                                    <div class= "fs-5 py-1 white" id="step-2">Involved Persons <span class="fs-6">(e.g Juan Dela Cruz, Asiong Salonga..)</span></div>
+                                <div class="row border g-0 rounded-top px-2 py-0 bg-599">
+                                    <div class= "fs-5 py-1 white" id="step-2">Step 3: Involved Persons <span class="fs-6">(e.g Juan Dela Cruz, Asiong Salonga..)</span></div>
                                 </div>
                             
                                 <div class="row g-2 px-2 py-2" style = "max-height: 400px; overflow-y: auto;  ">
@@ -187,10 +169,10 @@
                                                 <div class="input-group mb-3">
                                                     <input type="text" name="kag[]" class="form-control" placeholder="Involved person 1" >  
                                                     <div class="btn-group mx-2">
-                                                        <button id="removeper" type="button" class="btn btn-danger" disabled>Remove</button> 
+                                                        <button id="removeper" type="button" class="btn btn-secondary" disabled>Remove</button> 
                                                     </div>      
                                                     <div class="btn-group mx-1"> 
-                                                        <button id="addper" type="button" class="btn btn-info white"><i class= "fa fa-plus me-2"></i> Add Involved</button>   
+                                                        <button id="addper" type="button" class="btn btn-primary white"><i class= "fa fa-plus me-2"></i> Add Involved</button>   
                                                     </div>  
                                                 </div>
                                                 <div id="newRow2"></div>
@@ -202,42 +184,30 @@
                         </div>
                     </div>
                 
-            
 
                 <div class="row g-0 justify-content-center">
                 
                     <div class="col-xl-10  px-3 ">
                         <div class="row g-0 my-2 bg-white shadow-sm">
-                            <div class="row border g-0 rounded-top px-2 py-0 bg-primary">
-                                <div class= "fs-5 py-1 white" id="step-2">Incident Information <span class="fs-6">(Details regarding the incident)</span></div>
+                            <div class="row border g-0 rounded-top px-2 py-0 bg-599">
+                                <div class= "fs-5 py-1 white" id="step-2">Step 4: Incident Information <span class="fs-6">(Details regarding the incident)</span></div>
                             </div>
                             
                             <div class="row gx-3 py-2 px-3">
                                 
-                                <div class="col-md-5 ms-2">
-                                  
-                                    
-                                  <label for="btype"class= "fw-bold fs-6">Status </label>
-                                  <select class="form-select input-sm" id = "btype" aria-label="Default select example">
-                                  
-                                     
-                                      <option value="og">On going</option>
-                                      <option value="settled">Settled</option>
-                                      <option value="dismissed">Dismissed</option>
-                                  </select>
-                              </div>   
-                              <div class="col-md-6">
-                                  
-                                    
-                                  <label for="btype"class= "fw-bold fs-6">Incident Type: </label>
-                                  <select class="form-select input-sm" id = "btype" aria-label="Default select example">
-                                      <option selected>Select Blotter type</option>
-                                      <option value="homeowner">Violence</option>
-                                      <option value="caretaker">Vehicular Related</option>
-                                      <option value="rental">Public Disturbance</option>
-                                      <option value="wrelative">Littering</option>
-                                  </select>
-                              </div>  
+                             
+                              <div class="col-md-5">
+                                    <label for="btype"class= "fw-bold fs-6">Incident Type: </label>
+                                    <select class="form-select input-sm" id = "btype" aria-label="Default select example">
+                                        <option selected>Select Blotter type</option>
+                                        <option value="homeowner">Violence</option>
+                                        <option value="caretaker">Vehicular Related</option>
+                                        <option value="rental">Public Disturbance</option>
+                                        <option value="wrelative">Littering</option>
+                                    </select>
+                                </div>    
+                         
+                                
                        
 
                                 
@@ -245,14 +215,14 @@
                            
                             <div class="row gx-3 py-2 px-3">
                                 
-                                <div class="col-md-5 ">
+                                <div class="col-md-5 ms-2 ">
                                     
                                     <label for="narrative" class= "fw-bold fs-6">Incident Date and time</label>
                                     <input type="datetime-local" class="form-control" name='inciDate-start'>
                 
 
                                 </div>
-                                <div class="col-md-6 ms-2">
+                                <div class="col-md-5 ms-2">
                                     <label for="narrative" class= "fw-bold fs-6">Incident Location</label>
                                     <input type="text" class="form-control" name='inciAdd' placeholder='e.g Near Purok 2 along the road'>
                 
@@ -274,9 +244,14 @@
                                     <div class="col-md-8">
 
                                     </div>
-                                    <div class="col-md-4 col-sm-12 p-3">
+                                    <div class="col-md-12 col-sm-12 p-3">
                                         <div class="float-end">
-                                            <button type="button" href="#submit-record"  data-bs-toggle ="modal" role="modal"  class="btn btn-primary"><i class= "fa fa-save me-2"></i>Save</button>
+                                            <div class="btn-group">
+                                            <button type="button" href="#submit-record"  data-bs-toggle ="modal" role="modal"  class="btn btn-primary"><i class="fa fa-save mx-1"></i> Save</button>
+                                            </div>
+                                            <div class="btn-group">
+                                            <button type="button" href="#submit-record"  data-bs-toggle ="modal" role="modal"  class="btn btn-secondary"><i class="fa fa-arrow-circle-left mx-1"></i> Back</button>
+                                            </div>
                                         </div>
                                         
                                         
