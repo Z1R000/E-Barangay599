@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2021 at 03:30 PM
+-- Generation Time: Nov 06, 2021 at 04:53 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `clientmsdb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_reset_temp`
+--
+
+CREATE TABLE `password_reset_temp` (
+  `email` varchar(250) NOT NULL,
+  `key` varchar(250) NOT NULL,
+  `expDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `password_reset_temp`
+--
+
+INSERT INTO `password_reset_temp` (`email`, `key`, `expDate`) VALUES
+('virayvergel10@gmail.com', 'v?xJ?????????GE2fcbaf9385', '2021-11-06 15:54:44'),
+('virayvergel10@gmail.com', 'v?xJ?????????GEeaf3ccd704', '2021-11-06 15:57:57'),
+('virayvergel10@gmail.com', 'v?xJ?????????GEb24a86af3c', '2021-11-06 15:58:31'),
+('virayvergel10@gmail.com', 'v?xJ?????????GE9bb4026f02', '2021-11-06 15:58:39'),
+('virayvergel10@gmail.com', 'v?xJ?????????GE6e0abc97b5', '2021-11-06 16:22:00');
 
 -- --------------------------------------------------------
 
@@ -212,24 +235,25 @@ CREATE TABLE `tblcreatecertificate` (
   `CertificateId` varchar(120) DEFAULT NULL,
   `CreationId` varchar(120) DEFAULT NULL,
   `CreationDate` timestamp NULL DEFAULT current_timestamp(),
-  `adminID` int(11) DEFAULT NULL
+  `adminID` int(11) DEFAULT NULL,
+  `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tblcreatecertificate`
 --
 
-INSERT INTO `tblcreatecertificate` (`ID`, `Userid`, `CertificateId`, `CreationId`, `CreationDate`, `adminID`) VALUES
-(1, '2', '2', '135792633', '2021-04-15 03:51:43', 1),
-(2, '2', '2', '437472239', '2021-04-22 03:38:40', 1),
-(3, '4', '10', '637901206', '2021-04-22 03:39:22', 1),
-(4, '2', '15', '464157984', '2021-04-22 09:11:03', 1),
-(5, '4', '9', '171104214', '2021-04-22 12:02:07', 1),
-(6, '2', '10', '382660445', '2021-04-22 13:40:24', 1),
-(7, '2', '6', '722036110', '2021-05-03 17:09:45', 1),
-(8, '4', '14', '239149821', '2021-05-03 17:11:02', 1),
-(9, '1', '7', '575394333', '2021-05-03 17:11:16', 1),
-(10, '3', '4', '362984365', '2021-05-03 17:11:48', 1);
+INSERT INTO `tblcreatecertificate` (`ID`, `Userid`, `CertificateId`, `CreationId`, `CreationDate`, `adminID`, `status`) VALUES
+(1, '2', '2', '135792633', '2021-04-15 03:51:43', 1, 'Settled'),
+(2, '2', '2', '437472239', '2021-04-22 03:38:40', 1, 'Settled'),
+(3, '4', '10', '637901206', '2021-04-22 03:39:22', 1, 'Settled'),
+(4, '2', '15', '464157984', '2021-04-22 09:11:03', 1, 'Settled'),
+(5, '4', '9', '171104214', '2021-04-22 12:02:07', 1, 'Unsettled'),
+(6, '2', '10', '382660445', '2021-04-22 13:40:24', 1, 'Settled'),
+(7, '2', '6', '722036110', '2021-05-03 17:09:45', 1, 'Unsettled'),
+(8, '4', '14', '239149821', '2021-05-03 17:11:02', 1, 'Settled'),
+(9, '1', '7', '575394333', '2021-05-03 17:11:16', 1, 'Unsettled'),
+(10, '3', '4', '362984365', '2021-05-03 17:11:48', 1, 'Unsettled');
 
 -- --------------------------------------------------------
 
@@ -382,26 +406,28 @@ CREATE TABLE `tblresident` (
   `tinNumber` int(50) DEFAULT NULL,
   `CivilStatus` varchar(50) DEFAULT NULL,
   `BirthDate` datetime DEFAULT NULL,
-  `HomeName` varchar(100) NOT NULL
+  `HomeName` varchar(100) NOT NULL,
+  `PassReset` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tblresident`
 --
 
-INSERT INTO `tblresident` (`ID`, `Purok`, `houseUnit`, `streetName`, `Cellphnumber`, `Email`, `Password`, `CreationDate`, `voter`, `vPrecinct`, `ResidentType`, `LastName`, `Suffix`, `FirstName`, `MiddleName`, `BirthPlace`, `Gender`, `sssNumber`, `tinNumber`, `CivilStatus`, `BirthDate`, `HomeName`) VALUES
-(1, 1, 534, 'Old Sta. Mesa', 2147483647, 'ledes@gmail.com', '123', '2021-04-12 19:36:11', 'Yes', '123', 'Rental/Boarder', 'Ledesma', '', 'Marithess', 'Cortez', 'Manila', 'Male', 123123123, 1231321, 'Single', '2012-04-05 00:00:00', ''),
-(2, 2, 213, 'Peralta 2', 2147483647, 'kim@gmail.com', '123', '2021-04-12 19:36:11', 'No', '', 'House Owner', 'Dela Cruz', 'Jr.', 'Kim', 'Renzo', 'Manila', 'Female', 312123321, 3123123, 'Married', '2012-04-18 00:00:00', ''),
-(3, 3, 323, 'Narra', 19823719, 'verg@gmail.com', '123', '2021-04-12 20:14:26', 'No', '', 'Care Taker', 'Viray', 'Sr.', 'Vergel', 'Sallan', 'Manila', 'Male', 123123123, 3212312, 'Single', '2015-04-01 00:00:00', ''),
-(4, 4, 543, 'Mangga', 21315123, 'sallan@gmail.com', '123', '2021-04-20 07:49:54', 'Yes', '123', 'Living with Relatives', 'Sallan', 'Jr.', 'Arnold', 'Clavio', 'Manila', 'Female', 12512312, 12315123, 'Married', '2011-04-01 00:00:00', ''),
-(5, 5, 124, 'Sarmiento', 123123, 'nathan@gmail.com', '123', '2021-04-20 08:22:54', 'Yes', '123', 'Rental/Boarder', 'Morales', 'Sr.', 'Nathan', 'Pacquiao', 'Manila', 'Male', 123123, 12315123, 'Married', '2008-02-20 00:00:00', ''),
-(6, 6, 622, 'Peralta Int.', 6123124, 'villanueva@gmail.com', '1233', '2021-05-07 08:40:27', 'No', '', 'Care Taker', 'Villanueva', '', 'John Carlo', 'Wanto', 'Mindanao', 'Male', 25723523, 16245, 'Married', '2013-02-07 00:00:00', ''),
-(7, 7, 722, 'Mangga Ext.', 1436245, 'uy@gmail.com', '123', '2021-05-07 08:42:16', 'No', '', 'Living with Relatives', 'Uy', '', 'Wilvin', 'Voltaire', 'Visayas', 'Female', 45145451, 61451451, 'Married', '2013-01-07 00:00:00', ''),
-(8, 8, 888, 'Dita', 1245145124, 'celestial@gmail.com', '123', '2021-05-07 08:49:54', 'Yes', '8971248', 'Care Taker', 'Celestial', '', 'Jayvee', 'Dragon', 'Tondo', 'Male', 1451451345, 14561456, 'Separated', '2012-06-07 00:00:00', ''),
-(9, 9, 999, 'Narra', 134561, 'velasco@gmail.com', '123', '2021-05-07 08:51:28', 'Yes', '2147483647', 'House Owner', 'Velasco', '', 'Sheena', 'Marie', 'Manila', 'Female', 1641461346, 1435614, 'Married', '2011-01-07 00:00:00', ''),
-(10, 10, 100, 'Sampaloc', 1645612345, 'ligs@gmail.com', '123', '2021-05-07 08:52:28', 'Yes', '514512345', 'Living with Relatives', 'Ligutom', '', 'Zyra', 'Ligs', 'Manila', 'Female', 1451345134, 1451243513, 'Widow', '2014-01-07 00:00:00', ''),
-(11, 10, 891, 'Narra', 1243521345, 'demesa@gmail.com', '123', '2021-05-08 02:28:15', 'Yes', '21452435', 'House Owner', 'Demesa', '', 'Adrian', 'Villanueva', 'Macaraeg', 'Female', 1254125412, 12341234, 'Married', '2016-05-08 00:00:00', ''),
-(12, 2, 522, 'Peralta 3', 121514, 'ronald@gmail.com', '123', '2021-10-13 16:57:10', 'Yes', '50-A', 'House Owner', 'Celestial', '', 'Ronald', 'Clavio', NULL, 'Male', 1451345134, 1451345, 'Single', '1954-02-10 00:00:00', '');
+INSERT INTO `tblresident` (`ID`, `Purok`, `houseUnit`, `streetName`, `Cellphnumber`, `Email`, `Password`, `CreationDate`, `voter`, `vPrecinct`, `ResidentType`, `LastName`, `Suffix`, `FirstName`, `MiddleName`, `BirthPlace`, `Gender`, `sssNumber`, `tinNumber`, `CivilStatus`, `BirthDate`, `HomeName`, `PassReset`) VALUES
+(1, 1, 534, 'Old Sta. Mesa', 2147483647, 'ledes@gmail.com', '123', '2021-04-12 19:36:11', 'Yes', '123', 'Rental/Boarder', 'Ledesma', '', 'Marithess', 'Cortez', 'Manila', 'Male', 123123123, 1231321, 'Single', '2012-04-05 00:00:00', '', ''),
+(2, 2, 213, 'Peralta 2', 2147483647, 'kim@gmail.com', '123', '2021-04-12 19:36:11', 'No', '', 'House Owner', 'Dela Cruz', 'Jr.', 'Kim', 'Renzo', 'Manila', 'Female', 312123321, 3123123, 'Married', '2012-04-18 00:00:00', '', ''),
+(3, 3, 323, 'Narra', 19823719, 'virayvergel10@gmail.com', '123', '2021-04-12 20:14:26', 'No', '', 'Care Taker', 'Viray', 'Sr.', 'Vergel', 'Sallan', 'Manila', 'Male', 123123123, 3212312, 'Single', '2015-04-01 00:00:00', '', ''),
+(4, 4, 543, 'Mangga', 21315123, 'sallan@gmail.com', '123', '2021-04-20 07:49:54', 'Yes', '123', 'Living with Relatives', 'Sallan', 'Jr.', 'Arnold', 'Clavio', 'Manila', 'Female', 12512312, 12315123, 'Married', '2011-04-01 00:00:00', '', ''),
+(5, 5, 124, 'Sarmiento', 123123, 'nathan@gmail.com', '123', '2021-04-20 08:22:54', 'Yes', '123', 'Rental/Boarder', 'Morales', 'Sr.', 'Nathan', 'Pacquiao', 'Manila', 'Male', 123123, 12315123, 'Married', '2008-02-20 00:00:00', '', ''),
+(6, 6, 622, 'Peralta Int.', 6123124, 'villanueva@gmail.com', '1233', '2021-05-07 08:40:27', 'No', '', 'Care Taker', 'Villanueva', '', 'John Carlo', 'Wanto', 'Mindanao', 'Male', 25723523, 16245, 'Married', '2013-02-07 00:00:00', '', ''),
+(7, 7, 722, 'Mangga Ext.', 1436245, 'uy@gmail.com', '123', '2021-05-07 08:42:16', 'No', '', 'Living with Relatives', 'Uy', '', 'Wilvin', 'Voltaire', 'Visayas', 'Female', 45145451, 61451451, 'Married', '2013-01-07 00:00:00', '', ''),
+(8, 8, 888, 'Dita', 1245145124, 'celestial@gmail.com', '123', '2021-05-07 08:49:54', 'Yes', '8971248', 'Care Taker', 'Celestial', '', 'Jayvee', 'Dragon', 'Tondo', 'Male', 1451451345, 14561456, 'Separated', '2012-06-07 00:00:00', '', ''),
+(9, 9, 999, 'Narra', 134561, 'velasco@gmail.com', '123', '2021-05-07 08:51:28', 'Yes', '2147483647', 'House Owner', 'Velasco', '', 'Sheena', 'Marie', 'Manila', 'Female', 1641461346, 1435614, 'Married', '2011-01-07 00:00:00', '', ''),
+(10, 10, 100, 'Sampaloc', 1645612345, 'ligs@gmail.com', '123', '2021-05-07 08:52:28', 'Yes', '514512345', 'Living with Relatives', 'Ligutom', '', 'Zyra', 'Ligs', 'Manila', 'Female', 1451345134, 1451243513, 'Widow', '2014-01-07 00:00:00', '', ''),
+(11, 10, 891, 'Narra', 1243521345, 'demesa@gmail.com', '123', '2021-05-08 02:28:15', 'Yes', '21452435', 'House Owner', 'Demesa', '', 'Adrian', 'Villanueva', 'Macaraeg', 'Female', 1254125412, 12341234, 'Married', '2016-05-08 00:00:00', '', ''),
+(13, 2, 123, 'Old Sta. Mesa', 2147483647, 'bins@gmail.com', 'Bins123x', '2021-11-06 08:12:06', 'No', '', 'Rental/Boarder', 'sunhose', 'Sr.', 'Vinz', 'Dangkol', NULL, 'Male', 0, 0, 'Married', '1955-12-12 00:00:00', 'Jayvee Dragon Celestial ', ''),
+(14, 1, 222, 'V. Mapa', 2147483647, 'jim@gmail.com', '123x', '2021-11-06 13:45:50', 'Yes', '0212', 'Rental/Boarder', 'Ledes', 'Jr.', 'Sedel', 'Deles', NULL, 'Male', 123123123, 123123123, 'Single', '1991-05-26 00:00:00', 'Jayvee', '');
 
 -- --------------------------------------------------------
 
@@ -431,15 +457,18 @@ CREATE TABLE `tblresidentrequest` (
   `Email` varchar(50) NOT NULL,
   `Password` varchar(50) NOT NULL,
   `CreationDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `HomeName` varchar(100) NOT NULL
+  `HomeName` varchar(100) NOT NULL,
+  `reqStatus` varchar(20) NOT NULL,
+  `rejReason` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tblresidentrequest`
 --
 
-INSERT INTO `tblresidentrequest` (`ID`, `Purok`, `houseUnit`, `streetName`, `LastName`, `Suffix`, `FirstName`, `MiddleName`, `BirthPlace`, `Gender`, `BirthDate`, `CivilStatus`, `ResidentType`, `Cellphnumber`, `voter`, `vPrecinct`, `sssNumber`, `tinNumber`, `Email`, `Password`, `CreationDate`, `HomeName`) VALUES
-(1, 1, 222, 'asgaf', 'asdf', '123x', 'asdf', '123x', '', 'Male', '1991-05-26 00:00:00', 'Single', 'Rental/Boarder', 2147483647, 'Yes', '', 123123123, 123123123, 'jim@gmail.com', '123x', '2021-10-25 16:11:09', 'Jayvee');
+INSERT INTO `tblresidentrequest` (`ID`, `Purok`, `houseUnit`, `streetName`, `LastName`, `Suffix`, `FirstName`, `MiddleName`, `BirthPlace`, `Gender`, `BirthDate`, `CivilStatus`, `ResidentType`, `Cellphnumber`, `voter`, `vPrecinct`, `sssNumber`, `tinNumber`, `Email`, `Password`, `CreationDate`, `HomeName`, `reqStatus`, `rejReason`) VALUES
+(3, 2, 1231, 'Old Sta. Mesa', 'MA', 'Jr.', 'LE', 'DES', '', 'Male', '1965-05-16 00:00:00', 'Single', 'Rental/Boarder', 2147483647, 'Yes', '2a', 0, 0, 'v@gmail.com', 'Ledesma123', '2021-11-06 15:16:23', 'Vergel Sallan Viray Sr.', 'Pending', ''),
+(4, 3, 213, 'Old Sta. Mesa', 'Vi', 'Ray', 'Ver', 'Gel', 'Tondo Manila', 'Male', '1975-05-04 00:00:00', 'Single', 'House Owner', 2147483647, 'No', '', 0, 0, 'varay@gmail.com', 'Barangay599', '2021-11-06 15:17:08', '', 'Rejected', '');
 
 -- --------------------------------------------------------
 
@@ -666,13 +695,13 @@ ALTER TABLE `tblrentalrequest`
 -- AUTO_INCREMENT for table `tblresident`
 --
 ALTER TABLE `tblresident`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tblresidentrequest`
 --
 ALTER TABLE `tblresidentrequest`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tblstreet`
