@@ -520,19 +520,20 @@ if (isset($_POST['submit'])) {
 
     </form>
     <script>
-    var password = document.getElementById("password"), confirm_password = document.getElementById("confirm_password");
+        var password = document.getElementById("password"),
+            confirm_password = document.getElementById("confirm_password");
 
-    function validatePassword(){
-    if(password.value != confirm_password.value) {
-        confirm_password.setCustomValidity("Passwords does not match.");
-    } else {
-        confirm_password.setCustomValidity('');
-    }
-    }
+        function validatePassword() {
+            if (password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Passwords does not match.");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
+        }
 
-    password.onchange = validatePassword;
-    confirm_password.onkeyup = validatePassword;
-</script>
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>

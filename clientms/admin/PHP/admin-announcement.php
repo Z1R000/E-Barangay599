@@ -42,9 +42,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         .white{
             color: white;
         }
-        .row{
-            overflow-y:
-        }
         .divfortable{
             background-color: white;
             overflow-x:auto;
