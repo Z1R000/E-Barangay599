@@ -94,7 +94,7 @@
         <ul>
                 <li style="line-height: 1.5;"><span style="font-size: 15px; color: rgb(89, 89, 89);"><span
                                         style="font-size: 15px; color: rgb(89, 89, 89);"><span
-                                                data-custom-class="body_text">Visit our website<bdt
+                                                data-custom-class="body_text">Visit our website at <a href= "http://barangay599.com/">Barangay 599.com</a>
                                                         class="block-component"></bdt>
                                                 </span></span></span></span></span></span></span></span></li>
         </ul>
@@ -2579,4 +2579,6 @@
                                                                                         </div>
                                                                                         <div style="line-height: 1.5;">
                                                                                                 <br></div>
+
+                                                                                                
                                                                                         

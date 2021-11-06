@@ -54,15 +54,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $curr;?></title>
    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-
-    <link rel = "stylesheet" href="../css/sidebar.css" />
-    <link rel="stylesheet" href="../CSS/scrollbar.css">
+    <?php include ('link.php')?>
 
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
@@ -113,10 +105,7 @@
           transform-origin: 0 0;
         }
         
-     
- 
-   
-    
+
         @media screen and (-webkit-min-device-pixel-ratio:0) {
           #scaled-frame {
             zoom: 1;
@@ -176,7 +165,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" data-bs-toggle="modal" href="#service-choice"><i class="fa fa-hand-paper"></i>&nbsp;Services</a></li>
                                 <li class="breadcrumb-item"><a  class= "text-decoration-none" href="admin-certificate.php"><i class="fa fa-file"></i>&nbsp;Certificates</a></li>
                                 <li class="breadcrumb-item active"><a href="#"><i class="fa fa-list text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
                             </ol>
@@ -186,92 +175,176 @@
             </div>
         </div>
     </nav>
-    <form action="edit-cert-temp.php"method ="POST">
-        <div class="container-fluid mb-3 ms-1 mx-auto px-5">
-          <div class="row mx-1  py-2">
-            <div class="col-xl-5 mx-auto shadow-sm  rounded-top white">
-              <div class="row ">
-                <div class="fs-4 text-center mt-3"  style= "background: #012f6e">
-                    Certificate Information
-                </div>
-              </div>
-              
-              <div class="row bg-white pt-2 pb-5 mb-3">
-                <form  action="" method = "POST">
-                  <div class="row gx-3 gy-1 px-5">
-                    <label for="cname" class= "black fw-bold fs-5">Request Name</label>
-                    <input id = "cname" class ="form-control"type="text" placeholder = "Requestor Name" name= "cnrame">
-                    <label for="cname" class= "black fw-bold fs-5">Mode of Payment</label>
-                    <select id = "cname" class ="form-control" name= "cmeth">
-                        <option name="" id="">Cash</option>
-                        <option name="" id="">G-cash</option>
-                    
-                    </select>
-                    <label for="cname" class= "black fw-bold fs-5">Status</label>
-                    <select id = "cname" class ="form-control" name= "cmeth">
-                        <option name="" id="">Settled</option>
-                        <option name="" id="">Unsettled</option>
-                        <option name="" id="">Cancelled</option>
-                    </select>
-                    <label for="purp" class= "black fw-bold fs-5">Purpose</label>
-                    <select id = "purp" class ="form-control" name= "cmeth">
-                        <option name="" id="" selected>for....</option>
-                        <option name="" id="">for DSWD</option>
-                        <option name="" id="">for PAG-IBIG</option>
-                        <option name="" id="">for Employment purposes</option>
-                        <option name="" id="">for loaning</option>
-                    </select>
-                    <label for="cname" class= "black fw-bold fs-5">Certification fee</label>
-                    <input id = "cname" class ="form-control" type="text" placeholder = "Certfication fee" name= "cname">
-                    <label for="cname" class= "black fw-bold fs-5">Date</label>
-                    <input id = "cname" class ="form-control" type="datetime-local" placeholder = "Date of certification" name= "cdate">
-                    <label for="cname" class= "black fw-bold fs-5">Barangay Certification number</label>
-                    <input id = "cname" class ="form-control" type="text" placeholder = "bcn-###-##" name= "cname" readonly>
-                    <label for="cname" class= "black fw-bold fs-5">Business name <span class= "text-muted fs-6">( For business related only )</span></label>
-                    <input id = "cname" class ="form-control" type="text" placeholder = "business name here" name= "cname">
-                    <label for="cname" class= "black fw-bold fs-5">Kagwad on duty</label>
-                    <select id = "kod" class ="form-control " name= "cmeth">
-                        <option name="" id="" selected>Kagawad on duty</option>
-                        <option name="" id="">CRISANTO G. LORICA</option>
-                        <option name="" id="">ALEXANDER S. CEÑO</option>
-                        <option name="" id="">ALBERTO P. RAMOS</option>
-                        <option name="" id="">JAIME S. CHOY</option>
-                    </select>
-                    
-                    
-              
-             
-                  </div>
-                  <div class="row gy-2 mx-2 my-2 ">
-                    <div class="col-md-12 mx-auto">
-                      <label for="cert-inf" class= "black fw-bold fs-5">Certification Contents</label>
-                      <textarea class= "" name="cert-info" id="cert-inf" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1">hudassss</textarea>
 
-
-                    </div>
-                   
-                  </div>
-                
-                </form>
-              </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12"> 
+                <button type = "button" onclick = "window.history.back();" class = "btn btnx float-end btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</button>           
             </div>
-            <div class="col-xl-6 mx-auto pt-1 ">
-                <div class="fs-4 fw-bold">Certificate Template</div>
-                <button type = "button" href = "#save-cert" data-bs-toggle = "modal" role= "button"class = "btn btnx btn-primary mb-1"><i class= "fas fa-save me-2"></i>Save</button>
-                <button type = "button" onclick = "window.history.back();" class = "btn btnx  btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</button>
-              
-                <div class="row">
-                <div class="embed-responsive embed-responsive-16by9">
-                  <iframe class="embed-responsive-item" id = "frame" src="temp-cert.php"></iframe>
-                </div>
-           
-            </div>
-          
-          </div>
-        </form>
-
         </div>
+    </div>
+    <form action="edit-cert-temp.php"method ="POST">
+            <div class="container-fluid px-5 mb-5">
+                <div class="row">
+                    <div class="col-xl-12">
+                        
+                        <ul class="nav  nav-pills justify-content-center">
+                           
+                            <li class="nav-item">
+                                <a class="nav-link active fs-5" href="#preview" data-bs-toggle = "tab">Preview</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link fs-5" href="#edit-cert" data-bs-toggle = "tab">Manage Certification </a>
+                            </li>
+                        </ul>   
+                    </div>
+                    <div class="col-xl-12">
+                        <div class="tab-content">
+                        <div class="tab-pane fade show active" id="preview">    		
+                            <div class="container my-3">
+                                <div class="row g-0 ">
+                                    <div class="col-xl-8  shadow-sm mx-auto  ">
+                                        <div class="row  text-white bg-599 g-0 justify-content-center">
+                                            <div class="col-12">
+                                                <div class="display-6 border-start border-end border-bottom text-center">Certificate Template</div>
+                                            </div>
 
+                                        </div>
+                            
+                                
+                                        <div class="row border-start border-end border-bottom py-3 g-0 justify-content-center">
+                                            <div class="col-10 mx-auto">
+
+                                        
+                                            <div class="embed-responsive mx-auto embed-responsive-16by9">
+                                                <iframe class="embed-responsive-item" id = "frame" src="view-cert.php"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        </div>
+                         <div class="tab-pane fade show" id="edit-cert">
+                                <div class="container-fluid mb-3 ms-1 mx-auto px-5">
+                                    <div class="row mx-1  py-2 ">
+                                        <div class="col-xl-12 mx-auto  rounded-top white">
+                                            <div class="row ">
+                                                <div class="fs-4 text-center mt-3"  style= "background: #012f6e">
+                                                Certificate Information
+                                            </div>
+                                        </div>
+                                    <div class="row  border shadow-sm bg-white pt-2 pb-5 mb-3">
+                                       
+                                        <div class="row g-2 px-5">
+                                            <div class="col-xl-6">
+                                                <label for="cname" class= "black fw-bold fs-5">Requestor Name</label>
+                                                <input id = "cname" class ="form-control"type="text" placeholder = "Requestor Name" name= "cnrame">
+                                            </div>
+                                            <div class="col-xl-2">
+                                            <label for="cname" class= "black fw-bold fs-5">Status</label>
+                                            <select id = "cname" class ="form-select" name= "cmeth">
+                                                <option name="" id="">Settled</option>
+                                                <option name="" id="">Unsettled</option>
+                                                <option name="" id="">Cancelled</option>
+                                            </select>
+                                            </div>
+                                            <div class="col-xl-4">
+                                                <label for="cname" class= "black fw-bold fs-5">Barangay Certification number</label>
+                                                <input id = "cname" class ="form-control" type="text" placeholder = "bcn-###-##" name= "cname" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="row g-2 px-5">
+                                            <div class="col-xl-6">
+                                                <label for="purp" class= "black fw-bold fs-5">Type of Certification</label>
+                                                <select id = "purp" class ="form-select" name= "cmeth">
+                                                    <option name="" id="" selected>for....</option>
+                                                    <option name="" id="">Cert 1</option>
+                                                    <option name="" id="">Cert 2</option>
+                                                
+                                                </select>
+
+                                            </div>
+                                            <div class="col-xl-3">
+                                                <label for="cname" class= "black fw-bold fs-5">Certification fee</label>
+                                                <input id = "cname" class ="form-control" type="text" placeholder = "Certfication fee" name= "cname">
+
+                                            </div>
+                                            <div class="col-xl-3">
+                                                <label for="cname" class= "black fw-bold fs-5">Mode of Payment</label>
+                                                <select id = "cname" class ="form-select" name= "cmeth">
+                                                    <option name="" id="">Cash</option>
+                                                    <option name="" id="">G-cash</option>
+                                                
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div class="row g-2 px-5">
+                                            <div class="col-xl-6">
+                                                <label for="purp" class= "black fw-bold fs-5">Purpose</label>
+                                                <select id = "purp" class ="form-select" name= "cmeth">
+                                                    <option name="" id="" selected>for....</option>
+                                                    <option name="" id="">for DSWD</option>
+                                                    <option name="" id="">for PAG-IBIG</option>
+                                                    <option name="" id="">for Employment purposes</option>
+                                                    <option name="" id="">for loaning</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <label for="cname" class= "black fw-bold fs-5">Date</label>
+                                                <input id = "cname" class ="form-control" type="datetime-local" placeholder = "Date of certification" name= "cdate">
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <label for="cname" class= "black fw-bold fs-5">Kagwad on duty</label>
+                                                <select id = "kod" class ="form-control " name= "cmeth">
+                                                    <option name="" id="" selected>Kagawad on duty</option>
+                                                    <option name="" id="">CRISANTO G. LORICA</option>
+                                                    <option name="" id="">ALEXANDER S. CEÑO</option>
+                                                    <option name="" id="">ALBERTO P. RAMOS</option>
+                                                    <option name="" id="">JAIME S. CHOY</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="col-xl-6" style= "display: none">
+                                                <label for="cname" class= "black fw-bold fs-5">Business name <span class= "text-muted fs-6">( For business related only )</span></label>
+                                                <input id = "cname" class ="form-control" type="text" placeholder = "business name here" name= "cname">
+
+                                            </div>
+                                   
+                                        </div>
+                                        <div class="row gy-2 mx-2 my-2 ">
+                                            <div class="col-md-12 mx-auto">
+                                            <label for="cert-inf" class= "black fw-bold fs-5">Certification Contents</label>
+                                            <textarea class= "" name="cert-info" id="cert-inf" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1">hudassss</textarea>
+                                        </div>
+                                        <div class="row justify-content-end">
+                                        <div class="col-12">
+                                            <div class="float-end">
+
+                                           
+                                            <div class="btn-group">                               
+                                        <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
+                                        </div>
+                                        <div class="btn-group">     
+                                        <button type = "button" href = "#save-cert" data-bs-toggle = "modal" role= "button"class = "btn  btn-primary  my-2"><i class= "fas fa-save me-2"></i>Save</button>
+                                        </div>
+                                        <div class="btn-group">
+                                    
+                                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
+                                                                       
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
         <div class="modal fade" id = "save-cert" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-info ">
@@ -302,7 +375,7 @@
             </div>
         </div>
 
-
+        <?php   include('services.php'); ?>
         <div class="modal fade" id = "success" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-sm">
                 <div class="modal-content g-0 bg-success ">

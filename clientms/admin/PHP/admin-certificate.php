@@ -25,7 +25,7 @@
     <title><?php echo $curr;?></title>
    
     <?php include('link.php')?>
-    
+   
     <script>
     $(document).ready(function() {
     $('#crec').DataTable( {
@@ -36,7 +36,27 @@
                     extend: 'print',
                     text: 'Generate Report',
                     className: 'btn btn-primary my-1',
-                    exportOptions: {columns: [ 0, 1, 2, 3,4, 5 ]}
+                    title:'',
+                    exportOptions: {columns: [ 0, 1, 2, 3,4, 5 ]},
+                
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css('font-size', '16pt','')                    
+                            .prepend(
+
+                                '<div class= "row justify-content-center"><div class= "col-3 align-items-center"><img src ="https://scontent.fmnl4-6.fna.fbcdn.net/v/t1.15752-9/253840780_3043650102555884_6126132548248010936_n.png?_nc_cat=107&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeHtm0gSv39SpbH8YKdiyQmO9Q65UWXYIN71DrlRZdgg3gzdVs9nT_Emsy5607I5PSXaq0miUcTAhsnSWRVszXmU&_nc_ohc=nlQIQehSnbkAX-6AV7Y&_nc_ht=scontent.fmnl4-6.fna&oh=4ef3f4e19b84fbc2f8130d1d23dc16ce&oe=61AD6A25" style= "width: 100px"/></div><div class= "col-6"><div class = "fs-3 text-center">BARANGAY 599, ZONE 59, DISTRICT VI OFFICE OF THE SANGGUNIANG BARANGAY</div></div><div class= "col-3  align-items-center"><img class= "float-end" src ="https://scontent.fmnl4-2.fna.fbcdn.net/v/t1.15752-9/253727695_993694454821211_6742610281288759451_n.png?_nc_cat=105&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeEjZKbv7g_r_OkDANnMfmkmh6jj4naYPzqHqOPidpg_OjwuDdnXemIELY2YBxsifbVX6Q12cTqziZrf280CcmQ9&_nc_ohc=b0AupJm6_48AX8vajsF&tn=2Fn-qzGntt-ZZM-o&_nc_ht=scontent.fmnl4-2.fna&oh=923e9c42b5c658123e6afb3b5b0f1685&oe=61ACC77E" style= "width: 100px"/></div>'
+                            )
+                            .append(
+                                '<img src="https://scontent.fmnl4-6.fna.fbcdn.net/v/t1.15752-9/254152885_569551377676151_8198043780541099030_n.png?_nc_cat=107&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeGaHlQ9SaCFDoumzSqNbuYpX-DTswHybhVf4NOzAfJuFQb0vwGo3iZ4lgoV0U9JXqhvQciPwTNCLoUH_nwOkFhZ&_nc_ohc=VlwYtPOMD-kAX8F3DOo&_nc_ht=scontent.fmnl4-6.fna&oh=fede1fd8b66a464f69ca2a47abd6af65&oe=61AAFC89" style="position:absolute; bottom:0; left:500; right:500" />'
+
+                            );
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    },
+                   
+                   
+                    
                 
                 },
             
@@ -46,18 +66,8 @@
                     className: 'btn-success my-1',
                     exportOptions: {columns: [0,1,2,3,4,5]}
                 },
-                {
-                    extend: 'pdfHtml5',
-                    text: 'PDF file',
-                    className: 'btn-danger my-1',
-                    exportOptions: {columns: [ 0, 1, 2, 5 ]}
-                },
-                {
-                    extend: 'copyHtml5',
-                    text:'Copy',
-                    className: 'btn-secondary my-1',
-                    exportOptions: {columns: [0,1,2,3,4,5] }
-                },
+               
+             
                 
             ],
         dom: {
@@ -99,6 +109,11 @@
                 width: 100%;
             }
            
+        }
+        @media print
+{
+        html, body { height: auto; }
+        .dt-print-table, .dt-print-table thead, .dt-print-table th, .dt-print-table tr {border: 0;}
         }
         .red{
             background:#8B0000;
@@ -198,17 +213,17 @@
                                             <div class="col" style = "overflow-x:auto;">
                                             <?php $query = "SELECT distinct tblcertificate.ID, tblcertificate.CertificateName, tblcertificate.CertificatePrice, tblcreatecertificate.ID as getid, tblcreatecertificate.Userid, tblcreatecertificate.CertificateId, tblcreatecertificate.CreationId, tblcreatecertificate.status, tblcreatecertificate.CreationDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID ORDER BY tblcreatecertificate.CreationDate ASC, status";
                                                 $result = mysqli_query($con, $query);  ?>
-                                                <table class= "table table-striped table-bordered pt-2" id = "crec" style = "min-width: 900px;">
+                                                <table class= "table table-striped table-bordered pt-2" id = "crec" style = "min-width: 960px;">
                                                     <thead>
 
                                                     
-                                                            <th style = "text-align: left">ID</th>
+                                                            <th style = "text-align: left">BCN</th>
                                                             <th style = "text-align: left">Status</th>
-                                                            <th style = "text-align: left">Requestor</th>
-                                                            <th style = "text-align: left">Certification</th>
-                                                            <th style = "text-align: left">Fee</th>
-                                                            <th style = "text-align: left">Date</th>
-                                                            <th style = "text-align: center">Actions</th>
+                                                            <th style = "text-align: left;width: 24%;">Requestor</th>
+                                                            <th style = "text-align: left; width:20%">Certification</th>
+                                                            <th style = "text-align: left;">Fee(₱)</th>
+                                                            <th style = "text-align: left; width:20% ">Date</th>
+                                                            <th style = "text-align: center; width:30%">Actions</th>
                                                     </thead>  
                                                         <tbody>
                                                         <?php
@@ -219,26 +234,24 @@
                                                             <td scope="col" style = "text-align: left">'. $row["status"] . '</td>
                                                             <td scope="col" style = "text-align: left">' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>
                                                             <td scope="col" style = "text-align: left">'. $row["CertificateName"] .'</td>
-                                                            <td scope="col" style = "text-align: left">'. $row["CertificatePrice"] .'</td>
+                                                            <td scope="col" style = "text-align: right">'. $row["CertificatePrice"] .'</td>
                                                             <td scope="col" style = "text-align: left">'. $row["CreationDate"] .'</td>
                                                             <td scope="col" id = "disa" style = "text-align: center">
                                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="edit-cert-record.php?editid='. $row["getid"] .'"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
+                                                                            <a type="" href ="edit-cert-record.php?editid='. $row["getid"] .'"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Manage</span></a>
                                                                         </div>
                                                                     
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
-                                                                        </div>
+                                                                       
                                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                                                 <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane mx-1 white"></i><span class="wal">Send</span></a>
                                                                             </div> 
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
-                                                                        </div>
+                                                                       
                                                                     </td>
                                                         ';
                                                     }
                                                     ?>
+                                                                
+                                                                </tr>
                                                                 
                                                         </tbody>
                                                 </table>
@@ -809,9 +822,7 @@
                                                 E-mail
                                             </label>
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                Walk-in
-                                            </label>
+                                   
                                         </div>
 
                                     </div>

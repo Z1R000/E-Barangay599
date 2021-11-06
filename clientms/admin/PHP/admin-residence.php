@@ -87,7 +87,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a class="text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
 
-                            <li class="breadcrumb-item active"><a href="#"><i class="fa fa-users text-muted"></i></a>&nbsp;<?php echo $curr; ?></li>
+                            <li class="breadcrumb-item active"><a href="#services"><i class="fa fa-users text-muted"></i></a>&nbsp;<?php echo $curr; ?></li>
                         </ol>
                     </nav>
                 </nav>
@@ -132,81 +132,51 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                 </div>-->
 
                 <div class="row g-1 px-3">
-
                     <div class="col-xl-12 col-md-12 col-sm-12 ">
                         <div class="row my-2">
-                            <div class="col-md-10">
-
+                            <div class="col-md-5">
                                 <div class="btn-group" role="group">
                                     <a href="admin-registrations.php" class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-archive"></i>&nbsp;Pending Requests</a>
                                 </div>
 
                             </div>
-                            <div class="col-md-2">
-                            <!--START PER PUROK-->    
-                                <select name="purok" id="purok" class="form-select input-sm" aria-label="Default select example">
-                                    <option value="All">All Residents</option>
-                                
-                                <?php 
-                                    $sql ="SELECT * from tbllistpurok";
-                                    $query = $dbh -> prepare($sql);
-                                    $query->execute();
-                                    $results=$query->fetchAll(PDO::FETCH_OBJ);
-                                    foreach($results as $row)
-                                    { 
-                                        echo '<option value="'.$row->pName.'">'.$row->pName.'</option>';
-                                    }
-                                
-                                ?>
-                                </select>
-                            <!--END PER PUROK-->
+                            <div class="col-md-7">
+                                <div class="float-end">
+                                <div class="input-group align-items-center">
+                                    <label class= "fs-6 px-1" for = "purok"> Purok: </label>
+
+                                        <select name="purok" id="purok" class="form-select input-sm border-primary" aria-label="Default select example" style= "width: 10%;">
+                                        <option value="All">All Residents</option>
+                                    <?php 
+                                        $sql ="SELECT * from tbllistpurok";
+                                        $query = $dbh -> prepare($sql);
+                                        $query->execute();
+                                        $results=$query->fetchAll(PDO::FETCH_OBJ);
+                                        foreach($results as $row)
+                                        { 
+                                            echo '<option value="'.$row->pName.'">'.$row->pName.'</option>';
+                                        }
+                                    
+                                    ?>
+                                    </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                                    <!--
+                                    
 
                 <div class="container-fluid px-5 mx-auto">
                     <div class="row  g-0" style="border-radius: 10px 10px 0px 0px;">
-                        <ul class="nav nav-pills py-2" id="pills-tab" role="tablist">
-                            <li class="nav-item px-1 py-2" role="presentation">
-                                <button class="btn btn-outline-primary active fs-5" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#all" type="button" role="tab" aria-controls="pills-home" aria-selected="true">All Residents</button>
-                            </li>
-                            <li class="nav-item px-1 py-2" role="presentation">
-                                <button class="btn btn-outline-primary fs-5" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#p1" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Purok 1</button>
-                            </li>
-                            <li class="nav-item px-1 py-2" role="presentation">
-                                <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p2" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 2</button>
-                            </li>
-                            <li class="nav-item px-1 py-2" role="presentation">
-                                <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p3" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 3</button>
-                            </li>
-                            <li class="nav-item px-1 py-2" role="presentation">
-                                <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p4" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 4</button>
-                            </li>
-                            <li class="nav-item px-1 py-2" role="presentation">
-                                <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p5" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 5</button>
-                            </li>
-                            <li class="nav-item px-1 py-2" role="presentation">
-                                <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p6" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 6</button>
-                            </li>
-                            <li class="nav-item px-1 py-2" role="presentation">
-                                <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p7" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 7</button>
-                            </li>
-                            <li class="nav-item px-1 py-2" role="presentation">
-                                <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p8" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 8</button>
-                            </li>
-                            <li class="nav-item px-1 py-2" role="presentation">
-                                <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p9" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 9</button>
-                            </li>
-                            <li class="nav-item px-1 py-2" role="presentation">
-                                <button class="btn btn-outline-primary fs-5" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p10" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Purok 10</button>
-                            </li>
-                        </ul>
+                    <div class="col-xl-2">
+
+                   
+                    </div>
                     </div>
                 </div>
-                                -->
+                            
 
                 <?php $query = "SELECT * FROM tblresident ORDER BY LastName ASC";
                 $result = mysqli_query($connect, $query);  ?>
@@ -272,13 +242,10 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                                         <a href  = "view-resident-personal.php?viewid=' . $row["ID"] . '" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
                                                                     </div>
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                    <a type="button" href ="edit-resident-personal.php?editid=' . $row["ID"] . '"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
+                                                                    <a type="button" href ="edit-resident-personal.php?editid=' . $row["ID"] . '"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Manage</span></a>
                                                                 </div>
                                                                 
-                                                                    <input type="hidden" name="did" id="did" value="' . $row["ID"] . '">
-                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                        <button type="submit" name="delete" href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</button>
-                                                                    </div>
+                                                                  
                                                                 </form>
                                                             </td> 
                                                         </tr>  
@@ -299,43 +266,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
             <!--END ALL PUROK-->
 
             
-                <div class="modal fade" id="delete" tab-idndex="-1">
-                    <div class="modal-dialog modal-dialog-centered modal-md">
-                        <div class="modal-content g-0 bg-danger ">
-                            <div class="modal-header bg-danger white ">
-                                <h5 class="modal-title" id="delete">&nbsp;<i class="fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
-
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body bg-white">
-                                <div class="row">
-                                    <div class="col xl-4" align="center">
-                                        <img src="../images/trash.png" alt="trash" class=" img-fluid " style="width: 10%;">
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <p class="fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class="fa fa-check">)</i> if certain</span></p>
-                                    <input type="hidden" name="delete" value="row-id-to-delete">
-                                </div>
-                                <div class="row justify-content-center" align="center">
-                                    <form method="POST" action="#">
-                                        <button type="button" class="btn btn-success rounded-circle" data-bs-dismiss="modal" name="yes" value="Yes">
-                                            <i class='fa fa-check '></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger rounded-circle" data-bs-dismiss="modal" name="no" value="No">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </form>
-                                </div>
-
-                            </div>
-                            <div class="modal-footer">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              
 
     </body>
 
