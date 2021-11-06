@@ -5,6 +5,45 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid'] == 0)) {
     header('location:logout.php');
 } else {
+    $aid=$_SESSION['clientmsaid'];
+   $newpassword=$_POST['newpassword'];
+
+   $sqlc="select * from tbladmin where ID=:aid";
+   $queryc=$dbh->prepare($sqlc);
+   $queryc->bindParam(':aid',$aid,PDO::PARAM_STR);
+   $queryc->execute();
+   $resultc=$queryc->fetchAll(PDO::FETCH_OBJ);
+
+			
+    if($queryc->rowCount() > 0)
+    {
+        foreach($resultc as $rowc)
+        {        
+            $getter = $rowc->Password;
+        }
+    }
+    
+    if(isset($_POST['submit']))
+    {
+  
+  
+    
+    if($getter!=$_POST['currentpassword']){
+        echo '<script>alert("Current password not match.")</script>';
+    }else{
+        $sql="update tbladmin set Password=:newpassword where ID=:aid";
+        $query=$dbh->prepare($sql);
+        $query->bindParam(':newpassword',$newpassword,PDO::PARAM_STR);
+        $query->bindParam(':aid',$aid,PDO::PARAM_STR);
+            $query->execute();
+        
+            echo '<script>alert("Password has been changed.")</script>';
+            echo "<script>window.location.href ='change-password.php'</script>";
+    }
+   
+   
+  }            
+
 ?>
 
 <!DOCTYPE html>
@@ -117,10 +156,10 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                             <div class="form-body">
                                 <form name="changepassword" method="post" onsubmit="return checkpass();" action="">
 
-                                    <div class="form-group"> <label for="exampleInputEmail1">Current Password</label> <input type="password" name="currentpassword" id="currentpassword" class="form-control" required="true"> </div>
-                                    <div class="form-group"> <label for="exampleInputEmail1">New Password</label> <input type="password" name="newpassword" class="form-control" required="true"> </div>
+                                    <div class="form-group"> <label for="exampleInputEmail1">Current Password <?php echo $getter;?></label> <input type="password" name="currentpassword" id="currentpassword" class="form-control" required="true"> </div>
+                                    <div class="form-group"> <label for="exampleInputEmail1">New Password</label> <input type="password" id="newpassword" name="newpassword" class="form-control" required="true"> </div>
                                     <div class="form-group"> <label for="exampleInputEmail1">Confirm Password</label><input type="password" name="confirmpassword" id="confirmpassword" value="" class="form-control" required="true"> </div>
-
+                                    
                                     <br>
                                     <button type="submit" class="btn btn-default" name="submit" id="submit" style="color: white; background-color: #021f4e; border: 1px; width: 25%; border-radius:25px;">Change</button>
                             </div>
@@ -145,3 +184,18 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
 </html>
 <?php } ?>
+<script>
+        var password = document.getElementById("newpassword"),
+            confirm_password = document.getElementById("confirm_password");
+
+        function validatePassword() {
+            if (password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Passwords does not match.");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
+        }
+
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+    </script>

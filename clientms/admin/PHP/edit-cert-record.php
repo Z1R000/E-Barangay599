@@ -1,5 +1,50 @@
 <?php 
     $curr ="Update Certificate Record";
+    session_start();
+    error_reporting(0);
+    include('includes/dbconnection.php');
+    if (strlen($_SESSION['clientmsaid']==0)) {
+      header('location:logout.php');
+      } else{
+        if(isset($_POST['submit']))
+        {
+            $eid=intval($_GET['editid']);
+            $clientmsaid=$_SESSION['clientmsaid'];
+            $rest=$_POST['rest'];
+            $lname=$_POST['lname'];
+            $fname=$_POST['fname'];
+            $mname=$_POST['mname'];
+            $hu=$_POST['hu'];
+            $vp=$_POST['vp'];
+            $prk=$_POST['prk'];
+            $stn=$_POST['stn'];
+            $gnd=$_POST['gnd'];
+            $contact=$_POST['contact'];
+            $cstat=$_POST['cstat'];
+            $vstat=$_POST['vstat'];
+            $email=$_POST['email'];
+            $sss=$_POST['sss'];
+            $tin=$_POST['tin'];
+            $bdt=$_POST['bdt'];
+        
+            $sql="update tblresident set ResidentType=:rest, Purok=:prk, houseUnit=:hu, streetName=:stn, LastName=:lname, FirstName=:fname, MiddleName=:mname, houseUnit=:hu, streetName=:stn, Purok=:prk, Cellphnumber=:contact, CivilStatus=:cstat, voter=:vstat, Email=:email where ID=:eid";
+            $query=$dbh->prepare($sql);
+            $query->bindParam(':rest',$rest,PDO::PARAM_STR);
+            $query->bindParam(':vstat',$vstat,PDO::PARAM_STR);
+            $query->bindParam(':lname',$lname,PDO::PARAM_STR);
+            $query->bindParam(':fname',$fname,PDO::PARAM_STR);
+            $query->bindParam(':mname',$mname,PDO::PARAM_STR);
+            $query->bindParam(':hu',$hu,PDO::PARAM_STR);
+            $query->bindParam(':stn',$stn,PDO::PARAM_STR);
+            $query->bindParam(':prk',$prk,PDO::PARAM_STR);
+            $query->bindParam(':contact',$contact,PDO::PARAM_STR);
+            $query->bindParam(':cstat',$cstat,PDO::PARAM_STR);
+            $query->bindParam(':email',$email,PDO::PARAM_STR);
+            $query->bindParam(':eid',$eid,PDO::PARAM_STR);
+            $query->execute();
+            echo '<script>alert("Resident detail has been updated")</script>';
+            echo "<script type='text/javascript'> document.location ='edit-resident-account.php?editid=" + $eid + "'; </script>";
+        }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +110,7 @@
           -moz-transform-origin: 0 0;
           -o-transform-origin: 0 0;
           -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;*/
+          transform-origin: 0 0;
         }
         
      
@@ -288,3 +333,4 @@
  
 </body>
 </html>
+<?php } ?>

@@ -62,7 +62,7 @@
           -moz-transform-origin: 0 0;
           -o-transform-origin: 0 0;
           -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;*/
+          transform-origin: 0 0;
         }
         
      
@@ -273,7 +273,7 @@
                                         <label for="remarks" >Remarks</label>
                                         <div class="col-md-12">
                                             <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;resize: none;"></textarea>
                                             <label for="floatingTextarea2">Remarks here (max 10 words)</label>
                                                 
                                             </div>
@@ -377,7 +377,7 @@
                                         <label for="remarks" >Remarks</label>
                                         <div class="col-md-12">
                                             <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;resize: none;"></textarea>
                                             <label for="floatingTextarea2">Remarks here (max 10 words)</label>
                                                 
                                             </div>

@@ -5,6 +5,7 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid'] == 0)) {
     header('location:logout.php');
 } else {
+    
 ?>
 
     <!DOCTYPE html>
@@ -106,6 +107,21 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
     </head>
 
     <body>
+        <?php
+				$aid=$_SESSION['clientmsaid'];
+				$sql="SELECT distinct tbladmin.ID, tbladmin.BarangayPosition, tblresident.* from  tbladmin join tblresident where tbladmin.ID=:aid AND tbladmin.residentID = tblresident.ID";
+				$query = $dbh -> prepare($sql);
+				$query->bindParam(':aid',$aid,PDO::PARAM_STR);
+				$query->execute();
+
+				$results=$query->fetchAll(PDO::FETCH_OBJ);
+
+				$cnt=1;
+				if($query->rowCount() > 0)
+				{
+				    foreach($results as $row)
+				{               
+			?>
         <div class="d-flex" id="wrapper">
             <!-- Sidebar -->
             <?php include_once('../includes/sidebar.php');     ?>
@@ -115,19 +131,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
             <!-- Page Content -->
             <div id="page-content-wrapper">
                 
-                <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
-                    <div class="d-flex align-items-center">
-                        <i class="fa fa-align-justify secondary-text fs-4 me-3" id="menu-toggle"></i>
-                        <h2 class="fs-2 m-0">Admin Profile</h2>
-
-                    </div>
-
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-
-                </nav>
+            
                 <div class="container-fluid mx-auto px-5 mt-3 mb-2 ">
                     <div class="row g-0 mx-2 ">
                         <div class="row g-0 ">
@@ -143,10 +147,10 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                         </div>
                         <div class="row g-0  ">
                             <div class="col-xl-10 bg-white mx-auto text-center">
-                                <label for="" class="text-center fs-6 text-muted small">Resident's Full Name</label>
+                                <label for="" class="text-center fs-6 text-muted small"><?php echo $row->BarangayPosition ?></label>
                                 <div class="display-6 border-bottom text-center py-2">
-                                    testing
-                                    <!--?php echo "$row->LastName, $row->FirstName $row->MiddleName $row->Suffix";?-->
+                                   
+                                    <?php echo "$row->LastName, $row->FirstName $row->MiddleName $row->Suffix";?>
 
                                 </div>
 
@@ -187,6 +191,13 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                     </td>
                                                 </tr>
                                                 <tr>
+                                                <?php
+                                                    $gbd = $row->BirthDate;
+                                                    $gbd = date('Y-m-d', strtotime($gbd));
+                                                    $gbds = date('F j, Y', strtotime($gbd));
+                                                    $today = date('Y-m-d');
+                                                    $diff = date_diff(date_create($gbd), date_create($today));
+                                                    ?>
                                                     <th style="padding-top: 10px; padding-bottom:10px;">
                                                         <i class="fa fa-birthday-cake fa-1x me-1"></i>
                                                         Date of Birth
@@ -273,7 +284,15 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                                                                 </thead>
                                                                 <tbody class=" mt-2" style="padding: 10px;">
+                                                                <tr>
 
+                                                                    <th>
+                                                                        Age
+                                                                    </th>
+                                                                    <td style="text-align: right; padding-top: 15px; padding-bottom:15px;">
+                                                                        <?php echo $diff->format('%y'); ?>
+                                                                    </td>
+                                                                    </tr>
 
                                                                     <tr>
 
@@ -346,6 +365,8 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 </div>
                                 <!-- /#page-content-wrapper -->
                             </div>
+                
+                            <?php $cnt=$cnt+1;}} ?>
 
                             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
                             <script>

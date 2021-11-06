@@ -196,6 +196,8 @@
                                         </div>
                                         <div class="row">
                                             <div class="col" style = "overflow-x:auto;">
+                                            <?php $query = "SELECT distinct tblcertificate.ID, tblcertificate.CertificateName, tblcertificate.CertificatePrice, tblcreatecertificate.ID as getid, tblcreatecertificate.Userid, tblcreatecertificate.CertificateId, tblcreatecertificate.CreationId, tblcreatecertificate.status, tblcreatecertificate.CreationDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID ORDER BY tblcreatecertificate.CreationDate ASC, status";
+                                                $result = mysqli_query($con, $query);  ?>
                                                 <table class= "table table-striped table-bordered pt-2" id = "crec" style = "min-width: 900px;">
                                                     <thead>
 
@@ -209,18 +211,19 @@
                                                             <th style = "text-align: center">Actions</th>
                                                     </thead>  
                                                         <tbody>
-                                                                <tr>
-                                                                    <td scope="col" style = "text-align: left">015-22</td>
-                                                                    <td scope="col" style = "text-align: left">On-Going</td>
-                                                                    <td scope="col" style = "text-align: left">ekoc omsim</td>
-
-                                                                    <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                                    <td scope="col" style = "text-align: right">₱ 300000</td>
-                                                                    <td scope="col" style = "text-align: right">10-12-2021</td>
-                                                        
-                                                                    <td scope="col" id = "disa" style = "text-align: center">
+                                                        <?php
+                                                    while ($row = mysqli_fetch_array($result)) {
+                                                        echo '  
+                                                        <tr>
+                                                            <td scope="col" style = "text-align: left">015-22</td>
+                                                            <td scope="col" style = "text-align: left">'. $row["status"] . '</td>
+                                                            <td scope="col" style = "text-align: left">' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>
+                                                            <td scope="col" style = "text-align: left">'. $row["CertificateName"] .'</td>
+                                                            <td scope="col" style = "text-align: left">'. $row["CertificatePrice"] .'</td>
+                                                            <td scope="col" style = "text-align: left">'. $row["CreationDate"] .'</td>
+                                                            <td scope="col" id = "disa" style = "text-align: center">
                                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="edit-cert-record.php"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
+                                                                            <a type="" href ="edit-cert-record.php?editid='. $row["getid"] .'"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
                                                                         </div>
                                                                     
                                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
@@ -233,308 +236,10 @@
                                                                             <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
                                                                         </div>
                                                                     </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td scope="col" style = "text-align: left">015-22</td>
-                                                                    <td scope="col" style = "text-align: left">On-Going</td>
-                                                                    <td scope="col" style = "text-align: left">ekoc omsim</td>
-
-                                                                    <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                                    <td scope="col" style = "text-align: right">₱ 300000</td>
-                                                                    <td scope="col" style = "text-align: right">10-12-2021</td>
-                                                        
-                                                                    <td scope="col" id = "disa" style = "text-align: center">
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="edit-cert-record.php"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                                        </div>
-                                                                    
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
-                                                                        </div>
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                                <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane mx-1 white"></i><span class="wal">Send</span></a>
-                                                                            </div> 
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td scope="col" style = "text-align: left">015-22</td>
-                                                                    <td scope="col" style = "text-align: left">On-Going</td>
-                                                                    <td scope="col" style = "text-align: left">ekoc omsim</td>
-
-                                                                    <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                                    <td scope="col" style = "text-align: right">₱ 300000</td>
-                                                                    <td scope="col" style = "text-align: right">10-12-2021</td>
-                                                        
-                                                                    <td scope="col" id = "disa" style = "text-align: center">
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="edit-cert-record.php"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                                        </div>
-                                                                    
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
-                                                                        </div>
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                                <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane mx-1 white"></i><span class="wal">Send</span></a>
-                                                                            </div> 
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td scope="col" style = "text-align: left">015-22</td>
-                                                                    <td scope="col" style = "text-align: left">On-Going</td>
-                                                                    <td scope="col" style = "text-align: left">ekoc omsim</td>
-
-                                                                    <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                                    <td scope="col" style = "text-align: right">₱ 300000</td>
-                                                                    <td scope="col" style = "text-align: right">10-12-2021</td>
-                                                        
-                                                                    <td scope="col" id = "disa" style = "text-align: center">
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="edit-cert-record.php"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                                        </div>
-                                                                    
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
-                                                                        </div>
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                                <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane mx-1 white"></i><span class="wal">Send</span></a>
-                                                                            </div> 
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td scope="col" style = "text-align: left">015-22</td>
-                                                                    <td scope="col" style = "text-align: left">On-Going</td>
-                                                                    <td scope="col" style = "text-align: left">ekoc omsim</td>
-
-                                                                    <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                                    <td scope="col" style = "text-align: right">₱ 300000</td>
-                                                                    <td scope="col" style = "text-align: right">10-12-2021</td>
-                                                        
-                                                                    <td scope="col" id = "disa" style = "text-align: center">
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="edit-cert-record.php"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                                        </div>
-                                                                    
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
-                                                                        </div>
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                                <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane mx-1 white"></i><span class="wal">Send</span></a>
-                                                                            </div> 
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td scope="col" style = "text-align: left">015-22</td>
-                                                                    <td scope="col" style = "text-align: left">On-Going</td>
-                                                                    <td scope="col" style = "text-align: left">ekoc omsim</td>
-
-                                                                    <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                                    <td scope="col" style = "text-align: right">₱ 300000</td>
-                                                                    <td scope="col" style = "text-align: right">10-12-2021</td>
-                                                        
-                                                                    <td scope="col" id = "disa" style = "text-align: center">
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="edit-cert-record.php"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                                        </div>
-                                                                    
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
-                                                                        </div>
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                                <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane mx-1 white"></i><span class="wal">Send</span></a>
-                                                                            </div> 
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td scope="col" style = "text-align: left">015-22</td>
-                                                                    <td scope="col" style = "text-align: left">On-Going</td>
-                                                                    <td scope="col" style = "text-align: left">ekoc omsim</td>
-
-                                                                    <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                                    <td scope="col" style = "text-align: right">₱ 300000</td>
-                                                                    <td scope="col" style = "text-align: right">10-12-2021</td>
-                                                        
-                                                                    <td scope="col" id = "disa" style = "text-align: center">
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="edit-cert-record.php"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                                        </div>
-                                                                    
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
-                                                                        </div>
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                                <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane mx-1 white"></i><span class="wal">Send</span></a>
-                                                                            </div> 
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td scope="col" style = "text-align: left">015-22</td>
-                                                                    <td scope="col" style = "text-align: left">On-Going</td>
-                                                                    <td scope="col" style = "text-align: left">ekoc omsim</td>
-
-                                                                    <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                                    <td scope="col" style = "text-align: right">₱ 300000</td>
-                                                                    <td scope="col" style = "text-align: right">10-12-2021</td>
-                                                        
-                                                                    <td scope="col" id = "disa" style = "text-align: center">
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="edit-cert-record.php"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                                        </div>
-                                                                    
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
-                                                                        </div>
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                                <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane mx-1 white"></i><span class="wal">Send</span></a>
-                                                                            </div> 
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-
-                                                                <tr>
-                                                                    <td scope="col" style = "text-align: left">015-22</td>
-                                                                    <td scope="col" style = "text-align: left">On-Going</td>
-                                                                    <td scope="col" style = "text-align: left">ekoc omsim</td>
-
-                                                                    <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                                    <td scope="col" style = "text-align: right">₱ 300000</td>
-                                                                    <td scope="col" style = "text-align: right">10-12-2021</td>
-                                                        
-                                                                    <td scope="col" id = "disa" style = "text-align: center">
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="edit-cert-record.php"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                                        </div>
-                                                                    
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
-                                                                        </div>
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                                <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane mx-1 white"></i><span class="wal">Send</span></a>
-                                                                            </div> 
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr> <tr>
-                                                                    <td scope="col" style = "text-align: left">015-22</td>
-                                                                    <td scope="col" style = "text-align: left">On-Going</td>
-                                                                    <td scope="col" style = "text-align: left">ekoc omsim</td>
-
-                                                                    <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                                    <td scope="col" style = "text-align: right">₱ 300000</td>
-                                                                    <td scope="col" style = "text-align: right">10-12-2021</td>
-                                                        
-                                                                    <td scope="col" id = "disa" style = "text-align: center">
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="edit-cert-record.php"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                                        </div>
-                                                                    
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
-                                                                        </div>
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                                <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane mx-1 white"></i><span class="wal">Send</span></a>
-                                                                            </div> 
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-
-                                                                <tr>
-                                                                    <td scope="col" style = "text-align: left">015-22</td>
-                                                                    <td scope="col" style = "text-align: left">On-Going</td>
-                                                                    <td scope="col" style = "text-align: left">ekoc omsim</td>
-
-                                                                    <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                                    <td scope="col" style = "text-align: right">₱ 300000</td>
-                                                                    <td scope="col" style = "text-align: right">10-11-2021</td>
-                                                        
-                                                                    <td scope="col" id = "disa" style = "text-align: center">
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="edit-cert-record.php"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                                        </div>
-                                                                    
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
-                                                                        </div>
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                                <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane mx-1 white"></i><span class="wal">Send</span></a>
-                                                                            </div> 
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td scope="col" style = "text-align: left">015-22</td>
-                                                                    <td scope="col" style = "text-align: left">On-Going</td>
-                                                                    <td scope="col" style = "text-align: left">ekoc omsim</td>
-
-                                                                    <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                                    <td scope="col" style = "text-align: right">₱ 300000</td>
-                                                                    <td scope="col" style = "text-align: right">10-11-2021</td>
-                                                        
-                                                                    <td scope="col" id = "disa" style = "text-align: center">
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="edit-cert-record.php"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                                        </div>
-                                                                    
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
-                                                                        </div>
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                                <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane mx-1 white"></i><span class="wal">Send</span></a>
-                                                                            </div> 
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td scope="col" style = "text-align: left">015-22</td>
-                                                                    <td scope="col" style = "text-align: left">On-Going</td>
-                                                                    <td scope="col" style = "text-align: left">ekoc omsim</td>
-
-                                                                    <td scope="col" style = "text-align: left">Barangay Clearance</td>
-                                                                    <td scope="col" style = "text-align: right">₱ 300000</td>
-                                                                    <td scope="col" style = "text-align: right">10-11-2021</td>
-                                                        
-                                                                    <td scope="col" id = "disa" style = "text-align: center">
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="edit-cert-record.php"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                                        </div>
-                                                                    
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
-                                                                        </div>
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                                <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane mx-1 white"></i><span class="wal">Send</span></a>
-                                                                            </div> 
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
+                                                        ';
+                                                    }
+                                                    ?>
+                                                                
                                                         </tbody>
                                                 </table>
                                             </div>
@@ -833,7 +538,7 @@
         
     <!--end-payments-->
 
-    <div class="modal fade" id = "delete-cert" tab-idndex = "-1">
+    <div class="modal fade" id = "delete-cert" tab-index = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger ">
                     <div class="modal-header bg-danger bg-transparent ">
@@ -871,7 +576,7 @@
         </div>
 
 
-<div class="modal fade" id = "walk-in" tab-idndex = "-1">
+<div class="modal fade" id = "walk-in" tab-idex = "-1">
     <div class="modal-dialog modal-dialog-centered modal-lg" >
         <div class="modal-content g-0  "  >
         <form method="post">
