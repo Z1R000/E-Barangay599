@@ -7,7 +7,7 @@
     header('location:logout.php');
     } else{
         $connect = mysqli_connect("localhost", "root", "", "clientmsdb");
-        $query ="SELECT * FROM tblresidentrequest ORDER BY CreationDate ASC";  
+        $query ="SELECT * FROM tblresidentrequest where reqStatus='Pending' ORDER BY CreationDate ASC";  
                         $result = mysqli_query($connect, $query);  
         
 ?>
@@ -113,13 +113,14 @@
                                                         <th>Action </th>
                                                     </tr>   
                                                 </thead>
-                                                    <?php  
+                                                    <?php
+                                                    $count = 1;  
                                                     while($row = mysqli_fetch_array($result))  
                                                     {  
                                                         echo '  
                                                         <tr>
                                                                 <td >
-                                                                    '.$row["ID"].'
+                                                                    '.$count.'
                                                                 </td>
                                                                 <td >'.$row["LastName"].', '.$row["FirstName"].' '.$row["MiddleName"].' '.$row["Suffix"].'</td>';
 
@@ -159,7 +160,8 @@
                                                                 </td> 
                                                         </tr>  
                                                         ';  
-                                                    }  
+                                                    }
+                                                    $count++;  
                                                     ?>  
                                                 </table>  
                                             </div>
