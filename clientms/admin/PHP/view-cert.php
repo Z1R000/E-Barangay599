@@ -116,13 +116,7 @@
 </head>
 <body>
   <main class="py-5">
-    <div class="container justify-content-start">
-        <a href="#" onclick= 'history.back();' class="link-primary"><i class= "fas fa-arrow-left me-2"></i>Go back</a>
-        
-    </div>
-    <div class="container d-flex justify-content-center mb-3">
-      <button class="btn btn-primary" onclick="window.print()"><i class= "fa fa-print me-3"></i>Print</strongutton>
-    </div>
+  
 
     <section class="custom-container   print-container bg-white">
       <!-- header -->

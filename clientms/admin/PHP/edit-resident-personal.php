@@ -6,6 +6,7 @@
     if (strlen($_SESSION['clientmsaid']==0)) {
       header('location:logout.php');
       } else{
+        
         if(isset($_POST['submit']))
         {
             $eid=intval($_GET['editid']);
@@ -122,13 +123,15 @@
         </div>
     </nav>
     <?php
-        $eid=$_GET['editid'];
+        $eid= $_GET['editid'];
         $sql="SELECT * from tblresident where ID=:eid";
         $query = $dbh -> prepare($sql);
         $query->bindParam(':eid',$eid,PDO::PARAM_STR);
         $query->execute();
         $results=$query->fetchAll(PDO::FETCH_OBJ);
         $cnt=1;
+        $connect = mysqli_connect("localhost", "root", "", "clientmsdb");
+       
         if($query->rowCount() > 0){
             foreach($results as $row)
             {   
@@ -161,7 +164,7 @@
                                 Resident <?php echo $row->ID; ?>
                             </div>
                         </div>
-                        <div class="row g-0  bg-white shadow-sm">
+                        <div class="row g-0  bg-white shadow-sm border">
                             <div class="col-xl-12 py-2 border-end" align = "center">
                                 <button type = "button" onclick ="editname();"class="btn-primary btn">
                                     <i class="fa fa-edit me-2"></i>Edit Full Name
@@ -209,7 +212,7 @@
                                 }
                                 
                             </script>
-                        <div class="col-xl-10 mx-auto px-2">
+                        <div class="col-xl-10 mx-auto px-2 ">
                             <table class="table">
                                    <tr>
                                         <td colspan = 3 class= "text-center bg-info text-white">
@@ -246,11 +249,11 @@
                                             Residency Type
                                         </th>
                                         <td>
-                                        <div class="col-6 px-1" id="hidden_div" style = "width: 50%; float: right;text-align: right">
+                                        <div class="col-6 px-1" id="hidden_div" style = "width: 50%; float: right;text-align: right;display:none;">
                                         
-                                        <input type="text" class="form-control" placeholder="" id="residenttype" required />
+                                        <input type="text" class="form-control" placeholder="" id="residenttype" />
                                     </div>
-                                            <select class="form-select input-sm" aria-label="Default select example" style = "width: 50%; float: right;text-align: right"onchange="showDiv('hidden_div', this)">
+                                            <select class="form-select input-sm" aria-label="Default select example" style = "width: 50%; float: right;text-align: right"onchange="showDiv('hidden_div', this)" id = "rt">
                                                     <option value="<?php echo htmlentities($row->ResidentType)?>"><?php echo htmlentities($row->ResidentType)?></option>
                                                     <option value="House Owner">House Owner</option>
                                                     <option value="caretaker">Care taker</option>
@@ -394,25 +397,96 @@
                                     </tr>
                             </table>
                         </div>
+                        <div class="row g-0 my-2 px-5 py-2 justify-content-end">
+                        <div class="col-12">
+                            <div class="float-end">
+                        <div class="btn-group">
+                            <button type = "button" onclick ="editname();"class="btn-primary btn form-control">
+                                <i class="fa fa-save  me-2"></i>Save Changes
+                            </button>
+
+                        </div>
+                        <div class="btn-group"> <button type="button"  href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete Record</button>
+
+                        </div>
+                        </div>
+
+                        </div>
+                             
                     </div>
 
-                    <div class="row g-0 my-2 justify-content-end">
-                            <div class="col-xl-4" align ="right">
-                                <button type = "button" onclick ="editname();"class="btn-primary btn form-control">
-                                    <i class="fa fa-save  me-2"></i>Save Changes
-                                </button>
-
-                            </div>
-                      
-                        </div>
+              
+                           <!-- <input type="hidden" name="did" id="did" value="' . $row["ID"] . '">
+                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                       
+                                                                    </div>
+                                        -->
+                    </div>
                 </div>
-                <?php $cnt=$cnt+1; }} ?>
+                <?php $cnt=$cnt+1; }?>
             </div>
         </form>
     </div>
  </div>
-    
 
+<?php
+ if (isset($_POST['delete'])) {
+    $eid =$_GET['editid'];
+    $sqld = "DELETE FROM tblresident where ID=:eid";
+    $queryd = $dbh->prepare($sqld);
+    $queryd->bindParam(':eid', $eid, PDO::PARAM_STR);
+    $queryd->execute();
+    echo '<script>alert("Resident has been Deleted.")</script>';
+    echo "<script>window.location.href ='admin-residence.php'</script>";
+}
+
+?>
+ <form method="POST">
+   <div class="modal fade" id="delete" tab-idndex="-1">
+                    <div class="modal-dialog modal-dialog-centered modal-md">
+                        <div class="modal-content g-0 bg-danger ">
+                            <div class="modal-header bg-danger white ">
+                                <h5 class="modal-title" id="delete">&nbsp;<i class="fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
+
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body bg-white">
+                                <div class="row">
+                                    <div class="col xl-4" align="center">
+                                        <img src="../images/trash.png" alt="trash" class=" img-fluid " style="width: 10%;">
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <p class="fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class="fa fa-check">)</i> if certain</span></p>
+                                    
+                                </div>
+                                <div class="row justify-content-center" align="center">
+                                 
+                                        <div class="col-xl-12">
+                                            <div class="btn-group">
+                                        <button type="submit" name="delete" class="btn btn-success "  value="delete">
+                                            <i class='fa fa-check mx-1 '></i>Confirm
+                                        </button>
+                                        </div>
+                                        <div class="btn-group">
+                                        <button type="button" class="btn btn-danger " data-bs-dismiss="modal" name="no" value="No">
+                                            <i class="fa fa-times mx-1"></i>Cancel
+                                        </button>
+                                        </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+               <?php }?>                 
     <script>
         $(document).ready(function() {
             $("select").change(function() {
@@ -431,7 +505,13 @@
 
 <script type="text/javascript">
     function showDiv(divId, element) {
-        document.getElementById(divId).style.display = element.value == 'Rental/Boarder' ? 'block' : 'none';
+        var rentype = document.getElementById('rt').value;
+            if (rentype == "Rental/Boarder") {
+                document.getElementById('residenttype').required = true;
+            } else {
+                document.getElementById('residenttype').required = false;
+            }
+            document.getElementById(divId).style.display = element.value == 'Rental/Boarder' ? 'block' : 'none';
     }
     function showprecinct(divId, element) {
         document.getElementById(divId).style.display = element.value == 'reg' ? 'inline' : 'none';

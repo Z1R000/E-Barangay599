@@ -145,7 +145,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#service-choice" data-bs-toggle = "modal"><i class="fa fa-paperclip"></i>&nbsp;Services</a></li>
                                 <li class="breadcrumb-item"><a  class= "text-decoration-none" href="admin-certificate.php"><i class="fa fa-file"></i>&nbsp;Certificates</a></li>
                                 <li class="breadcrumb-item active"><a href="#"><i class="fa fa-list text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
                             </ol>
@@ -155,8 +155,55 @@ if (strlen($_SESSION['clientmsaid']==0)) {
             </div>
         </div>
     </nav>
-    
-    <form method ="POST">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12"> 
+                <button type = "button" onclick = "window.history.back();" class = "btn btnx float-end btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</button>           
+            </div>
+        </div>
+    </div>
+            <div class="container-fluid px-5 mb-5">
+              <div class="row">
+                <div class="col-xl-12"> 
+                  <ul class="nav  nav-pills justify-content-center">     
+                    <li class="nav-item">
+                        <a class="nav-link active fs-5" href="#preview" data-bs-toggle = "tab">Preview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fs-5" href="#edit-cert" data-bs-toggle = "tab">Edit Certification </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-xl-12">
+                  <div class="tab-content">
+                    <div class="tab-pane show fade active" id="preview">
+                        <div class="container my-3">
+                                <div class="row g-0 ">
+                                    <div class="col-xl-8  shadow-sm mx-auto  ">
+                                        <div class="row  text-white bg-599 g-0 justify-content-center">
+                                            <div class="col-12">
+                                                <div class="display-6 border-start border-end border-bottom text-center">Certificate Template</div>
+                                            </div>
+
+                                        </div>
+                            
+                                
+                                        <div class="row border-start border-end border-bottom py-3 g-0 justify-content-center">
+                                            <div class="col-10 mx-auto">
+
+                                        
+                                            <div class="embed-responsive mx-auto embed-responsive-16by9">
+                                                <iframe class="embed-responsive-item" id = "frame" src="temp-cert.php"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                      
+                    </div>
+                    <div class="tab-pane show fade" id="edit-cert">
+                    <form method ="POST">
     <?php
 				$eid=$_GET['editid'];
 				$clientmsaid=$_SESSION['clientmsaid'];
@@ -175,49 +222,52 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 			?>
         <div class="container-fluid mb-3 ms-1 mx-5">
           <div class="row mx-1  py-2">
-            <div class="col-xl-5 mx-auto  rounded-top white">
+            <div class="col-xl-12 mx-auto  rounded-top white">
               <div class="row ">
-                <div class="fs-6 text-center mt-3"  style= "background: #012f6e">
-                  <span class ="white">
+                <div class="fs-4 text-center mt-3 bg-599">
                     Certificate Information
-                  </span>
-                 
+                  
                 </div>
               </div>
               
-              <div class="row bg-white pb-5 shadow-sm">
+              <div class="row bg-white pb-5 border">
                 <form action="" method = "POST">
-                  <div class="row gx-3 gy-1 px-5">
+                  <div class="row g-2 gy-1 px-5">
+                    <div class="col-xl-6">
                     <label for="cn" class= "black fw-bold">Certification Name</label>
                     <input id = "cn" class ="form-control" type="text" placeholder = "Certfication Name" name= "cn" value =  "<?php echo htmlentities($row->CertificateName);?>">
-                    <label for="cp" class= "black fw-bold" >Certification Fee</label>
-                    <input id = "cp" name="cp" class ="form-control" value = "<?php echo htmlentities($row->CertificatePrice);?>" type="text" placeholder = "Certfication fee">
-             
-                  </div>
-                  <div class="row gy-2 mx-2 my-2 ">
-                    <div class="col-md-12 mx-auto">
-                      <label for="cert-inf" class= "black fw-bold">Certification Contents</label>
-                      <textarea class= "" name="cert-info" id="cert-inf" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1" value=""><?php echo htmlentities($row->CertText);?></textarea>
 
+                    </div>
+                    <div class="col-xl-4">
+                    <label for="cp" class= "black fw-bold" >Certification Fee</label>
+                    <div class="input-group">
+                      <button class="btn btn-secondary disabled">₱</button>
+                    <input id = "cp" name="cp" class ="form-control" value = "<?php echo htmlentities($row->CertificatePrice);?>" type="text" placeholder = "Certfication fee" style = "text-align: right">
 
                     </div>
                    
+                
+             
                   </div>
+                  <div class="row  g-2 ">
+                    <div class="col-md-12 mx-auto">
+                      <label for="cert-inf" class= "black fw-bold">Certification Contents</label>
+                      <textarea class= "" name="cert-info" id="cert-inf" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1" value=""><?php echo htmlentities($row->CertText);?></textarea>
+                    </div>
+                   
+                  </div>
+                  <div class="row g-2">
+                    <div class="col-12">
+                    <button type = "button" href = "#save-cert" data-bs-toggle = "modal" role= "button" name="submit" id="submit" class = "btn btnx btn-primary mb-1 float-end"><i class= "fas fa-save me-2"></i>Save</button>
+                    </div>
+
+                    </div>
+                    </div>
                 
                 </form>
               </div>
             </div>
-            <div class="col-xl-6 mx-auto pt-1 ">
-                <div class="fs-6 fw-bold">Certificate Template</div>
-                <button type = "button" href = "#save-cert" data-bs-toggle = "modal" role= "button" name="submit" id="submit" class = "btn btnx btn-primary mb-1"><i class= "fas fa-save me-2"></i>Save</button>
-                <a type = "button" href = "admin-certificate.php" class = "btn btnx  btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</a>
-              
-                <div class="row">
-                <div class="embed-responsive embed-responsive-16by9">
-                  <iframe class="embed-responsive-item" id = "frame" src="temp-cert.php"></iframe>
-                </div>
-           
-            </div>
+     
           
           </div>
       
@@ -257,9 +307,17 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                     <div class="modal-footer">
                      
                     </div>
+                  </div>
                 </div>
+             </div>
             </div>
+          </div>
         </div>
+      </div>   
+    </div>
+        
+    
+    
         
 
         <div class="modal fade" id = "success" tab-idndex = "-1">
@@ -286,6 +344,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
             </div>
         </div>
       </form>
+      <?php include ('services.php')?>
 
         <script src = '../ckeditor/ckeditor.js'></script>
         <script>

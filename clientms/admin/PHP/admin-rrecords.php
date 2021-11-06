@@ -241,7 +241,7 @@
                                         <div class="col-md-12     mx-auto my-2">
                                             <button type ="button" role = "button" class="btn btn-success px-2" >
                                                 
-                                                Save
+                                                Submit
                                             </button>
                                             <button type ="button" role = "button" class="btn btn-secondary px-2" data-bs-dismiss= "modal" >
                                                 Cancel
@@ -353,10 +353,10 @@
                                             </select>
                                     </div>
                                     
-                                    <div class="row " align= "right">
+                                    <div class="row" align= "right">
                                         <div class="col-md-12     mx-auto my-2">
                                             <button type ="button" role = "button" class="btn btn-success px-2" >
-                                                
+                                            <button type ="button" role = "button" style = "" class="btn btn-primary px-2" >
                                                 Save
                                             </button>
                                             <button type ="button" role = "button" class="btn btn-secondary px-2" data-bs-dismiss= "modal" >
