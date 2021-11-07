@@ -75,7 +75,10 @@
                     <div class="btn-group" role="group">
                         <a href = "resident-registration.php"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-user-plus"></i>&nbsp; New Resident</a>
                     </div>
+                    <div class="btn-group" role="group">
+                        <a href = "admin-residence.php"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-list"></i>&nbsp; Resident List</a>
                     </div>
+                </div>
 
             </div>
             <div class="row g-0  border rounded-top row-col-lg-12" style= "background: #012f4e;">
