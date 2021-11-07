@@ -267,9 +267,9 @@
     ?>
     <div class="modal fade" id = "submit-record" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 " style="background: #021f4e;">
-                    <div class="modal-header  white " style="background: #021f4e;">
-                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;New Blotter Record</h5>
+                <div class="modal-content g-0 border-0" >
+                    <div class="modal-header  white border-599" style="background: #021f4e;">
+                        <div class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;New Blotter Record Verification</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -284,20 +284,28 @@
                             <p class = "fs-5 text-center">You are about to add a new record of blotter in the system. By clicking yes you attest to the legibility, truthfullness and credibility of the information supplied by the complainant.  Once saved some information will be unchangeable. <br><span class="text-muted fs-6"></span></p>
                         </div>
                         <div class="row justify-content-center" align = "center">
-                            
-                                <button type = "button" class="btn btn-success rounded my-1" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                    Yes, I am certain
+                            <div class="col-xl-12">
+                                <div class="float-end">
+                                <div class="btn-group">
+                                    
+                                    <button type = "button" class="btn btn-success rounded my-1" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                        Yes, I am certain
                                 </button>
+                                </div>
+                                <div class="btn-group">
                                 <button type = "button" class="btn btn-danger rounded" data-bs-dismiss = "modal"  name = "no" value ="No">
                                     No, I am not
                                 </button>
+                                </div>
+                                </div>
                             </form>
+                            
+                            </div>
+                            
                         </div>
                 
                     </div>
-                    <div class="modal-footer">
-                        
-                    </div>
+                 
                 </div>
             </div>
         </div>

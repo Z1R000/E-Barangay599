@@ -4,7 +4,7 @@
                                     </div>
                                         <div class="row bg-white py-4 border-start border-bottom border-end">
                                             <div class="col-xl-6" style = "overflow:auto;">
-                                                <table class= "table table-striped table-bordered" id = "cpay" style = "min-width: 200px;max-heigth: 600px">
+                                                <table class= "table table-striped table-bordered" id = "cpay" style = "min-width: 200px; max-height: 600px">
                                                     <thead>
                                                             <th style = "text-align: left">Service</th>
                                                             <th style = "text-align: left">Requestor</th>
@@ -102,10 +102,10 @@
                                          
                                                         <div class="btn-group">
                                                         <div class="btn-group  mb-1  " role="group" aria-label="First group">
-                                                            <a href ="#approve-proof "class="btn btn-success mx-1" data-bs-toggle=  "modal" style = ""><i class = "fa fa-check mx-1 "></i><span class= "wal">Accept</span></a>
+                                                            <a href ="#approve-proof "class="btn btn-success mx-1" data-bs-toggle=  "modal" ><i class = "fa fa-check mx-1 "></i><span class= "wal">Accept</span></a>
                                                         </div>
                                                             <div class="btn-group  mb-1  " role="group" aria-label="First group">
-                                                            <a href ="#decline-proof "class="btn btn-danger mx-1" data-bs-toggle=  "modal" style= ""><i class = "fa fa-times fa-1x mx-1 "></i><span class= "wal"> Decline</span></a>
+                                                            <a href ="#decline-proof "class="btn btn-danger mx-1" data-bs-toggle=  "modal" ><i class = "fa fa-times fa-1x mx-1 "></i><span class= "wal"> Decline</span></a>
                                                         </div>
                                                         </div>
                                                         </div>
@@ -295,7 +295,7 @@
                                         <label for="remarks" >Remarks</label>
                                         <div class="col-md-12">
                                             <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;resize: none;"></textarea>
                                             <label for="floatingTextarea2">Remarks here (max 10 words)</label>
                                                 
                                             </div>
@@ -432,7 +432,7 @@
                                         <label for="remarks" >Remarks</label>
                                         <div class="col-md-12">
                                             <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;resize: none;"></textarea>
                                             <label for="floatingTextarea2">Remarks here (max 10 words)</label>
                                                 
                                             </div>

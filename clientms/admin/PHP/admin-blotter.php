@@ -20,7 +20,24 @@
                     extend: 'print',
                     text: 'Generate Report',
                     className: 'btn btn-primary my-1',
-                    exportOptions: {columns: [ 0, 1, 2, 3,4 ]}
+                    title:'',
+                    message:'The following data are the reported blotter cases to Barangay 599.',
+                    exportOptions: {columns: [ 0, 1, 2, 3,4 ]},
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css('font-size', '16pt','')                    
+                            .prepend(
+
+                                '<div class= "row justify-content-center"><div class= "col-3 align-items-center"><img src ="https://scontent.fmnl4-6.fna.fbcdn.net/v/t1.15752-9/253840780_3043650102555884_6126132548248010936_n.png?_nc_cat=107&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeHtm0gSv39SpbH8YKdiyQmO9Q65UWXYIN71DrlRZdgg3gzdVs9nT_Emsy5607I5PSXaq0miUcTAhsnSWRVszXmU&_nc_ohc=nlQIQehSnbkAX-6AV7Y&_nc_ht=scontent.fmnl4-6.fna&oh=4ef3f4e19b84fbc2f8130d1d23dc16ce&oe=61AD6A25" style= "width: 100px"/></div><div class= "col-6"><div class = "fs-3 text-center">BARANGAY 599, ZONE 59, DISTRICT VI OFFICE OF THE SANGGUNIANG BARANGAY</div></div><div class= "col-3  align-items-center"><img class= "float-end" src ="https://scontent.fmnl4-2.fna.fbcdn.net/v/t1.15752-9/253727695_993694454821211_6742610281288759451_n.png?_nc_cat=105&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeEjZKbv7g_r_OkDANnMfmkmh6jj4naYPzqHqOPidpg_OjwuDdnXemIELY2YBxsifbVX6Q12cTqziZrf280CcmQ9&_nc_ohc=b0AupJm6_48AX8vajsF&tn=2Fn-qzGntt-ZZM-o&_nc_ht=scontent.fmnl4-2.fna&oh=923e9c42b5c658123e6afb3b5b0f1685&oe=61ACC77E" style= "width: 100px"/></div>'
+                            )
+                            .append(
+                                '<img src="https://scontent.fmnl4-6.fna.fbcdn.net/v/t1.15752-9/254152885_569551377676151_8198043780541099030_n.png?_nc_cat=107&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeGaHlQ9SaCFDoumzSqNbuYpX-DTswHybhVf4NOzAfJuFQb0vwGo3iZ4lgoV0U9JXqhvQciPwTNCLoUH_nwOkFhZ&_nc_ohc=VlwYtPOMD-kAX8F3DOo&_nc_ht=scontent.fmnl4-6.fna&oh=fede1fd8b66a464f69ca2a47abd6af65&oe=61AAFC89" style="position:absolute; bottom:0; left:500; right:500" />'
+
+                            );
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    },
                 
                 },
             
@@ -30,18 +47,7 @@
                     className: 'btn-success my-1',
                     exportOptions: {columns: [0,1,2,3,4]}
                 },
-                {
-                    extend: 'pdfHtml5',
-                    text: 'PDF file',
-                    className: 'btn-danger my-1',
-                    exportOptions: {columns: [ 0, 1, 2, 3,4 ]}
-                },
-                {
-                    extend: 'copyHtml5',
-                    text:'Copy',
-                    className: 'btn-secondary my-1',
-                    exportOptions: {columns: [0,1,2,3,4] }
-                },
+               
                 
             ],
         dom: {
@@ -180,7 +186,7 @@
                                                 <td scope="col" style = "text-align: right">6:00pm</td>
                                                 <td scope="col" style = "text-align: center">
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="" href ="blotter-report.php"class="btn btng btn-primary"><i class = "fa fa-print mx-1"></i><span class="wal"> Report</span></a>
+                                                            <a type="" href ="blotter-report.php"class="btn btng btn-primary"><i class = "fa fa-print mx-1"></i><span class="wal"> Print</span></a>
                                                         </div>
                                                     
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
@@ -214,7 +220,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger ">
                     <div class="modal-header bg-danger white ">
-                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
+                        <div class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -229,13 +235,22 @@
                             <p class = "fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
                         </div>
                         <div class="row justify-content-center" align = "center">
-                            <form method = "POST" action = "#">
-                                <button type = "button" class="btn btn-success rounded-circle" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                    <i class= 'fa fa-check '></i>
+                        <form method = "POST" action = "#">
+                            <div class="col-xl-12">
+                                <div class="float-end">
+                                    <div class="btn-group">
+                                        <button type = "button" class="btn btn-success " data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                    <i class= 'fa fa-check mx-1'></i>Confirm
                                 </button>
-                                <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
-                                    <i class= "fa fa-times"></i>
+                                </div>
+                                <div class="btn-group">
+                                <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                    <i class= "fa fa-times-circle mx-1"></i>Cancel
                                 </button>
+                                </div>
+                           
+                            </div>
+                            </div>
                             </form>
                         </div>
                 

@@ -347,9 +347,9 @@
             </form>
         <div class="modal fade" id = "save-cert" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 bg-info ">
-                    <div class="modal-header bg-info white ">
-                        <h5 class="modal-title" id="delete">&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Edit Certificate</h5>    
+                <div class="modal-content g-0  border-0  ">
+                    <div class="modal-header  bg-599 border-599">
+                        <div class="modal-title text-white " id="delete">&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Edit Certificate</div>       
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">
@@ -362,15 +362,83 @@
                         <div class="row">
                             <p class = "fs-4 text-center">A new certificate template is about to be made, do you wish to continue?<br></p>
                         </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="float-end">
+                                    <div class="btn-group">
+                                    <input type = "submit" class="btn btn-success" href= "#success" data-bs-toggle="modal" data-bs-dismiss = "modal"  name = "conf" value ="Confirm">
+
+                                    </div>
+                                    <div class="btn-group">
+                                        
+                               <input type = "submit" class="btn btn-primary" href= "#success" data-bs-dismiss = "modal"  name = "canc" value ="Cancel">
+          
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                    </div>
+              
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id = "delete-record" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-danger" >
+                    <div class="modal-header  white ">
+                        <div class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</div>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        <div class="row">
+                            <div class="col xl-4" align = "center">
+                                <img src="../images/trash.png" alt="trash" class= " img-fluid " style ="width: 10%;">
+                            </div>
+                    
+                        </div>
+                        <div class="row">
+                            <p class = "fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
+                        </div>
+                        <div class="row justify-content-center" align = "center">
+                            <form method = "POST" action = "#">
+                            <div class="col-12">
+                                <div class="float-end">
+                                
+                                <button type = "button" class="btn btn-success" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                    <i class= 'fa fa-check mx-1 '></i> Confirm
+                                </button>
+                                <button type = "button" class="btn btn-danger" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                    <i class= "fa fa-times mx-1"></i> Cancel
+                                </button>
+                                </div>
+                                </div>
+                            </form>
+                        </div>
                 
                     </div>
                     <div class="modal-footer">
-                        <form method = "POST" action = "#">
-                            <input type = "submit" class="btn btn-success" href= "#success" data-bs-toggle="modal" data-bs-dismiss = "modal"  name = "conf" value ="Confirm">
-                               <input type = "submit" class="btn btn-primary" href= "#success" data-bs-dismiss = "modal"  name = "canc" value ="Cancel">
-          
-                        </form>
+                        
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id = "proof" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 border-0 border-bottom border-transparent ">
+                    <div class="modal-header  bg-transparent border-bottom border-white  ">
+                        
+                        <button type="button" class="btn-close btn-primary" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-transparent border-0" align = "center" >
+                    <img src="../images/proof.jpg" alt="proof of payment">
+                       
+                       
+                
+                    </div>
+                  
                 </div>
             </div>
         </div>
@@ -399,6 +467,7 @@
                 </div> 
             </div>
         </div>
+        
         <script src = '../ckeditor/ckeditor.js'></script>
         <script>
           CKEDITOR.replace('cert-info');
