@@ -657,8 +657,7 @@
                             </div>
                         </div>
                         <?php include ('manage-purok.php')?>
-
-                </div>
+                    </div>
                 <div class="tab-pane" id = "e-archive">
                     <div class="row g-0 mt-2">             
                         <ul class="nav nav-tabs">
@@ -979,7 +978,7 @@
                 <div class="tab-pane fade show" id="e-pay">
                     <div class="container">
 
-                        <div class="row">
+                        <div class="row mb-5">
                             <div class="col-xl-8">
                             <div class="row bg-dark text-white shadow-sm">
                                 <div class="fs-5 py-1">Payment Credentials </diV>
@@ -991,7 +990,7 @@
                                         <div class="col-md-10 mx-auto" align = "center">
                                             <div class="row py-2">
                                                 <div class="col-12">
-                                                <button type= "button" class="btn-primary btn" onclick = "edit()"><i class="fa fa-edit mx-1"></i>Edit</button>
+                                                <button type= "button" class="btn-primary btn" id= "ed" onclick = "edit('ed')"><i class="fa fa-edit mx-1"></i>Edit</button>
                                                 </div>
                                             </div>
                                             <div class="fs-5 fw-bold">
@@ -1013,7 +1012,7 @@
                                 <div class="col-xl-12 px-5 ">
                                    
                             
-                                <div class="row">
+                                <div class="row py-5">
                                     <div class="col-xl-6 mx-auto">
                                     <label for="g-cashn" class="fs-5 " >G-cash Name</label>
                                     <div class="input-group" >
@@ -1033,10 +1032,7 @@
                                             <div class="btn-group">
                                                 <button class="btn btn-primary" ><i class="fa fa-save mx-1"></i>Save Changes</button>
                                             </div>
-                                            <div class="btn-group">
-                                                <button class="btn btn-secondary" ><i class="fa fa-save mx-1"></i>Cancel</button>
-                                       
-                                            </div>
+                                           
                                          
                                         </div>
                                     </div>
@@ -1054,7 +1050,8 @@
         
    
 <script>
-    function edit(){
+
+    function edit(divid){
         var nam = document.getElementById('gnam').readOnly;
         var num = document.getElementById('gnum').readOnly;
         var bat = document.getElementById('gbut');
@@ -1079,10 +1076,22 @@
         }
         if(hd =="block"){
             document.getElementById('hid').style.display  = "none";
+       
+
         }
         else{
             document.getElementById('hid').style.display  = "block";
-
+            
+        }
+        if(document.getElementById('ed').classList.contains('btn-primary')){
+            document.getElementById('ed').classList.remove('btn-primary');
+            document.getElementById('ed').classList.add('btn-secondary');
+            document.getElementById('ed').innerHTML = "<i class= 'fa fa-times-circle mx-1'></i>Cancel";
+        }
+        else{
+            document.getElementById('ed').classList.add('btn-primary');
+            document.getElementById('ed').classList.remove('btn-secondary');
+            document.getElementById('ed').innerHTML = "<i class= 'fa fa-edit mx-1'></i>Edit";
         }
         
         

@@ -180,7 +180,6 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                 <?php $query = "SELECT * FROM tblresident ORDER BY LastName ASC";
                 $result = mysqli_query($connect, $query);  ?>
-
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="all">
                         <div class="container-fluid">
@@ -212,8 +211,21 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                         echo '  
                                                         <tr>
                                                                 <td >
-                                                                    <i class ="fa fa-circle link-success me-1"></i>
-                                                                    Active
+                                                                    <i class ="fa fa-circle ';
+                                                                    if ($row["resStatus"]== "Active"){
+                                                                        echo "link-success";
+                                                                    }
+                                                                    if ($row["resStatus"]== "Inactive"){
+                                                                        echo "link-danger";
+                                                                    }
+                                                                    if ($row["resStatus"]== "Deceased"){
+                                                                        echo "link-secondary";
+
+                                                                    }
+
+                                                        echo '  me-1"></i>
+                                                                    '.$row["resStatus"].'
+                                                                    
                                                                 </td>
                                                                 <td >' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>';
 
@@ -253,6 +265,32 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                     }
                                                     ?>
                                                 </table>
+                                                <div class="" style= "display: none;">
+
+                                                    <table id="alldata" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;" style= "display: none;">
+                                                            <tr>
+                                                            <th>Status</th>
+                                                            <th>Name</th>
+
+                                                            <th>Age</th>
+
+                                                            <th>Gender</th>
+
+                                                            <th>Purok</th>
+
+                                                            <th>Street</th>
+
+
+                                                            <th>Action </th>
+                                                        </tr>
+                                                        <tbody>
+                                                 
+                                                        </tbody>
+
+                                                </table>
+                                                </div>
+                                                
+                                               
                                             </div>
                                         </div>
                                     </div>
@@ -277,64 +315,6 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
         });
     </script>
 
-    <script>
-        $(document).ready(function() {
-            $('#p1data').DataTable();
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#p2data').DataTable();
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#p3data').DataTable();
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#p4data').DataTable();
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#p5data').DataTable();
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#p6data').DataTable();
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#p7data').DataTable();
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#p8data').DataTable();
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#p9data').DataTable();
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#p10data').DataTable();
-        });
-    </script>
+    
 <?php } ?>
 <!--up-->
