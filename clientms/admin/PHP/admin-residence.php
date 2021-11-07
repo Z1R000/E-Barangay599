@@ -271,15 +271,10 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                             <tr>
                                                             <th>Status</th>
                                                             <th>Name</th>
-
                                                             <th>Age</th>
-
                                                             <th>Gender</th>
-
                                                             <th>Purok</th>
-
                                                             <th>Street</th>
-
 
                                                             <th>Action </th>
                                                         </tr>
