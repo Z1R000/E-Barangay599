@@ -64,7 +64,16 @@
         } );
     } );
     </script>
-
+    <script>
+    $(document).ready(function() {
+    $('#opay').DataTable();
+    } );
+    </script>
+    <script>
+    $(document).ready(function() {
+    $('#olist').DataTable();
+    } );
+    </script>
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
     <style type = "text/css">
@@ -173,19 +182,19 @@
                                             <div class="row pb-2 px-4 g-0 justify-content-end">
                                                 <div class="col-3 ">
                                                     <div class="btn-group float-end">
-                                                        <a href = "#new-rental"  data-bs-toggle ="modal" role = "button"class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus mx-1"></i><span class= "wal">New Service</span></a>
+                                                        <a href = "#new-serv"  data-bs-toggle ="modal" role = "button"class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus mx-1"></i><span class= "wal">New Service</span></a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xl-12" style ="overflow:auto;">
 
-                                                    <table class= "table table-bordered table-striped" style= "min-width: 900px;">
+                                                    <table class= "table table-bordered table-striped" id = "olist" style= "min-width: 900px;">
                                                         
                                                         <thead class= "bg-light">
                                                             <tr>
                                                                 <th style = "text-align: left;">Service Name</th>
-                                                                <th style = "text-align: left;">Service Fee</th>
+                                                                <th style = "text-align: left;">Fee(₱)</th>
                                                                 <th style = "text-align: left; ">Availablility</th>
                                                                 <th style = "text-align: center;">Action</th>
                                                             </tr>
@@ -193,9 +202,9 @@
                                                         <tbody>
                                                         <tr>
                                                             <td scope="col" style = "text-align: left">Seminar (droga)</td>
-                                                            <td scope="col" style = "text-align: left">20 PHP</td>
+                                                            <td scope="col" style = "text-align: right">20.00</td>
                                                             <td scope="col" style = "text-align: left">Available</td>
-                                                            <td scope="col" style = "text-align: center">
+                                                            <td scope="col" style = "text-align: center;width: 30%">
                                                                 <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                                         <button  type="button" href ="#check-service" data-bs-toggle="modal" role="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class = "wal">View</span></button>
                                                                     </div>
@@ -207,22 +216,7 @@
                                                                     </div>
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <td scope="col" style = "text-align: left">Seminar (droga)</td>
-                                                            <td scope="col" style = "text-align: left">20 PHP</td>
-                                                            <td scope="col" style = "text-align: left">Available</td>
-                                                            <td scope="col" style = "text-align: center">
-                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                        <button  type="button" href ="#check-service" data-bs-toggle="modal" role="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class = "wal">View</span></button>
-                                                                    </div>
-                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                        <a href ="#edit-service" data-bs-toggle ="modal" role ="button" class="btn  btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
-                                                                    </div>
-                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                        <a type="button" href ="#delete-service" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class = "wal">Delete</span></a>
-                                                                    </div>
-                                                            </td>
-                                                        </tr>
+                                                       
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -244,7 +238,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger" >
                     <div class="modal-header  white ">
-                        <h5 class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
+                        <div class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -259,14 +253,22 @@
                             <p class = "fs-4 text-center">You are about to delete an existing service, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
                         </div>
                         <div class="row justify-content-center" align = "center">
-                            <form method = "POST" action = "#">
-                                <button type = "button" class="btn btn-success rounded-circle" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                    <i class= 'fa fa-check '></i>
-                                </button>
-                                <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
-                                    <i class= "fa fa-times"></i>
-                                </button>
-                            </form>
+                            <div class="col-md-12">
+                                <div class="float-end">
+                                    <div class="btn-group">
+                                <form method = "POST" action = "#">
+                                    <button type = "button" class="btn btn-success " data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                        <i class= 'fa fa-check mx-1 '></i>Confirm
+                                    </button>
+                                    </div>
+                                    <div class="btn-group">
+                                    <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                        <i class= "fa fa-times-circle mx-1"></i>Cancel
+                                    </button>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
                         </div>
                 
                     </div>
@@ -308,9 +310,9 @@
     <form action="" method ="POST">
         <div class="modal fade" id = "edit-service" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 blue">
-                    <div class="modal-header blue white ">
-                        <h5 class="modal-title" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Edit Service </h5>
+                <div class="modal-content g-0 border-0">
+                    <div class="modal-header bg-599 border-599 text-white ">
+                        <div class="modal-title" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Edit Service </div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -328,7 +330,7 @@
                             </div>
                             <div class="col-xl-6" >  
                                 <label for="status" class="fs-5 fw-bold">Service Availablility</label>
-                                <select name="" class="form-control" id="status">
+                                <select name="" class="form-select" id="status">
                                     <option value="avail">Available</option>
                                     <option value="noavail">Not Available</option>
                                 </select>
@@ -344,21 +346,29 @@
                        
                         </div>
 
-                        <div class="row " align="center">
-                            <div class="col-md-5  mx-auto my-2">
-                                <button type ="button" role = "button" class="btn btn-outline-primary" >
-                                    <i class="fa fa-save"></i>
+                        <div class="row my-2 " >
+                            <div class="col-md-12 ">
+                                <div class="float-end">
+                                    <div class=" btn-group">
+                                <button type ="button" role = "button" class="btn btn-primary" >
+                                    <i class="fa fa-save mx-1"></i> 
                                     Save
                                 </button>
+                                </div>
+                                <div class="btn-group">
+                                <button type ="button" role = "button" class="btn btn-secondary" data-bs-dismiss = "modal" >
+                                    <i class="fa fa-times-circle mx-1"></i>
+                                    Cancel
+                                </button>
+                                </div>
+                                </div>
                             </div>
                         </div>
                     
                         
                                         
                     </div>
-                    <div class="modal-footer">
-                        
-                    </div>
+                  
                 </div>
             </div>
         </div>
@@ -369,9 +379,9 @@
     <form action="" method ="POST">
         <div class="modal fade" id = "new-serv" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 blue">
-                    <div class="modal-header blue white ">
-                        <h5 class="modal-title" >&nbsp;<i class = "fa fa-plus"></i>&nbsp;&nbsp;New Service</h5>
+                <div class="modal-content g-0 border-0">
+                    <div class="modal-header bg-599 border-599 text-white ">
+                        <div class="modal-title" >&nbsp;<i class = "fa fa-plus"></i>&nbsp;&nbsp;New Service</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -396,14 +406,13 @@
                         </div>
                        
 
-                        <div class="row " align="center">
-                            
-                            <div class="col-md-12  mx-auto my-2">
+                        <div class="row g-0" >
+                            <div class="col-md-12    my-2">
                                 <div class="float-end">
                                     <div class="btn-group">
                                         <button type ="button" role = "button" class="btn btn-success" >
                                             <i class="fa fa-upload mx-1"></i>
-                                            Submit
+                                            Upload
                                         </button>
                                     </div>
                                     <div class="btn-group">
@@ -427,9 +436,9 @@
     </form>
     <div class="modal fade" id = "check-service" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 blue">
-                    <div class="modal-header blue white ">
-                        <h5 class="modal-title" >&nbsp;<i class = "fa fa-eye"></i>&nbsp;&nbsp;Service</h5>
+                <div class="modal-content g-0 border-0 ">
+                    <div class="modal-header bg-599 border-599 text-white ">
+                        <div class="modal-title" >&nbsp;<i class = "fa fa-eye"></i>&nbsp;&nbsp;Service</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -447,7 +456,7 @@
                             </div>
                             <div class="col-xl-6" >  
                                 <label for="status" class="fs-5 fw-bold">Service Availablility</label>
-                                <select name="" class="form-control" id="status" disabled>
+                                <select name="" class="form-select" id="status" disabled>
                                     <option value="avail">Available</option>
                                     <option value="noavail">Not Available</option>
                                 </select>
@@ -459,7 +468,12 @@
                                 <input readonly  type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row my-2">
+                            <div class="col-md-12">
+                                <div class="float-end">
+                                    <button class="btn btn-secondary" data-bs-dismiss ="modal">Done</button>
+                                </div>
+                            </div>
                          
                         </div>
 
@@ -467,9 +481,7 @@
                         
                                         
                     </div>
-                    <div class="modal-footer">
-                        
-                    </div>
+             
                 </div>
             </div>
         </div>

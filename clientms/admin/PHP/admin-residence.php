@@ -133,7 +133,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                 <div class="row g-1 px-3">
                     <div class="col-xl-12 col-md-12 col-sm-12 ">
-                        <div class="row my-2">
+                        <div class="row my-2 ">
                             <div class="col-md-5">
                                 <div class="btn-group" role="group">
                                     <a href="admin-registrations.php" class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-archive"></i>&nbsp;Pending Requests</a>
@@ -184,7 +184,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="all">
                         <div class="container-fluid">
-                            <div class="row g-1 px-5">
+                            <div class="row g-1 px-5 pt-3 pb-5">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                     <div class="row">
                                         <div class="col-xl-12" style="overflow:auto;" id="res_table">

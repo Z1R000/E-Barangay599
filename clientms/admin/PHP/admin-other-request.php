@@ -62,7 +62,7 @@
           -moz-transform-origin: 0 0;
           -o-transform-origin: 0 0;
           -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;*/
+          transform-origin: 0 0;
         }
         
      
@@ -219,7 +219,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-success ">
                     <div class="modal-header bg-success  ">
-                        <h5 class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Request Accepted Message</h5>
+                        <div class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Request Accepted Message</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -271,7 +271,7 @@
                                         <label for="remarks" >Remarks</label>
                                         <div class="col-md-12">
                                             <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;resize: none;"></textarea>
                                             <label for="floatingTextarea2">Remarks here (max 10 words)</label>
                                                 
                                             </div>
@@ -300,15 +300,21 @@
                                     
                                 </div>
                                 <div class="row justify-content-center" align = "center">
-                                    
-                                    <div class="col-mx-6">
-                                        <button href ="#" type = "button" class="btn btn-success" data-bs-dismiss ="modal" onclick = "alert('Approval Message Sent')" >
+                                <div class="col-md-12">
+                                        <div class="float-end">
+                                            <div class="btn-group">
+                                        <button href ="" onclick = "alert('Decline Message Sent')" type = "button" class="btn btn-success " data-bs-dismiss ="modal" data-bs-toggle= "modal" >
                                             <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
                                         </button>
+                                        </div>
+                                        <div class="btn-group">
+
+                                        
                                         <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
-                                            <i class= "fa fa-times me-2"></i>Discard
+                                            <i class= "fa fa-times me-2"></i> Discard
                                         </button>
-                                
+                                        </div>
+                                        </div>
                                     </div>
                                     
                                 </div>  
@@ -330,7 +336,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger ">
                     <div class="modal-header bg-danger bg-transparent ">
-                        <h5 class="modal-title text-white" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Declining request?</h5>
+                        <div class="modal-title text-white" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Declining request?</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -375,7 +381,7 @@
                                         <label for="remarks" >Remarks</label>
                                         <div class="col-md-12">
                                             <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;resize: none;"></textarea>
                                             <label for="floatingTextarea2">Remarks here (max 10 words)</label>
                                                 
                                             </div>
@@ -402,14 +408,21 @@
                                 </div>
                                 <div class="row justify-content-center" align = "center">
                                     
-                                    <div class="col-mx-6">
+                                <div class="col-md-12">
+                                        <div class="float-end">
+                                            <div class="btn-group">
                                         <button href ="" onclick = "alert('Decline Message Sent')" type = "button" class="btn btn-success " data-bs-dismiss ="modal" data-bs-toggle= "modal" >
                                             <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
                                         </button>
+                                        </div>
+                                        <div class="btn-group">
+
+                                        
                                         <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
                                             <i class= "fa fa-times me-2"></i> Discard
                                         </button>
-                                
+                                        </div>
+                                        </div>
                                     </div>
                                     
                                 </div>  

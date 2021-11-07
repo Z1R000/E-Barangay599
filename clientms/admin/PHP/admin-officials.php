@@ -124,7 +124,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
     
     <div class="container-fluid  mx-2 px-3">
         <div class="row  gx-0  pb-5" >
-      
                 <div class="col-xl-3 col-lg-4 col-md-12 mb-3 shadow-lg rounded-3 kan border me-4">
                     <div class="row g-0 bg-dark shadow-lg rounded-top border py-1 bg-dark "></div>
                         <div class="row g-0 "  style= "background: aliceblue">
@@ -240,32 +239,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </h5>
                             </div>
                             <div class="row g-0  bg-light text-center">
-                                <div class="col-xl-12">
-                                   <table class= "table border-none">
-                                       
-                                        <thead style= "border: 0px solid red;" class= "border-bottom border-primary text-secondary ">
-                                            <tr>
-                                                <th class= "fs-6">
-                                                    Update
-                                                </th>
-                                              
-                                                <th class= "fs-6">
-                                                    View
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                       
-                                        <tr>
-                                            <td>
-                                            
-                                            <a href = "#account" data-bs-toggle= "modal"class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
-                                            </td>
-                                          
-                                            <td>
-                                                <a href = "#view-info" data-bs-toggle ="modal" class= "link  link-primary"><i class ="fa fa-eye text-primary"></i></a>
-                                            </td>                                           
-                                        </tr>
-                                   </table>
+                                <div class="col-xl-12 my-2">
+                                    <a href = "#account" data-bs-toggle= "modal"class= "link link-info"><i class= "fa fa-edit text-info"></i> Manage </a>      
                                 </div>
                             </div>
                             </div>
@@ -288,31 +263,12 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                             </div>
                             <div class="row g-0  bg-light text-center">
                                 <div class="col-xl-12">
-                                   <table class= "table border-none">
-                                       
-                                        <thead style= "border: 0px solid red;" class= "border-bottom border-primary text-secondary ">
-                                            <tr>
-                                                <th class= "fs-6">
-                                                    Update
-                                                </th>
-                                             
-                                                <th class= "fs-6">
-                                                    View
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                       
-                                        <tr>
-                                            <td>
-                                        
-                                            <a href = "#account" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
-                                            </td>
-                                           
-                                            <td>
-                                            <a href = "#view-info" data-bs-toggle ="modal" class= "link  link-primary"><i class ="fa fa-eye text-primary"></i></a>
-                                            </td>                                           
-                                        </tr>
-                                   </table>
+                                <div class="row g-0  bg-light text-center">
+                                <div class="col-xl-12 my-2">
+                                    <a href = "#account" data-bs-toggle= "modal"class= "link link-info"><i class= "fa fa-edit text-info"></i> Manage </a>      
+                                </div>
+                            </div>
+                            
                                 </div>
                             </div>
                             </div>
@@ -334,34 +290,11 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </h5>
                             </div>
                             <div class="row g-0  bg-light text-center">
-                                <div class="col-xl-12">
-                                   <table class= "table border-none">
-                                       
-                                        <thead  class= "border-bottom border-primary text-secondary ">
-                                            <tr>
-                                                <th class= "fs-6">
-                                                    Update
-                                                </th>
-                                                
-                                                <th class= "fs-6">
-                                                    View
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                       
-                                        <tr>
-                                            <td>
-                                          
-                                            <a href = "#account" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
-                                            </td>
-                                          
-                                            <td>
-                                            <a href = "#view-info" data-bs-toggle ="modal" class= "link  link-primary"><i class ="fa fa-eye text-primary"></i></a>
-                                            </td>                                           
-                                        </tr>
-                                   </table>
+                                <div class="col-xl-12 my-2">
+                                    <a href = "#account" data-bs-toggle= "modal"class= "link link-info"><i class= "fa fa-edit text-info"></i> Manage </a>      
                                 </div>
                             </div>
+                            
                             </div>
                         </div>
                       
@@ -384,34 +317,11 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </h5>
                             </div>
                             <div class="row g-0  bg-light text-center">
-                                <div class="col-xl-12">
-                                   <table class= "table border-none">
-                                       
-                                        <thead style= "border: 0px solid red;" class= "border-bottom border-primary text-secondary ">
-                                            <tr>
-                                                <th class= "fs-6">
-                                                   Update
-                                                </th>
-                                                
-                                                <th class= "fs-6">
-                                                    View
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                       
-                                        <tr>
-                                            <td>
-                                           
-                                            <a href = "#account" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
-                                            </td>
-                                             
-                                            <td>
-                                            <a href = "#view-info" data-bs-toggle ="modal" class= "link  link-primary"><i class ="fa fa-eye text-primary"></i></a>
-                                            </td>                                           
-                                        </tr>
-                                   </table>
+                                <div class="col-xl-12 my-2">
+                                    <a href = "#account" data-bs-toggle= "modal"class= "link link-info"><i class= "fa fa-edit text-info"></i> Manage </a>      
                                 </div>
                             </div>
+                            
                             </div>
                         </div>
                         <div class="col-xl-4 px-3">
@@ -431,32 +341,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </h5>
                             </div>
                             <div class="row g-0  bg-light text-center">
-                                <div class="col-xl-12">
-                                   <table class= "table border-none">
-                                       
-                                        <thead style= "border: 0px solid red;" class= "border-bottom border-primary text-secondary ">
-                                            <tr>
-                                                <th class= "fs-6">
-                                                   Update
-                                                </th>
-                                                
-                                                <th class= "fs-6">
-                                                    View
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                       
-                                        <tr>
-                                            <td>
-                                            
-                                            <a href = "#account"  data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
-                                            </td>
-                                            
-                                            <td>
-                                            <a href = "#view-info" data-bs-toggle ="modal" class= "link  link-primary"><i class ="fa fa-eye text-primary"></i></a>
-                                            </td>                                           
-                                        </tr>
-                                   </table>
+                                <div class="col-xl-12 my-2">
+                                    <a href = "#account" data-bs-toggle= "modal"class= "link link-info"><i class= "fa fa-edit text-info"></i> Manage </a>      
                                 </div>
                             </div>
                             </div>
@@ -478,34 +364,11 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </h5>
                             </div>
                             <div class="row g-0  bg-light text-center">
-                                <div class="col-xl-12">
-                                   <table class= "table border-none">
-                                       
-                                        <thead style= "border: 0px solid red;" class= "border-bottom border-primary text-secondary ">
-                                            <tr>
-                                                <th class= "fs-6">
-                                                    Update
-                                                </th>
-                                                
-                                                <th class= "fs-6">
-                                                    View
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                       
-                                        <tr>
-                                            <td>
-                                                <a href = "#account" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
-
-                                            </td>
-                                             
-                                            <td>
-                                            <a href = "#view-info data-bs-toggle ="modal" class= "link  link-primary"><i class ="fa fa-eye text-primary"></i></a>
-                                            </td>                                           
-                                        </tr>
-                                   </table>
+                                <div class="col-xl-12 my-2">
+                                    <a href = "#account" data-bs-toggle= "modal"class= "link link-info"><i class= "fa fa-edit text-info"></i> Manage </a>      
                                 </div>
                             </div>
+                            
                             </div>
                         </div>
                       
@@ -528,32 +391,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </h5>
                             </div>
                             <div class="row g-0  bg-light text-center">
-                                <div class="col-xl-12">
-                                   <table class= "table border-none">
-                                       
-                                        <thead style= "border: 0px solid red;" class= "border-bottom border-primary text-secondary ">
-                                            <tr>
-                                                <th class= "fs-6">
-                                                    Update
-                                                </th>
-                                                
-                                                <th class= "fs-6">
-                                                    View
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        
-                                        <tr>
-                                            <td>
-                                          
-                                            <a href = "#account"  data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
-                                            </td>
-                                           
-                                            <td>
-                                            <a href = "#view-info" data-bs-toggle ="modal" class= "link  link-primary"><i class ="fa fa-eye text-primary"></i></a>
-                                            </td>                                           
-                                        </tr>
-                                   </table>
+                                <div class="col-xl-12 my-2">
+                                    <a href = "#account" data-bs-toggle= "modal"class= "link link-info"><i class= "fa fa-edit text-info"></i> Manage </a>      
                                 </div>
                             </div>
                             </div>
@@ -575,32 +414,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </h5>
                             </div>
                             <div class="row g-0  bg-light text-center">
-                                <div class="col-xl-12">
-                                   <table class= "table border-none">
-                                       
-                                        <thead style= "border: 0px solid red;" class= "border-bottom border-primary text-secondary ">
-                                            <tr>
-                                                <th class= "fs-6">
-                                                   Update
-                                                </th>
-                                              
-                                                <th class= "fs-6">
-                                                    View
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                       
-                                        <tr>
-                                            <td>
-                                                
-                                            <a href = "#account" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
-                                            </td>
-                                          
-                                            <td>
-                                            <a href = "#view-info" data-bs-toggle ="modal" class= "link  link-primary"><i class ="fa fa-eye text-primary"></i></a>
-                                            </td>                                           
-                                        </tr>
-                                   </table>
+                                <div class="col-xl-12 my-2">
+                                    <a href = "#account" data-bs-toggle= "modal"class= "link link-info"><i class= "fa fa-edit text-info"></i> Manage </a>      
                                 </div>
                             </div>
                             </div>
@@ -622,36 +437,11 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </h5>
                             </div>
                             <div class="row g-0  bg-light text-center">
-                                <div class="col-xl-12">
-                                   <table class= "table border-none">
-                                       
-                                        <thead style= "border: 0px solid red;" class= "border-bottom border-primary text-secondary ">
-                                            <tr>
-                                                <th class= "fs-6">
-                                                    Update
-                                                </th>
-                                               
-                                                <th class= "fs-6">
-                                                    View
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                       
-                                        <tr>
-                                            <td>
-                                         
-                                            <a href = "#account" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
-                                            </td>
-                                           
-                                            <td>
-                                            <a href = "#view-info" data-bs-toggle ="modal" class= "link  link-primary"><i class ="fa fa-eye text-primary"></i></a>
-                                            </td>                                           
-                                        </tr>
-                                   </table>
+                                <div class="col-xl-12 my-2">
+                                    <a href = "#account" data-bs-toggle= "modal"class= "link link-info"><i class= "fa fa-edit text-info"></i> Manage </a>      
                                 </div>
                             </div>
                             </div>
-                        </div>
                       
                     </div>
                     <div class="row g-0 pb-3 ">
@@ -672,32 +462,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                 </h5>
                             </div>
                             <div class="row g-0  bg-light text-center">
-                                <div class="col-xl-12">
-                                   <table class= "table border-none">
-                                       
-                                        <thead style= "border: 0px solid red;" class= "border-bottom border-primary text-secondary ">
-                                            <tr>
-                                                <th class= "fs-6">
-                                                    Update
-                                                </th>
-                                              
-                                                <th class= "fs-6">
-                                                    View
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                       
-                                        <tr>
-                                            <td>
-                                         
-                                            <a href = "#account" data-bs-toggle= "modal" class= "link link-info"><i class= "fa fa-edit text-info"></i></a>
-                                            </td>
-                                           
-                                            <td>
-                                            <a href = "#view-info" data-bs-toggle ="modal" role= "button"class= "link  link-primary"><i class ="fa fa-eye text-primary"></i></a>
-                                            </td>                                           
-                                        </tr>
-                                   </table>
+                                <div class="col-xl-12 my-2">
+                                    <a href = "#account" data-bs-toggle= "modal"class= "link link-info"><i class= "fa fa-edit text-info"></i> Manage </a>      
                                 </div>
                             </div>
                             </div>

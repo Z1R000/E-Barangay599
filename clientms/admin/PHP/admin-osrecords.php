@@ -18,7 +18,7 @@
                                                             <th style = "text-align: left;">Status</th>
                                                             <th style = "text-align: left;">Requestor</th>
                                                             <th style = "text-align: left; ">Service </th>        
-                                                            <th style = "text-align: left;"> Fee</th>
+                                                            <th style = "text-align: left;"> Fee(₱)</th>
                                                             <th style = "text-align: left;;">Date</th>
                                                             <th style = "text-align: center;">Action</th>
 
@@ -28,7 +28,7 @@
                                                         <td scope="col" style = "text-align: left">On-going</td>
                                                         <td scope="col" style = "text-align: left">Tobirama Uchiha</td>
                                                         <td scope="col" style = "text-align: left">Drug Seminar</td>
-                                                        <td style = "text-align: right;">₱40.00 </td>
+                                                        <td style = "text-align: right;">40.00 </td>
                                                         <td scope="col" style = "text-align: left">10/16/2021,21:12:08</td>
                                                         
                                                         <td scope="col" style = "text-align: center">
@@ -149,88 +149,107 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white ">
-                    <div class="row">
-                           
-                           <div class="col-xl-6" >
-                               <label for="prate" class="fs-5 fw-bold">Date today</label>
-                               <input type="date"  id = "date" class="form-control me-2" name ="date" >
-                             
-                           </div>
-                           <div class="col-xl-6" >  
-                                <label for="status" class="fs-5 fw-bold">Mode of payment</label>
-                                <select name="" class="form-control" id="status">
-                                    <option value="g-cash">G-cash</option>
-                                    <option value="cash">Cash</option>
+                    <div class="row gx-3">
+                                <div class="col-xl-12" >
+                                    <div class="row">
+                                        <div class="col-6 ">
+                                            <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
+                                            <div class="d-flex">    
+                                            <input type="text" id = "prate" class="form-control" name ="pRate" placeholder= "Requestor Name">
+                                            </div>
+                                        </div> 
+                                       
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-xl-6">
+                                            <label for="purp" class= "fs-5 fw-bold">Purposes</label>
+                                            <select class= "select form-select" name="" id="purp" onchange = "showOthers('others', this)">
+                                                <option  selected>Purposes</option>
+                                                <option value="ent">For entertainment</option>
+                                                <option value="med">For medical reasons</option>
+                                                <option value="others">Others</option>
+                                            </select>
+                                            <div class="col-xl-12" id = "others">
+                                                <label for="prate" class="fs-5 fw-bold">Purpose</label>
+                                                <input type="text"  id = "date" class="form-control " name ="date">
+                                            </div>
                                 
-                                </select>
-                            </div>
-                           
-                       </div>
-                   
-                        <div class="row">
-                            <div class="col-xl-12" >
-                                <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
-                                <div class="d-flex">    
-                                    <input type="text" id = "prate" class="form-control" name ="pRate" placeholder= "Requestor Name">
-                               </div> 
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-xl-6" >  
-                                <label for="status" class="fs-5 fw-bold">Service to Avail</label>
-                                <select name="" class="form-control" id="status">
-                                    <option value="avail">Drug Seminar</option>
-                                    <option value="noavail">Circumcision</option>
-                                    <option value="noavail">Marriage</option>
-                                </select>
-                            </div>
+                                        </div>
 
-                            <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Service Fee</label>
-                                <div class="input-group">
-                                    <button class="btn btn-secondary">
-                                    ₱ 
-                                    </button>    
-                                    <input type="text" min =0 ; id = "prate" class="form-control " name ="pRate" placeholder= "0.00" value = "20"  style = "text-align: right;" readonly>
-                               </div> 
-                            </div>
-                         
-                        </div>
-                        <div class="row gx-3">
-                            <div class="col-xl-6">
-                                    <label for="purp" class= "fs-5 fw-bold">Purposes</label>
-                                        <select class= "select form-select" name="" id="purp" onchange = "showOthers('others', this)" >
-                                            <option  selected>Purposes</option>
-                                            <option value="ent">For entertainment</option>
-                                            <option value="med">For medical reasons</option>
-                                            <option value="others">Others</option>
-                                        </select>
-                                </div>
-                                <div class="col-xl-6" id ="others">
-                           <label for="purp" class= "fs-5 fw-bold">Purpose </label>
-                               <input type="text" class="form-control" placeholder = "Specify purpose here">
-                           </div>
-                       
-                        </div>
-                  
-               
-                 
-
-                        <div class="row " align="center">
-                            <div class="col-md-5  mx-auto my-2">
-                                <button type ="button" role = "button" class="btn btn-outline-primary" >
-                                    <i class="fa fa-check me-1"></i>
-                                    Submit
-                                </button>
-                            </div>
-                        </div>
-                    
-                        
+                                        <div class="col-xl-6" >
+                                            <label for="prate" class="fs-5 fw-bold">Service Date</label>
+                                            <input type="date"  id = "date" class="form-control " name ="date">
+                                        </div>
                                         
-                    </div>
-                    <div class="modal-footer">
+                                     
+                                    
+                                    </div>
+                                
+                                    <div class="row">
+                                            <div class="col-xl-6" >  
+                                            <label for="sa" class="fs-5 fw-bold">Service to avail</label>
+                                            <select name="" class="form-select" id="sa">
+                                                <option value="avail">Drug Seminar</option>
+                                                <option value="noavail">Circumcision</option>
+                                                <option value="noavail">Marriage</option>
+                                            </select>
+                                            </div>
+                                            <div class="col-xl-6" >
+                                            <label for="prate" class="fs-5 fw-bold">Fee<span class= "text-muted fs-6">(₱)</span></label>
+                                            <div class="input-group">
+                                                <button class="btn btn-secondary disabled">
+                                                ₱
+                                                </button>    
+                                                <input type="text" id = "prate" class="form-control " name ="pRate" placeholder= "0.00" readonly style= "text-align:right">
+                                        </div> 
+                                    </div>
+                                    
+
+                                
+                                    </div>
+                            
+                                    <div class="row">
+
+                                    
+                                        <div class="col-xl-6" >  
+                                            <label for="status" class="fs-5 fw-bold">Mode of payment</label>
+                                            <select name="" class="form-select" id="status">
+                                            <option value="g-cash">G-cash</option>
+                                            <option value="cash">Cash</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xl-6" >
+                                        <label for="prate" class="fs-5 fw-bold">Service Status</label>
+                                            <select name="" class="form-select" id="status">
+                                                <option value="avail">On going</option>
+                                                <option value="noavail">Settled</option>
+                                        
+                                            </select>
+                                    </div>
+                                    
+                                    <div class="row g-0">
+
+                                        <div class="col-md-12  pe-3    my-2">
+                                            <div class="float-end ">
+                                                <div class="btn-group  ">
+                                            <button type ="button" role = "button" class="btn btn-success px-2" >
+                                                <i class="fa fa-upload mx-1"></i>
+                                                Submit
+                                            </button>
+                                            </div>
+                                            <div class="btn-group">
+                                            <button type ="button" role = "button" class="btn btn-secondary px-2" data-bs-dismiss= "modal" >
+                                                <i class="fa fa-times-circle mx-1"></i>
+                                                Cancel
+                                            </button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
                         
+                                </div>
+                            </div>
+                        </div>                
                     </div>
                 </div>
             </div>
@@ -244,209 +263,214 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white ">
-                        <div class="row">
-                            <div class="col-xl-6" >
-                               <label for="prate" class="fs-5 fw-bold">Date today</label>
-                               <input type="date"  id = "date" class="form-control " name ="date" >
-                             
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="col-xl-6" >  
-                                <label for="status" class="fs-5 fw-bold">Mode of payment</label>
-                                <select name="" class="form-select" id="status">
-                                    <option value="g-cash">G-cash</option>
-                                    <option value="cash">Cash</option>
+                    <div class="row gx-3">
+                                <div class="col-xl-12" >
+                                    <div class="row">
+                                        <div class="col-xl-6 ">
+                                            <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
+                                            <div class="d-flex">    
+                                            <input type="text" id = "prate" class="form-control" name ="pRate" placeholder= "Requestor Name">
+                                            </div>
+                                        </div>
+                                       
+                                       
+                                      
+                              
+
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-xl-6">
+                                                <label for="purp" class= "fs-6 fw-bold">Purposes</label>
+                                                    <select class= "select form-select" name="" id="purp" onchange = "showOthersEdit('othersed', this)">
+                                                        <option  selected>Purposes</option>
+                                                        <option value="ent">For entertainment</option>
+                                                        <option value="med">For medical reasons</option>
+                                                        <option value="others">Others</option>
+                                                    </select>
+                                                    <div class="col-xl-12" id ="othersed">
+                                        <label for="purp" class= "fs-6 fw-bold">Purpose </label>
+                                            <input type="text" class="form-control" placeholder = "Specify purpose here">
+                                        </div>
+                                            </div>
+                                        <div class="col-xl-6" >
+                                            <label for="prate" class="fs-5 fw-bold">Service Date</label>
+                                            <input type="date"  id = "date" class="form-control " name ="date">
+                                        </div>
+                                        
+                                    
+                                    </div>
                                 
-                                </select>
-                            </div>
-                           
-                           <div class="col-xl-6" >
-                           <label for="ss" class="fs-5 fw-bold">Service Status</label>
-                                   <select name="" class="form-select" id="ss">
-                                       <option value="avail">On going</option>
-                                       <option value="noavail">Settled</option>
-                               
-                                   </select>
-                             
-                             </div>
-                        </div>
-                    <div class="row">
-                            <div class="col-xl-12" >
-                                <label for="rname" class="fs-5 fw-bold">Requestor Name</label>
-                                <div class="d-flex">    
-                                    <input type="text" id = "prate" class="form-control" name ="rname" placeholder= "Requestor Name">
-                               </div> 
-                            </div>
-                        </div>
-                      
-              
-                
-                        <div class="row">
-                            <div class="col-xl-6" >  
-                                <label for="sa" class="fs-5 fw-bold">Service to avail</label>
-                                <select name="" class="form-control" id="sa">
-                                    <option value="avail">Drug Seminar</option>
-                                    <option value="noavail">Circumcision</option>
-                                    <option value="noavail">Marriage</option>
-                                </select>
-                            </div>
+                                    <div class="row">
+                                    <div class="col-xl-6" >  
+                                            <label for="sa" class="fs-5 fw-bold">Service to avail</label>
+                                            <select name="" class="form-select" id="sa">
+                                                <option value="avail">Drug Seminar</option>
+                                                <option value="noavail">Circumcision</option>
+                                                <option value="noavail">Marriage</option>
+                                            </select>
+                                            </div>
+                                        <div class="col-xl-6" >
+                                            <label for="prate" class="fs-5 fw-bold">Fee<span class= "text-muted fs-6">(₱)</span></label>
+                                            <div class="input-group">
+                                                <button class="btn btn-secondary disabled">
+                                                ₱
+                                                </button>    
+                                                <input type="text" id = "prate" class="form-control " name ="pRate" placeholder= "0.00" readonly style= "text-align:right">
+                                        </div> 
+                                    </div>
+                                    
 
-                            <div class="col-xl-6" >
-                                <label for="sfee" class="fs-5 fw-bold">Service Fee  </label>
-                                <div class="input-group">   
-                                    <button class="btn btn-secondary disabled">
-                                    ₱
-                                    </button> 
-                                    <input type="text" min =0 ; id = "sfee" class="form-control " name ="pRate" placeholder= "0.00" value = "20" readonly style = "text-align: right;">
-                               </div> 
-                            </div>
-                         
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-6">
-                            <label for="purp" class= "fs-5 fw-bold">Purposes</label>
-                                        <select class= "select form-select" name="" id="purp" onchange = "showOthersEdit('othersed', this)" >
-                                            <option  selected>Purposes</option>
-                                            <option value="ent">For entertainment</option>
-                                            <option value="med">For medical reasons</option>
-                                            <option value="others">Others</option>
-                                        </select>
-                           
                                 
-                            </div>     
-                            <div class="col-xl-6" id ="othersed" style= "display:none;">
-                           <label for="purp" class= "fs-5 fw-bold" >Purpose </label>
-                               <input type="text" class="form-control" placeholder = "Specify purpose here">
-                           </div>
-                       
-                 
-                           
-                       
-                       </div>
-             
-                 
+                                    </div>
+                            
+                                    <div class="row">
 
-                       
-               
-                 
-
-                        <div class="row " align="center">
-                            <div class="col-md-5  mx-auto my-2">
-                                <button type ="button" role = "button" class="btn btn-outline-primary" >
-                                    <i class="fa fa-save me-1"></i>
-                                    Save
-                                </button>
+                                    
+                                        <div class="col-xl-6" >  
+                                            <label for="status" class="fs-5 fw-bold">Mode of payment</label>
+                                            <select name="" class="form-select" id="status">
+                                            <option value="g-cash">G-cash</option>
+                                            <option value="cash">Cash</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xl-6" >
+                                        <label for="prate" class="fs-5 fw-bold">Service Status</label>
+                                            <select name="" class="form-select" id="status">
+                                                <option value="avail">On going</option>
+                                                <option value="noavail">Settled</option>
+                                        
+                                            </select>
+                                    </div>
+                                    
+                                    <div class="row g-0 " >
+                                        <div class="col-md-12 pe-3 my-2">
+                                            <div class="float-end">
+                                                <div class="btn-group">
+                                            <button type ="button" role = "button" style = "" class="btn btn-primary px-2" >
+                                                <i class= "fa fa-save mx-1"></i>
+                                                Save
+                                            </button>
+                                            </div>
+                                            <div class="btn-group">
+                                            <button type ="button" role = "button" class="btn btn-secondary px-2" data-bs-dismiss= "modal" >
+                                                <i class="fa fa-times-circle mx-1"></i>
+                                                Cancel
+                                            </button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        
+                                </div>
                             </div>
                         </div>
                     
                         
                                         
                     </div>
-                    <div class="modal-footer">
-                        
-                    </div>
+                   
                 </div>
             </div>
         </div>
         <div class="modal fade" id = "check-srecord" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content g-0 blue">
-                    <div class="modal-header blue white ">
+                <div class="modal-content g-0 border-0">
+                    <div class="modal-header bg-599 border-599 text-white ">
                         <div class="modal-title white" >&nbsp;<i class = "fa fa-eye"></i>&nbsp;&nbsp;Service Record</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white ">
-                        <div class="row">
-                        <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Date today</label>
-                                <input type="text"  id = "date" class="form-control " name ="date" readonly>
-                              
-                            </div>
-                            <div class="col-xl-6" >  
-                                <label for="status" class="fs-5 fw-bold">Mode of payment</label>
-                                <select name="" class="form-select" id="status"disabled>
-                                    <option value="g-cash">G-cash</option>
-                                    <option value="cash">Cash</option>
-                                
-                                </select>
-                            </div>
-                        </div>
-                         <div class="row">
-                            <div class="col-xl-12" >
-                                <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
-                                <div class="d-flex">    
-                                    <input type="text" id = "prate" class="form-control " name ="pRate" placeholder= "Requestor Name" readonly>
-                               </div> 
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-6">
+                    <div class="row gx-3">
+                                <div class="col-xl-12" >
+                                    <div class="row">
+                                        <div class="col-6 ">
+                                            <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
+                                            <div class="d-flex">    
+                                            <input type="text" id = "prate" class="form-control" name ="pRate" placeholder= "Requestor Name" readonly>
+                                            </div>
+                                        </div> 
+                                        
 
-                            <label for="purp" class= "fs-5 fw-bold">Purposes</label>
-                                        <select class= "select form-select" name="" id="purp" onchange = "showOthersEdit('othersed', this)" disabled>
-                                            <option  selected>Purposes</option>
-                                            <option value="ent">For entertainment</option>
-                                            <option value="med">For medical reasons</option>
-                                            <option value="others">Others</option>
-                                        </select>
-                            </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-xl-6">
+                                            <label for="purp" class= "fs-5 fw-bold">Purposes</label>
+                                            <select class= "select form-select" name="" id="purp" disabled onchange = "showOthers('others', this)">
+                                                <option  selected>Purposes</option>
+                                                <option value="ent">For entertainment</option>
+                                                <option value="med">For medical reasons</option>
+                                                <option value="others">Others</option>
+                                            </select>
+                                
+                                        </div>
+                                        <div class="col-xl-6" >
+                                            <label for="prate" class="fs-5 fw-bold">Service Date</label>
+                                            <input type="date"  id = "date" class="form-control " readonly name ="date">
+                                        </div>
+                                       
+                                    </div>
+                                
+                                    <div class="row">
+                                        <div class="col-xl-6" >  
+                                            <label for="status" class="fs-5 fw-bold">Service to avail</label>
+                                            <select name="" class="form-select" id="status" disabled>
+                                                <option value="avail">Barangay Van</option>
+                                                <option value="noavail">Patrol</option>
+                                                <option value="noavail">Basketball court</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xl-6" >
+                                            <label for="prate" class="fs-5 fw-bold">Fee<span class= "text-muted fs-6">(₱)</span></label>
+                                            <div class="input-group">
+                                                <button class="btn btn-secondary disabled">
+                                                ₱
+                                                </button>    
+                                                <input type="text" id = "prate" class="form-control " name ="pRate" placeholder= "0.00" readonly style= "text-align:right">
+                                        </div> 
+                                    </div>
+                                    
+                                    
+                                
+                                    </div>
                             
-                        
-                            <div class="col-xl-6" >
-                            <label for="prate" class="fs-5 fw-bold">Service Status</label>
-                                    <select name="" class="form-control" id="status" disabled>
-                                        <option value="avail">On going</option>
-                                        <option value="noavail">Settled</option>
-                                
-                                    </select>
-                                
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-6" >  
-                                <label for="status" class="fs-5 fw-bold">Property to rent</label>
-                                <select name="" class="form-control" id="status" disabled>
-                                    <option value="avail">Drug Seminar</option>
-                                    <option value="noavail">Circumcision</option>
-                                    <option value="noavail">Marriage</option>
-                                </select>
-                            </div>
+                                    <div class="row">
 
-                            <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Service Fee</label>
-                                <div class="input-group">
-                                    <button class="btn btn-secondary disabled">
-                                    ₱
-                                    </button>    
-                                    <input type="text" min =0 ; id = "prate" class="form-control" name ="pRate" placeholder= "0.00" value = "20" style="text-align: right;"readonly>
-                               </div> 
+                                    
+                                        <div class="col-xl-6" >  
+                                            <label for="status" class="fs-5 fw-bold">Mode of payment</label>
+                                            <select name="" class="form-select" id="status" disabled>
+                                            <option value="g-cash">G-cash</option>
+                                            <option value="cash">Cash</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xl-6" >
+                                        <label for="prate" class="fs-5 fw-bold">Service Status</label>
+                                            <select name="" class="form-control" id="status" disabled>
+                                                <option value="avail">On going</option>
+                                                <option value="noavail">Settled</option>
+                                        
+                                            </select>
+                                    </div>
+                                    <div class="row g-0" >
+                                        <div class="col-md-12   pe-3  mx-auto my-2">
+                                        <div class="float-end">
+                                            <button type ="button" role = "button" class="btn btn-secondary px-2" data-bs-dismiss= "modal">
+                                                Done
+                                            </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                
+                                </div>
                             </div>
-                         
                         </div>
-                        
-                        <div class="row">
-                            
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-6" >
-                             
-                            </div>
-                        </div>
-
-                        <div class="row " align="center">
-                            <div class="col-md-5  mx-auto my-2">
-                             
-                            </div>
-                        </div>
-                    
+          
                         
                                         
                     </div>
-                    <div class="modal-footer">
-                        
-                    </div>
+                  
                 </div>
             </div>
         </div>
@@ -454,10 +478,10 @@
     </form>
 
     <div class="modal fade" id = "delete-srecord" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger" >
                     <div class="modal-header  white ">
-                        <h5 class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
+                        <div class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -473,12 +497,21 @@
                         </div>
                         <div class="row justify-content-center" align = "center">
                             <form method = "POST" action = "#">
-                                <button type = "button" class="btn btn-success rounded-circle" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                    <i class= 'fa fa-check '></i>
+                            <div class="col-xl-12">
+                                <div class="float-end">
+                                    <div class="btn-group">
+                                        <button type = "button" class="btn btn-success " data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                    <i class= 'fa fa-check mx-1'></i>Confirm
                                 </button>
-                                <button type = "button" class="btn btn-danger rounded-circle" data-bs-dismiss = "modal"  name = "no" value ="No">
-                                    <i class= "fa fa-times"></i>
+                                </div>
+                                <div class="btn-group">
+                                <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                    <i class= "fa fa-times-circle mx-1"></i>Cancel
                                 </button>
+                                </div>
+                           
+                            </div>
+                            </div>
                             </form>
                         </div>
                 
@@ -494,7 +527,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-success ">
                     <div class="modal-header bg-success  ">
-                        <h5 class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Send Proof of transaction</h5>
+                        <div class="modal-title white">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Send Proof of transaction</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -542,7 +575,7 @@
                                         <label for="remarks" >Remarks</label>
                                         <div class="col-md-12">
                                             <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style=";height: 100px;resize: none;"></textarea>
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;resize: none;"></textarea>
                                             <label for="floatingTextarea2">Remarks here (max 10 words)</label>
                                                 
                                             </div>
@@ -574,14 +607,19 @@
                                 </div>
                                 <div class="row justify-content-center" align = "center">
                                     
-                                    <div class="col-mx-6">
+                                    <div class="col-md-12">
+                                        <div class="float-end">
+                                            <div class="btn-group">
                                         <button href ="#" type = "button" class="btn btn-success " data-bs-dismiss ="modal"  >
                                             <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
                                         </button>
+                                        </div>
+                                        <div class="btn-group">
                                         <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
                                             <i class= "fa fa-times me-2"></i>Discard
                                         </button>
-                                
+                                        </div>
+                                        </div>
                                     </div>
                                     
                                 </div>  

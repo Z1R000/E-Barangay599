@@ -100,7 +100,7 @@
             <div class="row g-0 p-1">
                 <div class="row g-0 justify-content-center">
                     <div class="col-xl-10 px-3">
-                        <div class="row g-0 my-2 bg-white shadow-sm">
+                        <div class="row g-0 my-2 bg-white border shadow-sm">
                             <div class="row border-bottom  g-0 rounded-top px-2 py-0 bg-599">
                                 <div class= "fs-5 py-1 white">Step 1: Complaint Details</div>
                             </div>
@@ -117,7 +117,7 @@
                 </div>
                 <div class="row g-0 justify-content-center">
                     <div class="col-xl-10  px-3 py-2">
-                        <div class="row g-0 my-2 bg-white shadow-sm">
+                        <div class="row g-0 my-2 bg-white border shadow-sm">
                             <div class="row border g-0 rounded-top px-2 py-0 bg-599">
                                 <div class= "fs-5 py-1 white" id="step-2">Step 2:Attending barangay personnel <span class="fs-6"></span></div>
                             </div>
@@ -157,7 +157,7 @@
 
                     <div class="row g-0 justify-content-center">     
                         <div class="col-xl-10  px-3 py-2">
-                            <div class="row g-0 my-2 bg-white shadow-sm" >
+                            <div class="row g-0 my-2 bg-white border shadow-sm" >
                                 <div class="row border g-0 rounded-top px-2 py-0 bg-599">
                                     <div class= "fs-5 py-1 white" id="step-2">Step 3: Involved Persons <span class="fs-6">(e.g Juan Dela Cruz, Asiong Salonga..)</span></div>
                                 </div>
@@ -188,7 +188,7 @@
                 <div class="row g-0 justify-content-center">
                 
                     <div class="col-xl-10  px-3 ">
-                        <div class="row g-0 my-2 bg-white shadow-sm">
+                        <div class="row g-0 my-2 bg-white border shadow-sm">
                             <div class="row border g-0 rounded-top px-2 py-0 bg-599">
                                 <div class= "fs-5 py-1 white" id="step-2">Step 4: Incident Information <span class="fs-6">(Details regarding the incident)</span></div>
                             </div>

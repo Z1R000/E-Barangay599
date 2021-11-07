@@ -407,7 +407,7 @@
 
                         </div>
                         <div class="btn-group"> <button type="button"  href= "#delete" data-bs-toggle= "modal" role= "button" class="btn btn-danger"> <i class = "fa fa-trash mx-1"></i><span class= "wal">Delete Record</button>
-
+                            
                         </div>
                         </div>
 
@@ -416,11 +416,7 @@
                     </div>
 
               
-                           <!-- <input type="hidden" name="did" id="did" value="' . $row["ID"] . '">
-                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                       
-                                                                    </div>
-                                        -->
+                          
                     </div>
                 </div>
                 <?php $cnt=$cnt+1; }?>
@@ -464,6 +460,7 @@
                                 <div class="row justify-content-center" align="center">
                                  
                                         <div class="col-xl-12">
+                                            <div class="float-end">
                                             <div class="btn-group">
                                         <button type="submit" name="delete" class="btn btn-success "  value="delete">
                                             <i class='fa fa-check mx-1 '></i>Confirm
@@ -473,6 +470,7 @@
                                         <button type="button" class="btn btn-danger " data-bs-dismiss="modal" name="no" value="No">
                                             <i class="fa fa-times mx-1"></i>Cancel
                                         </button>
+                                        </div>
                                         </div>
                                         </div>
                                     </form>
