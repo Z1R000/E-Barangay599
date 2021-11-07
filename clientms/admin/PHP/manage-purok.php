@@ -99,12 +99,12 @@
                                         <div class="row" >
                                             <div class="col-lg-8">
                                                 <div class="input-group mb-3">
-                                                    <input type="text" name="str[]" class="form-control" placeholder="Involved person 1" >  
+                                                    <input type="text" name="str[]" class="form-control" placeholder="New street 1" >  
                                                     <div class="btn-group mx-2">
                                                         <button id="removeper" type="button" class="btn btn-secondary" disabled>Remove</button> 
                                                     </div>      
                                                     <div class="btn-group mx-1"> 
-                                                        <button id="addper" type="button" class="btn btn-primary white"><i class= "fa fa-plus me-2"></i> Add Involved</button>   
+                                                        <button id="addper" type="button" class="btn btn-primary white"><i class= "fa fa-plus me-2"></i> Add Street</button>   
                                                     </div>  
                                                 </div>
                                                 <div id="newRow2"></div>

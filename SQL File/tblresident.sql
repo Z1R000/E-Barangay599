@@ -37,7 +37,7 @@ CREATE TABLE `tblresident` (
   `Password` varchar(50) NOT NULL,
   `CreationDate` timestamp NULL DEFAULT current_timestamp(),
   `voter` varchar(3) NOT NULL,
-  `vPrecinct` text NOT NULL,
+  `vPrecinct` text NOT NULL, 
   `ResidentType` varchar(50) NOT NULL,
   `LastName` varchar(50) DEFAULT NULL,
   `Suffix` varchar(50) NOT NULL,
