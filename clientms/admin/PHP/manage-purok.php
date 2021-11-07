@@ -27,7 +27,7 @@
           
                 
     </style>
-    <form method = "POST">
+   
     <div class="row bg-light py-3">
     <div class="container ">
         <div class="row">
@@ -36,10 +36,11 @@
                     <div class="btn-group">
                         <button class="btn-primary btn" data-bs-toggle ="modal" href ="#addpur" type = "button"><i class="fa fa-plus mx-1"></i>Add Purok</button>
                     </div>
+                   
                 </div>
             </div>
         </div>
-        </form>
+        
    
         <form action="purok-streets.php" method = "GET">
         <div class="row g-3   justify-content-center">
@@ -69,7 +70,84 @@
     </form>
     
     </div></div>
-
+    <form method = "POST">
+    <div class="modal fade" id="verif" tab-index = "-1">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content g-0 border-0">
+                <div class="modal-header bg-599 border-599  text-white">
+                    <div class="modal-title"><i class="fa fa-plus mx-1"></i>Add Purok Verification</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body bg-white">
+                    <p class= "fs-5 text-center">You are about to add a new purok to the system, are you sure ?</p>
+                    <div class="row">
+                            <div class="col-xl-12">
+                                <div class="float-end">
+                                    <div class="btn-group">
+                                        <button class="btn-success btn mx-1" data-bs-toggle= "modal" href= "#fin" data-bs-dismiss= "modal"><i class="fa fa-check mx-1"></i>Confirm</button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button class="btn-secondary btn mx-1" data-bs-dismiss="modal"><i class="fa fa-times-circle mx-1"></i>Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="fin" tab-index = "-1">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content g-0 border-0">
+                <div class="modal-header bg-success border-success  text-white">
+                    <div class="modal-title"><i class="fa fa-check-circle mx-1"></i>Success</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-white">
+                    <p class= "fs-5 text-center">You have successfully added a new purok </p>
+                    <div class="row">
+                            <div class="col-xl-12">
+                                <div class="float-end">
+                                   
+                                    <div class="btn-group">
+                                        <button class="btn-success btn mx-1" data-bs-dismiss="modal">Done</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="verif" tab-index = "-1">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content g-0 border-0">
+                <div class="modal-header bg-success border-success text-white">
+                    <div class="modal-title"><i class="fa fa-question-circle mx-1"></i>Add Purok Verification</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-white">
+                    <p class= "fs-5 text-center">You are about to add a new purok to the system, are you sure ?</p>
+                    <div class="row">
+                            <div class="col-xl-12">
+                                <div class="float-end">
+                                    <div class="btn-group">
+                                        <button class="btn-success btn mx-1" data-bs-toggle= "modal" href= "#fin" data-bs-dismiss= "modal"><i class="fa fa-check mx-1"></i>Confirm</button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button class="btn-secondary btn mx-1" data-bs-dismiss="modal"><i class="fa fa-times-circle mx-1"></i>Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id = "addpur" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content g-0 border-0 ">
@@ -99,10 +177,8 @@
                                         <div class="row" >
                                             <div class="col-lg-8">
                                                 <div class="input-group mb-3">
-                                                    <input type="text" name="str[]" class="form-control" placeholder="New street 1" >  
-                                                    <div class="btn-group mx-2">
-                                                        <button id="removeper" type="button" class="btn btn-secondary" disabled>Remove</button> 
-                                                    </div>      
+                                                    <input type="text" name="str[1]" class="form-control" placeholder="New street 1" >  
+                                                   
                                                     <div class="btn-group mx-1"> 
                                                         <button id="addper" type="button" class="btn btn-primary white"><i class= "fa fa-plus me-2"></i> Add Street</button>   
                                                     </div>  
@@ -111,55 +187,37 @@
                                             </div>
                                         </div>
                                     </div>
-                                
+                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="float-end">
+                                    <div class="btn-group">
+                                        <button class="btn-success btn mx-1" data-bs-toggle= "modal" href= "#verif" data-bs-dismiss= "modal"><i class="fa fa-upload mx-1"></i>Upload</button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button class="btn-secondary btn mx-1" data-bs-dismiss="modal"><i class="fa fa-times-circle mx-1"></i>Cancel</button>
+                                    </div>
+                                </div>
                             </div>
-                        
-                    </div>
-                       
-
-                     
-                        
-                                        
+                        </div>
+                                       
                     </div>
              
                 </div>
             </div>
         </div>
-
+        </form>
         
     <script type="text/javascript">
         var x = 0;
         // add row
-        $("#addkag").click(function () {
-            if (x>=50){
-                alert('There are only 7 kagawads');
-            }else{
-            
-            var html = '';
-            
-                html += '<div id="inputFormRow">';
-                html += '<div class="input-group mb-3">';
-                html += '<select name="kag['+x+']" class="form-select" placeholder="Enter title"><option value ="">Kagawad 1</option><option value ="">Kagawad 2</option><option value ="">Kagawad 2</option></select>'
-                ;
-                html += '<div class="input-group-append">';
-                html += '<button id="removekag" type="button" class="btn btn-danger">Remove</button>';
-                html += '</div>';
-                html += '</div>';
-                x++;
-                $('#newRow').append(html);
-            }
-        });
-
-        // remove row
-        $(document).on('click', '#removekag', function () {
-            $(this).closest('#inputFormRow').remove();
-        });
-
+     
         //involved persons
         var g = 2;
 
         $("#addper").click(function () {
-            if (g>=50){
+            if (g>=11){
                 alert('Over the limit');
            
             }else{
@@ -168,7 +226,7 @@
             
                 html += '<div id="inputFormRow2">';
                 html += '<div class="input-group mb-3">';
-                html += '<input type= "text" name="per['+g+']" class="form-control" placeholder="Involved Person '+g+'">';
+                html += '<input type= "text" name="str['+g+']" class="form-control" placeholder="New Street '+g+'">';
                 ;
                 html += '<div class="input-group-append">';
                 html += '<button id="removeper" type="button" class="btn btn-danger">Remove</button>';
