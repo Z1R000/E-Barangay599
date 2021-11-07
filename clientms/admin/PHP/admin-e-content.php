@@ -16,39 +16,222 @@
     $(document).ready(function() {
         $('#login-auds').DataTable({
         dom: 'Bfrtip',
-        buttons: [
-            'copy',  'print', 'pdf','excel'
-        ]
-    } );
+        buttons: {
+            buttons:[
+                {
+                    extend: 'print',
+                    text: 'Generate copy',
+                    className: 'btn btn-primary my-1',
+                    message:'The following data are report for audit of logs of the system.',
+                    title:'',
+                    exportOptions: {columns: [ 0, 1, 2, 3,4 ]},
+                
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css('font-size', '16pt','')                    
+                            .prepend(
+
+                                '<div class= "row justify-content-center"><div class= "col-3 align-items-center"><img src ="https://scontent.fmnl4-6.fna.fbcdn.net/v/t1.15752-9/253840780_3043650102555884_6126132548248010936_n.png?_nc_cat=107&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeHtm0gSv39SpbH8YKdiyQmO9Q65UWXYIN71DrlRZdgg3gzdVs9nT_Emsy5607I5PSXaq0miUcTAhsnSWRVszXmU&_nc_ohc=nlQIQehSnbkAX-6AV7Y&_nc_ht=scontent.fmnl4-6.fna&oh=4ef3f4e19b84fbc2f8130d1d23dc16ce&oe=61AD6A25" style= "width: 100px"/></div><div class= "col-6"><div class = "fs-3 text-center">BARANGAY 599, ZONE 59, DISTRICT VI OFFICE OF THE SANGGUNIANG BARANGAY</div></div><div class= "col-3  align-items-center"><img class= "float-end" src ="https://scontent.fmnl4-2.fna.fbcdn.net/v/t1.15752-9/253727695_993694454821211_6742610281288759451_n.png?_nc_cat=105&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeEjZKbv7g_r_OkDANnMfmkmh6jj4naYPzqHqOPidpg_OjwuDdnXemIELY2YBxsifbVX6Q12cTqziZrf280CcmQ9&_nc_ohc=b0AupJm6_48AX8vajsF&tn=2Fn-qzGntt-ZZM-o&_nc_ht=scontent.fmnl4-2.fna&oh=923e9c42b5c658123e6afb3b5b0f1685&oe=61ACC77E" style= "width: 100px"/></div>'
+                            )
+                            .append(
+                                '<img src="https://scontent.fmnl4-6.fna.fbcdn.net/v/t1.15752-9/254152885_569551377676151_8198043780541099030_n.png?_nc_cat=107&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeGaHlQ9SaCFDoumzSqNbuYpX-DTswHybhVf4NOzAfJuFQb0vwGo3iZ4lgoV0U9JXqhvQciPwTNCLoUH_nwOkFhZ&_nc_ohc=VlwYtPOMD-kAX8F3DOo&_nc_ht=scontent.fmnl4-6.fna&oh=fede1fd8b66a464f69ca2a47abd6af65&oe=61AAFC89" style="position:absolute; bottom:0; left:500; right:500" />'
+
+                            );
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    },
+                   
+                   
+                    
+                
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: 'Excel File',
+                    className: 'btn-success my-1',
+                    exportOptions: {columns: [0,1,2,3,4,5]}
+                },
+
+               
+             
+                
+            ],
+        dom: {
+            button:{
+                className: 'btn'
+            }
+        }
+
+        }
+        } );
     } );
     </script>
     <script>
-    $(document).ready(function() {
+         $(document).ready(function() {
         $('#del-serv').DataTable({
         dom: 'Bfrtip',
-        buttons: [
-            'copy',  'print', 'pdf','excel'
-        ]
-    });
+        buttons: {
+            buttons:[
+                {
+                    extend: 'print',
+                    text: 'Generate copy',
+                    className: 'btn btn-primary my-1',
+                    message:'The following data are report for deleted service transactions in the system.',
+                    title:'',
+                    exportOptions: {columns: [ 0, 1, 2, 3,4 ]},
+                
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css('font-size', '16pt','')                    
+                            .prepend(
+
+                                '<div class= "row justify-content-center"><div class= "col-3 align-items-center"><img src ="https://scontent.fmnl4-6.fna.fbcdn.net/v/t1.15752-9/253840780_3043650102555884_6126132548248010936_n.png?_nc_cat=107&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeHtm0gSv39SpbH8YKdiyQmO9Q65UWXYIN71DrlRZdgg3gzdVs9nT_Emsy5607I5PSXaq0miUcTAhsnSWRVszXmU&_nc_ohc=nlQIQehSnbkAX-6AV7Y&_nc_ht=scontent.fmnl4-6.fna&oh=4ef3f4e19b84fbc2f8130d1d23dc16ce&oe=61AD6A25" style= "width: 100px"/></div><div class= "col-6"><div class = "fs-3 text-center">BARANGAY 599, ZONE 59, DISTRICT VI OFFICE OF THE SANGGUNIANG BARANGAY</div></div><div class= "col-3  align-items-center"><img class= "float-end" src ="https://scontent.fmnl4-2.fna.fbcdn.net/v/t1.15752-9/253727695_993694454821211_6742610281288759451_n.png?_nc_cat=105&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeEjZKbv7g_r_OkDANnMfmkmh6jj4naYPzqHqOPidpg_OjwuDdnXemIELY2YBxsifbVX6Q12cTqziZrf280CcmQ9&_nc_ohc=b0AupJm6_48AX8vajsF&tn=2Fn-qzGntt-ZZM-o&_nc_ht=scontent.fmnl4-2.fna&oh=923e9c42b5c658123e6afb3b5b0f1685&oe=61ACC77E" style= "width: 100px"/></div>'
+                            )
+                            .append(
+                                '<img src="https://scontent.fmnl4-6.fna.fbcdn.net/v/t1.15752-9/254152885_569551377676151_8198043780541099030_n.png?_nc_cat=107&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeGaHlQ9SaCFDoumzSqNbuYpX-DTswHybhVf4NOzAfJuFQb0vwGo3iZ4lgoV0U9JXqhvQciPwTNCLoUH_nwOkFhZ&_nc_ohc=VlwYtPOMD-kAX8F3DOo&_nc_ht=scontent.fmnl4-6.fna&oh=fede1fd8b66a464f69ca2a47abd6af65&oe=61AAFC89" style="position:absolute; bottom:0; left:500; right:500" />'
+
+                            );
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    },
+                   
+                   
+                    
+                
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: 'Excel File',
+                    className: 'btn-success my-1',
+                    exportOptions: {columns: [0,1,2,3,4,5]}
+                },
+
+               
+             
+                
+            ],
+        dom: {
+            button:{
+                className: 'btn'
+            }
+        }
+
+        }
+        } );
     } );
+   
     </script>
       <script>
     $(document).ready(function() {
         $('#del-req').DataTable({
         dom: 'Bfrtip',
-        buttons: [
-            'copy',  'print', 'pdf','excel'
-        ]
-    });
+        buttons: {
+            buttons:[
+                {
+                    extend: 'print',
+                    text: 'Generate copy',
+                    className: 'btn btn-primary my-1',
+                    message:'The following data are report for audit of deleted service requests in the system.',
+                    title:'',
+                    exportOptions: {columns: [ 0, 1, 2, 3,4 ]},
+                
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css('font-size', '16pt','')                    
+                            .prepend(
+
+                                '<div class= "row justify-content-center"><div class= "col-3 align-items-center"><img src ="https://scontent.fmnl4-6.fna.fbcdn.net/v/t1.15752-9/253840780_3043650102555884_6126132548248010936_n.png?_nc_cat=107&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeHtm0gSv39SpbH8YKdiyQmO9Q65UWXYIN71DrlRZdgg3gzdVs9nT_Emsy5607I5PSXaq0miUcTAhsnSWRVszXmU&_nc_ohc=nlQIQehSnbkAX-6AV7Y&_nc_ht=scontent.fmnl4-6.fna&oh=4ef3f4e19b84fbc2f8130d1d23dc16ce&oe=61AD6A25" style= "width: 100px"/></div><div class= "col-6"><div class = "fs-3 text-center">BARANGAY 599, ZONE 59, DISTRICT VI OFFICE OF THE SANGGUNIANG BARANGAY</div></div><div class= "col-3  align-items-center"><img class= "float-end" src ="https://scontent.fmnl4-2.fna.fbcdn.net/v/t1.15752-9/253727695_993694454821211_6742610281288759451_n.png?_nc_cat=105&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeEjZKbv7g_r_OkDANnMfmkmh6jj4naYPzqHqOPidpg_OjwuDdnXemIELY2YBxsifbVX6Q12cTqziZrf280CcmQ9&_nc_ohc=b0AupJm6_48AX8vajsF&tn=2Fn-qzGntt-ZZM-o&_nc_ht=scontent.fmnl4-2.fna&oh=923e9c42b5c658123e6afb3b5b0f1685&oe=61ACC77E" style= "width: 100px"/></div>'
+                            )
+                            .append(
+                                '<img src="https://scontent.fmnl4-6.fna.fbcdn.net/v/t1.15752-9/254152885_569551377676151_8198043780541099030_n.png?_nc_cat=107&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeGaHlQ9SaCFDoumzSqNbuYpX-DTswHybhVf4NOzAfJuFQb0vwGo3iZ4lgoV0U9JXqhvQciPwTNCLoUH_nwOkFhZ&_nc_ohc=VlwYtPOMD-kAX8F3DOo&_nc_ht=scontent.fmnl4-6.fna&oh=fede1fd8b66a464f69ca2a47abd6af65&oe=61AAFC89" style="position:absolute; bottom:0; left:500; right:500" />'
+
+                            );
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    },
+                   
+                   
+                    
+                
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: 'Excel File',
+                    className: 'btn-success my-1',
+                    exportOptions: {columns: [0,1,2,3,4,5]}
+                },
+
+               
+             
+                
+            ],
+        dom: {
+            button:{
+                className: 'btn'
+            }
+        }
+
+        }
+        } );
+    
     } );
     </script>
        <script>
     $(document).ready(function() {
         $('#del-pay').DataTable({
         dom: 'Bfrtip',
-        buttons: [
-            'copy',  'print', 'pdf','excel'
-        ]
+        buttons: {
+            buttons:[
+                {
+                    extend: 'print',
+                    text: 'Generate copy',
+                    className: 'btn btn-primary my-1',
+                    message:'The following data are report for the rejected payments of the system.',
+                    title:'',
+                    exportOptions: {columns: [ 0, 1, 2, 3,4 ]},
+                
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css('font-size', '16pt','')                    
+                            .prepend(
+
+                                '<div class= "row justify-content-center"><div class= "col-3 align-items-center"><img src ="https://scontent.fmnl4-6.fna.fbcdn.net/v/t1.15752-9/253840780_3043650102555884_6126132548248010936_n.png?_nc_cat=107&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeHtm0gSv39SpbH8YKdiyQmO9Q65UWXYIN71DrlRZdgg3gzdVs9nT_Emsy5607I5PSXaq0miUcTAhsnSWRVszXmU&_nc_ohc=nlQIQehSnbkAX-6AV7Y&_nc_ht=scontent.fmnl4-6.fna&oh=4ef3f4e19b84fbc2f8130d1d23dc16ce&oe=61AD6A25" style= "width: 100px"/></div><div class= "col-6"><div class = "fs-3 text-center">BARANGAY 599, ZONE 59, DISTRICT VI OFFICE OF THE SANGGUNIANG BARANGAY</div></div><div class= "col-3  align-items-center"><img class= "float-end" src ="https://scontent.fmnl4-2.fna.fbcdn.net/v/t1.15752-9/253727695_993694454821211_6742610281288759451_n.png?_nc_cat=105&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeEjZKbv7g_r_OkDANnMfmkmh6jj4naYPzqHqOPidpg_OjwuDdnXemIELY2YBxsifbVX6Q12cTqziZrf280CcmQ9&_nc_ohc=b0AupJm6_48AX8vajsF&tn=2Fn-qzGntt-ZZM-o&_nc_ht=scontent.fmnl4-2.fna&oh=923e9c42b5c658123e6afb3b5b0f1685&oe=61ACC77E" style= "width: 100px"/></div>'
+                            )
+                            .append(
+                                '<img src="https://scontent.fmnl4-6.fna.fbcdn.net/v/t1.15752-9/254152885_569551377676151_8198043780541099030_n.png?_nc_cat=107&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeGaHlQ9SaCFDoumzSqNbuYpX-DTswHybhVf4NOzAfJuFQb0vwGo3iZ4lgoV0U9JXqhvQciPwTNCLoUH_nwOkFhZ&_nc_ohc=VlwYtPOMD-kAX8F3DOo&_nc_ht=scontent.fmnl4-6.fna&oh=fede1fd8b66a464f69ca2a47abd6af65&oe=61AAFC89" style="position:absolute; bottom:0; left:500; right:500" />'
+
+                            );
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    },
+                   
+                   
+                    
+                
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: 'Excel File',
+                    className: 'btn-success my-1',
+                    exportOptions: {columns: [0,1,2,3,4]}
+                },
+
+               
+             
+                
+            ],
+        dom: {
+            button:{
+                className: 'btn'
+            }
+        }
+
+        }
+       
     });
     } );
     </script>
@@ -56,9 +239,55 @@
     $(document).ready(function() {
         $('#del-reg').DataTable({
         dom: 'Bfrtip',
-        buttons: [
-            'copy',  'print', 'pdf','excel'
-        ]
+        buttons: {
+            buttons:[   
+                {
+                    extend: 'print',
+                    text: 'Generate copy',
+                    className: 'btn btn-primary my-1',
+                    message:'The following data are report for audit of logs of the system.',
+                    title:'',
+                    exportOptions: {columns: [ 0, 1, 2, 3]},
+                
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css('font-size', '16pt','')                    
+                            .prepend(
+
+                                '<div class= "row justify-content-center"><div class= "col-3 align-items-center"><img src ="https://scontent.fmnl4-6.fna.fbcdn.net/v/t1.15752-9/253840780_3043650102555884_6126132548248010936_n.png?_nc_cat=107&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeHtm0gSv39SpbH8YKdiyQmO9Q65UWXYIN71DrlRZdgg3gzdVs9nT_Emsy5607I5PSXaq0miUcTAhsnSWRVszXmU&_nc_ohc=nlQIQehSnbkAX-6AV7Y&_nc_ht=scontent.fmnl4-6.fna&oh=4ef3f4e19b84fbc2f8130d1d23dc16ce&oe=61AD6A25" style= "width: 100px"/></div><div class= "col-6"><div class = "fs-3 text-center">BARANGAY 599, ZONE 59, DISTRICT VI OFFICE OF THE SANGGUNIANG BARANGAY</div></div><div class= "col-3  align-items-center"><img class= "float-end" src ="https://scontent.fmnl4-2.fna.fbcdn.net/v/t1.15752-9/253727695_993694454821211_6742610281288759451_n.png?_nc_cat=105&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeEjZKbv7g_r_OkDANnMfmkmh6jj4naYPzqHqOPidpg_OjwuDdnXemIELY2YBxsifbVX6Q12cTqziZrf280CcmQ9&_nc_ohc=b0AupJm6_48AX8vajsF&tn=2Fn-qzGntt-ZZM-o&_nc_ht=scontent.fmnl4-2.fna&oh=923e9c42b5c658123e6afb3b5b0f1685&oe=61ACC77E" style= "width: 100px"/></div>'
+                            )
+                            .append(
+                                '<img src="https://scontent.fmnl4-6.fna.fbcdn.net/v/t1.15752-9/254152885_569551377676151_8198043780541099030_n.png?_nc_cat=107&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeGaHlQ9SaCFDoumzSqNbuYpX-DTswHybhVf4NOzAfJuFQb0vwGo3iZ4lgoV0U9JXqhvQciPwTNCLoUH_nwOkFhZ&_nc_ohc=VlwYtPOMD-kAX8F3DOo&_nc_ht=scontent.fmnl4-6.fna&oh=fede1fd8b66a464f69ca2a47abd6af65&oe=61AAFC89" style="position:absolute; bottom:0; left:500; right:500" />'
+
+                            );
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    },
+                   
+                   
+                    
+                
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: 'Excel File',
+                    className: 'btn-success my-1',
+                    exportOptions: {columns: [0,1,2,3]}
+                },
+
+               
+             
+                
+            ],
+        dom: {
+            button:{
+                className: 'btn'
+            }
+        }
+
+        }
+      
     });
     } );
     </script>
@@ -201,6 +430,9 @@
                     <li class="nav-item">
                         <a class="nav-link " href= "#e-archive"data-bs-toggle = "tab">E-barangay Archives</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href= "#e-pay"data-bs-toggle = "tab">Payment Credentials</a>
+                    </li>
                 </ul>   
             </div>
         <div class="col-xl-10">
@@ -208,9 +440,9 @@
                 <div class="tab-pane fade show active" id  = "logaud">
                         <div class="container g-0 py-2 shadow-sm">
                         <div class="row g-0 text-white py-2 bg-dark">   
-                                    <div class="fs-5 px-2">Login Audits</div>
+                                    <div class="fs-5 px-2">Login Audits </div>
                                 </div>
-                            <div class="row g-0 bg-white border-top-0 shadow-sm  px-3">
+                            <div class="row g-0 bg-white border border-top-0 shadow-sm  px-3">
                                 
                                 <div class="row py-2 ">
                                     <div class="col py-2" style= "overflow-x:auto;">
@@ -221,7 +453,7 @@
                                                         Position <i class="fa fa-address-card mx-1"></i>
                                                     </th>
                                                     <th>
-                                                        Official <i class="fa fa-user-shield"></i>
+                                                        Official <i class="fa fa-user-id"></i>
                                                     </th>
                                                     <td>
                                                         Access Date <i class="fa fa-calendar mx-1"></i>
@@ -348,7 +580,7 @@
                             </div>
                         </div>
                         <div class="row p-4 bg-light justify-content-center align-items-center">
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <div class="row g-0">
                                         <div class="col-md-10 mx-auto" align = "center">
                                             <div class="fs-5 fw-bold">
@@ -421,7 +653,7 @@
                     <div class="container mb-5 g-0 shadow-sm">
                         <div class="row bg-dark">
                             <div class="fs-4 text-white">
-                                Officials Log-in Audits
+                                Puroks Management
                             </div>
                         </div>
                         <?php include ('manage-purok.php')?>
@@ -671,7 +903,7 @@
                         </div>
                     </div>
                     <div class="tab-pane" id = "reg">
-                    <div class="container g-0 py-2">
+                        <div class="container g-0 py-2">
                             <div class="row g-0 border border-top-0 px-3">
                                 
                                 <div class="row py-2">
@@ -741,170 +973,122 @@
                             </div>
                         </div>
                     </div>
+                    
 
                 </div>
-               
+                <div class="tab-pane fade show" id="e-pay">
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col-xl-8">
+                            <div class="row bg-dark text-white shadow-sm">
+                                <div class="fs-5 py-1">Payment Credentials </diV>
+                            </div>
+                            <div class="row  bg-light border shadow-sm">
+                                <form action="POST row g-2">
+                                <div class="col-xl-12 col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <div class="row g-0">
+                                        <div class="col-md-10 mx-auto" align = "center">
+                                            <div class="row py-2">
+                                                <div class="col-12">
+                                                <button type= "button" class="btn-primary btn" onclick = "edit()"><i class="fa fa-edit mx-1"></i>Edit</button>
+                                                </div>
+                                            </div>
+                                            <div class="fs-5 fw-bold">
+                                                QR code
+                                            </div>
+                                        
+                                            <img src="../images/qr.png" alt="" class="img-fluid border border-info rounded ava"  style = "height: 185px">
+                                    
+                                        </div>
+                                    </div>
+                                    <div class="row" align = "center">
+                                        <div class="col-xl-10 my-2 mx-auto">
+                                            <input type="file" id="selectedFile" style="display: none;" />
+                                            <button type="button"  class= "btn btn-primary disabled" id = "gbut" onclick="document.getElementById('selectedFile').click();" ><i class= "fa fa-camera me-2"></i>Choose photo</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 px-5 ">
+                                   
+                            
+                                <div class="row">
+                                    <div class="col-xl-6 mx-auto">
+                                    <label for="g-cashn" class="fs-5 " >G-cash Name</label>
+                                    <div class="input-group" >
+                                        
+                                        <input type="text" id = "gnam"class="form-control" readonly>
+                                    </div>
+                                    <label for="g-cashn" class="fs-5">G-cash Number</label>
+                                    <div class="input-group">
+                                        <input type="text" id = "gnum"class="form-control" readonly>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12 my-4"style= "display:none;" id = "hid">
+                                        <div class="float-end">
+                                            <div class="btn-group">
+                                                <button class="btn btn-primary" ><i class="fa fa-save mx-1"></i>Save Changes</button>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button class="btn btn-secondary" ><i class="fa fa-save mx-1"></i>Cancel</button>
+                                       
+                                            </div>
+                                         
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
         
    
-    <div class="modal fade" id = "man-text" tab-idndex = "-1">
-        <form action="">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content g-0 bg-dark">
-                    <div class="modal-header bg-dark">
-                        <h5 class="modal-title white" id="delete" >&nbsp;<i class = "fa fa-comment "></i>&nbsp;&nbsp;E-barangay texts</h5>
-                        
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-white">
-                        <div class="row py-2">
-                            <div class="col-md-6">
-                                <label for = "etitle" class= "fs-5 fw-bold">E-barangay Title</label>
-                                <input type="text" class="form-control" id = "etitle" placeholder = "599 title" value = "Barangay 599" >
-                            </div>
-                        </row>
-                        <div class="row py-2">
+<script>
+    function edit(){
+        var nam = document.getElementById('gnam').readOnly;
+        var num = document.getElementById('gnum').readOnly;
+        var bat = document.getElementById('gbut');
+        var hd = document.getElementById('hid').style.display;
+        if (nam){
+            document.getElementById('gnam').readOnly = false;
 
-                            <div class="col-md-6">
-                                <label for = "eban1" class= "fs-5 fw-bold">E-barangay Banner Line 1</label>
-                                <input type="text" class="form-control" id = "eban1" placeholder = "599 title" value = "BARANGAY 599, ZONE 59, DISTRICT VI" >
-                            </div>
-                            <div class="col-md-6">
-                                <label for = "eban2" class= "fs-5 fw-bold">E-barangay Banner Line 2</label>
-                                <input type="text" class="form-control" id = "" placeholder = "599 title" value = "OFFICE OF THE SANGGUNIANG BARANGAY" >
-                                
-                            </div>
-                  
-                        </div>
-                        <div class="row g-2 pt-3 pb-1 px-3">
-                            <label for = "eban2" class= "fs-5 fw-bold">Barangay 599 History</label>
-                            <div class="form-floating mb-3">
-                                <textarea type="text" class="form-control" id="edit-about" >
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis ex et cursus molestie. Suspendisse et facilisis libero. Morbi aliquet non felis eu tincidunt. Nam mattis tortor ex, eu fringilla mi dapibus id. Nulla facilisi. Morbi porta luctus diam a consequat. Aenean eu tempus velit, id rhoncus libero.
+        }else{
+            document.getElementById('gnam').readOnly = true;
+        }
+        if (num){
+            document.getElementById('gnum').readOnly = false;
 
-                                Donec tempor lorem sed nibh pellentesque vulputate eget id leo. Vestibulum maximus hendrerit eros. Integer vel facilisis sem, vel ullamcorper elit. Cras tincidunt mollis metus. Nunc id risus sed mi facilisis posuere. Quisque faucibus auctor dui id hendrerit. Ut in blandit enim. In venenatis pretium consequat. Proin sed luctus augue, ut laoreet leo. Mauris lorem nisi, scelerisque vitae leo sed, facilisis accumsan elit. Vivamus eu consectetur urna. Donec elementum erat ut blandit cursus. Nam ac blandit sem. Suspendisse potenti. Proin sodales nisi nec pretium faucibus.
+        }else{
+            document.getElementById('gnum').readOnly = true;
+        }
+        if(bat.classList.contains('disabled')){
+            document.getElementById('gbut').classList.remove('disabled');
+        }
+        else{
+            document.getElementById('gbut').classList.add('disabled');
+        }
+        if(hd =="block"){
+            document.getElementById('hid').style.display  = "none";
+        }
+        else{
+            document.getElementById('hid').style.display  = "block";
 
-                                Duis vel mattis elit, eget condimentum nisl. Integer ultricies tellus viverra mi vehicula cursus. Suspendisse magna lacus, varius sed magna id, semper euismod purus. Vestibulum tincidunt venenatis nunc a tempus. Vestibulum tincidunt maximus blandit. Sed vitae sapien interdum, volutpat justo luctus, aliquam odio. Aenean finibus, sapien ac laoreet luctus, metus magna dictum neque, a luctus tellus neque vitae lorem. Ut nulla sapien, dictum sed euismod eget, feugiat blandit nisl.
-
-                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque luctus urna vel dui mattis fringilla. Pellentesque enim orci, blandit ut sapien at, cursus sagittis mauris. Suspendisse dignissim nulla tortor, in ultricies odio semper eu. Fusce ac dictum urna, at interdum nisl. Donec feugiat, justo in tristique malesuada, urna nunc tincidunt ex, sit amet pulvinar est augue sit amet dolor. Sed ultricies tempus sagittis. Morbi quis porttitor purus. In elementum enim ipsum, non laoreet diam posuere a. Praesent imperdiet pretium urna, vel efficitur felis fringilla quis. Aliquam erat volutpat. Quisque at condimentum augue. Nunc nec cursus nulla.
-
-                                Sed at euismod elit, sit amet eleifend enim. Maecenas venenatis aliquet lorem in venenatis. Donec scelerisque rutrum nibh vel dapibus. Etiam sodales eros eget malesuada accumsan. Nunc egestas ornare nisi, in venenatis elit maximus vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque posuere porttitor neque id imperdiet. Vestibulum a posuere nulla. Nam eleifend ultrices finibus. Sed quis dolor eros. In hac habitasse platea dictumst.
-
-
-                                </textarea>
-
-                            </div>
-                        </div>
-                        <div class="row justify-content-center" align = "center">
-                            <div class="col-xl-6">
-                            <button type = "button" class="btn btn-success" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                    <i class= 'fa fa-save me-2'></i>Save
-                                </button>
-                                <button type = "reset" class="btn btn-danger">
-                                    <i class= "fa fa-redo-alt me-2"></i>Clear
-                                </button>
-
-                            </div>
-                                
-                        
-                        </div>
-                
-                    </div>
-                    <div class="modal-footer">
-                        
-                    </div>
-                </div>
-            </div>
-            </form>
-        </div>
-    </div>
-        <div class="modal fade" id = "man-img" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content bg-primary g-0  ">
-                    <div class="modal-header bg-primary  ">
-                    <h5 class="modal-title white" id="delete" >&nbsp;<i class = "fa fa-image "></i>&nbsp;&nbsp;E-barangay Media</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-white">
-                        <div class="row justify-content-center px-4" align="center">
-                            <div class="col-xl-4">
-                                <div class="row g-0">
-                                    <div class="col-md-10 mx-auto">
-                                        <div class="fs-5 fw-bold">
-                                            Barangay 599's Logo
-                                        </div>
-                                    
-                                        <img src="../images/Barangay.png" alt="" class="img-fluid border border-info rounded ava"  style = "height: 185px">
-                                
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xl-10 my-2 mx-auto">
-                                        <input type="file" id="selectedFile" style="display: none;" />
-                                        <button type="button"  class= "btn btn-primary" onclick="document.getElementById('selectedFile').click();" ><i class= "fa fa-camera me-2 "></i>Choose photo</button>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                <div class="row g-0">
-                                    <div class="col-md-10 mx-auto">
-                                        <div class="fs-5 fw-bold">
-                                            599's Admin Logo
-                                        </div>
-                                    
-                                        <img src="../images/admin-logo.png" alt="" class="img-fluid border border-info rounded ava"  style = "height: 185px">
-                                
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xl-10 my-2 mx-auto">
-                                        <input type="file" id="selectedFile" style="display: none;" />
-                                        <button type="button"  class= "btn btn-primary" onclick="document.getElementById('selectedFile').click();" ><i class= "fa fa-camera me-2 "></i>Choose photo</button>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                <div class="row g-0">
-                                    <div class="col-md-10 mx-auto">
-                                        <div class="fs-5 fw-bold">
-                                            City of Manila Logo
-                                        </div>
-
-                                    
-                                        <img src="../images/maynila.png" alt="" class="img-fluid border border-info rounded ava"  style = "height: 185px">
-                                
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xl-10 my-2 mx-auto">
-                                        <input type="file" id="selectedFile" style="display: none;" />
-                                        <button type="button"  class= "btn btn-primary" onclick="document.getElementById('selectedFile').click();" ><i class= "fa fa-camera me-2 "></i>Choose photo</button>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mx-auto">
-                                    
-                                    <button type ="button" class= "btn btn-success form-control"><i class= "fa fa-save me-2"></i>Save</button>
-                              </div>
-                            </div>
-
-                            
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
- 
+        }
+        
+        
+    }
+</script>
+       
 
        
  <script src = "../ckeditor/ckeditor.js"></script>

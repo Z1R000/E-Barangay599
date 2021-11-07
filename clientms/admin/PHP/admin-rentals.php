@@ -64,7 +64,12 @@
     </script>
     <script>
     $(document).ready(function() {
-    $('#clist').DataTable();
+    $('#rpay').DataTable();
+    } );
+    </script>
+    <script>
+    $(document).ready(function() {
+    $('#rlist').DataTable();
     } );
     </script>
 
@@ -72,14 +77,10 @@
 
     <style type = "text/css">
   
-        td{
-            vertical-align: middle;
-     
+
+        #size{
+            width: 10%;
         }
-        .btng{
-            width: 50px;
-        }
-        
 
         @media (max-width: 576px){
          
@@ -166,53 +167,62 @@
                                 
                             </div>
                             </div>
+        
                             <div class="tab-pane fade show " id="properties">
                                     <div class="container g-0 pt-2">
                                         <div class="row bg-599 text-white rounded-top">
                                             <div class="fs-5 px-2"><i class="fa fa-warehouse mx-1"></i>Available Properties</div>
                                         </div>
                                         <div class="row border-end border-start border-bottom">
-                                            <div class="row pb-2 px-4 g-0 justify-content-end">
+                                            <div class="row pb-2  g-0 justify-content-end">
                                                 <div class="col-3 ">
                                                     <div class="btn-group float-end">
                                                         <a href = "#new-property"  data-bs-toggle ="modal" role = "button"class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus mx-1"></i><span class= "wal">New Property</span></a>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row ps-4" >
-                                                <div class= "col" style= "overflow-x:auto;">
-                                                <table class="table table-striped table-bordered" style= "min-width:900px;">
+                                            <div class="row  ps-4 px-2 "  >
+                                                <div class= "col-xl-12 col-lg-12" style= "overflow-x:auto;">
+                                                <table class="table table-striped table-bordered" id = "rlist"  style= "min-width:880px;">
                                                     <thead>
-                                                        <tr>                        
-                                                            <th style = "text-align: left;">Property Name</th>
-                                                            <th style = "text-align: left; ;">Availablility</th>
-                                                            <th style = "text-align: left; ">Rate <span class="ms-1 fs-6 text-muted"> (per hour)</span></th>
-                                                        
-                                                            <th style = "text-align: center;">Action</th>
-                                                        </tr>
+                                                        <th >
+                                                            Property
+                                                        </th>
+                                                        <th>
+                                                            Available
+                                                        </th>
+                                                        <th>
+                                                            Rate (per hour, ₱)
+                                                        </th>
+                                                        <th class= "text-center" >
+                                                            Action
+                                                        </th>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                            <td scope="col" style = "text-align: left">Basketball Court</td>
-                                                            <td scope="col" style = "text-align: left">Available</td>
-                                                            <td scope="col" style = "text-align: right">₱ 20</td>
-                                                         
-                                                            <td scope="col" style = "text-align: center">
-                                                                <div class="btn-group  mb-1" role="group" aria-label="First group">
-                                                                        <button  type="button" href ="#check-property" data-bs-toggle="modal" role="button" class="btn  btn-primary"><i class = "fa fa-eye mx-1"></i><span class = "wal"> View</span></button>
-                                                                    </div>
-                                                                    <div class="btn-group  mb-1" role="group" aria-label="First group">
-                                                                        <a href ="#edit-property    " data-bs-toggle ="modal" role ="button" class="btn btn-success" ><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
-                                                                    </div>
-                                                                    <div class="btn-group mb-1" role="group" aria-label="First group">
-                                                                        <a type="button" href ="#delete-prop" data-bs-toggle = "modal" role = "button" class="btn btn-danger" ><i class = "fa fa-trash mx-1"></i><span class= "wal">Delete</span></a>
-                                                                    </div>
-                                                                    
+                                                        <tr>
+                                                            <td>
+                                                                Basketball Court
+                                                            </td>
+                                                            <td>
+                                                                Available
+                                                            </td>
+                                                            <td style= "text-align: right">
+                                                                20.00
+                                                            </td>
+                                                            <td style= "width: 30%; text-align:center">
+                                                                <div class="btn-group">
+                                                                <button  type="button" href ="#check-property" data-bs-toggle="modal" role="button" class="btn  btn-primary"><i class = "fa fa-eye px-1"></i><span class = "wal"> View</span></button>
+                                                                </div>
+                                                                <div class="btn-group">
+                                                                <a href ="#edit-property    " data-bs-toggle ="modal" role ="button" class="btn btn-success" ><i class = "fa fa-edit px-1"></i><span class= "wal">Edit</span></a>
+                                                                </div>
+                                                                <div class="btn-group">
+                                                                <a type="button" href ="#delete-prop" data-bs-toggle = "modal" role = "button" class="btn btn-danger" ><i class = "fa fa-trash px-1"></i><span class= "wal">Delete</span></a>
+                                                                </div>
                                                             </td>
                                                         </tr>
-                                                
-                                            
                                                     </tbody>
+                                                    
                                                 </table>
                                                 </div>
                                             </div>
@@ -232,7 +242,7 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger" >
                     <div class="modal-header  white ">
-                        <h5 class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
+                        <div class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -305,9 +315,9 @@
     <form action="" method ="POST">
         <div class="modal fade" id = "edit-property" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 blue">
-                    <div class="modal-header blue white ">
-                        <h5 class="modal-title" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Basketball Court</h5>
+                <div class="modal-content g-0 border-0">
+                    <div class="modal-header bg-599 border-599 text-white ">
+                        <div class="modal-title" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Basketball Court</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -372,9 +382,9 @@
     <form action="" method ="POST">
         <div class="modal fade" id = "new-property" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 blue">
-                    <div class="modal-header blue white ">
-                        <h5 class="modal-title" >&nbsp;<i class = "fa fa-plus"></i>&nbsp;&nbsp;New Property</h5>
+                <div class="modal-content g-0 border-0">
+                    <div class="modal-header bg-599 border-599 text-white ">
+                        <div class="modal-title" >&nbsp;<i class = "fa fa-plus"></i>&nbsp;&nbsp;New Property</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -425,9 +435,9 @@
     </form>
     <div class="modal fade" id = "check-property" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 blue">
-                    <div class="modal-header blue white ">
-                        <h5 class="modal-title" >&nbsp;<i class = "fa fa-eye"></i>&nbsp;&nbsp;Basketball Court</h5>
+                <div class="modal-content g-0 border-0">
+                    <div class="modal-header bg-599 border-599 text-white ">
+                        <div class="modal-title" >&nbsp;<i class = "fa fa-eye"></i>&nbsp;&nbsp;Basketball Court</div>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white ">

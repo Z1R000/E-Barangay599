@@ -143,7 +143,7 @@
                         </div>
                         <div class="row border g-0">
                             <div class="col-xl-12 mx-2  mx-auto py-3  px-3">
-                                    <table class="table bg-white table-hover "> 
+                                    <table class="table bg-white table-hover" > 
                                         <thead>
                                             <tr>
                                                 <td scope = "col" colspan = 8 style ="background: #012f6e; color: white; text-align: center">Certification Records</td>

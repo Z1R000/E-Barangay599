@@ -60,13 +60,13 @@
                     
                 
                 },
-            
                 {
                     extend: 'excelHtml5',
                     text: 'Excel File',
                     className: 'btn-success my-1',
                     exportOptions: {columns: [0,1,2,3,4,5]}
                 },
+
                
              
                 
@@ -86,7 +86,15 @@
     $(document).ready(function() {
     $('#clist').DataTable();
     } );
+
     </script>
+    <script>
+    $(document).ready(function() {
+    $('#cpay').DataTable();
+    } );
+    
+    </script>
+
 
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 
@@ -201,7 +209,7 @@
                                         <div class="fs-5 px-2"><i class="fa fa-copy mx-1"></i>Certification Records</div>
                                     </div>
                                 
-                                    <div class="row py-2 bg-white border-start border-bottom border-end">
+                                    <div class="row py-2 bg-white  mb-5 py-5 border-start border-bottom border-end">
                                         <div class="row pb-2 px-4 g-0 justify-content-end">
                                             <div class="col-3 ">
                                                 <div class="btn-group float-end">
@@ -266,7 +274,7 @@
                                         <div class="row shadow-sm py-1 bg-599 text-white rounded-top">
                                             <div class="fs-5 px-2"><i class="fa fa-money-bill mx-1"></i>Payment Logs</div>
                                         </div>
-                                        <div class="row bg-white py-4 border-start border-bottom border-end">
+                                        <div class="row bg-white py-4 mb-5 border-start border-bottom border-end">
                                             <div class="col-xl-6" style = "overflow:auto;">
                                                 <table class= "table table-striped table-bordered" id = "cpay" style = "min-width: 200px;max-height: 600px">
                                                     <thead>
@@ -390,7 +398,7 @@
                                             <div class="fs-5 px-2"><i class="fa fa-stamp mx-1"></i>Available Certificates</div>
                                         </div>
                                     </div>
-                                    <div class="row py-2 bg-white border-start border-bottom border-end">
+                                    <div class="row py-2 bg-white mb-5 py-5 border-start border-bottom border-end">
                                         <div class="row pb-2 px-4 g-0 justify-content-end">
                                             <div class="col-3 ">
                                                 <div class="btn-group float-end">
@@ -400,7 +408,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-xl-12 ps-5" style = "overflow-x:auto;">
-                                                <table class= "table table-striped table-bordered" style = "min-width: 900px;">
+                                                <table class= "table table-striped table-bordered" id= "clist" style = "min-width: 900px;">
                                                     <thead>
 
                                                     <tr>
@@ -652,15 +660,28 @@
                             
                             
                         </div>
-                                   </div>
-            <div class="modal-footer bg-white border-top-0 py-0">
+                        <div class="row g-0 ">
+                            <div class="col-xl-12  my-2">
+                                <div class="float-end">
+                                    <div class="btn-group">
+                                        <button type = "submit" class="btn btn-success rounded"  name = "Submit" value ="Submit">
+                                        <i class="fa fa-check mx-1"></i>Submit
+                                        </button>
+
+                        
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type = "button" class="btn btn-secondary rounded" data-bs-dismiss ="modal" role  ="button"  name = "Cancel" value ="Cancel">
+                                        <i class="fa fa-times-circle mx-1"></i>Cancel                                    
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+                    <div class="modal-footer bg-white border-top-0 py-0">
             
-                        <button type = "submit" class="btn btn-success rounded"  name = "Submit" value ="Submit">
-                            Submit
-                        </button>
-                        <button type = "button" class="btn btn-danger rounded" data-bs-dismiss ="modal" role  ="button"  name = "Cancel" value ="Cancel">
-                            Discard                                    
-                        </button>
+                   
                     
 
                 

@@ -4,7 +4,7 @@
                                     </div>
                                         <div class="row bg-white py-4 border-start border-bottom border-end">
                                             <div class="col-xl-6" style = "overflow:auto;">
-                                                <table class= "table table-striped table-bordered" id = "cpay" style = "min-width: 200px;max-heigth: 600px">
+                                                <table class= "table table-striped table-bordered" id = "rpay" style = "min-width: 200px;max-height: 600px">
                                                     <thead>
                                                             <th style = "text-align: left">Rental</th>
                                                             <th style = "text-align: left">Requestor</th>

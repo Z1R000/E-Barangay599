@@ -152,7 +152,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white ">                       
-                        <div class="row gx-3">
+                        <div class="row ">
                                 <div class="col-xl-12" >
                                     <div class="row">
                                         <div class="col-6 ">
@@ -218,7 +218,7 @@
                                 
                                     </div>
                             
-                                    <div class="row">
+                                    <div class="row ">
 
                                     
                                         <div class="col-xl-6" >  
@@ -237,16 +237,25 @@
                                             </select>
                                     </div>
                                     
-                                    <div class="row " align= "right">
-                                        <div class="col-md-12     mx-auto my-2">
-                                            <button type ="button" role = "button" class="btn btn-success px-2" >
-                                                <i class="fa fa-upload mx-1"></i>
-                                                Submit
-                                            </button>
-                                            <button type ="button" role = "button" class="btn btn-secondary px-2" data-bs-dismiss= "modal" >
-                                                <i class="fa fa-times-circle mx-1"></i>
-                                                Cancel
-                                            </button>
+                                    <div class="row g-0 my-2  " >
+                                     
+                                        <div class="col-md-12 pe-2">
+                                            <div class="float-end">
+                                                
+                                                <div class="btn-group">
+                                                <button type ="button" role = "button" class="btn btn-success " >
+                                                    <i class="fa fa-upload mx-1"></i>
+                                                    Submit
+                                                </button>
+                                                </div>
+                                                <div class="btn-group">
+                                                <button type ="button" role = "button" class="btn btn-secondary" data-bs-dismiss= "modal" >
+                                                    <i class="fa fa-times-circle mx-1"></i>
+                                                    Cancel
+                                                </button>
+                                                </div>
+                                                
+                                                </div>
                                         </div>
                                     </div>
                         
@@ -354,8 +363,8 @@
                                             </select>
                                     </div>
                                     
-                                    <div class="row " align= "right">
-                                        <div class="col-md-12     mx-auto my-2">
+                                    <div class="row g-0" align= "right">
+                                        <div class="col-md-12  px-3 mx-auto my-2">
                                         
                                             <button type ="button" role = "button" style = "" class="btn btn-primary px-2" >
                                                 <i class= "fa fa-save mx-1"></i>
@@ -386,7 +395,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white ">
-                    <div class="row gx-3">
+                        <div class="row gx-3">
                                 <div class="col-xl-12" >
                                     <div class="row">
                                         <div class="col-6 ">
@@ -466,8 +475,8 @@
                                         
                                             </select>
                                     </div>
-                                    <div class="row " align= "right">
-                                        <div class="col-md-12     mx-auto my-2">
+                                    <div class="row g-0 " align= "right">
+                                        <div class="col-md-12     pe-2 my-2">
                                         
                                             <button type ="button" role = "button" class="btn btn-secondary px-2" data-bs-dismiss= "modal">
                                                 Done

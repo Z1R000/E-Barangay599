@@ -360,7 +360,7 @@
                     
                         </div>
                         <div class="row">
-                            <p class = "fs-4 text-center">A new certificate template is about to be made, do you wish to continue?<br></p>
+                            <p class = "fs-4 text-center">A new certificate template is about to be updated, do you wish to continue?<br></p>
                         </div>
                         <div class="row">
                             <div class="col-xl-12">
