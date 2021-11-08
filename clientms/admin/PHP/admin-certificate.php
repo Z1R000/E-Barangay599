@@ -277,13 +277,10 @@
                                         <div class="row bg-white py-4 mb-5 border-start border-bottom border-end">
                                             <div class="col-xl-6" style = "overflow:auto;">
                                                 <table class= "table table-striped table-bordered" id = "cpay" style = "min-width: 200px;max-height: 600px">
-                                                    <thead>
-
-                                                    
+                                                    <thead>                                                    
                                                             <th style = "text-align: left">Request</th>
                                                             <th style = "text-align: left">Requestor</th>
                                                             <th style = "text-align: left">Proof of Payment</th>
-                                                 
                                                     </thead>  
                                                         <tbody>
                                                                 <tr>
@@ -580,8 +577,10 @@
                     
                             <label for="rname"class="fs-6 fw-bold">Requestor Name</label>
                             <input type="text" class="form-control" name="search" id="search" placeholder ="e.g Juan Dela Cruz" autocomplete="off" required>
-                            <div class="list-group" id="show-list" style="position: absolute;">
+                            <div class="col" style= "z-index: 9;position:relative">
+                            <div class="list-group w-75"  id="show-list" style="position: absolute">
                             <!-- Here autocomplete list will be display -->
+                            </div>
                             </div>
                                         
                         </div>
@@ -626,7 +625,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2"style= "z-index: 0;">
                                 <label for="rname"class="fs-6 fw-bold"> Fee</label>
                                 <div class="d-flex">
                                     <div class="input-group">
@@ -691,7 +690,7 @@
             </form>
         
   <script>
-      $(document).ready(function () {
+$(document).ready(function () {
   // Send Search Text to the server
   $("#search").keyup(function () {
     let searchText = $(this).val();

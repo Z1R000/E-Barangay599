@@ -1,4 +1,55 @@
+<?php
+  session_start();
+  error_reporting(0);
+  include('includes/dbconnection.php');
+  if (strlen($_SESSION['clientmsaid']==0)) {
+  header('location:logout.php');
+  }else{
+    $id = $_GET['id'];
 
+    $sql = 'SELECT * from tblblotter where ID ="'.$id.'"';  
+    $query = $dbh -> prepare($sql);
+    $query->execute();
+    $results =$query->fetchAll(PDO::FETCH_OBJ);
+    $arr = [];
+    
+    foreach($results as $rows){
+        $cdate = $rows->blotterCreationDate;
+        $idate = $rows->incidentDate;
+        array_push($arr,$rows->complainant);
+        array_push($arr,$rows->blotterType);
+        array_push($arr,date('l, j F Y - h:i A', strtotime($incedentDate)));
+        array_push($arr,$rows->blotterSummary);
+        array_push($arr,$rows->ID);
+        array_push($arr,$rows->respondent);           
+    }
+    $sql = 'SELECT tbladmin.BarangayPosition , tblresident.LastName,tblresident.FirstName,tblresident.MiddleName
+    FROM tblresident 
+    INNER JOIN tbladmin ON tbladmin.residentID = tblresident.ID AND tbladmin.ID = 1';
+    $query = $dbh -> prepare($sql);
+    $query->execute();
+    $results =$query->fetchAll(PDO::FETCH_OBJ);
+    $arr_admin = [];
+    foreach($results as $rows){
+      array_push($arr_admin,$rows->LastName.",".$rows->FirstName." ".$rows->MiddleName);  
+    }
+    $sql = 'SELECT tbladmin.BarangayPosition , tblresident.LastName,tblresident.FirstName,tblresident.MiddleName
+    FROM tblresident 
+    INNER JOIN tbladmin ON tbladmin.residentID = tblresident.ID AND tblresident.ID = 2';
+    $query = $dbh -> prepare($sql);
+    $query->execute();
+    $results =$query->fetchAll(PDO::FETCH_OBJ);
+    foreach($results as $rows){
+
+      echo $rows->LastName.",".$rows->FirstName." ".$rows->MiddleName;
+
+    }
+    
+   
+    
+        
+    
+?>
 
 
 <!DOCTYPE html>
@@ -11,10 +62,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="../css/cert.css">
-  <title>business Clearance</title>
+  <title>Blotter Report</title>
   <style>
     html,body {
-     
       height: 100%;
       font-family:'arial';
     }
@@ -147,23 +197,27 @@
             <table>
                 <tr>
                     <td>Complainant Name:</td>
-                    <th>--Supplied Name of complainant--</th>
+                    <th><?php echo $arr[0]; ?></th>
                 </tr>
                 <tr>
                     <td>Incident type:</td>
-                    <th>--Supplied type of incident--</th>
+                    <th><?php echo $arr[1]?></th>
                 </tr>
                 <tr>
                     <td>Incident date & time:</td>
-                    <th>--Supplied date and time of incident--</th>
+                    <th><?php echo $arr[2]?></th>
                 </tr>
                 <tr>
-                    <td>Summary of complainant</td>
+                    <td>Summary of complainant:</td>
                    
                 </tr>
+             </table>
+             <table class= "mt-5">
                 <tr>
                     <td>
-                     <p align = "justify" id = "indent">-----supplied summary here----</p>
+                    <div class= "col-12">
+                     <p align = "justify" id = "indent"><?php echo $arr[3]?></p>
+                  </div>
                     </td>
                 </tr>
             
@@ -196,7 +250,7 @@
                     
                     <tr>
                       <td>
-                        Chairman Name
+                        <?php echo $arr_admin[0]; ?>
                       </td>
                     </tr>
                     <tr>
@@ -225,7 +279,7 @@
                   
                   <tr>
                     <td>
-                       --Supplied Respondent name--
+                    <?php echo $arr[5]; ?>
                     </td>
                   </tr>
                   <tr>
@@ -252,7 +306,7 @@
                   
                   <tr>
                     <td>
-                        Secretary name <!--Supply from secretary postions db-->
+                    <?php    echo $arr_admin[1]; ?>
                     </td>
                   </tr>
                   <tr>
@@ -266,7 +320,7 @@
         <div class="container">
           <div class="col">
             <div class="float-end">
-              <b>blotter id 015-22</b><!--supply with blotter id-->
+              <b>blotter id: <?php echo "BI-".$arr[4]?></b><!--supply with blotter id-->
             </div>
           </div>
         </div>
@@ -287,3 +341,4 @@
   </main>
 </strongody>
 </html>
+<?php   } ?>

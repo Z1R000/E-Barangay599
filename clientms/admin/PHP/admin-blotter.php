@@ -1,5 +1,14 @@
 <?php 
     $curr ="Blotter";
+    session_start();
+    error_reporting(0);
+    include('includes/dbconnection.php');
+    if (strlen($_SESSION['clientmsaid']==0)) {
+    header('location:logout.php');
+    }else{
+    
+    
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +18,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $curr;?></title>
    
-    <?php include ('link.php');?>
+    <?php include ('link.php');
+           
+           
+    ?>
     <script>
           $(document).ready(function() {
         $('#brecord').DataTable( {
@@ -119,6 +131,7 @@
 
     <?php 
         include ('../includes/sidebar.php');
+       
     ?> 
     <div class="d-flex align-items-center">
                 <div class="container  mt-3">
@@ -136,7 +149,7 @@
             </div>
         </div>
     </nav> 
- 
+  
     <div class="container px-5 mb-5">
             <div class=" row g-0">
                 <div class="col">
@@ -158,48 +171,119 @@
                             </div>
                             <div class="row">
                             <div class="col-xl-12 mx-2  mx-auto py-2  px-2" style= "overflow-x:auto">
+                                  
                                     <table class="table bg-white table-hover table-bordered  "  id ="brecord"style= "min-width: 1200px;"> 
+
                                         <thead class = "bg-light">
-                                            <tr>
-                                        
-                                            </tr>
                                             <tr>
                                                 <th style = "text-align: left">Status</th>
                                                 <th style = "text-align: left">Complainant</th>
                                                 <th style = "text-align: left">Incident Type</th>
                                                 <th style = "text-align: left">Date Time Reported</th>
-                                                <th style = "text-align: left">Incident's Estimated Time </th>
+                                                <th style = "text-align: left">Incident Date </th>
                                                 <th style = "text-align: center">Actions</th>
                                                 
                                             </tr>
-                                        
-                                        </thead>           
+                                        </thead>
                                         <tbody class= "table-hover">
-                                            <tr>
-                                                <td scope="col" style = "text-align: left">On-going</td>
-                                                <td scope="col" style = "text-align: left">Mang Berting</td>
-                                                <td scope="col" style = "text-align: left">Public Disturbance</td>
-                                         
-                            
+                                            <?php
+                                            
                                                 
-                                                <td scope="col" style = "text-align: right">12-10-2021</td>
-                                                <td scope="col" style = "text-align: right">6:00pm</td>
-                                                <td scope="col" style = "text-align: center">
-                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="" href ="blotter-report.php"class="btn btng btn-primary"><i class = "fa fa-print mx-1"></i><span class="wal"> Print</span></a>
+                                                $sql ="SELECT * from tblblotter";
+                                                $query = $dbh -> prepare($sql);
+                                                $query->execute();
+                                                $results =$query->fetchAll(PDO::FETCH_OBJ);
+                                                $ctr =1;
+                                                foreach ($results as $rows){
+                                                    $cdate = $rows->blotterCreationDate;
+                                                    $idate = $rows->incidentDate;
+                                                    echo'
+                                                    <tr>
+                                                        <td scope="col" style = "text-align: left">'.$rows->blotterStatus.'</td>
+                                                        <td scope="col" style = "text-align: left">'.$rows->complainant.'</td>
+                                                        <td scope="col" style = "text-align: left">'.$rows->blotterType.'</td>
+                                                        <td scope="col" style = "text-align: left">'.date('l, j F Y - h:i A', strtotime($cdate)).'</td>
+                                                        <td scope="col" style = "text-align: left">'.date('l, j F Y - h:i A', strtotime($idate)).'</td>
+                                                        <td scope="col" style = "text-align: center">
+                                                            
+                                                            <div class="btn-group me-1 mb-1"  aria-label="First group">
+                                                              <form action = "blotter-report.php" method= "GET">
+                                                                <button type="submit" name= "id" value = "'.$rows->ID.'"class="btn btng btn-primary"><i class = "fa fa-print mx-1"></i><span class="wal"> Print</span></button>
+                                                                </form>
+                                                                
+                                                            </div>
+                                                            
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                <form action = "edit-blotter.php" method = "GET">
+                                                                <button name = "bid"  value = "'.$rows->ID.'" class="btn btng btn-success"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></buttonn>
+                                                                </form>
+                                                            </div>
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                <a type="button" href ="#delete-record'.$ctr.'" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
+                                                            </div>
+                                                        
+                                                        </td>                                                                      
+                                                        </tr>
+
+
+                                                        <div class="modal fade" id = "delete-record'.$ctr.'" tab-idndex = "-1">
+                                                            <div class="modal-dialog modal-dialog-centered modal-md">
+                                                                <div class="modal-content g-0 bg-danger ">
+                                                                    <div class="modal-header bg-danger white ">
+                                                                        <div class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</div>
+                                                                        
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body bg-white">
+                                                                        <div class="row">
+                                                                            <div class="col xl-4" align = "center">
+                                                                                <img src="../images/trash.png" alt="trash" class= " img-fluid " style ="width: 10%;">
+                                                                            </div>
+                                                                    
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <p class = "fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
+                                                                        </div>
+                                                                        <div class="row justify-content-center" align = "center">
+                                                                        <form method = "POST" action = "#">
+                                                                            <div class="col-xl-12">
+                                                                                <div class="float-end">
+                                                                                    <div class="btn-group">
+                                                                                        <button type = "button" class="btn btn-success " data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                                                                    <i class= "fa fa-check mx-1"></i>Confirm
+                                                                                </button>
+                                                                                </div>
+                                                                                <div class="btn-group">
+                                                                                <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                                                                    <i class= "fa fa-times-circle mx-1"></i>Cancel
+                                                                                </button>
+                                                                                </div>
+                                                                        
+                                                                            </div>
+                                                                            </div>
+                                                                            </form>
+                                                                        </div>
+                                                                
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
+                                                        
+                                                                                                    
                                                     
-                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a href ="edit-blotter.php"class="btn btng btn-success"><i class = "fa fa-edit mx-1"></i><span class="wal">Edit</span></a>
-                                                        </div>
-                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
-                                                        </div>
-                                                    
-                                                </td>
-                                            </tr>
+                                                    ';
+                                                    $ctr ++;
+                                                   
+                                                }
+                                                
+                                            ?>
+                                            
                                         </tbody>
-                                    </table>                        
+                                    </table>
+                                    </div>                        
                                 </div>   
                             </div>
                             </div> 
@@ -210,59 +294,14 @@
     </div>
 
     </form>
-   
+    
+
     <!--modal-->
         <?php
             include('services.php');
         ?>
        
-        <div class="modal fade" id = "delete-record" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 bg-danger ">
-                    <div class="modal-header bg-danger white ">
-                        <div class="modal-title" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</div>
-                        
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-white">
-                        <div class="row">
-                            <div class="col xl-4" align = "center">
-                                <img src="../images/trash.png" alt="trash" class= " img-fluid " style ="width: 10%;">
-                            </div>
-                    
-                        </div>
-                        <div class="row">
-                            <p class = "fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
-                        </div>
-                        <div class="row justify-content-center" align = "center">
-                        <form method = "POST" action = "#">
-                            <div class="col-xl-12">
-                                <div class="float-end">
-                                    <div class="btn-group">
-                                        <button type = "button" class="btn btn-success " data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                    <i class= 'fa fa-check mx-1'></i>Confirm
-                                </button>
-                                </div>
-                                <div class="btn-group">
-                                <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
-                                    <i class= "fa fa-times-circle mx-1"></i>Cancel
-                                </button>
-                                </div>
-                           
-                            </div>
-                            </div>
-                            </form>
-                        </div>
-                
-                    </div>
-                    <div class="modal-footer">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-
-      
-    
-</body>
+        
+    </body>
 </html>
+<?php  }?>

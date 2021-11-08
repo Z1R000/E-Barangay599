@@ -1,5 +1,24 @@
 <?php 
     $curr ="Blotter Filing";
+    session_start();
+    error_reporting(0);
+    include('includes/dbconnection.php');
+    if (strlen($_SESSION['clientmsaid']==0)) {
+    header('location:logout.php');
+    }else{
+    $arr = [
+        $_POST['comp'],
+        $_POST['resp'],
+        $_POST['inv'],
+        $_POST['btype'],
+        $_POST['inciDate'],
+        $_POST['inciAdd'],
+        $_POST['narr'],
+        date('d/m/Y h:i sa')
+    ];
+
+        
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,7 +108,7 @@
                         <div class="col-xl-5"></div>
                         <div class="col-xl-7">
                             <div class="float-end">
-                                <a href="#" onclick = "window.history.back();" class="link link-primary text-decoration-none fs-4"><i class="fa fa-arrow-circle-left me-2"></i>Cancel Blotter Filing</a>
+                                <a href="admin-blotter.php" class="link link-primary text-decoration-none fs-4"><i class="fa fa-arrow-circle-left me-2"></i>Cancel Blotter Filing</a>
                             </div>
                             
                         </div>
@@ -107,8 +126,13 @@
                             <div class="row px-2 g-2 px-3 pt-2 pb-3 ">
                                 <div class="col-md-5">
                                     <label for="rname"class= "fw-bold fs-6">Complainant Name: </label>
-                                    <input type="text" class="form-control" placeholder = "e.g Juan Dela Cruz">
+                                    <input name = "comp" type="text" id = "search" class="form-control" placeholder = "e.g Juan Dela Cruz">
                                     <!--intellisence resident list-->
+                                    <div class="col" style= "z-index: 9;position:relative">
+                                    <div class="list-group w-100"  id="show-list" style="position: absolute">
+                                    <!-- Here autocomplete list will be display -->
+                                    </div>
+                                    </div>
                                 </div>     
                                     
                             </div>
@@ -136,9 +160,7 @@
                                                                 <option value="">Kagawad 2</option>
                                                         </select>
                                            
-                                                            <div class="btn-group mx-2">
-                                                                <button id="removekag" type="button" class="btn btn-secondary" disabled>Remove</button>
-                                                            </div>
+                                                            
                                                             <div class="btn-group mx-2">
                                                                 <button id="addkag" type="button" class="btn btn-primary "><i class= "fa fa-plus me-2"></i>Add Respondent</button>
                                                             </div>
@@ -168,9 +190,7 @@
                                             <div class="col-lg-8">
                                                 <div class="input-group mb-3">
                                                     <input type="text" name="kag[]" class="form-control" placeholder="Involved person 1" >  
-                                                    <div class="btn-group mx-2">
-                                                        <button id="removeper" type="button" class="btn btn-secondary" disabled>Remove</button> 
-                                                    </div>      
+                                                       
                                                     <div class="btn-group mx-1"> 
                                                         <button id="addper" type="button" class="btn btn-primary white"><i class= "fa fa-plus me-2"></i> Add Involved</button>   
                                                     </div>  
@@ -197,13 +217,24 @@
                                 
                              
                               <div class="col-md-5">
+                                  <?php
+                                    $sql= "SELECT * FROM tblbtype";
+                                    $query = $dbh->prepare($sql);
+                                    $query->execute();
+                                    $resultsbt = $query->fetchAll(PDO::FETCH_OBJ);
+                                    $btypes = '<option selected disabled>Incident Type</option>';
+                                    foreach($resultsbt as $bt){
+                                        $btypes .= '<option value = '.$bt->btype.'>'.$bt->btype.'</option>';
+                                    }
+                                                                
+                                  
+                                  
+                                  ?>
                                     <label for="btype"class= "fw-bold fs-6">Incident Type: </label>
-                                    <select class="form-select input-sm" id = "btype" aria-label="Default select example">
-                                        <option selected>Select Blotter type</option>
-                                        <option value="homeowner">Violence</option>
-                                        <option value="caretaker">Vehicular Related</option>
-                                        <option value="rental">Public Disturbance</option>
-                                        <option value="wrelative">Littering</option>
+                                    <select class="form-select input-sm" id = "btype" name= "btype" aria-label="Default select example">
+                                        <?php
+                                            echo $btypes;
+                                        ?>
                                     </select>
                                 </div>    
                          
@@ -218,8 +249,8 @@
                                 <div class="col-md-5 ms-2 ">
                                     
                                     <label for="narrative" class= "fw-bold fs-6">Incident Date and time</label>
-                                    <input type="datetime-local" class="form-control" name='inciDate-start'>
-                
+                                    <input type="datetime-local" class="form-control" name='inciDate'>
+                 
 
                                 </div>
                                 <div class="col-md-5 ms-2">
@@ -235,7 +266,7 @@
                             <div class="row g-0 px-3 py-2">
                                 <div class="col-md-12 mb-3">
                                     <label for="narrative" class= "fw-bold fs-6">Incident Narrative </label><br>
-                                    <textarea class= "form-control" type = "text" name="" id="narrative"   rows="6" style= "resize: none;" placeholder ="Complainant's Summary"></textarea>
+                                    <textarea class= "form-control" type = "text" name="narr" id="narrative"   rows="6" style= "resize: none;" placeholder ="Complainant's Summary"></textarea>
                                   
                                 </div>
                                 
@@ -309,7 +340,32 @@
                 </div>
             </div>
         </div>
-        
+        <script>
+$(document).ready(function () {
+  // Send Search Text to the server
+  $("#search").keyup(function () {
+    let searchText = $(this).val();
+    if (searchText != "") {
+      $.ajax({
+        url: "searchname.php",
+        method: "post",
+        data: {
+          query: searchText,
+        },
+        success: function (response) {
+          $("#show-list").html(response);
+        },
+      });
+    } else {
+      $("#show-list").html("");
+    }
+  });
+  $(document).on("click", "#clicks", function () {
+    $("#search").val($(this).text());
+    $("#show-list").html("");
+  });
+});
+  </script>   
 
     <script type="text/javascript">
         var x = 0;
@@ -374,3 +430,4 @@
 
 </body>
 </html>
+<?php }?>
