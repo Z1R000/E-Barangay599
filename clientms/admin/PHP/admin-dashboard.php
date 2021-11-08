@@ -7,6 +7,13 @@
     header('location:logout.php');
     }else{
 
+        $sql ="SELECT * from tblblotter";
+
+        $query = $dbh -> prepare($sql);
+        $query->execute();
+        $results =$query->fetchAll(PDO::FETCH_OBJ);
+        $types = "  <option disabled selected>Select Blotter type</option>";
+
  
 ?>
 <!DOCTYPE html>

@@ -1,5 +1,17 @@
 <?php 
     $curr ="Rentals";
+    $curr ="Blotter Filing";
+    session_start();
+    error_reporting(0);
+    include('includes/dbconnection.php');
+    if (strlen($_SESSION['clientmsaid']==0)) {
+    header('location:logout.php');
+    }else{
+        $sql= "SELECT * FROM tblcreaterental";
+        $query = $dbh->prepare($sql);
+        $query->execute();
+        $results = $query->fetchAll(PDO::FETCH_OBJ);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +23,7 @@
     <?php
          include('link.php');
     ?>
+    
     <script>
           $(document).ready(function() {
         $('#rrecord').DataTable( {
@@ -531,3 +544,4 @@
 
 </body>
 </html>
+<?php } ?>

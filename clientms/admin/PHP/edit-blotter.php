@@ -1,5 +1,28 @@
 <?php 
     $curr ="Edit Blotter Record";
+    session_start();
+    error_reporting(0);
+    include('includes/dbconnection.php');
+    if (strlen($_SESSION['clientmsaid']==0)) {
+    header('location:logout.php');
+    }else{
+
+    $bid = $_GET['bid'];
+        
+    $sql = 'SELECT * from tblblotter where ID ="'.$bid.'"';  
+    $query = $dbh -> prepare($sql);
+    $query->execute();
+    $results =$query->fetchAll(PDO::FETCH_OBJ);
+    $arr = [];
+    foreach ($results as $row){
+        $indcedentDate = $row->$incedentDate;
+        array_push($arr, $row->complainant);        
+        array_push($arr, $row->respondent);
+        array_push ($arr, $row->blotterType);
+        array_push($arr,date('l, j F Y - h:i A', strtotime($incedentDate)));
+        array_push($arr,$row->incidentLocation);
+        array_push($arr,$row->blotterSummary);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,10 +119,9 @@
                             <div class="row px-2 g-2 px-3 pt-2 pb-3 ">
                                 <div class="col-md-5">
                                     <label for="rname"class= "fw-bold fs-6">Complainant Name: </label>
-                                    <input type="text" class="form-control" placeholder = "e.g Juan Dela Cruz">
+                                    <input type="text" name= "comp" value = "<?php echo $arr[0]?>" class="form-control" placeholder = "e.g Juan Dela Cruz">
                                     <!--intellisence resident list-->
                                 </div>     
-                                    
                             </div>
                         </div>
                     </div>
@@ -120,14 +142,10 @@
                                                 <div id="inputFormRow">
                                                     <div class="input-group mb-3">
                                                         <Select type="text" name="kag[]" class="form-select" placeholder="" >
-                                                                <option value="">--Kagawad--</option>
-                                                                <option value="">Kagawad 1</option>
-                                                                <option value="">Kagawad 2</option>
+                                                               
                                                         </select>
                                            
-                                                            <div class="btn-group mx-2">
-                                                                <button id="removekag" type="button" class="btn btn-secondary" disabled>Remove</button>
-                                                            </div>
+                                                         
                                                             <div class="btn-group mx-2">
                                                                 <button id="addkag" type="button" class="btn btn-primary "><i class= "fa fa-plus me-2"></i>Add Respondent</button>
                                                             </div>
@@ -157,9 +175,7 @@
                                             <div class="col-lg-8">
                                                 <div class="input-group mb-3">
                                                     <input type="text" name="kag[]" class="form-control" placeholder="Involved person 1" >  
-                                                    <div class="btn-group mx-2">
-                                                        <button id="removeper" type="button" class="btn btn-secondary" disabled>Remove</button> 
-                                                    </div>      
+                                                   
                                                     <div class="btn-group mx-1"> 
                                                         <button id="addper" type="button" class="btn btn-primary white"><i class= "fa fa-plus me-2"></i> Add Involved</button>   
                                                     </div>  
@@ -186,14 +202,27 @@
                                 
                              
                               <div class="col-md-5">
+                                    <?php    
+                                        $sql = 'SELECT * from tblbtype ';  
+                                        $query = $dbh -> prepare($sql);
+                                        $query->execute();
+                                        $results =$query->fetchAll(PDO::FETCH_OBJ);
+                                        $bty = '';
+                                        foreach($results as $row){
+                                            if ($arr[2]==$row->btype){
+                                                $bty.= '<option value = "'.$arr[2].'"selected>'.$row->btype.'</option>';
+                                            }
+                                            else{
+                                                $bty.= '<option value = "'.$row->btype.'">'.$row->btype.'</option>';
+
+                                            }
+                                        }
+                                    ?>
                                     <label for="btype"class= "fw-bold fs-6">Incident Type: </label>
                                     <select class="form-select input-sm" id = "btype" aria-label="Default select example">
-                                        <option selected>Select Blotter type</option>
-                                        <option value="homeowner">Violence</option>
-                                        <option value="caretaker">Vehicular Related</option>
-                                        <option value="rental">Public Disturbance</option>
-                                        <option value="wrelative">Littering</option>
+                                        <?php echo $bty; ?>
                                     </select>
+
                                 </div>    
                          
                                 
@@ -203,17 +232,13 @@
                             </div>
                            
                             <div class="row gx-3 py-2 px-3">
-                                
                                 <div class="col-md-5 ms-2 ">
-                                    
                                     <label for="narrative" class= "fw-bold fs-6">Incident Date and time</label>
-                                    <input type="datetime-local" class="form-control" name='inciDate-start'>
-                
-
+                                    <input type="text" class="form-control" name='inciDate-start' value = "<?php echo $arr[3]?>" disabled>
                                 </div>
                                 <div class="col-md-5 ms-2">
                                     <label for="narrative" class= "fw-bold fs-6">Incident Location</label>
-                                    <input type="text" class="form-control" name='inciAdd' placeholder='e.g Near Purok 2 along the road'>
+                                    <input type="text" class="form-control" value = "<?php echo $arr[4]; ?>"name='inciAdd' placeholder='e.g Near Purok 2 along the road'>
                 
                                 </div>
                                 
@@ -224,7 +249,7 @@
                             <div class="row g-0 px-3 py-2">
                                 <div class="col-md-12 mb-3">
                                     <label for="narrative" class= "fw-bold fs-6">Incident Narrative </label><br>
-                                    <textarea class= "form-control" type = "text" name="" id="narrative"   rows="6" style= "resize: none;" placeholder ="Complainant's Summary"></textarea>
+                                    <textarea class= "form-control" type = "text" name="" id="narrative"   rows="6" style= "resize: none;" placeholder ="Complainant's Summary"><?php echo $arr[5]; ?></textarea>
                                   
                                 </div>
                                 
@@ -239,7 +264,7 @@
                                             <button type="button" href="#submit-record"  data-bs-toggle ="modal" role="modal"  class="btn btn-primary"><i class="fa fa-save mx-1"></i> Save</button>
                                             </div>
                                             <div class="btn-group">
-                                            <button type="button" onclick = "window.history.back()"  data-bs-toggle ="modal" role="modal"  class="btn btn-secondary"><i class="fa fa-arrow-circle-left mx-1"></i> Back</button>
+                                            <a type="button"  data-bs-toggle ="modal" role="modal" href = "admin-blotter.php"  class="btn btn-secondary"><i class="fa fa-arrow-circle-left mx-1"></i> Back</a>
                                             </div>
                                         </div>
                                         
@@ -272,7 +297,6 @@
                             <div class="col xl-4" align = "center">
                                 <i class="fa fa-suitcase"  style ="width: 10%;"></i>
                             </div>
-                    
                         </div>
                         <div class="row">
                             <p class = "fs-5 text-center">You are about to override data recorded for this blotter case, Are you certain. <br><span class="text-muted fs-6"></span></p>
@@ -365,3 +389,4 @@
 
 </body>
 </html>
+<?php } ?>

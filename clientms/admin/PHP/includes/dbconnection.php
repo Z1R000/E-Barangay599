@@ -13,4 +13,6 @@ try
 {
     exit("Error: " . $e->getMessage());
 }
+
+$connect = mysqli_connect("localhost", "root", "", "clientmsdb");
 ?>

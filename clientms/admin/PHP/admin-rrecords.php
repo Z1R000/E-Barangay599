@@ -13,6 +13,7 @@
                                             <div class="row g-0">
                                                 <div class="col-xl-12 " style= "overflow-x:auto;">
                                                     <table class= "table table-bordered table-striped" id = "rrecord" style= "min-width: 900px;">
+                                                   
                                                         <thead>
                                                             <tr>
                                                                 <th style = "text-align: left;"> Status</th>
@@ -24,6 +25,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                               
                                                             <tr>
                                                                 <td scope="col" style = "text-align: left">On-going</td>
                                                                 <td scope="col" style = "text-align: left" style ="width: 50%;">Tobirama Uchiha</td>
@@ -169,6 +171,7 @@
                                                 <option value="med">For medical reasons</option>
                                                 <option value="others">Others</option>
                                             </select>
+
                                             <div class="col-xl-12" id = "others">
                                                 <label for="prate" class="fs-5 fw-bold">Purpose</label>
                                                 <input type="text"  id = "date" class="form-control " name ="date">
@@ -178,17 +181,14 @@
 
                                     </div>
                                     <div class="row">
-                                        <div class="col-xl-6" >
-                                            <label for="prate" class="fs-5 fw-bold">Rental Date</label>
-                                            <input type="date"  id = "date" class="form-control " name ="date">
-                                        </div>
-                                        <div class="col-xl-6" >
+                                        
+                                        <div class="col-xl-12" >
                                             <label for="prate" class="fs-5 fw-bold">Rental Duration</label>
                                             <div class="input-group">
                                             <button class="btn btn-secondary disabled">From</button>
-                                                <input type="time" class="form-control">
-                                                <button class="btn btn-secondary disable">to</button>
-                                                <input type="time" class="form-control">
+                                                <input type="datetime-local" class="form-control">
+                                                <button class="btn btn-secondary disabled">to</button>
+                                                <input type="datetime-local" class="form-control">
                                         
                                             </div>
                                         </div>
@@ -229,6 +229,7 @@
                                             </select>
                                         </div>
                                         <div class="col-xl-6" >
+                                        
                                         <label for="prate" class="fs-5 fw-bold">Rental Status</label>
                                             <select name="" class="form-control" id="status">
                                                 <option value="avail">On going</option>
@@ -286,6 +287,21 @@
                                             </div>
                                         </div>
                                             <div class="col-xl-6">
+                                                <?php
+                                                    $sql = 'SELECT * FROM tblpurposes where serviceType = "rental"';
+                                                    $query= $dbh->prepare($sql);
+                                                    $query->execute();
+                                                    $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                    $opt = ""
+                                                    foreach($results as $row){
+
+                                                        
+
+                                                    }
+                                                    
+
+                                                
+                                                ?>
                                                 <label for="purp" class= "fs-6 fw-bold">Purposes</label>
                                                     <select class= "select form-select" name="" id="purp" onchange = "showOthersEdit('othersed', this)">
                                                         <option  selected>Purposes</option>
@@ -312,9 +328,9 @@
                                             <label for="prate" class="fs-5 fw-bold">Rental Duration</label>
                                             <div class="input-group">
                                             <button class="btn btn-secondary disabled">From</button>
-                                                <input type="time" class="form-control">
+                                                <input type="datetime-local" class="form-control">
                                                 <button class="btn btn-secondary disable">to</button>
-                                                <input type="time" class="form-control">
+                                                <input type="datetime-local" class="form-control">
                                         
                                             </div>
                                         </div>
