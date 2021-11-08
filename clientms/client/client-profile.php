@@ -106,6 +106,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
     </head>
 
     <body>
+        
         <div class="d-flex" id="wrapper">
             <!-- Sidebar -->
             <?php include_once('includes/sidebarupdated.php');     ?>
@@ -158,6 +159,20 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
 
                 </nav>
+                <?php
+				$uid=$_SESSION['clientmsuid'];
+				$sql="SELECT * FROM tblresident WHERE ID = :uid";
+				$query = $dbh -> prepare($sql);
+				$query->bindParam(':uid',$uid,PDO::PARAM_STR);
+				$query->execute();
+
+				$results=$query->fetchAll(PDO::FETCH_OBJ);
+
+				$cnt=1;
+				
+				    foreach($results as $row)
+				{               
+			?>
                 <div class="container-fluid mx-auto px-5 mt-3 mb-2 ">
                     <div class="row g-0 mx-2 ">
                         <div class="row g-0 ">
@@ -175,8 +190,8 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                             <div class="col-xl-10 bg-white mx-auto text-center">
                                 <label for="" class="text-center fs-6 text-muted small">Resident's Full Name</label>
                                 <div class="display-6 border-bottom text-center py-2">
-                                    testing
-                                    <!--?php echo "$row->LastName, $row->FirstName $row->MiddleName $row->Suffix";?-->
+                                    
+                                    <?php echo "$row->LastName, $row->FirstName $row->MiddleName $row->Suffix";?>
 
                                 </div>
 
@@ -217,6 +232,13 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                                     </td>
                                                 </tr>
                                                 <tr>
+                                                <?php
+                                                    $gbd = $row->BirthDate;
+                                                    $gbd = date('Y-m-d', strtotime($gbd));
+                                                    $gbds = date('F j, Y', strtotime($gbd));
+                                                    $today = date('Y-m-d');
+                                                    $diff = date_diff(date_create($gbd), date_create($today));
+                                                    ?>
                                                     <th style="padding-top: 10px; padding-bottom:10px;">
                                                         <i class="fa fa-birthday-cake fa-1x me-1"></i>
                                                         Date of Birth
@@ -376,7 +398,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                 </div>
                                 <!-- /#page-content-wrapper -->
                             </div>
-
+                            <?php $cnt=$cnt+1;} ?>
                             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
                             <script>
                                 var el = document.getElementById("wrapper");
@@ -385,8 +407,9 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                 toggleButton.onclick = function() {
                                     el.classList.toggle("toggled");
                                 };
+                                
                             </script>
+                            
     </body>
-
     </html>
 <?php } ?>
