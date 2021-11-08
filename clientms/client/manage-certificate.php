@@ -5,6 +5,7 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsuid'] == 0)) {
     header('location:logout.php');
 } else {
+    $uid = $_SESSION['clientmsuid'];
 ?>
 
     <!DOCTYPE html>
@@ -15,16 +16,12 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-
+        
+        <?php include('link.php') ?>
+        
         <link rel="stylesheet" href="css/sidebar.css" />
 
-        <link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
+        
 
         <title>Certification Record</title>
         <script>
@@ -160,23 +157,13 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                     </div>
 
                                 </div>
-                                <div class="col-md-4 ">
-                                    <form class="d-flex" method="post" name="search" action="">
-                                        <p style="font-size:16px; color:red" align="center"> <?php if ($msg) {
-                                                                                                    echo $msg;
-                                                                                                }  ?> </p>
-
-                                        <input id="searchdata" type="text" class="form-control" name="searchdata" placeholder="Search here">
-                                        <button type="submit" class="btn btn-outline-info" name="search"><i class="fa fa-search"></i></button>
-                                    </form>
-
-                                </div>
+                                
 
                             </div>
                         </div>
                         <div class="divfortable">
                             <div class="tables">
-                                <table class="table" border="1">
+                                <table class="table" id="alldata" border="1">
                                     <thead style="background-color: #021f4e;">
                                         <th><span style="color: #fff; font-size:120%;">Certificate Name</th>
                                         <th><span style="color: #fff; font-size:120%;">Resident Name</th>
@@ -239,6 +226,11 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                     toggleButton.onclick = function() {
                         el.classList.toggle("toggled");
                     };
+                </script>
+                <script>
+                    $(document).ready(function() {
+                        $('#alldata').DataTable();
+                    });
                 </script>
     </body>
 
