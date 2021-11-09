@@ -15,4 +15,23 @@ if(isset($_POST["action"]))
  }
  echo $output;
 }
+
+
+
+
+if(isset($_POST["action"]))
+{
+ $con = mysqli_connect("localhost", "root", "", "clientmsdb");
+ $output = '';
+ if($_POST["action"] == "rtype")
+ {
+  $query = "SELECT rentalPrice FROM tblrental WHERE ID = '".$_POST["query"]."'";
+  $result = mysqli_query($con, $query);
+  while($row = mysqli_fetch_array($result))
+  {
+   $output .= '<option value="'.$row["rentalPrice"].'" selected disabled>'.$row["rentalPrice"].'</option>';
+  }
+ }
+ echo $output;
+}
 ?>

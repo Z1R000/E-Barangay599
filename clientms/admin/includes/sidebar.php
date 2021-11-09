@@ -111,7 +111,7 @@
                             <li><a class="nav-link fs-6" href="admin-certificate.php">Certification </a></li>
                             <li><a class="nav-link fs-6" href="admin-blotter.php">Blotter </a></li>
                             <li><a class="nav-link fs-6" href="admin-rentals.php">Rentals</a></li>
-                            <li><a class="nav-link fs-6" href="admin-otherservice.php">Other Services </a></li>
+                            <!--<li><a class="nav-link fs-6" href="admin-otherservice.php">Other Services </a></li>-->
                         </ul>
                     </li>
                     <li class="nav-item has-submenu">
@@ -120,7 +120,7 @@
                         <ul class="submenu collapse">
                             <li><a class="nav-link fs-6" href="admin-cert-request.php">Certification</a></li>
                             <li><a class="nav-link fs-6" href="admin-rental-request.php">Rental</a></li>
-                            <li><a class="nav-link fs-6" href="admin-other-request.php">Other Service</a></li>
+                            <!--<li><a class="nav-link fs-6" href="admin-other-request.php">Other Service</a></li>-->
                         </ul>
                     </li>
                     

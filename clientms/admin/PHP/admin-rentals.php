@@ -1,16 +1,13 @@
 <?php 
     $curr ="Rentals";
-    $curr ="Blotter Filing";
+
     session_start();
     error_reporting(0);
     include('includes/dbconnection.php');
     if (strlen($_SESSION['clientmsaid']==0)) {
     header('location:logout.php');
     }else{
-        $sql= "SELECT * FROM tblcreaterental";
-        $query = $dbh->prepare($sql);
-        $query->execute();
-        $results = $query->fetchAll(PDO::FETCH_OBJ);
+       
 
 ?>
 <!DOCTYPE html>
@@ -202,7 +199,7 @@
                                                             Property
                                                         </th>
                                                         <th>
-                                                            Available
+                                                            Availability
                                                         </th>
                                                         <th>
                                                             Rate (per hour, ₱)
@@ -212,28 +209,43 @@
                                                         </th>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                Basketball Court
-                                                            </td>
-                                                            <td>
-                                                                Available
-                                                            </td>
-                                                            <td style= "text-align: right">
-                                                                20.00
-                                                            </td>
-                                                            <td style= "width: 30%; text-align:center">
-                                                                <div class="btn-group">
-                                                                <button  type="button" href ="#check-property" data-bs-toggle="modal" role="button" class="btn  btn-primary"><i class = "fa fa-eye px-1"></i><span class = "wal"> View</span></button>
-                                                                </div>
-                                                                <div class="btn-group">
-                                                                <a href ="#edit-property    " data-bs-toggle ="modal" role ="button" class="btn btn-success" ><i class = "fa fa-edit px-1"></i><span class= "wal">Edit</span></a>
-                                                                </div>
-                                                                <div class="btn-group">
-                                                                <a type="button" href ="#delete-prop" data-bs-toggle = "modal" role = "button" class="btn btn-danger" ><i class = "fa fa-trash px-1"></i><span class= "wal">Delete</span></a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
+                                                        <?php
+                                                         $sql= "SELECT * FROM tblrental";
+                                                         $query = $dbh->prepare($sql);
+                                                         $query->execute();
+                                                         $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                        
+                                                            foreach ($results as $rows){
+                                                                
+                                                                echo '
+                                                                
+                                                                <tr>
+                                                           
+                                                                    <td>'.$rows->rentalName.'</td>
+                                                                    <td>'.$rows->avai.'</td>
+                                                                    <td style= "text-align: right">'.$rows->rentalPrice.'</td>
+
+                                                                    <td style= "width: 30%; text-align:center">
+                                                                    <div class="btn-group">
+                                                                    <button  type="button" href ="#check-property" data-bs-toggle="modal" role="button" class="btn  btn-primary"><i class = "fa fa-eye px-1"></i><span class = "wal"> View</span></button>
+                                                                    </div>
+                                                                    <div class="btn-group">
+                                                                    <a href ="#edit-property    " data-bs-toggle ="modal" role ="button" class="btn btn-success" ><i class = "fa fa-edit px-1"></i><span class= "wal">Edit</span></a>
+                                                                    </div>
+                                                                    <div class="btn-group">
+                                                                    <a type="button" href ="#delete-prop" data-bs-toggle = "modal" role = "button" class="btn btn-danger" ><i class = "fa fa-trash px-1"></i><span class= "wal">Delete</span></a>
+                                                                    </div>
+                                                                    </td>
+
+
+                                                                </tr>
+                                                                ';
+
+                                                            }
+                                                        
+                                                        
+                                                        ?>
+                                                       
                                                     </tbody>
                                                     
                                                 </table>
