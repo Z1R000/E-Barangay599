@@ -145,37 +145,38 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
             <!-- Page Content -->
             <div id="page-content-wrapper">
-            <?php
-                    $sql1 = "select * from tblinformation";
-                    $query1 = $dbh->prepare($sql1);
-                    $query1->execute();
-                    $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
-                    if ($query1->rowCount() > 0) {
-                        foreach ($results1 as $row1) {
+                <?php
+                $sql1 = "select * from tblinformation";
+                $query1 = $dbh->prepare($sql1);
+                $query1->execute();
+                $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+                if ($query1->rowCount() > 0) {
+                    foreach ($results1 as $row1) {
                 ?>
-            <div class="container-fluid banner" align="center">
-                <div class="row">
-                    <div class="col-xl-3 px-1 ">
-                        <div class="float-start" style="margin-left:50px;">
-                            <img src="../<?php echo $row1->Blogoone;?>" style="width: 100px;">
+                        <div class="container-fluid banner" align="center">
+                            <div class="row">
+                                <div class="col-xl-3 px-1 ">
+                                    <div class="float-start" style="margin-left:50px;">
+                                        <img src="../<?php echo $row1->Blogoone; ?>" style="width: 100px;">
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-6 " align="center">
+                                    <h3 class="py-4"><?php echo $row1->Baddress; ?> <br>
+                                        <?php echo $row1->Btitle; ?></h3>
+                                </div>
+                                <div class="col-xl-3">
+                                    <div class="float-end" style="margin-right:50px;">
+                                        <img src="../<?php echo $row1->Blogotwo; ?>" style="width: 100px;">
+                                    </div>
+
+
+                                </div>
+                            </div>
+
                         </div>
-
-                    </div>
-                    <div class="col-xl-6 " align="center">
-                        <h3 class="py-4"><?php echo $row1->Baddress;?> <br>
-                        <?php echo $row1->Btitle;?></h3>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="float-end" style="margin-right:50px;">
-                            <img src="../<?php echo $row1->Blogotwo;?>" style="width: 100px;">
-                        </div>
-
-
-                    </div>
-                </div>
-
-            </div>
-            <?php }}?>
+                <?php }
+                } ?>
                 <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                     <div class="d-flex align-items-center">
                         <i class="fa fa-align-justify secondary-text fs-4 me-3" id="menu-toggle"></i>
@@ -204,7 +205,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                             <div class="modal-body bg-white ">
                                 <div class="row">
 
-                                    <div class="col-xl-6">
+                                    <div class="col-xl-4">
                                         <label for="status" class="fs-5 fw-bold">Property to rent</label>
                                         <select name="" class="form-control" id="status" disabled>
                                             <option value="avail">Barangay Van</option>
@@ -213,11 +214,15 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                         </select>
                                     </div>
 
-                                    <div class="col-xl-6">
+                                    <div class="col-xl-4">
                                         <label for="prate" class="fs-5 fw-bold">Rate<span class="text-muted fs-6">(per hour)</span></label>
                                         <div class="d-flex">
                                             <input type="text" id="prate" class="form-control me-2" name="pRate" placeholder="0.00" readonly>
                                         </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <label for="date" class="fw-bold fs-6">Status</label>
+                                        <input type="text" id="status" class="form-control" placeholder="Pending" readonly>
                                     </div>
 
                                 </div>
