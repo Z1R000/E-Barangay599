@@ -74,7 +74,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
     <body>
         <?php
 				$aid=$_SESSION['clientmsaid'];
-				$sql="SELECT distinct tbladmin.ID, tbladmin.BarangayPosition, tblresident.* from  tbladmin join tblresident where tbladmin.ID=:aid AND tbladmin.residentID = tblresident.ID";
+				$sql="SELECT distinct tbladmin.*, tblpositions.*, tblresident.* from  tbladmin join tblresident on tblresident.ID = tbladmin.residentID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition where tbladmin.ID=:aid";
 				$query = $dbh -> prepare($sql);
 				$query->bindParam(':aid',$aid,PDO::PARAM_STR);
 				$query->execute();
@@ -134,7 +134,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                         </div>
                         <div class="row g-0  ">
                             <div class="col-xl-10 bg-white mx-auto text-center">
-                                <label for="" class="text-center fs-6 text-muted small"><?php echo $row->BarangayPosition ?></label>
+                                <label for="" class="text-center fs-6 text-muted small"><?php echo $row->Position ?></label>
                                 <div class="display-6 border-bottom text-center py-2">
                                    
                                     <?php echo "$row->LastName, $row->FirstName $row->MiddleName $row->Suffix";?>

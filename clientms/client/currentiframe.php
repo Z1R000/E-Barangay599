@@ -13,7 +13,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 <div class='container-fluid px-4 mb-3'>
     <label></label>
 <?php 
-							$sql ="SELECT distinct tblannouncement.ID, tblannouncement.announcement, tblannouncement.announcementDate, tblannouncement.endDate, tblannouncement.adminID, tbladmin.BarangayPosition, tblresident.LastName from tblannouncement join tbladmin on tblannouncement.adminID = tbladmin.ID join tblresident on tbladmin.ID = tblresident.ID where tblannouncement.announcementDate <= now() and tblannouncement.endDate >= now() order by tblannouncement.ID desc";
+							$sql ="SELECT distinct tblannouncement.ID, tblannouncement.announcement, tblannouncement.announcementDate, tblannouncement.endDate, tblannouncement.adminID, tbladmin.BarangayPosition, tblresident.LastName, tblpositions.* from tblannouncement join tbladmin on tblannouncement.adminID = tbladmin.ID join tblresident on tbladmin.ID = tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition where tblannouncement.announcementDate <= now() and tblannouncement.endDate >= now() order by tblannouncement.ID desc";
 							$query = $dbh -> prepare($sql);
 							$query->execute();
 							$results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -56,7 +56,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                             <h5 class="testfont" style="text-align: justify; font-family: Segoe UI; margin:25px; text-indent: 5%;"><?php  echo $row->announcement;?> </h5>
                         </div>
                         <h3 class="testfont" style="margin: 25px; font-family: Segoe UI; color: #021f4e;">Announced By:</h3>
-                        <h2 class="testfont" style="margin: 25px; font-family: Segoe UI;color: #021f4e;"><?php  echo $row->BarangayPosition; echo $row->LastName;
+                        <h2 class="testfont" style="margin: 25px; font-family: Segoe UI;color: #021f4e;"><?php  echo $row->Position; echo $row->LastName;
                         echo "</h2></div>";    
                         }
                     }

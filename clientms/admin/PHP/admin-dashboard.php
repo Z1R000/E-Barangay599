@@ -120,7 +120,7 @@
                                                     echo htmlentities($tser);
                                                 ?>	
                                             </h4>
-                                            <p class = "text-inner fs-5 card-text " href ="#">Total<Br> Residents</p>
+                                            <p class = "text-inner fs-5 card-text " href ="#">Total Active<Br> Residents</p>
                                         </div>
                                             <i class="fas fa-users fs-1 logo  p-4 "></i>
                                             
