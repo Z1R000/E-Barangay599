@@ -812,8 +812,6 @@ $(document).ready(function () {
                                         </button>
                                         </div>
                                         <div class="btn-group">
-
-                                        
                                         <button type = "button" class="btn btn-danger" data-bs-dismiss = "modal"  name = "no" value ="No">
                                             <i class= "fa fa-times"></i> Discard
                                         </button>
@@ -950,7 +948,7 @@ $(document).ready(function () {
             </div>
         </div>
                <!--modal-->
-               <div class="modal fade" id = "proof" tab-idndex = "-1">
+        <div class="modal fade" id = "proof" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 ">
                     <div class="modal-header bg-danger bg-transparent ">
