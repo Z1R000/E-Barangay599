@@ -11,11 +11,7 @@
         $opt .= '<option  value ="'.$row->ID.'" >'.$row->Purpose.'</option>';
        
     }
- 
-
-
-
- 
+  
  $sql = 'SELECT * FROM tblrental';
  $query= $dbh->prepare($sql);
  $query->execute();
@@ -704,7 +700,7 @@ $mod = '<option  selected disabled>Mode of payment</option>';
     </script>
 
     <script>
-        $(document).ready(function(){
+$(document).ready(function(){
  $('.action').change(function(){
   if($(this).val() != '')
   {
