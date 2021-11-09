@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2021 at 04:38 PM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.8
+-- Generation Time: Nov 09, 2021 at 04:44 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -58,20 +58,21 @@ CREATE TABLE `tbladmin` (
   `endDuty` time NOT NULL,
   `Email` varchar(50) NOT NULL,
   `Password` varchar(100) NOT NULL,
-  `AdminRegdate` timestamp NOT NULL DEFAULT current_timestamp()
+  `AdminRegdate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `resID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbladmin`
 --
 
-INSERT INTO `tbladmin` (`ID`, `residentID`, `BarangayPosition`, `dutyTime`, `endDuty`, `Email`, `Password`, `AdminRegdate`) VALUES
-(1, 1, 'Chairperson', '08:00:00', '12:00:00', 'ledes@gmail.com', '123', '2021-04-20 08:08:28'),
-(2, 2, 'Secretary', '12:00:00', '14:00:00', 'kim@gmail.com', '123', '2021-04-20 08:09:00'),
-(3, 3, 'Treasurer', '14:00:00', '18:00:00', 'viray@gmail.com', '123', '2021-04-20 08:09:21'),
-(4, 4, 'Kagawad', '18:00:00', '02:00:00', 'sallan@gmail.com', '123', '2021-04-20 16:21:55'),
-(5, 5, 'SK-Chairman', '02:00:00', '00:00:00', 'nathan@gmail.com', '123', '2021-04-20 16:23:13'),
-(6, 3, 'Kagawad', '00:00:00', '04:00:00', 'email@gmail.com', '123', '2021-09-22 12:35:49');
+INSERT INTO `tbladmin` (`ID`, `residentID`, `BarangayPosition`, `dutyTime`, `endDuty`, `Email`, `Password`, `AdminRegdate`, `resID`) VALUES
+(1, 1, '1', '08:00:00', '12:00:00', 'ledes@gmail.com', '123', '2021-04-20 08:08:28', 0),
+(2, 2, '2', '12:00:00', '14:00:00', 'kim@gmail.com', '123', '2021-04-20 08:09:00', 0),
+(3, 3, '4', '14:00:00', '18:00:00', 'viray@gmail.com', '123', '2021-04-20 08:09:21', 0),
+(4, 4, '3', '18:00:00', '02:00:00', 'sallan@gmail.com', '123', '2021-04-20 16:21:55', 0),
+(5, 5, '5', '02:00:00', '00:00:00', 'nathan@gmail.com', '123', '2021-04-20 16:23:13', 0),
+(6, 3, '3', '00:00:00', '04:00:00', 'email@gmail.com', '123', '2021-09-22 12:35:49', 0);
 
 -- --------------------------------------------------------
 
@@ -127,7 +128,7 @@ CREATE TABLE `tblblotter` (
 --
 
 INSERT INTO `tblblotter` (`ID`, `blotterType`, `incidentLocation`, `incidentDate`, `respondent`, `complainant`, `blotterSummary`, `blotterStatus`, `summonSchedule`, `blotterCreationDate`, `adminID`) VALUES
-(1, 'Property Damage', 'Tindahan ni aling nena', '2021-04-22 13:29:00', 'Ledesma, Marithe Francois', 'Sallan, Arnold', 'Nagwawala sinira yung paninda', 'On-Going', '2021-04-22 13:51:00', '2021-04-21 21:30:27', 1),
+(1, 'Property Damage', 'Tindahan ni aling nena', '2021-04-22 13:29:00', 'Ledesma, Marithe Francois', 'Sallan, Arnold', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n', 'On-Going', '2021-04-22 13:51:00', '2021-04-29 13:04:00', 1),
 (2, 'Property Damage', 'Tapat ni aling gloria', '2021-04-22 20:03:00', 'Kim delacruz', 'Juan delacruz', 'Nagwawala si kim', 'Fulfilled', '2021-04-22 09:05:00', '2021-04-22 12:04:20', 1),
 (3, 'Robbery', 'Bahay ni natham', '2021-04-22 23:50:00', 'Sallan, Arnold', 'Nathan', 'Nagnakaw', 'On-Going', '2021-04-22 23:53:00', '2021-04-22 15:51:11', 1);
 
@@ -161,6 +162,27 @@ INSERT INTO `tblblotterrequest` (`ID`, `userID`, `blotterType`, `incidentLocatio
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblbtype`
+--
+
+CREATE TABLE `tblbtype` (
+  `bID` int(11) NOT NULL,
+  `btype` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblbtype`
+--
+
+INSERT INTO `tblbtype` (`bID`, `btype`) VALUES
+(1, 'Property Damage'),
+(2, 'Violence'),
+(3, 'Public Disturbance'),
+(4, 'Robbery');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tblcertificate`
 --
 
@@ -168,7 +190,7 @@ CREATE TABLE `tblcertificate` (
   `ID` int(10) NOT NULL,
   `Type` int(11) NOT NULL,
   `CertificateName` varchar(200) DEFAULT NULL,
-  `CertificatePrice` varchar(200) DEFAULT NULL,
+  `CertificatePrice` decimal(16,2) DEFAULT NULL,
   `CertText` varchar(500) NOT NULL,
   `CreationDate` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -178,24 +200,24 @@ CREATE TABLE `tblcertificate` (
 --
 
 INSERT INTO `tblcertificate` (`ID`, `Type`, `CertificateName`, `CertificatePrice`, `CertText`, `CreationDate`) VALUES
-(1, 1, 'Barangay Certificate', '121', '<p>sad</p>\r\n', '2021-04-21 13:45:50'),
-(2, 1, 'Barangay Clearance', '30', '', '2021-04-21 13:45:50'),
-(3, 1, 'Barangay Permit', '150', '', '2021-04-21 13:45:50'),
-(4, 1, 'Proof of Residency', '120', '', '2021-04-21 13:45:50'),
-(5, 2, 'Business Permit', '180', '', '2021-04-21 13:45:50'),
-(6, 2, 'Business Clearance Capital - Php10,000 Below', '100', '', '2021-04-21 13:45:50'),
-(7, 2, 'Business Clearance Capital - Php10,001 - Php100-000', '500', '', '2021-04-21 14:25:51'),
-(8, 2, 'Business Clearance Capital - Php100,001 - Above', '1000', '', '2021-04-21 14:25:51'),
-(9, 1, 'Certificate of Good Moral', '90', '', '2021-04-21 14:25:51'),
-(10, 1, 'Lipat-bahay Clearance', '105', '', '2021-04-21 14:25:51'),
-(11, 1, 'Certificate of Acceptance', '56', '', '2021-04-21 14:25:51'),
-(12, 1, 'Certificate of Cohabitation', '113', '', '2021-04-21 14:25:51'),
-(13, 1, 'Certificate of Indigency', '356', '', '2021-04-21 14:25:51'),
-(14, 1, 'Certificate to File Action', '250', '', '2021-04-21 14:25:51'),
-(15, 1, 'Barangay ID', '50', '', '2021-04-21 14:28:00'),
-(16, 1, 'Medical Assistance/Senior Citizen', '100', '', '2021-04-21 14:28:00'),
-(17, 1, 'Referral Recommendation', '50', '', '2021-04-21 14:28:00'),
-(18, 1, 'Filling Fee', '80', '', '2021-04-21 14:28:00');
+(1, 1, 'Barangay Certificate', '121.00', '<p>sad</p>\r\n', '2021-04-21 13:45:50'),
+(2, 1, 'Barangay Clearance', '30.00', '', '2021-04-21 13:45:50'),
+(3, 1, 'Barangay Permit', '150.00', '', '2021-04-21 13:45:50'),
+(4, 1, 'Proof of Residency', '120.00', '', '2021-04-21 13:45:50'),
+(5, 2, 'Business Permit', '180.00', '', '2021-04-21 13:45:50'),
+(6, 2, 'Business Clearance Capital - Php10,000 Below', '100.00', '', '2021-04-21 13:45:50'),
+(7, 2, 'Business Clearance Capital - Php10,001 - Php100-000', '500.00', '', '2021-04-21 14:25:51'),
+(8, 2, 'Business Clearance Capital - Php100,001 - Above', '1000.00', '', '2021-04-21 14:25:51'),
+(9, 1, 'Certificate of Good Moral', '90.00', '', '2021-04-21 14:25:51'),
+(10, 1, 'Lipat-bahay Clearance', '105.00', '', '2021-04-21 14:25:51'),
+(11, 1, 'Certificate of Acceptance', '56.00', '', '2021-04-21 14:25:51'),
+(12, 1, 'Certificate of Cohabitation', '113.00', '', '2021-04-21 14:25:51'),
+(13, 1, 'Certificate of Indigency', '356.00', '', '2021-04-21 14:25:51'),
+(14, 1, 'Certificate to File Action', '250.00', '', '2021-04-21 14:25:51'),
+(15, 1, 'Barangay ID', '50.00', '', '2021-04-21 14:28:00'),
+(16, 1, 'Medical Assistance/Senior Citizen', '100.00', '', '2021-04-21 14:28:00'),
+(17, 1, 'Referral Recommendation', '50.00', '', '2021-04-21 14:28:00'),
+(18, 1, 'Filling Fee', '80.00', '', '2021-04-21 14:28:00');
 
 -- --------------------------------------------------------
 
@@ -263,22 +285,26 @@ INSERT INTO `tblcreatecertificate` (`ID`, `Userid`, `CertificateId`, `CreationId
 
 CREATE TABLE `tblcreaterental` (
   `ID` int(11) NOT NULL,
+  `status` int(25) NOT NULL,
   `userID` int(11) NOT NULL,
   `rentalID` int(11) NOT NULL,
   `adminID` int(11) NOT NULL,
   `rentalStartDate` datetime NOT NULL,
-  `rentalEndDate` datetime NOT NULL
+  `rentalEndDate` datetime NOT NULL,
+  `creationDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `modeOfPayment` int(11) NOT NULL,
+  `purpID` int(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tblcreaterental`
 --
 
-INSERT INTO `tblcreaterental` (`ID`, `userID`, `rentalID`, `adminID`, `rentalStartDate`, `rentalEndDate`) VALUES
-(1, 3, 1, 1, '2021-04-22 13:00:00', '2021-04-22 16:00:00'),
-(2, 1, 2, 1, '2021-04-22 20:03:00', '2021-04-22 20:03:00'),
-(3, 5, 4, 1, '2021-04-22 21:45:00', '2021-04-22 12:49:00'),
-(4, 3, 2, 1, '2021-05-04 02:09:00', '2021-05-04 15:10:00');
+INSERT INTO `tblcreaterental` (`ID`, `status`, `userID`, `rentalID`, `adminID`, `rentalStartDate`, `rentalEndDate`, `creationDate`, `modeOfPayment`, `purpID`) VALUES
+(1, 1, 3, 1, 1, '2021-04-22 13:00:00', '2021-04-22 16:00:00', '2021-11-09 03:30:20', 1, 11),
+(2, 2, 1, 2, 1, '2021-04-22 20:03:00', '2021-04-22 20:03:00', '2021-11-09 03:30:20', 2, 12),
+(3, 3, 5, 4, 1, '2021-04-22 21:45:00', '2021-04-22 12:49:00', '2021-11-09 03:30:20', 1, 9),
+(4, 1, 3, 2, 1, '2021-05-04 02:09:00', '2021-05-04 15:10:00', '2021-11-09 03:30:20', 1, 10);
 
 -- --------------------------------------------------------
 
@@ -332,24 +358,96 @@ INSERT INTO `tbllistpurok` (`ID`, `pName`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblmodes`
+--
+
+CREATE TABLE `tblmodes` (
+  `ID` int(11) NOT NULL,
+  `mode` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblmodes`
+--
+
+INSERT INTO `tblmodes` (`ID`, `mode`) VALUES
+(1, 'G-cash'),
+(2, 'Cash');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblpositions`
+--
+
+CREATE TABLE `tblpositions` (
+  `ID` int(100) NOT NULL,
+  `Position` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblpositions`
+--
+
+INSERT INTO `tblpositions` (`ID`, `Position`) VALUES
+(1, 'Chairperson'),
+(2, 'Secretary'),
+(3, 'Kagawad'),
+(4, 'Treasurer'),
+(5, 'SK chairman');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblpurposes`
+--
+
+CREATE TABLE `tblpurposes` (
+  `ID` int(11) NOT NULL,
+  `Purpose` varchar(50) NOT NULL,
+  `serviceType` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblpurposes`
+--
+
+INSERT INTO `tblpurposes` (`ID`, `Purpose`, `serviceType`) VALUES
+(1, 'OPEN ACCOUNT/LOAN', 'certification'),
+(2, 'MEMBERSHIP/NEW ID', 'certification'),
+(3, 'EMPLOYMENT/WORK', 'certification'),
+(4, 'MEDICAL ASSISTANCE', 'certification'),
+(5, 'BURIAL ASSISTANCE', 'certification'),
+(6, 'FINANCIAL ASSISTANCE', 'certification'),
+(7, 'SCHOLARSHIP/BOARD EXAM/EN', 'certification'),
+(8, 'BIRTH CERTIFICATE/MARRIAG', 'certification'),
+(9, 'SEMINARS/MEETINGS', 'rental'),
+(10, 'SOCIAL GATHERING', 'rental'),
+(11, 'SPORTS', 'rental'),
+(12, 'MEDICAL', 'rental');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tblrental`
 --
 
 CREATE TABLE `tblrental` (
   `ID` int(11) NOT NULL,
   `rentalName` varchar(100) NOT NULL,
-  `rentalPrice` int(11) NOT NULL
+  `rentalPrice` decimal(16,2) NOT NULL,
+  `availability` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tblrental`
 --
 
-INSERT INTO `tblrental` (`ID`, `rentalName`, `rentalPrice`) VALUES
-(1, 'Basketball Court', 300),
-(2, 'Parking', 100),
-(3, 'Daycare', 150),
-(4, 'Barangay Hall', 250);
+INSERT INTO `tblrental` (`ID`, `rentalName`, `rentalPrice`, `availability`) VALUES
+(1, 'Basketball Court', '300.00', 'Available'),
+(2, 'Parking', '100.00', 'Available'),
+(3, 'Daycare', '150.00', 'Not Available'),
+(4, 'Barangay Hall', '250.00', 'Available');
 
 -- --------------------------------------------------------
 
@@ -472,6 +570,38 @@ INSERT INTO `tblresidentrequest` (`ID`, `Purok`, `houseUnit`, `streetName`, `Las
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblrespondents`
+--
+
+CREATE TABLE `tblrespondents` (
+  `ID` int(11) NOT NULL,
+  `bID` int(11) NOT NULL,
+  `Respondents` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblstatus`
+--
+
+CREATE TABLE `tblstatus` (
+  `ID` int(11) NOT NULL,
+  `status` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblstatus`
+--
+
+INSERT INTO `tblstatus` (`ID`, `status`) VALUES
+(1, 'SETTLED'),
+(2, 'CANCELLED'),
+(3, 'ON-GOING');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tblstreet`
 --
 
@@ -549,6 +679,12 @@ ALTER TABLE `tblblotterrequest`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `tblbtype`
+--
+ALTER TABLE `tblbtype`
+  ADD PRIMARY KEY (`bID`);
+
+--
 -- Indexes for table `tblcertificate`
 --
 ALTER TABLE `tblcertificate`
@@ -585,6 +721,24 @@ ALTER TABLE `tbllistpurok`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `tblmodes`
+--
+ALTER TABLE `tblmodes`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `tblpositions`
+--
+ALTER TABLE `tblpositions`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `tblpurposes`
+--
+ALTER TABLE `tblpurposes`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `tblrental`
 --
 ALTER TABLE `tblrental`
@@ -606,6 +760,18 @@ ALTER TABLE `tblresident`
 -- Indexes for table `tblresidentrequest`
 --
 ALTER TABLE `tblresidentrequest`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `tblrespondents`
+--
+ALTER TABLE `tblrespondents`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `tblstatus`
+--
+ALTER TABLE `tblstatus`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -641,6 +807,12 @@ ALTER TABLE `tblblotter`
 --
 ALTER TABLE `tblblotterrequest`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tblbtype`
+--
+ALTER TABLE `tblbtype`
+  MODIFY `bID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tblcertificate`
@@ -679,6 +851,24 @@ ALTER TABLE `tbllistpurok`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT for table `tblmodes`
+--
+ALTER TABLE `tblmodes`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tblpositions`
+--
+ALTER TABLE `tblpositions`
+  MODIFY `ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tblpurposes`
+--
+ALTER TABLE `tblpurposes`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `tblrental`
 --
 ALTER TABLE `tblrental`
@@ -701,6 +891,18 @@ ALTER TABLE `tblresident`
 --
 ALTER TABLE `tblresidentrequest`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tblrespondents`
+--
+ALTER TABLE `tblrespondents`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblstatus`
+--
+ALTER TABLE `tblstatus`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tblstreet`
