@@ -153,17 +153,17 @@ $mod = '<option  selected disabled>Mode of payment</option>';
                                                                                 echo $pur;
                                                                               
 
-                                                                echo '
+                                                                                echo '
                                                                                 
                                                                                                                                                                                                                         <option value="others">Others</option>
                                                                             </select>
                                                                             <div class="col-xl-12" id ="othersed" style= "display:none">
-                                                                <label for="purp" class= "fs-6 fw-bold">Purpose </label>
-                                                                    <input type="text" class="form-control" placeholder = "Specify purpose here">
-                                                                </div>
-                                                                    </div>
-                                                            
-                                                            
+                                                                            <label for="purp" class= "fs-6 fw-bold">Purpose </label>
+                                                                                <input type="text" class="form-control" placeholder = "Specify purpose here">
+                                                                            </div>
+                                                                                </div>
+                                                                        
+                                                                        
                               
 
                                                                 </div>
