@@ -204,6 +204,10 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 								<label for="date" class="fw-bold fs-6">Date today</label>
 								<input type="text" id="date" class="form-control" readonly>
 							</div>
+							<div class="col-xl-2">
+								<label for="date" class="fw-bold fs-6">Status</label>
+								<input type="text" id="status" class="form-control" placeholder = "Pending" readonly>
+							</div>
 						</div>
 
 						<div class="row g-3 ">
