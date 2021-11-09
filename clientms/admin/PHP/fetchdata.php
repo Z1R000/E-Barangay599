@@ -41,7 +41,7 @@ if(isset($_POST["id"]))
  $con = mysqli_connect("localhost", "root", "", "clientmsdb");
  $output = '';
  
-  $sql= 'SELECT DISTINCT tblpaymentlogs.refNum, tblpaymentlogs.refNum, tblresident.FirstName,tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblmodes.mode ,tblservices.sertype, tblrental.rentalName,tblpaymentlogs.proof FROM tblpaymentlogs INNER JOIN tblresident ON tblresident.ID = tblpaymentlogs.payorName INNER JOIN tblmodes ON tblmodes.ID = tblpaymentlogs.mode INNER JOIN tblservices ON tblservices.ID = tblpaymentlogs.servicetype INNER JOIN tblrental ON tblrental.ID = tblpaymentlogs.request and tblpaymentlogs.id = "'.$_POST['id'].'"';
+  $sql= 'SELECT DISTINCT tblpaymentlogs.payment, tblpaymentlogs.refNum,tblrental.rentalPrice, tblpaymentlogs.refNum, tblresident.FirstName,tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblmodes.mode ,tblservices.sertype, tblrental.rentalName,tblpaymentlogs.proof FROM tblpaymentlogs INNER JOIN tblresident ON tblresident.ID = tblpaymentlogs.payorName INNER JOIN tblmodes ON tblmodes.ID = tblpaymentlogs.mode INNER JOIN tblservices ON tblservices.ID = tblpaymentlogs.servicetype INNER JOIN tblrental ON tblrental.ID = tblpaymentlogs.request and tblpaymentlogs.id = "'.$_POST['id'].'"';
 
   if ($result = mysqli_query($con, $sql)){
     if (mysqli_num_rows($result)>0){
@@ -67,7 +67,7 @@ if(isset($_POST["id"]))
                 <label for="payed" class="fs-5">Paid</label>
                 <div class="input-group">
                     <button class="btn btn-secondary disabled">₱</button>
-                    <input id = "payed" type="text" class= "form-control" placeholder = "Payor Name" value = "50" style= "text-align: right"readonly > 
+                    <input id = "payed" type="text" class= "form-control" placeholder = "payment" value = "'.$row['payment'].'" style= "text-align: right"readonly > 
 
                 </div>
     
@@ -76,12 +76,12 @@ if(isset($_POST["id"]))
             <label for="payed" class= "fs-5">Payable</label>
             <div class="input-group">
                 <button class="btn btn-secondary disabled">₱</button>
-                <input id = "payed" type="text" class= "form-control" placeholder = "Payor Name" value = "50" style= "text-align: right"readonly> 
+                <input id = "payed" type="text" class= "form-control" placeholder = "Payor Name" value = "'.$row['rentalPrice'].'" style= "text-align: right"readonly> 
 
             </div>
         
         </div>
-        <label for="payed" class="fs-5 mb-2">Proof of Payment- <a href= "'.$row['proof'].'"  target = "_blank" class= "text-decoration-none"><i class= "fa fa-download"></i>Download proof</label></a>
+        <label for="payed" class="fs-5 mb-2">Proof of Payment- <a href= "'.$row['proof'].'" download target = "_blank" class= "text-decoration-none"><i class= "fa fa-download"></i>Download proof</label></a>
         
         <div class="row justify-content-center text-center">
             <div class="col-md-4"> 
