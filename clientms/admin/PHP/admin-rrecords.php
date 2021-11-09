@@ -98,7 +98,7 @@ $mod = '<option  selected disabled>Mode of payment</option>';
                                                                         <td scope="col" style = "text-align: center;width: 30%;">
                                                                     
                                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a href ="#edit-rental"    " data-bs-toggle ="modal" role ="button" class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
+                                                                            <a href ="#edit-rental'.$ctr.'    " data-bs-toggle ="modal" role ="button" class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Edit</span></a>
                                                                         </div>
                                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                                             <a type="button" href ="#delete-rental" data-bs-toggle = "modal" role = "button" class="btn  btn-danger"><i class = "fa fa-trash mx-1"></i><span class = "wal">Delete</span></a>
@@ -109,130 +109,148 @@ $mod = '<option  selected disabled>Mode of payment</option>';
                                                                         </div>  
                                                                     </td>
                                                                        
-                                                                    <div class="modal fade" id = "edit-rental" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content g-0 border-0">
-                    <div class="modal-header border-599 bg-599 ">
-                        <div class="modal-title white" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Edit Rental</div>
-                        
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-white ">
-                    <div class="row gx-3">
-                                <div class="col-xl-12" >
-                                    <div class="row">
-                                        <div class="col-xl-6 ">
-                                            <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
-                                            <div class="d-flex">    
-                                            <input type="text" id = "prate" class="form-control" name ="pRate" placeholder= "Requestor Name">
-                                            </div>
-                                        </div>
-                                            <div class="col-xl-6">
-                                          
-                                                <label for="purp" class= "fs-6 fw-bold">Purposes</label>
-                                                    <select class= "select form-select" name="" id="purpose" onchange = "showOthersEdit("   othersed", this)">
-                                                        <option  selected>Purposes</option>
-                                                        <option value="ent">For entertainment</option>
-                                                        <option value="med">For medical reasons</option>
-                                                        <option value="others">Others</option>
-                                                    </select>
-                                                    <div class="col-xl-12" id ="othersed">
-                                        <label for="purp" class= "fs-6 fw-bold">Purpose </label>
-                                            <input type="text" class="form-control" placeholder = "Specify purpose here">
-                                                </div>
-                                                    </div>
-                                            
-                                      
-                              
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xl-6" >
-                                            <label for="prate" class="fs-5 fw-bold">Rental Date</label>
-                                            <input type="date"  id = "date" class="form-control " name ="date">
-                                        </div>
-                                        <div class="col-xl-6" >
-                                            <label for="prate" class="fs-5 fw-bold">Rental Duration</label>
-                                            <div class="input-group">
-                                            <button class="btn btn-secondary disabled">From</button>
-                                                <input type="datetime-local" class="form-control">
-                                                <button class="btn btn-secondary disable">to</button>
-                                                <input type="datetime-local" class="form-control">
-                                        
-                                            </div>
-                                        </div>
-                                    
-                                    </div>
-                                
-                                    <div class="row">
-                                        <div class="col-xl-6" >  
-                                            <label for="status" class="fs-5 fw-bold">Property to rent</label>
-                                            <select name="" class="form-select" id="status">
-                                                <option value="avail">Barangay Van</option>
-                                                <option value="noavail">Patrol</option>
-                                                <option value="noavail">Basketball court</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-xl-6" >
-                                            <label for="prate" class="fs-5 fw-bold">Rate<span class= "text-muted fs-6">(per hour)</span></label>
-                                            <div class="input-group">
-                                                <button class="btn btn-secondary disabled">
-                                                ₱
-                                                </button>    
-                                                <input type="text" id = "prate" class="form-control " name ="pRate" placeholder= "0.00" readonly style= "text-align:right">
-                                        </div> 
-                                    </div>
-                                    
-
-                                
-                                    </div>
-                            
-                                    <div class="row">
-
-                                    
-                                        <div class="col-xl-6" >  
-                                            <label for="status" class="fs-5 fw-bold">Mode of payment</label>
-                                            <select name="" class="form-control" id="status">
-                                            <option value="g-cash">G-cash</option>
-                                            <option value="cash">Cash</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-xl-6" >
-                                        <label for="prate" class="fs-5 fw-bold">Rental Status</label>
-                                            <select name="" class="form-control" id="status">
-                                                <option value="avail">On going</option>
-                                                <option value="noavail">Settled</option>
-                                        
-                                            </select>
-                                    </div>
-                                    
-                                    <div class="row g-0" align= "right">
-                                        <div class="col-md-12  px-3 mx-auto my-2">
-                                        
-                                            <button type ="button" role = "button" style = "" class="btn btn-primary px-2" >
-                                                <i class= "fa fa-save mx-1"></i>
-                                                Save
-                                            </button>
-                                            <button type ="button" role = "button" class="btn btn-secondary px-2" data-bs-dismiss= "modal" >
-                                                <i class="fa fa-times-circle mx-1"></i>
-                                                Cancel
-                                            </button>
-                                        </div>
-                                    </div>
-                        
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   
-                    </div>
-
-            </div>
-        </div>
+                                                                   
                                                                   
                                                              
                                                                     
+                                                         <div class="modal fade" id = "edit-rental'.$ctr.'" tab-idndex = "-1">
+                                                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                                    <div class="modal-content g-0 border-0">
+                                                                        <div class="modal-header border-599 bg-599 ">
+                                                                            <div class="modal-title white" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Edit Rental</div>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body bg-white ">
+                                                                        <div class="row gx-3">
+                                                                            <div class="col-xl-12" >
+                                                                             <div class="row">
+                                                                            <div class="col-xl-6 ">
+                                                                                <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
+                                                                                <div class="d-flex">    
+                                                                                <input type="text" id = "prate" class="form-control" name ="pRate" placeholder= "'.$row->LastName.",".$row->FirstName." ".$row->MiddleName." ".$Suffix.'">
+                                                                                </div>
+                                                                            </div>
+                                                                                <div class="col-xl-6">
+                                               
+                                                                        <label for="purp" class= "fs-6 fw-bold">Purposes</label>
+                                                                            <select class= "select form-select" name="" id="purp" onchange = "showOthersEdit("othersed", this)">';
+
+
+                                                                                $sql = 'SELECT * FROM tblpurposes where serviceType = "rental"';
+                                                                                $query= $dbh->prepare($sql);
+                                                                                $query->execute();
+                                                                                $result = $query->fetchAll(PDO::FETCH_OBJ);
+                                                                                $pur = "";
+                                                                                foreach($result as $p){
+                                                                                    if ($row->purposeID == $p->ID){
+                                                                                        $pur .= '<option  value = "'.$p->ID.'" selected>'.$p->Purpose.'</option>';
+                                                                                    }
+                                                                                    else{
+                                                                                        $pur .= '<option  value = "'.$p->ID.'">'.$p->Purpose.'</option>';
+
+                                                                                    }    
+                                                                                }
+                                                                                echo $pur;
+                                                                              
+
+                                                                echo '
                                                                                 
+                                                                                                                                                                                                                        <option value="others">Others</option>
+                                                                            </select>
+                                                                            <div class="col-xl-12" id ="othersed" style= "display:none">
+                                                                <label for="purp" class= "fs-6 fw-bold">Purpose </label>
+                                                                    <input type="text" class="form-control" placeholder = "Specify purpose here">
+                                                                </div>
+                                                                    </div>
+                                                            
+                                                            
+                              
+
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-xl-6" >
+                                                                        <label for="prate" class="fs-5 fw-bold">Rental Date</label>
+                                                                        <input type="date"  id = "date" class="form-control " name ="date">
+                                                                    </div>
+                                                                    <div class="col-xl-6" >
+                                                                        <label for="prate" class="fs-5 fw-bold">Rental Duration</label>
+                                                                        <div class="input-group">
+                                                                        <button class="btn btn-secondary disabled">From</button>
+                                                                            <input type="datetime-local" class="form-control">
+                                                                            <button class="btn btn-secondary disable">to</button>
+                                                                            <input type="datetime-local" class="form-control">
+                                                                    
+                                                                        </div>
+                                                                    </div>
+                                                                
+                                                                </div>
+                                
+                                                                <div class="row">
+                                                                    <div class="col-xl-6" >  
+                                                                        <label for="status" class="fs-5 fw-bold">Property to rent</label>
+                                                                        <select name="" class="form-select" id="status">
+                                                                            <option value="avail">Barangay Van</option>
+                                                                            <option value="noavail">Patrol</option>
+                                                                            <option value="noavail">Basketball court</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-xl-6" >
+                                                                        <label for="prate" class="fs-5 fw-bold">Rate<span class= "text-muted fs-6">(per hour)</span></label>
+                                                                        <div class="input-group">
+                                                                            <button class="btn btn-secondary disabled">
+                                                                            ₱
+                                                                            </button>    
+                                                                            <input type="text" id = "prate" class="form-control " name ="pRate" placeholder= "0.00" readonly style= "text-align:right">
+                                                                    </div> 
+                                                                </div>
+                                                                
+
+                                                            
+                                                                </div>
+                                                        
+                                                                <div class="row">
+
+                                                                
+                                                                    <div class="col-xl-6" >  
+                                                                        <label for="status" class="fs-5 fw-bold">Mode of payment</label>
+                                                                        <select name="" class="form-control" id="status">
+                                                                        <option value="g-cash">G-cash</option>
+                                                                        <option value="cash">Cash</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-xl-6" >
+                                                                    <label for="prate" class="fs-5 fw-bold">Rental Status</label>
+                                                                        <select name="" class="form-control" id="status">
+                                                                            <option value="avail">On going</option>
+                                                                            <option value="noavail">Settled</option>
+                                                                    
+                                                                        </select>
+                                                                </div>
+                                                                
+                                                                <div class="row g-0" align= "right">
+                                                                    <div class="col-md-12  px-3 mx-auto my-2">
+                                                                    
+                                                                        <button type ="button" role = "button" style = "" class="btn btn-primary px-2" >
+                                                                            <i class= "fa fa-save mx-1"></i>
+                                                                            Save
+                                                                        </button>
+                                                                        <button type ="button" role = "button" class="btn btn-secondary px-2" data-bs-dismiss= "modal" >
+                                                                            <i class="fa fa-times-circle mx-1"></i>
+                                                                            Cancel
+                                                                        </button>
+                                                                    </div>
+                                                                                </div>
+                                                                                
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        
+                                                                            </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                </tr>                                        
                                                                     ';
                                                                     $ctr++;
                                                                 }
@@ -537,7 +555,6 @@ $mod = '<option  selected disabled>Mode of payment</option>';
                 </div>
             </div>
         </div>
-       
 
         <div class="modal fade" id = "approve-transac" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">

@@ -222,7 +222,7 @@
                                                                 <tr>
                                                            
                                                                     <td>'.$rows->rentalName.'</td>
-                                                                    <td>'.$rows->avai.'</td>
+                                                                    <td>'.$rows->availability.'</td>
                                                                     <td style= "text-align: right">'.$rows->rentalPrice.'</td>
 
                                                                     <td style= "width: 30%; text-align:center">
@@ -548,7 +548,7 @@
         document.getElementById(divId).style.display = element.value == 'others' ? 'block' : 'none';
     }
     function showOthersEdit(divId, element) {
-        document.getElementById(divId).style.display = element.value == 'others' ? 'block' : 'none';
+        document.getElementById(divId).style.display = element.value == 'othersed' ? 'block' : 'none';
     }
 </script>
  
