@@ -167,6 +167,21 @@
                             </li>
                         </ul>   
                     </div>
+                    <script>
+        $(document).ready(function() {
+            $("select").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+    </script>
                     <div class="col-xl-10">
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="rentalrecords">
@@ -518,21 +533,7 @@
     ?>
 
     </script>
-    <script>
-        $(document).ready(function() {
-            $("select").change(function() {
-                $(this).find("option:selected").each(function() {
-                    var optionValue = $(this).attr("value");
-                    if (optionValue) {
-                        $(".box").not("." + optionValue).hide();
-                        $("." + optionValue).show();
-                    } else {
-                        $(".box").hide();
-                    }
-                });
-            }).change();
-        });
-    </script>
+ 
 
 <script type="text/javascript">
     function showDiv(divId, element) {

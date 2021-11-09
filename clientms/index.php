@@ -218,7 +218,7 @@
                     <div class="divider-custom-icon "><i class="fas fa-phone-square fa-2x"></i></div>
                     <div class="divider-custom-line bg-599"></div>
                 </div>
-                <div class="container mx-auto">
+                <div class="container mx-auto py-5">
                     <div class="row g-2 justify-content-center">
                         <div class="col-xl-3  ">
                             <div class="text-center py-3 bg-light rounded" style= "height: 190px;max-height: 250px;">
@@ -238,8 +238,7 @@
                                     Contact us here: <a href ="#" class= "text-decoration-none"> facebook.com/BRGY-599</a>
                                 </p>
                             </div></div>
-                    </div>
-                    <div class="row g-2 my-1 justify-content-center">
+               
                         <div class="col-xl-3  ">
                             <div class="text-center py-3 bg-light rounded" style= "height: 190px;max-height: 220px;">
                                 <i class="fa fa-compass fa-4x">
