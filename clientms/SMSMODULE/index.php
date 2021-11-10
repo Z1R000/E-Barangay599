@@ -24,8 +24,8 @@ if ($_POST) {
   $edate = $_POST['edate'];
   $name = $_POST['name'];
   $msg = $_POST['msg'];
-  $api = "TR-E-BAR581899_P3BDB";
-  $passwd = "@qzdxw4hj(";
+  $api = "TR-SALLA708062_SVUYX";
+  $passwd = '&ln{%g{$ft';
   $text = $name . ";" . $msg . ";" . $sdate . ";" . $edate;
 
   if (!empty($_POST['name']) && ($_POST['number']) && ($_POST['msg']) && ($_POST['sdate']) && ($_POST['edate'])) {
