@@ -12,13 +12,16 @@ require_once('includes/dbconnection.php');
       foreach ($resultcc as $rowcc) {
         
         echo "<a href='#' id='clicks' class='list-group-item list-group-item-action border-1'>";
-		    echo $rowcc['FirstName'] . ' ';
-		    echo $rowcc['MiddleName'] . ' ';
         echo $rowcc['LastName'] . ' ';
+        echo $rowcc['FirstName'] . ' ';
+		    echo $rowcc['MiddleName'] . ' ';
+       
         echo $rowcc['Suffix'];
+   
+        
+        echo "<input type='hidden' name='lname' id='lname' value='" . $rowcc['LastName'] . "'";
         echo "<input type='hidden' name='fname' id='fname' value='" . $rowcc['FirstName'] . "'";
         echo "<input type='hidden' name='mname' id='mname' value='" . $rowcc['MiddleName'] . "'";
-        echo "<input type='hidden' name='lname' id='lname' value='" . $rowcc['LastName'] . "'";
         echo "<input type='hidden' name='suffix' id='suffix' value='" . $rowcc['Suffix'] . "'";
 		    echo "</a>";
     
