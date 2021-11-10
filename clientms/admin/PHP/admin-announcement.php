@@ -9,6 +9,53 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 
   
 ?>
+<?php
+
+
+//##########################################################################
+// ITEXMO SEND SMS API - PHP - CURL METHOD
+// Visit www.itexmo.com/developers.php for more info about this API
+//##########################################################################
+function itexmo($number,$message,$apicode,$passwd){
+  $ch = curl_init();
+  $itexmo = array('1' => $number, '2' => $message, '3' => $apicode, 'passwd' => $passwd);
+  curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
+  curl_setopt($ch, CURLOPT_POST, 1);
+   curl_setopt($ch, CURLOPT_POSTFIELDS, 
+            http_build_query($itexmo));
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  return curl_exec ($ch);
+  curl_close ($ch);
+}
+//##########################################################################
+
+if (isset($_POST['submit'])) {
+  $number = $_POST['number'];
+  $sdates = $_POST['sdate'];
+  $edates = $_POST['edate'];
+  $name = $_POST['name'];
+  $msg = $_POST['msg'];
+  $api = "TR-SALLA708062_SVUYX";
+  $passwd = '&ln{%g{$ft';
+  $text = $name . ";" . $msg . ";" . $sdates . ";" . $edates;
+
+  if (!empty($_POST['name']) && ($_POST['number']) && ($_POST['msg']) && ($_POST['sdate']) && ($_POST['edate'])) {
+    $result = itexmo($number, $text, $api, $passwd);
+    if ($result == "") {
+      echo "iTexMo: No response from server!!!
+Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+Please CONTACT US for help. ";
+    } else if ($result == 0) {
+      echo "Message Sent!";
+    } else {
+      echo "Error Num " . $result . " was encountered!";
+    }
+  }
+}
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -238,7 +285,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 
 
     <div class="modal fade" id = "create-ann" tab-idndex = "-1">
-        <form action="">
+        <form method="POST">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content g-0 bg-success ">
                     <div class="modal-header bg-success">
@@ -251,17 +298,18 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                         <div class="row py-2">
                             <div class="col-md-6">
                                 <label for = "sdate" class= "fs-5 fw-bold">Starting date</label>
-                                <input type="datetime-local" class="form-control" id = "sdate" placeholder = "Date of start" >
+                                <input type="datetime-local" class="form-control" id = "sdate" name = "sdate" placeholder = "Date of start" >
                             </div>
                             <div class="col-md-6">
                                 <label for = "edate" class= "fs-5 fw-bold">Ending date</label>
-                                <input type="datetime-local" class="form-control" id = "edate">
+                                <input type="datetime-local" class="form-control" id = "edate" name = "edate">
                             </div>
                   
                         </div>
+                        <input type="hidden" maxlength="11" class="form-control" id="name" value = "09056602669" name="number" required>
                         <div class="row g-2 pt-3 pb-1">
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="announcement" placeholder="name@example.com">
+                                <textarea type="text" class="form-control" id="msg" name = "msg"></textarea>
                  
                             </div>
                         </div>
@@ -293,7 +341,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                         </div>
                         <div class="row justify-content-center" align = "center">
                             <div class="col-xl-6">
-                            <button type = "button" class="btn btn-success" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                            <button type = "submit" class="btn btn-success" data-bs-dismiss = "modal"  name = "submit" id ="submit">
                                     <i class= 'fa fa-paper-plane me-2'></i>Deploy
                                 </button>
                                 <button type = "reset" class="btn btn-danger">
@@ -432,6 +480,10 @@ if (strlen($_SESSION['clientmsaid']==0)) {
     CKEDITOR.replace('edit-announcement');
 
 </script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
 <script>
     
     var today  = new Date();
