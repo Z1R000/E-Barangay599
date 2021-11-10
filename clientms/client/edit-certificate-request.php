@@ -5,6 +5,28 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsuid'] == 0)) {
 	header('location:logout.php');
 } else {
+	$eid = intval($_GET['editid']);
+	$sqlcheck="Select * from tblcreatecertificate where ID = :eid";
+	$querycheck= $dbh->prepare($sqlcheck);
+	$querycheck->bindParam(':eid',$eid,PDO::PARAM_STR);
+	$querycheck->execute();
+	$resultscheck = $querycheck->fetchAll(PDO::FETCH_OBJ);
+	foreach($resultscheck as $rowcheck){
+		$statcheck = $rowcheck->status;
+	}
+	if (isset($_POST['submit'])) {
+		$stats = $_POST['status'];
+		if ($statcheck == "2" || $statcheck == "7"){
+			$stats = "3";
+		}
+		$sql = "update tblcreatecertificate set status=:stats WHERE ID=:eid";
+		$query = $dbh->prepare($sql);
+		$query->bindParam(':stats', $stats, PDO::PARAM_STR);
+		$query->bindParam(':eid', $eid, PDO::PARAM_STR);
+		$query->execute();
+		echo '<script>alert("Certificate Information has been updated")</script>';
+		echo "<script>window.location.href ='edit-certificate-request.php?editid=" . $eid . "'</script>";
+	}
 ?>
 
 	<!DOCTYPE html>
@@ -145,37 +167,38 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
 			<!-- Page Content -->
 			<div id="page-content-wrapper">
-			<?php
-                    $sql1 = "select * from tblinformation";
-                    $query1 = $dbh->prepare($sql1);
-                    $query1->execute();
-                    $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
-                    if ($query1->rowCount() > 0) {
-                        foreach ($results1 as $row1) {
-                ?>
-            <div class="container-fluid banner" align="center">
-                <div class="row">
-                    <div class="col-xl-3 px-1 ">
-                        <div class="float-start" style="margin-left:50px;">
-                            <img src="../<?php echo $row1->Blogoone;?>" style="width: 100px;">
-                        </div>
+				<?php
+				$sql1 = "select * from tblinformation";
+				$query1 = $dbh->prepare($sql1);
+				$query1->execute();
+				$results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+				if ($query1->rowCount() > 0) {
+					foreach ($results1 as $row1) {
+				?>
+						<div class="container-fluid banner" align="center">
+							<div class="row">
+								<div class="col-xl-3 px-1 ">
+									<div class="float-start" style="margin-left:50px;">
+										<img src="../<?php echo $row1->Blogoone; ?>" style="width: 100px;">
+									</div>
 
-                    </div>
-                    <div class="col-xl-6 " align="center">
-                        <h3 class="py-4"><?php echo $row1->Baddress;?> <br>
-                        <?php echo $row1->Btitle;?></h3>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="float-end" style="margin-right:50px;">
-                            <img src="../<?php echo $row1->Blogotwo;?>" style="width: 100px;">
-                        </div>
+								</div>
+								<div class="col-xl-6 " align="center">
+									<h3 class="py-4"><?php echo $row1->Baddress; ?> <br>
+										<?php echo $row1->Btitle; ?></h3>
+								</div>
+								<div class="col-xl-3">
+									<div class="float-end" style="margin-right:50px;">
+										<img src="../<?php echo $row1->Blogotwo; ?>" style="width: 100px;">
+									</div>
 
 
-                    </div>
-                </div>
+								</div>
+							</div>
 
-            </div>
-            <?php }}?>
+						</div>
+				<?php }
+				} ?>
 				<nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
 					<div class="d-flex align-items-center">
 						<i class="fa fa-align-justify secondary-text fs-4 me-3" id="menu-toggle"></i>
@@ -197,179 +220,232 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 						<li class="active">Edit Certificate Record</li>
 					</ol>
 				</div>
-				<div class="container-fluid px-4">
-					<div style="background-color: aliceblue;border-radius: 25px;border:1px solid black;padding: 25px;">
-						<div class="row">
-							<div class="col-xl-4">
-								<label for="date" class="fw-bold fs-6">Date today</label>
-								<input type="text" id="date" class="form-control" readonly>
-							</div>
-							<div class="col-xl-2">
-								<label for="date" class="fw-bold fs-6">Status</label>
-								<input type="text" id="status" class="form-control" placeholder = "Pending" readonly>
-							</div>
-						</div>
+				<form method="post">
+					<?php
+					$sql = "SELECT distinct tblcreatecertificate.*, tblcreatecertificate.ID as getID, tblresident.*, tblcertificate.*, tblstatus.* from tblcreatecertificate join tblcertificate on tblcertificate.ID = tblcreatecertificate.CertificateId join tblstatus on tblcreatecertificate.status = tblstatus.ID join tblresident on tblcreatecertificate.Userid=tblresident.ID WHERE tblcreatecertificate.ID=:eid";
+					$query = $dbh->prepare($sql);
+					$query->bindParam(':eid', $eid, PDO::PARAM_STR);
+					$query->execute();
+					$results = $query->fetchAll(PDO::FETCH_OBJ);
+					foreach ($results as $row) {
+						$cdates = $row->resDate;
+						$cdates = date('F j Y - h:i A', strtotime($cdates));
 
-						<div class="row g-3 ">
-							<div class="col-md-6">
-
-								<label for="rname" class="fs-6 fw-bold">Requestor Name</label>
-								<input type="text" class="form-control" id="rname" placeholder="e.g Juan Dela Cruz" readonly>
-
-							</div>
-							<div class="col-md-6">
-								<label for="purp" class="fs-6 fw-bold">Purposes/Submission Office</label>
-								<select class="select form-control" name="" id="purp" onchange="otherDiv('others_hidden',this)" disabled>
-									<option selected disabled>Purposes/Submission Office</option>
-									<option value="ent">For entertainment</option>
-									<option value="med">For medical reasons</option>
-									<option value="oth">Others</option>
-								</select>
-							</div>
-						</div>
-						<div class="row" id="others_hidden">
-							<div class="col-md-6">
-
-
-
-							</div>
-							<div class="col-md-6">
-
-								<label for="rname" class="fs-6 fw-bold">Other Reasons</label>
-								<input type="text" class="form-control" id="rname" placeholder="Please Specify:">
-
-							</div>
-						</div>
-						<div class="row">
-
-							<div class="col-md-4">
-
-								<label for="ctype" class="fs-6 fw-bold">Certification Type</label>
-								<div class="d-flex">
-									<select class="select form-control" name="" id="ctype" onchange="showDiv('hidden_div',this)" disabled>
-										<option selected>--Avaiable certifications--</option>
-										<option value="emp">Employment</option>
-										<option value="ind">Indigency</option>
-										<option value="Business">Business</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-2">
-								<label for="rname" class="fs-6 fw-bold">Certification Fee</label>
-								<div class="d-flex">
-									<div class="input-group">
-										<button class="btn btn-secondary text-white" disabled>
-											₱
-										</button>
-										<input type="text" class="form-control me-2 w-50" style="text-align: right;" id="rname" value="20.00" readonly>
+					?>
+						<div class="container-fluid px-4">
+							<div style="background-color: aliceblue;border-radius: 25px;border:1px solid black;padding: 25px;">
+								<div class="row">
+									<div class="col-xl-4">
+										<label for="date" class="black fw-bold fs-5">Date today</label>
+										<input type="text" id="" class="form-control" value="<?php echo $cdates; ?>" readonly>
+									</div>
+									<div class="col-xl-2">
+										<label for="date" class="black fw-bold fs-5">Status</label>
+										<input type="text" id="status" class="form-control" placeholder="Pending" value="<?php echo $row->statusName; ?>" readonly>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-6">
-								<label for="ctype" class="fs-6 fw-bold">Mode of Payment</label>
-								<div class="d-flex">
-									<select class="select form-control" name="" id="mop" onchange="showDiv('hidden_div',this)" disabled>
-										<option selected>--Select--</option>
-										<option value="gc">G-Cash</option>
-										<option value="cash">Cash</option>
 
-									</select>
+								<div class="row g-3 ">
+									<div class="col-md-6">
+
+										<label for="rname" class="black fw-bold fs-5">Requestor Name</label>
+										<input type="text" class="form-control" id="rname" placeholder="e.g Juan Dela Cruz" value="<?php echo htmlentities($row->FirstName); ?> <?php echo htmlentities($row->MiddleName); ?> <?php echo htmlentities($row->LastName); ?> <?php echo htmlentities($row->Suffix); ?>" readonly>
+
+									</div>
+									<div class="col-md-6">
+										<label for="purp" class= "black fw-bold fs-5">Purpose</label>
+											<select id = "purp" class ="form-select" name= "cmeth" disabled>
+												<option value="<?php echo "$row->Purpose";?>"><?php echo "$row->Purpose";?></option>
+											</select>
+									</div>
 								</div>
+									<?php 
+										$purpc = $row->Purpose;
+										if ($purpc == "OTHERS"){
+											echo '<div class="col-md-6">
+											</div>
+											<div class="col-md-6">
+		
+												<label for="rname" class="fs-6 fw-bold">Other Reasons</label>
+												<input type="text" class="form-control" id="rname" placeholder="Please Specify:">
+		
+											</div>';
+										}
+									?>
+								<div class="row">
+
+									<div class="col-md-4">
+
+									<label for="purp" class= "black fw-bold fs-5">Certificate Type</label>
+                                                <select id = "purp" class ="form-select" name= "cmeth" disabled>
+                                                    <option value="<?php echo "$row->CertificateId";?>" selected><?php echo "$row->CertificateName";?></option>                                                
+                                                </select>
+									</div>
+									<div class="col-md-2">
+										<label for="rname" class="fs-6 fw-bold">Certification Fee</label>
+										<div class="d-flex">
+											<div class="input-group">
+												<button class="btn btn-secondary text-white" disabled>
+													₱
+												</button>
+                                                <input id = "cname" class ="form-control" type="text" placeholder = "Certfication fee" name= "cname" value="<?php echo "$row->CertificatePrice";?>" disabled>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<label for="cname" class= "black fw-bold fs-5">Mode of Payment</label>
+                                                <select id = "cname" class ="form-select" name= "cmeth" disabled>
+                                                    <option value="<?php echo "$row->pMode";?>" id=""><?php echo "$row->pMode";?><option>                                                
+                                                </select>
+									</div>
+
+
+								</div>
+										<br>
+								<?php 
+										$ccheck = $row->CertificateName;
+										if ($ccheck == "6" || $ccheck == "7" || $ccheck == "8"){
+											echo '<div class="row">
+
+											<div class="col-md-6">
+												<label for="purp" class="fs-6 fw-bold">Business name
+													<small class="text-muted">(If business related)</small> </label>
+												<input type="text" class="form-control" id="rname" placeholder="e.g Manong Store">
+											</div>
+										</div><br>';
+										}
+
+										$scheck = "$row->statusName";
+										if ($scheck == "PENDING" || $scheck == "REJECTED/CANCELLED"){
+											echo '<div class="row">
+											<div class="col-xl-3">
+		
+											</div>
+											<div class="col-xl-3 ">
+		
+											</div>
+											<div class="col-xl-3 ">
+												<a href="manage-certificate.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
+											</div>
+											<div class="col-xl-3 ">
+												<button type="submit" class="form-control btn btn-outline-success" name="delete" id="delete">Delete</button>
+											</div>
+										</div>';
+										}else if ($scheck == "APPROVED" || $scheck == "PAYMENT REJECTED"){
+											echo '<div class="row">
+											<div class="col-xl-3">
+												<label for="formFileSm" class="form-label">Upload Proof of Payment<span class="fs-6 text-muted"> (JPEG or PNG format)</span></label>
+		
+											</div>
+											<div class="col-xl-3">
+		
+											</div>
+											<div class="col-xl-3">
+												<label for="ctype" class="black fw-bold fs-5">Payment Details</label>
+		
+											</div>
+											<div class="col-xl-3">
+		
+											</div>
+		
+										</div>
+										<div class="row">
+											<div class="col-xl-3">
+												<input class="form-control form-control-sm" id="formFileSm" type="file">
+												<br>
+											</div>
+											<div class="col-xl-3">
+		
+											</div>
+											<div class="col-xl-3">
+												<img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
+		
+											</div>
+											<div class="col-xl-1">
+		
+												<img src="images/images.jpg" alt="Girl in a jacket" width="80" height="80">
+		
+		
+											</div>
+											<div class="col-xl-2">
+		
+		
+		
+												<label for="ctype" style="font-size:130%; font-weight:600;">Francine Voltaire Ledesma <br><span style="font-size:90%;font-style:italic; font-weight:600;"> 09056602669</span></label>
+											</div>
+		
+										</div>
+										<br>
+										<div class="row">
+											<div class="col-xl-3">
+		
+											</div>
+											<div class="col-xl-3 ">
+		
+											</div>
+											<div class="col-xl-3 ">
+												<a href="manage-certificate.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
+											</div>
+											<div class="col-xl-3 ">
+												<button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
+											</div>
+										</div>';
+										}else if ($scheck == "PAYMENT VERIFICATION" || $scheck == "PAYMENT VERIFIED" || $scheck == "SETTLED"){
+											echo '<div class="row">
+											<div class="col-xl-3">
+											<label for="ctype" class="black fw-bold fs-5">Proof of Payment</label>
+		
+											</div>
+											<div class="col-xl-3">
+		
+											</div>
+											<div class="col-xl-3">
+												<label for="ctype" class="black fw-bold fs-5">Payment Details</label>
+		
+											</div>
+											<div class="col-xl-3">
+		
+											</div>
+		
+										</div>
+										<div class="row">
+											<div class="col-xl-3">
+											<img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
+												<br>
+											</div>
+											<div class="col-xl-3">
+		
+											</div>
+											<div class="col-xl-3">
+												<img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
+		
+											</div>
+		
+										</div>
+										<br>
+										<div class="row">
+											<div class="col-xl-3">
+		
+											</div>
+											<div class="col-xl-3 ">
+		
+											</div>
+											<div class="col-xl-3 ">
+												
+											</div>
+											<div class="col-xl-3 ">
+											<a href="manage-certificate.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
+											</div>
+										</div>';
+										}
+									?>
 							</div>
-
-
 						</div>
+				</form>
+			<?php } ?>
 
 
-
-						<div class="row" id="hidden_div">
-
-							<div class="col-md-6">
-								<label for="purp" class="fs-6 fw-bold">Business name
-									<small class="text-muted">(If business related)</small> </label>
-								<input type="text" class="form-control" id="rname" placeholder="e.g Manong Store">
-							</div>
-
-							<div class="col-md-6">
-								<label for="cap" class="fs-6 fw-bold">Capital</label>
-								<select class="select form-control" name="" id="cap">
-									<option selected>
-										< 10,000 </option>
-									<option value="ent">>10, 000</option>
-									<option value="med">>100,000</option>
-								</select>
-
-							</div>
-
-
-						</div>
-						<br>
-
-						<div class="row">
-							<div class="col-xl-3">
-								<label for="formFileSm" class="form-label">Upload Proof of Payment<span class="fs-6 text-muted"> (JPEG or PNG format)</span></label>
-
-							</div>
-							<div class="col-xl-3">
-
-							</div>
-							<div class="col-xl-3">
-								<label for="ctype" class="fs-6 fw-bold">Payment Details</label>
-
-							</div>
-							<div class="col-xl-3">
-
-							</div>
-
-						</div>
-						<div class="row">
-							<div class="col-xl-3">
-								<input class="form-control form-control-sm" id="formFileSm" type="file">
-								<br>
-							</div>
-							<div class="col-xl-3">
-
-							</div>
-							<div class="col-xl-3">
-								<img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
-
-							</div>
-							<div class="col-xl-1">
-								
-								<img src="images/images.jpg" alt="Girl in a jacket" width="80" height="80">
-								
-						
-							</div>
-							<div class="col-xl-2">
-								
-
-								
-								<label for="ctype" style="font-size:130%; font-weight:600;">Francine Voltaire Ledesma <br><span style="font-size:90%;font-style:italic; font-weight:600;"> 09056602669</span></label>
-							</div>
-
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-xl-3">
-
-							</div>
-							<div class="col-xl-3 ">
-
-							</div>
-							<div class="col-xl-3 ">
-								<a href="index.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
-							</div>
-							<div class="col-xl-3 ">
-								<button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
-							</div>
-						</div>
-
-
-					</div>
-				</div>
-
-
-				<!-- /#page-content-wrapper -->
+			<!-- /#page-content-wrapper -->
 			</div>
 
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
@@ -424,15 +500,32 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 				});
 			</script>
 			<script type="text/javascript">
-				function showDiv(divId, element) {
-					document.getElementById(divId).style.display = element.value == 'Business' ? 'flex' : 'none';
-				}
-			</script>
-			<script>
-				function otherDiv(divId, element) {
-					document.getElementById(divId).style.display = element.value == 'oth' ? 'flex' : 'none';
-				}
-			</script>
+            function showHid(divId, element) {
+                var bus = document.getElementById('ctype').value;
+                if (bus == 'Business Clearance Capital - Php10,000 Below') {
+                    document.getElementById(divId).style.display = 'flex';
+                } else if (bus == "Business Permit") {
+                    document.getElementById(divId).style.display = 'flex';
+                } else if (bus == "Business Clearance Capital - Php10,001 - Php100-000") {
+                    document.getElementById(divId).style.display = 'flex';
+                } else if (bus == "Business Clearance Capital - Php100,001 - Above") {
+                    document.getElementById(divId).style.display = 'flex';
+                } else {
+                    document.getElementById(divId).style.display = 'none';
+                }
+
+
+
+            }
+
+            function showOthers(divId, element) {
+                document.getElementById(divId).style.display = element.value == 'OTHERS' ? 'flex' : 'none';
+            }
+
+            function showOthersdec(divId, element) {
+                document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';
+            }
+        </script>
 	</body>
 
 	</html>
