@@ -6,7 +6,7 @@ if(isset($_POST["action"]))
  $output = '';
  if($_POST["action"] == "ctype")
  {
-  $query = "SELECT CertificatePrice FROM tblcertificate WHERE CertificateName = '".$_POST["query"]."'";
+  $query = "SELECT CertificatePrice, ID FROM tblcertificate WHERE ID = '".$_POST["query"]."'";
   $result = mysqli_query($con, $query);
   while($row = mysqli_fetch_array($result))
   {
