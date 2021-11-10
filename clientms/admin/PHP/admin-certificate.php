@@ -11,6 +11,37 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid'] == 0)) {
     header('location:logout.php');
 } else {
+    $aid = $_SESSION['clientmsaid'];
+    if(isset($_POST['submit']))
+        {
+            $usid=$_POST['usid'];
+            $ctype=$_POST['ctype'];
+            $mop=$_POST['mop'];
+            $purp=$_POST['purp'];
+            $bn=$_POST['bn'];
+            $cadm=$_POST['cadm'];
+            $other=$_POST['other'];
+            
+            $sql="insert into tblcreatecertificate (Userid, CertificateId, pMode, cAdmin, Purpose, other, bName) VALUES (:usid,:ctype,:mop,:cadm,:purp,:other,:bn)";
+            $query=$dbh->prepare($sql);
+            $query->bindParam(':usid',$usid,PDO::PARAM_STR);
+            $query->bindParam(':mop',$mop,PDO::PARAM_STR);
+            $query->bindParam(':purp',$purp,PDO::PARAM_STR);
+            $query->bindParam(':bn',$bn,PDO::PARAM_STR);
+            $query->bindParam(':other',$other,PDO::PARAM_STR);
+            $query->bindParam(':ctype',$ctype,PDO::PARAM_STR);
+            $query->bindParam(':cadm',$cadm,PDO::PARAM_STR);
+            $query->execute();
+            
+
+            $LastInsertId = $dbh->lastInsertId();
+            if ($LastInsertId > 0) {
+                echo '<script>alert("Certificate information has been added")</script>';
+                echo "<script>window.location.href ='admin-certificate.php'</script>";
+            } else {
+                echo '<script>alert("Something Went Wrong. Please try again")</script>';
+            }
+        }
 ?>
 
 
@@ -381,7 +412,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                         <div class="row">
                                             <div class="col" style="overflow-x:auto;">
                                                 <div class="all box" id="all">
-                                                    <?php $query = "SELECT tblcertificate.*, tblcreatecertificate.ID as getid, tblcreatecertificate.Userid, tblcreatecertificate.CertificateId, tblcreatecertificate.CreationId, tblcreatecertificate.status, tblcreatecertificate.CreationDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID ORDER BY status DESC, tblcreatecertificate.CreationDate";
+                                                    <?php $query = "SELECT tblcertificate.*, tblcreatecertificate.ID as getid, tblcreatecertificate.Userid, tblcreatecertificate.CertificateId, tblcreatecertificate.status, tblcreatecertificate.CreationDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID ORDER BY status DESC, tblcreatecertificate.CreationDate";
                                                     $result = mysqli_query($con, $query);  ?>
                                                     <table class="table table-striped table-bordered pt-2" id="crecall" style="min-width: 960px;">
                                                         <thead>
@@ -433,7 +464,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                 </div>
 
                                                 <div class="nbc box" id="nbc">
-                                                    <?php $query = "SELECT tblcertificate.*, tblcreatecertificate.ID as getid, tblcreatecertificate.Userid, tblcreatecertificate.CertificateId, tblcreatecertificate.CreationId, tblcreatecertificate.status, tblcreatecertificate.CreationDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID where tblcertificate.Type = '1' ORDER BY status DESC, tblcreatecertificate.CreationDate";
+                                                    <?php $query = "SELECT tblcertificate.*, tblcreatecertificate.ID as getid, tblcreatecertificate.Userid, tblcreatecertificate.CertificateId, tblcreatecertificate.status, tblcreatecertificate.CreationDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID where tblcertificate.Type = '1' ORDER BY status DESC, tblcreatecertificate.CreationDate";
                                                     $result = mysqli_query($con, $query);  ?>
                                                     <table class="table table-striped table-bordered pt-2" id="crecnbc" style="min-width: 960px;">
                                                         <thead>
@@ -485,7 +516,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                 </div>
 
                                                 <div class="bc box">
-                                                    <?php $query = "SELECT tblcertificate.*, tblcreatecertificate.ID as getid, tblcreatecertificate.Userid, tblcreatecertificate.CertificateId, tblcreatecertificate.CreationId, tblcreatecertificate.status, tblcreatecertificate.CreationDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID where tblcertificate.Type = '2' ORDER BY status DESC, tblcreatecertificate.CreationDate";
+                                                    <?php $query = "SELECT tblcertificate.*, tblcreatecertificate.ID as getid, tblcreatecertificate.Userid, tblcreatecertificate.CertificateId, tblcreatecertificate.status, tblcreatecertificate.CreationDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID where tblcertificate.Type = '2' ORDER BY status DESC, tblcreatecertificate.CreationDate";
                                                     $result = mysqli_query($con, $query);  ?>
                                                     <table class="table table-striped table-bordered pt-2" id="crecbc" style="min-width: 960px;">
                                                         <thead>
@@ -826,6 +857,9 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                         $clientmsaid = $_SESSION['clientmsaid'];
                         $search = $_POST['search'];
                     }
+                   
+                       
+                
                     ?>
                     <form method="post">
                         <div class="modal-header bg-599 border-599 ">
@@ -835,11 +869,26 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                         </div>
                         <div class="modal-body bg-white py-4">
                             <div class="row align-items-center">
+                            
                                 <div class="col-xl-4">
                                     <label for="date" class="fw-bold fs-6">Date today</label>
                                     <input type="text" class="form-control" value="<?php echo date("F j, Y"); ?>" readonly>
+                                    
+                                </div>
+                                <div class="col-xl-4">
+
+                                    
+                                    <input type="text" class="form-control" name="cadm" id="cadm" style="display: none;" value="<?php  $aid = $_SESSION['clientmsaid']; $sqls="SELECT tbladmin.*, tblresident.*, tblpositions.* from tbladmin JOIN tblresident on tbladmin.residentID=tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition WHERE tbladmin.ID = :aid";
+                        $querys = $dbh->prepare($sqls);
+                        $querys->bindParam(':aid',$aid,PDO::PARAM_STR);
+                        $querys->execute();
+                        $results = $querys->fetchAll(PDO::FETCH_OBJ);
+                        foreach ($results as $rows) {
+                            $pos = "$rows->Position $rows->LastName"; echo "$pos";}?>" readonly>
+                                
                                 </div>
                             </div>
+
 
                             <div class="row g-3 ">
                                 <div class="col-md-6">
@@ -855,12 +904,18 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 </div>
 
                                 <div class="col-md-6">
+                               
                                     <label for="purp" class="fs-6 fw-bold">Purpose</label>
                                     <select class="select form-select" name="purp" id="purp" onchange="showOthers('other_txt',this);" required>
                                         <option selected disabled>--Purpose--</option>
-                                        <option value="ent">For entertainment</option>
-                                        <option value="med">For medical reasons</option>
-                                        <option value="others">Others</option>
+                                        <?php
+                                                $sqllist = "select * from tblpurposes where serviceType='certification'";
+                                                $checkplist = $dbh->prepare($sqllist);
+                                                $checkplist->execute();
+                                                $resultplist = $checkplist->fetchAll(PDO::FETCH_OBJ);
+                                                foreach ($resultplist as $rowplist) {?>
+                                        <?php echo '<option value="'.$rowplist->Purpose.'">'.$rowplist->Purpose.'</option>';}?>
+                                        <option value="OTHERS">OTHERS</option>
                                     </select>
                                 </div>
 
@@ -870,7 +925,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="other" id="other " placeholder="Specify a purpose here">
+                                    <input type="text" class="form-control" name="other" id="other" placeholder="Specify a purpose here">
                                 </div>
                             </div>
                             <div class="row">
@@ -884,7 +939,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                         $query = "SELECT * FROM tblcertificate";
                                         $result = mysqli_query($con, $query);
                                         while ($row = mysqli_fetch_array($result)) {
-                                            $cName .= '<option value="' . $row["CertificateName"] . '">' . $row["CertificateName"] . '</option>';
+                                            $cName .= '<option value="' . $row["ID"] . '">' . $row["CertificateName"] . '</option>';
                                         }
                                         ?>
                                         <select class="form-control action" name="ctype" id="ctype" onchange="showHid('hidden_div',this)" required>
@@ -909,10 +964,10 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 <div class="col-md-6">
                                     <label for="ctype" class="fs-6 fw-bold">Mode of Payment</label>
                                     <div class="d-flex">
-                                        <select class="select form-select" name="" id="mop" required>
+                                        <select class="select form-select" name="mop" id="mop" required>
                                             <option selected disabled>--Select--</option>
-                                            <option value="gc">G-Cash</option>
-                                            <option value="cash">Cash</option>
+                                            <option value="G-Cash">G-Cash</option>
+                                            <option value="Cash">Cash</option>
                                         </select>
                                     </div>
                                 </div>
@@ -922,7 +977,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 <div class="col-md-6">
                                     <label for="purp" class="fs-6 fw-bold">Business name
                                         <small class="text-muted">(If business related)</small> </label>
-                                    <input type="text" class="form-control" id="rname" placeholder="e.g Manong Store">
+                                    <input type="text" class="form-control" id="bn" name="bn" placeholder="e.g Manong Store">
                                 </div>
 
 
@@ -931,7 +986,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 <div class="col-xl-12  my-2">
                                     <div class="float-end">
                                         <div class="btn-group">
-                                            <button type="submit" class="btn btn-success rounded" name="Submit" value="Submit">
+                                            <button type="submit" class="btn btn-success rounded" name="submit" id="submit" value="Submit">
                                                 <i class="fa fa-check mx-1"></i>Submit
                                             </button>
 
@@ -947,13 +1002,6 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                             </div>
                         </div>
                         <div class="modal-footer bg-white border-top-0 py-0">
-
-
-
-
-
-
-
                         </div>
                     </form>
 
@@ -1408,7 +1456,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
             }
 
             function showOthers(divId, element) {
-                document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';
+                document.getElementById(divId).style.display = element.value == 'OTHERS' ? 'flex' : 'none';
             }
 
             function showOthersdec(divId, element) {
