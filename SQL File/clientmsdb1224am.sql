@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2021 at 09:34 AM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.8
+-- Generation Time: Nov 10, 2021 at 05:24 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -54,25 +54,28 @@ CREATE TABLE `tbladmin` (
   `ID` int(11) NOT NULL,
   `residentID` int(11) NOT NULL,
   `BarangayPosition` varchar(50) NOT NULL,
-  `dutyTime` time NOT NULL,
-  `endDuty` time NOT NULL,
+  `dayDuty` varchar(15) NOT NULL,
   `Email` varchar(50) NOT NULL,
   `Password` varchar(100) NOT NULL,
-  `AdminRegdate` timestamp NOT NULL DEFAULT current_timestamp(),
-  `resID` int(11) NOT NULL
+  `AdminRegdate` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbladmin`
 --
 
-INSERT INTO `tbladmin` (`ID`, `residentID`, `BarangayPosition`, `dutyTime`, `endDuty`, `Email`, `Password`, `AdminRegdate`, `resID`) VALUES
-(1, 1, '1', '08:00:00', '12:00:00', 'ledes@gmail.com', '123', '2021-04-20 08:08:28', 0),
-(2, 2, '2', '12:00:00', '14:00:00', 'kim@gmail.com', '123', '2021-04-20 08:09:00', 0),
-(3, 3, '4', '14:00:00', '18:00:00', 'viray@gmail.com', '123', '2021-04-20 08:09:21', 0),
-(4, 4, '3', '18:00:00', '02:00:00', 'sallan@gmail.com', '123', '2021-04-20 16:21:55', 0),
-(5, 5, '5', '02:00:00', '00:00:00', 'nathan@gmail.com', '123', '2021-04-20 16:23:13', 0),
-(6, 3, '3', '00:00:00', '04:00:00', 'email@gmail.com', '123', '2021-09-22 12:35:49', 0);
+INSERT INTO `tbladmin` (`ID`, `residentID`, `BarangayPosition`, `dayDuty`, `Email`, `Password`, `AdminRegdate`) VALUES
+(1, 1, '1', '1', 'ledes@gmail.com', '123', '2021-04-20 08:08:28'),
+(2, 2, '2', '1', 'kim@gmail.com', '123', '2021-04-20 08:09:00'),
+(4, 4, '3', '1', 'sallan@gmail.com', '123', '2021-04-20 16:21:55'),
+(5, 5, '5', '1', 'nathan@gmail.com', '123', '2021-04-20 16:23:13'),
+(7, 7, '4', '2', 'kagawad1@gmail.com', '123', '2021-11-10 06:42:29'),
+(8, 9, '4', '3', 'kagawad2@gmail.com', '123', '2021-11-10 07:33:00'),
+(9, 10, '4', '4', 'kagawad3@gmail.com', '123', '2021-11-10 07:37:38'),
+(10, 11, '4', '5', 'kagawad4@gmail.com', '123', '2021-11-10 07:38:26'),
+(11, 13, '4', '6', 'kagawad5@gmail.com', '123', '2021-11-10 07:39:43'),
+(12, 14, '4', '7', 'kagawad6@gmail.com', '123', '2021-11-10 07:39:43'),
+(13, 16, '4', '8', 'kagawad7@gmail.com', '123', '2021-11-10 07:39:43');
 
 -- --------------------------------------------------------
 
@@ -102,25 +105,6 @@ INSERT INTO `tblannouncement` (`ID`, `announcement`, `announcementDate`, `endDat
 (7, 'Welcome to Gmeet', '2021-05-08 00:00:00', '2021-10-05 00:00:00', 1),
 (8, 'asdasdasd', '2021-10-05 18:02:26', '2021-10-05 18:02:26', 1),
 (9, 'Sample Announcement October 5 2021', '2021-10-05 18:03:36', '2021-10-05 18:03:36', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblavailability`
---
-
-CREATE TABLE `tblavailability` (
-  `ID` int(11) NOT NULL,
-  `ava` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tblavailability`
---
-
-INSERT INTO `tblavailability` (`ID`, `ava`) VALUES
-(1, 'AVAILABLE'),
-(2, 'NOT AVAILABLE');
 
 -- --------------------------------------------------------
 
@@ -211,33 +195,29 @@ CREATE TABLE `tblcertificate` (
   `CertificateName` varchar(200) DEFAULT NULL,
   `CertificatePrice` decimal(16,2) DEFAULT NULL,
   `CertText` varchar(500) NOT NULL,
-  `CreationDate` timestamp NULL DEFAULT current_timestamp(),
-  `request` varchar(100) NOT NULL
+  `CreationDate` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tblcertificate`
 --
 
-INSERT INTO `tblcertificate` (`ID`, `Type`, `CertificateName`, `CertificatePrice`, `CertText`, `CreationDate`, `request`) VALUES
-(1, 1, 'Barangay Certificate', '121.00', '<p>sad</p>\r\n', '2021-04-21 13:45:50', ''),
-(2, 1, 'Barangay Clearance', '30.00', '', '2021-04-21 13:45:50', ''),
-(3, 1, 'Barangay Permit', '150.00', '', '2021-04-21 13:45:50', ''),
-(4, 1, 'Proof of Residency', '120.00', '', '2021-04-21 13:45:50', ''),
-(5, 2, 'Business Permit', '180.00', '', '2021-04-21 13:45:50', ''),
-(6, 2, 'Business Clearance Capital - Php10,000 Below', '100.00', '', '2021-04-21 13:45:50', ''),
-(7, 2, 'Business Clearance Capital - Php10,001 - Php100-000', '500.00', '', '2021-04-21 14:25:51', ''),
-(8, 2, 'Business Clearance Capital - Php100,001 - Above', '1000.00', '', '2021-04-21 14:25:51', ''),
-(9, 1, 'Certificate of Good Moral', '90.00', '', '2021-04-21 14:25:51', ''),
-(10, 1, 'Lipat-bahay Clearance', '105.00', '', '2021-04-21 14:25:51', ''),
-(11, 1, 'Certificate of Acceptance', '56.00', '', '2021-04-21 14:25:51', ''),
-(12, 1, 'Certificate of Cohabitation', '113.00', '', '2021-04-21 14:25:51', ''),
-(13, 1, 'Certificate of Indigency', '356.00', '', '2021-04-21 14:25:51', ''),
-(14, 1, 'Certificate to File Action', '250.00', '', '2021-04-21 14:25:51', ''),
-(15, 1, 'Barangay ID', '50.00', '', '2021-04-21 14:28:00', ''),
-(16, 1, 'Medical Assistance/Senior Citizen', '100.00', '', '2021-04-21 14:28:00', ''),
-(17, 1, 'Referral Recommendation', '50.00', '', '2021-04-21 14:28:00', ''),
-(18, 1, 'Filling Fee', '80.00', '', '2021-04-21 14:28:00', '');
+INSERT INTO `tblcertificate` (`ID`, `Type`, `CertificateName`, `CertificatePrice`, `CertText`, `CreationDate`) VALUES
+(1, 1, 'Barangay Certificate', '121.00', 'Text Sample', '2021-04-21 13:45:50'),
+(2, 1, 'Barangay Clearance', '30.00', 'Text Sample', '2021-04-21 13:45:50'),
+(3, 1, 'Barangay Permit', '150.00', 'Text Sample', '2021-04-21 13:45:50'),
+(4, 1, 'Proof of Residency', '120.00', 'Text Sample', '2021-04-21 13:45:50'),
+(6, 2, 'Business Clearance Capital - Php10,000 Below', '100.00', 'Text Sample', '2021-04-21 13:45:50'),
+(7, 2, 'Business Clearance Capital - Php10,001 - Php100-000', '500.00', 'Text Sample', '2021-04-21 14:25:51'),
+(8, 2, 'Business Clearance Capital - Php100,001 - Above', '1000.00', 'Text Sample', '2021-04-21 14:25:51'),
+(9, 1, 'Certificate of Good Moral', '90.00', 'Text Sample', '2021-04-21 14:25:51'),
+(10, 1, 'Lipat-bahay Clearance', '105.00', 'Text Sample', '2021-04-21 14:25:51'),
+(11, 1, 'Certificate of Acceptance', '56.00', 'Text Sample', '2021-04-21 14:25:51'),
+(12, 1, 'Certificate of Cohabitation', '113.00', 'Text Sample', '2021-04-21 14:25:51'),
+(13, 1, 'Certificate of Indigency', '356.00', 'Text Sample', '2021-04-21 14:25:51'),
+(14, 1, 'Certificate to File Action', '250.00', 'Text Sample', '2021-04-21 14:25:51'),
+(15, 1, 'Barangay ID', '50.00', 'Text Sample', '2021-04-21 14:28:00'),
+(17, 1, 'Referral Recommendation', '50.00', 'Text Sample', '2021-04-21 14:28:00');
 
 -- --------------------------------------------------------
 
@@ -274,28 +254,39 @@ INSERT INTO `tblcertificaterequest` (`ID`, `userID`, `certificateID`, `requestSt
 CREATE TABLE `tblcreatecertificate` (
   `ID` int(10) NOT NULL,
   `Userid` varchar(120) DEFAULT NULL,
-  `CertificateId` varchar(120) DEFAULT NULL,
-  `CreationId` varchar(120) DEFAULT NULL,
+  `CertificateId` varchar(100) NOT NULL,
   `CreationDate` timestamp NULL DEFAULT current_timestamp(),
-  `adminID` int(11) DEFAULT NULL,
-  `status` varchar(20) NOT NULL
+  `cAdmin` varchar(50) DEFAULT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'Unsettled',
+  `pMode` varchar(10) NOT NULL,
+  `Purpose` varchar(100) NOT NULL,
+  `other` varchar(100) NOT NULL,
+  `bName` varchar(50) NOT NULL,
+  `content` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tblcreatecertificate`
 --
 
-INSERT INTO `tblcreatecertificate` (`ID`, `Userid`, `CertificateId`, `CreationId`, `CreationDate`, `adminID`, `status`) VALUES
-(1, '2', '2', '135792633', '2021-04-15 03:51:43', 1, 'Settled'),
-(2, '2', '2', '437472239', '2021-04-22 03:38:40', 1, 'Settled'),
-(3, '4', '10', '637901206', '2021-04-22 03:39:22', 1, 'Settled'),
-(4, '2', '15', '464157984', '2021-04-22 09:11:03', 1, 'Settled'),
-(5, '4', '9', '171104214', '2021-04-22 12:02:07', 1, 'Unsettled'),
-(6, '2', '10', '382660445', '2021-04-22 13:40:24', 1, 'Settled'),
-(7, '2', '6', '722036110', '2021-05-03 17:09:45', 1, 'Unsettled'),
-(8, '4', '14', '239149821', '2021-05-03 17:11:02', 1, 'Settled'),
-(9, '1', '7', '575394333', '2021-05-03 17:11:16', 1, 'Unsettled'),
-(10, '3', '4', '362984365', '2021-05-03 17:11:48', 1, 'Unsettled');
+INSERT INTO `tblcreatecertificate` (`ID`, `Userid`, `CertificateId`, `CreationDate`, `cAdmin`, `status`, `pMode`, `Purpose`, `other`, `bName`, `content`) VALUES
+(1, '2', '2', '2021-04-15 03:51:43', 'Chairperson Ledesma', 'Settled', 'Cash', 'OPEN ACCOUNT/LOAN', '', '', 'Check Text'),
+(2, '2', '2', '2021-04-22 03:38:40', 'Chairperson Ledesma', 'Settled', 'G-cash', 'EMPLOYMENT/WORK', '', '', 'Check Text'),
+(3, '4', '10', '2021-04-22 03:39:22', 'Chairperson Ledesma', 'Settled', 'Cash', 'FINANCIAL ASSISTANCE', '', '', 'Check Text'),
+(4, '2', '15', '2021-04-22 09:11:03', 'Chairperson Ledesma', 'Settled', 'G-cash', 'MEMBERSHIP/NEW ID', '', '', 'Check Text'),
+(5, '4', '9', '2021-04-22 12:02:07', 'Chairperson Ledesma', 'Settled', 'G-cash', 'EMPLOYMENT/WORK', '', '', '<p>Check Text</p>\r\n'),
+(6, '2', '10', '2021-04-22 13:40:24', 'Chairperson Ledesma', 'Unsettled', 'Cash', 'FINANCIAL ASSISTANCE', '', '', '<p>Check Text</p>\r\n'),
+(7, '2', '6', '2021-05-03 17:09:45', 'Chairperson Ledesma', 'Settled', 'Cash', 'BUSINESS CLEARANCE', '', 'Business #1', 'Check Text'),
+(8, '4', '14', '2021-05-03 17:11:02', 'Chairperson Ledesma', 'Unsettled', 'Cash', 'MEDICAL ASSISTANCE', '', '', 'Check Text'),
+(9, '1', '7', '2021-05-03 17:11:16', 'Chairperson Ledesma', 'Unsettled', 'G-cash', 'BUSINESS CLEARANCE', '', 'Business #1', 'Check Text'),
+(10, '2', '4', '2021-05-03 17:11:48', 'Chairperson Ledesma', 'Unsettled', 'G-cash', 'EMPLOYMENT/WORK', '', '', 'Check Text'),
+(11, '4', '1', '2021-11-10 09:40:08', 'Chairperson Ledesma', 'Unsettled', 'G-Cash', 'Own', '', '', ''),
+(12, '3', '1', '2021-11-10 10:27:18', 'Chairperson Ledesma', 'Unsettled', 'G-Cash', '', '', '', ''),
+(13, '7', '3', '2021-11-10 10:42:43', 'Chairperson Ledesma', 'Unsettled', 'G-Cash', 'OPEN ACCOUNT/LOAN', '', '', ''),
+(14, '10', '2', '2021-11-10 10:44:39', 'Chairperson Ledesma', 'Unsettled', 'G-Cash', 'OTHERS', 'School', '', ''),
+(15, '8', '2', '2021-11-10 11:16:41', 'Chairperson Ledesma', 'Unsettled', 'G-Cash', 'MEMBERSHIP/NEW ID', '', '', ''),
+(16, '11', '6', '2021-11-10 11:18:23', 'Chairperson Ledesma', 'Unsettled', 'G-Cash', 'EMPLOYMENT/WORK', '', '', ''),
+(17, '11', '3', '2021-11-10 12:54:50', 'Chairperson Ledesma', 'Unsettled', 'G-Cash', 'MEMBERSHIP/NEW ID', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -340,18 +331,20 @@ INSERT INTO `tblcreaterental` (`ID`, `status`, `userID`, `rentalID`, `adminID`, 
 
 CREATE TABLE `tblinformation` (
   `ID` int(11) NOT NULL,
-  `Baddress` text NOT NULL,
+  `Baddress` varchar(100) NOT NULL,
+  `bFullAdd` varchar(100) NOT NULL,
   `Btitle` text NOT NULL,
   `Blogoone` text NOT NULL,
-  `Blogotwo` text NOT NULL
+  `Blogotwo` text NOT NULL,
+  `bContact` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tblinformation`
 --
 
-INSERT INTO `tblinformation` (`ID`, `Baddress`, `Btitle`, `Blogoone`, `Blogotwo`) VALUES
-(1, 'BARANGAY 599, ZONE 59, DISTRICT VI', 'OFFICE OF THE SANGGUNIANG BARANGAY\r\n', 'images/barangay.png', 'images/maynila.png');
+INSERT INTO `tblinformation` (`ID`, `Baddress`, `bFullAdd`, `Btitle`, `Blogoone`, `Blogotwo`, `bContact`) VALUES
+(1, 'BARANGAY 599, ZONE 59, DISTRICT VI', '4745 Peralta St. V. Mapa Sta. Mesa, Manila', 'OFFICE OF THE SANGGUNIANG BARANGAY\r\n', 'images/barangay.png', 'images/maynila.png', '09123456789');
 
 -- --------------------------------------------------------
 
@@ -378,8 +371,7 @@ INSERT INTO `tbllistpurok` (`ID`, `pName`) VALUES
 (7, '7'),
 (8, '8'),
 (9, '9'),
-(10, '10'),
-(13, '11');
+(10, '10');
 
 -- --------------------------------------------------------
 
@@ -403,32 +395,6 @@ INSERT INTO `tblmodes` (`ID`, `mode`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblpaymentlogs`
---
-
-CREATE TABLE `tblpaymentlogs` (
-  `ID` int(11) NOT NULL,
-  `mode` int(11) NOT NULL,
-  `payorName` int(11) NOT NULL,
-  `refNum` int(11) NOT NULL,
-  `proof` varchar(1000) NOT NULL,
-  `servicetype` varchar(25) NOT NULL,
-  `request` varchar(1000) NOT NULL,
-  `payment` decimal(16,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tblpaymentlogs`
---
-
-INSERT INTO `tblpaymentlogs` (`ID`, `mode`, `payorName`, `refNum`, `proof`, `servicetype`, `request`, `payment`) VALUES
-(1, 1, 11, 123456789, '../images/admin-logo.png', '2', '1', '300.00'),
-(3, 1, 11, 12341235, '../images/maynila.png', '2', '3', '150.00'),
-(4, 1, 10, 12314222, '../images/nirvanalogo.jpg', '2', '1', '200.00');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tblpositions`
 --
 
@@ -444,8 +410,8 @@ CREATE TABLE `tblpositions` (
 INSERT INTO `tblpositions` (`ID`, `Position`) VALUES
 (1, 'Chairperson'),
 (2, 'Secretary'),
-(3, 'Kagawad'),
-(4, 'Treasurer'),
+(3, 'Treasurer'),
+(4, 'Kagawad'),
 (5, 'SK chairman');
 
 -- --------------------------------------------------------
@@ -472,12 +438,11 @@ INSERT INTO `tblpurposes` (`ID`, `Purpose`, `serviceType`) VALUES
 (5, 'BURIAL ASSISTANCE', 'certification'),
 (6, 'FINANCIAL ASSISTANCE', 'certification'),
 (7, 'SCHOLARSHIP/BOARD EXAM/EN', 'certification'),
-(8, 'BIRTH CERTIFICATE/MARRIAG', 'certification'),
+(8, 'BIRTH CERTIFICATE/MARRIAGE', 'certification'),
 (9, 'SEMINARS/MEETINGS', 'rental'),
 (10, 'SOCIAL GATHERING', 'rental'),
 (11, 'SPORTS', 'rental'),
-(12, 'MEDICAL', 'rental'),
-(13, 'OTHERS', 'rental');
+(12, 'MEDICAL', 'rental');
 
 -- --------------------------------------------------------
 
@@ -489,7 +454,7 @@ CREATE TABLE `tblrental` (
   `ID` int(11) NOT NULL,
   `rentalName` varchar(100) NOT NULL,
   `rentalPrice` decimal(16,2) NOT NULL,
-  `availability` int(11) NOT NULL
+  `availability` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -497,10 +462,10 @@ CREATE TABLE `tblrental` (
 --
 
 INSERT INTO `tblrental` (`ID`, `rentalName`, `rentalPrice`, `availability`) VALUES
-(1, 'Basketball Court', '253.00', 2),
-(2, 'Parking', '60.00', 1),
-(3, 'Daycares', '150.01', 2),
-(4, 'Barangay Hallssssss', '210.00', 1);
+(1, 'Basketball Court', '300.00', 'Available'),
+(2, 'Parking', '100.00', 'Available'),
+(3, 'Daycare', '150.00', 'Not Available'),
+(4, 'Barangay Hall', '250.00', 'Available');
 
 -- --------------------------------------------------------
 
@@ -541,7 +506,7 @@ CREATE TABLE `tblresident` (
   `Purok` int(11) NOT NULL,
   `houseUnit` int(11) NOT NULL,
   `streetName` varchar(200) NOT NULL,
-  `Cellphnumber` int(11) DEFAULT NULL,
+  `Cellphnumber` varchar(12) DEFAULT NULL,
   `Email` varchar(50) DEFAULT NULL,
   `Password` varchar(50) NOT NULL,
   `CreationDate` timestamp NULL DEFAULT current_timestamp(),
@@ -568,16 +533,17 @@ CREATE TABLE `tblresident` (
 --
 
 INSERT INTO `tblresident` (`ID`, `Purok`, `houseUnit`, `streetName`, `Cellphnumber`, `Email`, `Password`, `CreationDate`, `voter`, `vPrecinct`, `ResidentType`, `LastName`, `Suffix`, `FirstName`, `MiddleName`, `BirthPlace`, `Gender`, `sssNumber`, `tinNumber`, `CivilStatus`, `BirthDate`, `HomeName`, `PassReset`, `resStatus`) VALUES
-(1, 1, 534, 'Old Sta. Mesa', 2147483647, 'ledes@gmail.com', '123', '2021-04-12 19:36:11', 'Yes', '123', 'Rental/Boarder', 'Ledesma', '', 'Marithess', 'Cortez', 'Manila', 'Male', 123123123, 1231321, 'Single', '2012-04-05 00:00:00', '', '', 'Active'),
-(3, 3, 323, 'Narra', 19823719, 'virayvergel10@gmail.com', '123', '2021-04-12 20:14:26', 'No', '', 'Care Taker', 'Viray', 'Sr.', 'Vergel', 'Sallan', 'Manila', 'Male', 123123123, 3212312, 'Single', '2015-04-01 00:00:00', '', '', 'Active'),
-(4, 4, 543, 'Mangga', 21315123, 'sallan@gmail.com', '123', '2021-04-20 07:49:54', 'Yes', '123', 'Living with Relatives', 'Sallan', 'Jr.', 'Arnold', 'Clavio', 'Manila', 'Female', 12512312, 12315123, 'Married', '2011-04-01 00:00:00', '', '', 'Active'),
-(5, 5, 124, 'Sarmiento', 123123, 'nathan@gmail.com', '123', '2021-04-20 08:22:54', 'Yes', '123', 'Rental/Boarder', 'Morales', 'Sr.', 'Nathan', 'Pacquiao', 'Manila', 'Male', 123123, 12315123, 'Married', '2008-02-20 00:00:00', '', '', 'Active'),
-(7, 7, 722, 'Mangga Ext.', 1436245, 'uy@gmail.com', '123', '2021-05-07 08:42:16', 'No', '', 'Living with Relatives', 'Uy', '', 'Wilvin', 'Voltaire', 'Visayas', 'Female', 45145451, 61451451, 'Married', '2013-01-07 00:00:00', '', '', 'Active'),
-(9, 9, 999, 'Narra', 134561, 'velasco@gmail.com', '123', '2021-05-07 08:51:28', 'Yes', '2147483647', 'House Owner', 'Velasco', '', 'Sheena', 'Marie', 'Manila', 'Female', 1641461346, 1435614, 'Married', '2011-01-07 00:00:00', '', '', 'Active'),
-(10, 10, 100, 'Sampaloc', 1645612345, 'ligs@gmail.com', '123', '2021-05-07 08:52:28', 'Yes', '514512345', 'Living with Relatives', 'Ligutom', '', 'Zyra', 'Ligs', 'Manila', 'Female', 1451345134, 1451243513, 'Widow', '2014-01-07 00:00:00', '', '', 'Active'),
-(11, 10, 891, 'Narra', 1243521345, 'demesa@gmail.com', '123', '2021-05-08 02:28:15', 'Yes', '21452435', 'House Owner', 'Demesa', '', 'Adrian', 'Villanueva', 'Macaraeg', 'Female', 1254125412, 12341234, 'Married', '2016-05-08 00:00:00', '', '', 'Inactive'),
-(13, 2, 123, 'Old Sta. Mesa', 2147483647, 'bins@gmail.com', 'Bins123x', '2021-11-06 08:12:06', 'No', '', 'Rental/Boarder', 'sunhose', 'Sr.', 'Vinz', 'Dangkol', NULL, 'Male', 0, 0, 'Married', '1955-12-12 00:00:00', 'Jayvee Dragon Celestial ', '', 'Deceased'),
-(14, 1, 222, 'V. Mapa', 2147483647, 'jim@gmail.com', '123x', '2021-11-06 13:45:50', 'Yes', '0212', 'Rental/Boarder', 'Ledes', 'Jr.', 'Sedel', 'Deles', NULL, 'Male', 123123123, 123123123, 'Single', '1991-05-26 00:00:00', 'Jayvee', '', 'Inactive');
+(1, 3, 534, 'Old Sta. Mesa', '09056602669', 'ledesma.francinevoltaire@ue.edu.ph', '123', '2021-04-12 19:36:11', 'Yes', '123', 'Rental/Boarder', 'Ledesma', '', 'Marithess', 'Cortez', 'Manila', 'Male', 123123123, 1231321, 'Single', '2012-04-05 00:00:00', '', '', 'Active'),
+(2, 2, 323, 'Narra', '09056602669', 'virayvergel10@gmail.com', '123', '2021-04-12 20:14:26', 'No', '', 'Care Taker', 'Viray', 'Sr.', 'Vergel', 'Sallan', 'Manila', 'Male', 123123123, 3212312, 'Single', '2015-04-01 00:00:00', '', '', 'Active'),
+(4, 3, 543, 'Mangga', '09291581899', 'viray.vergel@ue.edu.ph', '123', '2021-04-20 07:49:54', 'Yes', '123', 'Living with Relatives', 'Sallan', 'Jr.', 'Arnold', 'Clavio', 'Manila', 'Female', 12512312, 12315123, 'Married', '2011-04-01 00:00:00', '', '', 'Active'),
+(5, 5, 124, 'Sarmiento', '09056602669', 'nathan@gmail.com', '123', '2021-04-20 08:22:54', 'Yes', '123', 'Rental/Boarder', 'Morales', 'Sr.', 'Nathan', 'Pacquiao', 'Manila', 'Male', 123123, 12315123, 'Married', '2008-02-20 00:00:00', '', '', 'Active'),
+(7, 7, 722, 'Mangga Ext.', '09056602669', 'uy@gmail.com', '123', '2021-05-07 08:42:16', 'No', '', 'Living with Relatives', 'Uy', '', 'Wilvin', 'Voltaire', 'Visayas', 'Female', 45145451, 61451451, 'Married', '2013-01-07 00:00:00', '', '', 'Active'),
+(9, 9, 999, 'Narra', '09056602669', 'velasco@gmail.com', '123', '2021-05-07 08:51:28', 'Yes', '2147483647', 'House Owner', 'Velasco', '', 'Sheena', 'Marie', 'Manila', 'Female', 1641461346, 1435614, 'Married', '2011-01-07 00:00:00', '', '', 'Active'),
+(10, 10, 100, 'Sampaloc', '09056602669', 'ligs@gmail.com', '123', '2021-05-07 08:52:28', 'Yes', '514512345', 'Living with Relatives', 'Ligutom', '', 'Zyra', 'Ligs', 'Manila', 'Female', 1451345134, 1451243513, 'Widow', '2014-01-07 00:00:00', '', '', 'Active'),
+(11, 10, 891, 'Narra', '09056602669', 'demesa@gmail.com', '123', '2021-05-08 02:28:15', 'Yes', '21452435', 'House Owner', 'Demesa', '', 'Adrian', 'Villanueva', 'Macaraeg', 'Female', 1254125412, 12341234, 'Married', '2016-05-08 00:00:00', '', '', 'Inactive'),
+(13, 2, 123, 'Old Sta. Mesa', '09056602669', 'bins@gmail.com', 'Bins123x', '2021-11-06 08:12:06', 'No', '', 'Rental/Boarder', 'sunhose', 'Sr.', 'Vinz', 'Dangkol', NULL, 'Male', 0, 0, 'Married', '1955-12-12 00:00:00', 'Jayvee Dragon Celestial ', '', 'Deceased'),
+(14, 1, 222, 'V. Mapa', '09056602669', 'jim@gmail.com', '123x', '2021-11-06 13:45:50', 'Yes', '0212', 'Rental/Boarder', 'Ledes', 'Jr.', 'Sedel', 'Deles', NULL, 'Male', 123123123, 123123123, 'Single', '1991-05-26 00:00:00', 'Jayvee', '', 'Inactive'),
+(16, 2, 23, 'Peralta 3', '09056602669', 'snow@gmail.com', '123', '2021-11-10 07:44:06', 'No', '', 'House Owner', 'Vi', 'Ray', 'Ver', 'Gel', 'Manila', 'Male', NULL, NULL, 'Single', '1961-10-19 15:42:11', '', '', 'Active');
 
 -- --------------------------------------------------------
 
@@ -740,12 +706,6 @@ ALTER TABLE `tblannouncement`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `tblavailability`
---
-ALTER TABLE `tblavailability`
-  ADD PRIMARY KEY (`ID`);
-
---
 -- Indexes for table `tblblotter`
 --
 ALTER TABLE `tblblotter`
@@ -803,12 +763,6 @@ ALTER TABLE `tbllistpurok`
 -- Indexes for table `tblmodes`
 --
 ALTER TABLE `tblmodes`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `tblpaymentlogs`
---
-ALTER TABLE `tblpaymentlogs`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -879,19 +833,13 @@ ALTER TABLE `tblstreet`
 -- AUTO_INCREMENT for table `tbladmin`
 --
 ALTER TABLE `tbladmin`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tblannouncement`
 --
 ALTER TABLE `tblannouncement`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `tblavailability`
---
-ALTER TABLE `tblavailability`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tblblotter`
@@ -927,7 +875,7 @@ ALTER TABLE `tblcertificaterequest`
 -- AUTO_INCREMENT for table `tblcreatecertificate`
 --
 ALTER TABLE `tblcreatecertificate`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tblcreaterental`
@@ -954,22 +902,16 @@ ALTER TABLE `tblmodes`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tblpaymentlogs`
---
-ALTER TABLE `tblpaymentlogs`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
 -- AUTO_INCREMENT for table `tblpositions`
 --
 ALTER TABLE `tblpositions`
-  MODIFY `ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tblpurposes`
 --
 ALTER TABLE `tblpurposes`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tblrental`
@@ -987,7 +929,7 @@ ALTER TABLE `tblrentalrequest`
 -- AUTO_INCREMENT for table `tblresident`
 --
 ALTER TABLE `tblresident`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tblresidentrequest`

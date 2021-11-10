@@ -52,7 +52,7 @@ if ($_POST) {
     $passwd = '&ln{%g{$ft';
     $text = "Announcement for " . $sdates . " to " . $edates . ": " . $msg;
 
-    $sql = "SELECT * from tblresident";
+    $sql = "SELECT * from tblresident WHERE Purok = '3'";
     $query=$dbh->prepare($sql);
     $query->execute();
     $result1=$query->fetchAll(PDO::FETCH_OBJ);
@@ -78,7 +78,7 @@ if ($_POST) {
                 
                     $mail->setFrom('barnagay599@gmail.com', 'chairman');
             
-                    $sqle = "SELECT * from tblresident";
+                    $sqle = "SELECT * from tblresident WHERE Purok = '3'";
                     $querye=$dbh->prepare($sqle);
                     $querye->execute();
                     $resulte=$querye->fetchAll(PDO::FETCH_OBJ);
@@ -290,9 +290,7 @@ if ($_POST) {
                                 echo '     <div class="row">
                                 <div class="col-md-12">
                                     <div class="float-end">
-                                        <div class="btn-group" role="group">
-                                            <button type= "button" href = "#edit-ann" data-bs-toggle = "modal"  class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-edit"></i>&nbsp;Edit </a>
-                                    </div>
+                                        
                                     <div class="btn-group" role="group">
                                     <button type= "button" href = "#delete-ann" data-bs-toggle= "modal" class="btn btn-outline-danger mx-1 my-1"><i class="fa fa-trash"></i>&nbsp;Delete</button>
                                     </div>
@@ -373,26 +371,6 @@ if ($_POST) {
                                 <label for="formFileSm" class="form-label">Attach a file here <span class= "fs-6 text-muted">(e.g social amelioration forms, registration forms,posters etc...)</span></label>
                                 <input class="form-control form-control-sm" id="formFileSm" type="file">
                             </div>
-                        </div>
-                        <div class="row mt-2">
-                                    <label for="remarks" >Send Message to other media: <i class= "fa fa-envelope"></i></label>
-                                    <div class="col-md-6">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="sms">
-                                            <label class="form-check-label fs-5" for="sms">
-                                                SMS
-                                            </label>
-                                            </div>
-                                            <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="em" >
-                                            <label class="form-check-label fs-5" for="em">
-                                                E-mail
-                                            </label>
-                                          
-                                        </div>
-
-                                    </div>
-                                    
                         </div>
                         <div class="row justify-content-center" align = "center">
                             <div class="col-xl-6">
