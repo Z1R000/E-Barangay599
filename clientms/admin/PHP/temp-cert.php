@@ -310,7 +310,7 @@
            
         </div>
         <?php 
-          $sql = "SELECT tblcertificate.*, tblcreatecertificate.*, tblcreatecertificate.CreationDate as getDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID WHERE tblcreatecertificate.ID = :vid";
+          $sql = "SELECT tblcertificate.*, tblcreatecertificate.*, tblcreatecertificate.resDate as getDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID WHERE tblcreatecertificate.ID = :vid";
           $query = $dbh -> prepare($sql);
           $query->bindParam(':vid',$vid,PDO::PARAM_STR);
           $query->execute();

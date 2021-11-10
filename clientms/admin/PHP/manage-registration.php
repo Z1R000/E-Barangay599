@@ -573,12 +573,12 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <div class="col-xl-12 ">
                                         <div class="float-end">
                                         <div class="btn-group">
-                                        <button type="button" class="btn btn-danger form-control" name="delete" data-bs-toggle ="modal"  href ="#decline-proof"id="delete">Reject</button>
+                                        <button type="submit" class="btn btn-danger form-control" name="delete"   href ="#decline-proof"id="delete">Reject</button>
                                         </div>
                                         <div class="btn-group">
                                                         
                                             
-                                        <button type="button" href= "#approve-proof" data-bs-toggle = "modal" class="btn btn-success form-control" name="submit" id="submit">Approve</button>
+                                        <button type="submit" href= "#approve-proof" class="btn btn-success form-control" name="submit" id="submit">Approve</button>
                                         </div>
                                         </div>
                                     </div>

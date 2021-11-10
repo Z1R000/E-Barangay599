@@ -164,7 +164,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                                     <tbody>
                                         <?php
 
-                                            $sql="SELECT distinct tbladmin.ID, tblresident.ID, tbladmin.BarangayPosition, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tbladmin.dayDuty, tblresident.Cellphnumber, tblpositions.*, tbldays.* from tbladmin JOIN tblresident on tbladmin.residentID=tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition join tbldays on tbladmin.dayDuty = tbldays.ID order by tblpositions.ID ASC, tbladmin.dayDuty";
+                                            $sql="SELECT distinct tbladmin.*, tblresident.*, tblpositions.*, tbldays.* from tbladmin JOIN tblresident on tbladmin.residentID=tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition join tbldays on tbladmin.dayDuty = tbldays.ID order by tblpositions.ID ASC, tbladmin.dayDuty";
                                             $query = $dbh -> prepare($sql);
                                             $query->execute();
                                             $results=$query->fetchAll(PDO::FETCH_OBJ);

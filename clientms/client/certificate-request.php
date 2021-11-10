@@ -1,10 +1,41 @@
 <?php
+$con = mysqli_connect("localhost", "root", "", "clientmsdb");
+if (mysqli_connect_errno()) {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsuid'] == 0)) {
     header('location:logout.php');
 } else {
+    $uid = $_SESSION['clientmsuid'];
+    if (isset($_POST['submit'])) {
+        $ctype = $_POST['ctype'];
+        $purp = $_POST['purp'];
+        $other = $_POST['other'];
+        $pMode = $_POST['pMode'];
+        $bn = $_POST['bn'];
+
+        $sql = "insert into tblcreatecertificate (Userid, certificateId, Purpose, other, pMode,bName) VALUES (:uid,:ctype,:purp,:other,:pMode,:bn)";
+        $query = $dbh->prepare($sql);
+        $query->bindParam(':uid', $uid, PDO::PARAM_STR);
+        $query->bindParam(':ctype', $ctype, PDO::PARAM_STR);
+        $query->bindParam(':purp', $purp, PDO::PARAM_STR);
+        $query->bindParam(':other', $other, PDO::PARAM_STR);
+        $query->bindParam(':pMode', $pMode, PDO::PARAM_STR);
+        $query->bindParam(':bn', $bn, PDO::PARAM_STR);
+        $query->execute();
+
+
+        $LastInsertId = $dbh->lastInsertId();
+        if ($LastInsertId > 0) {
+            echo '<script>alert("Certificate request has been sent.")</script>';
+            echo "<script>window.location.href ='certificate-request.php'</script>";
+        } else {
+            echo '<script>alert("Something Went Wrong. Please try again")</script>';
+        }
+    }
 ?>
 
     <!DOCTYPE html>
@@ -209,117 +240,121 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                 <input type="text" id="date" class="form-control" readonly>
                             </div>
                         </div>
-                        <form>
-                            <div class="row g-3 ">
-                                <div class="col-md-6">
 
-                                    <label for="rname" class="fs-6 fw-bold">Requestor Name</label>
-                                    <input type="text" class="form-control" id="rname" placeholder="e.g Juan Dela Cruz" readonly>
+                        <form method="post">
+                            <?php
+                            $sql = "select * from tblresident where ID=:uid";
+                            $query = $dbh->prepare($sql);
+                            $query->bindParam(':uid', $uid, PDO::PARAM_STR);
+                            $query->execute();
 
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="purp" class="fs-6 fw-bold">Purposes/Submission Office</label>
-                                    <select class="select form-control" name="" id="purp" onchange="otherDiv('others_hidden',this)" required>
-                                        <option selected value="">Purposes/Submission Office</option>
-                                        <option value="ent">For entertainment</option>
-                                        <option value="med">For medical reasons</option>
-                                        <option value="oth">Others</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row" id="others_hidden">
-                                <div class="col-md-6">
+                            $results = $query->fetchAll(PDO::FETCH_OBJ);
+                            foreach ($results as $row) {
+                            ?>
+                                <div class="row g-3 ">
+                                    <div class="col-md-6">
 
+                                        <label for="rname" class="fs-6 fw-bold">Requestor Name</label>
+                                        <input type="text" class="form-control" id="rname" placeholder="e.g Juan Dela Cruz" value="<?php echo "$row->FirstName $row->MiddleName $row->LastName $row->Suffix";
+                                                                                                                                } ?>" readonly>
 
-
-                                </div>
-                                <div class="col-md-6">
-
-                                    <label for="rname" class="fs-6 fw-bold">Other Reasons</label>
-                                    <input type="text" class="form-control" id="arname" placeholder="Please Specify:">
-
-                                </div>
-                            </div>
-                            <div class="row">
-
-                                <div class="col-md-4">
-
-                                    <label for="ctype" class="fs-6 fw-bold">Certification Type</label>
-                                    <div class="d-flex">
-                                        <select class="select form-control" name="" id="ctype" onchange="showDiv('hidden_div',this)" required>
-                                            <option selected value="">--Avaiable certifications--</option>
-                                            <option value="emp">Employment</option>
-                                            <option value="ind">Indigency</option>
-                                            <option value="Business">Business</option>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="purp" class="fs-6 fw-bold">Purpose</label>
+                                        <select class="select form-select" name="purp" id="purp" onchange="showOthers('other_txt',this);" required>
+                                            <option selected disabled>--Purpose--</option>
+                                            <?php
+                                            $sqllist = "select * from tblpurposes where serviceType='certification'";
+                                            $checkplist = $dbh->prepare($sqllist);
+                                            $checkplist->execute();
+                                            $resultplist = $checkplist->fetchAll(PDO::FETCH_OBJ);
+                                            foreach ($resultplist as $rowplist) { ?>
+                                            <?php echo '<option value="' . $rowplist->Purpose . '">' . $rowplist->Purpose . '</option>';
+                                            } ?>
+                                            <option value="OTHERS">OTHERS</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <label for="rname" class="fs-6 fw-bold">Certification Fee</label>
-                                    <div class="d-flex">
-                                        <div class="input-group">
-                                            <button class="btn btn-secondary text-white" disabled>
-                                                ₱
-                                            </button>
-                                            <input type="text" class="form-control me-2 w-50" style="text-align: right;" id="rname" value="20.00" readonly>
+                                <div class="row g-3 mt-1" id="other_txt">
+                                    <div class="col-xl-6">
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="other" id="other" placeholder="Specify a purpose here">
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-4">
+
+                                        <label for="ctype" class="fs-6 fw-bold">Certification Type</label>
+                                        <div class="d-flex">
+
+                                            <?php
+                                            $cName = '';
+                                            $query = "SELECT * FROM tblcertificate";
+                                            $result = mysqli_query($con, $query);
+                                            while ($row = mysqli_fetch_array($result)) {
+                                                $cName .= '<option value="' . $row["ID"] . '">' . $row["CertificateName"] . '</option>';
+                                            }
+                                            ?>
+                                            <select class="form-control action" name="ctype" id="ctype" onchange="showHid('hidden_div',this)" required>
+                                                <option selected disabled>--Available Certifications--</option>
+                                                <?php echo $cName; ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" style="z-index: 0;">
+                                        <label for="rname" class="fs-6 fw-bold"> Fee</label>
+                                        <div class="d-flex">
+                                            <div class="input-group">
+                                                <button class="btn btn-secondary text-white" disabled>
+                                                    ₱
+                                                </button>
+                                                <select name="cprice" id="cprice" class="form-control action" disabled>
+                                                    <option value='' selected disabled></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="ctype" class="fs-6 fw-bold">Mode of Payment</label>
+                                        <div class="d-flex">
+                                            <select class="select form-select" name="pMode" id="pMode" required>
+                                                <option selected disabled>--Select--</option>
+                                                <option value="G-Cash">G-Cash</option>
+                                                <option value="Cash">Cash</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="ctype" class="fs-6 fw-bold">Mode of Payment</label>
-                                    <div class="d-flex">
-                                        <select class="select form-control" name="" id="mop" required>
-                                            <option selected value="">--Select--</option>
-                                            <option value="gc">G-Cash</option>
-                                            <option value="cash">Cash</option>
+                                <div class="row" id="hidden_div" style="display:none;">
 
-                                        </select>
+                                    <div class="col-md-6">
+                                        <label for="purp" class="fs-6 fw-bold">Business name
+                                            <small class="text-muted">(If business related)</small> </label>
+                                        <input type="text" class="form-control" id="bn" name="bn" placeholder="e.g Manong Store">
+                                    </div>
+
+
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-xl-3">
+
+                                    </div>
+                                    <div class="col-xl-3 ">
+
+                                    </div>
+                                    <div class="col-xl-3 ">
+                                        <a href="dashboard.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
+                                    </div>
+                                    <div class="col-xl-3 ">
+                                        <input type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">
                                     </div>
                                 </div>
-
-
-                            </div>
-
-
-
-                            <div class="row" id="hidden_div">
-
-                                <div class="col-md-6">
-                                    <label for="purp" class="fs-6 fw-bold">Business name
-                                        <small class="text-muted">(If business related)</small> </label>
-                                    <input type="text" class="form-control" id="businessnamerequired" placeholder="e.g Manong Store">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label for="cap" class="fs-6 fw-bold">Capital</label>
-                                    <select class="select form-control" name="" id="capitalrequired">
-                                        <option selected value="">--Select Capital--</option>
-                                        <option value="less10k"> Less than 10,000 </option>
-                                        <option value="more10k"> More than 10, 000 </option>
-                                        <option value="more100k"> More than 100,000 </option>
-                                    </select>
-
-                                </div>
-
-
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-xl-3">
-
-                                </div>
-                                <div class="col-xl-3 ">
-
-                                </div>
-                                <div class="col-xl-3 ">
-                                    <a href="dashboard.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
-                                </div>
-                                <div class="col-xl-3 ">
-                                    <input type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">
-                                </div>
-                            </div>
                         </form>
-                    </div>
+                                                </div>
 
 
                 </div>
@@ -358,17 +393,68 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                 }
             </script>
 
+            <script>
+                $(document).ready(function() {
+                    $("select").change(function() {
+                        $(this).find("option:selected").each(function() {
+                            var optionValue = $(this).attr("value");
+                            if (optionValue) {
+                                $(".box").not("." + optionValue).hide();
+                                $("." + optionValue).show();
+                            } else {
+                                $(".box").hide();
+                            }
+                        });
+                    }).change();
+                });
+            </script>
 
             <script type="text/javascript">
-                function showDiv(divId, element) {
-                    document.getElementById(divId).style.display = element.value == 'Business' ? 'flex' : 'none';
+                function showHid(divId, element) {
+                    var bus = document.getElementById('ctype').value;
+                    if (bus == '6' || bus == "7" || bus == "8") {
+                        document.getElementById(divId).style.display = 'flex';
+                    }else {
+                        document.getElementById(divId).style.display = 'none';
+                    }
+
+
+
+                }
+
+                function showOthers(divId, element) {
+                    document.getElementById(divId).style.display = element.value == 'OTHERS' ? 'flex' : 'none';
+                }
+
+                function showOthersdec(divId, element) {
+                    document.getElementById(divId).style.display = element.value == 'Business Clearance Capital - Php10,000 Below' ? 'flex' : 'none';
                 }
             </script>
             <script>
-                function otherDiv(divId, element) {
-                    document.getElementById(divId).style.display = element.value == 'oth' ? 'flex' : 'none';
+    $(document).ready(function() {
+        $('.action').change(function() {
+            if ($(this).val() != '') {
+                var action = $(this).attr("id");
+                var query = $(this).val();
+                var result = '';
+                if (action == "ctype") {
+                    result = 'cprice';
                 }
-            </script>
+                $.ajax({
+                    url: "fetchdata.php",
+                    method: "POST",
+                    data: {
+                        action: action,
+                        query: query
+                    },
+                    success: function(data) {
+                        $('#' + result).html(data);
+                    }
+                })
+            }
+        });
+    });
+</script>
     </body>
 
     </html>

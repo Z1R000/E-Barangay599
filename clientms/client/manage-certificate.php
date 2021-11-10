@@ -177,8 +177,9 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                     <tbody>
                                         <?php
                                         $uid = $_SESSION['clientmsuid'];
+                                        
 
-                                        $sql = "SELECT distinct tblcertificaterequest.ID, tblcertificaterequest.userID, tblcertificaterequest.certificateID, tblcertificaterequest.requestStatus,tblcertificaterequest.requestDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Cellphnumber, tblresident.houseUnit,tblresident.streetName, tblresident.Email, tblcertificate.CertificateName from tblcertificaterequest join tblcertificate on tblcertificate.ID = tblcertificaterequest.certificateID join tblresident where tblresident.ID=tblcertificaterequest.userID and tblcertificaterequest.userID=:uid";
+                                        $sql = "SELECT distinct tblcreatecertificate.*, tblcreatecertificate.ID as getID, tblresident.*, tblcertificate.*, tblstatus.* from tblcreatecertificate join tblcertificate on tblcertificate.ID = tblcreatecertificate.CertificateId join tblstatus on tblcreatecertificate.status = tblstatus.ID join tblresident on tblcreatecertificate.Userid=tblresident.ID WHERE tblresident.ID=:uid order by status ASC, resDate";
                                         $query = $dbh->prepare($sql);
                                         $query->bindParam(':uid', $uid, PDO::PARAM_STR);
                                         $query->execute();
@@ -186,18 +187,20 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
                                         $cnt = 1;
                                         if ($query->rowCount() > 0) {
-                                            foreach ($results as $row) {               ?>
+                                            foreach ($results as $row) {  $cdates = $row->resDate;
+                                                $cdates = date('F j Y - h:i A', strtotime($cdates));
+                                        ?>
                                                 <tr class="active">
                                                     <td style="color: #000;"><?php echo htmlentities($row->CertificateName); ?></td>
-                                                    <td style="color: #000;"><?php echo htmlentities($row->LastName); ?>, <?php echo htmlentities($row->FirstName); ?> <?php echo htmlentities($row->MiddleName); ?></td>
-                                                    <td style="color: #000;"><?php echo htmlentities($row->Cellphnumber); ?></td>
-                                                    <td style="color: #000;"><?php echo htmlentities($row->requestStatus); ?></td>
-                                                    <td style="color: #000;"><?php echo htmlentities($row->requestDate); ?></td>
+                                                    <td style="color: #000;"><?php echo htmlentities($row->FirstName); ?> <?php echo htmlentities($row->MiddleName); ?> <?php echo htmlentities($row->LastName); ?> <?php echo htmlentities($row->Suffix); ?></td>
+                                                    <td style="color: #000;"><?php echo htmlentities($row->CertificatePrice); ?></td>
+                                                    <td style="color: #000;"><?php echo htmlentities($row->statusName); ?></td>
+                                                    <td style="color: #000;"><?php echo htmlentities($cdates); ?></td>
                                                     <td style="color: #000;">G-Cash</td>
                                                     <td>
 
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="" href="edit-certificate-request.php" class="btn btng btn-success"><i class="fa fa-edit"></i></a>
+                                                            <a type="" href="edit-certificate-request.php?editid=<?php echo $row->getID;?>" class="btn btng btn-success"><i class="fa fa-edit"></i></a>
                                                         </div>
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                             <a type="button" href="#delete-cert" data-bs-toggle="modal" role="button" class="btn btng btn-danger"><i class="fa fa-trash"></i></a>

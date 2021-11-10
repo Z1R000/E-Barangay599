@@ -164,7 +164,7 @@
     <form method ="POST">
         <?php
             $eid=intval($_GET['editid']);
-            $sqle="SELECT tblcertificate.*, tblcreatecertificate.*, tblcreatecertificate.CreationDate as getDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID WHERE tblcreatecertificate.ID = :eid";
+            $sqle="SELECT tblcertificate.*, tblcreatecertificate.*, tblcreatecertificate.resDate as getDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix, tblstatus.* FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID join tblstatus on tblstatus.ID = tblcreatecertificate.status WHERE tblcreatecertificate.ID = :eid";
             $querye = $dbh -> prepare($sqle);
             $querye->bindParam(':eid',$eid,PDO::PARAM_STR);
             $querye->execute();
@@ -235,14 +235,35 @@
                                             
                                                 <?php 
                                                     $check = $rowe->status;
-                                                    if ($check == "Settled"){
-                                                        
-                                                        echo '<select id = "status" class ="form-select" name= "status" disabled><option value="Settled">Settled</option>';
-                                                    }else{
-                                                        echo '<select id = "status" class ="form-select" name= "status"><option value="Unsettled">Unsettled</option><option value="Settled">Settled</option>';
+                                                    $cheme = $rowe->statusName;
+                                                    if ($check == "5" || $check == "6" || $check == "4" || $check == "7" || $check == "2"){
+                                                        echo '<select id = "status" class ="form-select" name= "status" disabled><option value="'.$cheme.'">'.$cheme.'</option>
+                                                        ';
+                                                    
+                                                    }else if ($check == "3"){
+                                                        echo '<select id = "status" class ="form-select" name= "status">';
+                                                        $sqlst="SELECT * from tblstatus WHERE ID ='3' or ID ='4' or ID='7'";
+                                                        $queryst=$dbh->prepare($sqlst);
+                                                        $queryst->execute();
+                                                        $resultst=$queryst->fetchAll(PDO::FETCH_OBJ);
+                                                        foreach($resultst as $rowst){
+                                                            echo '<option value="'.$rowst->ID.'">'.$rowst->statusName.'</option>
+                                                           ';
+                                                        }
+                                                    
+                                                    }else if ($check == "1"){
+                                                        echo '<select id = "status" class ="form-select" name= "status">';
+                                                        $sqlst="SELECT * from tblstatus WHERE ID = '1' or ID = '2' or ID ='6'";
+                                                        $queryst=$dbh->prepare($sqlst);
+                                                        $queryst->execute();
+                                                        $resultst=$queryst->fetchAll(PDO::FETCH_OBJ);
+                                                        foreach($resultst as $rowst){
+                                                            echo '<option value="'.$rowst->ID.'">'.$rowst->statusName.'</option>
+                                                            ';
+                                                        }
                                                     }
                                                 ?>
-                                            </select>
+                                                </select>
                                             </div>
                                             <div class="col-xl-4">
                                                 <label for="cname" class= "black fw-bold fs-5">Barangay Certification number</label>
@@ -299,7 +320,7 @@
                                             <div class="col-md-12 mx-auto">
                                             <label for="cont" class= "black fw-bold fs-5">Certification Contents</label>
                                             <?php 
-                                                if ($check == "Settled"){
+                                                if ($check == "5"){
                                                     echo '<textarea class= "" name="cont" id="cont" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1" disabled>'.$rowe->content.'</textarea>';
                                                 }else{
                                                     echo '<textarea class= "" name="cont" id="cont" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1">'.$rowe->content.'</textarea>';
@@ -316,7 +337,7 @@
                                         <a type="" href ="temp-cert.php?viewid=<?php echo $eid;?>"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
                                         </div>
                                         <?php 
-                                                if ($check != "Settled"){
+                                                if ($check != "5"){
                                                     echo '<button type = "sbumit" href = "#save-cert" name="submit" id="submit" data-bs-toggle = "modal" role= "button"class = "btn  btn-primary  my-2"><i class= "fas fa-save me-2"></i>Save</button>';
                                                 }
                                             ?>
