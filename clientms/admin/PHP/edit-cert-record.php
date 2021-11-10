@@ -10,40 +10,17 @@
         {
             $eid=intval($_GET['editid']);
             $clientmsaid=$_SESSION['clientmsaid'];
-            $rest=$_POST['rest'];
-            $lname=$_POST['lname'];
-            $fname=$_POST['fname'];
-            $mname=$_POST['mname'];
-            $hu=$_POST['hu'];
-            $vp=$_POST['vp'];
-            $prk=$_POST['prk'];
-            $stn=$_POST['stn'];
-            $gnd=$_POST['gnd'];
-            $contact=$_POST['contact'];
-            $cstat=$_POST['cstat'];
-            $vstat=$_POST['vstat'];
-            $email=$_POST['email'];
-            $sss=$_POST['sss'];
-            $tin=$_POST['tin'];
-            $bdt=$_POST['bdt'];
+            $cont=$_POST['cont'];
+            $status=$_POST['status'];
         
-            $sql="update tblresident set ResidentType=:rest, Purok=:prk, houseUnit=:hu, streetName=:stn, LastName=:lname, FirstName=:fname, MiddleName=:mname, houseUnit=:hu, streetName=:stn, Purok=:prk, Cellphnumber=:contact, CivilStatus=:cstat, voter=:vstat, Email=:email where ID=:eid";
+            $sql="update tblcreatecertificate set content=:cont, status=:status WHERE ID=:eid";
             $query=$dbh->prepare($sql);
-            $query->bindParam(':rest',$rest,PDO::PARAM_STR);
-            $query->bindParam(':vstat',$vstat,PDO::PARAM_STR);
-            $query->bindParam(':lname',$lname,PDO::PARAM_STR);
-            $query->bindParam(':fname',$fname,PDO::PARAM_STR);
-            $query->bindParam(':mname',$mname,PDO::PARAM_STR);
-            $query->bindParam(':hu',$hu,PDO::PARAM_STR);
-            $query->bindParam(':stn',$stn,PDO::PARAM_STR);
-            $query->bindParam(':prk',$prk,PDO::PARAM_STR);
-            $query->bindParam(':contact',$contact,PDO::PARAM_STR);
-            $query->bindParam(':cstat',$cstat,PDO::PARAM_STR);
-            $query->bindParam(':email',$email,PDO::PARAM_STR);
+            $query->bindParam(':cont',$cont,PDO::PARAM_STR);
+            $query->bindParam(':status',$status,PDO::PARAM_STR);
             $query->bindParam(':eid',$eid,PDO::PARAM_STR);
             $query->execute();
-            echo '<script>alert("Resident detail has been updated")</script>';
-            echo "<script type='text/javascript'> document.location ='edit-resident-account.php?editid=" + $eid + "'; </script>";
+            echo '<script>alert("Certificate Information has been updated")</script>';
+            echo "<script>window.location.href ='edit-cert-record.php?editid=".$eid."'</script>";
         }
 ?>
 <!DOCTYPE html>
@@ -179,11 +156,24 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-12"> 
-                <button type = "button" onclick = "window.history.back();" class = "btn btnx float-end btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</button>           
+                <a href="admin-certificate.php" class = "btn btnx float-end btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</a>           
             </div>
         </div>
     </div>
-    <form action="edit-cert-temp.php"method ="POST">
+    
+    <form method ="POST">
+        <?php
+            $eid=intval($_GET['editid']);
+            $sqle="SELECT tblcertificate.*, tblcreatecertificate.*, tblcreatecertificate.CreationDate as getDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID WHERE tblcreatecertificate.ID = :eid";
+            $querye = $dbh -> prepare($sqle);
+            $querye->bindParam(':eid',$eid,PDO::PARAM_STR);
+            $querye->execute();
+            $resulte = $querye->fetchAll(PDO::FETCH_OBJ);
+            foreach ($resulte as $rowe) {
+                $gdate = $rowe->getDate;
+                $cdate = date('m/d/Y - h:i A', strtotime($gdate));
+                    
+        ?>
             <div class="container-fluid px-5 mb-5">
                 <div class="row">
                     <div class="col-xl-12">
@@ -191,16 +181,16 @@
                         <ul class="nav  nav-pills justify-content-center">
                            
                             <li class="nav-item">
-                                <a class="nav-link active fs-5" href="#preview" data-bs-toggle = "tab">Preview</a>
+                                <a class="nav-link active fs-5" href="#edit-cert" data-bs-toggle = "tab">Manage Certification </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link fs-5" href="#edit-cert" data-bs-toggle = "tab">Manage Certification </a>
+                                <a class="nav-link fs-5" href="#preview" data-bs-toggle = "tab">Preview</a>
                             </li>
                         </ul>   
                     </div>
                     <div class="col-xl-12">
                         <div class="tab-content">
-                        <div class="tab-pane fade show active" id="preview">    		
+                        <div class="tab-pane fade show" id="preview">    		
                             <div class="container my-3">
                                 <div class="row g-0 ">
                                     <div class="col-xl-8  shadow-sm mx-auto  ">
@@ -214,18 +204,16 @@
                                 
                                         <div class="row border-start border-end border-bottom py-3 g-0 justify-content-center">
                                             <div class="col-10 mx-auto">
-
-                                        
-                                            <div class="embed-responsive mx-auto embed-responsive-16by9">
-                                                <iframe class="embed-responsive-item" id = "frame" src="view-cert.php"></iframe>
+                                                <div class="embed-responsive mx-auto embed-responsive-16by9">
+                                                    <iframe class="embed-responsive-item" id = "frame" src="view-cert.php?viewid=<?php echo $eid;?>"></iframe>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div> 
+                            </div> 
                         </div>
-                         <div class="tab-pane fade show" id="edit-cert">
+                         <div class="tab-pane fade show active" id="edit-cert">
                                 <div class="container-fluid mb-3 ms-1 mx-auto px-5">
                                     <div class="row mx-1  py-2 ">
                                         <div class="col-xl-12 mx-auto  rounded-top white">
@@ -234,19 +222,26 @@
                                                 Certificate Information
                                             </div>
                                         </div>
+                                    
                                     <div class="row  border shadow-sm bg-white pt-2 pb-5 mb-3">
                                        
                                         <div class="row g-2 px-5">
                                             <div class="col-xl-6">
                                                 <label for="cname" class= "black fw-bold fs-5">Requestor Name</label>
-                                                <input id = "cname" class ="form-control"type="text" placeholder = "Requestor Name" name= "cnrame">
+                                                <input id = "cname" class ="form-control"type="text" placeholder = "Requestor Name" name= "cnrame" disabled value="<?php echo "$rowe->FirstName $rowe->MiddleName $rowe->LastName $rowe->Suffix";?>">
                                             </div>
                                             <div class="col-xl-2">
                                             <label for="cname" class= "black fw-bold fs-5">Status</label>
-                                            <select id = "cname" class ="form-select" name= "cmeth">
-                                                <option name="" id="">Settled</option>
-                                                <option name="" id="">Unsettled</option>
-                                                <option name="" id="">Cancelled</option>
+                                            
+                                                <?php 
+                                                    $check = $rowe->status;
+                                                    if ($check == "Settled"){
+                                                        
+                                                        echo '<select id = "status" class ="form-select" name= "status" disabled><option value="Settled">Settled</option>';
+                                                    }else{
+                                                        echo '<select id = "status" class ="form-select" name= "status"><option value="Unsettled">Unsettled</option><option value="Settled">Settled</option>';
+                                                    }
+                                                ?>
                                             </select>
                                             </div>
                                             <div class="col-xl-4">
@@ -257,25 +252,20 @@
                                         <div class="row g-2 px-5">
                                             <div class="col-xl-6">
                                                 <label for="purp" class= "black fw-bold fs-5">Type of Certification</label>
-                                                <select id = "purp" class ="form-select" name= "cmeth">
-                                                    <option name="" id="" selected>for....</option>
-                                                    <option name="" id="">Cert 1</option>
-                                                    <option name="" id="">Cert 2</option>
-                                                
+                                                <select id = "purp" class ="form-select" name= "cmeth" disabled>
+                                                    <option value="<?php echo "$rowe->CertificateName";?>" selected><?php echo "$rowe->CertificateName";?></option>                                                
                                                 </select>
 
                                             </div>
                                             <div class="col-xl-3">
                                                 <label for="cname" class= "black fw-bold fs-5">Certification fee</label>
-                                                <input id = "cname" class ="form-control" type="text" placeholder = "Certfication fee" name= "cname">
+                                                <input id = "cname" class ="form-control" type="text" placeholder = "Certfication fee" name= "cname" value="<?php echo "$rowe->CertificatePrice";?>" disabled>
 
                                             </div>
                                             <div class="col-xl-3">
                                                 <label for="cname" class= "black fw-bold fs-5">Mode of Payment</label>
-                                                <select id = "cname" class ="form-select" name= "cmeth">
-                                                    <option name="" id="">Cash</option>
-                                                    <option name="" id="">G-cash</option>
-                                                
+                                                <select id = "cname" class ="form-select" name= "cmeth" disabled>
+                                                    <option value="<?php echo "$rowe->pMode";?>" id=""><?php echo "$rowe->pMode";?></option>                                                
                                                 </select>
 
                                             </div>
@@ -283,40 +273,39 @@
                                         <div class="row g-2 px-5">
                                             <div class="col-xl-6">
                                                 <label for="purp" class= "black fw-bold fs-5">Purpose</label>
-                                                <select id = "purp" class ="form-select" name= "cmeth">
-                                                    <option name="" id="" selected>for....</option>
-                                                    <option name="" id="">for DSWD</option>
-                                                    <option name="" id="">for PAG-IBIG</option>
-                                                    <option name="" id="">for Employment purposes</option>
-                                                    <option name="" id="">for loaning</option>
+                                                <select id = "purp" class ="form-select" name= "cmeth" disabled>
+                                                    <option value="<?php echo "$rowe->Purpose";?>" selected><?php echo "$rowe->Purpose";?></option>
                                                 </select>
                                             </div>
                                             <div class="col-xl-6">
                                                 <label for="cname" class= "black fw-bold fs-5">Date</label>
-                                                <input id = "cname" class ="form-control" type="datetime-local" placeholder = "Date of certification" name= "cdate">
+                                                <input id = "cdate" class ="form-control" type="text" placeholder = "Date of certification" name= "cdate" value="<?php echo $cdate;?>" disabled>
                                             </div>
                                             <div class="col-xl-6">
-                                                <label for="cname" class= "black fw-bold fs-5">Kagwad on duty</label>
-                                                <select id = "kod" class ="form-control " name= "cmeth">
-                                                    <option name="" id="" selected>Kagawad on duty</option>
-                                                    <option name="" id="">CRISANTO G. LORICA</option>
-                                                    <option name="" id="">ALEXANDER S. CEÑO</option>
-                                                    <option name="" id="">ALBERTO P. RAMOS</option>
-                                                    <option name="" id="">JAIME S. CHOY</option>
+                                                <label for="cname" class= "black fw-bold fs-5">Officer on Duty</label>
+                                                <select id = "kod" class ="form-control " name= "cmeth" disabled>
+                                                    <option value="<?php echo $rowe->cAdmin?>" id="" selected><?php echo $rowe->cAdmin?></option>
                                                 </select>
 
                                             </div>
                                             <div class="col-xl-6" style= "display: none">
                                                 <label for="cname" class= "black fw-bold fs-5">Business name <span class= "text-muted fs-6">( For business related only )</span></label>
-                                                <input id = "cname" class ="form-control" type="text" placeholder = "business name here" name= "cname">
+                                                <input id = "cname" class ="form-control" type="text" placeholder = "business name here" name= "cname" value="<?php echo $rowe->bName?>" disabled>
 
                                             </div>
                                    
                                         </div>
                                         <div class="row gy-2 mx-2 my-2 ">
                                             <div class="col-md-12 mx-auto">
-                                            <label for="cert-inf" class= "black fw-bold fs-5">Certification Contents</label>
-                                            <textarea class= "" name="cert-info" id="cert-inf" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1">hudassss</textarea>
+                                            <label for="cont" class= "black fw-bold fs-5">Certification Contents</label>
+                                            <?php 
+                                                if ($check == "Settled"){
+                                                    echo '<textarea class= "" name="cont" id="cont" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1" disabled>'.$rowe->content.'</textarea>';
+                                                }else{
+                                                    echo '<textarea class= "" name="cont" id="cont" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1">'.$rowe->content.'</textarea>';
+                                                }
+                                            ?>
+                                            
                                         </div>
                                         <div class="row justify-content-end">
                                         <div class="col-12">
@@ -324,10 +313,15 @@
 
                                            
                                             <div class="btn-group">                               
-                                        <a type="" href ="temp-cert.php"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
+                                        <a type="" href ="temp-cert.php?viewid=<?php echo $eid;?>"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
                                         </div>
+                                        <?php 
+                                                if ($check != "Settled"){
+                                                    echo '<button type = "sbumit" href = "#save-cert" name="submit" id="submit" data-bs-toggle = "modal" role= "button"class = "btn  btn-primary  my-2"><i class= "fas fa-save me-2"></i>Save</button>';
+                                                }
+                                            ?>
                                         <div class="btn-group">     
-                                        <button type = "button" href = "#save-cert" data-bs-toggle = "modal" role= "button"class = "btn  btn-primary  my-2"><i class= "fas fa-save me-2"></i>Save</button>
+                                        
                                         </div>
                                         <div class="btn-group">
                                     
@@ -344,8 +338,11 @@
                     </div>
                 </div>
             </div>
+            <?php } ?>
+
+            
             </form>
-        <div class="modal fade" id = "save-cert" tab-idndex = "-1">
+            <div class="modal fade" id = "save-cert" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0  border-0  ">
                     <div class="modal-header  bg-599 border-599">
@@ -366,7 +363,7 @@
                             <div class="col-xl-12">
                                 <div class="float-end">
                                     <div class="btn-group">
-                                    <input type = "submit" class="btn btn-success" href= "#success" data-bs-toggle="modal" data-bs-dismiss = "modal"  name = "conf" value ="Confirm">
+                                    <input type = "submit" class="btn btn-success" href= "#success" data-bs-toggle="modal" data-bs-dismiss = "modal"  name = "submit" id="submit" value ="Confirm">
 
                                     </div>
                                     <div class="btn-group">
@@ -384,6 +381,7 @@
                 </div>
             </div>
         </div>
+
         <div class="modal fade" id = "delete-record" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger" >
@@ -470,7 +468,7 @@
         
         <script src = '../ckeditor/ckeditor.js'></script>
         <script>
-          CKEDITOR.replace('cert-info');
+          CKEDITOR.replace('cont');
         </script>
  
 </body>

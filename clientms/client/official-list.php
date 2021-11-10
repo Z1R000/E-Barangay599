@@ -164,8 +164,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                                     <tbody>
                                         <?php
 
-$sql="SELECT distinct tbladmin.ID, tblresident.ID, tbladmin.BarangayPosition, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tbladmin.dutyTime, tbladmin.endDuty,
-tblresident.Cellphnumber, tblpositions.* from tbladmin JOIN tblresident on tbladmin.residentID=tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition order by tblpositions.Position ASC";
+$sql="SELECT distinct tbladmin.ID, tblresident.ID, tbladmin.BarangayPosition, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tbladmin.dayDuty, tblresident.Cellphnumber, tblpositions.* from tbladmin JOIN tblresident on tbladmin.residentID=tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition order by tblpositions.ID ASC";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -178,7 +177,7 @@ foreach($results as $row)
                                      <tr class="active">
                                         <td style="color: black;"><?php  echo htmlentities($row->Position);?></td>
                                          <td style="color: black;"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?></td>
-                                         <td><input type="time" name="td" value="<?php  echo $row->dutyTime;?>" class="form-control" required='true' readonly='true' style="border:none; color: black; "></td>
+                                         <td><input type="text" name="td" value="<?php  echo $row->dayDuty;?>" class="form-control" required='true' readonly='true' style="border:none; color: black; "></td>
                                      </tr>
                                      <?php $cnt=$cnt+1;}} ?>
                                      </tbody> </table> 

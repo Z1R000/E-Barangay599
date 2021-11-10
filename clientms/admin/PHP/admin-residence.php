@@ -69,10 +69,29 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
             .white {
                 color: white;
             }
+            .box{
+                display: none;
+            }
         </style>
     </head>
+    <script>
+        $(document).ready(function(){
+            $("#purok").change(function(){
+                $(this).find("option:selected").each(function(){
+                    var optionValue = $(this).attr("value");
+                    if(optionValue){
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else{
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+    </script>
 
     <body>
+
 
         <?php
         $curr = "Resident List";
@@ -142,23 +161,22 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                             </div>
                             <div class="col-md-7">
                                 <div class="float-end">
-                                <div class="input-group align-items-center">
-                                    <label class= "fs-6 px-1" for = "purok"> Purok: </label>
+                                    <div class="input-group align-items-center">
+                                        <label class="fs-6 px-1" for="purok"> Purok: </label>
 
-                                        <select name="purok" id="purok" class="form-select input-sm border-primary" aria-label="Default select example" style= "width: 10%;">
-                                        <option value="All">All Residents</option>
-                                    <?php 
-                                        $sql ="SELECT * from tbllistpurok";
-                                        $query = $dbh -> prepare($sql);
-                                        $query->execute();
-                                        $results=$query->fetchAll(PDO::FETCH_OBJ);
-                                        foreach($results as $row)
-                                        { 
-                                            echo '<option value="'.$row->pName.'">'.$row->pName.'</option>';
-                                        }
-                                    
-                                    ?>
-                                    </select>
+                                        <select name="purok" id="purok" class="form-select input-sm border-primary" aria-label="Default select example" style="width: 10%;">
+                                            <option value="all" selected>All Residents</option>
+                                            <?php
+                                            $sql = "SELECT * from tbllistpurok";
+                                            $query = $dbh->prepare($sql);
+                                            $query->execute();
+                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                            foreach ($results as $row) {
+                                                echo '<option value="' . $row->pName . '">' . $row->pName . '</option>';
+                                            }
+
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -166,21 +184,18 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                     </div>
                 </div>
 
-                                    
+
 
                 <div class="container-fluid px-5 mx-auto">
                     <div class="row  g-0" style="border-radius: 10px 10px 0px 0px;">
-                    <div class="col-xl-2">
+                        <div class="col-xl-2">
 
-                   
-                    </div>
+
+                        </div>
                     </div>
                 </div>
-                            
 
-                <?php $query = "SELECT * FROM tblresident ORDER BY LastName ASC";
-                $result = mysqli_query($connect, $query);  ?>
-                <div class="tab-content">
+                <div class="tab-content all box">
                     <div class="tab-pane fade show active" id="all">
                         <div class="container-fluid">
                             <div class="row g-1 px-5 pt-3 pb-5">
@@ -188,6 +203,8 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <div class="row">
                                         <div class="col-xl-12" style="overflow:auto;" id="res_table">
                                             <div class="table-responsive">
+                                                <?php $query = "SELECT * FROM tblresident ORDER BY resStatus ASC, LastName";
+                                                $result = mysqli_query($connect, $query);  ?>
                                                 <table id="alldata" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
                                                     <thead>
                                                         <tr>
@@ -212,19 +229,18 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                         <tr>
                                                                 <td >
                                                                     <i class ="fa fa-circle ';
-                                                                    if ($row["resStatus"]== "Active"){
-                                                                        echo "link-success";
-                                                                    }
-                                                                    if ($row["resStatus"]== "Inactive"){
-                                                                        echo "link-danger";
-                                                                    }
-                                                                    if ($row["resStatus"]== "Deceased"){
-                                                                        echo "link-secondary";
-
-                                                                    }
+                                                        if ($row["resStatus"] == "Active") {
+                                                            echo "link-success";
+                                                        }
+                                                        if ($row["resStatus"] == "Inactive") {
+                                                            echo "link-danger";
+                                                        }
+                                                        if ($row["resStatus"] == "Deceased") {
+                                                            echo "link-secondary";
+                                                        }
 
                                                         echo '  me-1"></i>
-                                                                    '.$row["resStatus"].'
+                                                                    ' . $row["resStatus"] . '
                                                                     
                                                                 </td>
                                                                 <td >' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>';
@@ -265,27 +281,6 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                     }
                                                     ?>
                                                 </table>
-                                                <div class="" style= "display: none;">
-
-                                                    <table id="alldata" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;" style= "display: none;">
-                                                            <tr>
-                                                            <th>Status</th>
-                                                            <th>Name</th>
-                                                            <th>Age</th>
-                                                            <th>Gender</th>
-                                                            <th>Purok</th>
-                                                            <th>Street</th>
-
-                                                            <th>Action </th>
-                                                        </tr>
-                                                        <tbody>
-                                                 
-                                                        </tbody>
-
-                                                </table>
-                                                </div>
-                                                
-                                               
                                             </div>
                                         </div>
                                     </div>
@@ -293,13 +288,963 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                             </div>
                         </div>
                     </div>
-
                 </div>
 
-            <!--END ALL PUROK-->
+                <div class="tab-content 1 box">
+                    <div class="tab-pane fade show active">
+                        <div class="container-fluid">
+                            <div class="row g-1 px-5 pt-3 pb-5">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-xl-12" style="overflow:auto;" id="res_table">
+                                            <div class="table-responsive">
+                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='1' ORDER BY resStatus ASC, LastName";
+                                                $result = mysqli_query($connect, $query);  ?>
+                                                <table id="1" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Status</th>
+                                                            <th>Name</th>
 
-            
-              
+                                                            <th>Age</th>
+
+                                                            <th>Gender</th>
+
+                                                            <th>Purok</th>
+
+                                                            <th>Street</th>
+
+
+                                                            <th>Action </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <?php
+                                                    while ($row = mysqli_fetch_array($result)) {
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle ';
+                                                        if ($row["resStatus"] == "Active") {
+                                                            echo "link-success";
+                                                        }
+                                                        if ($row["resStatus"] == "Inactive") {
+                                                            echo "link-danger";
+                                                        }
+                                                        if ($row["resStatus"] == "Deceased") {
+                                                            echo "link-secondary";
+                                                        }
+
+                                                        echo '  me-1"></i>
+                                                                    ' . $row["resStatus"] . '
+                                                                    
+                                                                </td>
+                                                                <td >' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>';
+
+                                                        $gbd = $row["BirthDate"];
+                                                        $gbd = date('Y-m-d', strtotime($gbd));
+                                                        $today = date('Y-m-d');
+                                                        $diff = date_diff(date_create($gbd), date_create($today));
+
+                                                        echo '
+                                                                <td>' . $diff->format('%y') . '</td>  
+                                                                <td><i class = "';
+                                                        $gend = $row["Gender"];
+                                                        $gen = "fa fa-venus link-danger ";
+                                                        if ($gend == "Female") {
+                                                            echo $gen;
+                                                        } else {
+                                                            $gen = "fa fa-mars link-info ";
+                                                            echo $gen;
+                                                        }
+                                                        echo 'me-2"> </i>' . $row["Gender"] . '</td>  
+                                                                <td>' . $row["Purok"] . '</td>  
+                                                                <td>' . $row["streetName"] . '</td>
+                                                                <form method="post">  
+                                                                <td  class ="action" scope="col">
+                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                        <a href  = "view-resident-personal.php?viewid=' . $row["ID"] . '" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                    </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid=' . $row["ID"] . '"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Manage</span></a>
+                                                                </div>
+                                                                
+                                                                  
+                                                                </form>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';
+                                                    }
+                                                    ?>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content 2 box">
+                    <div class="tab-pane fade show active">
+                        <div class="container-fluid">
+                            <div class="row g-1 px-5 pt-3 pb-5">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-xl-12" style="overflow:auto;" id="res_table">
+                                            <div class="table-responsive">
+                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='2' ORDER BY resStatus ASC, LastName";
+                                                $result = mysqli_query($connect, $query);  ?>
+                                                <table id="2" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Status</th>
+                                                            <th>Name</th>
+
+                                                            <th>Age</th>
+
+                                                            <th>Gender</th>
+
+                                                            <th>Purok</th>
+
+                                                            <th>Street</th>
+
+
+                                                            <th>Action </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <?php
+                                                    while ($row = mysqli_fetch_array($result)) {
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle ';
+                                                        if ($row["resStatus"] == "Active") {
+                                                            echo "link-success";
+                                                        }
+                                                        if ($row["resStatus"] == "Inactive") {
+                                                            echo "link-danger";
+                                                        }
+                                                        if ($row["resStatus"] == "Deceased") {
+                                                            echo "link-secondary";
+                                                        }
+
+                                                        echo '  me-1"></i>
+                                                                    ' . $row["resStatus"] . '
+                                                                    
+                                                                </td>
+                                                                <td >' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>';
+
+                                                        $gbd = $row["BirthDate"];
+                                                        $gbd = date('Y-m-d', strtotime($gbd));
+                                                        $today = date('Y-m-d');
+                                                        $diff = date_diff(date_create($gbd), date_create($today));
+
+                                                        echo '
+                                                                <td>' . $diff->format('%y') . '</td>  
+                                                                <td><i class = "';
+                                                        $gend = $row["Gender"];
+                                                        $gen = "fa fa-venus link-danger ";
+                                                        if ($gend == "Female") {
+                                                            echo $gen;
+                                                        } else {
+                                                            $gen = "fa fa-mars link-info ";
+                                                            echo $gen;
+                                                        }
+                                                        echo 'me-2"> </i>' . $row["Gender"] . '</td>  
+                                                                <td>' . $row["Purok"] . '</td>  
+                                                                <td>' . $row["streetName"] . '</td>
+                                                                <form method="post">  
+                                                                <td  class ="action" scope="col">
+                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                        <a href  = "view-resident-personal.php?viewid=' . $row["ID"] . '" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                    </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid=' . $row["ID"] . '"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Manage</span></a>
+                                                                </div>
+                                                                
+                                                                  
+                                                                </form>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';
+                                                    }
+                                                    ?>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content 3 box">
+                    <div class="tab-pane fade show active">
+                        <div class="container-fluid">
+                            <div class="row g-1 px-5 pt-3 pb-5">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-xl-12" style="overflow:auto;" id="res_table">
+                                            <div class="table-responsive">
+                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='3' ORDER BY resStatus ASC, LastName";
+                                                $result = mysqli_query($connect, $query);  ?>
+                                                <table id="3" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Status</th>
+                                                            <th>Name</th>
+
+                                                            <th>Age</th>
+
+                                                            <th>Gender</th>
+
+                                                            <th>Purok</th>
+
+                                                            <th>Street</th>
+
+
+                                                            <th>Action </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <?php
+                                                    while ($row = mysqli_fetch_array($result)) {
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle ';
+                                                        if ($row["resStatus"] == "Active") {
+                                                            echo "link-success";
+                                                        }
+                                                        if ($row["resStatus"] == "Inactive") {
+                                                            echo "link-danger";
+                                                        }
+                                                        if ($row["resStatus"] == "Deceased") {
+                                                            echo "link-secondary";
+                                                        }
+
+                                                        echo '  me-1"></i>
+                                                                    ' . $row["resStatus"] . '
+                                                                    
+                                                                </td>
+                                                                <td >' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>';
+
+                                                        $gbd = $row["BirthDate"];
+                                                        $gbd = date('Y-m-d', strtotime($gbd));
+                                                        $today = date('Y-m-d');
+                                                        $diff = date_diff(date_create($gbd), date_create($today));
+
+                                                        echo '
+                                                                <td>' . $diff->format('%y') . '</td>  
+                                                                <td><i class = "';
+                                                        $gend = $row["Gender"];
+                                                        $gen = "fa fa-venus link-danger ";
+                                                        if ($gend == "Female") {
+                                                            echo $gen;
+                                                        } else {
+                                                            $gen = "fa fa-mars link-info ";
+                                                            echo $gen;
+                                                        }
+                                                        echo 'me-2"> </i>' . $row["Gender"] . '</td>  
+                                                                <td>' . $row["Purok"] . '</td>  
+                                                                <td>' . $row["streetName"] . '</td>
+                                                                <form method="post">  
+                                                                <td  class ="action" scope="col">
+                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                        <a href  = "view-resident-personal.php?viewid=' . $row["ID"] . '" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                    </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid=' . $row["ID"] . '"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Manage</span></a>
+                                                                </div>
+                                                                
+                                                                  
+                                                                </form>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';
+                                                    }
+                                                    ?>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content 4 box">
+                    <div class="tab-pane fade show active">
+                        <div class="container-fluid">
+                            <div class="row g-1 px-5 pt-3 pb-5">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-xl-12" style="overflow:auto;" id="res_table">
+                                            <div class="table-responsive">
+                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='4' ORDER BY resStatus ASC, LastName";
+                                                $result = mysqli_query($connect, $query);  ?>
+                                                <table id="4" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Status</th>
+                                                            <th>Name</th>
+
+                                                            <th>Age</th>
+
+                                                            <th>Gender</th>
+
+                                                            <th>Purok</th>
+
+                                                            <th>Street</th>
+
+
+                                                            <th>Action </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <?php
+                                                    while ($row = mysqli_fetch_array($result)) {
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle ';
+                                                        if ($row["resStatus"] == "Active") {
+                                                            echo "link-success";
+                                                        }
+                                                        if ($row["resStatus"] == "Inactive") {
+                                                            echo "link-danger";
+                                                        }
+                                                        if ($row["resStatus"] == "Deceased") {
+                                                            echo "link-secondary";
+                                                        }
+
+                                                        echo '  me-1"></i>
+                                                                    ' . $row["resStatus"] . '
+                                                                    
+                                                                </td>
+                                                                <td >' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>';
+
+                                                        $gbd = $row["BirthDate"];
+                                                        $gbd = date('Y-m-d', strtotime($gbd));
+                                                        $today = date('Y-m-d');
+                                                        $diff = date_diff(date_create($gbd), date_create($today));
+
+                                                        echo '
+                                                                <td>' . $diff->format('%y') . '</td>  
+                                                                <td><i class = "';
+                                                        $gend = $row["Gender"];
+                                                        $gen = "fa fa-venus link-danger ";
+                                                        if ($gend == "Female") {
+                                                            echo $gen;
+                                                        } else {
+                                                            $gen = "fa fa-mars link-info ";
+                                                            echo $gen;
+                                                        }
+                                                        echo 'me-2"> </i>' . $row["Gender"] . '</td>  
+                                                                <td>' . $row["Purok"] . '</td>  
+                                                                <td>' . $row["streetName"] . '</td>
+                                                                <form method="post">  
+                                                                <td  class ="action" scope="col">
+                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                        <a href  = "view-resident-personal.php?viewid=' . $row["ID"] . '" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                    </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid=' . $row["ID"] . '"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Manage</span></a>
+                                                                </div>
+                                                                
+                                                                  
+                                                                </form>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';
+                                                    }
+                                                    ?>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content 5 box">
+                    <div class="tab-pane fade show active">
+                        <div class="container-fluid">
+                            <div class="row g-1 px-5 pt-3 pb-5">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-xl-12" style="overflow:auto;" id="res_table">
+                                            <div class="table-responsive">
+                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='5' ORDER BY resStatus ASC, LastName";
+                                                $result = mysqli_query($connect, $query);  ?>
+                                                <table id="5" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Status</th>
+                                                            <th>Name</th>
+
+                                                            <th>Age</th>
+
+                                                            <th>Gender</th>
+
+                                                            <th>Purok</th>
+
+                                                            <th>Street</th>
+
+
+                                                            <th>Action </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <?php
+                                                    while ($row = mysqli_fetch_array($result)) {
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle ';
+                                                        if ($row["resStatus"] == "Active") {
+                                                            echo "link-success";
+                                                        }
+                                                        if ($row["resStatus"] == "Inactive") {
+                                                            echo "link-danger";
+                                                        }
+                                                        if ($row["resStatus"] == "Deceased") {
+                                                            echo "link-secondary";
+                                                        }
+
+                                                        echo '  me-1"></i>
+                                                                    ' . $row["resStatus"] . '
+                                                                    
+                                                                </td>
+                                                                <td >' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>';
+
+                                                        $gbd = $row["BirthDate"];
+                                                        $gbd = date('Y-m-d', strtotime($gbd));
+                                                        $today = date('Y-m-d');
+                                                        $diff = date_diff(date_create($gbd), date_create($today));
+
+                                                        echo '
+                                                                <td>' . $diff->format('%y') . '</td>  
+                                                                <td><i class = "';
+                                                        $gend = $row["Gender"];
+                                                        $gen = "fa fa-venus link-danger ";
+                                                        if ($gend == "Female") {
+                                                            echo $gen;
+                                                        } else {
+                                                            $gen = "fa fa-mars link-info ";
+                                                            echo $gen;
+                                                        }
+                                                        echo 'me-2"> </i>' . $row["Gender"] . '</td>  
+                                                                <td>' . $row["Purok"] . '</td>  
+                                                                <td>' . $row["streetName"] . '</td>
+                                                                <form method="post">  
+                                                                <td  class ="action" scope="col">
+                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                        <a href  = "view-resident-personal.php?viewid=' . $row["ID"] . '" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                    </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid=' . $row["ID"] . '"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Manage</span></a>
+                                                                </div>
+                                                                
+                                                                  
+                                                                </form>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';
+                                                    }
+                                                    ?>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content 6 box">
+                    <div class="tab-pane fade show active">
+                        <div class="container-fluid">
+                            <div class="row g-1 px-5 pt-3 pb-5">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-xl-12" style="overflow:auto;" id="res_table">
+                                            <div class="table-responsive">
+                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='6' ORDER BY resStatus ASC, LastName";
+                                                $result = mysqli_query($connect, $query);  ?>
+                                                <table id="6" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Status</th>
+                                                            <th>Name</th>
+
+                                                            <th>Age</th>
+
+                                                            <th>Gender</th>
+
+                                                            <th>Purok</th>
+
+                                                            <th>Street</th>
+
+
+                                                            <th>Action </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <?php
+                                                    while ($row = mysqli_fetch_array($result)) {
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle ';
+                                                        if ($row["resStatus"] == "Active") {
+                                                            echo "link-success";
+                                                        }
+                                                        if ($row["resStatus"] == "Inactive") {
+                                                            echo "link-danger";
+                                                        }
+                                                        if ($row["resStatus"] == "Deceased") {
+                                                            echo "link-secondary";
+                                                        }
+
+                                                        echo '  me-1"></i>
+                                                                    ' . $row["resStatus"] . '
+                                                                    
+                                                                </td>
+                                                                <td >' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>';
+
+                                                        $gbd = $row["BirthDate"];
+                                                        $gbd = date('Y-m-d', strtotime($gbd));
+                                                        $today = date('Y-m-d');
+                                                        $diff = date_diff(date_create($gbd), date_create($today));
+
+                                                        echo '
+                                                                <td>' . $diff->format('%y') . '</td>  
+                                                                <td><i class = "';
+                                                        $gend = $row["Gender"];
+                                                        $gen = "fa fa-venus link-danger ";
+                                                        if ($gend == "Female") {
+                                                            echo $gen;
+                                                        } else {
+                                                            $gen = "fa fa-mars link-info ";
+                                                            echo $gen;
+                                                        }
+                                                        echo 'me-2"> </i>' . $row["Gender"] . '</td>  
+                                                                <td>' . $row["Purok"] . '</td>  
+                                                                <td>' . $row["streetName"] . '</td>
+                                                                <form method="post">  
+                                                                <td  class ="action" scope="col">
+                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                        <a href  = "view-resident-personal.php?viewid=' . $row["ID"] . '" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                    </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid=' . $row["ID"] . '"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Manage</span></a>
+                                                                </div>
+                                                                
+                                                                  
+                                                                </form>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';
+                                                    }
+                                                    ?>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content 7 box">
+                    <div class="tab-pane fade show active">
+                        <div class="container-fluid">
+                            <div class="row g-1 px-5 pt-3 pb-5">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-xl-12" style="overflow:auto;" id="res_table">
+                                            <div class="table-responsive">
+                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='7' ORDER BY resStatus ASC, LastName";
+                                                $result = mysqli_query($connect, $query);  ?>
+                                                <table id="7" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Status</th>
+                                                            <th>Name</th>
+
+                                                            <th>Age</th>
+
+                                                            <th>Gender</th>
+
+                                                            <th>Purok</th>
+
+                                                            <th>Street</th>
+
+
+                                                            <th>Action </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <?php
+                                                    while ($row = mysqli_fetch_array($result)) {
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle ';
+                                                        if ($row["resStatus"] == "Active") {
+                                                            echo "link-success";
+                                                        }
+                                                        if ($row["resStatus"] == "Inactive") {
+                                                            echo "link-danger";
+                                                        }
+                                                        if ($row["resStatus"] == "Deceased") {
+                                                            echo "link-secondary";
+                                                        }
+
+                                                        echo '  me-1"></i>
+                                                                    ' . $row["resStatus"] . '
+                                                                    
+                                                                </td>
+                                                                <td >' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>';
+
+                                                        $gbd = $row["BirthDate"];
+                                                        $gbd = date('Y-m-d', strtotime($gbd));
+                                                        $today = date('Y-m-d');
+                                                        $diff = date_diff(date_create($gbd), date_create($today));
+
+                                                        echo '
+                                                                <td>' . $diff->format('%y') . '</td>  
+                                                                <td><i class = "';
+                                                        $gend = $row["Gender"];
+                                                        $gen = "fa fa-venus link-danger ";
+                                                        if ($gend == "Female") {
+                                                            echo $gen;
+                                                        } else {
+                                                            $gen = "fa fa-mars link-info ";
+                                                            echo $gen;
+                                                        }
+                                                        echo 'me-2"> </i>' . $row["Gender"] . '</td>  
+                                                                <td>' . $row["Purok"] . '</td>  
+                                                                <td>' . $row["streetName"] . '</td>
+                                                                <form method="post">  
+                                                                <td  class ="action" scope="col">
+                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                        <a href  = "view-resident-personal.php?viewid=' . $row["ID"] . '" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                    </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid=' . $row["ID"] . '"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Manage</span></a>
+                                                                </div>
+                                                                
+                                                                  
+                                                                </form>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';
+                                                    }
+                                                    ?>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content 8 box">
+                    <div class="tab-pane fade show active">
+                        <div class="container-fluid">
+                            <div class="row g-1 px-5 pt-3 pb-5">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-xl-12" style="overflow:auto;" id="res_table">
+                                            <div class="table-responsive">
+                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='8' ORDER BY resStatus ASC, LastName";
+                                                $result = mysqli_query($connect, $query);  ?>
+                                                <table id="8" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Status</th>
+                                                            <th>Name</th>
+
+                                                            <th>Age</th>
+
+                                                            <th>Gender</th>
+
+                                                            <th>Purok</th>
+
+                                                            <th>Street</th>
+
+
+                                                            <th>Action </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <?php
+                                                    while ($row = mysqli_fetch_array($result)) {
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle ';
+                                                        if ($row["resStatus"] == "Active") {
+                                                            echo "link-success";
+                                                        }
+                                                        if ($row["resStatus"] == "Inactive") {
+                                                            echo "link-danger";
+                                                        }
+                                                        if ($row["resStatus"] == "Deceased") {
+                                                            echo "link-secondary";
+                                                        }
+
+                                                        echo '  me-1"></i>
+                                                                    ' . $row["resStatus"] . '
+                                                                    
+                                                                </td>
+                                                                <td >' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>';
+
+                                                        $gbd = $row["BirthDate"];
+                                                        $gbd = date('Y-m-d', strtotime($gbd));
+                                                        $today = date('Y-m-d');
+                                                        $diff = date_diff(date_create($gbd), date_create($today));
+
+                                                        echo '
+                                                                <td>' . $diff->format('%y') . '</td>  
+                                                                <td><i class = "';
+                                                        $gend = $row["Gender"];
+                                                        $gen = "fa fa-venus link-danger ";
+                                                        if ($gend == "Female") {
+                                                            echo $gen;
+                                                        } else {
+                                                            $gen = "fa fa-mars link-info ";
+                                                            echo $gen;
+                                                        }
+                                                        echo 'me-2"> </i>' . $row["Gender"] . '</td>  
+                                                                <td>' . $row["Purok"] . '</td>  
+                                                                <td>' . $row["streetName"] . '</td>
+                                                                <form method="post">  
+                                                                <td  class ="action" scope="col">
+                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                        <a href  = "view-resident-personal.php?viewid=' . $row["ID"] . '" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                    </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid=' . $row["ID"] . '"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Manage</span></a>
+                                                                </div>
+                                                                
+                                                                  
+                                                                </form>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';
+                                                    }
+                                                    ?>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content 9 box">
+                    <div class="tab-pane fade show active">
+                        <div class="container-fluid">
+                            <div class="row g-1 px-5 pt-3 pb-5">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-xl-12" style="overflow:auto;" id="res_table">
+                                            <div class="table-responsive">
+                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='9' ORDER BY resStatus ASC, LastName";
+                                                $result = mysqli_query($connect, $query);  ?>
+                                                <table id="9" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Status</th>
+                                                            <th>Name</th>
+
+                                                            <th>Age</th>
+
+                                                            <th>Gender</th>
+
+                                                            <th>Purok</th>
+
+                                                            <th>Street</th>
+
+
+                                                            <th>Action </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <?php
+                                                    while ($row = mysqli_fetch_array($result)) {
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle ';
+                                                        if ($row["resStatus"] == "Active") {
+                                                            echo "link-success";
+                                                        }
+                                                        if ($row["resStatus"] == "Inactive") {
+                                                            echo "link-danger";
+                                                        }
+                                                        if ($row["resStatus"] == "Deceased") {
+                                                            echo "link-secondary";
+                                                        }
+
+                                                        echo '  me-1"></i>
+                                                                    ' . $row["resStatus"] . '
+                                                                    
+                                                                </td>
+                                                                <td >' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>';
+
+                                                        $gbd = $row["BirthDate"];
+                                                        $gbd = date('Y-m-d', strtotime($gbd));
+                                                        $today = date('Y-m-d');
+                                                        $diff = date_diff(date_create($gbd), date_create($today));
+
+                                                        echo '
+                                                                <td>' . $diff->format('%y') . '</td>  
+                                                                <td><i class = "';
+                                                        $gend = $row["Gender"];
+                                                        $gen = "fa fa-venus link-danger ";
+                                                        if ($gend == "Female") {
+                                                            echo $gen;
+                                                        } else {
+                                                            $gen = "fa fa-mars link-info ";
+                                                            echo $gen;
+                                                        }
+                                                        echo 'me-2"> </i>' . $row["Gender"] . '</td>  
+                                                                <td>' . $row["Purok"] . '</td>  
+                                                                <td>' . $row["streetName"] . '</td>
+                                                                <form method="post">  
+                                                                <td  class ="action" scope="col">
+                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                        <a href  = "view-resident-personal.php?viewid=' . $row["ID"] . '" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                    </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid=' . $row["ID"] . '"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Manage</span></a>
+                                                                </div>
+                                                                
+                                                                  
+                                                                </form>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';
+                                                    }
+                                                    ?>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content 10 box">
+                    <div class="tab-pane fade show active">
+                        <div class="container-fluid">
+                            <div class="row g-1 px-5 pt-3 pb-5">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-xl-12" style="overflow:auto;" id="res_table">
+                                            <div class="table-responsive">
+                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='10' ORDER BY resStatus ASC, LastName";
+                                                $result = mysqli_query($connect, $query);  ?>
+                                                <table id="10" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Status</th>
+                                                            <th>Name</th>
+
+                                                            <th>Age</th>
+
+                                                            <th>Gender</th>
+
+                                                            <th>Purok</th>
+
+                                                            <th>Street</th>
+
+
+                                                            <th>Action </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <?php
+                                                    while ($row = mysqli_fetch_array($result)) {
+                                                        echo '  
+                                                        <tr>
+                                                                <td >
+                                                                    <i class ="fa fa-circle ';
+                                                        if ($row["resStatus"] == "Active") {
+                                                            echo "link-success";
+                                                        }
+                                                        if ($row["resStatus"] == "Inactive") {
+                                                            echo "link-danger";
+                                                        }
+                                                        if ($row["resStatus"] == "Deceased") {
+                                                            echo "link-secondary";
+                                                        }
+
+                                                        echo '  me-1"></i>
+                                                                    ' . $row["resStatus"] . '
+                                                                    
+                                                                </td>
+                                                                <td >' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>';
+
+                                                        $gbd = $row["BirthDate"];
+                                                        $gbd = date('Y-m-d', strtotime($gbd));
+                                                        $today = date('Y-m-d');
+                                                        $diff = date_diff(date_create($gbd), date_create($today));
+
+                                                        echo '
+                                                                <td>' . $diff->format('%y') . '</td>  
+                                                                <td><i class = "';
+                                                        $gend = $row["Gender"];
+                                                        $gen = "fa fa-venus link-danger ";
+                                                        if ($gend == "Female") {
+                                                            echo $gen;
+                                                        } else {
+                                                            $gen = "fa fa-mars link-info ";
+                                                            echo $gen;
+                                                        }
+                                                        echo 'me-2"> </i>' . $row["Gender"] . '</td>  
+                                                                <td>' . $row["Purok"] . '</td>  
+                                                                <td>' . $row["streetName"] . '</td>
+                                                                <form method="post">  
+                                                                <td  class ="action" scope="col">
+                                                                    <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                        <a href  = "view-resident-personal.php?viewid=' . $row["ID"] . '" type="button" class="btn btn-primary"><i class = "fa fa-eye mx-1"></i><span class= "wal">View</span></a>
+                                                                    </div>
+                                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                    <a type="button" href ="edit-resident-personal.php?editid=' . $row["ID"] . '"class="btn btn-success"><i class = "fa fa-edit mx-1"></i><span class= "wal">Manage</span></a>
+                                                                </div>
+                                                                
+                                                                  
+                                                                </form>
+                                                            </td> 
+                                                        </tr>  
+                                                        ';
+                                                    }
+                                                    ?>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <!--END ALL PUROK-->
+
+
+
 
     </body>
 
@@ -308,8 +1253,38 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
         $(document).ready(function() {
             $('#alldata').DataTable();
         });
+        $(document).ready(function() {
+            $('#1').DataTable();
+        });
+        $(document).ready(function() {
+            $('#2').DataTable();
+        });
+        $(document).ready(function() {
+            $('#3').DataTable();
+        });
+        $(document).ready(function() {
+            $('#4').DataTable();
+        });
+        $(document).ready(function() {
+            $('#5').DataTable();
+        });
+        $(document).ready(function() {
+            $('#6').DataTable();
+        });
+        $(document).ready(function() {
+            $('#7').DataTable();
+        });
+        $(document).ready(function() {
+            $('#8').DataTable();
+        });
+        $(document).ready(function() {
+            $('#9').DataTable();
+        });
+        $(document).ready(function() {
+            $('#10').DataTable();
+        });
     </script>
 
-    
+
 <?php } ?>
 <!--up-->

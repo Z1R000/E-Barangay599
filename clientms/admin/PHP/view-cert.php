@@ -1,22 +1,12 @@
 <?php
-    $content = "";
-    $name = "";
-    if (!isset($_POST['cert-info'])){
-        $content = "----Supply Text  here---";
-    }
-
-    else{
-      $content  = $_POST['cert-info'];
-    }
-
-    if (!isset($_POST['cname'])){
-      $name = "Certification  Name";
-
-    }
-    else{
-      $name =$_POST['cname'];
-    }
-   
+session_start();
+error_reporting(0);
+include('includes/dbconnection.php');
+if (strlen($_SESSION['clientmsaid']==0)) {
+  header('location:logout.php');
+  } else{
+    $vid=intval($_GET['viewid']);
+       
 ?>
 
 
@@ -121,24 +111,38 @@
     <section class="custom-container   print-container bg-white">
       <!-- header -->
       <header class="row pb-4 blue ">
+        <?php
+              $sql1 = "select * from tblinformation";
+              $query1 = $dbh->prepare($sql1);
+              $query1->execute();
+              $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+              echo "<div class='row'>
+              <div class='col-xl-3 px-1 dis'>
+                  <div class='float-start'>";
+              
+                  foreach ($results1 as $row1) {
+        ?>
+                  
 
         <div class="row  g-0">
             <div class="col-3 justify-content-center">
-                <img src="../images/Barangay.png" style ="width: 150px" >
+                <img src="../<?php echo $row1->Blogoone ?>" style ="width: 150px" >
             </div>
+            
             <div class="col-6 text-center ">
-                <h4>BARANGAY 599, ZONE 59, DISTRICT VI</h4>
-                <h4>OFFICE OF THE SANGGUNIANG BARANGAY</h4>
-                <h6>#4745 Peralta St. V. Mapa Sta. Mesa, Manila
+                <h4><?php echo $row1->Baddress ?></h4>
+                <h4><?php echo $row1->Btitle ?></h4>
+                <h6><?php echo $row1->bFullAdd ?>
                 </h6>
-                <h6>Barangay Contact Number
+                <h6><?php echo $row1->bContact ?>
                 </h6>
             </div>
 
             <div class="col-3">
-                <img src="../images/Maynila.png" style ="width: 150px" >
+                <img src="../<?php echo $row1->Blogotwo ?>" style ="width: 150px" >
             </div>
         </div>
+      <?php } ?>
 
 
        
@@ -147,6 +151,7 @@
       <!-- header -->
 
       <!-- body -->
+      
       <div class="row g-4" style="min-height: 11in;">
       
         <div class="col-4 border pt-3  mx-auto left text-center text-uppercase">
@@ -156,53 +161,96 @@
                   Punong Barangay
                 </li>
                 <li class= "fs-6 ">
-                  JOSE MILO L. LACATAN
+                <?php 
+        $sql = "SELECT tbladmin.*, tblresident.* from tbladmin JOIN tblresident on tbladmin.residentID=tblresident.ID WHERE tbladmin.BarangayPosition = '1'";
+        $query = $dbh->prepare($sql);
+                    $query->execute();
+                    $results = $query->fetchAll(PDO::FETCH_OBJ);
+                    $ac = "";
+                    foreach ($results as $row) {
+                      $mid = explode(" ", "$row->MiddleName");
+                      foreach($mid as $m){
+                        $ac .= $m[0];
+                      }
+                      $complete = "$row->FirstName $ac. $row->LastName $row->Suffix";
+                      $up = strtoupper($complete);
+                      
+                      echo "$up";
+                    }
+      ?>
 
                 </li>
+                
             </ul>
-            <table class= "mt-2 px-2 ">
-              <tr>
-
-                <td colspan=2 class= "fs-6 fw-bold  "id = "post">Kagawad</td>
-              </tr>
-              <tr>
+            <p class= "fs-6 fw-bold" id="post">Kagawad</p>
+            <table class= "px-2 " style="width: 15%; float: left;">
+                            <tr>
               <td class= "fs-6" style= "padding-top:30px;padding-right: 10px;">K</td>
-                <td class= "fs-6 " style= "padding-top:30px;float:left">Erwin L. Sampaga</td>
               </tr>
               <tr>
                 <td class= "fs-6" style= "padding-top:30px;padding-right: 10px;">A</td>
-                <td class= "fs-6" style= "padding-top:30px;float:left">Alberto P. Ramos</td>
               </tr>
               <tr>
               <td class= "fs-6" style= "padding-top:30px; padding-right: 10px;">G</td>
-                <td class= "fs-6" style= "padding-top:30px; float:left">Florante V. Bonagua</td>
               </tr>
               <tr>
               <td class= "fs-6" style= "padding-top:30px; padding-right: 10px;">A</td>
-                <td class= "fs-6" style= "padding-top:30px;float:left">Crisanto G. Lorica</td>
               </tr>
               <tr>
               <td class= "fs-6" style= "padding-top:30px; padding-right: 10px;">W</td>
-                <td class= "fs-6" style= "padding-top:30px; float:left">Alexander S. Ceño</td>
               </tr>
               <tr>
               <td class= "fs-6" style= "padding-top:30px; padding-right: 10px;">A</td>
-                <td class= "fs-6" style= "padding-top:30px;float:left">Nelson L. Labrador</td>
               </tr>
               <tr>
               <td class= "fs-6" style= "padding-top:30px; padding-right: 10px;">D</td>
-                <td class= "fs-6" style= "padding-top:30px;float:left">Marivic M. Villareal</td>
-              </tr>
-
-              
-               
-            </table>            
+              </tr>               
+            </table>
+            
+            <table class= "px-2 " style="width: 85%; float: right;">
+            <?php 
+               $sql = "SELECT tbladmin.*, tblresident.* from tbladmin JOIN tblresident on tbladmin.residentID=tblresident.ID WHERE tbladmin.BarangayPosition = '4'";
+               $query = $dbh->prepare($sql);
+                    $query->execute();
+                    $results = $query->fetchAll(PDO::FETCH_OBJ);
+                    
+                    foreach ($results as $row) {
+                      $ac = "";
+                      $mid = explode(" ", "$row->MiddleName");
+                      foreach($mid as $m){
+                        $ac .= $m[0];
+                      }
+                      $complete = "$row->FirstName $ac. $row->LastName $row->Suffix";
+                      $up = strtoupper($complete);
+                      
+                      echo "<tr><td class= 'fs-6' style= 'padding-top:30px;padding-right: 10px;'> $up </td>
+                      </tr>";
+                    }
+              ?>
+                          </table> 
+             
             <ul class= "mt-4 blue">
                 <li class= "fs-6 fw-bold" id="post">
                   SK CHAIRMAN
                 </li>
                 <li class= "fs-6 mb-4">
-                  MIKO CUSTODIO
+                <?php 
+        $sql = "SELECT tbladmin.*, tblresident.* from tbladmin JOIN tblresident on tbladmin.residentID=tblresident.ID WHERE tbladmin.BarangayPosition = '5'";
+        $query = $dbh->prepare($sql);
+                    $query->execute();
+                    $results = $query->fetchAll(PDO::FETCH_OBJ);
+                    $ac = "";
+                    foreach ($results as $row) {
+                      $mid = explode(" ", "$row->MiddleName");
+                      foreach($mid as $m){
+                        $ac .= $m[0];
+                      }
+                      $complete = "$row->FirstName $ac. $row->LastName $row->Suffix";
+                      $up = strtoupper($complete);
+                      
+                      echo "$up";
+                    }
+      ?>
                 </li>
             </ul>
 
@@ -211,13 +259,45 @@
                   SECRETARY
                 </li>
                 <li class= "fs-6 ">
-                MARIA CECILIA C. DELA CRUZ
+                <?php 
+        $sql = "SELECT tbladmin.*, tblresident.* from tbladmin JOIN tblresident on tbladmin.residentID=tblresident.ID WHERE tbladmin.BarangayPosition = '2'";
+        $query = $dbh->prepare($sql);
+                    $query->execute();
+                    $results = $query->fetchAll(PDO::FETCH_OBJ);
+                    $ac = "";
+                    foreach ($results as $row) {
+                      $mid = explode(" ", "$row->MiddleName");
+                      foreach($mid as $m){
+                        $ac .= $m[0];
+                      }
+                      $complete = "$row->FirstName $ac. $row->LastName $row->Suffix";
+                      $up = strtoupper($complete);
+                      
+                      echo "$up";
+                    }
+      ?>
                 </li>
                 <li class= "fs-6 fw-bold" id="post">
                   Treasurer
                 </li>
                 <li class= "fs-6 ">
-                MELDA G. PADILLA
+                <?php 
+        $sql = "SELECT tbladmin.*, tblresident.* from tbladmin JOIN tblresident on tbladmin.residentID=tblresident.ID WHERE tbladmin.BarangayPosition = '3'";
+        $query = $dbh->prepare($sql);
+                    $query->execute();
+                    $results = $query->fetchAll(PDO::FETCH_OBJ);
+                    $ac = "";
+                    foreach ($results as $row) {
+                      $mid = explode(" ", "$row->MiddleName");
+                      foreach($mid as $m){
+                        $ac .= $m[0];
+                      }
+                      $complete = "$row->FirstName $ac. $row->LastName $row->Suffix";
+                      $up = strtoupper($complete);
+                      
+                      echo "$up";
+                    }
+      ?>
                 </li>
             </ul>
        
@@ -227,8 +307,26 @@
             </div>
            
         </div>
+        <?php 
+          $sql = "SELECT tblcertificate.*, tblcreatecertificate.*, tblcreatecertificate.CreationDate as getDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID WHERE tblcreatecertificate.ID = :vid";
+          $query = $dbh -> prepare($sql);
+          $query->bindParam(':vid',$vid,PDO::PARAM_STR);
+          $query->execute();
+          $result = $query->fetchAll(PDO::FETCH_OBJ);
+          foreach ($result as $row) {
+            $gdate = $row->getDate;
+            $cdate = date('m/d/Y h:i A', strtotime($gdate));
+            $mid = $row->MiddleName;
+            foreach($mid as $m){
+              $ac .= $m[0];
+            }
+            $complete = "$row->FirstName $ac. $row->LastName $row->Suffix";
+            $upn = strtoupper($complete);
+            $upc = "$row->CertificateName";
+            $upc = strtoupper($upc);
+        ?>
         <aside class="col position-relative border" style = "padding: 1.5%;">
-          <h2 class="text-center"><b><?php echo $name?></b></h2>
+          <h2 class="text-center"><b><?php echo "$row->CertificateName";?></b></h2>
           <div class="text-center"></div>
           <!--supply name of customer--> 
           <div class="text-center fs-5"><b></b></div>
@@ -241,18 +339,18 @@
           <div class="my-1">
           <div class="my-1">
               <!--Supply initially with description in db-->
-              <p align = "justify" id = "indent">This is to certify that <strong>Requestor Name</strong> for their <strong>certification type</strong> </p>
-              <p align = "justify" id = "indent"><?php echo $content;?></p>
+              <p align = "justify" id = "indent">This is to certify that <strong><?php echo "$upn";?></strong> for their <strong><?php echo "$upc";?></strong> </p>
+              <p align = "justify" id = "indent"><?php echo $row->content;?></p>
 
 
               <p id = "indent">
-              Issued this <strong>(date)<!--supply date-->)</strong>
-                at Barangay 599, Zone 59, District VI Manila.
+              Issued this<strong><?php echo $cdate;?></strong>at Barangay 599, Zone 59, District VI Manila.
               </p>
             
             </div>
             
           </div>
+          <?php } ?>
          <div class = "row w-100">
               <div class= "col">
                 <div class="float-end">
@@ -272,7 +370,23 @@
                     
                     <tr>
                       <td>
-                        Chairman Name
+                      <?php 
+        $sql = "SELECT tbladmin.*, tblresident.* from tbladmin JOIN tblresident on tbladmin.residentID=tblresident.ID WHERE tbladmin.BarangayPosition = '1'";
+        $query = $dbh->prepare($sql);
+                    $query->execute();
+                    $results = $query->fetchAll(PDO::FETCH_OBJ);
+                    $ac = "";
+                    foreach ($results as $row) {
+                      $mid = explode(" ", "$row->MiddleName");
+                      foreach($mid as $m){
+                        $ac .= $m[0];
+                      }
+                      $complete = "$row->FirstName $ac. $row->LastName $row->Suffix";
+                      $up = $complete;
+                      
+                      echo "$up";
+                    }
+      ?>
                       </td>
                     </tr>
                     <tr>
@@ -301,12 +415,22 @@
                   
                   <tr>
                     <td>
-                        Kagawad Name <!--Supply from secretary postions db-->
+                    <?php 
+                    $vid=intval($_GET['viewid']);
+        $sql2 = "SELECT * from tblcreatecertificate where ID = :vid";
+        $query2 = $dbh->prepare($sql2);
+        $query2->bindParam(':vid',$vid,PDO::PARAM_STR);
+        $query2->execute();
+        $result2 = $query2->fetchAll(PDO::FETCH_OBJ);
+        foreach ($result2 as $row2) {
+          echo $row2->cAdmin;
+        }
+      ?>
                     </td>
                   </tr>
                   <tr>
                     <td class = "text-muted">
-                      Kagawad on Duty
+                      Officer on Duty
                     </td>
                   </tr>
                   <tr>
@@ -327,7 +451,23 @@
                   
                   <tr>
                     <td>
-                        Secretary name <!--Supply from secretary postions db-->
+                    <?php 
+        $sql = "SELECT tbladmin.*, tblresident.* from tbladmin JOIN tblresident on tbladmin.residentID=tblresident.ID WHERE tbladmin.BarangayPosition = '2'";
+        $query = $dbh->prepare($sql);
+                    $query->execute();
+                    $results = $query->fetchAll(PDO::FETCH_OBJ);
+                    $ac = "";
+                    foreach ($results as $row) {
+                      $mid = explode(" ", "$row->MiddleName");
+                      foreach($mid as $m){
+                        $ac .= $m[0];
+                      }
+                      $complete = "$row->FirstName $ac. $row->LastName $row->Suffix";
+                      $up = $complete;
+                      
+                      echo "$up";
+                    }
+      ?>
                     </td>
                   </tr>
                   <tr>
@@ -353,6 +493,7 @@
         </div>       
             
         </aside>
+        
 
       </div>
       <!-- body -->
@@ -362,3 +503,4 @@
   </main>
 </strongody>
 </html>
+<?php } ?>
