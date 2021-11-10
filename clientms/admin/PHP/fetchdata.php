@@ -29,7 +29,8 @@ if(isset($_POST["action"]))
   $result = mysqli_query($con, $query);
   while($row = mysqli_fetch_array($result))
   {
-   $output .= '<option value="'.$row["rentalPrice"].'" selected disabled>'.$row["rentalPrice"].'</option>';
+   $output .= '<button class="btn btn-secondary disabled">₱</button>    
+                <input type= "text" name="rprice" id="rprice" style= "text-align:right" value = "'.$row['rentalPrice'].' "class="form-control action" disabled>';
   }
  }
  echo $output;

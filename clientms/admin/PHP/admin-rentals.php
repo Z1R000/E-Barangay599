@@ -7,7 +7,19 @@
     if (strlen($_SESSION['clientmsaid']==0)) {
     header('location:logout.php');
     }else{
-       
+        $upsuccess = "";
+       if (isset($_POST['editprop'])){
+            $sql= 'UPDATE tblrental SET rentalName = "'.$_POST['propName'].'", rentalPrice = "'.$_POST['propRate'].'" ,availability = "'.$_POST['propA'].'" WHERE `tblrental`.ID = '.$_POST['editprop'].';';            
+        
+            if ($connect->query($sql)===TRUE){
+                $upsuccess = "<div class= 'fs-5 text-success'>Successfully Updated</div>".$_POST['propRate']."";
+                header("Location: admin-rentals.php?updateProperty=success");
+                
+            }
+            else{   
+                $upsuccess = "<div class= 'fs-5 text-danger'>Update Failed</div>";
+            }
+       }
 
 ?>
 <!DOCTYPE html>
@@ -135,10 +147,12 @@
     <?php 
         include ('../includes/sidebar.php');
     ?> 
+
         <div class="d-flex align-items-center">
                 <div class="container  mt-3">
                     <nav aria-label="breadcrumb">
                         <nav aria-label="breadcrumb">
+                            
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
                                 <li class="breadcrumb-item"><a  class= "text-decoration-none" href="#service-choice" data-bs-toggle= "modal" role ="button"><i class="fa fa-hand-paper"></i>&nbsp;Services</a></li>
@@ -150,6 +164,23 @@
             </div>
         </div>
     </nav>
+    <div class="container-fluid">
+    <?php
+        if ($_GET['updateProperty']== "success"){
+            echo '<div class="alert alert-success alert-dismissible fade show " id = "alert" role="alert">
+            <strong><i class="fa fa-check-circle mx-2"></i>Properties Update Success</strong> See <a href = "#" onclick = "document.getElementById(\'propertytab\').click()"> Properties</a> Tab to check.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            </div>';
+            
+        }
+        else{
+
+        }
+    
+    
+    ?>
+    
      <!--breadcrumb-->
     <form action="#" method= "POST">
             <div class="container-fluid px-5 mb-5">
@@ -163,25 +194,11 @@
                                 <a class="nav-link" href="#paymentrecs" data-bs-toggle = "tab">Payment Logs</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#properties" data-bs-toggle = "tab">Properties List </a>
+                                <a class="nav-link" href="#properties" id = "propertytab" data-bs-toggle = "tab">Properties List </a>
                             </li>
                         </ul>   
                     </div>
-                    <script>
-        $(document).ready(function() {
-            $("select").change(function() {
-                $(this).find("option:selected").each(function() {
-                    var optionValue = $(this).attr("value");
-                    if (optionValue) {
-                        $(".box").not("." + optionValue).hide();
-                        $("." + optionValue).show();
-                    } else {
-                        $(".box").hide();
-                    }
-                });
-            }).change();
-        });
-    </script>
+        
                     <div class="col-xl-10">
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="rentalrecords">
@@ -225,11 +242,13 @@
                                                     </thead>
                                                     <tbody>
                                                         <?php
-                                                         $sql= "SELECT * FROM tblrental";
+                                                         $sql= "SELECT *, tblrental.ID as renID,tblavailability.ava as propava
+                                                         FROM tblrental
+                                                         INNER JOIN tblavailability on tblavailability.ID = tblrental.availability";
                                                          $query = $dbh->prepare($sql);
                                                          $query->execute();
                                                          $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                                        
+                                                         $ctr= 1;
                                                             foreach ($results as $rows){
                                                                 
                                                                 echo '
@@ -237,15 +256,14 @@
                                                                 <tr>
                                                            
                                                                     <td>'.$rows->rentalName.'</td>
-                                                                    <td>'.$rows->availability.'</td>
+                                                                    <td>'.$rows->ava.'</td>
                                                                     <td style= "text-align: right">'.$rows->rentalPrice.'</td>
-
                                                                     <td style= "width: 30%; text-align:center">
                                                                     <div class="btn-group">
-                                                                    <button  type="button" href ="#check-property" data-bs-toggle="modal" role="button" class="btn  btn-primary"><i class = "fa fa-eye px-1"></i><span class = "wal"> View</span></button>
+                                                                        <button  type="button" href ="#check-property'.$ctr.'" data-bs-toggle="modal" role="button" class="btn  btn-primary"><i class = "fa fa-eye px-1"></i><span class = "wal"> View</span></button>
                                                                     </div>
                                                                     <div class="btn-group">
-                                                                    <a href ="#edit-property    " data-bs-toggle ="modal" role ="button" class="btn btn-success" ><i class = "fa fa-edit px-1"></i><span class= "wal">Edit</span></a>
+                                                                    <a href ="#edit-property'.$ctr.'" data-bs-toggle ="modal" role ="button" class="btn btn-success" ><i class = "fa fa-edit px-1"></i><span class= "wal">Edit</span></a>
                                                                     </div>
                                                                     <div class="btn-group">
                                                                     <a type="button" href ="#delete-prop" data-bs-toggle = "modal" role = "button" class="btn btn-danger" ><i class = "fa fa-trash px-1"></i><span class= "wal">Delete</span></a>
@@ -254,7 +272,167 @@
 
 
                                                                 </tr>
+
+
+                                                                <div class="modal fade" id = "check-property'.$ctr.'" tab-idndex = "-1">
+                                                                <div class="modal-dialog modal-dialog-centered modal-md">
+                                                                    <div class="modal-content g-0 border-0">
+                                                                        <div class="modal-header bg-599 border-599 text-white ">
+                                                                            <div class="modal-title" >&nbsp;<i class = "fa fa-eye"></i>&nbsp;&nbsp;'.$rows->rentalName.'</div>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body bg-white ">
+                                                                            <div class="row">
+                                                                                <div class="col-xl-6" >
+                                                                                    <label for="prate" class="fs-5 fw-bold">Property Rate</label>
+                                                                                    <div class="input-group">    
+                                                                                        <button class="btn btn-secondary disabled">₱</button>
+                                                                                        <input readonly type="text" id = "prate" class="form-control " name ="pRate" placeholder= "Rate" value = "'.$rows->rentalPrice.'"style = "text-align:right">
+                                                                                </div> 
+                                                                                </div>
+                                                                                <div class="col-xl-6" >  
+                                                                                    <label for="status" class="fs-5 fw-bold">Property Availablility</label>
+                                                                                    <select name="availability" class="form-control" id="status" disabled>';
+
+                                                                                    $sql= "SELECT * FROM tblavailability";
+                                                                                    $query = $dbh->prepare($sql);
+                                                                                    $query->execute();
+                                                                                    $result = $query->fetchAll(PDO::FETCH_OBJ);
+                                                                                    foreach($result as $r){
+                                                                                        if ($r->ava == $rows->availability){
+                                                                                            echo '<option value = "'.$r->ID.'"selected>'.$r->ava.'</option>';
+                                                                                        }
+                                                                                        else{
+                                                                                            echo '<option value = "'.$r->ID.'">'.$r->ava.'</option>';
+                                                                                        }
+                                                                                    }
+
+                                                                        echo'
+                                                                                       
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-xl-12" >
+                                                                                    <label for="pname" class="fs-5 fw-bold">Property Name</label>
+                                                                                    <input readonly  type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property" value = "'.$rows->rentalName.'">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                            <div class="col-md-12  mx-auto my-2">
+                                                                                    <div class="float-end">
+                                                                                
+                                                                                    
+                                                                                    <div class="btn-group">
+                                                                                    <button type ="button" role = "button" data-bs-dismiss = "modal" class="btn btn-secondary" >
+                                                                                    
+                                                                                    Done
+                                                                                    </button>
+                                                                                    </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            
+                                                                            </div>
+
+                                                                        
+                                                                            
+                                                                                            
+                                                                        </div>
+                                                                    
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="modal fade" id = "edit-property'.$ctr.'" tab-idndex = "-1">
+                                                            <div class="modal-dialog modal-dialog-centered modal-md">
+                                                                <div class="modal-content g-0 border-0">
+                                                                    <div class="modal-header bg-599 border-599 text-white ">
+                                                                        <div class="modal-title" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;'.$rows->rentalName.'</div>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body bg-white ">
+                                                                        <div class="row">
+                                                                            <form method = "POST">
+                                                                            '.$upsuccess.'
+                                                                            <div class="col-xl-6" >
+                                                                                <label for="prate" class="fs-5 fw-bold">Property Rate</label>
+                                                                                <div class="input-group">    
+                                                                                    <button class="btn btn-secondary disabled">₱</button>
+                                                                                    <input type="number" id = "prate" value = "'.$rows->rentalPrice.'"class="form-control" name ="propRate" placeholder= "Rate" style= "text-align:right">
+                                                                               </div> 
+                                                
+                                                                              
+                                                
+                                                                            </div>
+                                                                            <div class="col-xl-6" >  
+                                                                                <label for="status" class="fs-5 fw-bold">Property Availablility</label>
+
+                                                                                <select name="propA" class="form-control" id="status">
+                                                                                ';
+                                                                                $sql= "SELECT * FROM tblavailability";
+                                                                                $query = $dbh->prepare($sql);
+                                                                                $query->execute();
+                                                                                $result = $query->fetchAll(PDO::FETCH_OBJ);
+                                                                                foreach($result as $r){
+                                                                                    if ($rows->propava === $r->ava){
+                                                                                        echo '<option value = "'.$r->ID.'"selected>'.$rows->propava.'</option>';
+                                                                                    }
+                                                                                    else{
+
+                                                                                    
+                                                                                        
+                                                                                        echo '<option value = "'.$r->ID.'">'.$r->ava.'</option>';
+                                                                                    }   
+                                                                                }
+                                                                                echo'                                                                                                                                        </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-xl-12" >
+                                                                                <label for="pname" class="fs-5 fw-bold">Property Name</label>
+                                                                                <input type="text" id = "pname" class="form-control" name ="propName" placeholder="Name of the selected property" value = "'.$rows->rentalName.'">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                                                    </div>
+                                                
+                                                                      
+                                                                                                    <div class="row ">
+                                                                            <div class="col-md-12  mx-auto my-2">
+                                                                                <div class="float-end">
+                                                                                <div class="btn-group">
+                                                                                <button type ="submit" name= "editprop" value = '.$rows->renID.' role = "button" class="btn btn-primary">
+                                                                                    <i class="fa fa-save me-1"></i>
+                                                                                    Save
+                                                                                </button>
+                                                                                </div>
+
+                                                                                <div class="btn-group">
+                                                                                <button type ="button" role = "button" class="btn btn-secondary" data-bs-dismiss = "modal">
+                                                                                    <i class="fa fa-times-circle me-1"></i>
+                                                                                    Cancel
+                                                                                </button>
+
+                                                                                </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                                        
+                                                                    </div>
+                                                                  </form>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+
+
+
+
+        
                                                                 ';
+                                                                $ctr++;
 
                                                             }
                                                         
@@ -353,69 +531,7 @@
         
 
     <form action="" method ="POST">
-        <div class="modal fade" id = "edit-property" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 border-0">
-                    <div class="modal-header bg-599 border-599 text-white ">
-                        <div class="modal-title" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Basketball Court</div>
-                        
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-white ">
-                        <div class="row">
-                            <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Property Rate</label>
-                                <div class="input-group">    
-                                    <button class="btn btn-secondary disabled">₱</button>
-                                    <input type="text" id = "prate" class="form-control" name ="pRate" placeholder= "Rate" style= "text-align:right">
-                               </div> 
-
-                              
-
-                            </div>
-                            <div class="col-xl-6" >  
-                                <label for="status" class="fs-5 fw-bold">Property Availablility</label>
-                                <select name="" class="form-control" id="status">
-                                    <option value="avail">Available</option>
-                                    <option value="noavail">Not Available</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12" >
-                                <label for="pname" class="fs-5 fw-bold">Property Name</label>
-                                <input type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
-                            </div>
-                        </div>
-                        <div class="row">
-                                                    </div>
-
-                      
-                                                    <div class="row ">
-                            <div class="col-md-12  mx-auto my-2">
-                                <div class="float-end">
-                                <div class="btn-group">
-                                <button type ="button" role = "button" class="btn btn-primary" >
-                                    <i class="fa fa-save me-1"></i>
-                                    Save
-                                </button>
-                                </div>
-                                <div class="btn-group">
-                                <button type ="button" role = "button" class="btn btn-secondary" >
-                                    <i class="fa fa-times-circle me-1"></i>
-                                    Cancel
-                                </button>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                                        
-                    </div>
-                  
-                </div>
-            </div>
-        </div>
+      
     </form>
 
  
@@ -473,67 +589,30 @@
             </div>
         </div>
     </form>
-    <div class="modal fade" id = "check-property" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 border-0">
-                    <div class="modal-header bg-599 border-599 text-white ">
-                        <div class="modal-title" >&nbsp;<i class = "fa fa-eye"></i>&nbsp;&nbsp;Basketball Court</div>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-white ">
-                        <div class="row">
-                            <div class="col-xl-6" >
-                                <label for="prate" class="fs-5 fw-bold">Property Rate</label>
-                                <div class="input-group">    
-                                    <button class="btn btn-secondary disabled">₱</button>
-                                    <input readonly type="text" id = "prate" class="form-control " name ="pRate" placeholder= "Rate" style = "text-align:right">
-                               </div> 
-                            </div>
-                            <div class="col-xl-6" >  
-                                <label for="status" class="fs-5 fw-bold">Property Availablility</label>
-                                <select name="" class="form-control" id="status" disabled>
-                                    <option value="avail">Available</option>
-                                    <option value="noavail">Not Available</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12" >
-                                <label for="pname" class="fs-5 fw-bold">Property Name</label>
-                                <input readonly  type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the selected property">
-                            </div>
-                        </div>
-                        <div class="row">
-                        <div class="col-md-12  mx-auto my-2">
-                                <div class="float-end">
-                               
-                                
-                                <div class="btn-group">
-                                <button type ="button" role = "button" data-bs-dismiss = "modal" class="btn btn-secondary" >
-                                 
-                                   Done
-                                </button>
-                                </div>
-                                </div>
-                            </div>
-                           
-                        </div>
-
-                     
-                        
-                                        
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-        
+    
     <?php
         include('services.php');
     ?>
 
     </script>
- 
+    <script>
+        $(document).ready(function() {
+            $("select").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+    </script>
+    <script>
+
+    </script>
 
 <script type="text/javascript">
     function showDiv(divId, element) {
@@ -548,9 +627,7 @@
     function showOthers(divId, element) {
         document.getElementById(divId).style.display = element.value == 'others' ? 'block' : 'none';
     }
-    function showOthersEdit(divId, element) {
-        document.getElementById(divId).style.display = element.value == 'othersed' ? 'block' : 'none';
-    }
+  
 </script>
  
 
