@@ -1,26 +1,44 @@
 <?php
 session_start();
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
+
 error_reporting(0);
 $curr = "Announcements";
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');    
   } else{
+//###########################################################################
 
+
+//Load Composer's autoloader
+
+
+//Create an instance; passing `true` enables exceptions
+
+$mail = new PHPMailer(true);
+
+
+
+//###########################################################################
 //##########################################################################
 // ITEXMO SEND SMS API - PHP - CURL METHOD
 // Visit www.itexmo.com/developers.php for more info about this API
 //##########################################################################
 function itexmo($number,$message,$apicode,$passwd){
-  $ch = curl_init();
-  $itexmo = array('1' => $number, '2' => $message, '3' => $apicode, 'passwd' => $passwd);
-  curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
-  curl_setopt($ch, CURLOPT_POST, 1);
-   curl_setopt($ch, CURLOPT_POSTFIELDS, 
-            http_build_query($itexmo));
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-  return curl_exec ($ch);
-  curl_close ($ch);
+    $ch = curl_init();
+    $itexmo = array('1' => $number, '2' => $message, '3' => $apicode, 'passwd' => $passwd);
+    curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
+    curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, 
+                http_build_query($itexmo));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    return curl_exec ($ch);
+    curl_close ($ch);
 }
 //##########################################################################
 
@@ -34,7 +52,7 @@ if ($_POST) {
     $passwd = '&ln{%g{$ft';
     $text = "Announcement for " . $sdates . " to " . $edates . ": " . $msg;
 
-    $sql = "SELECT * from tblresident WHERE Purok='3'";
+    $sql = "SELECT * from tblresident";
     $query=$dbh->prepare($sql);
     $query->execute();
     $result1=$query->fetchAll(PDO::FETCH_OBJ);
@@ -47,7 +65,42 @@ if ($_POST) {
         Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
         Please CONTACT US for help. ";
             } else if ($result == 0) {
-              echo "<script>alert('Announcement has been made.')</script>'";
+                try {
+                    //Server settings
+                                         //Enable verbose debug output
+                    $mail->isSMTP();                                            //Send using SMTP
+                    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                    $mail->Username   = 'barnagay599@gmail.com';                     //SMTP username
+                    $mail->Password   = 'barangay599123';                               //SMTP password
+                    $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
+                    $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                
+                    $mail->setFrom('barnagay599@gmail.com', 'chairman');
+            
+                    $sqle = "SELECT * from tblresident";
+                    $querye=$dbh->prepare($sqle);
+                    $querye->execute();
+                    $resulte=$querye->fetchAll(PDO::FETCH_OBJ);
+                    foreach ($resulte as $rowe) {
+                        $emails = $rowe->Email;
+                        $mail->addAddress("$emails");
+                        
+                    }
+            
+                    
+                
+                    //Content
+                    $mail->isHTML(true);                                  //Set email format to HTML
+                    $mail->Subject = 'Announcement';
+                    $mail->Body    = "$msg";
+                    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                
+                    $mail->send();
+                    echo "<script>alert('Announcement has been made.')</script>";
+                } catch (Exception $e) {
+                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                }   
             } else {
               echo "Error Num " . $result . " was encountered!";
             }
