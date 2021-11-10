@@ -7,11 +7,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');    
   } else{
 
-  
-?>
-<?php
-
-
 //##########################################################################
 // ITEXMO SEND SMS API - PHP - CURL METHOD
 // Visit www.itexmo.com/developers.php for more info about this API
@@ -29,28 +24,35 @@ function itexmo($number,$message,$apicode,$passwd){
 }
 //##########################################################################
 
-if (isset($_POST['submit'])) {
-  $number = $_POST['number'];
-  $sdates = $_POST['sdate'];
-  $edates = $_POST['edate'];
-  $name = $_POST['name'];
-  $msg = $_POST['msg'];
-  $api = "TR-SALLA708062_SVUYX";
-  $passwd = '&ln{%g{$ft';
-  $text = $name . ";" . $msg . ";" . $sdates . ";" . $edates;
+if ($_POST) {
+    $sdates = $_POST['sdates'];
+    $sdates = date('F j Y - h:i A', strtotime($sdates));
+    $edates = $_POST['edates'];
+    $edates = date('F j Y - h:i A', strtotime($edates));
+    $msg = $_POST['msg'];
+    $api = "TR-SALLA708062_SVUYX";
+    $passwd = '&ln{%g{$ft';
+    $text = "Announcement for " . $sdates . " to " . $edates . ": " . $msg;
 
-  if (!empty($_POST['name']) && ($_POST['number']) && ($_POST['msg']) && ($_POST['sdate']) && ($_POST['edate'])) {
-    $result = itexmo($number, $text, $api, $passwd);
-    if ($result == "") {
-      echo "iTexMo: No response from server!!!
-Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
-Please CONTACT US for help. ";
-    } else if ($result == 0) {
-      echo "Message Sent!";
-    } else {
-      echo "Error Num " . $result . " was encountered!";
+    $sql = "SELECT * from tblresident WHERE Purok='3'";
+    $query=$dbh->prepare($sql);
+    $query->execute();
+    $result1=$query->fetchAll(PDO::FETCH_OBJ);
+    foreach ($result1 as $row1) {
+        $number = $row1->Cellphnumber;
+        if (!empty($_POST['msg']) && ($_POST['sdates']) && ($_POST['edates'])) {
+            $result = itexmo($number, $text, $api, $passwd);
+            if ($result == "") {
+              echo "iTexMo: No response from server!!!
+        Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+        Please CONTACT US for help. ";
+            } else if ($result == 0) {
+              echo "<script>alert('Announcement has been made.')</script>'";
+            } else {
+              echo "Error Num " . $result . " was encountered!";
+            }
+          }
     }
-  }
 }
 
 
@@ -285,7 +287,7 @@ Please CONTACT US for help. ";
 
 
     <div class="modal fade" id = "create-ann" tab-idndex = "-1">
-        <form method="POST">
+        
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content g-0 bg-success ">
                     <div class="modal-header bg-success">
@@ -293,20 +295,20 @@ Please CONTACT US for help. ";
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <form method="POST">
                     <div class="modal-body bg-white">
                      
                         <div class="row py-2">
                             <div class="col-md-6">
-                                <label for = "sdate" class= "fs-5 fw-bold">Starting date</label>
-                                <input type="datetime-local" class="form-control" id = "sdate" name = "sdate" placeholder = "Date of start" >
+                                <label for = "sdates" class= "fs-5 fw-bold">Starting date</label>
+                                <input type="datetime-local" class="form-control" id = "sdates" name = "sdates" placeholder = "Date of start" >
                             </div>
                             <div class="col-md-6">
-                                <label for = "edate" class= "fs-5 fw-bold">Ending date</label>
-                                <input type="datetime-local" class="form-control" id = "edate" name = "edate">
+                                <label for = "edates" class= "fs-5 fw-bold">Ending date</label>
+                                <input type="datetime-local" class="form-control" id = "edates" name = "edates">
                             </div>
                   
                         </div>
-                        <input type="hidden" maxlength="11" class="form-control" id="name" value = "09056602669" name="number" required>
                         <div class="row g-2 pt-3 pb-1">
                             <div class="form-floating mb-3">
                                 <textarea type="text" class="form-control" id="msg" name = "msg"></textarea>
@@ -341,7 +343,7 @@ Please CONTACT US for help. ";
                         </div>
                         <div class="row justify-content-center" align = "center">
                             <div class="col-xl-6">
-                            <button type = "submit" class="btn btn-success" data-bs-dismiss = "modal"  name = "submit" id ="submit">
+                            <button type = "submit" class="btn btn-success" value="submit" name = "submit" id ="submit">
                                     <i class= 'fa fa-paper-plane me-2'></i>Deploy
                                 </button>
                                 <button type = "reset" class="btn btn-danger">
