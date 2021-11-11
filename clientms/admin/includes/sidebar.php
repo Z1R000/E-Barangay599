@@ -1,5 +1,6 @@
 <?php
     include('includes/dbconnection.php');
+    error_reporting(1);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,15 +64,59 @@
 
 </head>
 
+<?php
+    $sql = "Select * from tblinformation";
+    $query = $dbh->prepare($sql);
+    $query->execute();
+    $result = $query->fetchAll(PDO::FETCH_OBJ);
+    $adminlogo = "";
+    $title = "";
+    foreach($result as $l){
+        $adminlogo = $l->blogo3;
+        $title = $l->eTitle;
+    }
 
+     
+    $sql ="Select max(ID)as current from tblloginaudits";
+
+    $latest =0;
+    $query = $dbh -> prepare($sql);
+    $query->execute();
+    $results =$query->fetchAll(PDO::FETCH_OBJ);
+    foreach($results as $c){
+        $latest = $c->current;
+    }
+?>
 <body>
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="side-color" id="sidebar-wrapper">
             
             <div class="sidebar-heading text-center py-2 second-text fs-5 fw-bold border-bottom">
-             <br>Barangay 599 <br>E-barangay<br>
-                <img src = "../IMAGES/admin-logo.png" class = "py-1"style = "width: 60px;"><br>
+             <br>
+             <?php 
+                
+                $counter = 0;
+                $len = strlen($title);
+                for($i = 0; $i < $len;$i++){
+                    if ($counter == 3){
+                        echo "<br>";
+                        $counter = 0;                        
+                    }
+                    
+                    if (preg_match('/\s/',$title[$i])){
+                        $counter++;
+
+                        echo $title[$i];
+                    }
+                    else{
+                        
+                        echo $title[$i];
+                    }
+                }
+
+             ?><br>
+                <img src = "<?php echo "../".$adminlogo;?>" class = "py-1"style = "width: 60px;"><br>
                 <div class="btn-group">
                     <a href="client-profile.php" class="btn btn-transparent"><i class="fa fa-user fs-4 text-primary"></i></a>
                     
@@ -80,7 +125,9 @@
                 </div>
                 <br>
                 <div class="btn-group my-2" role="group" aria-label="Basic example">
-                    <a type = " button" href = "../../index.php"  class = "btn btn-outline-danger fs-6" ><i class = "fa fa-power-off"></i>&nbsp;Logout </a>          
+                    <form action = "../../index.php" method = "GET">
+                        <button type = "submit" value = "<?php echo $latest?>" href = "../../index.php"  name = "logout" class = "btn btn-outline-danger fs-6" ><i class = "fa fa-power-off"></i>&nbsp;Logout </button>
+                        </form>          
                 </div>
                 
                 

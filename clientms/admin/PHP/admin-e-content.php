@@ -1,5 +1,30 @@
 <?php 
-    $curr ="E-barangay Information";
+    session_start();
+    $curr ="E-barangay Content";
+    error_reporting(0);
+    include('includes/dbconnection.php');
+    if (strlen($_SESSION['clientmsaid']==0)) {
+    header('location:logout.php');
+    }else{
+        $infoArr=[];
+        $curr ="E-barangay Information";
+        $sql = "Select * from tblinformation";
+        $query = $dbh->prepare($sql);
+        $query->execute();
+        $result= $query->fetchAll(PDO::FETCH_OBJ);
+        foreach($result as $d){
+            array_push($infoArr,$d->Baddress);
+            array_push($infoArr,$d->bFullAdd);
+            array_push($infoArr,$d->Blogoone);
+            array_push($infoArr,$d->Blogotwo);
+            array_push($infoArr,$d->bContact);
+            array_push($infoArr,$d->blogo3);
+            array_push($infoArr,$d->aboutus);
+            array_push($infoArr,$d->Btitle);
+            array_push($infoArr,$d->eTitle);
+            array_push($infoArr,$d->gName);
+            array_push($infoArr,$d->qr);
+        }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -400,7 +425,7 @@
                     <nav aria-label="breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
+                                <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;</a></li>
                       
                                
                                 <li class="breadcrumb-item active"><a href="#"><i class="fa fa-cog  text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
@@ -467,41 +492,48 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        Secretary
-                                                    </td>
-                                                    <td>
-                                                        MARIA CECILIA C. DELA CRUZ
-                                                    </td>
-                                                    <td>
-                                                        10/30/2021
-                                                    </td>
-                                                    <td>
-                                                        7:35 AM
-                                                    </td>
-                                                    <td>
-                                                        8:00PM
-                                                    </td>
-                                                </tr>
 
-                                                <tr>
-                                                    <td>
-                                                        Kagawad
-                                                    </td>
-                                                    <td>
-                                                        Erwin L. Sampaga
-                                                    </td>
-                                                    <td>
-                                                        10/30/2021
-                                                    </td>
-                                                    <td>
-                                                        7:00 AM
-                                                    </td>
-                                                    <td>
-                                                        6:00 PM
-                                                    </td>
-                                                </tr>
+                                                <?php
+                                                    $sql ='Select tblloginaudits.datesignedin, tblresident.FirstName, tblresident.LastName, tblresident.MiddleName, tblresident.Suffix, tblpositions.Position, tblloginaudits.timeIn,tblloginaudits.timeOut From tblloginaudits Inner join tblresident on tblresident.ID = tblloginaudits.resId Inner join tblpositions on tblpositions.ID = tblloginaudits.position';
+                                                    $query = $dbh->prepare($sql);
+                                                    $query->execute();
+
+                                                    $results = $query->fetchAll(PDO::FETCH_OBJ);
+
+                                                    foreach($results as $r){
+                                                        $cdate = $r->datesignedin;
+                                                        $mid = $r->MiddleName;
+                                                        echo'
+                                                        <tr>
+                                                        <td>'.ucfirst($r->LastName).",".ucfirst($r->FirstName)." ".ucfirst($mid[0]).". ".ucfirst($r->Suffix).'</td>
+                                                        <td>
+                                                            '.$r->Position.'
+                                                        </td>
+                                                        <td>
+                                                            '.date('F j Y - h:i A', strtotime($cdate)).'
+                                                       </td>
+                                                        <td>
+                                                            '.$r->timeIn.'
+                                                        </td>
+                                                        <td>';
+                                                        if (!preg_match("/[1-9]/",($r->timeOut))){
+                                                            echo "Currently logged in";
+                                                        }
+                                                        else{
+                                                            echo $r->timeOut;
+                                                        }
+                                                    
+                                                        echo'
+                                                        </td>
+                                                        </tr>'
+                                                        
+                                                        ;
+                                                    }   
+
+                                                
+                                                
+                                                
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -518,22 +550,30 @@
                                 <div class="fs-5 py-1">E-barangay Texts <i class="fa fa-scroll mx-1"></i></div>
                             </div>
                             <div class="row bg-light py-2 shadow-sm">
-                                
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for = "etitle" class= "fs-5 fw-bold">E-barangay Title</label>
-                                        <input type="text" class="form-control" id = "etitle" placeholder = "599 title" value = "Barangay 599" >
+                                        <input type="text" class="form-control" id = "etitle" placeholder = "599 title" value = "<?php
+                                        echo $infoArr[8];?>" >
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for = "etitle" class= "fs-5 fw-bold">Barangay Title</label>
+                                        <input type="text" class="form-control" id = "etitle" placeholder = "599 title" value = "<?php
+                                        echo $infoArr[7];?>" >
                                     </div>
                                 </div>
                                 <div class="row py-2 px-3 ">
 
                                     <div class="col-md-6">
-                                        <label for = "eban1" class= "fs-5 fw-bold">E-barangay Banner Line 1</label>
-                                        <input type="text" class="form-control" id = "eban1" placeholder = "599 title" value = "BARANGAY 599, ZONE 59, DISTRICT VI" >
+                                        <label for = "eban1" class= "fs-5 fw-bold">Barangay Address <span class ="text-muted">(for Banner)</span></label>
+                                        <input type="text" class="form-control" id = "eban1" placeholder = "599 title" value = "<?php
+                                        echo $infoArr[0];?>" >
                                     </div>
                                     <div class="col-md-6">
-                                        <label for = "eban2" class= "fs-5 fw-bold">E-barangay Banner Line 2</label>
-                                        <input type="text" class="form-control" id = "" placeholder = "599 title" value = "OFFICE OF THE SANGGUNIANG BARANGAY" >
+                                        <label for = "eban2" class= "fs-5 fw-bold">Barangay Full Address</label>
+                                        <input type="text" class="form-control" id = "" placeholder = "599 title" value = "<?php
+                                        echo $infoArr[1];
+                                        ?>" >
                                         
                                     </div>
                         
@@ -542,16 +582,7 @@
                                         <label for = "eban2" class= "fs-5 fw-bold">Barangay 599 History</label>
                                         <div class="form-floating mb-3">
                                             <textarea type="text" class="form-control" id="edit-about" >
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis ex et cursus molestie. Suspendisse et facilisis libero. Morbi aliquet non felis eu tincidunt. Nam mattis tortor ex, eu fringilla mi dapibus id. Nulla facilisi. Morbi porta luctus diam a consequat. Aenean eu tempus velit, id rhoncus libero.
-
-                                            Donec tempor lorem sed nibh pellentesque vulputate eget id leo. Vestibulum maximus hendrerit eros. Integer vel facilisis sem, vel ullamcorper elit. Cras tincidunt mollis metus. Nunc id risus sed mi facilisis posuere. Quisque faucibus auctor dui id hendrerit. Ut in blandit enim. In venenatis pretium consequat. Proin sed luctus augue, ut laoreet leo. Mauris lorem nisi, scelerisque vitae leo sed, facilisis accumsan elit. Vivamus eu consectetur urna. Donec elementum erat ut blandit cursus. Nam ac blandit sem. Suspendisse potenti. Proin sodales nisi nec pretium faucibus.
-
-                                            Duis vel mattis elit, eget condimentum nisl. Integer ultricies tellus viverra mi vehicula cursus. Suspendisse magna lacus, varius sed magna id, semper euismod purus. Vestibulum tincidunt venenatis nunc a tempus. Vestibulum tincidunt maximus blandit. Sed vitae sapien interdum, volutpat justo luctus, aliquam odio. Aenean finibus, sapien ac laoreet luctus, metus magna dictum neque, a luctus tellus neque vitae lorem. Ut nulla sapien, dictum sed euismod eget, feugiat blandit nisl.
-
-                                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque luctus urna vel dui mattis fringilla. Pellentesque enim orci, blandit ut sapien at, cursus sagittis mauris. Suspendisse dignissim nulla tortor, in ultricies odio semper eu. Fusce ac dictum urna, at interdum nisl. Donec feugiat, justo in tristique malesuada, urna nunc tincidunt ex, sit amet pulvinar est augue sit amet dolor. Sed ultricies tempus sagittis. Morbi quis porttitor purus. In elementum enim ipsum, non laoreet diam posuere a. Praesent imperdiet pretium urna, vel efficitur felis fringilla quis. Aliquam erat volutpat. Quisque at condimentum augue. Nunc nec cursus nulla.
-
-                                            Sed at euismod elit, sit amet eleifend enim. Maecenas venenatis aliquet lorem in venenatis. Donec scelerisque rutrum nibh vel dapibus. Etiam sodales eros eget malesuada accumsan. Nunc egestas ornare nisi, in venenatis elit maximus vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque posuere porttitor neque id imperdiet. Vestibulum a posuere nulla. Nam eleifend ultrices finibus. Sed quis dolor eros. In hac habitasse platea dictumst.
-
+                                            <?php echo $infoArr[6]?>
 
                                             </textarea>
 
@@ -587,7 +618,7 @@
                                                 Barangay 599's Logo
                                             </div>
                                         
-                                            <img src="../images/Barangay.png" alt="" class="img-fluid border border-info rounded ava"  style = "height: 185px">
+                                            <img src="../<?php echo $infoArr[2] ?>" alt="" class="img-fluid border border-info rounded ava"  style = "height: 185px">
                                     
                                         </div>
                                     </div>
@@ -606,7 +637,7 @@
                                                 599's Admin Logo
                                             </div>
                                         
-                                            <img src="../images/admin-logo.png" alt="" class="img-fluid border border-info rounded ava"  style = "height: 185px">
+                                            <img src="../<?php echo $infoArr[3] ?>" alt="" class="img-fluid border border-info rounded ava"  style = "height: 185px">
                                     
                                         </div>
                                     </div>
@@ -626,7 +657,7 @@
                                             </div>
 
                                         
-                                            <img src="../images/maynila.png" alt="" class="img-fluid border border-info rounded ava"  style = "height: 185px">
+                                            <img src="../<?php echo $infoArr[5] ?>" alt="" class="img-fluid border border-info rounded ava"  style = "height: 185px">
                                     
                                         </div>
                                     </div>
@@ -997,7 +1028,7 @@
                                                 QR code
                                             </div>
                                         
-                                            <img src="../images/qr.png" alt="" class="img-fluid border border-info rounded ava"  style = "height: 185px">
+                                            <img src="../<?php echo $infoArr[10]?>" alt="" class="img-fluid border border-info rounded ava"  style = "height: 185px">
                                     
                                         </div>
                                     </div>
@@ -1017,11 +1048,11 @@
                                     <label for="g-cashn" class="fs-5 " >G-cash Name</label>
                                     <div class="input-group" >
                                         
-                                        <input type="text" id = "gnam"class="form-control" readonly>
+                                        <input type="text" value = "<?php echo $infoArr[9]?>" id = "gnam"class="form-control" readonly>
                                     </div>
                                     <label for="g-cashn" class="fs-5">G-cash Number</label>
                                     <div class="input-group">
-                                        <input type="text" id = "gnum"class="form-control" readonly>
+                                        <input type="text" value = "<?php echo $infoArr['4']?>"id = "gnum"class="form-control" readonly>
                                     </div>
                                     </div>
                                 </div>
@@ -1106,3 +1137,4 @@
  </script>
 </body>
 </html>
+<?php }?>

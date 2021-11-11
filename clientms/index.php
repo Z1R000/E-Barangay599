@@ -1,3 +1,27 @@
+<?php
+    include ('admin/PHP/includes/dbconnection.php');
+    error_reporting(1);
+    $user = $_GET['logout'];
+    $time = new DateTime("now", new DateTimeZone('Asia/Manila'));
+    $e = "";
+    $aud = "Update tblloginaudits set timeOut = \"".$time->format("h:i:s")."\" where ID = ".$user.";";
+    if (isset($_GET['logout'])){
+        session_start();
+        session_destroy();
+        session_unset();
+        if ($connect->query($aud)===TRUE){
+            $e = "tama";
+        }
+        else{
+            $e =  "mali";
+        }
+        
+    }
+    
+   
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +29,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome </title>
+    <title><?php echo $user; ?></title>
     <link rel="icon" href="admin/images/Barangay.png" type="image/icon type">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -203,7 +227,7 @@
                 <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12 py-5 mt-5 align-items-center">
                     <div class="row">
                         <div class="display-6 text-uppercase text-white " style="letter-spacing: 1.9px;">
-                            Welcome to BARANGAY 599, ZONE 59, DISTRICT VI : E-barangay Information Management System
+                            Welcome to BARANGAY 599, ZONE 59, DISTRICT VI : E-barangay Information Management System <?php echo $user; ?>
                         </div>
                     </div>
                     <div class="row my-2">
@@ -279,12 +303,50 @@
             <div class="container mx-auto">
                 <div class="row g-0 py-1">
                     <div class="col-xl-11 col-lg-10 mx-auto border border-0 fs-5 rounded text-center about-us px-5" style="letter-spacing: 3px;">
-                        Barangay 599 has been one of the forerunning barangays along the streets of “Victorino Mapa” and as stated by a corresponding local of the barangay it has been established way before she was born which was during the early 1970’s and since then, not many integrations were made nor committed by the municipality. According to the barangay’s secretary, there are about 5,600 registered citizens. Barangay 599’s roster of officials is composed of the Barangay Chairman (Jose Milo L. Lacatan), Barangay Secretary (Maria Cecilia C. Dela Cruz),.<span id="dot">....</span><span style="display:none;" id="simor"> SK Chairman and Kagawads (Erwin L. Sampaga, Florante V. Bonagua, Crisantro G. Lorica, Alexander S. Ceño, Nelson L. Labrador, Marivic Villareal). Supporting these leaders are the 20 barangay enforcers, 20 “lupontagapamayapa’s”, 3 advisers and being composed of 10 puroks, 10 purok leaders. However, mostly the secretary’s team and the chairman handle the processes, queries, and requests of their residents..</span>
-                        <div class="col-xl-3 mx-auto mt-4 mb-2">
-                            <div class="btn-group">
-                                <a onclick="seemor();" id="semorbtn" class="btn btn-outline-light text-white">See More</a>
-                            </div>
-                        </div>
+                                        
+                        <?php
+                            $sql = "Select aboutus from tblinformation";
+                            $query = $dbh->prepare($sql);
+                            $query->execute();
+                            $result = $query->fetchAll(PDO::FETCH_OBJ);
+                            $abt = "";
+                            foreach ($result as $a){
+                                $abt = $a->aboutus;
+                            }
+                            
+
+                            $abt.="</span>";
+                            $len = strlen($abt);
+                            $counter = 0;
+                            for ($i = 0; $i<$len;$i++){
+                                if ($counter==70){
+                                    echo "
+                                    <span id='dot'>....</span></br><a onclick='seemor();' id='semorbtn' class='btn btn-outline-light text-white'>See More</a>
+                                    </div><span style='display:none;' id='simor'><span style='display:none;' id='simor'>
+                                    <div class='btn-group'>"
+                                        ;
+                                    
+                                    $counter=-1000;
+                                    
+                                    
+                                   
+                                }
+                                else{
+                                    if (preg_match('/\s/',$abt[$i])){
+                                        $counter++;
+                                        echo $abt[$i];
+                                    }
+                                    else{
+                                        echo $abt[$i];
+                                    }
+                                }
+                            }
+                            
+                        
+                        ?>
+                       
+                        
+                      
                     </div>
                     <script>
                         function seemor() {
