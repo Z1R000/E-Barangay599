@@ -1,26 +1,33 @@
 <?php 
-    $curr ="Update Certificate Record";
+    $curr ="Update Certificate Request";
     session_start();
     error_reporting(0);
     include('includes/dbconnection.php');
     if (strlen($_SESSION['clientmsaid']==0)) {
       header('location:logout.php');
       } else{
+        $eid=intval($_GET['editid']);
+        $aid=$_SESSION['clientmsaid'];
         if(isset($_POST['submit']))
         {
-            $eid=intval($_GET['editid']);
-            $clientmsaid=$_SESSION['clientmsaid'];
+            
             $cont=$_POST['cont'];
-            $status=$_POST['status'];
-        
-            $sql="update tblcreatecertificate set content=:cont, status=:status WHERE ID=:eid";
-            $query=$dbh->prepare($sql);
-            $query->bindParam(':cont',$cont,PDO::PARAM_STR);
-            $query->bindParam(':status',$status,PDO::PARAM_STR);
-            $query->bindParam(':eid',$eid,PDO::PARAM_STR);
-            $query->execute();
-            echo '<script>alert("Certificate Information has been updated")</script>';
-            echo "<script>window.location.href ='edit-cert-record.php?editid=".$eid."'</script>";
+            $status="2";
+            $sqls = "Select tbladmin.*, tblresident.*, tblpositions.* from tblresident join tbladmin on tbladmin.residentID = tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition WHERE tbladmin.ID = :aid";
+            $querys=$dbh->prepare($sqls);
+            $querys->bindParam(':aid', $aid, PDO::PARAM_STR);
+            $querys->execute();
+            $results=$querys->fetchAll(PDO::FETCH_OBJ);
+            foreach ($results as $rows) {$getpos = "$rows->Position $rows->LastName";}
+
+        $sql = "update tblcreatecertificate set status=:status, cAdmin=:getpos WHERE ID=:eid";
+        $query = $dbh->prepare($sql);
+        $query->bindParam(':eid',$eid,PDO::PARAM_STR);
+        $query->bindParam(':getpos', $getpos, PDO::PARAM_STR);
+        $query->bindParam(':status',$status,PDO::PARAM_STR);
+        $query->execute();
+        echo '<script>alert("Certificate request has been approved.")</script>';
+        echo "<script>window.location.href ='admin-certificate.php'</script>";
         }
 ?>
 <!DOCTYPE html>
@@ -156,7 +163,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-12"> 
-                <a href="admin-certificate.php" class = "btn btnx float-end btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</a>           
+                <a href="admin-cert-request.php" class = "btn btnx float-end btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</a>           
             </div>
         </div>
     </div>
@@ -181,7 +188,7 @@
                         <ul class="nav  nav-pills justify-content-center">
                            
                             <li class="nav-item">
-                                <a class="nav-link active fs-5" href="#edit-cert" data-bs-toggle = "tab">Manage Certification </a>
+                                <a class="nav-link active fs-5" href="#edit-cert" data-bs-toggle = "tab">Manage Certificate </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link fs-5" href="#preview" data-bs-toggle = "tab">Preview</a>
@@ -232,42 +239,10 @@
                                             </div>
                                             <div class="col-xl-2">
                                             <label for="cname" class= "black fw-bold fs-5">Status</label>
-                                            
-                                                <?php 
-                                                    $check = $rowe->status;
-                                                    $cheme = $rowe->statusName;
-                                                    if ($check == "5" || $check == "6" || $check == "4" || $check == "7" || $check == "2"){
-                                                        echo '<select id = "status" class ="form-select" name= "status" disabled><option value="'.$cheme.'">'.$cheme.'</option>
-                                                        ';
-                                                    
-                                                    }else if ($check == "3"){
-                                                        echo '<select id = "status" class ="form-select" name= "status">';
-                                                        $sqlst="SELECT * from tblstatus WHERE ID ='3' or ID ='4' or ID='7'";
-                                                        $queryst=$dbh->prepare($sqlst);
-                                                        $queryst->execute();
-                                                        $resultst=$queryst->fetchAll(PDO::FETCH_OBJ);
-                                                        foreach($resultst as $rowst){
-                                                            echo '<option value="'.$rowst->ID.'">'.$rowst->statusName.'</option>
-                                                           ';
-                                                        }
-                                                    
-                                                    }else if ($check == "1"){
-                                                        echo '<select id = "status" class ="form-select" name= "status">';
-                                                        $sqlst="SELECT * from tblstatus WHERE ID = '1' or ID = '2' or ID ='6'";
-                                                        $queryst=$dbh->prepare($sqlst);
-                                                        $queryst->execute();
-                                                        $resultst=$queryst->fetchAll(PDO::FETCH_OBJ);
-                                                        foreach($resultst as $rowst){
-                                                            echo '<option value="'.$rowst->ID.'">'.$rowst->statusName.'</option>
-                                                            ';
-                                                        }
-                                                    }
-                                                ?>
+                                            <select id = "status" class ="form-select" name= "status" disabled>
+                                                <option value="<?php echo "$rowe->statusName"?>"><?php echo "$rowe->statusName"?></option>
+                                                
                                                 </select>
-                                            </div>
-                                            <div class="col-xl-4">
-                                                <label for="cname" class= "black fw-bold fs-5">Barangay Certification number</label>
-                                                <input id = "cname" class ="form-control" type="text" placeholder = "bcn-###-##" name= "cname" readonly>
                                             </div>
                                         </div>
                                         <div class="row g-2 px-5">
@@ -298,7 +273,6 @@
                                                 <?php $checkpurp = $rowe->Purpose;
                                                         if ($checkpurp =="OTHERS"){
                                                             $checkpurp = $rowe->other;
-                                                            $checkpurp = strtoupper($checkpurp);
                                                         }
                                                 ?>
                                                     <option value="<?php echo "$checkpurp";?>" selected><?php echo "$checkpurp";?></option>
@@ -308,13 +282,6 @@
                                                 <label for="cname" class= "black fw-bold fs-5">Date</label>
                                                 <input id = "cdate" class ="form-control" type="text" placeholder = "Date of certification" name= "cdate" value="<?php echo $cdate;?>" disabled>
                                             </div>
-                                            <div class="col-xl-6">
-                                                <label for="cname" class= "black fw-bold fs-5">Officer on Duty</label>
-                                                <select id = "kod" class ="form-control " name= "cmeth" disabled>
-                                                    <option value="<?php echo $rowe->cAdmin?>" id="" selected><?php echo $rowe->cAdmin?></option>
-                                                </select>
-
-                                            </div>
                                             <div class="col-xl-6" style= "display: none">
                                                 <label for="cname" class= "black fw-bold fs-5">Business name <span class= "text-muted fs-6">( For business related only )</span></label>
                                                 <input id = "cname" class ="form-control" type="text" placeholder = "business name here" name= "cname" value="<?php echo $rowe->bName?>" disabled>
@@ -322,34 +289,16 @@
                                             </div>
                                    
                                         </div>
-                                        <div class="row gy-2 mx-2 my-2 ">
-                                            <div class="col-md-12 mx-auto">
-                                            <label for="cont" class= "black fw-bold fs-5">Certification Contents</label>
-                                            <?php 
-                                                if ($check == "5"){
-                                                    echo '<textarea class= "" name="cont" id="cont" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1" disabled>'.$rowe->content.'</textarea>';
-                                                }else{
-                                                    echo '<textarea class= "" name="cont" id="cont" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1">'.$rowe->content.'</textarea>';
-                                                }
-                                            ?>
-                                            
-                                        </div>
+                                       
                                         <div class="row justify-content-end">
                                         <div class="col-12">
                                             <div class="float-end">
 
                                            
                                             <div class="btn-group">                               
-                                        <a type="" href ="temp-cert.php?viewid=<?php echo $eid;?>"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
+                                            <button type = "submit" href = "#save-cert" name="submit" id="submit" data-bs-toggle = "modal" role= "button"class = "btn btn-success"><i class= "fas fa-save me-2"></i>Approve</button>
                                         </div>
-                                        <?php 
-                                                if ($check != "5"){
-                                                    echo '<button type = "sbumit" href = "#save-cert" name="submit" id="submit" data-bs-toggle = "modal" role= "button"class = "btn  btn-primary  my-2"><i class= "fas fa-save me-2"></i>Save</button>';
-                                                }
-                                            ?>
-                                        <div class="btn-group">     
                                         
-                                        </div>
                                         <div class="btn-group">
                                     
                                                                             <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>

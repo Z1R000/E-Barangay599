@@ -203,7 +203,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <div class="row">
                                         <div class="col-xl-12" style="overflow:auto;" id="res_table">
                                             <div class="table-responsive">
-                                                <?php $query = "SELECT * FROM tblresident ORDER BY resStatus ASC, LastName";
+                                                <?php $query = "SELECT * FROM tblresident WHERE resStatus != 'Pending' AND resStatus !='Rejected' ORDER BY resStatus ASC, LastName";
                                                 $result = mysqli_query($connect, $query);  ?>
                                                 <table id="alldata" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
                                                     <thead>
@@ -298,7 +298,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <div class="row">
                                         <div class="col-xl-12" style="overflow:auto;" id="res_table">
                                             <div class="table-responsive">
-                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='1' ORDER BY resStatus ASC, LastName";
+                                                <?php $query = "SELECT * FROM tblresident WHERE resStatus != 'Pending' AND resStatus !='Rejected' AND Purok='1' ORDER BY resStatus ASC, LastName";
                                                 $result = mysqli_query($connect, $query);  ?>
                                                 <table id="1" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
                                                     <thead>
@@ -393,7 +393,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <div class="row">
                                         <div class="col-xl-12" style="overflow:auto;" id="res_table">
                                             <div class="table-responsive">
-                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='2' ORDER BY resStatus ASC, LastName";
+                                                <?php $query = "SELECT * FROM tblresident WHERE resStatus != 'Pending' AND resStatus !='Rejected' AND Purok='2' ORDER BY resStatus ASC, LastName";
                                                 $result = mysqli_query($connect, $query);  ?>
                                                 <table id="2" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
                                                     <thead>
@@ -488,7 +488,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <div class="row">
                                         <div class="col-xl-12" style="overflow:auto;" id="res_table">
                                             <div class="table-responsive">
-                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='3' ORDER BY resStatus ASC, LastName";
+                                                <?php $query = "SELECT * FROM tblresident WHERE resStatus != 'Pending' AND resStatus !='Rejected' AND Purok='3' ORDER BY resStatus ASC, LastName";
                                                 $result = mysqli_query($connect, $query);  ?>
                                                 <table id="3" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
                                                     <thead>
@@ -583,7 +583,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <div class="row">
                                         <div class="col-xl-12" style="overflow:auto;" id="res_table">
                                             <div class="table-responsive">
-                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='4' ORDER BY resStatus ASC, LastName";
+                                                <?php $query = "SELECT * FROM tblresident WHERE resStatus != 'Pending' AND resStatus !='Rejected' AND Purok='4' ORDER BY resStatus ASC, LastName";
                                                 $result = mysqli_query($connect, $query);  ?>
                                                 <table id="4" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
                                                     <thead>
@@ -678,7 +678,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <div class="row">
                                         <div class="col-xl-12" style="overflow:auto;" id="res_table">
                                             <div class="table-responsive">
-                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='5' ORDER BY resStatus ASC, LastName";
+                                                <?php $query = "SELECT * FROM tblresident WHERE resStatus != 'Pending' AND resStatus !='Rejected' AND Purok='5' ORDER BY resStatus ASC, LastName";
                                                 $result = mysqli_query($connect, $query);  ?>
                                                 <table id="5" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
                                                     <thead>
@@ -773,7 +773,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <div class="row">
                                         <div class="col-xl-12" style="overflow:auto;" id="res_table">
                                             <div class="table-responsive">
-                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='6' ORDER BY resStatus ASC, LastName";
+                                                <?php $query = "SELECT * FROM tblresident WHERE resStatus != 'Pending' AND resStatus !='Rejected' AND Purok='6' ORDER BY resStatus ASC, LastName";
                                                 $result = mysqli_query($connect, $query);  ?>
                                                 <table id="6" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
                                                     <thead>
@@ -868,7 +868,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <div class="row">
                                         <div class="col-xl-12" style="overflow:auto;" id="res_table">
                                             <div class="table-responsive">
-                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='7' ORDER BY resStatus ASC, LastName";
+                                                <?php $query = "SELECT * FROM tblresident WHERE resStatus != 'Pending' AND resStatus !='Rejected' AND Purok='7' ORDER BY resStatus ASC, LastName";
                                                 $result = mysqli_query($connect, $query);  ?>
                                                 <table id="7" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
                                                     <thead>
@@ -963,7 +963,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <div class="row">
                                         <div class="col-xl-12" style="overflow:auto;" id="res_table">
                                             <div class="table-responsive">
-                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='8' ORDER BY resStatus ASC, LastName";
+                                                <?php $query = "SELECT * FROM tblresident WHERE resStatus != 'Pending' AND resStatus !='Rejected' AND Purok='8' ORDER BY resStatus ASC, LastName";
                                                 $result = mysqli_query($connect, $query);  ?>
                                                 <table id="8" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
                                                     <thead>
@@ -1058,7 +1058,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <div class="row">
                                         <div class="col-xl-12" style="overflow:auto;" id="res_table">
                                             <div class="table-responsive">
-                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='9' ORDER BY resStatus ASC, LastName";
+                                                <?php $query = "SELECT * FROM tblresident WHERE resStatus != 'Pending' AND resStatus !='Rejected' AND Purok='9' ORDER BY resStatus ASC, LastName";
                                                 $result = mysqli_query($connect, $query);  ?>
                                                 <table id="9" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
                                                     <thead>
@@ -1153,7 +1153,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <div class="row">
                                         <div class="col-xl-12" style="overflow:auto;" id="res_table">
                                             <div class="table-responsive">
-                                                <?php $query = "SELECT * FROM tblresident WHERE Purok='10' ORDER BY resStatus ASC, LastName";
+                                                <?php $query = "SELECT * FROM tblresident WHERE resStatus != 'Pending' AND resStatus !='Rejected' AND Purok='10' ORDER BY resStatus ASC, LastName";
                                                 $result = mysqli_query($connect, $query);  ?>
                                                 <table id="10" class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;">
                                                     <thead>

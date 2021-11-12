@@ -225,7 +225,7 @@
                 <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12 py-5 mt-5 align-items-center">
                     <div class="row">
                         <div class="display-6 text-uppercase text-white " style="letter-spacing: 1.9px;">
-                            Welcome to BARANGAY 599, ZONE 59, DISTRICT VI : E-barangay Information Management System <?php echo $user; ?>
+                            Welcome to BARANGAY 599, ZONE 59, DISTRICT VI : E-barangay Information Management System
                         </div>
                     </div>
                     <div class="row my-2">
