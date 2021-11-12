@@ -178,7 +178,6 @@
 
         }
     
-    
     ?>
     
      <!--breadcrumb-->
@@ -209,7 +208,6 @@
                                 
                             </div>
                             </div>
-        
                             <div class="tab-pane fade show " id="properties">
                                     <div class="container g-0 pt-2">
                                         <div class="row bg-599 text-white rounded-top">
@@ -241,14 +239,13 @@
                                                         </th>
                                                     </thead>
                                                     <tbody>
+
                                                         <?php
-                                                         $sql= "SELECT *, tblrental.ID as renID,tblavailability.ava as propava
-                                                         FROM tblrental
-                                                         INNER JOIN tblavailability on tblavailability.ID = tblrental.availability";
-                                                         $query = $dbh->prepare($sql);
-                                                         $query->execute();
-                                                         $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                                         $ctr= 1;
+                                                            $sql= "SELECT *, tblrental.ID as renID,tblAvailability.ava as propava FROM tblrental INNER JOIN tblAvailability on tblAvailability.ID = tblrental.Availability";
+                                                            $query = $dbh->prepare($sql);
+                                                            $query->execute();
+                                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                            $ctr= 1;
                                                             foreach ($results as $rows){
                                                                 
                                                                 echo '
@@ -307,7 +304,7 @@
                                                                                         }
                                                                                     }
 
-                                                                        echo'
+                                                                                    echo'
                                                                                        
                                                                                     </select>
                                                                                 </div>
@@ -335,7 +332,6 @@
                                                                             </div>
 
                                                                         
-                                                                            
                                                                                             
                                                                         </div>
                                                                     

@@ -42,7 +42,7 @@ $mod = '<option  selected disabled>Mode of payment</option>';
 
  
  
- $sql = 'SELECT tblcreaterental.ID as cID, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate,tblcreaterental.creationDate, tblpurposes.Purpose, tblresident.FirstName, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix,tblrental.rentalName, tblrental.rentalPrice, tblmodes.mode, tblstatus.status,tblpurposes.ID as purposeID FROM tblcreaterental INNER JOIN tblpurposes ON tblcreaterental.purpID = tblpurposes.ID INNER JOIN tblresident ON tblresident.ID = tblcreaterental.userID INNER JOIN tblrental ON tblrental.ID = tblcreaterental.rentalID INNER JOIN tblmodes ON tblmodes.ID = tblcreaterental.modeOfPayment INNER JOIN tblstatus ON tblstatus.ID = tblcreaterental.status';
+ $sql = 'SELECT tblcreaterental.ID as cID, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate,tblcreaterental.creationDate, tblpurposes.Purpose, tblresident.FirstName, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix,tblrental.rentalName, tblrental.rentalPrice, tblmodes.mode, tblstatus.statusName,tblpurposes.ID as purposeID FROM tblcreaterental INNER JOIN tblpurposes ON tblcreaterental.purpID = tblpurposes.ID INNER JOIN tblresident ON tblresident.ID = tblcreaterental.userID INNER JOIN tblrental ON tblrental.ID = tblcreaterental.rentalID INNER JOIN tblmodes ON tblmodes.ID = tblcreaterental.modeOfPayment INNER JOIN tblstatus ON tblstatus.ID = tblcreaterental.status';
 
  
  $query= $dbh->prepare($sql);
@@ -89,7 +89,7 @@ $mod = '<option  selected disabled>Mode of payment</option>';
                                                                     echo '
                                                                 
                                                                     <tr>
-                                                                        <td scope="col" style = "text-align: left">'.$row->status.'</td>
+                                                                        <td scope="col" style = "text-align: left">'.$row->statusName.'</td>
                                                                         <td scope="col" style = "text-align: left">'.$row->LastName.",".$row->FirstName." ".$row->MiddleName." ".$Suffix.'</td>
                                                                         <td scope="col" style = "text-align: left">'.$row->rentalName.'</td>
                                                                         <td scope="col" style = "text-align: left">'.date('l, j F Y - h:i A', strtotime($cdate)).'</td>
@@ -145,9 +145,9 @@ $mod = '<option  selected disabled>Mode of payment</option>';
                                             <input type="text" id = "search" class="form-control" name ="pRate" placeholder= "Requestor Name">
                                             </div>
                                             <div class="col" style= "z-index: 9;position:relative">
-                                            <div class="list-group w-100"  id="show-list" style="position: absolute">
+                                                <div class="list-group w-100"  id="show-list" style="position: absolute">
                                             <!-- Here autocomplete list will be display -->
-                                            </div>
+                                                </div>
                                             </div>
                                         </div> 
                                         <div class="col-xl-6">

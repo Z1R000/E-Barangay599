@@ -277,8 +277,6 @@ if ($_POST) {
                     <i class= "fa fa-bullhorn me-2 fs-5 " ></i>
                 </button>
     </div>
-
-    
     <div class="container-fluid px-4">
                         <?php 
 							$sql ="SELECT distinct tblannouncement.ID, tblannouncement.announcement, tblannouncement.announcementDate, tblannouncement.endDate, tblannouncement.adminID, tbladmin.BarangayPosition, tblresident.LastName, tblpositions.* from tblannouncement join tbladmin on tblannouncement.adminID = tbladmin.ID join tblresident on tbladmin.ID = tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition order by tblannouncement.ID Desc";
@@ -418,7 +416,7 @@ if ($_POST) {
                         </div>
                         <div class="row g-2 pt-3 pb-1">
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="edit-announcement" placeholder="name@example.com">
+                                <input type="text" class="form-control" id="edit-announcement">
                  
                             </div>
                         </div>
@@ -476,7 +474,6 @@ if ($_POST) {
                 <div class="modal-content g-0 bg-danger" >
                     <div class="modal-header  white ">
                         <h5 class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</h5>
-                        
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">

@@ -1,18 +1,14 @@
 <?php 
-    $curr ="Dashboard";
     session_start();
+    $curr ="Dashboard";
     error_reporting(0);
     include('includes/dbconnection.php');
     if (strlen($_SESSION['clientmsaid']==0)) {
     header('location:logout.php');
     }else{
-
-        $sql ="SELECT * from tblblotter";
-
-        $query = $dbh -> prepare($sql);
-        $query->execute();
-        $results =$query->fetchAll(PDO::FETCH_OBJ);
-        $types = "  <option disabled selected>Select Blotter type</option>";
+     
+      
+        
 
  
 ?>

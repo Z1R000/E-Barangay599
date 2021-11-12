@@ -1,4 +1,4 @@
-<div class="modal fade" id = "account" tab-idndex = "-1">
+<div class="modal fade" id = "account-owner" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content bg-dark g-0  ">
                     <div class="modal-header bg-dark  ">
@@ -32,7 +32,7 @@
                                     </div>
                                         
                                     <div class="input-group">
-                                        <input type="text" id = "fulname"class="form-control" placeholder = "Officials Name" style= "text-align:center;font-size: 1.4em;" readonly>
+                                        <input type="text" id = "search" class="form-control" value = "<?php echo $arr[1];?>" placeholder = "Officials Name" style= "text-align:center;font-size: 1.4em;" readonly>
                                         <button class="btn btn-info text-white" onclick = "ful()" type ="button">
                                             <i class="fa fa-edit">
 
@@ -40,54 +40,59 @@
                                         </button>
                                         <script>
                                                     function ful(){
-                                                        var ps = document.getElementById('fulname').readOnly;
+                                                        var ps = document.getElementById('search').readOnly;
 
                                                         if (ps){
-                                                            document.getElementById('fulname').readOnly = false;
+                                                            document.getElementById('search').readOnly = false;
                                                         }
                                                         else{
-                                                            document.getElementById('fulname').readOnly = true;
+                                                            document.getElementById('search').readOnly = true;
                                                         }
                                                     }
                                                 </script>
                                     
 
                                     </div>
+                                    <div class="col" style= "z-index: 9;position:relative">
+                                            <div class="list-group w-100"  id="show-list" style="position: absolute">
+                                            <!-- Here autocomplete list will be display -->
+                                            </div>
+                                            </div>
                                     <div class="row justify-content-center text-center my-2">
                                         <h3>Day of Duty</h3>
                                         <div class="col-xl-12" align ="center">
-                                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                                            <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btncheck1">Monday</label>
-
-                                            <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btncheck2">Tuesday</label>
-
-                                            <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btncheck3">Wednesday</label>
-                                            
-                                            
-                                        </div>
+                                      
                                         <div class="col-xl-12 my-2">
-                                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                                            <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btncheck4">Thursday</label>
-
-                                            <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btncheck5">Friday</label>
-
-                                            <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btncheck6">Saturday</label>
+                                            <?php
                                             
-                                            <input type="checkbox" class="btn-check" id="btncheck7" autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btncheck7">Sunday</label>
+                                                    $sql = "Select * from tbldays";
+                                                    $query = $dbh->prepare($sql);
+                                                    $query->execute();
+                                                    $res = $query->fetchAll(PDO::FETCH_OBJ);
+                                                    $ctr = 0;
+                                                    foreach ($res as $d){
+                                                        if ($d->dDay == $row->dDay){
+                                                            echo '  <div class = "btn-group p-1 active"><input type="checkbox" checked value = "'.$d->dDay.'" class="btn-check" id="btncheck'.$ctr.'" autocomplete="off">
+                                                            <label class="btn btn-outline-primary" for="btncheck'.$ctr.'">'.$d->dDay.'</label></div>';    
+                                                        }
+                                                        else{
+                                                        echo '  <div class = "btn-group p-1"><input type="checkbox" value = "'.$d->dDay.'" class="btn-check" id="btncheck'.$ctr.'" autocomplete="off">
+                                                        <label class="btn btn-outline-primary" for="btncheck'.$ctr.'">'.$d->dDay.'</label></div>';
+                                                        }
+                                                        $ctr ++;
+
+                                                    }
+                                            
+                                            
+                                            ?>
+                                        
                                             
                                         </div>
 
                                         </div>
 
                                         </div>
-                                    </div>
+                                  
                                    
                     
                                     <div class="row justify-content-center">
@@ -95,7 +100,7 @@
 
                                             <label for="email" class="fs-5 text-secondary">Email Address</label>
                                             <div class="input-group">
-                                                <input type="text" id = "email"class="form-control" placeholder = "e.g chairman@gmail.com" readonly>
+                                                <input type="email" value = "<?php echo $arr[6];?>"id = "email"class="form-control" placeholder = "e.g chairman@gmail.com" readonly>
                                                 <button type= "button" name= "edit-em"class="btn btn-info" onclick = 'em()'>
                                                     <i class= "fa fa-edit text-white"></i>
                                                 </button>
@@ -122,7 +127,7 @@
                                         <div class="col-xl-12 text-center">
                                             <label for="pas" class="fs-5 text-secondary">Password</label>
                                             <div class="input-group">
-                                                <input type="text" id = "pas" class="form-control" placeholder = "123456" readonly >
+                                                <input type="text" value = "<?php echo $arr[7];?>" id = "pas" class="form-control" placeholder = "123456" readonly >
                                                 <button type= "button" name= "editpas" class="btn btn-info" onclick = 'pas()' >
                                                     <i class= "fa fa-edit text-white"></i>
                                                 </button>
@@ -141,10 +146,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row justify-content-center">
-                                        <div class="col-xl-8 my-2" align ="center">
+                                    <div class="row my-2">
+                                        <div class="col-xl-12 my-2" >
+                                        <div class="float-end">
                                         
-                                        <button type= "submit" onclick= "alert('Credential Update Successful')" class= "btn btn-success"><i class= "fa fa-save me-2"></i>Save</button>
+                                        <div class="btn-group"><button type= "submit" onclick= "alert('Credential Update Successful')" class= "btn btn-success"><i class= "fa fa-save me-2"></i>Save</button>
+                                        </div>
+                                        <div class="btn-group"><button type= "button" data-bs-dismiss="modal" class= "btn btn-secondary"><i class= "fa fa-times-circle me-2"></i>Cancel</button>
+                                        </div>
+                                        </div>
                                         </div>
 
                                     </div>
@@ -161,15 +171,15 @@
                                                 <i class="fa fa-phone-square me-2"></i>Contact Number
                                             </th>
                                             <td style= "text-align:right">
-                                                 09123456789
-                                            </td>
+                                                 <?php echo $arr[2];?>
+                                            </td> 
                                         </tr>
                                         <tr>
                                             <th>
                                                 <i class="fa fa-circle me-2"></i>Civil Status
                                             </th>
                                             <td style= "text-align:right">
-                                                Single
+                                                <?php echo $arr[3];?>
                                             </td>
                                         </tr>
                                         <tr>
@@ -177,7 +187,7 @@
                                                 <i class="fa fa-id-card me-2"></i>Age
                                             </th>
                                             <td style= "text-align:right">
-                                                35
+                                                    <?php echo $diff->format('%y');?>
                                             </td>
                                         </tr>
                                         <tr>
@@ -185,7 +195,9 @@
                                                 <i class="fa fa-venus-mars me-2"></i>Gender
                                             </th>
                                             <td style= "text-align:right">
-                                                Male
+                                                <?php
+                                                    echo $arr[4];
+                                                ?>
                                             </td>
                                         </tr>
                                         <tr>
@@ -193,7 +205,11 @@
                                                 <i class="fa fa-birthday-cake me-2"></i>Date of Birth
                                             </th>
                                             <td style= "text-align:right">
-                                                12/25/2000
+                                                <?php
+                                                
+                                                    echo $bday;
+                                                
+                                                ?>
                                             </td>
                                         </tr>
                                         <tr>
@@ -201,7 +217,9 @@
                                                 <i class="fa fa-check-square me-2"></i>Day/s of Duty
                                             </th>
                                             <td style= "text-align:right">
-                                                M,W,F
+                                            <?php
+                                                    echo $arr[5];
+                                                ?>
                                             </td>
                                         </tr>
                                         <tr>
@@ -209,18 +227,12 @@
                                                 <i class="fa fa-calendar me-2"></i>Term
                                             </th>
                                             <td style= "text-align:right">
-                                                2019-2021
+                                            <?php
+                                                    echo $start->format('20y')."-".$term->format('20y');
+                                                ?>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <th>
-                                                <i class="fa fa-info me-2"></i>Status
-                                            </th>
-                                            <td style= "text-align:right">
-                                                Active
-                                            </td>
-                                        </tr>
-                                    </table>                            
+                                                </table>                            
                                 </div>
                             </div>
                     </div>
@@ -229,9 +241,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>  
     </div> 
  </div>  
+ 
 
 
     <div class="modal fade" id = "view-info" tab-idndex = "-1">

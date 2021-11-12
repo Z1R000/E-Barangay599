@@ -137,7 +137,7 @@
             {   
                 
                 $gbd = $row->BirthDate;
-                $gbd = date('Y-m-d', strtotime($gbd));
+                $gbd = date('Y-m-d', strtotime($gbd));  
                 $today = date('Y-m-d');
                 $diff = date_diff(date_create($gbd), date_create($today));
     ?>

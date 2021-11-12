@@ -27,6 +27,11 @@ if(isset($_POST['login']))
 		echo "<script>alert('Invalid Details');</script>";
 	}
 
+
+
+	
+	
+
 }
 ?>
 <!DOCTYPE html>
@@ -35,7 +40,7 @@ if(isset($_POST['login']))
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>599 Admin Login</title>
+	<title><?php echo $position.$user.$timein?></title>
 
 
 	<link rel="icon" href="images/Barangay.png" type="image/icon type">
@@ -262,7 +267,7 @@ if(isset($_POST['login']))
 		<div class="row">
 			
 		</div>
-		<form id="login" method="POST" name="login">
+		<form id="login" method="POST" action = "admin-dashboard.php" name="login">
 			<div class="mb-3">
 				<div class="input-group mb-3">
 					<span class="input-group-text" id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 			fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">

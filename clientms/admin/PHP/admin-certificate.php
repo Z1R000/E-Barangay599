@@ -484,13 +484,13 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                                 $cdate = $row["resDate"];
                                                                 echo '  
                                                             <tr>
-                                                                <td scope="col" style = "text-align: left">015-22</td>
-                                                                <td scope="col" style = "text-align: left">' . $row["statusName"] . '</td>
-                                                                <td scope="col" style = "text-align: left">' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>
-                                                                <td scope="col" style = "text-align: left">' . $row["CertificateName"] . '</td>
+                                                                <td scope="col" style = "text-align: left;width:10%">015-22</td>
+                                                                <td scope="col" style = "text-align: left;width:5%">' . $row["statusName"] . '</td>
+                                                                <td scope="col" style = "text-align: left;width:25%;">' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>
+                                                                <td scope="col" style = "text-align: left;width:20%;">' . $row["CertificateName"] . '</td>
                                                                 <td scope="col" style = "text-align: right">' . $row["CertificatePrice"] . '</td>
                                                                 <td scope="col" style = "text-align: left">' . date('F j Y - h:i A', strtotime($cdate)) . '</td>
-                                                                <td scope="col" id = "disa" style = "text-align: center">
+                                                                <td scope="col" id = "disa" style = "text-align: center;width:35%">
                                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                                                 <a type="" href ="edit-cert-record.php?editid=' . $row["getid"] . '"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Manage</span></a>
                                                                             </div>';

@@ -7,11 +7,12 @@
     if (strlen($_SESSION['clientmsaid']==0)) {
     header('location:logout.php');
     }else{
-        $sql= "SELECT tblcreaterental.ID,tblcreaterental.payable, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate,tblcreaterental.creationDate, tblpurposes.Purpose, tblresident.FirstName, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix,tblrental.rentalName, tblrental.rentalPrice, tblmodes.mode, tblstatus.status,tblpurposes.ID as purposeID FROM tblcreaterental INNER JOIN tblpurposes ON tblcreaterental.purpID = tblpurposes.ID INNER JOIN tblresident ON tblresident.ID = tblcreaterental.userID INNER JOIN tblrental ON tblrental.ID = tblcreaterental.rentalID INNER JOIN tblmodes ON tblmodes.ID = tblcreaterental.modeOfPayment INNER JOIN tblstatus ON tblstatus.ID = tblcreaterental.status and tblcreaterental.ID =".$_GET['rid']." ";
+        $sql= "SELECT tblcreaterental.ID,tblcreaterental.payable, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate,tblcreaterental.creationDate, tblpurposes.Purpose, tblresident.FirstName, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix,tblrental.rentalName, tblrental.rentalPrice, tblmodes.mode, tblstatus.statusName,tblpurposes.ID as purposeID FROM tblcreaterental INNER JOIN tblpurposes ON tblcreaterental.purpID = tblpurposes.ID INNER JOIN tblresident ON tblresident.ID = tblcreaterental.userID INNER JOIN tblrental ON tblrental.ID = tblcreaterental.rentalID INNER JOIN tblmodes ON tblmodes.ID = tblcreaterental.modeOfPayment INNER JOIN tblstatus ON tblstatus.ID = tblcreaterental.status and tblcreaterental.ID =".$_GET['rid']." ";
         $query = $dbh ->prepare($sql);
         $query ->execute();
         $result = $query->fetchAll(PDO::FETCH_OBJ);
         $arr= [];
+
         foreach ($result as $r){
             $cdate = $r->creationDate;
             $sdate = $r->rentalStartDate;
@@ -25,11 +26,16 @@
             array_push($arr, $r->rentalPrice);
             array_push($arr,$r->rentalName);
             array_push($arr,$r->mode);
-            array_push($arr,$r->status);
+            array_push($arr,$r->statusName);
             
 
 
         }
+
+        //$sql= "UPDATE tblcreaterental SET purpID = '".$_POST['purp']."', = '".$_POST['payable']."' WHERE `tblcreaterental`.`ID` = ;";
+    
+
+
        
 
 ?>
@@ -218,7 +224,7 @@
                                     
                                     
                                     ?>
-                                        <select class= " form-select" name="" id="purp" onchange = "showotherEdit('othersed',this);">                  
+                                        <select class= " form-select" name="purp" id="purp" onchange = "showotherEdit('othersed',this);">                  
                                                 <?php echo $opt; ?>
                                         </select>
                                     <div class="col-xl-12" id ="othersed" style= "display : none ">
@@ -239,18 +245,18 @@
                                                 <button class="btn btn-secondary disabled">From</button>
                                                     <input type="text" readonly value = "<?php echo $arr[4]; ?>"class="form-control">
                                                     <button class="btn btn-secondary disabled">to</button>
-                                                    <input type="text" readonly value = "<?php echo $arr[5]; ?>"class="form-control">              
-                                                <button type= "button" class="btn btn-outline-primary  " id = "edit2" onclick = "newDuration('editStarttoEnd','edit2')"><i class="fa fa-edit" disabled></i></button>     
+                                                    <input type="text" readonly value = "<?php echo $arr[5]; ?>"class="form-control">
+                                                    <button type= "button" class="btn btn-outline-primary  " id = "edit2" onclick = "newDuration('editStarttoEnd','edit2')"><i class="fa fa-edit" disabled></i></button>     
                                                 </div>
                                                 <div class="col" style = "display:none" id ="editStarttoEnd">
-                                                <label for="purp" class= "fs-5 fw-bold">New Duration </label>
+                                                    <label for="purp" class= "fs-5 fw-bold">New Duration </label>
                                                 <div class="input-group">
                                                     <button class="btn btn-secondary disabled">From</button>
-                                                    <input type="datetime-local" class="form-control" placeholder = "Specify purpose here">
+                                                    <input name= "newEnd" type="datetime-local" class="form-control" placeholder = "Specify purpose here">
                                                     <button class="btn btn-secondary disabled">to</button>
-                                                    <input type="datetime-local" class="form-control" placeholder = "Specify purpose here">
+                                                    <input name = "newStart" type="datetime-local" class="form-control" placeholder = "Specify purpose here">
                                                 </div>
-                                            </div> 
+                                                </div> 
                                             </div>
                                     </div>
                                     </div>
@@ -329,10 +335,10 @@
                                                     $stat = "";
                                                     foreach($result as $r){
                                                         if ($arr[9] == $r->status){
-                                                            $stat.='<option value="'.$r->ID.'" selected>'.$r->status.'</option>';
+                                                            $stat.='<option value="'.$r->ID.'" selected>'.$r->statusName.'</option>';
                                                         }
                                                         else{
-                                                            $stat.='<option value="'.$r->ID.'">'.$r->status.'</option>';
+                                                            $stat.='<option value="'.$r->ID.'">'.$r->statusName.'</option>';
                                                         }
                                                     }
                                                 
