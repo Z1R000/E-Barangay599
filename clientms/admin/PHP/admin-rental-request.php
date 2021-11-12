@@ -1,5 +1,15 @@
 <?php 
-    $curr ="Rental Requests";
+    session_start();
+    error_reporting(1);
+    include('includes/dbconnection.php');
+    if (strlen($_SESSION['clientmsaid']==0)) {
+    header('location:logout.php');
+    }else{
+        $curr ="Rental Requests";
+        
+        
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,14 +30,7 @@
 
     <style type = "text/css">
         @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
-        table,td,tr,th{
-            border: 1px solid #d3d3d3;
-            text-align: left;
-            font-size: 1em;
-         
-            font-family: 'Noto Sans Display', sans-serif;
-            
-        }
+   
         
         td{
             vertical-align: middle;
@@ -159,13 +162,11 @@
                             <div class="col-xl-12 px-5 mx-2  mx-auto py-3  px-2" style= "overflow-x:auto;">
                                     <table class="table bg-white table-hover table-bordered " id = "reqr" style= "min-width:1000px"> 
                                         <thead class = "bg-light">
-                                            <tr>
-                                           
-                                            </tr>
+                                            
                                             <tr>
                                                 <th style = "text-align: left">Requestor Name</th>
                                                 <th style = "text-align: left">Requested Property</th>
-                                                <th style = "text-align: left">Rental Fee</th>
+                                                <th style = "text-align: left">Rental Fee(₱)</th>
                                                 <th style = "text-align: left">Purpose </th>
                                                
                                                 <th style = "text-align: left">Date </th>
@@ -177,28 +178,44 @@
                                         
                                         </thead>           
                                         <tbody class= "table-hover">
-                                            <tr>
-                  
-                                                <td scope="col" style = "text-align: left"><a href = "#">Mang Berting</a></td>
-                                                <td scope="col" style = "text-align: left">Basketball Court</td>
+                                          
+                                                <?php
+                                                    $sql = "Select tblcreaterental.ID as rid, tblresident.FirstName, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblcreaterental.status, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate, tblcreaterental.creationDate, tblpurposes.Purpose, tblrental.rentalName, tblrental.rentalPrice, tblcreaterental.payable from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID join tblrental on tblrental.ID = tblcreaterental.rentalID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID where tblcreaterental.status = 1 order by tblcreaterental.creationDate ASC";
+                                                    $query = $dbh->prepare($sql);
+                                                    $query->execute();
+                                                    $results = $query->fetchAll(PDO::FETCH_OBJ);    
+                                                    foreach($results as $rows){
+                                                        echo '
+                                                        <tr>
+                                                            <td scope="col" style = "text-align: left">'.$rows->LastName.",".$rows->FirstName." ".$rows->MiddleName." ".$rows->Suffix.'</td>
+                                                            <td scope="col" style = "text-align: left">'.$rows->rentalName.'</td>
                                          
                             
                                                 
-                                                <td scope="col" style = "text-align: right">₱ 0.00</td>
-                                                <td scope="col" style = "text-align: left">Employment</td>
-                                                <td scope="col" style = "text-align: left">10-19-2021</td>
-                                                <td scope="col" style = "text-align: center">
-                                                       
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <button href ="#approve-req"class="btn btng btn-success" data-bs-toggle = "modal"><i class = "fa fa-check"></i>
-                                                            Accept</button>
-                                                        </div>
-                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="button" href ="#decline-req" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-times-circle me-2"></i>Decline</a>
-                                                        </div>
-                                                    
-                                                </td>
-                                            </tr>
+                                                            <td scope="col" style = "text-align: right">'.$rows->payable.'</td>
+                                                            <td scope="col" style = "text-align: left">'.$rows->Purpose.'</td>
+                                                            <td scope="col" style = "text-align: left">'.$rows->creationDate.'</td>
+                                                            <td scope="col" style = "text-align: center">
+                                                                   
+                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                            <form action ="edit-rental-request.php" method = "get">
+                                                                        <button type = "submit" name = "id" value = "'.$rows->rid.'"class="btn btng btn-primary" data-bs-toggle = "modal"><i class = "fa fa-edit"></i>
+                                                                        Manage</button>
+                                                                    </div>
+                                                                </form>
+                                                                 
+                                                                
+                                                            </td>
+                                                        </tr>
+                                                        
+                                                        ';
+                                                    }
+                                            
+                                                
+                                                ?>
+                  
+                                                
+                                          
                                           
                                         </tbody>
                                     </table>                        
@@ -447,3 +464,4 @@
  
 </body>
 </html>
+<?php } ?>

@@ -51,15 +51,11 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
             vertical-align: middle;
      
         }
-        .btng{
-            width: 100px;
-        }
+        
         .black{
           color: black;
         }
-        .btnx{
-          width: 150px;
-        }
+        
 
         #frame { 
           width: 850px; 
@@ -83,7 +79,9 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
           transform-origin: 0 0;
         }
         
-     
+        .btnx{
+          width: 150px;
+        }
  
    
     
@@ -213,9 +211,9 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                         <td scope="col" style = "text-align: right">' . $purp . '</td>
                                                         <td scope="col" style = "text-align: right">' . $row["bName"] . '</td>
                                                         <td scope="col" style = "text-align: left">' . date('F j Y - h:i A', strtotime($cdate)) . '</td>
-                                                        <td scope="col" id = "disa" style = "text-align: center">
+                                                        <td scope="col" id = "disa" style = "text-align: center:width: 30%;">
                                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                                <a type="" href ="edit-cert-request.php?editid=' . $row["getID"] . '"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Manage</span></a>
+                                                                                <a type="" href ="edit-cert-request.php?editid=' . $row["getID"] . '"class="btn btnx btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Manage</span></a>
                                                                             </div></td></tr>';
                                                     }
                                                 ?>
