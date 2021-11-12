@@ -34,12 +34,14 @@ if (mysqli_connect_errno())
             $email=$_POST['email'];
             $vp=$_POST['vp'];
             $hm=$_POST['hm'];
+            $stat = "Active";
             
-            $sql="insert into tblresident (ResidentType,Purok,houseUnit,voter,LastName,Suffix,FirstName,MiddleName,Gender,BirthDate,streetName,Cellphnumber,tinNumber,sssNumber,CivilStatus,Email,Password,vPrecinct,HomeName)
-            values(:residenttype,:prk,:hunit,:voter,:lname,:sf,:fname,:mname,:gend,:bdate,:strt,:contact,:tin,:sss,:cstatus,:email,:password,:vp,:hm)";
+            $sql="insert into tblresident (ResidentType,Purok,houseUnit,voter,LastName,Suffix,FirstName,MiddleName,Gender,BirthDate,streetName,Cellphnumber,tinNumber,sssNumber,CivilStatus,Email,Password,vPrecinct,HomeName, resStatus)
+            values(:residenttype,:prk,:hunit,:voter,:lname,:sf,:fname,:mname,:gend,:bdate,:strt,:contact,:tin,:sss,:cstatus,:email,:password,:vp,:hm, :stat)";
             $query=$dbh->prepare($sql);
             $query->bindParam(':residenttype',$residenttype,PDO::PARAM_STR);
             $query->bindParam(':prk',$prk,PDO::PARAM_STR);
+            $query->bindParam(':stat',$stat,PDO::PARAM_STR);
             $query->bindParam(':sf',$sf,PDO::PARAM_STR);
             $query->bindParam(':hunit',$hunit,PDO::PARAM_STR);
             $query->bindParam(':voter',$voter,PDO::PARAM_STR);
@@ -232,7 +234,7 @@ if (mysqli_connect_errno())
                             <div class="col-xl-5 col-sm-12">
                                <br>
                                 <select id="gend" name="gend" class="form-select input-sm" aria-label="Default select example" id="gender" onchange="showDiv('hidden_div', this)" required>
-                                    <option value="" disabled>--Select Gender--</option>
+                                    <option value="" disabled selected>--Select Gender--</option>
                                     <option value="Male">Male (lalake)</option>
                                     <option value="Female">Female (Babae)</option>
 
@@ -245,7 +247,7 @@ if (mysqli_connect_errno())
                             <div class="col-xl-5">
                                 
                                 <select class="form-select input-sm" aria-label="Default select example" id="voter" name="voter" onchange="showprecinct('precinct', this)">
-                                    <option value="" disabled>--Select--</option>
+                                    <option value="" disabled selected>--Select--</option>
                                     <option value="Yes">Registered</option>
                                     <option value="No">Unregistered</option>
                                 </select>
@@ -272,7 +274,7 @@ if (mysqli_connect_errno())
                             <div class="col-xl-5">
                                 <br>
                                 <select class="form-select input-sm" aria-label="Default select example" id="cstatus" name="cstatus" onchange="showDiv('hidden_div', this)" required>
-                                    <option value="" disabled>--Select Status--</option>
+                                    <option value="" disabled selected>--Select Status--</option>
                                     <option value="Single">Single</option>
                                     <option value="Married">Married</option>
                                     <option value="Separated">Separated</option>

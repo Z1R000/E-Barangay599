@@ -13,56 +13,10 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
     if (isset($_POST['submit'])) {
 
 
-        $residenttype = $_POST['residenttype'];
-        $prk = $_POST['prk'];
-        $hunit = $_POST['hunit'];
-        $voter = $_POST['voter'];
-        $password = $_POST['password'];
-        $lname = $_POST['lname'];
-        $sf = $_POST['sf'];
-        $fname = $_POST['fname'];
-        $mname = $_POST['mname'];
-        $gend = $_POST['gend'];
-        $bdate = $_POST['bdate'];
-        $strt = $_POST['strt'];
-        $contact = $_POST['contact'];
-        $tin = $_POST['tin'];
-        $sss = $_POST['sss'];
-        $cstatus = $_POST['cstatus'];
-        $email = $_POST['email'];
-        $vp = $_POST['vp'];
-        $bp = $_POST['bp'];
-        $hm = $_POST['hm'];
-
-        $sql = "insert into tblresident (ResidentType,Purok,houseUnit,voter,LastName,Suffix,FirstName,MiddleName,Gender,BirthDate,BirthPlace,streetName,Cellphnumber,tinNumber,sssNumber,CivilStatus,Email,Password,vPrecinct,HomeName)
-                values(:residenttype,:prk,:hunit,:voter,:lname,:sf,:fname,:mname,:gend,:bdate,:bp,:strt,:contact,:tin,:sss,:cstatus,:email,:password,:vp,:hm)";
-        $query = $dbh->prepare($sql);
-        $query->bindParam(':residenttype', $residenttype, PDO::PARAM_STR);
-        $query->bindParam(':prk', $prk, PDO::PARAM_STR);
-        $query->bindParam(':sf', $sf, PDO::PARAM_STR);
-        $query->bindParam(':hunit', $hunit, PDO::PARAM_STR);
-        $query->bindParam(':voter', $voter, PDO::PARAM_STR);
-        $query->bindParam(':vp', $vp, PDO::PARAM_STR);
-        $query->bindParam(':bp', $bp, PDO::PARAM_STR);
-        $query->bindParam(':lname', $lname, PDO::PARAM_STR);
-        $query->bindParam(':fname', $fname, PDO::PARAM_STR);
-        $query->bindParam(':mname', $mname, PDO::PARAM_STR);
-        $query->bindParam(':gend', $gend, PDO::PARAM_STR);
-        $query->bindParam(':bdate', $bdate, PDO::PARAM_STR);
-        $query->bindParam(':strt', $strt, PDO::PARAM_STR);
-        $query->bindParam(':contact', $contact, PDO::PARAM_STR);
-        $query->bindParam(':tin', $tin, PDO::PARAM_STR);
-        $query->bindParam(':sss', $sss, PDO::PARAM_STR);
-        $query->bindParam(':hm', $hm, PDO::PARAM_STR);
-        $query->bindParam(':cstatus', $cstatus, PDO::PARAM_STR);
-        $query->bindParam(':email', $email, PDO::PARAM_STR);
-        $query->bindParam(':password', $password, PDO::PARAM_STR);
-        $query->execute();
-
         $eid = intval($_GET['editid']);
 
-        $sqld = "Delete FROM tblresidentrequest where ID=:eid";
-        $queryd = $dbh->prepare($sqld);
+        $sql = "update tblresident set resStatus ='Active' WHERE ID=:eid";
+        $query = $dbh->prepare($sql);
         $queryd->bindParam(':eid', $eid, PDO::PARAM_STR);
         $queryd->execute();
 
@@ -73,7 +27,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
     if (isset($_POST['delete'])) {
         $eid = intval($_GET['editid']);
 
-        $sqld = "Update tblresidentrequest set reqStatus='Rejected' where ID=:eid";
+        $sqld = "Update tblresident set resStatus='Rejected' where ID=:eid";
         $queryd = $dbh->prepare($sqld);
         $queryd->bindParam(':eid', $eid, PDO::PARAM_STR);
         $queryd->execute();
@@ -169,7 +123,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
         <?php
         $eid = $_GET['editid'];
         $clientmsaid = $_SESSION['clientmsaid'];
-        $sql = "select * from tblresidentrequest where ID=:eid";
+        $sql = "select * from tblresident where ID=:eid";
         $query = $dbh->prepare($sql);
         $query->bindParam(':eid', $eid, PDO::PARAM_STR);
         $query->execute();
@@ -216,7 +170,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                         <div class="col-xl-8 col-sm-12">
                                            
 
-                                            <input id="fname" name="fname" type="text" class="form-control" required value="<?php echo $row->FirstName; ?>">
+                                            <input disabled id="fname" name="fname" type="text" class="form-control" disabled value="<?php echo $row->FirstName; ?>">
                                             <label for="" class="text-muted fs-6 small"> Place a space between if you have second or third name(e.g Juan Dela)</label>
                                         </div>
                                     </div>
@@ -226,7 +180,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                                         <div class="col-xl-8 col-sm-12">
                                       
-                                            <input type="text" id="mname" class="form-control" name="mname" value="<?php echo $row->MiddleName; ?>">
+                                            <input disabled type="text" id="mname" class="form-control" name="mname" value="<?php echo $row->MiddleName; ?>">
                                             <label for="" class="text-muted fs-6 small">If born without middle name just leave blank.</label>
                                         </div>
                                     </div>
@@ -236,7 +190,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                                         <div class="col-xl-8 col-sm-12">
                                             
-                                            <input type="text" id="lname" class="form-control" name="lname" required value="<?php echo $row->LastName; ?>">
+                                            <input disabled type="text" id="lname" class="form-control" name="lname" disabled value="<?php echo $row->LastName; ?>">
                                             <label for="" class="text-muted fs-6 small"></label>
                                         </div>
                                     </div>
@@ -244,7 +198,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                         <label for="fname" class="col-xl-2 fs-5 py-0"> <span class="text-danger fs-5"></span>Suffix<br><span class="fs-6 text-muted small"> (Kadugsong ng pangalan)</span></label>
                                         <div class="col-xl-5 col-sm-12">
                                            
-                                            <input id="sf" type="text" class="form-control" name="sf" value="<?php echo $row->Suffix; ?>">
+                                            <input disabled id="sf" type="text" class="form-control" name="sf" value="<?php echo $row->Suffix; ?>">
                                             <label for="" class="text-muted fs-6 small">For residents with suffix (e.g Juan Dela Cruz Jr., Juan Dela Cruz III</label>
                                         </div>
                                     </div>
@@ -257,7 +211,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                                         <div class="col-xl-5 col-sm-12">
                                         <Br>
-                                            <input type="date" id="bdate" class="form-control" name="bdate" required value="<?php echo $bdatesets; ?>">
+                                            <input disabled type="date" id="bdate" class="form-control" name="bdate" disabled value="<?php echo $bdatesets; ?>">
                                             <label for="" class="text-muted fs-6 small">Format: day/month/year</label>
                                         </div>
                                     </div>
@@ -266,7 +220,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                         <label for="fname" class="col-xl-2 fs-5 py-0"> <span class="text-danger fs-5"></span>Birth Place<br><span class="fs-6 text-muted small"> (Lugar ng kapanganakan)</span></label>
                                         <div class="col-xl-5 col-sm-12">
                                             <br>
-                                            <input id="bp" type="text" class="form-control" name="bp" value="<?php echo $row->BirthPlace; ?>" required>
+                                            <input disabled id="bp" type="text" class="form-control" name="bp" value="<?php echo $row->BirthPlace; ?>" disabled>
                                         </div>
                                     </div>
 
@@ -275,7 +229,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                         <label for="gender" class="col-sm-2 col-form-label  fs-5"><span class="text-danger fs-5">*</span>Gender<br><span class="fs-6 text-muted small"> (Kasarian)</span></label>
                                         <div class="col-xl-5 col-sm-12">
                                         
-                                            <select id="gend" name="gend" class="form-select input-sm" aria-label="Default select example" id="gender" required>
+                                            <select id="gend" name="gend" class="form-select input-sm" aria-label="Default select example" id="gender" disabled>
                                                 <option value="" disabled>--Select Gender--</option>
 
                                                 <?php
@@ -298,7 +252,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                         <label for="gender" class="col-sm-2 col-form-label  fs-5"><span class="text-danger fs-5">*</span>Voter's Status<br><span class="fs-6 text-muted small"> (Pagkabotante)</span></label>
                                         <div class="col-xl-5">
                                             <br>
-                                            <select class="form-select input-sm" aria-label="Default select example" id="voter" name="voter" onchange="showprecinct('precinct', this)">
+                                            <select class="form-select input-sm" aria-label="Default select example" id="voter" name="voter" onchange="showprecinct('precinct', this)" disabled>
                                                 <option value="" disabled>--Select--</option>
 
                                                 <?php
@@ -322,7 +276,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                                                 <label class="fs-6 px-2">Precinct Number</label>
                                             
-                                            <input type="text" name="vp" class="form-control" id="pres" value="<?php echo $row->vPrecinct; ?>">
+                                            <input disabled type="text" name="vp" class="form-control" id="pres" value="<?php echo $row->vPrecinct; ?>">
 
                                             </div>
 
@@ -335,7 +289,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                         <label for="cs" class="col-sm-2 col-form-label  fs-5"><span class="text-danger fs-5">*</span>Civil Status<br><span class="fs-6 text-muted small"> (Kalagayang Sibil)</span></label>
                                         <div class="col-xl-5">
                                             <br>
-                                            <select class="form-select input-sm" aria-label="Default select example" id="cstatus" name="cstatus" required>
+                                            <select class="form-select input-sm" aria-label="Default select example" id="cstatus" name="cstatus" disabled>
                                                 <option value="" disabled>--Select Status--</option>
                                                 <?php
                                                 $cstat = $row->CivilStatus;
@@ -371,7 +325,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                             <br>
                                             <div class="mb-3">
 
-                                                <input class="form-control form-control " id="formFileSm" type="file">
+                                                <input disabled class="form-control form-control " id="formFileSm" type="file">
                                             </div>
                                         </div>
                                     </div>
@@ -380,7 +334,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                                         <div class="col-xl-6 col-sm-12">
 
-                                            <input type="text" id="sss" name="sss" class="form-control" value="<?php echo $row->sssNumber; ?>">
+                                            <input disabled type="text" id="sss" name="sss" class="form-control" value="<?php echo $row->sssNumber; ?>">
 
                                         </div>
                                     </div>
@@ -389,7 +343,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                                         <div class="col-xl-6 col-sm-12">
 
-                                            <input type="text" id="tin" name="tin" class="form-control" value="<?php echo $row->tinNumber; ?>">
+                                            <input disabled type="text" id="tin" name="tin" class="form-control" value="<?php echo $row->tinNumber; ?>">
                                             <label for="tin" class="text-muted fs-6 small"></label>
                                         </div>
                                     </div>
@@ -414,7 +368,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 <div class="row g-0  mb-4">
 
                                     <div class="display-6 py-2 ps-3">
-                                        Barangay Residency Information<span class=" fs-4 text-danger"> (Required)</span>
+                                        Barangay Residency Information<span class=" fs-4 text-danger"> (required)</span>
                                     </div>
                                 </div>
                                 <div class="row g-0 ps-4 pe-2 ps-2">
@@ -423,7 +377,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                         <label for="cs" class="col-sm-2 col-form-label  fs-5">Type of<Br> Residency<br><span class="fs-6 text-muted small"> (Uri ng residente)</span></label>
                                         <div class="col-xl-5">
                                             <br>
-                                            <select class="form-select input-sm" aria-label="Default select example" name="residenttype" onchange="showDiv('hidden_div', this)" required id="rt">
+                                            <select class="form-select input-sm" aria-label="Default select example" name="residenttype" onchange="showDiv('hidden_div', this)" disabled id="rt">
                                                 <option value="" disabled>--Select Resident Type--</option>
                                                 <?php
                                                 $rst = $row->ResidentType;
@@ -452,7 +406,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                             </select>
                                             <div class="col-xl-12 col-lg-6 col-md-8 col-sm-12 col-xs-12" id="hidden_div">
                                                 <label class="col-form-label fs-5">Home Owner Name</label>
-                                                <input type="text" class="form-control" placeholder="" id="hm" name="hm" value="<?php echo $row->HomeName; ?>" />
+                                                <input disabled type="text" class="form-control" placeholder="" id="hm" name="hm" value="<?php echo $row->HomeName; ?>" />
                                             </div>
 
 
@@ -480,7 +434,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                         }
                                                     }
                                                     ?>
-                                                    <select class="form-control action" name="prk" id="prk" aria-label="Default select example" style="width: 60%;">
+                                                    <select class="form-control action" name="prk" id="prk" aria-label="Default select example" style="width: 60%;" disabled>
                                                         <option value='' disabled>--Purok--</option>
                                                         <?php echo $pName; ?>
                                                     </select>
@@ -490,7 +444,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                             <div class="col-xl-4 col-sm-12 my-2 ">
                                                 <div class="input-group">
                                                     <label for="" class="mx-2 fs-5 small">Street </label>
-                                                    <select name="strt" id="strt" class="form-control action">
+                                                    <select name="strt" id="strt" class="form-control action" disabled>
                                                         <?php
                                                         // $con = mysqli_connect("localhost", "admin", "admin", "countrydb");
                                                         $sName = '';
@@ -522,7 +476,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                                         <div class="col-xl-4 col-sm-12">
                                             <br>
-                                            <input type="number" id="hunit" name="hunit" class="form-control" required value="<?php echo $row->houseUnit; ?>">
+                                            <input disabled type="number" id="hunit" name="hunit" class="form-control" disabled value="<?php echo $row->houseUnit; ?>">
                                             <label for="" class="text-muted fs-6 small">House unit or lot number of the residents household</label>
                                         </div>
                                     </div>
@@ -551,7 +505,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                                         <div class="col-xl-5 col-sm-12">
                                             <br>
-                                            <input type="tel" id="contact" name="contact" class="form-control" pattern="[0]{1}[9]{1}[0-9]{9}" placeholder="09" title="Contact number should start with 09" value="<?php echo $row->Cellphnumber; ?>">
+                                            <input disabled type="tel" id="contact" name="contact" class="form-control" pattern="[0]{1}[9]{1}[0-9]{9}" placeholder="09" title="Contact number should start with 09" value="<?php echo $row->Cellphnumber; ?>">
                                         </div>
                                     </div>
 
@@ -560,8 +514,8 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                                         <div class="col-xl-5 col-sm-12">
                                             <br>
-                                            <input type="text" id="email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value="<?php echo $row->Email; ?>">
-                                            <input type="hidden" id="password" name="password" class="form-control" value="<?php echo $row->Password; ?>">
+                                            <input disabled type="text" id="email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value="<?php echo $row->Email; ?>">
+                                            <input disabled type="hidden" id="password" name="password" class="form-control" value="<?php echo $row->Password; ?>">
                                         </div>
                                     </div>
 
@@ -608,7 +562,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label for="dname">Requestor Name</label>
-                                        <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
+                                        <input disabled id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
 
                                     </div>
                            
@@ -616,11 +570,11 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 <div class="row mt-2">
                                     <div class="col-md-6">
                                         <label for="contac">Contact Number</label>
-                                        <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
+                                        <input disabled id = "contac" type="text" class="form-control" value = "09123456789" readonly>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="emails" >Email Address</label>
-                                        <input id = "emails" type="text" class="form-control" value = "juanDelaC@gmail.com" readonly>
+                                        <input disabled id = "emails" type="text" class="form-control" value = "juanDelaC@gmail.com" readonly>
                                         
                                     
                                     </div>
@@ -634,7 +588,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                         <div class="row g-0 my-2" id = "other_txt-dec" style= "display: none;">
                                  
                                  <div class="col-md-12">
-                                     <input type="text" class="form-control" placeholder= "Specify a reason here">
+                                     <input disabled type="text" class="form-control" placeholder= "Specify a reason here">
                                  </div>
                              </div>
                                     </div>
@@ -655,13 +609,13 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <label for="remarks" >Mode of delivery <i class= "fa fa-envelope"></i></label>
                                     <div class="col-md-6">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                <input disabled class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                                 <label class="form-check-label" for="flexCheckDefault">
                                                     SMS
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+                                                <input disabled class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
                                                 <label class="form-check-label" for="flexCheckChecked">
                                                     E-mail
                                                 </label>  
@@ -710,7 +664,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label for="dname">Requestor Name</label>
-                                        <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
+                                        <input disabled id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
 
                                     </div>
                            
@@ -718,13 +672,13 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 <div class="row mt-2">
                                     <div class="col-md-6">
                                         <label for="contac">Contact Number</label>
-                                        <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
+                                        <input disabled id = "contac" type="text" class="form-control" value = "09123456789" readonly>
                    
                                        
                                     </div>
                                     <div class="col-md-6">
                                         <label for="emails" >Email Address</label>
-                                        <input id = "emails" type="text" class="form-control" value = "juanDelaC@gmail.com" readonly>
+                                        <input disabled id = "emails" type="text" class="form-control" value = "juanDelaC@gmail.com" readonly>
                                         
                                     
                                     </div>
@@ -745,17 +699,17 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <label for="remarks" >Mode of delivery <i class= "fa fa-envelope"></i></label>
                                     <div class="col-md-6">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="sms">
+                                            <input disabled class="form-check-input" type="checkbox" value="" id="sms">
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 SMS
                                             </label>
                                             </div>
                                             <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="em" checked>
+                                            <input disabled class="form-check-input" type="checkbox" value="" id="em" checked>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 E-mail
                                             </label>
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                            <input disabled class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 Walk-in
                                             </label>
@@ -857,9 +811,9 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                     function showDiv(divId, element) {
                         var rentype = document.getElementById('rt').value;
                         if (rentype == "Rental/Boarder") {
-                            document.getElementById('hm').required = true;
+                            document.getElementById('hm').disabled = true;
                         } else {
-                            document.getElementById('hm').required = false;
+                            document.getElementById('hm').disabled = false;
                         }
                         document.getElementById(divId).style.display = element.value == 'Rental/Boarder' ? 'block' : 'none';
                     }
@@ -871,9 +825,9 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                     function showprecinct(divId, element) {
                         var vot = document.getElementById('voter').value;
                         if (vot == "Yes") {
-                            document.getElementById('pres').required = true;
+                            document.getElementById('pres').disabled = true;
                         } else {
-                            document.getElementById('pres').required = false;
+                            document.getElementById('pres').disabled = false;
                         }
                         document.getElementById(divId).style.display = element.value == 'Yes' ? 'inline' : 'none';
                     }

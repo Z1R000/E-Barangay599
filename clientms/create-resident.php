@@ -30,9 +30,10 @@ if (isset($_POST['submit'])) {
     $vp = $_POST['vp'];
     $bp = $_POST['bp'];
     $hm = $_POST['hm'];
+    $stat = "Pending";
 
-    $sql = "insert into tblresidentrequest (ResidentType,Purok,houseUnit,voter,LastName,Suffix,FirstName,MiddleName,Gender,BirthDate,BirthPlace,streetName,Cellphnumber,tinNumber,sssNumber,CivilStatus,Email,Password,vPrecinct,HomeName)
-        values(:residenttype,:prk,:hunit,:voter,:lname,:sf,:fname,:mname,:gend,:bdate,:bp,:strt,:contact,:tin,:sss,:cstatus,:email,:password,:vp,:hm)";
+    $sql = "insert into tblresident (ResidentType,Purok,houseUnit,voter,LastName,Suffix,FirstName,MiddleName,Gender,BirthDate,BirthPlace,streetName,Cellphnumber,tinNumber,sssNumber,CivilStatus,Email,Password,vPrecinct,HomeName,resStatus)
+        values(:residenttype,:prk,:hunit,:voter,:lname,:sf,:fname,:mname,:gend,:bdate,:bp,:strt,:contact,:tin,:sss,:cstatus,:email,:password,:vp,:hm,:stat)";
     $query = $dbh->prepare($sql);
     $query->bindParam(':residenttype', $residenttype, PDO::PARAM_STR);
     $query->bindParam(':prk', $prk, PDO::PARAM_STR);
@@ -41,6 +42,7 @@ if (isset($_POST['submit'])) {
     $query->bindParam(':voter', $voter, PDO::PARAM_STR);
     $query->bindParam(':vp', $vp, PDO::PARAM_STR);
     $query->bindParam(':bp', $bp, PDO::PARAM_STR);
+    $query->bindParam(':stat', $stat, PDO::PARAM_STR);
     $query->bindParam(':lname', $lname, PDO::PARAM_STR);
     $query->bindParam(':fname', $fname, PDO::PARAM_STR);
     $query->bindParam(':mname', $mname, PDO::PARAM_STR);

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2021 at 11:13 PM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.8
+-- Generation Time: Nov 12, 2021 at 12:57 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -87,7 +87,8 @@ CREATE TABLE `tblannouncement` (
   `ID` int(11) NOT NULL,
   `announcement` varchar(2000) NOT NULL,
   `announcementDate` datetime NOT NULL DEFAULT current_timestamp(),
-  `endDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `startDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `endDate` datetime NOT NULL,
   `adminID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -95,16 +96,33 @@ CREATE TABLE `tblannouncement` (
 -- Dumping data for table `tblannouncement`
 --
 
-INSERT INTO `tblannouncement` (`ID`, `announcement`, `announcementDate`, `endDate`, `adminID`) VALUES
-(1, 'Announcement Trial #1', '2021-04-22 00:00:00', '2021-10-05 00:00:00', 1),
-(2, 'Announcement Trial #2', '2021-04-22 00:00:00', '2021-10-05 00:00:00', 1),
-(3, 'Announcement Trial #3', '2021-04-22 00:00:00', '2021-10-05 00:00:00', 1),
-(4, 'Announcement Trial #4', '2021-04-22 00:00:00', '2021-10-05 00:00:00', 1),
-(5, 'I am ledesma marithess', '2021-04-29 00:00:00', '2021-10-05 00:00:00', 1),
-(6, 'Sample', '2021-05-03 00:00:00', '2021-10-05 00:00:00', 1),
-(7, 'Welcome to Gmeet', '2021-05-08 00:00:00', '2021-10-05 00:00:00', 1),
-(8, 'asdasdasd', '2021-10-05 18:02:26', '2021-10-05 18:02:26', 1),
-(9, 'Sample Announcement October 5 2021', '2021-10-05 18:03:36', '2021-10-05 18:03:36', 1);
+INSERT INTO `tblannouncement` (`ID`, `announcement`, `announcementDate`, `startDate`, `endDate`, `adminID`) VALUES
+(1, 'Announcement Trial #1', '2021-04-22 00:00:00', '2021-11-12 16:10:40', '2021-10-05 00:00:00', 1),
+(2, 'Announcement Trial #2', '2021-04-22 00:00:00', '2021-11-12 16:10:40', '2021-10-05 00:00:00', 1),
+(3, 'Announcement Trial #3', '2021-04-22 00:00:00', '2021-11-12 16:10:40', '2021-10-05 00:00:00', 1),
+(4, 'Announcement Trial #4', '2021-04-22 00:00:00', '2021-11-12 16:10:40', '2021-10-05 00:00:00', 1),
+(5, 'I am ledesma marithess', '2021-04-29 00:00:00', '2021-11-12 16:10:40', '2021-10-05 00:00:00', 1),
+(6, 'Sample', '2021-05-03 00:00:00', '2021-11-12 16:10:40', '2021-10-05 00:00:00', 1),
+(7, 'Welcome to Gmeet', '2021-05-08 00:00:00', '2021-11-12 16:10:40', '2021-10-05 00:00:00', 1),
+(8, 'asdasdasd', '2021-10-05 18:02:26', '2021-11-12 16:10:40', '2021-10-05 18:02:26', 1),
+(9, 'Sample Announcement October 5 2021', '2021-10-05 18:03:36', '2021-11-12 16:10:40', '2021-10-05 18:03:36', 1),
+(10, 'Check announcement 1', '2021-11-12 16:14:19', '2021-11-12 00:00:00', '2021-11-17 00:00:00', 1),
+(11, 'Check announcement 2', '2021-11-12 16:14:26', '2021-11-12 00:00:00', '2021-11-17 00:00:00', 1),
+(12, 'Check announcement 3', '2021-11-12 16:14:32', '2021-11-12 00:00:00', '2021-11-17 00:00:00', 1),
+(13, 'Check announcement 4', '2021-11-12 16:14:38', '2021-11-12 00:00:00', '2021-11-17 00:00:00', 1),
+(14, 'Check announcement 5', '2021-11-12 16:14:43', '2021-11-12 00:00:00', '2021-11-17 00:00:00', 1),
+(15, 'Check announcement 6', '2021-11-12 16:14:50', '2021-11-12 00:00:00', '2021-11-17 00:00:00', 1),
+(16, 'Check announcement 7', '2021-11-12 16:14:56', '2021-11-12 00:00:00', '2021-11-17 00:00:00', 1),
+(17, 'Check announcement 8', '2021-11-12 16:15:03', '2021-11-12 00:00:00', '2021-11-17 00:00:00', 1),
+(18, 'Check announcement 9', '2021-11-12 16:15:09', '2021-11-12 00:00:00', '2021-11-17 00:00:00', 1),
+(19, 'Check announcement 10', '2021-11-12 16:15:15', '2021-11-12 00:00:00', '2021-11-17 00:00:00', 1),
+(20, 'Check announcement 11', '2021-11-12 16:15:27', '2021-11-12 00:00:00', '2021-11-17 00:00:00', 1),
+(21, 'Check announcement 12', '2021-11-12 16:15:34', '2021-11-12 00:00:00', '2021-11-17 00:00:00', 1),
+(22, 'Check announcement 13', '2021-11-12 16:15:39', '2021-11-12 00:00:00', '2021-11-17 00:00:00', 1),
+(23, 'Sample announcement', '2021-11-12 16:24:21', '2021-11-12 00:00:00', '2021-11-26 00:00:00', 1),
+(24, 'Last check announcement', '2021-11-12 16:26:21', '2021-11-13 00:00:00', '2021-11-25 00:00:00', 1),
+(25, 'Last', '2021-11-12 16:28:43', '2021-11-12 00:00:00', '2021-11-25 00:00:00', 1),
+(26, 'Ganito ba ledes', '2021-11-12 16:30:40', '2021-11-12 00:00:00', '2021-11-26 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -286,7 +304,7 @@ CREATE TABLE `tblcreatecertificate` (
   `pMode` varchar(10) NOT NULL,
   `Purpose` varchar(100) NOT NULL,
   `other` varchar(100) NOT NULL,
-  `bName` varchar(50) NOT NULL,
+  `bName` varchar(50) NOT NULL DEFAULT 'N/A',
   `content` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -295,27 +313,29 @@ CREATE TABLE `tblcreatecertificate` (
 --
 
 INSERT INTO `tblcreatecertificate` (`ID`, `Userid`, `CertificateId`, `resDate`, `cAdmin`, `status`, `pMode`, `Purpose`, `other`, `bName`, `content`) VALUES
-(1, '2', '2', '2021-04-15 03:51:43', 'Chairperson Ledesma', '3', 'Cash', 'OPEN ACCOUNT/LOAN', '', '', 'Check Text'),
-(2, '2', '2', '2021-04-22 03:38:40', 'Chairperson Ledesma', '3', 'G-cash', 'EMPLOYMENT/WORK', '', '', 'Check Text'),
-(3, '4', '10', '2021-04-22 03:39:22', 'Chairperson Ledesma', '4', 'Cash', 'FINANCIAL ASSISTANCE', '', '', 'Check Text'),
-(4, '2', '15', '2021-04-22 09:11:03', 'Chairperson Ledesma', '5', 'G-cash', 'MEMBERSHIP/NEW ID', '', '', 'Check Text'),
-(5, '4', '9', '2021-04-22 12:02:07', 'Chairperson Ledesma', '6', 'G-cash', 'EMPLOYMENT/WORK', '', '', '<p>Check Text</p>\r\n'),
-(6, '2', '10', '2021-04-22 13:40:24', 'Chairperson Ledesma', '7', 'Cash', 'FINANCIAL ASSISTANCE', '', '', '<p>Check Text</p>\r\n'),
+(1, '2', '2', '2021-04-15 03:51:43', 'Chairperson Ledesma', '3', 'Cash', 'OPEN ACCOUNT/LOAN', '', 'N/A', 'Check Text'),
+(2, '2', '2', '2021-04-22 03:38:40', 'Chairperson Ledesma', '3', 'G-cash', 'EMPLOYMENT/WORK', '', 'N/A', 'Check Text'),
+(3, '4', '10', '2021-04-22 03:39:22', 'Chairperson Ledesma', '4', 'Cash', 'FINANCIAL ASSISTANCE', '', 'N/A', 'Check Text'),
+(4, '2', '15', '2021-04-22 09:11:03', 'Chairperson Ledesma', '5', 'G-cash', 'MEMBERSHIP/NEW ID', '', 'N/A', 'Check Text'),
+(5, '4', '9', '2021-04-22 12:02:07', 'Chairperson Ledesma', '6', 'G-cash', 'EMPLOYMENT/WORK', '', 'N/A', '<p>Check Text</p>\r\n'),
+(6, '2', '10', '2021-04-22 13:40:24', 'Chairperson Ledesma', '7', 'Cash', 'FINANCIAL ASSISTANCE', '', 'N/A', '<p>Check Text</p>\r\n'),
 (7, '2', '6', '2021-05-03 17:09:45', 'Chairperson Ledesma', '2', 'Cash', 'BUSINESS CLEARANCE', '', 'Business #1', 'Check Text'),
-(8, '4', '14', '2021-05-03 17:11:02', 'Chairperson Ledesma', '3', 'Cash', 'MEDICAL ASSISTANCE', '', '', 'Check Text'),
+(8, '4', '14', '2021-05-03 17:11:02', 'Chairperson Ledesma', '3', 'Cash', 'MEDICAL ASSISTANCE', '', 'N/A', 'Check Text'),
 (9, '1', '7', '2021-05-03 17:11:16', 'Chairperson Ledesma', '4', 'G-cash', 'BUSINESS CLEARANCE', '', 'Business #1', 'Check Text'),
-(10, '2', '4', '2021-05-03 17:11:48', 'Chairperson Ledesma', '5', 'G-cash', 'EMPLOYMENT/WORK', '', '', 'Check Text'),
-(11, '4', '1', '2021-11-10 09:40:08', 'Chairperson Ledesma', '6', 'G-Cash', 'Own', '', '', ''),
-(12, '3', '1', '2021-11-10 10:27:18', 'Chairperson Ledesma', '7', 'G-Cash', '', '', '', ''),
-(13, '7', '3', '2021-11-10 10:42:43', 'Chairperson Ledesma', '1', 'G-Cash', 'OPEN ACCOUNT/LOAN', '', '', ''),
-(14, '10', '2', '2021-11-10 10:44:39', 'Chairperson Ledesma', '2', 'G-Cash', 'OTHERS', 'School', '', ''),
-(15, '8', '2', '2021-11-10 11:16:41', 'Chairperson Ledesma', '1', 'G-Cash', 'MEMBERSHIP/NEW ID', '', '', ''),
-(16, '11', '6', '2021-11-10 11:18:23', 'Chairperson Ledesma', '1', 'G-Cash', 'EMPLOYMENT/WORK', '', '', ''),
-(17, '11', '3', '2021-11-10 12:54:50', 'Chairperson Ledesma', '1', 'G-Cash', 'MEMBERSHIP/NEW ID', '', '', ''),
-(18, '1', '1', '2021-11-10 17:46:48', NULL, '4', 'G-Cash', 'EMPLOYMENT/WORK', '', '', ''),
-(19, '1', '4', '2021-11-10 20:39:43', NULL, '1', 'G-Cash', 'EMPLOYMENT/WORK', '', '', ''),
-(20, '1', '4', '2021-11-10 21:00:24', NULL, '4', 'G-Cash', 'MEMBERSHIP/NEW ID', '', '', ''),
-(21, '2', '2', '2021-11-11 09:34:12', NULL, '2', 'Cash', 'EMPLOYMENT/WORK', '', '', '');
+(10, '2', '4', '2021-05-03 17:11:48', 'Chairperson Ledesma', '5', 'G-cash', 'EMPLOYMENT/WORK', '', 'N/A', 'Check Text'),
+(11, '4', '1', '2021-11-10 09:40:08', 'Chairperson Ledesma', '6', 'G-Cash', 'Own', '', 'N/A', ''),
+(12, '3', '1', '2021-11-10 10:27:18', 'Chairperson Ledesma', '7', 'G-Cash', '', '', 'N/A', ''),
+(13, '7', '3', '2021-11-10 10:42:43', 'Chairperson Ledesma', '1', 'G-Cash', 'OPEN ACCOUNT/LOAN', '', 'N/A', ''),
+(14, '10', '2', '2021-11-10 10:44:39', 'Chairperson Ledesma', '2', 'G-Cash', 'OTHERS', 'School', 'N/A', ''),
+(15, '8', '2', '2021-11-10 11:16:41', 'Chairperson Ledesma', '1', 'G-Cash', 'MEMBERSHIP/NEW ID', '', 'N/A', ''),
+(16, '11', '6', '2021-11-10 11:18:23', 'Chairperson Ledesma', '1', 'G-Cash', 'EMPLOYMENT/WORK', '', 'N/A', ''),
+(17, '11', '3', '2021-11-10 12:54:50', 'Chairperson Ledesma', '1', 'G-Cash', 'MEMBERSHIP/NEW ID', '', 'N/A', ''),
+(18, '1', '1', '2021-11-10 17:46:48', 'Chairperson Ledesma', '4', 'G-Cash', 'EMPLOYMENT/WORK', '', 'N/A', ''),
+(19, '1', '4', '2021-11-10 20:39:43', 'Chairperson Ledesma', '2', 'G-Cash', 'EMPLOYMENT/WORK', '', 'N/A', ''),
+(20, '1', '4', '2021-11-10 21:00:24', 'Chairperson Ledesma', '4', 'G-Cash', 'MEMBERSHIP/NEW ID', '', 'N/A', ''),
+(21, '2', '2', '2021-11-11 09:34:12', 'Chairperson Ledesma', '2', 'Cash', 'EMPLOYMENT/WORK', '', 'N/A', ''),
+(22, '1', '1', '2021-11-12 09:35:37', 'Chairperson Ledesma', '1', 'Cash', 'EMPLOYMENT/WORK', '', 'N/A', ''),
+(23, '1', '6', '2021-11-12 10:45:52', NULL, '1', 'G-Cash', 'OTHERS', 'COLLECTION', 'Manong Store', '');
 
 -- --------------------------------------------------------
 
@@ -351,6 +371,25 @@ INSERT INTO `tblcreaterental` (`ID`, `status`, `userID`, `rentalID`, `adminID`, 
 (9, 1, 3, 4, 1, '2021-11-19 12:23:48', '2021-11-10 14:23:48', '2021-11-10 12:31:30', 1, 11, '123.00'),
 (10, 1, 6, 3, 3, '2021-11-18 12:32:04', '2021-11-26 12:32:04', '2021-11-10 12:33:14', 1, 10, '20.00'),
 (11, 1, 3, 3, 3, '2021-11-19 12:23:48', '2021-11-10 14:23:48', '2021-11-10 12:34:11', 1, 11, '20.00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblcredits`
+--
+
+CREATE TABLE `tblcredits` (
+  `ID` int(11) NOT NULL,
+  `ApiCode` varchar(50) NOT NULL,
+  `ApiPassword` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblcredits`
+--
+
+INSERT INTO `tblcredits` (`ID`, `ApiCode`, `ApiPassword`) VALUES
+(1, 'ST-VERGE581899_QEUNZ', '1m1ba%321p');
 
 -- --------------------------------------------------------
 
@@ -453,7 +492,9 @@ CREATE TABLE `tblloginaudits` (
 
 INSERT INTO `tblloginaudits` (`ID`, `timeIn`, `timeOut`, `resId`, `position`, `datesignedin`) VALUES
 (1, '04:43:42', '04:44:08', 1, 1, '2021-11-12'),
-(2, '04:44:13', '00:00:00', 1, 1, '2021-11-12');
+(2, '04:44:13', '00:00:00', 1, 1, '2021-11-12'),
+(3, '13:33:42', '02:18:11', 1, 1, '2021-11-12'),
+(4, '14:18:23', '00:00:00', 1, 1, '2021-11-12');
 
 -- --------------------------------------------------------
 
@@ -625,8 +666,8 @@ CREATE TABLE `tblresident` (
   `MiddleName` varchar(50) DEFAULT NULL,
   `BirthPlace` varchar(50) DEFAULT NULL,
   `Gender` varchar(20) NOT NULL,
-  `sssNumber` int(50) DEFAULT NULL,
-  `tinNumber` int(50) DEFAULT NULL,
+  `sssNumber` varchar(50) DEFAULT NULL,
+  `tinNumber` varchar(50) DEFAULT NULL,
   `CivilStatus` varchar(50) DEFAULT NULL,
   `BirthDate` datetime DEFAULT NULL,
   `HomeName` varchar(100) NOT NULL,
@@ -639,17 +680,19 @@ CREATE TABLE `tblresident` (
 --
 
 INSERT INTO `tblresident` (`ID`, `Purok`, `houseUnit`, `streetName`, `Cellphnumber`, `Email`, `Password`, `CreationDate`, `voter`, `vPrecinct`, `ResidentType`, `LastName`, `Suffix`, `FirstName`, `MiddleName`, `BirthPlace`, `Gender`, `sssNumber`, `tinNumber`, `CivilStatus`, `BirthDate`, `HomeName`, `PassReset`, `resStatus`) VALUES
-(1, 3, 534, 'Old Sta. Mesa', '09056602669', 'ledesma.francinevoltaire@ue.edu.ph', '123', '2021-04-12 19:36:11', 'Yes', '123', 'Rental/Boarder', 'Ledesma', '', 'Marithess', 'Cortez', 'Manila', 'Male', 123123123, 1231321, 'Single', '2012-04-05 00:00:00', '', '', 'Active'),
-(2, 2, 323, 'Narra', '09056602669', 'virayvergel10@gmail.com', '123', '2021-04-12 20:14:26', 'No', '', 'Care Taker', 'Viray', 'Sr.', 'Vergel', 'Sallan', 'Manila', 'Male', 123123123, 3212312, 'Single', '2015-04-01 00:00:00', '', '', 'Active'),
-(4, 3, 543, 'Mangga', '09291581899', 'viray.vergel@ue.edu.ph', '123', '2021-04-20 07:49:54', 'Yes', '123', 'Living with Relatives', 'Sallan', 'Jr.', 'Arnold', 'Clavio', 'Manila', 'Female', 12512312, 12315123, 'Married', '2011-04-01 00:00:00', '', '', 'Active'),
-(5, 5, 124, 'Sarmiento', '09056602669', 'nathan@gmail.com', '123', '2021-04-20 08:22:54', 'Yes', '123', 'Rental/Boarder', 'Morales', 'Sr.', 'Nathan', 'Pacquiao', 'Manila', 'Male', 123123, 12315123, 'Married', '2008-02-20 00:00:00', '', '', 'Active'),
-(7, 7, 722, 'Mangga Ext.', '09056602669', 'uy@gmail.com', '123', '2021-05-07 08:42:16', 'No', '', 'Living with Relatives', 'Uy', '', 'Wilvin', 'Voltaire', 'Visayas', 'Female', 45145451, 61451451, 'Married', '2013-01-07 00:00:00', '', '', 'Active'),
-(9, 9, 999, 'Narra', '09056602669', 'velasco@gmail.com', '123', '2021-05-07 08:51:28', 'Yes', '2147483647', 'House Owner', 'Velasco', '', 'Sheena', 'Marie', 'Manila', 'Female', 1641461346, 1435614, 'Married', '2011-01-07 00:00:00', '', '', 'Active'),
-(10, 10, 100, 'Sampaloc', '09056602669', 'ligs@gmail.com', '123', '2021-05-07 08:52:28', 'Yes', '514512345', 'Living with Relatives', 'Ligutom', '', 'Zyra', 'Ligs', 'Manila', 'Female', 1451345134, 1451243513, 'Widow', '2014-01-07 00:00:00', '', '', 'Active'),
-(11, 10, 891, 'Narra', '09056602669', 'demesa@gmail.com', '123', '2021-05-08 02:28:15', 'Yes', '21452435', 'House Owner', 'Demesa', '', 'Adrian', 'Villanueva', 'Macaraeg', 'Female', 1254125412, 12341234, 'Married', '2016-05-08 00:00:00', '', '', 'Inactive'),
-(13, 2, 123, 'Old Sta. Mesa', '09056602669', 'bins@gmail.com', 'Bins123x', '2021-11-06 08:12:06', 'No', '', 'Rental/Boarder', 'sunhose', 'Sr.', 'Vinz', 'Dangkol', NULL, 'Male', 0, 0, 'Married', '1955-12-12 00:00:00', 'Jayvee Dragon Celestial ', '', 'Deceased'),
-(14, 1, 222, 'V. Mapa', '09056602669', 'jim@gmail.com', '123x', '2021-11-06 13:45:50', 'Yes', '0212', 'Rental/Boarder', 'Ledes', 'Jr.', 'Sedel', 'Deles', NULL, 'Male', 123123123, 123123123, 'Single', '1991-05-26 00:00:00', 'Jayvee', '', 'Inactive'),
-(16, 2, 23, 'Peralta 3', '09056602669', 'snow@gmail.com', '123', '2021-11-10 07:44:06', 'No', '', 'House Owner', 'Vi', 'Ray', 'Ver', 'Gel', 'Manila', 'Male', NULL, NULL, 'Single', '1961-10-19 15:42:11', '', '', 'Active');
+(1, 3, 534, 'Old Sta. Mesa', '09056602669', 'ledesma.francinevoltaire@ue.edu.ph', '123', '2021-04-12 19:36:11', 'Yes', '123', 'Rental/Boarder', 'Ledesma', '', 'Marithess', 'Cortez', 'Manila', 'Male', '123123123', '1231321', 'Single', '2012-04-05 00:00:00', '', '', 'Active'),
+(2, 2, 323, 'Narra', '09178078237', 'virayvergel10@gmail.com', '123', '2021-04-12 20:14:26', 'No', '', 'Care Taker', 'Viray', 'Sr.', 'Vergel', 'Sallan', 'Manila', 'Male', '123123123', '3212312', 'Single', '2015-04-01 00:00:00', '', '', 'Active'),
+(4, 3, 543, 'Mangga', '09291581899', 'viray.vergel@ue.edu.ph', '123', '2021-04-20 07:49:54', 'Yes', '123', 'Living with Relatives', 'Sallan', 'Jr.', 'Arnold', 'Clavio', 'Manila', 'Female', '12512312', '12315123', 'Married', '2011-04-01 00:00:00', '', '', 'Active'),
+(5, 5, 124, 'Sarmiento', '09154708062', 'nathan@gmail.com', '123', '2021-04-20 08:22:54', 'Yes', '123', 'Rental/Boarder', 'Morales', 'Sr.', 'Nathan', 'Pacquiao', 'Manila', 'Male', '123123', '12315123', 'Married', '2008-02-20 00:00:00', '', '', 'Active'),
+(7, 7, 722, 'Mangga Ext.', '09776819795', 'uy@gmail.com', '123', '2021-05-07 08:42:16', 'No', '', 'Living with Relatives', 'Uy', '', 'Wilvin', 'Voltaire', 'Visayas', 'Female', '45145451', '61451451', 'Married', '2013-01-07 00:00:00', '', '', 'Active'),
+(9, 9, 999, 'Narra', '09704954526', 'velasco@gmail.com', '123', '2021-05-07 08:51:28', 'Yes', '2147483647', 'House Owner', 'Velasco', '', 'Sheena', 'Marie', 'Manila', 'Female', '1641461346', '1435614', 'Married', '2011-01-07 00:00:00', '', '', 'Active'),
+(10, 10, 100, 'Sampaloc', '09052420827', 'ligs@gmail.com', '123', '2021-05-07 08:52:28', 'Yes', '514512345', 'Living with Relatives', 'Ligutom', '', 'Zyra', 'Ligs', 'Manila', 'Female', '1451345134', '1451243513', 'Widow', '2014-01-07 00:00:00', '', '', 'Active'),
+(13, 2, 123, 'Old Sta. Mesa', '09154708062', 'bins@gmail.com', 'Bins123x', '2021-11-06 08:12:06', 'No', '', 'Rental/Boarder', 'sunhose', 'Sr.', 'Vinz', 'Dangkol', NULL, 'Male', '0', '0', 'Married', '1955-12-12 00:00:00', 'Jayvee Dragon Celestial ', '', 'Deceased'),
+(14, 1, 222, 'V. Mapa', '09052420827', 'jim@gmail.com', '123x', '2021-11-06 13:45:50', 'Yes', '0212', 'Rental/Boarder', 'Ledes', 'Jr.', 'Sedel', 'Deles', NULL, 'Male', '123123123', '123123123', 'Single', '1991-05-26 00:00:00', 'Jayvee', '', 'Inactive'),
+(16, 2, 23, 'Peralta 3', '09056602669', 'snow@gmail.com', '123', '2021-11-10 07:44:06', 'No', '', 'House Owner', 'Vi', 'Ray', 'Ver', 'Gel', 'Manila', 'Male', NULL, NULL, 'Single', '1961-10-19 15:42:11', '', '', 'Active'),
+(17, 6, 2222, 'Peralta Int.', '09154708062', 'virayvergel10@gmail.com', 'Barangay599', '2021-11-12 06:16:32', 'No', '', 'House Owner', 'XD', '', 'Personal', 'Information', 'Manila', 'Male', '0', '0', 'Single', '2008-01-12 00:00:00', '', '', 'Rejected'),
+(18, 6, 123, 'Peralta Int.', '09291581899', 'ledesma.francinevoltaire@ue.edu.ph', 'Barangay599', '2021-11-12 06:51:34', 'No', '', 'House Owner', 'Legaspi', 'Jr.', 'Zyra', 'Mae', NULL, 'Male', '0', '0', 'Single', '1974-12-09 00:00:00', '', '', 'Active'),
+(19, 4, 2313, 'Mangga', '09052420827', '', 'Barangay599', '2021-11-12 10:59:01', 'No', '', 'House Owner', 'Vert', '', 'Lil', 'Uzi', 'Manila', 'Male', '0', '0', 'Single', '1984-07-23 00:00:00', '', '', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -973,7 +1016,7 @@ ALTER TABLE `tbladmin`
 -- AUTO_INCREMENT for table `tblannouncement`
 --
 ALTER TABLE `tblannouncement`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `tblavailability`
@@ -1015,7 +1058,7 @@ ALTER TABLE `tblcertificaterequest`
 -- AUTO_INCREMENT for table `tblcreatecertificate`
 --
 ALTER TABLE `tblcreatecertificate`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tblcreaterental`
@@ -1045,7 +1088,7 @@ ALTER TABLE `tbllistpurok`
 -- AUTO_INCREMENT for table `tblloginaudits`
 --
 ALTER TABLE `tblloginaudits`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tblmodes`
@@ -1087,7 +1130,7 @@ ALTER TABLE `tblrentalrequest`
 -- AUTO_INCREMENT for table `tblresident`
 --
 ALTER TABLE `tblresident`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tblresidentrequest`

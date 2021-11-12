@@ -1,5 +1,19 @@
 <?php 
     $curr ="Certification Requests";
+    session_start();
+error_reporting(0);
+include('includes/dbconnection.php');
+if (strlen($_SESSION['clientmsaid'] == 0)) {
+    header('location:logout.php');
+} else {
+    $con = mysqli_connect("localhost", "root", "", "clientmsdb");
+    $aid = $_SESSION['clientmsaid'];
+    $sqls = "Select tbladmin.*, tblresident.*, tblpositions.* from tblresident join tbladmin on tbladmin.residentID = tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition WHERE tbladmin.ID = :aid";
+        $querys=$dbh->prepare($sqls);
+        $querys->bindParam(':aid', $aid, PDO::PARAM_STR);
+        $querys->execute();
+        $results=$querys->fetchAll(PDO::FETCH_OBJ);
+        foreach ($results as $rows) {$getpos = "$rows->Position $rows->LastName";}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -156,77 +170,60 @@
                         </div>
                         
                     </div>
-                    <div class="row g-0 border bg-white border-start border-end border-bottom " >
-                        
-                            <div class="col px-5 py-3" style= "overflow-x:auto;" >
-                               
-                                    <table class="table bg-white table-hover table-bordered" id = "reqc" style= "min-width: 1000px;"> 
-                                        <thead class = "bg-light">
-                                        
-                                            <tr>
-                
+                    <?php 
+                                                    $sql = "Select tblcreatecertificate.ID as getID, tblcreatecertificate.*, tblresident.*, tblcertificate.* from tblcreatecertificate join tblresident on tblcreatecertificate.Userid = tblresident.ID join tblcertificate on tblcertificate.ID = tblcreatecertificate.CertificateId where tblcreatecertificate.status = '1' order by tblcreatecertificate.resDate ASC";
+                                                    $result = mysqli_query($con, $sql);  
+?>
+                    <form method="POST">
+                        <div class="row g-0 border bg-white border-start border-end border-bottom " >
+                                <div class="col px-5 py-3" style= "overflow-x:auto;" >
+                                
+                                        <table class="table bg-white table-hover table-bordered" id = "reqc" style= "min-width: 1000px;"> 
+                                            <thead class = "bg-light">
+                                            
+                                                <tr>
+                    
 
-                                                <th style = "text-align: left">Requestor Name</th>
-                                                <th style = "text-align: left">Requested Certificate</th>
-                                                <th style = "text-align: left">Purpose </th>
-                                                <th style = "text-align: left">Business Name </th>
-                                                <th style = "text-align: left">Date </th>
-                                                <th style = "text-align: center">Actions</th>
-                                                
-                                                
-                                    
-                                            </tr>
+                                                    <th style = "text-align: left">Requestor Name</th>
+                                                    <th style = "text-align: left">Requested Certificate</th>
+                                                    <th style = "text-align: left">Purpose </th>
+                                                    <th style = "text-align: left">Business Name </th>
+                                                    <th style = "text-align: left">Date </th>
+                                                    <th style = "text-align: center">Actions</th>
+                                                    
+                                                    
                                         
-                                        </thead>           
-                                        <tbody class= "table-hover">
-                                            <tr>
-                  
-                                                <td scope="col" style = "text-align: left"><a href = "#">Mang Berting</a></td>
-                                                <td scope="col" style = "text-align: left">Indigency</td>
-                                                <td scope="col" style = "text-align: left">Employment</td>
-                                                <td scope="col" style = "text-align: left">N/a</td>
-                                                <td scope="col" style = "text-align: left">10-19-2021</td>
-                                                <td scope="col" style = "text-align: center">
-                                                       
-                                                    
-                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <button href ="#approve-req"class="btn btng btn-success" data-bs-toggle = "modal"><i class = "fa fa-check"></i>
-                                                            Accept</button>
-                                                        </div>
-                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="button" href ="#decline-req" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-times-circle me-2"></i>Decline</a>
-                                                        </div>
-                                                    
-                                                </td>
-                                            </tr>
-                                              <tr>
-                  
-                                                <td scope="col" style = "text-align: left"><a href = "#">Bertong Apoy</a></td>
-                                                <td scope="col" style = "text-align: left">Business Clearance</td>
-                                         
-                            
-                                                
-                                           
-                                                <td scope="col" style = "text-align: left">Business</td>
-                                                <td scope="col" style = "text-align: left">Sari sari store ni berto</td>
-                                                <td scope="col" style = "text-align: left">10-19-2021</td>
-                                                <td scope="col" style = "text-align: center">
-                                                       
-                                                    
-                                                <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <button href ="#approve-req"class="btn btng btn-success" data-bs-toggle = "modal"><i class = "fa fa-check"></i>
-                                                            Accept</button>
-                                                        </div>
-                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="button" href ="#decline-req" data-bs-toggle = "modal" role = "button" class="btn btng btn-danger"><i class = "fa fa-times-circle me-2"></i>Decline</a>
-                                                        </div>
-                                                    
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>                        
-                                </div>   
-                            </div>
+                                                </tr>
+                                            
+                                            </thead>           
+                                            <tbody class= "table-hover">
+                                                <?php
+                                                    while ($row = mysqli_fetch_array($result)) {
+                                                        $cdate = $row["resDate"];
+                                                        $purp = $row["Purpose"];
+                                                        if ($purp == "OTHERS" ){
+                                                            $purp = $row["other"];
+                                                            $purp = strtoupper($purp);
+                                                        }
+
+                                                        echo '
+                                                    <tr>
+                                                        <td scope="col" style = "text-align: left">' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>
+                                                        <td scope="col" style = "text-align: left">' . $row["CertificateName"] . '</td>
+                                                        <td scope="col" style = "text-align: right">' . $purp . '</td>
+                                                        <td scope="col" style = "text-align: right">' . $row["bName"] . '</td>
+                                                        <td scope="col" style = "text-align: left">' . date('F j Y - h:i A', strtotime($cdate)) . '</td>
+                                                        <td scope="col" id = "disa" style = "text-align: center">
+                                                                            <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
+                                                                                <a type="" href ="edit-cert-request.php?editid=' . $row["getID"] . '"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Manage</span></a>
+                                                                            </div></td></tr>';
+                                                    }
+                                                ?>
+                                            </tbody>
+                                        </table>                        
+                                    </div>   
+                                </div>
+                            </form>
                         </div>
                     </div>
                  </div> 
@@ -516,3 +513,4 @@
  
 </body>
 </html>
+<?php } ?>

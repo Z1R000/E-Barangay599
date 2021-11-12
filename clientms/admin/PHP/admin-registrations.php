@@ -7,9 +7,6 @@
     header('location:logout.php');
     } else{
         $connect = mysqli_connect("localhost", "root", "", "clientmsdb");
-        $query ="SELECT * FROM tblresidentrequest where reqStatus='Pending' ORDER BY CreationDate ASC";  
-                        $result = mysqli_query($connect, $query);  
-        
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -117,9 +114,11 @@
                                                     </tr>   
                                                 </thead>
                                                     <?php
+                                                    
+                                                    $query = "SELECT * FROM tblresident WHERE resStatus='Pending' ORDER BY CreationDate ASC, LastName";
+                                                    $result = mysqli_query($connect, $query);
                                                     $count = 1;  
-                                                    while($row = mysqli_fetch_array($result))  
-                                                    {  
+                                                    while ($row = mysqli_fetch_array($result)) { 
                                                         echo '  
                                                         <tr>
                                                                 <td >

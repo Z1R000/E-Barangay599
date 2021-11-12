@@ -412,7 +412,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                         <div class="row">
                                             <div class="col" style="overflow-x:auto;">
                                                 <div class="all box" id="all">
-                                                    <?php $query = "SELECT tblcertificate.*, tblcreatecertificate.ID as getid, tblcreatecertificate.Userid, tblcreatecertificate.CertificateId, tblcreatecertificate.status, tblcreatecertificate.resDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix, tblstatus.* FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID join tblstatus on tblcreatecertificate.status = tblstatus.ID ORDER BY statusName DESC, tblcreatecertificate.resDate";
+                                                    <?php $query = "SELECT tblcertificate.*, tblcreatecertificate.ID as getid, tblcreatecertificate.Userid, tblcreatecertificate.CertificateId, tblcreatecertificate.status, tblcreatecertificate.resDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix, tblstatus.* FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID join tblstatus on tblcreatecertificate.status = tblstatus.ID WHERE tblstatus.ID != '1' ORDER BY tblstatus.ID ASC, tblcreatecertificate.resDate";
                                                     $result = mysqli_query($con, $query);  ?>
                                                     <table class="table table-striped table-bordered pt-2" id="crecall" style="min-width: 960px;">
                                                         <thead>
@@ -441,30 +441,19 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                                 <td scope="col" id = "disa" style = "text-align: center">
                                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                                                 <a type="" href ="edit-cert-record.php?editid=' . $row["getid"] . '"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Manage</span></a>
-                                                                            </div>';
-                                                                if ($row["statusName"] != "Settled") {
-                                                                    echo '<div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                                    <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane mx-1 white"></i><span class="wal">Send</span></a>
-                                                                                </div>';
-                                                                }
-                                                                echo '
-                                                                        
-                                                                        
-                                                                            
-                                                                        
-                                                                        </td>
-                                                            ';
+                                                                            </div></td></tr>';
+                                                    
                                                             }
                                                             ?>
 
-                                                            </tr>
+                                                            
 
                                                         </tbody>
                                                     </table>
                                                 </div>
 
                                                 <div class="nbc box" id="nbc">
-                                                    <?php $query = "SELECT tblcertificate.*, tblcreatecertificate.ID as getid, tblcreatecertificate.Userid, tblcreatecertificate.CertificateId, tblcreatecertificate.status, tblcreatecertificate.resDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix, tblstatus.* FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID join tblstatus on tblcreatecertificate.status = tblstatus.ID where tblcertificate.Type = '1' ORDER BY statusName DESC, tblcreatecertificate.resDate";
+                                                    <?php $query = "SELECT tblcertificate.*, tblcreatecertificate.ID as getid, tblcreatecertificate.Userid, tblcreatecertificate.CertificateId, tblcreatecertificate.status, tblcreatecertificate.resDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix, tblstatus.* FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID join tblstatus on tblcreatecertificate.status = tblstatus.ID where tblcertificate.Type = '1' AND tblstatus.ID != '1' ORDER BY tblstatus.ID ASC, tblcreatecertificate.resDate";
                                                     $result = mysqli_query($con, $query);  ?>
                                                     <table class="table table-striped table-bordered pt-2" id="crecnbc" style="min-width: 960px;">
                                                         <thead>
@@ -493,30 +482,16 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                                 <td scope="col" id = "disa" style = "text-align: center;width:35%">
                                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                                                 <a type="" href ="edit-cert-record.php?editid=' . $row["getid"] . '"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Manage</span></a>
-                                                                            </div>';
-                                                                if ($row["statusName"] != "Settled") {
-                                                                    echo '<div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                                    <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane mx-1 white"></i><span class="wal">Send</span></a>
-                                                                                </div>';
-                                                                }
-                                                                echo '
-                                                                        
-                                                                        
-                                                                            
-                                                                        
-                                                                        </td>
-                                                            ';
+                                                                            </div></td></tr>';
                                                             }
                                                             ?>
-
-                                                            </tr>
 
                                                         </tbody>
                                                     </table>
                                                 </div>
 
                                                 <div class="bc box">
-                                                    <?php $query = "SELECT tblcertificate.*, tblcreatecertificate.ID as getid, tblcreatecertificate.Userid, tblcreatecertificate.CertificateId, tblcreatecertificate.status, tblcreatecertificate.resDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix, tblstatus.* FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID join tblstatus on tblcreatecertificate.status = tblstatus.ID where tblcertificate.Type = '2' ORDER BY statusName DESC, tblcreatecertificate.resDate";
+                                                    <?php $query = "SELECT tblcertificate.*, tblcreatecertificate.ID as getid, tblcreatecertificate.Userid, tblcreatecertificate.CertificateId, tblcreatecertificate.status, tblcreatecertificate.resDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix, tblstatus.* FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID join tblstatus on tblcreatecertificate.status = tblstatus.ID where tblcertificate.Type = '2' AND tblstatus.ID != '1' ORDER BY tblstatus.ID ASC, tblcreatecertificate.resDate";
                                                     $result = mysqli_query($con, $query);  ?>
                                                     <table class="table table-striped table-bordered pt-2" id="crecbc" style="min-width: 960px;">
                                                         <thead>
@@ -545,23 +520,9 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                                 <td scope="col" id = "disa" style = "text-align: center">
                                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                                                 <a type="" href ="edit-cert-record.php?editid=' . $row["getid"] . '"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Manage</span></a>
-                                                                            </div>';
-                                                                if ($row["statusName"] != "Settled") {
-                                                                    echo '<div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                                    <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info white"><i class = "fa fa-paper-plane mx-1 white"></i><span class="wal">Send</span></a>
-                                                                                </div>';
-                                                                }
-                                                                echo '
-                                                                        
-                                                                        
-                                                                            
-                                                                        
-                                                                        </td>
-                                                            ';
+                                                                            </div></td></tr>';
                                                             }
                                                             ?>
-
-                                                            </tr>
 
                                                         </tbody>
                                                     </table>
