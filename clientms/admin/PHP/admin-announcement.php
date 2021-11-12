@@ -29,9 +29,9 @@ $mail = new PHPMailer(true);
 // ITEXMO SEND SMS API - PHP - CURL METHOD
 // Visit www.itexmo.com/developers.php for more info about this API
 //##########################################################################
-function itexmo($number,$message,$apicode,$passwd){
+function itexmo($number,$message,$api,$passwd){
     $ch = curl_init();
-    $itexmo = array('1' => $number, '2' => $message, '3' => $apicode, 'passwd' => $passwd);
+    $itexmo = array('1' => $number, '2' => $message, '3' => $api, 'passwd' => $passwd);
     curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
     curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, 
@@ -43,16 +43,23 @@ function itexmo($number,$message,$apicode,$passwd){
 //##########################################################################
 
 if ($_POST) {
+    $sql="SELECT * FROM tblcredits";
+    $query=$dbh->prepare($sql);
+    $query->execute();
+    $result1=$query->fetchAll(PDO::FETCH_OBJ);
+    foreach($result1 as $row){
+        $api=$row->ApiCode;
+        $passwd=$row->ApiPassword;
+    }
+
     $sdates = $_POST['sdates'];
     $sdates = date('F j Y - h:i A', strtotime($sdates));
     $edates = $_POST['edates'];
     $edates = date('F j Y - h:i A', strtotime($edates));
     $msg = $_POST['msg'];
-    $api = "TR-SALLA708062_SVUYX";
-    $passwd = '&ln{%g{$ft';
     $text = "Announcement for " . $sdates . " to " . $edates . ": " . $msg;
 
-    $sql = "SELECT * from tblresident WHERE Purok = '3'";
+    $sql = "SELECT * from tblresident";
     $query=$dbh->prepare($sql);
     $query->execute();
     $result1=$query->fetchAll(PDO::FETCH_OBJ);
@@ -78,7 +85,7 @@ if ($_POST) {
                 
                     $mail->setFrom('barnagay599@gmail.com', 'chairman');
             
-                    $sqle = "SELECT * from tblresident WHERE Purok = '3'";
+                    $sqle = "SELECT * from tblresident";
                     $querye=$dbh->prepare($sqle);
                     $querye->execute();
                     $resulte=$querye->fetchAll(PDO::FETCH_OBJ);
@@ -98,6 +105,7 @@ if ($_POST) {
                 
                     $mail->send();
                     echo "<script>alert('Announcement has been made.')</script>";
+                    echo "<script type='text/javascript'> document.location ='admin-announcement.php" , "'; </script>";
                 } catch (Exception $e) {
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 }   
