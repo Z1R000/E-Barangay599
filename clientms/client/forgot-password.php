@@ -195,7 +195,7 @@ if (isset($_POST['submit'])) {
 
 									</div>
 									<div class="btn-group">
-										<input href="reset-password.php" type="submit" class="btn btn-info">
+										<button href="reset-password.php" type="submit" class="btn btn-info">Submit</button>
 									</div>
 
 								</div>

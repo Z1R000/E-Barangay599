@@ -202,10 +202,8 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#of">Features</a></li>
                             <li><a class="dropdown-item" href="create-resident.php">Register</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            
+                            
 
                         </ul>
                     </li>
@@ -235,7 +233,7 @@
 
                             <label for="" class="fs-6 small">Resident of the barangay but not yet registered ?</label><br>
                             <div class="btn-group my-2">
-                                <a href="create-resident.php" class="btn btn-primary">Click Here !</a>
+                                <a href="create-resident.php" class="btn btn-primary">Click Here</a>
                             </div>
                         </div>
                     </div>
