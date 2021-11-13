@@ -503,6 +503,8 @@
                                                     foreach($results as $r){
                                                         $cdate = $r->datesignedin;
                                                         $mid = $r->MiddleName;
+                                                        $ctime =$r->timeIn;
+                                                        $ctimout =$r->timeOut;
                                                         echo'
                                                         <tr>
                                                         <td>'.ucfirst($r->LastName).",".ucfirst($r->FirstName)." ".ucfirst($mid[0]).". ".ucfirst($r->Suffix).'</td>
@@ -510,17 +512,17 @@
                                                             '.$r->Position.'
                                                         </td>
                                                         <td>
-                                                            '.date('F j Y - h:i A', strtotime($cdate)).'
+                                                            '.date('F j, Y', strtotime($cdate)).'
                                                        </td>
                                                         <td>
-                                                            '.$r->timeIn.'
+                                                            '.date('h:i A', strtotime($ctime)).'
                                                         </td>
                                                         <td>';
                                                         if (!preg_match("/[1-9]/",($r->timeOut))){
                                                             echo "Currently logged in";
                                                         }
                                                         else{
-                                                            echo $r->timeOut;
+                                                            echo date('h:i A', strtotime($ctimout));
                                                         }
                                                     
                                                         echo'
