@@ -42,9 +42,7 @@ if(isset($_POST['login']))
 	if($connect->query($aud)===TRUE){
 		header("Location: admin-dashboard.php?success=1");
 	}
-	else{
-		header("Location: admin-login.php?logsfailed=1");
-	}
+	
 
 }
 

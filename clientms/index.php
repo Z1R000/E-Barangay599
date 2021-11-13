@@ -313,26 +313,27 @@
                             }
                             
 
-                            $abt.="</span>";
+                           
                             $len = strlen($abt);
                             $counter = 0;
                             for ($i = 0; $i<$len;$i++){
-                                if ($counter==70){
+                                if ($i == $len-1){
+                                    echo "</span>";
+                                    
+                                }
+                                if ($counter==100){
                                     echo "
-                                    <span id='dot'>....</span></br><a onclick='seemor();' id='semorbtn' class='btn btn-outline-light text-white'>See More</a>
-                                    </div><span style='display:none;' id='simor'><span style='display:none;' id='simor'>
-                                    <div class='btn-group'>"
-                                        ;
+                                    <span id='dot'>......</span></br>
+                                    <span style='display:none;' id='simor'>";
                                     
                                     $counter=-1000;
-                                    
-                                    
                                    
                                 }
                                 else{
                                     if (preg_match('/\s/',$abt[$i])){
                                         $counter++;
                                         echo $abt[$i];
+                                        
                                     }
                                     else{
                                         echo $abt[$i];
@@ -346,6 +347,7 @@
                         
                       
                     </div>
+           
                     <script>
                         function seemor() {
                             var x = document.getElementById('dot');
@@ -366,8 +368,15 @@
                     </script>
 
                 </div>
+                <div class="row justify-content-center border">
+                    <div class="col-12 d-flex " >  
+                        <div class="mx-auto btn-group justify-content-center">
+                            <a onclick='seemor();' id='semorbtn' class='btn btn-outline-dark '>See More</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-
+            
         </div>
     </section>
     <section class="offer mt-5" id="of">
