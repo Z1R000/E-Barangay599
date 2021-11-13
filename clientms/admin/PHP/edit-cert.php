@@ -13,16 +13,15 @@ if (strlen($_SESSION['clientmsaid']==0)) {
     $clientmsaid=$_SESSION['clientmsaid'];
       $cn=$_POST['cn'];
       $cp=$_POST['cp'];
-      $ct=$_POST['cert-info'];
 
-      $sql="update tblcertificate set CertificateName=:cn, CertificatePrice=:cp, CertText=:ct where ID=:eid";
+      $sql="update tblcertificate set CertificateName=:cn, CertificatePrice=:cp where ID=:eid";
       $query=$dbh->prepare($sql);
       $query->bindParam(':cn',$cn,PDO::PARAM_STR);
       $query->bindParam(':cp',$cp,PDO::PARAM_STR);
-      $query->bindParam(':ct',$ct,PDO::PARAM_STR);
       $query->bindParam(':eid',$eid,PDO::PARAM_STR);
       $query->execute();
       echo "<script type='text/javascript'> document.location ='edit-cert.php?editid=" , $eid ,"'; </script>";
+      echo '<script>alert("Certificate Information has been updated")</script>';
   }
 ?>
 <!DOCTYPE html>
@@ -159,7 +158,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-12"> 
-                <button type = "button" onclick = "window.history.back();" class = "btn btnx float-end btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</button>           
+                <a href="admin-certificate.php" class = "btn btnx float-end btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</a>           
             </div>
         </div>
     </div>
@@ -251,16 +250,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                 
              
                   </div>
-                  <div class="row  g-2 ">
-                    <div class="col-md-12 mx-auto">
-                      <label for="cert-inf" class= "black fw-bold">Certification Contents</label>
-                      <textarea class= "" name="cert-info" id="cert-inf" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1" value=""><?php echo htmlentities($row->CertText);?></textarea>
-                    </div>
-                   
-                  </div>
                   <div class="row g-2">
                     <div class="col-12">
-                    <button type = "button" href = "#save-cert" data-bs-toggle = "modal" role= "button" name="submit" id="submit" class = "btn btnx btn-primary mb-1 float-end"><i class= "fas fa-save me-2"></i>Save</button>
+                    <button type = "submit" name="submit" id="submit" class = "btn btnx btn-primary mb-1 float-end"><i class= "fas fa-save me-2"></i>Save</button>
                     </div>
 
                     </div>

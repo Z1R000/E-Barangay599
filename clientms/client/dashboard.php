@@ -180,13 +180,59 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
             </nav>
 
 
-            <br>
-            <div class='container-fluid px-4' style="padding: 5px; background-image: url(https://img.wallpapersafari.com/desktop/1440/900/97/58/SdRCAL.jpg);">
-            </div>
-            <br>
-            <div class='container-fluid px-4 mb-3' height="50%">
-                <iframe src="currentiframe.php" title="announcement" width="100%"></iframe>
-            </div>
+            <div class='container-fluid px-4 mb-3'>
+    <label></label>
+<?php 
+							$sql ="SELECT distinct tblannouncement.ID, tblannouncement.announcement, tblannouncement.announcementDate, tblannouncement.endDate, tblannouncement.adminID, tbladmin.BarangayPosition, tblresident.LastName, tblpositions.* from tblannouncement join tbladmin on tblannouncement.adminID = tbladmin.ID join tblresident on tbladmin.ID = tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition where tblannouncement.announcementDate <= now() and tblannouncement.endDate >= now() order by tblannouncement.ID desc";
+							$query = $dbh -> prepare($sql);
+							$query->execute();
+							$results=$query->fetchAll(PDO::FETCH_OBJ);
+                            $count = $query->rowCount();
+                            if($count < 1){
+                                echo "
+                                <div class = 'mb-3 table-responsive' style='background-color:aliceblue;border:1px solid black;  border-radius:4px; overflow: hidden;'>
+                                <h1 class='h1font' style='float: left; margin:25px; font-family:Segoe UI;   color: #021f4e;'>Latest Announcement</h1>";
+								date_default_timezone_set('Asia/Manila');
+                                
+                            
+
+						?>
+                        <h4 class="testfont" style="float: right; font-family: Segoe UI; margin: 25px; color: #021f4e; text-align: justify;">
+                            <?php  echo date('l, j F Y - h:i A');?> <br>
+                        </h4>
+                        <br><br><br><br><br>
+                        <div class="testulit" style="border-radius: 25px; ">
+                            <h5 class="testfont" style="text-align: justify; font-family: Segoe UI; margin:25px; text-indent: 5%;">No Current Announcement</h5>
+                        </div>
+                        <?php  
+                            }
+                            else{
+							foreach($results as $row)
+							{ 
+                                
+                                echo "
+                                <div class = 'mb-3 table-responsive' style='background-color:aliceblue;border:1px solid black;  border-radius:4px; overflow: hidden;'>
+                                <h1 class='h1font' style='float: left; margin:25px; font-family:Segoe UI;   color: #021f4e;'>Current Announcement</h1>";
+								$sDate = $row->announcementDate;
+								$eDate = $row->endDate;
+                            
+
+						?>
+                        <h4 class="testfont" style="float: right; font-family: Segoe UI; margin: 25px; color: #021f4e; text-align: justify;">
+                            <?php  echo date('l, j F Y - h:i A', strtotime($sDate));?> <br>
+                        </h4>
+                        <br><br><br><br><br>
+                        <div class="testulit" style="border-radius: 25px; ">
+                            <h5 class="testfont" style="text-align: justify; font-family: Segoe UI; margin:25px; text-indent: 5%;"><?php  echo $row->announcement;?> </h5>
+                        </div>
+                        <h3 class="testfont" style="margin: 25px; font-family: Segoe UI; color: #021f4e;">Announced By:</h3>
+                        <h2 class="testfont" style="margin: 25px; font-family: Segoe UI;color: #021f4e;"><?php  echo $row->Position; echo $row->LastName;
+                        echo "</h2></div>";    
+                        }
+                    }
+                        
+                        ?>
+                       </div>
             <!--Makulay start-->
 
 
