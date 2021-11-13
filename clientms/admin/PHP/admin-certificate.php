@@ -6,24 +6,33 @@ if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 session_start();
-error_reporting(0);
+error_reporting(1);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid'] == 0)) {
     header('location:logout.php');
 } else {
     $aid = $_SESSION['clientmsaid'];
-    if(isset($_POST['submit']))
+    if(isset($_POST['new-record']))
         {
-            $usid=$_POST['usid'];
+            $user = $_POST['rcName'];
+            $usid=$user[0];
             $ctype=$_POST['ctype'];
             $mop=$_POST['mop'];
             $purp=$_POST['purp'];
             $bn=$_POST['bn'];
             $cadm=$_POST['cadm'];
             $other=$_POST['other'];
-            
-            $sql="insert into tblcreatecertificate (Userid, CertificateId, pMode, cAdmin, Purpose, other, bName) VALUES (:usid,:ctype,:mop,:cadm,:purp,:other,:bn)";
-            $query=$dbh->prepare($sql);
+
+          
+            $sql = "Insert into tblcreatecertificate(Userid, CertificateId, pMode, cAdmin, Purpose, other, bName) values (".$usid.",".$ctype.",'".$mop."','".$cadm."','".$purp."','".$other."','".$bn."');";
+            if ($connect->query($sql)===TRUE){
+                header("Location: admin-certificate.php?add=success");
+            }
+            else{
+                header("Location: admin-certificate.php?add=fail");
+            }
+            //$sql="insert into tblcreatecertificate (Userid, CertificateId, pMode, cAdmin, Purpose, other, bName) VALUES (:usid,:ctype,:mop,:cadm,:purp,:other,:bn)";
+            /*$query=$dbh->prepare($sql);
             $query->bindParam(':usid',$usid,PDO::PARAM_STR);
             $query->bindParam(':mop',$mop,PDO::PARAM_STR);
             $query->bindParam(':purp',$purp,PDO::PARAM_STR);
@@ -33,6 +42,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
             $query->bindParam(':cadm',$cadm,PDO::PARAM_STR);
             $query->execute();
             
+            
 
             $LastInsertId = $dbh->lastInsertId();
             if ($LastInsertId > 0) {
@@ -40,8 +50,10 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                 echo "<script>window.location.href ='admin-certificate.php'</script>";
             } else {
                 echo '<script>alert("Something Went Wrong. Please try again")</script>';
-            }
+            }*/
         }
+
+
 ?>
 
 
@@ -818,8 +830,6 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                         $clientmsaid = $_SESSION['clientmsaid'];
                         $search = $_POST['search'];
                     }
-                   
-                       
                 
                     ?>
                     <form method="post">
@@ -840,12 +850,13 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                                     
                                     <input type="text" class="form-control" name="cadm" id="cadm" style="display: none;" value="<?php  $aid = $_SESSION['clientmsaid']; $sqls="SELECT tbladmin.*, tblresident.*, tblpositions.* from tbladmin JOIN tblresident on tbladmin.residentID=tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition WHERE tbladmin.ID = :aid";
-                        $querys = $dbh->prepare($sqls);
-                        $querys->bindParam(':aid',$aid,PDO::PARAM_STR);
-                        $querys->execute();
-                        $results = $querys->fetchAll(PDO::FETCH_OBJ);
-                        foreach ($results as $rows) {
-                            $pos = "$rows->Position $rows->LastName"; echo "$pos";}?>" readonly>
+                                    $querys = $dbh->prepare($sqls);
+                                    $querys->bindParam(':aid',$aid,PDO::PARAM_STR);
+                                    $querys->execute();
+                                    $results = $querys->fetchAll(PDO::FETCH_OBJ);
+                                    $pos = "";
+                                    foreach ($results as $rows) {
+                                        $pos .= "$rows->Position $rows->LastName"; echo "$pos";}?>" readonly>
                                 
                                 </div>
                             </div>
@@ -855,7 +866,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 <div class="col-md-6">
 
                                     <label for="rname" class="fs-6 fw-bold">Requestor Name</label>
-                                    <input type="text" class="form-control" name="search" id="search" placeholder="e.g Juan Dela Cruz" autocomplete="off" required>
+                                    <input type="text" class="form-control" name="rcName" id="search" placeholder="e.g Juan Dela Cruz" autocomplete="off" required>
                                     <div class="col" style="z-index: 9;position:relative">
                                         <div class="list-group w-75" id="show-list" style="position: absolute">
                                             <!-- Here autocomplete list will be display -->
@@ -863,11 +874,12 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     </div>
 
                                 </div>
-
-                                <div class="col-md-6">
                                
+                                <div class="col-md-6">
+                              
                                     <label for="purp" class="fs-6 fw-bold">Purpose</label>
-                                    <select class="select form-select" name="purp" id="purp" onchange="showOthers('other_txt',this);" required>
+                                        <select class="select form-select" name="purp" id="purp" onchange="showOthers('other_txt',  this);" required>
+                                
                                         <option selected disabled>--Purpose--</option>
                                         <?php
                                                 $sqllist = "select * from tblpurposes where serviceType='certification'";
@@ -875,9 +887,9 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                 $checkplist->execute();
                                                 $resultplist = $checkplist->fetchAll(PDO::FETCH_OBJ);
                                                 foreach ($resultplist as $rowplist) {?>
-                                        <?php echo '<option value="'.$rowplist->Purpose.'">'.$rowplist->Purpose.'</option>';}?>
-                                        <option value="OTHERS">OTHERS</option>
-                                    </select>
+                                                <?php echo '<option value="'.$rowplist->Purpose.'">'.$rowplist->Purpose.'</option>';}?>
+                                                <option value="OTHERS">OTHERS</option>
+                                        </select>
                                 </div>
 
                             </div>
@@ -947,7 +959,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 <div class="col-xl-12  my-2">
                                     <div class="float-end">
                                         <div class="btn-group">
-                                            <button type="submit" class="btn btn-success rounded" name="submit" id="submit" value="Submit">
+                                            <button type="submit" class="btn btn-success rounded" name="new-record" id="submit" value="Submit">
                                                 <i class="fa fa-check mx-1"></i>Submit
                                             </button>
 
