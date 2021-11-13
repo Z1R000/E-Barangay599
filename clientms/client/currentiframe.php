@@ -57,7 +57,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                         </div>
                         <h3 class="testfont" style="margin: 25px; font-family: Segoe UI; color: #021f4e;">Announced By:</h3>
                         <h2 class="testfont" style="margin: 25px; font-family: Segoe UI;color: #021f4e;"><?php  echo $row->Position; echo $row->LastName;
-                        echo "</h2></div>";    
+                        echo "</h2></div><br>";    
                         }
                     }
                         

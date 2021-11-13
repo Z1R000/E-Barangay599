@@ -334,7 +334,6 @@
           <div class="my-1">
               <!--Supply initially with description in db-->
               <p align = "justify" id = "indent">This is to certify that <strong>REQUESTOR NAME</strong> for their <strong><?php echo "$upc";?></strong> </p>
-              <p align = "justify" id = "indent">--Supply Text--</p>
 
 
               <p id = "indent">
