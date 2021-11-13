@@ -12,12 +12,12 @@ require_once('includes/dbconnection.php');
       foreach ($resultcc as $rowcc) {
         
         echo "<a href='#' id='clicks' class='list-group-item list-group-item-action border-1'>";
-        echo $rowcc['LastName'] . ' ';
+        echo $rowcc['ID']." ".$rowcc['LastName'] . ' ';
         echo $rowcc['FirstName'] . ' ';
 		    echo $rowcc['MiddleName'] . ' ';
         echo $rowcc['Suffix'];
 		    echo "</a>";
-        echo "<input type='text' name='usid' id='usid' value='" . $rowcc['ID'] . "' disabled>";
+        
     
       }
     } else {
