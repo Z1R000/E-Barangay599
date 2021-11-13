@@ -2,12 +2,12 @@
     $curr ="Manage Rental";
 
     session_start();
-    error_reporting(0);
+    error_reporting(1);
     include('includes/dbconnection.php');
     if (strlen($_SESSION['clientmsaid']==0)) {
     header('location:logout.php');
     }else{
-        $sql= "SELECT tblcreaterental.ID,tblcreaterental.payable, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate,tblcreaterental.creationDate, tblpurposes.Purpose, tblresident.FirstName, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix,tblrental.rentalName, tblrental.rentalPrice, tblmodes.mode, tblstatus.statusName,tblpurposes.ID as purposeID FROM tblcreaterental INNER JOIN tblpurposes ON tblcreaterental.purpID = tblpurposes.ID INNER JOIN tblresident ON tblresident.ID = tblcreaterental.userID INNER JOIN tblrental ON tblrental.ID = tblcreaterental.rentalID INNER JOIN tblmodes ON tblmodes.ID = tblcreaterental.modeOfPayment INNER JOIN tblstatus ON tblstatus.ID = tblcreaterental.status and tblcreaterental.ID =".$_GET['rid']." ";
+        $sql= "SELECT tblcreaterental.ID,tblrental.ID as renid,tblresident.ID as resid,tblcreaterental.payable, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate,tblcreaterental.creationDate, tblpurposes.Purpose, tblresident.FirstName, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix,tblrental.rentalName, tblrental.rentalPrice, tblmodes.mode, tblstatus.statusName,tblpurposes.ID as purposeID FROM tblcreaterental INNER JOIN tblpurposes ON tblcreaterental.purpID = tblpurposes.ID INNER JOIN tblresident ON tblresident.ID = tblcreaterental.userID INNER JOIN tblrental ON tblrental.ID = tblcreaterental.rentalID INNER JOIN tblmodes ON tblmodes.ID = tblcreaterental.modeOfPayment INNER JOIN tblstatus ON tblstatus.ID = tblcreaterental.status and tblcreaterental.ID =".$_GET['rid']." ";
         $query = $dbh ->prepare($sql);
         $query ->execute();
         $result = $query->fetchAll(PDO::FETCH_OBJ);
@@ -21,18 +21,147 @@
             array_push($arr,$r->LastName.", ".$r->FirstName." ".$r-> MiddleName." ".$r->Suffix);
             array_push ($arr, $r->Purpose);
             array_push($arr,date("Y-d-m",strtotime($cdate)));
-            array_push($arr,date("j F Y - h:i A",strtotime($sdate)));
-            array_push($arr,date("j F Y - h:i A",strtotime($edate)));
-            array_push($arr, $r->rentalPrice);
+            array_push($arr,$sdate);
+            array_push($arr,$edate);
+            array_push($arr, $r->payable);
             array_push($arr,$r->rentalName);
             array_push($arr,$r->mode);
             array_push($arr,$r->statusName);
+            array_push($arr, $r->rentalPrice);
+            array_push($arr,$r->renid);
+            array_push($arr,$r->resid);
+
             
+
+        }
+        if (isset($_POST['update'])){
+            $others = $_POST['oth'];
+            $ad = $_SESSION['clientmsaid'];
+            //admin
+            $user = $_POST['rname'];
+            $userid = $user[0];
+            
+            
+            if (!(is_numeric($userid))){
+                $userid = $arr[12];
+            }
+            else{
+                $userid = $user[0];
+            }
+            //userid
+            $purp = $_POST['purp'];
+            //purpose
+
+            $cs = $arr[4];
+            $ns = date('Y-m-d H:i', strtotime($_POST['newStart']));
+            $start = $cs;
+            
+            if ($ns=="1970-01-01 01:00"){
+                $start = $cs;
+            }
+            else{
+                $start = $ns;
+            }
+            
+            $ce = $arr[5];
+            $ne = date('Y-m-d H:i', strtotime($_POST['newEnd']));
+        
+            $end = $ce;
+            if ($ne== "1970-01-01 01:00"){
+                $end =  $ce;
+            }
+            else{
+                $end = $ne;
+            }
+          
+            //start to end
+
+            
+            $mode  = $_POST['mod'];
+            //mode
+            
+            $stat = $_POST['stat'];
+            //status
+            $rtype= $_POST['rtype'];
+            //property
+            $rprice = $_POST['rprice'];
+            //rental price
+            $rate= 0;
+            if($arr[11] == $rtype){
+                $rate = $arr[10];
+            }
+            
+            else{
+                $rate = $_POST['rprice'];
+            }
+            //rate
+
+            $start1 = new DateTime($start);
+            $end2 = new DateTime($end);
+            $diff = $end2->diff($start1);
+            $d = $diff->format('%d');
+            $h = $diff->format('%h');
+            $i = $diff->format('%i');
+            
+            
+            $crono = 0;
+            $pay = 0;
+            if ($d>0){
+                $putal = (float)(($i/60) *$rate);
+                $crono = (float)(($d*24)+ ($h*1));
+                $pay = (float)(($rate*$crono)+$putal);
+                 
+            }
+            else if ($h>0){
+                $putal = (float)(($i/60) *$rate);
+                $crono = (float)($h*1);
+                $pay = (float)(($rate*$crono)+$putal);
+            }
+            else{
+                $pay=  (float)($i/60)*($rate);
+            }
+          
+            $send =  number_format((float)$pay,2,'.','');
+            //payable computation
+            echo $ad."</br>";
+            echo $userid."</br>";
+            echo $stat."</br>";
+            echo $rtype."</br>";
+            echo $purp."</br>";
+            echo $mode."</br>";
+            echo $start."</br>";
+            echo $end."</br>";
+            echo $rate."</br>";  
+            echo $send."</br>";
+            
+            $sql = 'Update tblcreaterental set 
+                    status ='.$stat.' ,userID = '.$userid.'  ,rentalID = '.$rtype.' ,adminID = '.$ad.' ,rentalStartDate = "'.$start.'",rentalEndDate = "'.$end.'",modeOfPayment = '.$mode.',purpID = '.$purp.', payable = '.$send.',
+                    others = "'.$others.'"  
+
+                    where ID ='.$arr[0].';';
+
+            if ($connect->query($sql)===TRUE){
+                header('Location: edit-rental.php?rid='.$arr[0].'&update=success');
+            }
+            else{
+                echo "lima";
+            }
 
 
         }
+        if (isset($_POST['del-rec'])){
 
-        //$sql= "UPDATE tblcreaterental SET purpID = '".$_POST['purp']."', = '".$_POST['payable']."' WHERE `tblcreaterental`.`ID` = ;";
+           $sql = "Update tblcreaterental set status = 8 where ID = ".$arr[0]." ";
+
+           if ($connect->query($sql)===TRUE){
+                header('Location: admin-rentals.php?delete=success');
+           }
+           else{
+               echo "ikli na nyan he";
+           }
+            
+
+        }
     
 
 
@@ -180,19 +309,46 @@
         </div>
     </nav>
      <!--breadcrumb-->
+     
     <div class="container-fluid p-5 border">
+        
+            
+        
+        
+        
+
         <div class="row">
             <div class="col-xl-8   mx-auto">
+            <?php
+            if ($_GET['update']=="success"){
+                echo'
+                
+                <div class="alert alert-primary alert-dismissible fade show " id = "alert" role="alert">
+                    <strong><i class="fa fa-check-circle mx-2"></i>Record Updated</strong> See <a href = "admin-rental-request.php" > pending</a> to check if pending status was set for rental record.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                
+                    </div>
+                
+                
+                ';
+            }
+            else{
+                
+
+            }
+            ?>
                 <div class="row gx-3 bg-599 border-599 text-white">
                     <div class="fs-5">Rental Record</div>
                 </div>
+                <form method = "POST">
                 <div class="row gx-3 border-start border-end border-bottom shadow-sm">
                     <div class="col-xl-12 p-3" >
                         <div class="row ">
                             <div class="col-xl-6 ">
                                 <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
                                     <div class="input-group">    
-                                        <input type="text"  id = "search" value = "<?php echo $arr[1]; ?>" class="form-control" name ="pRate" placeholder= "">
+                                        <input type= "text" value ="<?php echo $arr[0]; ?>" name = "id" style= "display:none;">
+                                        <input type="text"  id = "search" value = "<?php echo $arr[1]; ?>" class="form-control" name ="rname" placeholder= "">
                                     </div>
                                     
 
@@ -203,6 +359,7 @@
                                             </div>
                                 </div>
                                 <div class="col-xl-6">
+                                  
                                     <label for="purp" class= "fs-5 fw-bold">Purposes</label>
                                     <?php
                                         
@@ -229,32 +386,32 @@
                                         </select>
                                     <div class="col-xl-12" id ="othersed" style= "display : none ">
                                         <label for="purp" class= "fs-6 fw-bold">Purpose </label>
-                                        <input type="text" class="form-control" placeholder = "Specify purpose here">
+                                        <input type="text" name= "oth" value = "" class="form-control" placeholder = "Specify purpose here">
                                     </div>                                      
                                 </div>
                             </div>
                                 <div class="row gy-2">
                                     <div class="col-xl-3" >
                                         <label for="prate" class="fs-5 fw-bold">Rental Date</label>
-                                            <input type="date"  id = "date" class="form-control " value = "<?php echo $arr[3]?>" name ="date" readonly>
+                                            <input type="text"  name = "cdate" id = "date" class="form-control " value = "<?php echo $arr[3]?>" name ="date" readonly>
                                     </div>
                                     <div class="col-xl-9" >
                                         <div class="row ">
                                         <label for="prate" class="fs-5 fw-bold">Rental Duration</label>
                                             <div class="input-group">
                                                 <button class="btn btn-secondary disabled">From</button>
-                                                    <input type="text" readonly value = "<?php echo $arr[4]; ?>"class="form-control">
+                                                    <input type="text" name= "currStart" readonly value = "<?php echo date("j F Y - h:i A",strtotime($arr[4])); ?>"class="form-control">
                                                     <button class="btn btn-secondary disabled">to</button>
-                                                    <input type="text" readonly value = "<?php echo $arr[5]; ?>"class="form-control">
+                                                    <input type="text" name= "currEnd" readonly value = "<?php echo date("j F Y - h:i A",strtotime($arr[5])); ?>"class="form-control">
                                                     <button type= "button" class="btn btn-outline-primary  " id = "edit2" onclick = "newDuration('editStarttoEnd','edit2')"><i class="fa fa-edit" disabled></i></button>     
                                                 </div>
                                                 <div class="col" style = "display:none" id ="editStarttoEnd">
                                                     <label for="purp" class= "fs-5 fw-bold">New Duration </label>
                                                 <div class="input-group">
                                                     <button class="btn btn-secondary disabled">From</button>
-                                                    <input name= "newEnd" type="datetime-local" class="form-control" placeholder = "Specify purpose here">
+                                                    <input name= "newStart" type="datetime-local" class="form-control" placeholder = "Specify purpose here">
                                                     <button class="btn btn-secondary disabled">to</button>
-                                                    <input name = "newStart" type="datetime-local" class="form-control" placeholder = "Specify purpose here">
+                                                    <input name = "newEnd" type="datetime-local" class="form-control" placeholder = "Specify purpose here">
                                                 </div>
                                                 </div> 
                                             </div>
@@ -321,20 +478,20 @@
                                                 
                                                 ?>
                                                 <label for="status" class="fs-5 fw-bold">Mode of payment</label>
-                                                    <select name="" class="form-select" id="status">
+                                                    <select name="mod" class="form-select" id="status">
                                                        <?php   echo $mod; ?>
                                                     </select>
                                             </div>
                                             <div class="col-xl-6" >
                                                 <?php
-                                                    $sql = "Select * from tblstatus";
+                                                    $sql = "Select * from tblstatus where ID >1 and ID<8";
                                                     $query = $dbh->prepare($sql);
                                                     $query -> execute();
 
                                                     $result = $query->fetchAll(PDO::FETCH_OBJ);
                                                     $stat = "";
                                                     foreach($result as $r){
-                                                        if ($arr[9] == $r->status){
+                                                        if ($arr[9] == $r->statusName){
                                                             $stat.='<option value="'.$r->ID.'" selected>'.$r->statusName.'</option>';
                                                         }
                                                         else{
@@ -345,16 +502,16 @@
                                                 
                                                 ?>
                                                     <label for="prate" class="fs-5 fw-bold">Rental Status</label>
-                                                    <select name="" class="form-select" id="status">
+                                                    <select name="stat" class="form-select" id="status">
                                                            <?php echo $stat; ?>       
                                                     </select>
                                             </div>
                                                                 
                                             <div class="row g-0" align= "right">
                                                 <div class="col-md-12  px-3 mx-auto my-2">
-                                                    <button type ="button" role = "button" class="btn btn-primary px-2" >
+                                                    <button type ="submit" name= "update" role = "button" class="btn btn-primary px-2" >
                                                     <i class= "fa fa-save mx-1"></i>Save</button>
-                                                    <button type ="button" role = "button" href = ""class="btn btn-danger px-2" data-bs-dismiss= "modal" >
+                                                    <button type ="button" data-bs-toggle = "modal" href = "#delete-rental" role = "button" href = ""class="btn btn-danger px-2" data-bs-dismiss= "modal" >
                                                     <i class="fa fa-trash mx-1"></i>
                                                             Delete
                                                     </button>
@@ -364,7 +521,8 @@
                                                     </a>
                                                     
                                                 </div>
-                                            </div>                 
+                                            </div>
+                                             </form>                 
                                         </div>
                                     </div>
                                 </div>
@@ -398,13 +556,16 @@
                             <p class = "fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
                         </div>
                         <div class="row justify-content-center" align = "center">
-                            <form method = "POST" action = "#">
+                            <form method = "POST">
                             <div class="col-xl-12">
                                 <div class="float-end">
+                              
                                     <div class="btn-group">
-                                        <button type = "button" class="btn btn-success " data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                        <button type = "submit" class="btn btn-success "  name = "del-rec" value ="<?php echo $arr[0]?>">
                                     <i class= 'fa fa-check mx-1'></i>Confirm
+                                               
                                 </button>
+                                </form>
                                 </div>
                                 <div class="btn-group">
                                 <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
@@ -414,7 +575,7 @@
                            
                             </div>
                             </div>
-                            </form>
+                          
                         </div>
                 
                     </div>

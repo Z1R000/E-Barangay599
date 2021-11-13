@@ -23,7 +23,7 @@
             array_push($arr,date("j F Y",strtotime($cdate)));
             array_push($arr,date("j F Y - h:i A",strtotime($sdate)));
             array_push($arr,date("j F Y - h:i A",strtotime($edate)));
-            array_push($arr, $r->rentalPrice);
+            array_push($arr, $r->payable);
             array_push($arr,$r->rentalName);
             array_push($arr,$r->mode);
             array_push($arr,$r->status);

@@ -30,7 +30,7 @@ if(isset($_POST["action"]))
   while($row = mysqli_fetch_array($result))
   {
    $output .= '<button class="btn btn-secondary disabled">₱</button>    
-                <input type= "text" name="rprice" id="rprice" style= "text-align:right" value = "'.$row['rentalPrice'].' "class="form-control action" disabled>';
+                <input type= "text" name="rprice" id="rprice" style= "text-align:right" value = "'.$row['rentalPrice'].' "class="form-control action" readonly>';
   }
  }
  echo $output;

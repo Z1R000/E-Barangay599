@@ -22,13 +22,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         $gbd = $row->BirthDate;
         $bday = date('j F Y', strtotime($gbd));
         $today = date('Y-m-d');
-        $diff = date_diff(date_create($gbd), date_create($today));
 
+        $diff = date_diff(date_create($gbd), date_create($today));
+        
         $start1 = date_create($row->AdminRegDate);
         $start = date_create($row->AdminRegDate);
 
         $term = date_add($start1,date_interval_create_from_date_string("2 Years"));
-     
       
         array_push($arr, $row->Position);
         array_push($arr, $row->LastName." ". $row->FirstName." ".$row->MiddleName." ".$row->Suffix);

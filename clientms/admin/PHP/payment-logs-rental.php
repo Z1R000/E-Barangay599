@@ -316,9 +316,7 @@
                         
                     </div>
                 </div>
-            </div>
-        </div>
-
+                                                            </div>
 <script>
 $(document).ready(function(){
     $(document).on('click','button[data-role=check]',function(){
