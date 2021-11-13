@@ -23,14 +23,32 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
             $cadm=$_POST['cadm'];
             $other=$_POST['other'];
 
+            if($mop == "G-Cash"){
+                $stat = "2";
+                $sql = "Insert into tblcreatecertificate(Userid, CertificateId, pMode, cAdmin, Purpose, other, bName, status) values (".$usid.",".$ctype.",'".$mop."','".$cadm."','".$purp."','".$other."','".$bn."','".$stat."');";
+                if ($connect->query($sql)===TRUE){
+                    echo '<script>alert("Certificate information has been added")</script>';
+                    echo "<script>window.location.href ='admin-certificate.php'</script>";
+                }
+                else{
+                    echo '<script>alert("Something Went Wrong. Please try again")</script>';
+                    echo "<script>window.location.href ='admin-certificate.php'</script>";
+                }
+            }else if ($mop == "Cash"){
+                $stat = "3";
+                $sql = "Insert into tblcreatecertificate(Userid, CertificateId, pMode, cAdmin, Purpose, other, bName, status) values (".$usid.",".$ctype.",'".$mop."','".$cadm."','".$purp."','".$other."','".$bn."','".$stat."');";
+                if ($connect->query($sql)===TRUE){
+                    echo '<script>alert("Certificate information has been added")</script>';
+                    echo "<script>window.location.href ='admin-certificate.php'</script>";
+                }
+                else{
+                    echo '<script>alert("Something Went Wrong. Please try again")</script>';
+                    echo "<script>window.location.href ='admin-certificate.php'</script>";
+                }
+            }
+
           
-            $sql = "Insert into tblcreatecertificate(Userid, CertificateId, pMode, cAdmin, Purpose, other, bName) values (".$usid.",".$ctype.",'".$mop."','".$cadm."','".$purp."','".$other."','".$bn."');";
-            if ($connect->query($sql)===TRUE){
-                header("Location: admin-certificate.php?add=success");
-            }
-            else{
-                header("Location: admin-certificate.php?add=fail");
-            }
+           
             //$sql="insert into tblcreatecertificate (Userid, CertificateId, pMode, cAdmin, Purpose, other, bName) VALUES (:usid,:ctype,:mop,:cadm,:purp,:other,:bn)";
             /*$query=$dbh->prepare($sql);
             $query->bindParam(':usid',$usid,PDO::PARAM_STR);
@@ -703,7 +721,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                         <td  style = 'text-align: center'>
                                                             
                                                                 <div class='btn-group me-1 mb-1' role='group' aria-label='First group'>
-                                                                    <a type='' href ='edit-Cert.php?editid=$rowclist->ID' class='btn btn-success'><i class = 'fa fa-edit me-2'></i>Edit</a>
+                                                                    <a type='' href ='edit-cert.php?editid=$rowclist->ID' class='btn btn-success'><i class = 'fa fa-edit me-2'></i>Edit</a>
                                                                 </div>
                                                                    
                                                                
@@ -880,7 +898,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <label for="purp" class="fs-6 fw-bold">Purpose</label>
                                         <select class="select form-select" name="purp" id="purp" onchange="showOthers('other_txt',  this);" required>
                                 
-                                        <option selected disabled>--Purpose--</option>
+                                        <option disabled selected>--Purpose--</option>
                                         <?php
                                                 $sqllist = "select * from tblpurposes where serviceType='certification'";
                                                 $checkplist = $dbh->prepare($sqllist);
@@ -895,7 +913,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                             </div>
                             <div class="row g-3 mt-1" id="other_txt">
                                 <div class="col-xl-6">
-
+                                
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="other" id="other" placeholder="Specify a purpose here">
@@ -1390,23 +1408,6 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                 document.getElementId('em').disabled = true;
 
             }
-        </script>
-
-        </script>
-        <script>
-            $(document).ready(function() {
-                $("select").change(function() {
-                    $(this).find("option:selected").each(function() {
-                        var optionValue = $(this).attr("value");
-                        if (optionValue) {
-                            $(".box").not("." + optionValue).hide();
-                            $("." + optionValue).show();
-                        } else {
-                            $(".box").hide();
-                        }
-                    });
-                }).change();
-            });
         </script>
 
         <script type="text/javascript">

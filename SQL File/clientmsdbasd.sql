@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2021 at 05:53 AM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.8
+-- Generation Time: Nov 13, 2021 at 05:28 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -122,7 +122,8 @@ INSERT INTO `tblannouncement` (`ID`, `announcement`, `announcementDate`, `startD
 (23, 'Sample announcement', '2021-11-12 16:24:21', '2021-11-12 00:00:00', '2021-11-26 00:00:00', 1),
 (24, 'Last check announcement', '2021-11-12 16:26:21', '2021-11-13 00:00:00', '2021-11-25 00:00:00', 1),
 (25, 'Last', '2021-11-12 16:28:43', '2021-11-12 00:00:00', '2021-11-25 00:00:00', 1),
-(26, 'Ganito ba ledes', '2021-11-12 16:30:40', '2021-11-12 00:00:00', '2021-11-26 00:00:00', 1);
+(26, 'Ganito ba ledes', '2021-11-12 16:30:40', '2021-11-12 00:00:00', '2021-11-26 00:00:00', 1),
+(27, 'asdasd', '2021-11-13 14:06:24', '2021-11-19 00:00:00', '2021-11-30 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -168,7 +169,7 @@ CREATE TABLE `tblblotter` (
 --
 
 INSERT INTO `tblblotter` (`ID`, `blotterType`, `incidentLocation`, `incidentDate`, `respondent`, `complainant`, `blotterSummary`, `blotterStatus`, `summonSchedule`, `blotterCreationDate`, `adminID`) VALUES
-(1, 'Property Damage', 'Tindahan ni aling nena', '2021-04-22 13:29:00', 'Ledesma, Marithe Francois', 'Sallan, Arnold', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n', 'On-Going', '2021-04-22 13:51:00', '2021-04-29 13:04:00', 1),
+(1, 'Property Damage', 'Tindahan ni aling nenas', '2021-04-22 13:29:00', 'Ledesma, Marithe Francois', 'Sallan, Arnold', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n', 'On-Going', '2021-04-22 13:51:00', '2021-04-29 13:04:00', 1),
 (2, 'Property Damage', 'Tapat ni aling gloria', '2021-04-22 20:03:00', 'Kim delacruz', 'Juan delacruz', 'Nagwawala si kim', 'Fulfilled', '2021-04-22 09:05:00', '2021-04-22 12:04:20', 1),
 (3, 'Robbery', 'Bahay ni natham', '2021-04-22 23:50:00', 'Sallan, Arnold', 'Nathan', 'Nagnakaw', 'On-Going', '2021-04-22 23:53:00', '2021-04-22 15:51:11', 1);
 
@@ -313,29 +314,10 @@ CREATE TABLE `tblcreatecertificate` (
 --
 
 INSERT INTO `tblcreatecertificate` (`ID`, `Userid`, `CertificateId`, `resDate`, `cAdmin`, `status`, `pMode`, `Purpose`, `other`, `bName`, `content`) VALUES
-(1, '2', '2', '2021-04-15 03:51:43', 'Chairperson Ledesma', '3', 'Cash', 'OPEN ACCOUNT/LOAN', '', 'N/A', 'Check Text'),
-(2, '2', '2', '2021-04-22 03:38:40', 'Chairperson Ledesma', '3', 'G-cash', 'EMPLOYMENT/WORK', '', 'N/A', 'Check Text'),
-(3, '4', '10', '2021-04-22 03:39:22', 'Chairperson Ledesma', '4', 'Cash', 'FINANCIAL ASSISTANCE', '', 'N/A', 'Check Text'),
-(4, '2', '15', '2021-04-22 09:11:03', 'Chairperson Ledesma', '5', 'G-cash', 'MEMBERSHIP/NEW ID', '', 'N/A', 'Check Text'),
-(5, '4', '9', '2021-04-22 12:02:07', 'Chairperson Ledesma', '6', 'G-cash', 'EMPLOYMENT/WORK', '', 'N/A', '<p>Check Text</p>\r\n'),
-(6, '2', '10', '2021-04-22 13:40:24', 'Chairperson Ledesma', '7', 'Cash', 'FINANCIAL ASSISTANCE', '', 'N/A', '<p>Check Text</p>\r\n'),
-(7, '2', '6', '2021-05-03 17:09:45', 'Chairperson Ledesma', '2', 'Cash', 'BUSINESS CLEARANCE', '', 'Business #1', 'Check Text'),
-(8, '4', '14', '2021-05-03 17:11:02', 'Chairperson Ledesma', '3', 'Cash', 'MEDICAL ASSISTANCE', '', 'N/A', 'Check Text'),
-(9, '1', '7', '2021-05-03 17:11:16', 'Chairperson Ledesma', '4', 'G-cash', 'BUSINESS CLEARANCE', '', 'Business #1', 'Check Text'),
-(10, '2', '4', '2021-05-03 17:11:48', 'Chairperson Ledesma', '5', 'G-cash', 'EMPLOYMENT/WORK', '', 'N/A', 'Check Text'),
-(11, '4', '1', '2021-11-10 09:40:08', 'Chairperson Ledesma', '6', 'G-Cash', 'Own', '', 'N/A', ''),
-(12, '3', '1', '2021-11-10 10:27:18', 'Chairperson Ledesma', '7', 'G-Cash', '', '', 'N/A', ''),
-(13, '7', '3', '2021-11-10 10:42:43', 'Chairperson Ledesma', '1', 'G-Cash', 'OPEN ACCOUNT/LOAN', '', 'N/A', ''),
-(14, '10', '2', '2021-11-10 10:44:39', 'Chairperson Ledesma', '2', 'G-Cash', 'OTHERS', 'School', 'N/A', ''),
-(15, '8', '2', '2021-11-10 11:16:41', 'Chairperson Ledesma', '1', 'G-Cash', 'MEMBERSHIP/NEW ID', '', 'N/A', ''),
-(16, '11', '6', '2021-11-10 11:18:23', 'Chairperson Ledesma', '1', 'G-Cash', 'EMPLOYMENT/WORK', '', 'N/A', ''),
-(17, '11', '3', '2021-11-10 12:54:50', 'Chairperson Ledesma', '1', 'G-Cash', 'MEMBERSHIP/NEW ID', '', 'N/A', ''),
-(18, '1', '1', '2021-11-10 17:46:48', 'Chairperson Ledesma', '4', 'G-Cash', 'EMPLOYMENT/WORK', '', 'N/A', ''),
-(19, '1', '4', '2021-11-10 20:39:43', 'Chairperson Ledesma', '2', 'G-Cash', 'EMPLOYMENT/WORK', '', 'N/A', ''),
-(20, '1', '4', '2021-11-10 21:00:24', 'Chairperson Ledesma', '4', 'G-Cash', 'MEMBERSHIP/NEW ID', '', 'N/A', ''),
-(21, '2', '2', '2021-11-11 09:34:12', 'Chairperson Ledesma', '2', 'Cash', 'EMPLOYMENT/WORK', '', 'N/A', ''),
-(22, '1', '1', '2021-11-12 09:35:37', 'Chairperson Ledesma', '2', 'Cash', 'EMPLOYMENT/WORK', '', 'N/A', ''),
-(23, '1', '6', '2021-11-12 10:45:52', NULL, '1', 'G-Cash', 'OTHERS', 'COLLECTION', 'Manong Store', '');
+(1, '2', '13', '2021-11-13 15:12:57', 'Chairperson Ledesma', '2', 'G-Cash', 'OTHERS', 'sad', '', ''),
+(2, '1', '9', '2021-11-13 15:20:38', 'Chairperson Ledesma', '2', 'G-Cash', 'MEMBERSHIP/NEW ID', '', '', '<p>asdasd</p>\r\n'),
+(3, '1', '13', '2021-11-13 16:03:46', 'Chairperson Ledesma', '2', 'G-Cash', 'MEMBERSHIP/NEW ID', '', '', ''),
+(4, '2', '9', '2021-11-13 16:13:21', 'Chairperson Ledesma', '3', 'Cash', 'MEMBERSHIP/NEW ID', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -356,13 +338,6 @@ CREATE TABLE `tblcreaterental` (
   `purpID` int(25) NOT NULL,
   `payable` decimal(16,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tblcreaterental`
---
-
-INSERT INTO `tblcreaterental` (`ID`, `status`, `userID`, `rentalID`, `adminID`, `rentalStartDate`, `rentalEndDate`, `creationDate`, `modeOfPayment`, `purpID`, `payable`) VALUES
-(1, 1, 1, 3, 1, '2021-11-19 12:23:48', '2021-11-26 12:32:04', '2021-11-13 02:43:49', 1, 11, '20.00');
 
 -- --------------------------------------------------------
 
@@ -780,9 +755,10 @@ INSERT INTO `tblstatus` (`ID`, `statusName`) VALUES
 (2, 'APPROVED'),
 (3, 'PAYMENT VERIFICATION'),
 (4, 'PAYMENT VERIFIED'),
-(5, 'SETTLED'),
-(6, 'REJECTED/CANCELLED'),
-(7, 'PAYMENT REJECTED');
+(5, 'FOR PICK-UP'),
+(6, 'SETTLED'),
+(7, 'PAYMENT REJECTED'),
+(8, 'REJECTED/CANCELLED');
 
 -- --------------------------------------------------------
 
@@ -1009,7 +985,7 @@ ALTER TABLE `tbladmin`
 -- AUTO_INCREMENT for table `tblannouncement`
 --
 ALTER TABLE `tblannouncement`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `tblavailability`
@@ -1051,13 +1027,13 @@ ALTER TABLE `tblcertificaterequest`
 -- AUTO_INCREMENT for table `tblcreatecertificate`
 --
 ALTER TABLE `tblcreatecertificate`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tblcreaterental`
 --
 ALTER TABLE `tblcreaterental`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbldays`
@@ -1147,7 +1123,7 @@ ALTER TABLE `tblservices`
 -- AUTO_INCREMENT for table `tblstatus`
 --
 ALTER TABLE `tblstatus`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tblstreet`

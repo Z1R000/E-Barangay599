@@ -236,8 +236,8 @@
                                                 <?php 
                                                     $check = $rowe->status;
                                                     $cheme = $rowe->statusName;
-                                                    if ($check == "5" || $check == "6" || $check == "4" || $check == "7" || $check == "2"){
-                                                        echo '<select id = "status" class ="form-select" name= "status" disabled><option value="'.$cheme.'">'.$cheme.'</option>
+                                                    if ($check == "6" || $check == "4" || $check == "7" || $check == "2"){
+                                                        echo '<select id = "status" class ="form-select" name= "status" disabled><option value="'.$check.'" selected>'.$cheme.'</option>
                                                         ';
                                                     
                                                     }else if ($check == "3"){
@@ -251,9 +251,9 @@
                                                            ';
                                                         }
                                                     
-                                                    }else if ($check == "1"){
+                                                    }else if ($check == "5"){
                                                         echo '<select id = "status" class ="form-select" name= "status">';
-                                                        $sqlst="SELECT * from tblstatus WHERE ID = '1' or ID = '2' or ID ='6'";
+                                                        $sqlst="SELECT * from tblstatus WHERE ID = '5' or ID ='6'";
                                                         $queryst=$dbh->prepare($sqlst);
                                                         $queryst->execute();
                                                         $resultst=$queryst->fetchAll(PDO::FETCH_OBJ);

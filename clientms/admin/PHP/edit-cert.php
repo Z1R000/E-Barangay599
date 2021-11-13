@@ -6,9 +6,10 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
   } else{
+    $eid=intval($_GET['editid']);
   if(isset($_POST['submit']))
   {
-    $eid=intval($_GET['editid']);
+    
     $clientmsaid=$_SESSION['clientmsaid'];
       $cn=$_POST['cn'];
       $cp=$_POST['cp'];
@@ -165,18 +166,19 @@ if (strlen($_SESSION['clientmsaid']==0)) {
             <div class="container-fluid px-5 mb-5">
               <div class="row">
                 <div class="col-xl-12"> 
-                  <ul class="nav  nav-pills justify-content-center">     
+                  <ul class="nav  nav-pills justify-content-center">
+                  <li class="nav-item">
+                        <a class="nav-link active fs-5" href="#edit-cert" data-bs-toggle = "tab">Edit Certification </a>
+                    </li>     
                     <li class="nav-item">
-                        <a class="nav-link active fs-5" href="#preview" data-bs-toggle = "tab">Preview</a>
+                        <a class="nav-link fs-5" href="#preview" data-bs-toggle = "tab">Preview</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link fs-5" href="#edit-cert" data-bs-toggle = "tab">Edit Certification </a>
-                    </li>
+                    
                   </ul>
                 </div>
                 <div class="col-xl-12">
                   <div class="tab-content">
-                    <div class="tab-pane show fade active" id="preview">
+                    <div class="tab-pane show fade" id="preview">
                         <div class="container my-3">
                                 <div class="row g-0 ">
                                     <div class="col-xl-8  shadow-sm mx-auto  ">
@@ -193,7 +195,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 
                                         
                                             <div class="embed-responsive mx-auto embed-responsive-16by9">
-                                                <iframe class="embed-responsive-item" id = "frame" src="temp-cert.php"></iframe>
+                                                <iframe class="embed-responsive-item" id = "frame" src="temp-cert.php?viewid=<?php echo $eid;?>"></iframe>
                                             </div>
                                         </div>
                                     </div>
@@ -202,7 +204,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                         </div> 
                       
                     </div>
-                    <div class="tab-pane show fade" id="edit-cert">
+                    <div class="tab-pane show fade active" id="edit-cert">
                     <form method ="POST">
     <?php
 				$eid=$_GET['editid'];
