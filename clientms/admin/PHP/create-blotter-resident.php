@@ -102,7 +102,7 @@
             </div>
         </div>
     </nav> 
-    <form action="" method = "POST">
+    <form method = "POST">
     <div class="container-fluid px-5">
                     <div class="row px-5">
                         <div class="col-xl-5"></div>
@@ -126,12 +126,12 @@
                             <div class="row px-2 g-2 px-3 pt-2 pb-3 ">
                                 <div class="col-md-5">
                                     <label for="rname"class= "fw-bold fs-6">Complainant Name: </label>
-                                    <input name = "comp" type="text" id = "search" class="form-control" placeholder = "e.g Juan Dela Cruz">
+                                    <input name = "comp " type="text" id = "search" class="form-control action" placeholder = "e.g Juan Dela Cruz">
                                     <!--intellisence resident list-->
                                     <div class="col" style= "z-index: 9;position:relative">
-                                    <div class="list-group w-100"  id="show-list" style="position: absolute">
+                                        <div class="list-group w-100"  id="show-list" style="position: absolute">
                                     <!-- Here autocomplete list will be display -->
-                                    </div>
+                                        </div>
                                     </div>
                                 </div>     
                                     
@@ -154,12 +154,8 @@
                                             <div class="col-lg-8">
                                                 <div id="inputFormRow">
                                                     <div class="input-group mb-3">
-                                                        <Select type="text" name="kag[]" class="form-select" placeholder="" >
-                                                                <option value="">--Kagawad--</option>
-                                                                <option value="">Kagawad 1</option>
-                                                                <option value="">Kagawad 2</option>
-                                                        </select>
-                                           
+                                                        <input type="text" name="kag[0]" class="form-control" placeholder="" >
+                                                            
                                                             
                                                             <div class="btn-group mx-2">
                                                                 <button id="addkag" type="button" class="btn btn-primary "><i class= "fa fa-plus me-2"></i>Add Respondent</button>
@@ -340,33 +336,33 @@
                 </div>
             </div>
         </div>
-        <script>
-$(document).ready(function () {
-  // Send Search Text to the server
-  $("#search").keyup(function () {
-    let searchText = $(this).val();
-    if (searchText != "") {
-      $.ajax({
-        url: "searchname.php",
-        method: "post",
-        data: {
-          query: searchText,
-        },
-        success: function (response) {
-          $("#show-list").html(response);
-        },
-      });
-    } else {
-      $("#show-list").html("");
-    }
-  });
-  $(document).on("click", "#clicks", function () {
-    $("#search").val($(this).text());
-    $("#show-list").html("");
-  });
-});
-  </script>   
 
+        <script>
+                        $(document).ready(function() {
+                            // Send Search Text to the server
+                            $("#search").keyup(function() {
+                                let searchText = $(this).val();
+                                if (searchText != "") {
+                                    $.ajax({
+                                        url: "searchname.php",
+                                        method: "post",
+                                        data: {
+                                            query: searchText,
+                                        },
+                                        success: function(response) {
+                                            $("#show-list").html(response);
+                                        },
+                                    });
+                                } else {
+                                    $("#show-list").html("");
+                                }
+                            });
+                            $(document).on("click", "#clicks", function() {
+                                $("#search").val($(this).text());
+                                $("#show-list").html("");
+                            });
+                        });
+                    </script>
     <script type="text/javascript">
         var x = 0;
         // add row

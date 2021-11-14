@@ -48,6 +48,7 @@ $mod = '<option  selected disabled>Mode of payment</option>';
 
  $sql = 'Select tblresident.FirstName,tblcreaterental.ID as cID, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblcreaterental.status, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate, tblcreaterental.creationDate, tblpurposes.Purpose, tblrental.rentalName, tblrental.rentalPrice, tblcreaterental.payable, tblstatus.statusName from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID join tblrental on tblrental.ID = tblcreaterental.rentalID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID join tblstatus on tblstatus.ID = tblcreaterental.status where tblcreaterental.status > 1 and tblcreaterental.status<8 order by tblcreaterental.creationDate DESC';
 
+
  
  $query= $dbh->prepare($sql);
  $query->execute();
@@ -58,7 +59,15 @@ $mod = '<option  selected disabled>Mode of payment</option>';
     
     $ad = $_SESSION['clientmsaid'];
     $user = $_POST['rrname'];
-    $userid = $user[0];
+    
+    $userid = '';
+    for ($i = 0; $i<strlen($user);$i++){
+        if (is_numeric($user[$i])){
+            $userid.= $user[$i];
+        }
+        
+    }
+    echo $userid;    
     $purp = $_POST['purpose'];
     $s = $_POST['startDur'];
     $e = $_POST['endDur'];
@@ -68,10 +77,15 @@ $mod = '<option  selected disabled>Mode of payment</option>';
     $other = $_POST['others'];
     $rate = $_POST['rprice'];
     $mode = $_POST['modeofp'];
-    $stat = $_POST['stat'];
-
-    $rt = $_POST['rtype'];
+    if ($mode ==1){
+        $stat = 2;
+    }
+    else{
+        $stat= 3;
+   } 
     
+    $rt = $_POST['rtype'];
+
     $start1 = new DateTime($_POST['startDur']);
     $end2 = new DateTime($_POST['endDur']);
     $diff = $end2->diff($start1);
@@ -96,6 +110,9 @@ $mod = '<option  selected disabled>Mode of payment</option>';
     else{
         $pay=  (float)($i/60)*($rate);
     }
+
+
+
 
     $send =  number_format((float)$pay,2,'.','');
  
@@ -198,9 +215,7 @@ if ($_GET['delete']== "success"){
                                                                         </div>
                                                                    
                                                                     
-                                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <a type="button" href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info text-white"><i class = "fa fa-paper-plane mx-1 white"></i><span class= "wal">Send</span></a>
-                                                                        </div>  
+                                                                      
                                                                     </td>
                                                                         
                                                                 </tr>                                        
@@ -307,10 +322,10 @@ if ($_GET['delete']== "success"){
                                         </div>
                                         <div class="col-xl-6" >
                                         
-                                        <label for="prate" class="fs-5 fw-bold">Rental Status</label>
+                                        <!--<label for="prate" class="fs-5 fw-bold">Rental Status</label>
                                             <select name="stat" class="form-control" id="status">
                                             <?php
-                                                    $sql= 'Select * from tblstatus where ID = 1 or ID = 2';
+                                                 /*   $sql= 'Select * from tblstatus where ID = 1 or ID = 2';
                                                     $query = $dbh->prepare($sql);
                                                     $query->execute();
                                                     $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -320,9 +335,9 @@ if ($_GET['delete']== "success"){
                                                         
                                                         ';
                                                     }
-                                                
+                                                */
                                                 ?>
-                                            </select>
+                                            </select>-->
                                     </div>
                                     
                                     <div class="row g-0 my-2  " >
