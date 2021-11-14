@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2021 at 07:09 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.11
+-- Generation Time: Nov 14, 2021 at 05:22 AM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -232,6 +232,7 @@ CREATE TABLE `tblcertificate` (
   `Type` int(11) NOT NULL,
   `CertificateName` varchar(200) DEFAULT NULL,
   `CertificatePrice` decimal(16,2) DEFAULT NULL,
+  `CertText` varchar(500) NOT NULL,
   `CreationDate` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -239,22 +240,22 @@ CREATE TABLE `tblcertificate` (
 -- Dumping data for table `tblcertificate`
 --
 
-INSERT INTO `tblcertificate` (`ID`, `Type`, `CertificateName`, `CertificatePrice`, `CreationDate`) VALUES
-(1, 1, 'Barangay Certificate', '121.00', '2021-04-21 13:45:50'),
-(2, 1, 'Barangay Clearance', '30.00', '2021-04-21 13:45:50'),
-(3, 1, 'Barangay Permit', '150.00', '2021-04-21 13:45:50'),
-(4, 1, 'Proof of Residency', '120.00', '2021-04-21 13:45:50'),
-(6, 2, 'Business Clearance Capital - Php10,000 Below', '100.00', '2021-04-21 13:45:50'),
-(7, 2, 'Business Clearance Capital - Php10,001 - Php100-000', '500.00', '2021-04-21 14:25:51'),
-(8, 2, 'Business Clearance Capital - Php100,001 - Above', '1000.00', '2021-04-21 14:25:51'),
-(9, 1, 'Certificate of Good Moral', '90.00', '2021-04-21 14:25:51'),
-(10, 1, 'Lipat-bahay Clearance', '105.00', '2021-04-21 14:25:51'),
-(11, 1, 'Certificate of Acceptance', '56.00', '2021-04-21 14:25:51'),
-(12, 1, 'Certificate of Cohabitation', '113.00', '2021-04-21 14:25:51'),
-(13, 1, 'Certificate of Indigency', '356.00', '2021-04-21 14:25:51'),
-(14, 1, 'Certificate to File Action', '250.00', '2021-04-21 14:25:51'),
-(15, 1, 'Barangay ID', '50.00', '2021-04-21 14:28:00'),
-(17, 1, 'Referral Recommendation', '50.00', '2021-04-21 14:28:00');
+INSERT INTO `tblcertificate` (`ID`, `Type`, `CertificateName`, `CertificatePrice`, `CertText`, `CreationDate`) VALUES
+(1, 1, 'Barangay Certificate', '121.00', 'Text Sample', '2021-04-21 13:45:50'),
+(2, 1, 'Barangay Clearance', '30.00', 'Text Sample', '2021-04-21 13:45:50'),
+(3, 1, 'Barangay Permit', '150.00', 'Text Sample', '2021-04-21 13:45:50'),
+(4, 1, 'Proof of Residency', '120.00', 'Text Sample', '2021-04-21 13:45:50'),
+(6, 2, 'Business Clearance Capital - Php10,000 Below', '100.00', 'Text Sample', '2021-04-21 13:45:50'),
+(7, 2, 'Business Clearance Capital - Php10,001 - Php100-000', '500.00', 'Text Sample', '2021-04-21 14:25:51'),
+(8, 2, 'Business Clearance Capital - Php100,001 - Above', '1000.00', 'Text Sample', '2021-04-21 14:25:51'),
+(9, 1, 'Certificate of Good Moral', '90.00', 'Text Sample', '2021-04-21 14:25:51'),
+(10, 1, 'Lipat-bahay Clearance', '105.00', 'Text Sample', '2021-04-21 14:25:51'),
+(11, 1, 'Certificate of Acceptance', '56.00', 'Text Sample', '2021-04-21 14:25:51'),
+(12, 1, 'Certificate of Cohabitation', '113.00', 'Text Sample', '2021-04-21 14:25:51'),
+(13, 1, 'Certificate of Indigency', '356.00', 'Text Sample', '2021-04-21 14:25:51'),
+(14, 1, 'Certificate to File Action', '250.00', 'Text Sample', '2021-04-21 14:25:51'),
+(15, 1, 'Barangay ID', '50.00', 'Text Sample', '2021-04-21 14:28:00'),
+(17, 1, 'Referral Recommendation', '50.00', 'Text Sample', '2021-04-21 14:28:00');
 
 -- --------------------------------------------------------
 
@@ -294,34 +295,34 @@ INSERT INTO `tblcertificaterequest` (`ID`, `userID`, `certificateID`, `Purpose`,
 -- Table structure for table `tblcreatecertificate`
 --
 
-  CREATE TABLE `tblcreatecertificate` (
-    `ID` int(10) NOT NULL,
-    `Userid` varchar(120) DEFAULT NULL,
-    `CertificateId` varchar(100) NOT NULL,
-    `resDate` timestamp NULL DEFAULT current_timestamp(),
-    `cAdmin` varchar(50) DEFAULT NULL,
-    `status` varchar(20) NOT NULL DEFAULT '1',
-    `pMode` varchar(10) NOT NULL,
-    `Purpose` varchar(100) NOT NULL,
-    `other` varchar(100) NOT NULL,
-    `bName` varchar(50) NOT NULL DEFAULT 'N/A'
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `tblcreatecertificate` (
+  `ID` int(10) NOT NULL,
+  `Userid` varchar(120) DEFAULT NULL,
+  `CertificateId` varchar(100) NOT NULL,
+  `resDate` timestamp NULL DEFAULT current_timestamp(),
+  `cAdmin` varchar(50) DEFAULT NULL,
+  `status` varchar(20) NOT NULL DEFAULT '1',
+  `pMode` varchar(10) NOT NULL,
+  `Purpose` varchar(100) NOT NULL,
+  `other` varchar(100) NOT NULL,
+  `bName` varchar(50) NOT NULL DEFAULT 'N/A'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-  --
-  -- Dumping data for table `tblcreatecertificate`
-  --
+--
+-- Dumping data for table `tblcreatecertificate`
+--
 
-  INSERT INTO `tblcreatecertificate` (`ID`, `Userid`, `CertificateId`, `resDate`, `cAdmin`, `status`, `pMode`, `Purpose`, `other`, `bName`) VALUES
-  (1, '2', '13', '2021-11-13 15:12:57', 'Chairperson Ledesma', '8', 'G-Cash', 'OTHERS', 'sad', ''),
-  (2, '1', '9', '2021-11-13 15:20:38', 'Chairperson Ledesma', '6', 'G-Cash', 'MEMBERSHIP/NEW ID', '', ''),
-  (3, '1', '13', '2021-11-13 16:03:46', 'Chairperson Ledesma', '3', 'G-Cash', 'MEMBERSHIP/NEW ID', '', ''),
-  (4, '2', '9', '2021-11-13 16:13:21', 'Chairperson Ledesma', '3', 'Cash', 'MEMBERSHIP/NEW ID', '', ''),
-  (5, '2', '1', '2021-11-13 17:17:41', 'Chairperson Ledesma', '2', 'G-Cash', 'MEMBERSHIP/NEW ID', '', ''),
-  (6, '1', '1', '2021-11-13 17:31:18', 'Chairperson Ledesma', '6', 'Cash', 'OPEN ACCOUNT/LOAN', '', ''),
-  (7, '1', '9', '2021-11-13 17:41:43', 'Chairperson Ledesma', '6', 'G-Cash', 'OPEN ACCOUNT/LOAN', '', ''),
-  (8, '1', '3', '2021-11-13 17:43:23', 'Chairperson Ledesma', '6', 'Cash', 'EMPLOYMENT/WORK', '', ''),
-  (9, '1', '2', '2021-11-13 17:44:39', 'Chairperson Ledesma', '2', 'G-Cash', 'EMPLOYMENT/WORK', '', ''),
-  (10, '1', '3', '2021-11-13 17:45:25', NULL, '1', 'Cash', 'MEMBERSHIP/NEW ID', '', '');
+INSERT INTO `tblcreatecertificate` (`ID`, `Userid`, `CertificateId`, `resDate`, `cAdmin`, `status`, `pMode`, `Purpose`, `other`, `bName`) VALUES
+(1, '2', '13', '2021-11-13 07:12:57', 'Chairperson Ledesma', '8', 'G-Cash', 'OTHERS', 'sad', ''),
+(2, '1', '9', '2021-11-13 07:20:38', 'Chairperson Ledesma', '6', 'G-Cash', 'MEMBERSHIP/NEW ID', '', ''),
+(3, '1', '13', '2021-11-13 08:03:46', 'Chairperson Ledesma', '3', 'G-Cash', 'MEMBERSHIP/NEW ID', '', ''),
+(4, '2', '9', '2021-11-13 08:13:21', 'Chairperson Ledesma', '3', 'Cash', 'MEMBERSHIP/NEW ID', '', ''),
+(5, '2', '1', '2021-11-13 09:17:41', 'Chairperson Ledesma', '2', 'G-Cash', 'MEMBERSHIP/NEW ID', '', ''),
+(6, '1', '1', '2021-11-13 09:31:18', 'Chairperson Ledesma', '6', 'Cash', 'OPEN ACCOUNT/LOAN', '', ''),
+(7, '1', '9', '2021-11-13 09:41:43', 'Chairperson Ledesma', '6', 'G-Cash', 'OPEN ACCOUNT/LOAN', '', ''),
+(8, '1', '3', '2021-11-13 09:43:23', 'Chairperson Ledesma', '6', 'Cash', 'EMPLOYMENT/WORK', '', ''),
+(9, '1', '2', '2021-11-13 09:44:39', 'Chairperson Ledesma', '2', 'G-Cash', 'EMPLOYMENT/WORK', '', ''),
+(10, '1', '3', '2021-11-13 09:45:25', NULL, '1', 'Cash', 'MEMBERSHIP/NEW ID', '', '');
 
 -- --------------------------------------------------------
 
@@ -340,8 +341,22 @@ CREATE TABLE `tblcreaterental` (
   `creationDate` datetime NOT NULL DEFAULT current_timestamp(),
   `modeOfPayment` int(11) NOT NULL,
   `purpID` int(25) NOT NULL,
-  `payable` decimal(16,2) NOT NULL
+  `payable` decimal(16,2) NOT NULL,
+  `others` varchar(100) NOT NULL,
+  `paymentID` int(11) NOT NULL,
+  `proof` varchar(1000) NOT NULL,
+  `payment` decimal(16,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblcreaterental`
+--
+
+INSERT INTO `tblcreaterental` (`ID`, `status`, `userID`, `rentalID`, `adminID`, `rentalStartDate`, `rentalEndDate`, `creationDate`, `modeOfPayment`, `purpID`, `payable`, `others`, `paymentID`, `proof`, `payment`) VALUES
+(1, 3, 2, 1, 1, '2021-11-13 23:30:00', '2021-11-14 07:13:00', '2021-11-13 23:31:12', 2, 10, '1.00', '', 0, '/images/admin-logo.png', '0.00'),
+(2, 3, 1, 3, 1, '2021-11-13 23:31:00', '2021-11-27 03:26:00', '2021-11-13 23:31:54', 2, 9, '47388.00', '', 0, '', '0.00'),
+(3, 1, 5, 2, 1, '2021-11-14 04:25:00', '2021-11-23 04:25:00', '2021-11-14 04:25:33', 1, 11, '21600.00', '', 0, '', '0.00'),
+(4, 1, 1, 1, 1, '2021-11-14 04:26:00', '2021-11-14 06:26:00', '2021-11-14 04:26:26', 2, 10, '600.00', '', 0, '', '0.00');
 
 -- --------------------------------------------------------
 
@@ -466,8 +481,9 @@ INSERT INTO `tblloginaudits` (`ID`, `timeIn`, `timeOut`, `resId`, `position`, `d
 (3, '13:33:42', '02:18:11', 1, 1, '2021-11-12'),
 (6, '02:38:48', '02:39:37', 7, 4, '2021-11-13'),
 (7, '02:39:42', '00:00:00', 1, 1, '2021-11-13'),
-(8, '12:29:28', '12:37:18', 1, 1, '2021-11-13'),
-(9, '00:53:40', '00:00:00', 1, 1, '2021-11-14');
+(8, '12:29:28', '00:00:00', 1, 1, '2021-11-13'),
+(9, '04:25:07', '04:26:54', 1, 1, '2021-11-14'),
+(10, '10:48:52', '00:00:00', 1, 1, '2021-11-14');
 
 -- --------------------------------------------------------
 
@@ -585,7 +601,7 @@ INSERT INTO `tblrental` (`ID`, `rentalName`, `rentalPrice`, `availability`) VALU
 (1, 'Basketball Court', '300.00', '1'),
 (2, 'Parking', '100.00', '1'),
 (3, 'Daycare', '150.00', '2'),
-(4, 'Barangay Hall', '250.00', '2');
+(4, 'Barangay Hall', '250.00', '1');
 
 -- --------------------------------------------------------
 
@@ -1038,7 +1054,7 @@ ALTER TABLE `tblcreatecertificate`
 -- AUTO_INCREMENT for table `tblcreaterental`
 --
 ALTER TABLE `tblcreaterental`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbldays`
@@ -1062,7 +1078,7 @@ ALTER TABLE `tbllistpurok`
 -- AUTO_INCREMENT for table `tblloginaudits`
 --
 ALTER TABLE `tblloginaudits`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tblmodes`
@@ -1128,7 +1144,7 @@ ALTER TABLE `tblservices`
 -- AUTO_INCREMENT for table `tblstatus`
 --
 ALTER TABLE `tblstatus`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tblstreet`
