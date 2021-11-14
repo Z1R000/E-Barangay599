@@ -1,6 +1,5 @@
 <?php
- $sql= 'SELECT tblpaymentlogs.refNum, tblresident.FirstName,tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblmodes.mode ,tblservices.sertype, tblrental.rentalName, tblpaymentlogs.ID
-  FROM tblpaymentlogs INNER JOIN tblresident ON tblresident.ID = tblpaymentlogs.payorName INNER JOIN tblmodes ON tblmodes.ID = tblpaymentlogs.mode INNER JOIN tblservices ON tblservices.ID = tblpaymentlogs.servicetype INNER JOIN tblrental ON tblrental.ID = tblpaymentlogs.request;';
+ $sql= 'Select tblresident.FirstName,tblcreaterental.ID as cID,tblcreaterental.payment,tblcreaterental.paymentID, tblcreaterental.proof, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblcreaterental.status, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate, tblcreaterental.creationDate, tblpurposes.Purpose, tblrental.rentalName, tblrental.rentalPrice, tblcreaterental.payable, tblstatus.statusName from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID join tblrental on tblrental.ID = tblcreaterental.rentalID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID join tblstatus on tblstatus.ID = tblcreaterental.status where tblcreaterental.status = 3 and tblcreaterental.status<8 order by tblcreaterental.creationDate DESC';
  $query = $dbh->prepare($sql);
  $query->execute();
  $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -31,7 +30,7 @@
                                                                         <td scope="col" style = "text-align: left">'.$r->LastName.", ".$r->FirstName." ".$r->MiddleName." ".$r->Suffix.'</td>
                                                                         <td class= "text-center">
                                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                                            <button type="button" data-role = "check" id = "show" value = "'.$r->ID.'" style= " "class="btn btn-primary rounded"><i class = "fa fa-eye me-1"></i><span class= "wal">Check</span></button>
+                                                                            <button type="button" data-role = "check" id = "show" value = "'.$r->cID.'" style= " "class="btn btn-primary rounded"><i class = "fa fa-eye me-1"></i><span class= "wal">Check</span></button>
                                                                             </div>
                                                                         </td>
                                                                     </tr>
@@ -211,7 +210,6 @@
             </div>
         </div>
 
-
         <div class="modal fade" id = "decline-proof" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger ">
@@ -321,7 +319,7 @@
 $(document).ready(function(){
     $(document).on('click','button[data-role=check]',function(){
         var id = $(this).val();
-       
+        alert(id);
         $.ajax({
             method:'POST',
             url: 'fetchdata.php',
