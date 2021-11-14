@@ -14,7 +14,9 @@
         $arr= [];
         $det = "";
         $fupdate = "";
-        $sen = "none";
+        $status = "";
+        $btn = "";
+        $sen = "display:none";
         foreach ($result as $r){
             $cdate = $r->creationDate;
             $sdate = $r->rentalStartDate;
@@ -36,31 +38,8 @@
             array_push($arr, $r->statid);
 
         }
-        $stat ="";
+            $stat ="";
 
-        if(($arr[8]=="G-cash")&&($arr[13]=="")){
-            $det = "disabled";
-            $sql = "Select * from tblstatus where ID = 3 or ID= 4 or ID= 7";
-            $query = $dbh->prepare($sql);
-            $query -> execute();
-            $result = $query->fetchAll(PDO::FETCH_OBJ);
-            $stat = "";
-            foreach($result as $r){
-                if ($arr[9] == $r->statusName){
-                    $stat.='<option value="'.$r->ID.'" selected>'.$r->statusName.'</option>';
-                }
-                else{
-                    $stat.='<option value="'.$r->ID.'">'.$r->statusName.'</option>';
-                }
-            }
-            
-            $fupdate = 'Update tblcreaterental set 
-            modeOfPayment = '.$mode.' where ID ='.$arr[0].';';
-            
-        }
-        
-
-        if (isset($_POST['update'])){
             $others = $_POST['oth'];
             $ad = $_SESSION['clientmsaid'];
             //admin
@@ -105,12 +84,12 @@
             
             $mode  = $_POST['mod'];
             //mode
-            $stat = "";
+            $status = "";
             if ($det!= "disabled"){
-                $stat = $_POST['stat'];
+                $status = $_POST['stat'];
             }
             else{
-                $stat = $arr[14];                
+                $status = $arr[14];                
             }
            
             //status
@@ -148,25 +127,179 @@
             }
           
             $send =  number_format((float)$pay,2,'.','');
+        
+        if($arr[8]=="G-cash"){
+         
+            $det = "disabled";
+            $sql = "Select * from tblstatus where ID = 3 or ID= 4 or ID= 7";
+            $query = $dbh->prepare($sql);
+            $query -> execute();
+            $result = $query->fetchAll(PDO::FETCH_OBJ);
+            $stat = "";
+
+            foreach($result as $r){
+                if ($arr[9] == $r->statusName){
+                    $stat.='<option value="'.$r->ID.'" selected>'.$r->statusName.'</option>';
+                }
+                else{
+                    $stat.='<option value="'.$r->ID.'">'.$r->statusName.'</option>';
+                }
+            }
+
+            if ($arr[13]==""){
+                $det = "disabled";
+                $fupdate = 'Update tblcreaterental set 
+                modeOfPayment = '.$mode.' where ID ='.$arr[0].';';
+            }
+            else{
+                $det = "";
+                $status = $_POST['stat'];
+                $fupdate = 'Update tblcreaterental set status = '.$status.' ,rentalStartDate = "'.$start.'" ,rentalEndDate = "'.$end.'"
+                ,modeOfPayment = '.$mode.' ,payable = '.$send.'
+                
+                where ID ='.$arr[0].';';
+            }
+
+
+        }
+        if ($arr[8]=="Cash"){
+            $sql = "Select * from tblstatus where ID = 3 or ID= 4 or ID= 7";
+            $query = $dbh->prepare($sql);
+            $query -> execute();
+            $result = $query->fetchAll(PDO::FETCH_OBJ);
+            $stat = "";
+            foreach($result as $r){
+                if ($arr[9] == $r->statusName){
+                    $stat.='<option value="'.$r->ID.'" selected>'.$r->statusName.'</option>';
+                }
+                else{
+                    $stat.='<option value="'.$r->ID.'">'.$r->statusName.'</option>';
+                }
+            }
+            $status = $_POST['stat'];
+            $fupdate = 'Update tblcreaterental set status = '.$status.' ,rentalStartDate = "'.$start.'" ,rentalEndDate = "'.$end.'"
+            ,modeOfPayment = '.$mode.' ,payable = '.$send.'
+            
+            where ID ='.$arr[0].';';
+        }
+
+        if ($arr[9]=="PAYMENT VERIFIED"){
+            $btn= "disabled";
+            $sql = "Select * from tblstatus where  ID= 5 or ID= 6";
+            $query = $dbh->prepare($sql);
+            $query -> execute();
+            $result = $query->fetchAll(PDO::FETCH_OBJ);
+            $stat = "";
+            foreach($result as $r){
+                if ($arr[9] == $r->statusName){
+                    $stat.='<option value="'.$r->ID.'" selected>'.$r->statusName.'</option>';
+                }
+                else{
+                    $stat.='<option value="'.$r->ID.'">'.$r->statusName.'</option>';
+                }
+            }
+
+            $fupdate = 'Update tblcreaterental set status = '.$status.'  
+            where ID ='.$arr[0].';';
+        }
+        if ($arr[9]== "PAYMENT REJECTED"){
+            $det = "disabled";
+            $sql = "Select * from tblstatus where ID = 3 or ID= 4 or ID= 7";
+            $query = $dbh->prepare($sql);
+            $query -> execute();
+            $result = $query->fetchAll(PDO::FETCH_OBJ);
+            $stat = "";
+
+            foreach($result as $r){
+                if ($arr[9] == $r->statusName){
+                    $stat.='<option value="'.$r->ID.'" selected>'.$r->statusName.'</option>';
+                }
+                else{
+                    $stat.='<option value="'.$r->ID.'">'.$r->statusName.'</option>';
+                }
+            }
+
+            if ($arr[13]==""){
+                $det = "disabled";
+                $fupdate = 'Update tblcreaterental set 
+                modeOfPayment = '.$mode.' where ID ='.$arr[0].';';
+            }
+            else{
+                $det = "";
+                $status = $_POST['stat'];
+                $fupdate = 'Update tblcreaterental set status = '.$status.' ,rentalStartDate = "'.$start.'" ,rentalEndDate = "'.$end.'"
+                ,modeOfPayment = '.$mode.' ,payable = '.$send.'
+                
+                where ID ='.$arr[0].';';
+            }
+
+        }
+
+        if ($arr[9] == "FOR PICK-UP"){
+            $sen = "flex";
+            $btn = "disabled";
+            $sql = "Select * from tblstatus where ID = 5 or  ID= 6";
+            $query = $dbh->prepare($sql);
+            $query -> execute();
+            $result = $query->fetchAll(PDO::FETCH_OBJ);
+            $stat = "";
+            foreach($result as $r){
+                if ($arr[9] == $r->statusName){
+                    $stat.='<option value="'.$r->ID.'" selected>'.$r->statusName.'</option>';
+                }
+                else{
+                    $stat.='<option value="'.$r->ID.'">'.$r->statusName.'</option>';
+                }
+            }
+            $fupdate = 'Update tblcreaterental set status = '.$status.'  
+            where ID ='.$arr[0].';';
+        }
+
+        
+        if ($arr[9] == "SETTLED"){
+            $btn = "disabled";
+            $hide = "none";
+            $sen = "disabled";
+            $det = "disabled";
+            $sql = "Select * from tblstatus where ID = 5 or  ID= 6";
+            $query = $dbh->prepare($sql);
+            $query -> execute();
+            $result = $query->fetchAll(PDO::FETCH_OBJ);
+            $stat = "";
+            foreach($result as $r){
+                if ($arr[9] == $r->statusName){
+                    $stat.='<option value="'.$r->ID.'" selected>'.$r->statusName.'</option>';
+                }
+                else{
+                    $stat.='<option value="'.$r->ID.'">'.$r->statusName.'</option>';
+                }
+            }
+        }
+
+        
+
+        if (isset($_POST['update'])){
+            
             //payable computation
-            echo $ad."</br>";
-            echo $userid."</br>";
-            echo $stat."</br>";
-            echo $rtype."</br>";
-            echo $purp."</br>";
+            //echo $ad."</br>";
+            //echo $userid."</br>";
+            //echo $stat."</br>";
+            //echo $rtype."</br>";
+            //echo $purp."</br>";
             echo $mode."</br>";
             echo $start."</br>";
             echo $end."</br>";
             echo $rate."</br>";  
             echo $send."</br>";
-            
-            $sql = 'Update tblcreaterental set 
+            echo $status;
+            echo "</br>".$fupdate;
+            /*$sql = 'Update tblcreaterental set 
                     status ='.$stat.',rentalStartDate = "'.$start.'", rentalEndDate = "'.$end.'", modeOfPayment = '.$mode.',  payable = '.$send.'
                      
 
-                    where ID ='.$arr[0].';';
+                    where ID ='.$arr[0].';';*/
 
-            if ($connect->query($sql)===TRUE){
+            if ($connect->query($fupdate)===TRUE){
                 header('Location: edit-rental.php?rid='.$arr[0].'&update=success');
             }
             else{
@@ -363,19 +496,7 @@
                 
                 ';
             }
-            if ($arr[13]!=""){
-                echo'
-                <div class="alert alert-primary alert-dismissible fade show " id = "alert" role="alert">
-                    <strong><i class="fa fa-check-circle mx-2"></i>Record Updated</strong> See <a href = "admin-rental-request.php" > pending</a> to check if pending status was set for rental record.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                
-                    </div>
-                
-                
-                ';
-
-            }
-         
+       
             ?>
           
                 <div class="row gx-3 bg-599 border-599 text-white">
@@ -444,7 +565,7 @@
                                                     <input type="text" name= "currStart" readonly value = "<?php echo date("j F Y - h:i A",strtotime($arr[4])); ?>"class="form-control">
                                                     <button class="btn btn-secondary disabled">to</button>
                                                     <input type="text" name= "currEnd" readonly value = "<?php echo date("j F Y - h:i A",strtotime($arr[5])); ?>"class="form-control">
-                                                    <button type= "button" class="btn btn-outline-primary  " id = "edit2" onclick = "newDuration('editStarttoEnd','edit2')"><i class="fa fa-edit" disabled></i></button>     
+                                                    <button <?php echo $btn?> type= "button" class="btn btn-outline-primary  " id = "edit2" onclick = "newDuration('editStarttoEnd','edit2')"><i class="fa fa-edit" disabled></i></button>     
                                                 </div>
                                                 <div class="col" style = "display:none" id ="editStarttoEnd">
                                                     <label for="purp" class= "fs-5 fw-bold">New Duration </label>
@@ -519,7 +640,7 @@
                                                 
                                                 ?>
                                                 <label for="status" class="fs-5 fw-bold">Mode of payment</label>
-                                                    <select name="mod" class="form-select" id="status">
+                                                    <select <?php echo $btn ?> name="mod" class="form-select" id="status">
                                                        <?php   echo $mod; ?>
                                                     </select>
                                             </div>
@@ -538,7 +659,9 @@
                                                                 
                                             <div class="row g-0" align= "right">
                                                 <div class="col-md-12  px-3 mx-auto my-2">
-                                                    <button  style= "display:<?php $hide?>"type ="submit" name= "update" role = "button" class="btn btn-primary px-2" >
+
+                                                    <a type="button" style= "<?php echo $sen; ?>"href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info text-white"><i class = "fa fa-paper-plane mx-1 white"></i><span class= "wal">Send</span></a>     
+                                                    <button  style= "display:<?php echo $hide?>"type ="submit" name= "update" role = "button" class="btn btn-primary px-2" >
                                                     <i class= "fa fa-save mx-1"></i>Save</button>
                                                     <button type ="button" data-bs-toggle = "modal" href = "#delete-rental" role = "button" href = ""class="btn btn-danger px-2" data-bs-dismiss= "modal" >
                                                     <i class="fa fa-trash mx-1"></i>
@@ -649,11 +772,11 @@
                                     
                                     <div class="col-md-12">
                                         <div class="float-end">
-
                                         <div class="btn-group">
                                         <button href ="#" type = "button" class="btn btn-success " data-bs-dismiss ="modal"  >
                                             <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
                                         </button>
+
                                         </div>
                                         <div class="btn-group">
                                         <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">

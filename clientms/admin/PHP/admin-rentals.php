@@ -20,6 +20,24 @@
                 $upsuccess = "<div class= 'fs-5 text-danger'>Update Failed</div>";
             }
        }
+       if (isset($_POST['upload'])){
+           if (($_POST['newPayment']=="")||($_POST['newProperty']==""))
+           {
+            header("Location: admin-rentals.php?propertyadd=failed");
+           }
+           else{
+            $sql= "Insert into tblrental(rentalName,rentalPrice,availability) values('".$_POST['newProperty']."','".$_POST['newPayment']."', 1)";
+            if($connect->query($sql)===TRUE){
+                header("Location: admin-rentals.php?propertyadd=success");
+                
+            }
+            else{
+                header("Location: admin-rentals.php?propertyadd=failed");
+                
+            }
+              
+           }
+       }
 
 ?>
 <!DOCTYPE html>
@@ -29,6 +47,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $curr;?></title>
+    
     <?php
          include('link.php');
     ?>
@@ -167,17 +186,29 @@
     <div class="container-fluid">
     <?php
         if ($_GET['updateProperty']== "success"){
-            echo '<div class="alert alert-success alert-dismissible fade show " id = "alert" role="alert">
+            echo '<div class="alert alert-primary alert-dismissible fade show " id = "alert" role="alert">
             <strong><i class="fa fa-check-circle mx-2"></i>Properties Update Success</strong> See <a href = "#" onclick = "document.getElementById(\'propertytab\').click()"> Properties</a> Tab to check.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             </div>';
             
         }
-        else{
-
+        if ($_GET['propertyadd']=="success"){
+            echo '<div class="alert alert-success alert-dismissible fade show " id = "alert" role="alert">
+            <strong><i class="fa fa-check-circle mx-2"></i>New Property Added Successfully</strong> See <a href = "#" onclick = "document.getElementById(\'propertytab\').click()"> Properties</a> Tab to check.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            </div>';
         }
-    
+        if($_GET['propertyadd']=="failed"){
+            echo '<div class="alert alert-warning alert-dismissible fade show " id = "alert" role="alert">
+            <strong><i class="fa fa-check-circle mx-2"></i>New Property Add Failed</strong> check the supplied inputs and place appropriate ones See <a href = "#" onclick = "document.getElementById(\'propertytab\').click()"> Properties</a> Tab to check.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            
+            </div>';
+        }
+        
+        
     ?>
     
      <!--breadcrumb-->
@@ -267,14 +298,9 @@
                                                                     <div class="btn-group">
                                                                     <a href ="#edit-property'.$ctr.'" data-bs-toggle ="modal" role ="button" class="btn btn-success" ><i class = "fa fa-edit px-1"></i><span class= "wal">Edit</span></a>
                                                                     </div>
-                                                                    <div class="btn-group">
-                                                                    <a type="button" href ="#delete-prop" data-bs-toggle = "modal" role = "button" class="btn btn-danger" ><i class = "fa fa-trash px-1"></i><span class= "wal">Delete</span></a>
-                                                                    </div>
+                                                                
                                                                     </td>
-
-
                                                                 </tr>
-
 
                                                                 <div class="modal fade" id = "check-property'.$ctr.'" tab-idndex = "-1">
                                                                 <div class="modal-dialog modal-dialog-centered modal-md">
@@ -427,12 +453,18 @@
                                                             </div>
                                                             
                                                         </div>
-
+                                                        
+       
+   
 
 
 
         
                                                                 ';
+
+
+
+                                                             
                                                                 $ctr++;
 
                                                             }
@@ -458,52 +490,6 @@
     <!--modal-->
    
 
-    <div class="modal fade" id = "delete-prop" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 bg-danger" >
-                    <div class="modal-header  white ">
-                        <div class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</div>
-                        
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-white">
-                        <div class="row">
-                            <div class="col xl-4" align = "center">
-                                <img src="../images/trash.png" alt="trash" class= " img-fluid " style ="width: 10%;">
-                            </div>
-                    
-                        </div>
-                        <div class="row">
-                            <p class = "fs-4 text-center">You are about to delete an existing property, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
-                        </div>
-                        <div class="row justify-content-center" align = "center">
-                            <form method = "POST" action = "#">
-                            <div class="col-xl-12">
-                                <div class="float-end">
-                                    <div class="btn-group">
-                                        <button type = "button" class="btn btn-success " data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                    <i class= 'fa fa-check mx-1'></i>Confirm
-                                </button>
-                                </div>
-                                <div class="btn-group">
-                                <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
-                                    <i class= "fa fa-times-circle mx-1"></i>Cancel
-                                </button>
-                                </div>
-                           
-                            </div>
-                            </div>
-                            </form>
-                        </div>
-                
-                    </div>
-                    <div class="modal-footer">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-       
         <!--<div class="modal fade" id = "check-property" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 blue ">
@@ -532,12 +518,9 @@
         </div>-->
         
 
-    <form action="" method ="POST">
-      
-    </form>
 
  
-    <form action="" method ="POST">
+    <form method ="POST">
         <div class="modal fade" id = "new-property" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 border-0">
@@ -552,14 +535,14 @@
                                 <label for="prate" class="fs-5 fw-bold">Property Rate</label>
                                 <div class="input-group">    
                                     <button class="btn btn-secondary disabled">₱</button>
-                                    <input type="text" id = "prate" class="form-control me-2" name ="pRate" placeholder= "Rate" style= "text-align: right;">
+                                    <input type="text" id = "prate" class="form-control me-2" name ="newPayment" placeholder= "Rate" style= "text-align: right;">
                                </div> 
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xl-12" >
                                 <label for="pname" class="fs-5 fw-bold">Property Name</label>
-                                <input type="text" id = "pname" class="form-control" name ="pName" placeholder="Name of the property to add">
+                                <input type="text" id = "pname" class="form-control"  name = "newProperty" placeholder="Name of the property to add">
                             </div>
                         </div>
                        
@@ -568,7 +551,7 @@
                             <div class="col-md-12  mx-auto my-2">
                                 <div class="float-end">
                                 <div class="btn-group">
-                                <button type ="button" role = "button" class="btn btn-success" >
+                                <button type ="submit" value = ""  name = "upload" role = "button" class="btn btn-success" >
                                     <i class="fa fa-upload me-1"></i>
                                     Upload
                                 </button>
