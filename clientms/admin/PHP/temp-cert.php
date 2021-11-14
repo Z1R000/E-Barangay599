@@ -310,20 +310,12 @@
            
         </div>
         <?php 
-          $sql = "SELECT tblcertificate.*, tblcreatecertificate.*, tblcreatecertificate.resDate as getDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID WHERE tblcreatecertificate.ID = :vid";
+          $sql = "SELECT * from tblcertificate WHERE ID = :vid";
           $query = $dbh -> prepare($sql);
           $query->bindParam(':vid',$vid,PDO::PARAM_STR);
           $query->execute();
           $result = $query->fetchAll(PDO::FETCH_OBJ);
           foreach ($result as $row) {
-            $gdate = $row->getDate;
-            $cdate = date('m/d/Y h:i A', strtotime($gdate));
-            $mid = $row->MiddleName;
-            foreach($mid as $m){
-              $ac .= $m[0];
-            }
-            $complete = "$row->FirstName $ac. $row->LastName $row->Suffix";
-            $upn = strtoupper($complete);
             $upc = "$row->CertificateName";
             $upc = strtoupper($upc);
         ?>
@@ -341,12 +333,11 @@
           <div class="my-1">
           <div class="my-1">
               <!--Supply initially with description in db-->
-              <p align = "justify" id = "indent">This is to certify that <strong><?php echo "$upn";?></strong> for their <strong><?php echo "$upc";?></strong> </p>
-              <p align = "justify" id = "indent"><?php echo $row->content;?></p>
+              <p align = "justify" id = "indent">This is to certify that <strong>REQUESTOR NAME</strong> for their <strong><?php echo "$upc";?></strong> </p>
 
 
               <p id = "indent">
-              Issued this<strong><?php echo $cdate;?></strong>at Barangay 599, Zone 59, District VI Manila.
+              Issued this<strong>DATE</strong>at Barangay 599, Zone 59, District VI Manila.
               </p>
             
             </div>
@@ -417,17 +408,7 @@
                   
                   <tr>
                     <td>
-                    <?php 
-                    $vid=intval($_GET['viewid']);
-        $sql2 = "SELECT * from tblcreatecertificate where ID = :vid";
-        $query2 = $dbh->prepare($sql2);
-        $query2->bindParam(':vid',$vid,PDO::PARAM_STR);
-        $query2->execute();
-        $result2 = $query2->fetchAll(PDO::FETCH_OBJ);
-        foreach ($result2 as $row2) {
-          echo $row2->cAdmin;
-        }
-      ?>
+                    Officer Name
                     </td>
                   </tr>
                   <tr>

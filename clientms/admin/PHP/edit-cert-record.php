@@ -10,16 +10,28 @@
         {
             $eid=intval($_GET['editid']);
             $clientmsaid=$_SESSION['clientmsaid'];
-            $cont=$_POST['cont'];
             $status=$_POST['status'];
         
-            $sql="update tblcreatecertificate set content=:cont, status=:status WHERE ID=:eid";
+            $sql="update tblcreatecertificate set status=:status WHERE ID=:eid";
             $query=$dbh->prepare($sql);
-            $query->bindParam(':cont',$cont,PDO::PARAM_STR);
             $query->bindParam(':status',$status,PDO::PARAM_STR);
             $query->bindParam(':eid',$eid,PDO::PARAM_STR);
             $query->execute();
-            echo '<script>alert("Certificate Information has been updated")</script>';
+            echo '<script>alert("Certificate Record has been updated")</script>';
+            echo "<script>window.location.href ='edit-cert-record.php?editid=".$eid."'</script>";
+        }
+        if(isset($_POST['delete']))
+        {
+            $eid=intval($_GET['editid']);
+            $clientmsaid=$_SESSION['clientmsaid'];
+            $status="8";
+        
+            $sql="update tblcreatecertificate set status=:status WHERE ID=:eid";
+            $query=$dbh->prepare($sql);
+            $query->bindParam(':status',$status,PDO::PARAM_STR);
+            $query->bindParam(':eid',$eid,PDO::PARAM_STR);
+            $query->execute();
+            echo '<script>alert("Certificate Record has been updated")</script>';
             echo "<script>window.location.href ='edit-cert-record.php?editid=".$eid."'</script>";
         }
 ?>
@@ -236,8 +248,8 @@
                                                 <?php 
                                                     $check = $rowe->status;
                                                     $cheme = $rowe->statusName;
-                                                    if ($check == "5" || $check == "6" || $check == "4" || $check == "7" || $check == "2"){
-                                                        echo '<select id = "status" class ="form-select" name= "status" disabled><option value="'.$cheme.'">'.$cheme.'</option>
+                                                    if ($check == "6" || $check == "7" || $check == "2" || $check == "8"){
+                                                        echo '<select id = "status" class ="form-select" name= "status" disabled><option value="'.$check.'" selected>'.$cheme.'</option>
                                                         ';
                                                     
                                                     }else if ($check == "3"){
@@ -251,9 +263,20 @@
                                                            ';
                                                         }
                                                     
-                                                    }else if ($check == "1"){
+                                                    }else if ($check == "5"){
                                                         echo '<select id = "status" class ="form-select" name= "status">';
-                                                        $sqlst="SELECT * from tblstatus WHERE ID = '1' or ID = '2' or ID ='6'";
+                                                        $sqlst="SELECT * from tblstatus WHERE ID = '5' or ID ='6'";
+                                                        $queryst=$dbh->prepare($sqlst);
+                                                        $queryst->execute();
+                                                        $resultst=$queryst->fetchAll(PDO::FETCH_OBJ);
+                                                        foreach($resultst as $rowst){
+                                                            echo '<option value="'.$rowst->ID.'">'.$rowst->statusName.'</option>
+                                                            ';
+                                                        }
+                                                    }
+                                                    else if ($check == "4"){
+                                                        echo '<select id = "status" class ="form-select" name= "status">';
+                                                        $sqlst="SELECT * from tblstatus WHERE ID = '4' or ID ='5'";
                                                         $queryst=$dbh->prepare($sqlst);
                                                         $queryst->execute();
                                                         $resultst=$queryst->fetchAll(PDO::FETCH_OBJ);
@@ -323,38 +346,43 @@
                                    
                                         </div>
                                         <div class="row gy-2 mx-2 my-2 ">
-                                            <div class="col-md-12 mx-auto">
-                                            <label for="cont" class= "black fw-bold fs-5">Certification Contents</label>
-                                            <?php 
-                                                if ($check == "5"){
-                                                    echo '<textarea class= "" name="cont" id="cont" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1" disabled>'.$rowe->content.'</textarea>';
-                                                }else{
-                                                    echo '<textarea class= "" name="cont" id="cont" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1">'.$rowe->content.'</textarea>';
-                                                }
-                                            ?>
                                             
-                                        </div>
                                         <div class="row justify-content-end">
                                         <div class="col-12">
                                             <div class="float-end">
-
-                                           
-                                            <div class="btn-group">                               
-                                        <a type="" href ="temp-cert.php?viewid=<?php echo $eid;?>"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
-                                        </div>
                                         <?php 
-                                                if ($check != "5"){
-                                                    echo '<button type = "sbumit" href = "#save-cert" name="submit" id="submit" data-bs-toggle = "modal" role= "button"class = "btn  btn-primary  my-2"><i class= "fas fa-save me-2"></i>Save</button>';
+                                                if ($rowe->status == "4"){
+                                                    echo '
+                                                    <div class="btn-group">                               
+                                        <a type="" href ="temp-cert.php?viewid=<?php echo $eid;?>"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
+                                        </div> <div class="btn-group"> <button type = "sbumit" href = "#save-cert" name="submit" id="submit" data-bs-toggle = "modal" role= "button"class = "btn  btn-primary  my-2"><i class= "fas fa-save me-2"></i>Save</button></div>';
+                                                }else if ($rowe->status == "3" || $rowe->status == "5"){
+                                                    echo '
+                                                    <div class="btn-group">        
+                                        </div><button type = "sbumit" href = "#save-cert" name="submit" id="submit" data-bs-toggle = "modal" role= "button"class = "btn  btn-primary  my-2"><i class= "fas fa-save me-2"></i>Save</button>';
                                                 }
                                             ?>
                                         <div class="btn-group">     
                                         
                                         </div>
                                         <div class="btn-group">
+                                        <?php 
+                                                
+                                                if ($rowe->status == "6" || $rowe->status == "7" || $rowe->status == "8"){
+                                                    echo '
+                                                    <div class="btn-group">                               
+                                                    <a href="admin-certificate.php" class = "btn btnx float-end btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</a>/div>';
+                                                }else{
+                                                    echo '
+                                                    <div class="btn-group">                               
+                                                    <button type="delete" name="delete" id="delete" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Reject</span></button>';
+                                                }
+                                            ?>
+                                            
                                     
-                                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
+                                                                            
                                                                        
-                                        </div>
+                                        
                                         </div>
                                         </div>
                                         </div>

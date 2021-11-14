@@ -6,22 +6,22 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');
   } else{
+    $eid=intval($_GET['editid']);
   if(isset($_POST['submit']))
   {
-    $eid=intval($_GET['editid']);
+    
     $clientmsaid=$_SESSION['clientmsaid'];
       $cn=$_POST['cn'];
       $cp=$_POST['cp'];
-      $ct=$_POST['cert-info'];
 
-      $sql="update tblcertificate set CertificateName=:cn, CertificatePrice=:cp, CertText=:ct where ID=:eid";
+      $sql="update tblcertificate set CertificateName=:cn, CertificatePrice=:cp where ID=:eid";
       $query=$dbh->prepare($sql);
       $query->bindParam(':cn',$cn,PDO::PARAM_STR);
       $query->bindParam(':cp',$cp,PDO::PARAM_STR);
-      $query->bindParam(':ct',$ct,PDO::PARAM_STR);
       $query->bindParam(':eid',$eid,PDO::PARAM_STR);
       $query->execute();
       echo "<script type='text/javascript'> document.location ='edit-cert.php?editid=" , $eid ,"'; </script>";
+      echo '<script>alert("Certificate Information has been updated")</script>';
   }
 ?>
 <!DOCTYPE html>
@@ -158,25 +158,26 @@ if (strlen($_SESSION['clientmsaid']==0)) {
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-12"> 
-                <button type = "button" onclick = "window.history.back();" class = "btn btnx float-end btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</button>           
+                <a href="admin-certificate.php" class = "btn btnx float-end btn-secondary mb-1"><i class= "fas fa-sign-out-alt me-2"></i>Cancel</a>           
             </div>
         </div>
     </div>
             <div class="container-fluid px-5 mb-5">
               <div class="row">
                 <div class="col-xl-12"> 
-                  <ul class="nav  nav-pills justify-content-center">     
+                  <ul class="nav  nav-pills justify-content-center">
+                  <li class="nav-item">
+                        <a class="nav-link active fs-5" href="#edit-cert" data-bs-toggle = "tab">Edit Certification </a>
+                    </li>     
                     <li class="nav-item">
-                        <a class="nav-link active fs-5" href="#preview" data-bs-toggle = "tab">Preview</a>
+                        <a class="nav-link fs-5" href="#preview" data-bs-toggle = "tab">Preview</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link fs-5" href="#edit-cert" data-bs-toggle = "tab">Edit Certification </a>
-                    </li>
+                    
                   </ul>
                 </div>
                 <div class="col-xl-12">
                   <div class="tab-content">
-                    <div class="tab-pane show fade active" id="preview">
+                    <div class="tab-pane show fade" id="preview">
                         <div class="container my-3">
                                 <div class="row g-0 ">
                                     <div class="col-xl-8  shadow-sm mx-auto  ">
@@ -193,7 +194,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 
                                         
                                             <div class="embed-responsive mx-auto embed-responsive-16by9">
-                                                <iframe class="embed-responsive-item" id = "frame" src="temp-cert.php"></iframe>
+                                                <iframe class="embed-responsive-item" id = "frame" src="temp-cert.php?viewid=<?php echo $eid;?>"></iframe>
                                             </div>
                                         </div>
                                     </div>
@@ -202,7 +203,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                         </div> 
                       
                     </div>
-                    <div class="tab-pane show fade" id="edit-cert">
+                    <div class="tab-pane show fade active" id="edit-cert">
                     <form method ="POST">
     <?php
 				$eid=$_GET['editid'];
@@ -249,16 +250,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                 
              
                   </div>
-                  <div class="row  g-2 ">
-                    <div class="col-md-12 mx-auto">
-                      <label for="cert-inf" class= "black fw-bold">Certification Contents</label>
-                      <textarea class= "" name="cert-info" id="cert-inf" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1" value=""><?php echo htmlentities($row->CertText);?></textarea>
-                    </div>
-                   
-                  </div>
                   <div class="row g-2">
                     <div class="col-12">
-                    <button type = "button" href = "#save-cert" data-bs-toggle = "modal" role= "button" name="submit" id="submit" class = "btn btnx btn-primary mb-1 float-end"><i class= "fas fa-save me-2"></i>Save</button>
+                    <button type = "submit" name="submit" id="submit" class = "btn btnx btn-primary mb-1 float-end"><i class= "fas fa-save me-2"></i>Save</button>
                     </div>
 
                     </div>

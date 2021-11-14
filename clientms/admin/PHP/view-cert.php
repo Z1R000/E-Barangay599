@@ -340,8 +340,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
           <div class="my-1">
               <!--Supply initially with description in db-->
               <p align = "justify" id = "indent">This is to certify that <strong><?php echo "$upn";?></strong> for their <strong><?php echo "$upc";?></strong> </p>
-              <p align = "justify" id = "indent"><?php echo $row->content;?></p>
-
+              
 
               <p id = "indent">
               Issued this<strong><?php echo $cdate;?></strong>at Barangay 599, Zone 59, District VI Manila.
