@@ -1,7 +1,13 @@
 <?php   
+    
+function moveto(){
+     header('Location:admin-rentals.php?success=1');    
+    
+}
+     
 
     
-    $sql = 'SELECT * FROM tblpurposes where serviceType = "rental"';
+$sql = 'SELECT * FROM tblpurposes where serviceType = "rental"';
     $query= $dbh->prepare($sql);
     $query->execute();
     $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -40,14 +46,102 @@ $mod = '<option  selected disabled>Mode of payment</option>';
      $mod .= '<option  value ="'.$row->ID.'" >'.$row->mode.'</option>';
  }
 
- 
- 
- $sql = 'Select tblresident.FirstName, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblcreaterental.status, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate, tblcreaterental.creationDate, tblpurposes.Purpose, tblrental.rentalName, tblrental.rentalPrice, tblcreaterental.payable from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID join tblrental on tblrental.ID = tblcreaterental.rentalID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID where tblcreaterental.status > 1 order by tblcreaterental.creationDate ASC;';
+ $sql = 'Select tblresident.FirstName,tblcreaterental.ID as cID, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblcreaterental.status, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate, tblcreaterental.creationDate, tblpurposes.Purpose, tblrental.rentalName, tblrental.rentalPrice, tblcreaterental.payable, tblstatus.statusName from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID join tblrental on tblrental.ID = tblcreaterental.rentalID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID join tblstatus on tblstatus.ID = tblcreaterental.status where tblcreaterental.status > 1 and tblcreaterental.status<8 order by tblcreaterental.creationDate DESC';
 
  
  $query= $dbh->prepare($sql);
  $query->execute();
  $results = $query->fetchAll(PDO::FETCH_OBJ);
+
+
+ if (isset($_POST['rent'])){
+    
+    $ad = $_SESSION['clientmsaid'];
+    $user = $_POST['rrname'];
+    $userid = $user[0];
+    $purp = $_POST['purpose'];
+    $s = $_POST['startDur'];
+    $e = $_POST['endDur'];
+    $start =  date('Y-m-d  H:i', strtotime($s));
+    $end =  date('Y-m-d H:i', strtotime($e));
+    
+    $other = $_POST['others'];
+    $rate = $_POST['rprice'];
+    $mode = $_POST['modeofp'];
+    $stat = $_POST['stat'];
+
+
+    $start1 = new DateTime($_POST['startDur']);
+    $end2 = new DateTime($_POST['endDur']);
+    $diff = $end2->diff($start1);
+    $rt = $_POST['rtype'];
+    $d = $diff->format('%d');
+    $h = $diff->format('%h');
+    $i = $diff->format('%i');
+
+    $crono = 0;
+    $pay = 0;
+    if ($d>0){
+        $putal = (float)(($i/60) *$rate);
+        $crono = (float)(($d*24)+ ($h*1));
+        $pay = (float)(($rate*$crono)+$putal);
+         
+    }
+    else if ($h>0){
+        $putal = (float)(($i/60) *$rate);
+        $crono = (float)($h*1);
+        $pay = (float)(($rate*$crono)+$putal);
+    }
+    else{
+        $pay=  (float)($i/60)*($rate);
+    }
+
+    $send =  number_format((float)$pay,2,'.','');
+ 
+    $sqlr= 'Insert into tblcreaterental(status,userID,rentalID,adminID,	rentalStartDate,rentalEndDate,modeOfPayment,purpID,payable,others) values('.$stat.','.$userid.','.$rt.','.$ad.',"'.$start.'","'.$end.'",'.$mode.','.$purp.','.$send.',"'.$others.'");';
+    
+    if ($connect->query($sqlr)===TRUE){
+      
+   
+    }
+    else{
+        echo "TANIGNA";
+    }
+    header("Location: admin-rentals.php?add-rec=successful");
+    
+   
+
+}
+
+if ($_GET['add-rec']=="successful"){
+    echo'
+    
+    <div class="alert alert-success alert-dismissible fade show " id = "alert" role="alert">
+        <strong><i class="fa fa-check-circle mx-2"></i>New Record Added</strong> See <a href = "admin-rental-request.php" > pending</a> to check if pending status was set for rental record.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    
+        </div>
+    
+    
+    ';
+}
+else{
+    
+}
+if ($_GET['delete']== "success"){
+    echo'
+    
+    <div class="alert alert-danger alert-dismissible fade show " id = "alert" role="alert">
+        <strong><i class="fa fa-trash me-2"></i>A record was deleted</strong> See archives in <a href = "admin-e-content.php" >E-barangay settings</a> to check deleted record.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    
+        </div>
+    
+    
+    ';
+}
+
+
  
 
 ?>                                    
@@ -126,7 +220,7 @@ $mod = '<option  selected disabled>Mode of payment</option>';
                                 
                         
 
-
+<form method = "POST">
         <div class="modal fade show" id = "new-rental" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content g-0 border-0">
@@ -142,7 +236,7 @@ $mod = '<option  selected disabled>Mode of payment</option>';
                                         <div class="col-6 ">
                                             <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
                                             <div class="d-flex">    
-                                            <input type="text" id = "search" class="form-control" name ="pRate" placeholder= "Requestor Name">
+                                            <input type="text" id = "search" class="form-control" name ="rrname" placeholder= "Requestor Name">
                                             </div>
                                             <div class="col" style= "z-index: 9;position:relative">
                                                 <div class="list-group w-100"  id="show-list" style="position: absolute">
@@ -152,14 +246,14 @@ $mod = '<option  selected disabled>Mode of payment</option>';
                                         </div> 
                                         <div class="col-xl-6">
                                             <label for="purp" class= "fs-5 fw-bold">Purposes</label>
-                                            <select class= "select form-select" name="" id="purp" onchange = "showOthers('others', this)">
+                                            <select class= "select form-select" name="purpose" id="purp" onchange = "showOthers('others', this)">
                                                 <?php echo $opt;?>
                                                 <option value="others">Others</option>
                                             </select>
 
                                             <div class="col-xl-12" id = "others">
                                                 <label for="prate" class="fs-5 fw-bold">Purpose</label>
-                                                <input type="text"  id = "date" class="form-control " name ="date">
+                                                <input type="text"  name= "others" id = "date" class="form-control " name ="date">
                                             </div>
                                 
                                         </div>
@@ -171,9 +265,9 @@ $mod = '<option  selected disabled>Mode of payment</option>';
                                             <label for="prate" class="fs-5 fw-bold">Rental Duration</label>
                                             <div class="input-group">
                                             <button class="btn btn-secondary disabled">From</button>
-                                                <input type="datetime-local" class="form-control">
+                                                <input type="datetime-local" name= "startDur" class="form-control">
                                                 <button class="btn btn-secondary disabled">to</button>
-                                                <input type="datetime-local" class="form-control">
+                                                <input type="datetime-local" name= "endDur" class="form-control">
                                         
                                             </div>
                                         </div>
@@ -193,7 +287,7 @@ $mod = '<option  selected disabled>Mode of payment</option>';
                                                 <button class="btn btn-secondary disabled">
                                                 ₱
                                                 </button>    
-                                                <input type= "text" name="rprice" id="rprice" style= "text-align:right" value = "" class="form-control action" disabled>
+                                                <input type= "text" name="rprice" id="rprice" style= "text-align:right" value = "" class="form-control action" >
                                         </div> 
                                     </div>
                                     
@@ -206,18 +300,27 @@ $mod = '<option  selected disabled>Mode of payment</option>';
                                     
                                         <div class="col-xl-6" >  
                                             <label for="status" class="fs-5 fw-bold">Mode of payment</label>
-                                            <select name="" class="form-control" id="status">
+                                            <select name="modeofp" class="form-control" id="status">
                                                 <?php echo $mod;?>
                                             </select>
                                         </div>
                                         <div class="col-xl-6" >
                                         
                                         <label for="prate" class="fs-5 fw-bold">Rental Status</label>
-                                            <select name="" class="form-control" id="status">
-                                                                <?php
-                                                                    echo $stat;
-                                                                
-                                                                ?>
+                                            <select name="stat" class="form-control" id="status">
+                                            <?php
+                                                    $sql= 'Select * from tblstatus where ID = 1 or ID = 2';
+                                                    $query = $dbh->prepare($sql);
+                                                    $query->execute();
+                                                    $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                    foreach($results as $md){
+                                                        echo '
+                                                            <option value = "'.$md->ID.'">'.$md->statusName.'</option>
+                                                        
+                                                        ';
+                                                    }
+                                                
+                                                ?>
                                             </select>
                                     </div>
                                     
@@ -227,7 +330,7 @@ $mod = '<option  selected disabled>Mode of payment</option>';
                                             <div class="float-end">
                                                 
                                                 <div class="btn-group">
-                                                <button type ="button" role = "button" class="btn btn-success " >
+                                                <button type ="submit" name = "rent" class="btn btn-success" >
                                                     <i class="fa fa-upload mx-1"></i>
                                                     Submit
                                                 </button>
@@ -251,7 +354,7 @@ $mod = '<option  selected disabled>Mode of payment</option>';
                 </div>
             </div>
         </div>
-        
+    </form>
         <div class="modal fade" id = "check-rental" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content g-0 border-0">
@@ -328,17 +431,15 @@ $mod = '<option  selected disabled>Mode of payment</option>';
                                     
                                         <div class="col-xl-6" >  
                                             <label for="status" class="fs-5 fw-bold">Mode of payment</label>
-                                            <select name="" class="form-control" id="status" disabled>
+                                            <select name="" class="form-control" name = "modeofp"id="status" disabled>
                                             <option value="g-cash">G-cash</option>
                                             <option value="cash">Cash</option>
                                             </select>
                                         </div>
                                         <div class="col-xl-6" >
                                         <label for="prate" class="fs-5 fw-bold">Rental Status</label>
-                                            <select name="" class="form-control" id="status" disabled>
-                                                <option value="avail">On going</option>
-                                                <option value="noavail">Settled</option>
-                                        
+                                            <select name="" class="form-control" id="status" >
+                                               
                                             </select>
                                     </div>
                                     <div class="row g-0 " align= "right">
@@ -363,7 +464,7 @@ $mod = '<option  selected disabled>Mode of payment</option>';
             </div>
         </div>
         
-    </form>
+
 
     
 

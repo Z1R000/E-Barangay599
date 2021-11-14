@@ -1,6 +1,6 @@
 <?php 
     $curr ="Rentals";
-
+    ob_start();
     session_start();
     error_reporting(0);
     include('includes/dbconnection.php');
@@ -181,7 +181,7 @@
     ?>
     
      <!--breadcrumb-->
-    <form action="#" method= "POST">
+    
             <div class="container-fluid px-5 mb-5">
                 <div class="row">
                     <div class="col-xl-2">
@@ -207,8 +207,12 @@
                                 <?php include('payment-logs-rental.php');?>
                                 
                             </div>
-                            </div>
+                        </div>
+                        </div>
+                         
                             <div class="tab-pane fade show " id="properties">
+                                  
+                            <form action="#" method= "POST">
                                     <div class="container g-0 pt-2">
                                         <div class="row bg-599 text-white rounded-top">
                                             <div class="fs-5 px-2"><i class="fa fa-warehouse mx-1"></i>Available Properties</div>
@@ -221,6 +225,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+   
                                             <div class="row  ps-4 px-2 "  >
                                                 <div class= "col-xl-12 col-lg-12" style= "overflow-x:auto;">
                                                 <table class="table table-striped table-bordered" id = "rlist"  style= "min-width:880px;">
@@ -436,18 +441,19 @@
                                                         ?>
                                                        
                                                     </tbody>
-                                                    
+                                                                                        
+                                                </form>
+               
                                                 </table>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                            </div>
+             </div>
                     </div>
                 </div>
             </div>
 
-</form>
    
     <!--modal-->
    
@@ -630,4 +636,4 @@
 
 </body>
 </html>
-<?php } ?>
+<?php  } ob_end_flush(); ?>

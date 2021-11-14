@@ -30,7 +30,7 @@ if(isset($_POST["action"]))
   while($row = mysqli_fetch_array($result))
   {
    $output .= '<button class="btn btn-secondary disabled">₱</button>    
-                <input type= "text" name="rprice" id="rprice" style= "text-align:right" value = "'.$row['rentalPrice'].' "class="form-control action" disabled>';
+                <input type= "text" name="rprice" id="rprice" style= "text-align:right" value = "'.$row['rentalPrice'].' "class="form-control action" readonly>';
   }
  }
  echo $output;
@@ -41,19 +41,21 @@ if(isset($_POST["id"]))
 {
  $con = mysqli_connect("localhost", "root", "", "clientmsdb");
  $output = '';
- 
-  $sql= 'SELECT DISTINCT tblpaymentlogs.payment, tblpaymentlogs.refNum,tblrental.rentalPrice, tblpaymentlogs.refNum, tblresident.FirstName,tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblmodes.mode ,tblservices.sertype, tblrental.rentalName,tblpaymentlogs.proof FROM tblpaymentlogs INNER JOIN tblresident ON tblresident.ID = tblpaymentlogs.payorName INNER JOIN tblmodes ON tblmodes.ID = tblpaymentlogs.mode INNER JOIN tblservices ON tblservices.ID = tblpaymentlogs.servicetype INNER JOIN tblrental ON tblrental.ID = tblpaymentlogs.request and tblpaymentlogs.id = "'.$_POST['id'].'"';
+    
+  $sql= 'Select tblresident.FirstName,tblcreaterental.ID as cID,tblcreaterental.payment,tblcreaterental.paymentID, tblcreaterental.proof, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblcreaterental.status, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate, tblcreaterental.creationDate, tblpurposes.Purpose, tblrental.rentalName, tblrental.rentalPrice, tblcreaterental.payable, tblstatus.statusName from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID join tblrental on tblrental.ID = tblcreaterental.rentalID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID join tblstatus on tblstatus.ID = tblcreaterental.status where tblcreaterental.status = 3 and tblcreaterental.status<8 and tblcreaterental.ID = '.$_POST['id'].' order by tblcreaterental.creationDate DESC
+  ';
 
   if ($result = mysqli_query($con, $sql)){
     if (mysqli_num_rows($result)>0){
         while($row = mysqli_fetch_array($result))
         {
+            
             echo '
             <div class= "row">
                 <div class="col-xl-12">
                 
                 <label for="payid" class="fs-5">Payment ID</label>
-                <input id = "payid" type="text" class= "form-control" placeholder = "Payor Name" value = "'.$row['refNum'].'" readonly style = "text-align: left;">
+                <input id = "payid" type="text" class= "form-control" placeholder = "Payor Name" value = "'.$row['paymentID'].'" readonly style = "text-align: left;">
                 </div>
             </div>
             <div class="row">
@@ -77,7 +79,7 @@ if(isset($_POST["id"]))
             <label for="payed" class= "fs-5">Payable</label>
             <div class="input-group">
                 <button class="btn btn-secondary disabled">₱</button>
-                <input id = "payed" type="text" class= "form-control" placeholder = "Payor Name" value = "'.$row['rentalPrice'].'" style= "text-align: right"readonly> 
+                <input id = "payed" type="text" class= "form-control" placeholder = "Payor Name" value = "'.$row['payable'].'" style= "text-align: right"readonly> 
 
             </div>
         
@@ -96,10 +98,10 @@ if(isset($_POST["id"]))
 
         <div class="btn-group">
         <div class="btn-group  mb-1  " role="group" aria-label="First group">
-            <a href ="#approve-proof "class="btn btn-success mx-1" data-bs-toggle=  "modal" style = ""><i class = "fa fa-check mx-1 "></i><span class= "wal">Accept</span></a>
+            <a href ="payment-verification.php?payment=success&rid='.$row['cID'].'"class="btn btn-success mx-1"  style = ""><i class = "fa fa-check mx-1 "></i><span class= "wal">Accept</span></a>
         </div>
             <div class="btn-group  mb-1  " role="group" aria-label="First group">
-            <a href ="#decline-proof "class="btn btn-danger mx-1" data-bs-toggle=  "modal" style= ""><i class = "fa fa-times fa-1x mx-1 "></i><span class= "wal"> Decline</span></a>
+            <a href ="payment-verification.php?payment=rejected&rid='.$row['cID'].' "class="btn btn-danger mx-1" style= ""><i class = "fa fa-times fa-1x mx-1 "></i><span class= "wal"> Decline</span></a>
         </div>
         </div>
 
