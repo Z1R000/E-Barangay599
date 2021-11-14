@@ -286,6 +286,7 @@
                                                 $results = $query->fetchAll(PDO::FETCH_OBJ);
                                             
                                                 $prp = "<option  selected disabled>Property</option>";
+
                                                 foreach($results as $row){
                                                     if ($row->rentalName == $arr[7] ){
                                                         $prp .= '<option  value ="'.$row->ID.'" selected>'.$row->rentalName.'</option>';
@@ -370,9 +371,9 @@
                                                                 
                                             <div class="row g-0" align= "right">
                                                 <div class="col-md-12  px-3 mx-auto my-2">
-                                                    <button type ="button" role = "button" class="btn btn-success px-2" >
+                                                    <button type ="button" role = "button" class="btn btn-success px-2" data-bs-toggle= "" >
                                                     <i class= "fa fa-check mx-1"></i>Approve</button>
-                                                    <button type ="button" role = "button" href = ""class="btn btn-danger px-2" data-bs-dismiss= "modal" >
+                                                    <button type ="button" role = "button" href = "#decline-req"class="btn btn-danger px-2" data-bs-toggle= "modal" >
                                                     <i class="fa fa-trash mx-1"></i>
                                                             Decline
                                                     </button>
@@ -394,43 +395,104 @@
     <?php
         include('services.php');
     ?>
-    <div class="modal fade" id = "delete-rental" tab-idndex = "-1">
+    <div class="modal fade" id = "decline-req" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 bg-danger" >
-                    <div class="modal-header  white ">
-                        <div class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</div>
+                <div class="modal-content g-0 bg-danger ">
+                    <div class="modal-header bg-danger bg-transparent ">
+                        <div class="modal-title text-white" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Declining request?</div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">
-                        <div class="row">
-                            <div class="col xl-4" align = "center">
-                                <img src="../images/trash.png" alt="trash" class= " img-fluid " style ="width: 10%;">
-                            </div>
-                    
-                        </div>
-                        <div class="row">
-                            <p class = "fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
-                        </div>
-                        <div class="row justify-content-center" align = "center">
-                            <form method = "POST" action = "#">
-                            <div class="col-xl-12">
-                                <div class="float-end">
-                                    <div class="btn-group">
-                                        <button type = "button" class="btn btn-success " data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                    <i class= 'fa fa-check mx-1'></i>Confirm
-                                </button>
-                                </div>
-                                <div class="btn-group">
-                                <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
-                                    <i class= "fa fa-times-circle mx-1"></i>Cancel
-                                </button>
-                                </div>
+                        <div class="row mt-2 me-3 ms-2">
+                            <form action="" method = "POST">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="dname">Requestor Name</label>
+                                        <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
+
+                                    </div>
                            
-                            </div>
-                            </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6">
+                                        <label for="contac">Contact Number</label>
+                                        <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="emails" >Email Address</label>
+                                        <input id = "emails" type="text" class="form-control" value = "juanDelaC@gmail.com" readonly>
+                                        
+                                    
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="decreason" >Decline Reason</label>
+                                        <select name="" id="decreason" class= "form-select" onclick = "showOthersdec('other_txt-dec',this)">
+                                            <option value="">Insufficient payment</option>
+                                            <option value="">Invalid proof sent</option>
+                                            <option value="others">Others</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row g-0 my-2" id = "other_txt-dec" style= "display:none;">
+                                 
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" placeholder= "Specify a reason here">
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                        <label for="remarks" >Remarks</label>
+                                        <div class="col-md-12">
+                                            <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;resize: none;"></textarea>
+                                            <label for="floatingTextarea2">Remarks here (max 10 words)</label>
+                                                
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                                <div class="row mt-2">
+                                    <label for="remarks" >Mode of delivery <i class= "fa fa-envelope"></i></label>
+                                    <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    SMS
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    E-mail
+                                                </label>  
+                                            </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row justify-content-center" align = "center">
+                                    
+                                <div class="col-md-12">
+                                        <div class="float-end">
+                                            <div class="btn-group">
+                                        <button href ="" onclick = "alert('Decline Message Sent')" type = "button" class="btn btn-success " data-bs-dismiss ="modal" data-bs-toggle= "modal" >
+                                            <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
+                                        </button>
+                                        </div>
+                                        <div class="btn-group">
+
+                                        
+                                        <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times me-2"></i> Discard
+                                        </button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>  
                             </form>
+
                         </div>
+                      
                 
                     </div>
                     <div class="modal-footer">
@@ -439,7 +501,6 @@
                 </div>
             </div>
         </div>
-
     </script>
  
 <script>
