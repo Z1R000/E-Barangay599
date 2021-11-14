@@ -70,11 +70,12 @@ $mod = '<option  selected disabled>Mode of payment</option>';
     $mode = $_POST['modeofp'];
     $stat = $_POST['stat'];
 
-
+    $rt = $_POST['rtype'];
+    
     $start1 = new DateTime($_POST['startDur']);
     $end2 = new DateTime($_POST['endDur']);
     $diff = $end2->diff($start1);
-    $rt = $_POST['rtype'];
+    
     $d = $diff->format('%d');
     $h = $diff->format('%h');
     $i = $diff->format('%i');
@@ -98,16 +99,16 @@ $mod = '<option  selected disabled>Mode of payment</option>';
 
     $send =  number_format((float)$pay,2,'.','');
  
-    $sqlr= 'Insert into tblcreaterental(status,userID,rentalID,adminID,	rentalStartDate,rentalEndDate,modeOfPayment,purpID,payable,others) values('.$stat.','.$userid.','.$rt.','.$ad.',"'.$start.'","'.$end.'",'.$mode.','.$purp.','.$send.',"'.$others.'");';
+    $sqlr= 'Insert into tblcreaterental(status,userID,rentalID,	rentalStartDate,rentalEndDate,modeOfPayment,purpID,payable,others) values('.$stat.','.$userid.','.$rt.',"'.$start.'","'.$end.'",'.$mode.','.$purp.','.$send.',"'.$others.'");';
     
     if ($connect->query($sqlr)===TRUE){
-      
+        header("Location: admin-rentals.php?add-rec=successful");
    
     }
     else{
-        echo "TANIGNA";
+  
     }
-    header("Location: admin-rentals.php?add-rec=successful");
+   
     
    
 

@@ -319,7 +319,7 @@
 $(document).ready(function(){
     $(document).on('click','button[data-role=check]',function(){
         var id = $(this).val();
-        alert(id);
+     
         $.ajax({
             method:'POST',
             url: 'fetchdata.php',

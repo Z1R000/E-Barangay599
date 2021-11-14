@@ -5,6 +5,113 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsuid'] == 0)) {
     header('location:logout.php');
 } else {
+    $send = 20.00;
+    $sql = 'SELECT * FROM tblpurposes where serviceType = "rental"';
+    $query= $dbh->prepare($sql);
+    $query->execute();
+    $results = $query->fetchAll(PDO::FETCH_OBJ);
+
+    $opt = "<option  selected disabled>Purposes</option>";
+    foreach($results as $row){
+        $opt .= '<option  value ="'.$row->ID.'" >'.$row->Purpose.'</option>';
+       
+    }
+
+
+    $sql = 'SELECT * FROM tblmodes';
+    $query= $dbh->prepare($sql);
+    $query->execute();
+    $results = $query->fetchAll(PDO::FETCH_OBJ);
+    $mod = '<option  selected disabled>Mode of payment</option>';
+
+    foreach($results as $row){
+        $mod .= '<option  value ="'.$row->ID.'" >'.$row->mode.'</option>';
+    }
+
+    if (isset($_POST['request'])){
+        if (!isset($_POST['rtype'])||
+            !isset($_POST['rprice'])||
+            !isset($_POST['startDur'])||
+            !isset($_POST['startDur'])||
+            !isset($_POST['endDur'])||
+            !isset($_POST['modeofp'])||
+            !isset($_POST['purpose'])){
+                header("Location: rental-request.php?request=failed");
+        }else{
+            
+                
+            $user = $_SESSION['clientmsuid'];
+            $prop = $_POST['rtype'];
+            $rate = $_POST['rprice'];
+            $s = $_POST['startDur'];
+            $e = $_POST['endDur'];
+            $start =  date('Y-m-d  H:i', strtotime($s));
+            $end =  date('Y-m-d H:i', strtotime($e));
+            $mod = $_POST['modeofp'];
+            $purp = $_POST['purpose'];
+
+
+            $start1 = new DateTime($_POST['startDur']);
+            $end2 = new DateTime($_POST['endDur']);
+            $diff = $end2->diff($start1);
+        
+
+            $d = $diff->format('%d');
+            $h = $diff->format('%h');
+            $i = $diff->format('%i');
+        
+            $crono = 0;
+            $pay = 0;
+            if ($d>0){
+                $putal = (float)(($i/60) *$rate);
+                $crono = (float)(($d*24)+ ($h*1));
+                $pay = (float)(($rate*$crono)+$putal);
+                
+            }
+            else if ($h>0){
+                $putal = (float)(($i/60) *$rate);
+                $crono = (float)($h*1);
+                $pay = (float)(($rate*$crono)+$putal);
+            }
+            else{
+                $pay=  (float)($i/60)*($rate);
+            }
+        
+            $send =  number_format((float)$pay,2,'.','');
+            $others = $_POST['others'];
+
+
+            echo $user."</br>";
+            echo $prop."</br>";
+            echo $rate."</br>";
+            echo $user."</br>";
+            echo $start."</br>";
+            echo $end."</br>";
+            echo $send."</br>";
+            echo $mod."</br>";
+            echo $purp."</br>";
+    
+
+            $sql= '';
+            if ($_POST['others']!=""){
+                $sql = 'Insert into tblcreaterental(status,userID,rentalID,adminID,rentalStartDate,rentalEndDate,modeOfPayment,purpID,payable,others) values (1,'.$user.','.$prop.',0,"'.$start.'","'.$end.'",'.$mod.','.$purp.','.$send.',"'.$others.'")';
+            
+            }
+            else{
+                $sql = 'Insert into tblcreaterental(status,userID,rentalID,adminID,rentalStartDate,rentalEndDate,modeOfPayment,purpID,payable) values (1,'.$user.','.$prop.',0,"'.$start.'","'.$end.'",'.$mod.','.$purp.','.$send.')';
+            }
+            echo $sql;
+            if ($connect->query($sql)===TRUE){
+                header("Location: rental-request.php?request=sent&topay=".$send."&h=".$h."&d=".$d."&m=".$i."&rate=".$rate."");
+            }
+            else{
+                header("Location: rental-request.php?request=failed");
+            }
+        }
+        
+    }
+        
+
 ?>
 
     <!DOCTYPE html>
@@ -141,6 +248,8 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
     </head>
 
     <body>
+
+
         <div class="d-flex" id="wrapper">
             <!-- Sidebar -->
             <?php include_once('includes/sidebarupdated.php');     ?>
@@ -199,96 +308,144 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                         <li class="active">Rental Request</li>
                     </ol>
                 </div>
-                <div class="container-fluid px-4">
-                    <div style="background-color: aliceblue;border-radius: 25px;border:1px solid black;padding: 25px;">
-                        <div class="graph-visual tables-main">
-                            <form>
-                                <div class="modal-body bg-white ">
+                        
+            <div class="container-fluid">
+                <?php
+                    if ($_GET['request']=="sent"){
+                        echo'
+                        
+                        <div class="row px-5">
+                        <div class="alert alert-success alert-dismissible fade show " id = "alert" role="alert">
+                            <strong><i class="fa fa-check-circle mx-2"></i>Rental Request Sent</strong> See breakdown <a href = "breakdown.php?total='.$_GET['topay'].'&h='.$_GET['h'].'&m='.$_GET['m'].'&d='.$_GET['d'].'&r='.$_GET['rate'].'" > here</a> of payment.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                                
+                        
+                        ';
+                    }
+                    if($_GET['request']=="failed"){
+                        echo '<div class="row px-5">
+                        <div class="alert alert-warning alert-dismissible fade show " id = "alert" role="alert">
+                            <strong><i class="fa fa-exclamation-triangle mx-2"></i>Rental Request failed </strong>do check your inputs and supply the fields appropriately.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
 
+                    }
+                
+                
+                
+                
+                ?>
+                 
+        
+    
+            </div>
+            <form method = "POST">
+                <div class="container-fluid px-2">
+                    
+           
+                       <div class="row justify-content-center">
+                           <div class="col-xl-11 px-3 py-2 ">
+                          
+                                    <div class="row text-white rounded-top" style= "background: #012f4e">
+                                        <div class= "fs-5 mx-2">Request Rental</div>
+                                    </div>
+                                    <div class="row px-2 shadow-sm bg-white pt-3 pb-3 ">
+                                        <?php
+                                        
+                                        $sql= "Select * from tblrental where availability =1 ";
+                                        $query = $dbh->prepare($sql);
+                                        $query->execute();
+                                        $results = $query->fetchAll(PDO::FETCH_OBJ);
 
-                                    <div class="row">
+                                        $props = ' <option selected value="">--Select Property--</option>';
+                                        foreach($results as $pr){
+                                            $props .= '<option value="'.$pr->ID.'">'.$pr->rentalName.'</option>';
+                                        }
 
-                                        <div class="col-xl-6">
+                                        ?>
+                                      <div class="row">
+                                        <div class="col-xl-6" >  
                                             <label for="status" class="fs-5 fw-bold">Property to rent</label>
-                                            <select name="" class="form-control" id="status" required>
-                                                <option selected value="">--Select Property--</option>
-                                                <option value="avail">Barangay Van</option>
-                                                <option value="noavail">Patrol</option>
-                                                <option value="noavail">Basketball court</option>
+                                            <select name="rtype" class="form-select action" id="rtype">
+                                                <?php echo $props;?>
+                                            </select>
+                                        </div>
+                                        <div class="col-xl-3" >
+                                            <label for="prate" class="fs-5 fw-bold">Rate<span class= "text-muted fs-6">(per hour)</span></label>
+                                            <div class="input-group" id = "price">
+                                                <button class="btn btn-secondary disabled">
+                                                ₱
+                                                </button>    
+                                                <input type= "text" name="rprice" id="rprice" style= "text-align:right" value = "" class="form-control action" readonly >
+                                            </div> 
+                                        
+                                        </div>
+                                        <div class="col-xl-3" >  
+                                            <label for="status" class="fs-5 fw-bold">Mode of payment</label>
+                                            <select name="modeofp" class="form-select" id="status">
+                                                <?php echo $mod;?>
                                             </select>
                                         </div>
 
-                                        <div class="col-xl-6">
-                                            <label for="prate" class="fs-5 fw-bold">Rate<span class="text-muted fs-6">(per hour)</span></label>
-                                            <div class="d-flex">
-                                                <input type="text" id="prate" class="form-control me-2" name="pRate" placeholder="0.00" readonly>
-                                            </div>
-                                        </div>
-
                                     </div>
                                     <div class="row">
-                                        <div class="col-xl-4">
-                                            <label for="prate" class="fs-5 fw-bold">Date of Rental</label>
-                                            <input type="date" id="date" class="form-control me-2" name="date" required>
-                                        </div>
-
-                                        <div class="col-xl-4">
-                                            <label for="prate" class="fs-5 fw-bold">Start Time <span class="text-muted fs-6">(ex: 12:30 pm)</span></label>
-                                            <div class="d-flex">
-                                                <input type="time" id="appt" name="appt-time" class="form-control me-2" value="12:30" required>
-
+                                        
+                                        <div class="col-xl-12" >
+                                            <label for="prate" class="fs-5 fw-bold">Rental Duration</label>
+                                            <div class="input-group">
+                                            <button class="btn btn-secondary disabled">From</button>
+                                                <input type="datetime-local" name= "startDur" class="form-control">
+                                                <button class="btn btn-secondary disabled">to</button>
+                                                <input type="datetime-local" name= "endDur" class="form-control">
+                                        
                                             </div>
                                         </div>
-                                        <div class="col-xl-4">
-                                            <label for="prate" class="fs-5 fw-bold">End Time <span class="text-muted fs-6">(ex: 12:30 pm)</span></label>
-                                            <div class="d-flex">
-                                                <input type="time" id="appt" name="appt-time" class="form-control me-2" value="12:30" required>
-
-                                            </div>
-                                        </div>
-
-
-
-
-
+                                    
                                     </div>
+                                
                                     <div class="row">
-                                        <div class="col-xl-6">
-                                            <label for="purpose" class="fs-5 fw-bold">Purpose</label>
-                                            <div class="d-flex">
-                                                <input type="text" id="purpose" class="form-control me-2" name="purpose">
-                                            </div>
+                                    <div class="col-xl-6">
+                                            <label for="purp" class= "fs-5 fw-bold">Purposes</label>
+                                            <select class= "select form-select" name="purpose" id="purp" onchange = "showOthers('others', this)">
+                                                <?php echo $opt;?>
+                                                <option value="others">Others</option>
+                                            </select>
+
+                                
                                         </div>
-                                        <div class="col-xl-6">
-                                            <label for="total" class="fs-5 fw-bold">Total</label>
-                                            <div class="d-flex">
-                                                <input type="text" id="total" class="form-control me-2" name="pRate" placeholder="0.00" readonly>
+                                        <div class="col-xl-6 " id = "others">
+                                                <label for="prate" class="fs-5 fw-bold">Purpose</label>
+                                                <input type="text"  name= "others" id = "date" class="form-control " value=  "">
+                                            </div>
+                                        
+                             
+                                      
+                                        </div>
+                                        <div class="col-xl-12 ">
+                                            <div class="float-end">
+                                                <div class="btn-group">
+                                                <button type="submit" class=" btn btn-outline-success" name="request" >Submit</button>
+                                                </div>
+                                                <div class="btn-group">
+                                                <a href="dashboard.php" class=" btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
                                     <br>
-                                    <div class="row">
-                                        <div class="col-xl-3">
-
-                                        </div>
-                                        <div class="col-xl-3 ">
-
-                                        </div>
-                                        <div class="col-xl-3 ">
-                                            <a href="dashboard.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
-                                        </div>
-                                        <div class="col-xl-3 ">
-                                            <input type="submit" class="form-control btn btn-outline-success" name="submit" id="submit"></input>
-                                        </div>
+                               
+                                     
+                                     
                                     </div>
                                 </div>
                         </div>
-                        </form>
-
-                    </div>
+                        
+                        </div>
+                        </div>
                     <!-- /#page-content-wrapper -->
-                </div>
-
+                    </form>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
                 <script>
                     var el = document.getElementById("wrapper");
@@ -305,3 +462,58 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
     </html>
 <?php } ?>
+
+<script>
+
+
+       function showOthers(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'others' ? 'block' : 'none';
+    }
+</script>
+
+<script>
+        $(document).ready(function() {
+            $("select").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+</script>
+ 
+
+
+
+<script>
+$(document).ready(function(){
+ $('.action').change(function(){
+  if($(this).val() != '')
+  {
+   var action = $(this).attr("id");
+   var query = $(this).val();
+   var result = '';
+   if(action == "rtype")
+   {
+    result = 'rprice';
+   }
+   $.ajax({
+    url:"../admin/PHP/fetchdata.php",
+    method:"POST",
+    data:{action:action, query:query},
+    success:function(data){
+     $('#price').html(data);
+    }
+   })
+  }
+ });
+});
+
+
+
+    </script>

@@ -164,19 +164,17 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                         <?php
                                         $uid = $_SESSION['clientmsuid'];
 
-                                        $sql = "SELECT distinct tblrentalrequest.ID, tblrentalrequest.userID, tblrentalrequest.rentalID, tblrentalrequest.rentalStartDate, tblrentalrequest.rentalEndDate, tblrentalrequest.rentalStatus,tblrentalrequest.requestDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Cellphnumber, tblresident.houseUnit,tblresident.streetName, tblresident.Email, tblrental.rentalName from tblrentalrequest join tblrental on tblrental.ID = tblrentalrequest.rentalID join tblresident where tblresident.ID=tblrentalrequest.userID and tblrentalrequest.userID=:uid";
+                                        $sql = "Select tblresident.FirstName,tblcreaterental.ID as cID,tblcreaterental.payment,tblcreaterental.paymentID, tblcreaterental.proof, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblcreaterental.status, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate, tblcreaterental.creationDate, tblpurposes.Purpose, tblrental.rentalName, tblrental.rentalPrice, tblcreaterental.payable, tblstatus.statusName from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID join tblrental on tblrental.ID = tblcreaterental.rentalID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID join tblstatus on tblstatus.ID = tblcreaterental.status where tblcreaterental.userID = ".$uid.";";
                                         $query = $dbh->prepare($sql);
                                         $query->bindParam(':uid', $uid, PDO::PARAM_STR);
                                         $query->execute();
                                         $results = $query->fetchAll(PDO::FETCH_OBJ);
-
                                         $cnt = 1;
-                                        if ($query->rowCount() > 0) {
                                             foreach ($results as $row) { ?>
                                                 <tr class="active">
                                                     <td style="color: #000;"><?php echo htmlentities($row->rentalName); ?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($row->LastName); ?>, <?php echo htmlentities($row->FirstName); ?> <?php echo htmlentities($row->MiddleName); ?></td>
-                                                    <td style="color: #000;">20 PHP</td>
+                                                    <td style="color: #000;"><?php $row->payable ?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($row->rentalStartDate); ?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($row->rentalEndDate); ?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($row->rentalStatus); ?></td>
@@ -191,9 +189,9 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                                         </div>
                                                     </td>
                                                 </tr>
-                                        <?php $cnt = $cnt + 1;
+                                        <?php $cnt++;
                                             }
-                                        } ?>
+                                         ?>
                                     </tbody>
                                 </table>
                             </div>
