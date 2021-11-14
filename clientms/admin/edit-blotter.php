@@ -83,17 +83,20 @@ echo "<script type='text/javascript'> document.location ='manage-client.php'; </
 <div class="form-body">
 <form method="post"> 
 	<?php
-$eid=$_GET['editid'];
-$sql="SELECT * from tblblotter where ID=:eid";
-$query = $dbh -> prepare($sql);
-$query->bindParam(':eid',$eid,PDO::PARAM_STR);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-$cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $row)
-{               ?>	
+		$eid=$_GET['editid'];
+		$sql="SELECT * from tblblotter where ID=:eid";
+		$query = $dbh -> prepare($sql);
+		$query->bindParam(':eid',$eid,PDO::PARAM_STR);
+		$query->execute();
+		$results=$query->fetchAll(PDO::FETCH_OBJ);
+		$cnt=1;
+		
+		if($query->rowCount() > 0)
+		{
+			foreach($results as $row)
+		{               
+	
+?>	
 
 
 	<table style="border: none; width: 100%; font-size: 120%;">

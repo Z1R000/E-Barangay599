@@ -7,12 +7,14 @@
     if (strlen($_SESSION['clientmsaid']==0)) {
     header('location:logout.php');
     }else{
-        $sql= "SELECT tblcreaterental.ID,tblrental.ID as renid,tblresident.ID as resid,tblcreaterental.payable, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate,tblcreaterental.creationDate, tblpurposes.Purpose, tblresident.FirstName, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix,tblrental.rentalName, tblrental.rentalPrice, tblmodes.mode, tblstatus.statusName,tblpurposes.ID as purposeID FROM tblcreaterental INNER JOIN tblpurposes ON tblcreaterental.purpID = tblpurposes.ID INNER JOIN tblresident ON tblresident.ID = tblcreaterental.userID INNER JOIN tblrental ON tblrental.ID = tblcreaterental.rentalID INNER JOIN tblmodes ON tblmodes.ID = tblcreaterental.modeOfPayment INNER JOIN tblstatus ON tblstatus.ID = tblcreaterental.status and tblcreaterental.ID =".$_GET['rid']." ";
+        $sql= "SELECT tblstatus.ID as statid, tblcreaterental.proof,tblcreaterental.ID,tblrental.ID as renid,tblresident.ID as resid,tblcreaterental.payable, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate,tblcreaterental.creationDate, tblpurposes.Purpose, tblresident.FirstName, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix,tblrental.rentalName, tblrental.rentalPrice, tblmodes.mode, tblstatus.statusName,tblpurposes.ID as purposeID FROM tblcreaterental INNER JOIN tblpurposes ON tblcreaterental.purpID = tblpurposes.ID INNER JOIN tblresident ON tblresident.ID = tblcreaterental.userID INNER JOIN tblrental ON tblrental.ID = tblcreaterental.rentalID INNER JOIN tblmodes ON tblmodes.ID = tblcreaterental.modeOfPayment INNER JOIN tblstatus ON tblstatus.ID = tblcreaterental.status and tblcreaterental.ID =".$_GET['rid']." ";
         $query = $dbh ->prepare($sql);
         $query ->execute();
         $result = $query->fetchAll(PDO::FETCH_OBJ);
         $arr= [];
-
+        $det = "";
+        $fupdate = "";
+        $sen = "none";
         foreach ($result as $r){
             $cdate = $r->creationDate;
             $sdate = $r->rentalStartDate;
@@ -30,10 +32,34 @@
             array_push($arr, $r->rentalPrice);
             array_push($arr,$r->renid);
             array_push($arr,$r->resid);
-
-            
+            array_push($arr,$r->proof);
+            array_push($arr, $r->statid);
 
         }
+        $stat ="";
+
+        if(($arr[8]=="G-cash")&&($arr[13]=="")){
+            $det = "disabled";
+            $sql = "Select * from tblstatus where ID = 3 or ID= 4 or ID= 7";
+            $query = $dbh->prepare($sql);
+            $query -> execute();
+            $result = $query->fetchAll(PDO::FETCH_OBJ);
+            $stat = "";
+            foreach($result as $r){
+                if ($arr[9] == $r->statusName){
+                    $stat.='<option value="'.$r->ID.'" selected>'.$r->statusName.'</option>';
+                }
+                else{
+                    $stat.='<option value="'.$r->ID.'">'.$r->statusName.'</option>';
+                }
+            }
+            
+            $fupdate = 'Update tblcreaterental set 
+            modeOfPayment = '.$mode.' where ID ='.$arr[0].';';
+            
+        }
+        
+
         if (isset($_POST['update'])){
             $others = $_POST['oth'];
             $ad = $_SESSION['clientmsaid'];
@@ -79,21 +105,21 @@
             
             $mode  = $_POST['mod'];
             //mode
-            
-            $stat = $_POST['stat'];
+            $stat = "";
+            if ($det!= "disabled"){
+                $stat = $_POST['stat'];
+            }
+            else{
+                $stat = $arr[14];                
+            }
+           
             //status
             $rtype= $_POST['rtype'];
             //property
             $rprice = $_POST['rprice'];
             //rental price
-            $rate= 0;
-            if($arr[11] == $rtype){
-                $rate = $arr[10];
-            }
-            
-            else{
-                $rate = $_POST['rprice'];
-            }
+            $rate = $arr[10];
+          
             //rate
 
             $start1 = new DateTime($start);
@@ -135,8 +161,8 @@
             echo $send."</br>";
             
             $sql = 'Update tblcreaterental set 
-                    status ='.$stat.' ,userID = '.$userid.'  ,rentalID = '.$rtype.' ,adminID = '.$ad.' ,rentalStartDate = "'.$start.'",rentalEndDate = "'.$end.'",modeOfPayment = '.$mode.',purpID = '.$purp.', payable = '.$send.',
-                    others = "'.$others.'"  
+                    status ='.$stat.',rentalStartDate = "'.$start.'", rentalEndDate = "'.$end.'", modeOfPayment = '.$mode.',  payable = '.$send.'
+                     
 
                     where ID ='.$arr[0].';';
 
@@ -153,7 +179,7 @@
 
            $sql = "Update tblcreaterental set status = 8 where ID = ".$arr[0]." ";
 
-           if ($connect->query($sql)===TRUE){
+           if ($connect->query($fupdate)===TRUE){
                 header('Location: admin-rentals.php?delete=success');
            }
            else{
@@ -309,14 +335,19 @@
         </div>
     </nav>
      <!--breadcrumb-->
-     
-    <div class="container-fluid p-5 border">
-        
-            
-        
-        
-        
-
+     <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="float-end">
+                        <a type ="button" role = "button" href = "admin-rentals.php"class="btn btn-secondary px-2" data-bs-dismiss= "modal" >
+                                                    <i class="fa fa-arrow-circle-left mx-1"></i>
+                                                            Back
+                                                    </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <div class="container-fluid p-5 ">
         <div class="row">
             <div class="col-xl-8   mx-auto">
             <?php
@@ -332,11 +363,21 @@
                 
                 ';
             }
-            else{
+            if ($arr[13]!=""){
+                echo'
+                <div class="alert alert-primary alert-dismissible fade show " id = "alert" role="alert">
+                    <strong><i class="fa fa-check-circle mx-2"></i>Record Updated</strong> See <a href = "admin-rental-request.php" > pending</a> to check if pending status was set for rental record.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 
+                    </div>
+                
+                
+                ';
 
             }
+         
             ?>
+          
                 <div class="row gx-3 bg-599 border-599 text-white">
                     <div class="fs-5">Rental Record</div>
                 </div>
@@ -348,7 +389,7 @@
                                 <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
                                     <div class="input-group">    
                                         <input type= "text" value ="<?php echo $arr[0]; ?>" name = "id" style= "display:none;">
-                                        <input type="text"  id = "search" value = "<?php echo $arr[1]; ?>" class="form-control" name ="rname" placeholder= "">
+                                        <input type="text" readonly  id = "search" value = "<?php echo $arr[1]; ?>" class="form-control" name ="rname" placeholder= "">
                                     </div>
                                     
 
@@ -381,7 +422,7 @@
                                     
                                     
                                     ?>
-                                        <select class= " form-select" name="purp" id="purp" onchange = "showotherEdit('othersed',this);">                  
+                                        <select disabled class= " form-select" name="purp" id="purp" onchange = "showotherEdit('othersed',this);">                  
                                                 <?php echo $opt; ?>
                                         </select>
                                     <div class="col-xl-12" id ="othersed" style= "display : none ">
@@ -441,14 +482,14 @@
                                             
                                             ?>
                                                 <label for="status" class="fs-5 fw-bold">Property to rent</label>
-                                                <select name="rtype" class="form-select action" id="rtype">
+                                                <select disabled name="rtype" class="form-select action" id="rtype">
                                                     <?php echo $prp; ?>
                                                 </select>
 
                                                 
                                         </div>
                                         <div class="col-xl-6" >
-                                            <label for="prate" class="fs-5 fw-bold">Rate<span class= "text-muted fs-6">(per hour)</span></label>
+                                            <label for="prate" class="fs-5 fw-bold">Payable<span class= "text-muted fs-6"></span></label>
                                             <div class="input-group" id = "result">
                                                 <button class="btn btn-secondary disabled">₱</button>    
                                                 <input type= "text" name="rprice" id="rprice" style= "text-align:right" value = "<?php echo $arr[6]; ?>"class="form-control action" disabled>
@@ -484,42 +525,27 @@
                                             </div>
                                             <div class="col-xl-6" >
                                                 <?php
-                                                    $sql = "Select * from tblstatus where ID >1 and ID<8";
-                                                    $query = $dbh->prepare($sql);
-                                                    $query -> execute();
-
-                                                    $result = $query->fetchAll(PDO::FETCH_OBJ);
-                                                    $stat = "";
-                                                    foreach($result as $r){
-                                                        if ($arr[9] == $r->statusName){
-                                                            $stat.='<option value="'.$r->ID.'" selected>'.$r->statusName.'</option>';
-                                                        }
-                                                        else{
-                                                            $stat.='<option value="'.$r->ID.'">'.$r->statusName.'</option>';
-                                                        }
-                                                    }
+                                                   
+                                                    
                                                 
                                                 
                                                 ?>
                                                     <label for="prate" class="fs-5 fw-bold">Rental Status</label>
-                                                    <select name="stat" class="form-select" id="status">
+                                                    <select name="stat" class="form-select" id="status" <?php echo $det?>>
                                                            <?php echo $stat; ?>       
                                                     </select>
                                             </div>
                                                                 
                                             <div class="row g-0" align= "right">
                                                 <div class="col-md-12  px-3 mx-auto my-2">
-                                                    <button type ="submit" name= "update" role = "button" class="btn btn-primary px-2" >
+                                                    <button  style= "display:<?php $hide?>"type ="submit" name= "update" role = "button" class="btn btn-primary px-2" >
                                                     <i class= "fa fa-save mx-1"></i>Save</button>
                                                     <button type ="button" data-bs-toggle = "modal" href = "#delete-rental" role = "button" href = ""class="btn btn-danger px-2" data-bs-dismiss= "modal" >
                                                     <i class="fa fa-trash mx-1"></i>
                                                             Delete
                                                     </button>
-                                                    <a type ="button" role = "button" href = "admin-rentals.php"class="btn btn-secondary px-2" data-bs-dismiss= "modal" >
-                                                    <i class="fa fa-times-circle mx-1"></i>
-                                                            Cancel
-                                                    </a>
-                                                    
+                                                 
+                                                  
                                                 </div>
                                             </div>
                                              </form>                 
@@ -537,6 +563,119 @@
     <?php
         include('services.php');
     ?>
+      <div class="modal fade" id = "approve-transac" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-success ">
+                    <div class="modal-header bg-success  ">
+                        <div class="modal-title white">&nbsp;<i class = "fa fa-paper-plane"></i>&nbsp;&nbsp;Send Proof of transaction</div>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        
+                        <div class="row mt-2 ms-2 me-3">
+                            <form action="" method = "POST">
+                                <div class="row ">
+                                    <div class="col-md-12">
+                                        <label for="dname">Requestor Name</label>
+                                        <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
+
+                                    </div>
+                           
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6">
+                                        <label for="contac">Contact Number</label>
+                                        <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
+                   
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="emails" >Email Address</label>
+                                        <input id = "emails" type="text" class="form-control" value = "juanDelaC@gmail.com" readonly>
+                                        
+                                    
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6">
+                                        <label for="ars">Acquired Rental</label>
+                                        <input id = "crs" type="text" class="form-control" value = "Basketball Court" readonly>
+                   
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="emails" >Payment Status</label>
+                                        <input id = "emails" type="text" class="form-control" value = "Settled + amount payed" readonly>
+                                       
+                                    
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                        <label for="remarks" >Remarks</label>
+                                        <div class="col-md-12">
+                                            <div class="form-floating">
+                                            <textarea class="form-control"style= "height: 100px;" placeholder="Leave a comment here" id="floatingTextarea2"  ></textarea>
+                                            <label for="floatingTextarea2">Remarks here (max 10 words)</label>
+                                                
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                                <div class="row mt-2">
+                                    <label for="remarks" >Mode of delivery <i class= "fa fa-envelope"></i></label>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="sms">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                SMS
+                                            </label>
+                                            </div>
+                                            <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="em" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                E-mail
+                                            </label>
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Walk-in
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                    
+                                </div>
+                                <div class="row justify-content-center" align = "center">
+                                    
+                                    <div class="col-md-12">
+                                        <div class="float-end">
+
+                                        <div class="btn-group">
+                                        <button href ="#" type = "button" class="btn btn-success " data-bs-dismiss ="modal"  >
+                                            <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
+                                        </button>
+                                        </div>
+                                        <div class="btn-group">
+                                        <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times me-2"></i>Discard
+                                        </button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>  
+                            </form>
+
+                        </div>
+                      
+                
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
     <div class="modal fade" id = "delete-rental" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger" >

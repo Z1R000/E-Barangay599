@@ -174,12 +174,12 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                                 <tr class="active">
                                                     <td style="color: #000;"><?php echo htmlentities($row->rentalName); ?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($row->LastName); ?>, <?php echo htmlentities($row->FirstName); ?> <?php echo htmlentities($row->MiddleName); ?></td>
-                                                    <td style="color: #000;"><?php $row->payable ?></td>
+                                                    <td style="color: #000;"><?php echo htmlentities($row->payable)?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($row->rentalStartDate); ?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($row->rentalEndDate); ?></td>
-                                                    <td style="color: #000;"><?php echo htmlentities($row->rentalStatus); ?></td>
+                                                    <td style="color: #000;"><?php echo htmlentities($row->statusName); ?></td>
                                                     <td style="color: #000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cash</td>
-                                                    <td style="color: #000;"><?php echo htmlentities($row->requestDate); ?></td>
+                                                    <td style="color: #000;"><?php echo htmlentities($row->creationDate); ?></td>
                                                     <td>
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                             <a type="" href="edit-rental-request.php" class="btn btng btn-success"><i class="fa fa-edit"></i></a>
