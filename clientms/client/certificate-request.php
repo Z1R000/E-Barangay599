@@ -169,13 +169,11 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                 }
             }
         </style>
-
     </head>
-
     <body>
         <div class="d-flex" id="wrapper">
             <!-- Sidebar -->
-            <?php include_once('includes/sidebarupdated.php');     ?>
+            <?php include_once('includes/sidebarupdated.php'); ?>
             <!-- /#sidebar-wrapper -->
 
             <!-- Page Content -->
@@ -233,8 +231,13 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                     </ol>
                 </div>
                 <div class="container-fluid px-4">
-                    <div style="background-color: aliceblue;border-radius: 25px;border:1px solid black;padding: 25px;">
-                        <div class="row">
+                   <div class="row">
+                       <div class="col-11 border shadow-sm  bg-white mx-auto">
+                        <div class="row py-2">
+                            <div class="fs-5 text-white rounded-top" style= "background: #012f4e">Certification Request</div>
+                        </div>
+                        <div class="row pt-3 pb-3 px-3 bg-white">
+                        <div class="row ">
                             <div class="col-xl-4">
                                 <label for="date" class="fw-bold fs-6">Date today</label>
                                 <input type="text" id="date" class="form-control" readonly>
@@ -340,18 +343,18 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                 </div>
                                 <br>
                                 <div class="row">
-                                    <div class="col-xl-3">
-
-                                    </div>
-                                    <div class="col-xl-3 ">
-
-                                    </div>
-                                    <div class="col-xl-3 ">
+                                    <div class="col-12">
+                                        <div class="float-end">
+                                    <div class="btn-group ">
                                         <a href="dashboard.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
                                     </div>
-                                    <div class="col-xl-3 ">
+                                    <div class="btn-group">
                                         <input type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">
                                     </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
                                 </div>
                         </form>
                                                 </div>

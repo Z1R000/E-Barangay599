@@ -95,7 +95,9 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
             $sql= '';
             if ($_POST['others']!=""){
-                $sql = 'Insert into tblcreaterental(status,userID,rentalID,adminID,rentalStartDate,rentalEndDate,modeOfPayment,purpID,payable,others) values (1,'.$user.','.$prop.',0,"'.$start.'","'.$end.'",'.$mod.','.$purp.','.$send.',"'.$others.'")';
+                $sql = 'Insert into tblcreaterental(status,userID,rentalID,adminID,rentalStartDate,rentalEndDate,modeOfPayment,purpID,others)values(1,'.$user.','.$prop.',0,"'.$start.'","'.$end.'",'.$mod.','.$purp.',"'.$others.'")';
+                $add = 'Insert into tblpaymentlogs()';
+               
             
             }
             else{
@@ -426,7 +428,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                     </div>
                                 
                                     <div class="row">
-                                    <div class="col-xl-6">
+                                        <div class="col-xl-6">
                                             <label for="purp" class= "fs-5 fw-bold">Purposes</label>
                                             <select class= "select form-select" name="purpose" id="purp" onchange = "showOthers('others', this)">
                                                 <?php echo $opt;?>
@@ -436,11 +438,11 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                 
                                         </div>
                                         <div class="col-xl-6">
-                                        <label for="total" class="fs-5 fw-bold">Total</label>
-                                        <div class="d-flex">
-                                            <input type="text" id="total" class="form-control me-2" name="total" disabled>
+                                            <label for="total" class="fs-5 fw-bold">Total</label>
+                                            <div class="d-flex">
+                                                <input type="text" id="total" class="form-control me-2" name="total" disabled>
+                                            </div>
                                         </div>
-                                    </div>
                                         <div class="col-xl-6 " id = "others">
                                                 <label for="prate" class="fs-5 fw-bold">Purpose</label>
                                                 <input type="text"  name= "others" id = "date" class="form-control " value=  "">
