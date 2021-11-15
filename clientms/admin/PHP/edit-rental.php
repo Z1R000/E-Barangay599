@@ -640,7 +640,7 @@
                                                 
                                                 ?>
                                                 <label for="status" class="fs-5 fw-bold">Mode of payment</label>
-                                                    <select <?php echo $btn ?> name="mod" class="form-select" id="status">
+                                                    <select <?php echo $btn ?> name="mod" class="form-select" id="status" disabled>
                                                        <?php   echo $mod; ?>
                                                     </select>
                                             </div>

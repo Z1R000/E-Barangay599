@@ -180,7 +180,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
             <!-- Page Content -->
             <div id="page-content-wrapper">
-                <?php
+            <?php
                     $sql1 = "select * from tblinformation";
                     $query1 = $dbh->prepare($sql1);
                     $query1->execute();
@@ -210,6 +210,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                 </div>
 
             </div>
+            
             <?php }}?>
                 <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                     <div class="d-flex align-items-center">
@@ -231,14 +232,8 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                         <li class="active">Certificate Request</li>
                     </ol>
                 </div>
-
                 <div class="container-fluid px-4">
-                    <div class="row">
-                        <div class="col-xl-11 mx-auto shadow-sm">
-                        <div class="row" style= "background: #012f4e; ">
-                            <div class ="fs-4 px-2 text-white">Certification Request</div>
-                        </div>
-                        <div class="row bg-white pt-3 pb-4">
+                    <div style="background-color: aliceblue;border-radius: 25px;border:1px solid black;padding: 25px;">
                         <div class="row">
                             <div class="col-xl-4">
                                 <label for="date" class="fw-bold fs-6">Date today</label>
@@ -345,26 +340,25 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                 </div>
                                 <br>
                                 <div class="row">
-                                   
-                                    <div class="col-12">
-                                        <div class="float-end">
-                                            <div class="btn-group">
+                                    <div class="col-xl-3">
+
+                                    </div>
+                                    <div class="col-xl-3 ">
+
+                                    </div>
+                                    <div class="col-xl-3 ">
                                         <a href="dashboard.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
                                     </div>
-                                    <div class="btn-group">
-                                   
-                                        <input type="submit" class="form-control btn btn-outline-success" name="submit" id="submit" value = "Submit">
-                                    </div>
-                                    </div>
+                                    <div class="col-xl-3 ">
+                                        <input type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">
                                     </div>
                                 </div>
                         </form>
                                                 </div>
 
-                                                </div>
+
                 </div>
                 <!-- /#page-content-wrapper -->
-            </div>
             </div>
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>

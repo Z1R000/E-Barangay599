@@ -5,7 +5,38 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsuid'] == 0)) {
     header('location:logout.php');
 } else {
-    
+    $eid = intval($_GET['editid']);
+	$sqlcheck="Select * from tblcreaterental where ID = :eid";
+	$querycheck= $dbh->prepare($sqlcheck);
+	$querycheck->bindParam(':eid',$eid,PDO::PARAM_STR);
+	$querycheck->execute();
+	$resultscheck = $querycheck->fetchAll(PDO::FETCH_OBJ);
+	foreach($resultscheck as $rowcheck){
+		$statcheck = $rowcheck->status;
+	}
+	if (isset($_POST['submit'])) {
+		$stats = $_POST['status'];
+		if ($statcheck == "2" || $statcheck == "7"){
+			$stats = "3";
+		}
+		$sql = "update tblcreaterental set status=:stats WHERE ID=:eid";
+		$query = $dbh->prepare($sql);
+		$query->bindParam(':stats', $stats, PDO::PARAM_STR);
+		$query->bindParam(':eid', $eid, PDO::PARAM_STR);
+		$query->execute();
+		echo '<script>alert("Rental Information has been updated")</script>';
+		echo "<script>window.location.href ='edit-rental-request.php?editid=" . $eid . "'</script>";
+	}
+    if (isset($_POST['delete'])){
+		$stats = "8";
+		$sql = "update tblcreaterental set status=:stats WHERE ID=:eid";
+		$query = $dbh->prepare($sql);
+		$query->bindParam(':stats', $stats, PDO::PARAM_STR);
+		$query->bindParam(':eid', $eid, PDO::PARAM_STR);
+		$query->execute();
+		echo '<script>alert("Rental request has been cancelled.")</script>';
+		echo "<script>window.location.href ='edit-rental-request.php?editid=" . $eid . "'</script>";
+	}
 ?>
 
     <!DOCTYPE html>
@@ -199,134 +230,205 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                         <li class="active">Edit Rental Request</li>
                     </ol>
                 </div>
-                <div class="container-fluid px-4">
-                    <div class= "row mb-5">
-                        <div class="col-11 mx-auto bg-white border shadow-sm rounded-top pt-3 pb-2 ">
-                        <div class="graph-visual tables-main ">
+                <?php 
+                    $sql="SELECT distinct tblcreaterental.*, tblresident.*, tblrental.*, tblstatus.*, tblpurposes.* from tblcreaterental join tblrental on tblrental.ID = tblcreaterental.rentalID join tblstatus on tblcreaterental.status = tblstatus.ID join tblresident on tblcreaterental.userID=tblresident.ID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID WHERE tblcreaterental.ID=:eid";
+                    $query= $dbh->prepare($sql);
+                    $query->bindParam(':eid',$eid,PDO::PARAM_STR);
+                    $query->execute();
+                    $results = $query->fetchAll(PDO::FETCH_OBJ);
+                    foreach($results as $row){
+                        $checkstat = $row->status;
+                        $pay = $row->payable;
+                        $pay = number_format($pay,2);
+                        $sdates = $row->rentalStartDate;
+                        $sdates = date('F j Y - h:i A', strtotime($sdates));
+                        $edates = $row->rentalEndDate;
+                        $edates = date('F j Y - h:i A', strtotime($edates));
+                    
+                ?>
+                <form method="post">
+                <div class="container-fluid px-4 bg-white ">
+                    
+                    <div style="border-radius: 25px;border:1px solid black;padding: 25px;">
+                    <div class="row">
+								<div class="col-xl-11">
+					</div><div class="col-xl-1">
+                        <a type ="button" role = "button" href = "manage-certificate.php" class="btn btn-secondary px-4" data-bs-dismiss= "modal" >
+                                                    <i class="fa fa-arrow-circle-left mx-1"></i>
+                                                            Back
+                                                    </a>
+                        </div>
+						</div>
+                        <div class="graph-visual tables-main">
 
+                            <div class="modal-body">
                             
                                 <div class="row">
 
                                     <div class="col-xl-4">
                                         <label for="status" class="fs-5 fw-bold">Property to rent</label>
                                         <select name="" class="form-control" id="status" disabled>
-                                            <option value="avail">Barangay Van</option>
-                                            <option value="noavail">Patrol</option>
-                                            <option value="noavail">Basketball court</option>
+                                            <option value="<?php echo $row->rentalName; ?>"><?php echo $row->rentalName; ?></option>
                                         </select>
                                     </div>
 
                                     <div class="col-xl-4">
                                         <label for="prate" class="fs-5 fw-bold">Rate<span class="text-muted fs-6">(per hour)</span></label>
                                         <div class="d-flex">
-                                            <input type="text" id="prate" class="form-control me-2" name="pRate" placeholder="0.00" readonly>
+                                        <div class="input-group">
+												<button class="btn btn-secondary text-white" disabled>
+													₱
+												</button>
+                                            <input type="text" id="prate" class="form-control me-2" name="pRate" value="<?php echo $row->rentalPrice; ?>" readonly></div>
                                         </div>
                                     </div>
                                     <div class="col-xl-4">
                                         <label for="date" class="fw-bold fs-6">Status</label>
-                                        <input type="text" id="status" class="form-control" placeholder="Pending" readonly>
+                                        <input type="text" id="status" class="form-control" name="status" value="<?php echo $row->statusName; ?>" readonly>
                                     </div>
 
                                 </div>
                                 <div class="row">
-                                    <div class="col-xl-4">
-                                        <label for="prate" class="fs-5 fw-bold">Date of Rental</label>
-                                        <input type="date" id="date" class="form-control me-2" name="date" disabled>
-                                    </div>
-                                    <div class="col-xl-4">
-                                        <label for="prate" class="fs-5 fw-bold">Start Time <span class="text-muted fs-6">(ex: 12:30 pm)</span></label>
-                                        <div class="d-flex">
-                                            <input type="time" id="appt" name="appt-time" class="form-control me-2" value="12:30" disabled>
-
+                                    <div class="col-xl-12" >
+                                            <label for="prate" class="fs-5 fw-bold">Rental Duration</label>
+                                            <div class="input-group">
+                                            <button class="btn btn-secondary disabled">From</button>
+                                                <input type="text" name= "startDur" class="form-control" id="startDur" value="<?php echo $sdates ?>" disabled>
+                                                <button class="btn btn-secondary disabled">to</button>
+                                                <input type="text" name= "endDur" class="form-control" id="endDur" value="<?php echo $edates ?>" disabled>
+                                        
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-xl-4">
-                                        <label for="prate" class="fs-5 fw-bold">End Time <span class="text-muted fs-6">(ex: 12:30 pm)</span></label>
-                                        <div class="d-flex">
-                                            <input type="time" id="appt" name="appt-time" class="form-control me-2" value="12:30" disabled>
-
-                                        </div>
-                                    </div>
 
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-6">
                                         <label for="purpose" class="fs-5 fw-bold">Purpose</label>
                                         <div class="d-flex">
-                                            <input type="text" id="purpose" class="form-control me-2" name="purpose" disabled>
+                                            <input type="text" id="purpose" class="form-control me-2" name="purpose" value="<?php echo $row->Purpose; ?>"disabled>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <label for="total" class="fs-5 fw-bold">Total</label>
-                                        <div class="d-flex">
-                                            <input type="text" id="total" class="form-control me-2" name="total" placeholder="0.00" readonly disabled>
+                                        <div class="d-flex"><div class="input-group">
+												<button class="btn btn-secondary text-white" disabled>
+													₱
+												</button>
+                                            <input type="text" id="total" class="form-control me-2" name="total" value="<?php echo $pay; ?>" readonly disabled>
+                    </div>
                                         </div>
                                     </div>
                                 </div>
                                 <br>
-                                <div class="row">
-                                    <div class="col-xl-3">
-                                        <label for="formFileSm" class="form-label">Upload Proof of Payment<span class="fs-6 text-muted"> (JPEG or PNG format)</span></label>
-
+                                <?php 
+                                    if ($checkstat == "1"){
+                                        echo '<div class="row">
+                                        <div class="col-xl-3">
+    
+                                        </div>
+                                        <div class="col-xl-3 ">
+    
+                                        </div>
+                                        <div class="col-xl-3 ">
+                                        </div>
+                                        <div class="col-xl-3 ">
+                                            <button type="submit" class="form-control btn btn-outline-danger" name="delete" id="delete">Cancel Request</button>
+                                        </div>
+                                    </div>';
+                                    }else if ($checkstat == "2" || $checkstat == "7"){
+                                        echo '<div class="row">
+                                        <div class="col-xl-3">
+                                            <label for="formFileSm" class="form-label">Upload Proof of Payment<span class="fs-6 text-muted"> (JPEG or PNG format)</span></label>
+    
+                                        </div>
+                                        <div class="col-xl-3">
+    
+                                        </div>
+                                        <div class="col-xl-3">
+                                            <label for="ctype" class="black fw-bold fs-5">Payment Details</label>
+    
+                                        </div>
+                                        <div class="col-xl-3">
+    
+                                        </div>
+    
                                     </div>
-                                    <div class="col-xl-3">
-
-                                    </div>
-                                    <div class="col-xl-3">
-                                        <label for="ctype" class="fs-6 fw-bold">Payment Details</label>
-
-                                    </div>
-                                    <div class="col-xl-3">
-
-                                    </div>
-
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-xl-3">
-                                        <input class="form-control form-control-sm" id="formFileSm" type="file">
-                                        <br>
-                                    </div>
-                                    <div class="col-xl-3">
-
-                                    </div>
-                                    <div class="col-xl-3">
-                                        <img src="images/barangaybackground.png" width="280" height="250">
-
-                                    </div>
-                                    <div class="col-xl-1">
-
-                                        <img src="images/images.jpg" width="80" height="80">
-
-
-                                    </div>
-                                    <div class="col-xl-2">
-
-
-
+                                    <div class="row">
+                                        <div class="col-xl-3">
+                                            <input class="form-control form-control-sm" id="formFileSm" type="file">
+                                            <br>
+                                        </div>
+                                        <div class="col-xl-3">
+    
+                                        </div>
+                                        <div class="col-xl-3">
+                                            <img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
+    
+                                        </div>
+                                        <div class="col-xl-3">
                                         <label for="ctype" style="font-size:130%; font-weight:600;">Francine Voltaire Ledesma <br><span style="font-size:90%;font-style:italic; font-weight:600;"> 09056602669</span></label>
-                                    </div>
-
-                                </div>
-                                <br>
-                                <div class="row py-2">
-                                    <div class="col-12">
-                                    <div class="float-end">
-                                        <div class="btn-group">
-                                        <a href="manage-rental.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
+    
+    
                                         </div>
-                                  <div class="btn-group">
-                                    <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
+    
                                     </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xl-3">
+    
+                                        </div>
+                                        <div class="col-xl-3 ">
+    
+                                        </div>
+                                        <div class="col-xl-3 ">
+                                            <button type="submit" class="form-control btn btn-outline-danger" name="delete" id="delete">Cancel Request</button>
+                                        </div>
+                                        <div class="col-xl-3 ">
+                                            <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
+                                        </div>
+                                    </div>';
+                                    }else if ($checkstat == "4" || $checkstat == "6" || $checkstat == "3"){
+                                        echo '<div class="row">
+                                        <div class="col-xl-3">
+                                        <label for="ctype" class="black fw-bold fs-5">Proof of Payment</label>
+    
+                                        </div>
+                                        <div class="col-xl-3">
+    
+                                        </div>
+                                        <div class="col-xl-3">
+                                            <label for="ctype" class="black fw-bold fs-5">Payment Details</label>
+    
+                                        </div>
+                                        <div class="col-xl-3">
+    
+                                        </div>
+    
                                     </div>
-                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-3">
+                                        <img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
+                                            <br>
+                                        </div>
+                                        <div class="col-xl-3">
+    
+                                        </div>
+                                        <div class="col-xl-3">
+                                            <img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
+    
+                                        </div>
+    
+                                    </div>';
+                                    }
+                                ?>
                                 </div>
-                            </div>
-                        
                         </div>
+
                     </div>
                     <!-- /#page-content-wrapper -->
                 </div>
+                    </form>
+                <?php } ?>
 
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
                 <script>

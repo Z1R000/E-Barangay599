@@ -169,7 +169,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                         
                     </div>
                     <?php 
-                                                    $sql = "Select tblcreatecertificate.ID as getID, tblcreatecertificate.*, tblresident.*, tblcertificate.* from tblcreatecertificate join tblresident on tblcreatecertificate.Userid = tblresident.ID join tblcertificate on tblcertificate.ID = tblcreatecertificate.CertificateId where tblcreatecertificate.status = '1' order by tblcreatecertificate.resDate ASC";
+                                                    $sql = "Select tblcreatecertificate.ID as getID, tblcreatecertificate.*, tblresident.*, tblcertificate.*, tblpurposes.* from tblcreatecertificate join tblresident on tblcreatecertificate.Userid = tblresident.ID join tblcertificate on tblcertificate.ID = tblcreatecertificate.CertificateId join tblpurposes on tblpurposes.ID = tblcreatecertificate.purpID where tblcreatecertificate.status = '1' order by tblcreatecertificate.resDate ASC";
                                                     $result = mysqli_query($con, $sql);  
 ?>
                     <form method="POST">
@@ -198,10 +198,12 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                 <?php
                                                     while ($row = mysqli_fetch_array($result)) {
                                                         $cdate = $row["resDate"];
-                                                        $purp = $row["Purpose"];
-                                                        if ($purp == "OTHERS" ){
+                                                        $purp = $row["purpID"];
+                                                        if ($purp == "13" ){
                                                             $purp = $row["other"];
                                                             $purp = strtoupper($purp);
+                                                        }else{
+                                                            $purp = $row["Purpose"];
                                                         }
 
                                                         echo '

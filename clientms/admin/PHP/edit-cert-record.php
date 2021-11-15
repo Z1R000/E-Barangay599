@@ -176,12 +176,13 @@
     <form method ="POST">
         <?php
             $eid=intval($_GET['editid']);
-            $sqle="SELECT tblcertificate.*, tblcreatecertificate.*, tblcreatecertificate.resDate as getDate, tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix, tblstatus.* FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID join tblstatus on tblstatus.ID = tblcreatecertificate.status WHERE tblcreatecertificate.ID = :eid";
+            $sqle="SELECT tblcertificate.*, tblcreatecertificate.*, tblcreatecertificate.resDate as getDate, tblresident.*, tblstatus.*, tblpurposes.* FROM tblcertificate join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID join tblresident on tblcreatecertificate.Userid = tblresident.ID join tblstatus on tblstatus.ID = tblcreatecertificate.status join tblpurposes on tblpurposes.ID = tblcreatecertificate.purpID WHERE tblcreatecertificate.ID = :eid";
             $querye = $dbh -> prepare($sqle);
             $querye->bindParam(':eid',$eid,PDO::PARAM_STR);
             $querye->execute();
             $resulte = $querye->fetchAll(PDO::FETCH_OBJ);
             foreach ($resulte as $rowe) {
+                $checkstat = $rowe->status;
                 $gdate = $rowe->resDate;
                 $cdate = date('F j, Y - h:i A', strtotime($gdate));
                     
@@ -345,6 +346,93 @@
                                             </div>
                                    
                                         </div>
+                                        <?php 
+                                   if ($checkstat == "7"){
+                                        echo '<div class="row">
+                                        <div class="col-xl-3">
+                                            <label for="formFileSm" class="form-label">Upload Proof of Payment<span class="fs-6 text-muted"> (JPEG or PNG format)</span></label>
+    
+                                        </div>
+                                        <div class="col-xl-3">
+    
+                                        </div>
+                                        <div class="col-xl-3">
+                                            <label for="ctype" class="black fw-bold fs-5">Payment Details</label>
+    
+                                        </div>
+                                        <div class="col-xl-3">
+    
+                                        </div>
+    
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-3">
+                                            <input class="form-control form-control-sm" id="formFileSm" type="file">
+                                            <br>
+                                        </div>
+                                        <div class="col-xl-3">
+    
+                                        </div>
+                                        <div class="col-xl-3">
+                                            <img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
+    
+                                        </div>
+                                        <div class="col-xl-3">
+                                        <label for="ctype" style="font-size:130%; font-weight:600;">Francine Voltaire Ledesma <br><span style="font-size:90%;font-style:italic; font-weight:600;"> 09056602669</span></label>
+    
+    
+                                        </div>
+    
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xl-3">
+    
+                                        </div>
+                                        <div class="col-xl-3 ">
+    
+                                        </div>
+                                        <div class="col-xl-3 ">
+                                            <button type="submit" class="form-control btn btn-outline-danger" name="delete" id="delete">Cancel Request</button>
+                                        </div>
+                                        <div class="col-xl-3 ">
+                                            <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
+                                        </div>
+                                    </div>';
+                                    }else if ($checkstat == "4" || $checkstat == "6" || $checkstat == "3"){
+                                        echo '<div class="row">
+                                        <div class="col-xl-3">
+                                        <label for="ctype" class="black fw-bold fs-5">Proof of Payment</label>
+    
+                                        </div>
+                                        <div class="col-xl-3">
+    
+                                        </div>
+                                        <div class="col-xl-3">
+                                            <label for="ctype" class="black fw-bold fs-5">Payment Details</label>
+    
+                                        </div>
+                                        <div class="col-xl-3">
+    
+                                        </div>
+    
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-3">
+                                        <img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
+                                            <br>
+                                        </div>
+                                        <div class="col-xl-3">
+    
+                                        </div>
+                                        <div class="col-xl-3">
+                                            <img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
+    
+                                        </div>
+    
+                                    </div>';
+                                    }
+                                ?>
                                         <div class="row gy-2 mx-2 my-2 ">
                                             
                                         <div class="row justify-content-end">
