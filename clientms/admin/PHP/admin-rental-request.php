@@ -198,11 +198,8 @@
                                                             <td scope="col" style = "text-align: center">
                                                                    
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <form action ="edit-rental-request.php" method = "get">
-                                                                        <button type = "submit" name = "id" value = "'.$rows->rid.'"class="btn btng btn-primary" data-bs-toggle = "modal"><i class = "fa fa-edit"></i>
-                                                                        Manage</button>
+                                                            <a type="" href="edit-rental-request.php?editid='.$rows->rid.'" class="btn btng btn-primary"><i class="fa fa-edit"></i> Manage</a>
                                                                     </div>
-                                                                </form>
                                                                  
                                                                 
                                                             </td>

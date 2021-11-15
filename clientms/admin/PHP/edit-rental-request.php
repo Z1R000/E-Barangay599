@@ -7,8 +7,11 @@
     if (strlen($_SESSION['clientmsaid']==0)) {
     header('location:logout.php');
     }else{
-        $sql= "Select tblcreaterental.ID as rid, tblresident.FirstName, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblcreaterental.status, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate, tblcreaterental.creationDate, tblpurposes.Purpose, tblrental.rentalName, tblrental.rentalPrice, tblcreaterental.payable from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID join tblrental on tblrental.ID = tblcreaterental.rentalID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID and tblcreaterental.ID = ".$_GET['id'].";";
+        $eid = $_GET["editid"];
+
+        $sql= "Select tblcreaterental.ID as rid, tblresident.*, tblcreaterental.*, tblpurposes.*, tblrental.* from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID join tblrental on tblrental.ID = tblcreaterental.rentalID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID and tblcreaterental.ID = :eid";
         $query = $dbh ->prepare($sql);
+        $query->bindParam(':eid',$eid,PDO::PARAM_STR);
         $query ->execute();
         $result = $query->fetchAll(PDO::FETCH_OBJ);
         $arr= [];
@@ -28,9 +31,21 @@
             array_push($arr,$r->mode);
             array_push($arr,$r->status);
             
-
-
         }
+
+        
+    if(isset($_POST['submit']))
+    {
+        $sql="update tblcreaterental set status='2' WHERE ID = :eid";
+        $query = $dbh->prepare($sql);
+        $query->bindParam(':eid',$eid,PDO::PARAM_STR);
+        $query->execute();
+        echo "<script>alert('Rental request has been approved.')</script>";
+        echo "<script type='text/javascript'> document.location ='admin-rental-request.php'; </script>";
+        
+    }
+
+        
 
         //$sql= "UPDATE tblcreaterental SET purpID = '".$_POST['purp']."', = '".$_POST['payable']."' WHERE `tblcreaterental`.`ID` = ;";
     
@@ -195,13 +210,16 @@
         </div>
     </div>
      <!--breadcrumb-->
+     <form method = "POST">
     <div class="container-fluid p-5 ">
         <div class="row">
             <div class="col-xl-8   mx-auto">
                 <div class="row gx-3 bg-599 border-599 text-white">
                     <div class="fs-5">Rental Record</div>
                 </div>
+                
                 <div class="row gx-3 border-start border-end border-bottom shadow-sm">
+                
                     <div class="col-xl-12 p-3" >
                         <div class="row ">
                             <div class="col-xl-6 ">
@@ -341,37 +359,10 @@
                                                        <?php   echo $mod; ?>
                                                     </select>
                                             </div>
-                                            <div class="col-xl-6" >
-                                                <?php
-                                                    $sql = "select * from tblstatus where id = 1 OR id = 2 or id = 6";
-                                                    $query = $dbh->prepare($sql);
-                                                    $query -> execute();
-
-                                                    $result = $query->fetchAll(PDO::FETCH_OBJ);
-                                                    $stat = "";
-                                                    foreach($result as $r){
-                                                       
-                                                        
-                                                        if ($arr[9] == $r->status){
-                                                            $stat.='<option value="'.$r->ID.'" selected>'.$r->statusName.'</option>';
-                                                        }
-                                                        else{
-                                                            $stat.='<option value="'.$r->ID.'">'.$r->statusName.'</option>';
-                                                        }
-                                                        
-                                                    }
-                                                
-                                                
-                                                ?>
-                                                    <label for="prate" class="fs-5 fw-bold">Rental Status</label>
-                                                    <select name="" class="form-select" id="status" >
-                                                           <?php echo $stat; ?>       
-                                                    </select>
-                                            </div>
-                                                                
+                                                                                                           
                                             <div class="row g-0" align= "right">
                                                 <div class="col-md-12  px-3 mx-auto my-2">
-                                                    <button type ="button" role = "button" class="btn btn-success px-2" data-bs-toggle= "" >
+                                                    <button type ="submit" name="submit" id="submit" class="btn btn-success px-2">
                                                     <i class= "fa fa-check mx-1"></i>Approve</button>
                                                     <button type ="button" role = "button" href = "#decline-req"class="btn btn-danger px-2" data-bs-toggle= "modal" >
                                                     <i class="fa fa-trash mx-1"></i>
@@ -387,6 +378,7 @@
                             </div>                                                
                         </div>
                     </div>
+                                                </form>
                 </div>
             </div>
 
@@ -405,7 +397,7 @@
                     </div>
                     <div class="modal-body bg-white">
                         <div class="row mt-2 me-3 ms-2">
-                            <form action="" method = "POST">
+                            <form method = "POST">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label for="dname">Requestor Name</label>

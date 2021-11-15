@@ -5,6 +5,7 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsuid'] == 0)) {
     header('location:logout.php');
 } else {
+    
 ?>
 
     <!DOCTYPE html>

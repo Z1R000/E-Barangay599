@@ -82,7 +82,6 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                 $query1 = $dbh->prepare($sql1);
                 $query1->execute();
                 $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
-                if ($query1->rowCount() > 0) {
                     foreach ($results1 as $row1) {
                 ?>
                         <div class="container-fluid banner" align="center">
@@ -107,7 +106,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                             </div>
 
                         </div>
-                <?php }
+                <?php
                 } ?>
                 
                 <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
@@ -162,16 +161,16 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
+                                    <?php
                                         $uid = $_SESSION['clientmsuid'];
 
-                                        $sql = "Select tblresident.FirstName,tblcreaterental.ID as cID,tblcreaterental.payment,tblcreaterental.paymentID, tblcreaterental.proof, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblcreaterental.status, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate, tblcreaterental.creationDate, tblpurposes.Purpose, tblrental.rentalName, tblrental.rentalPrice, tblcreaterental.payable, tblstatus.statusName from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID join tblrental on tblrental.ID = tblcreaterental.rentalID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID join tblstatus on tblstatus.ID = tblcreaterental.status where tblcreaterental.userID = ".$uid.";";
+                                        $sql = "Select tblresident.*,tblcreaterental.ID as cID,tblcreaterental.*, tblpurposes.*, tblrental.*, tblrental.rentalPrice, tblstatus.* from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID join tblrental on tblrental.ID = tblcreaterental.rentalID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID join tblstatus on tblstatus.ID = tblcreaterental.status where tblcreaterental.userID = :uid";
                                         $query = $dbh->prepare($sql);
                                         $query->bindParam(':uid', $uid, PDO::PARAM_STR);
                                         $query->execute();
                                         $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                        $cnt = 1;
-                                            foreach ($results as $row) { ?>
+                                            foreach ($results as $row) { $cdates = $row->creationDate;
+                                                $cdates = date('F j Y - h:i A', strtotime($cdates));?>
                                                 <tr class="active">
                                                     <td style="color: #000;"><?php echo htmlentities($row->rentalName); ?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($row->LastName); ?>, <?php echo htmlentities($row->FirstName); ?> <?php echo htmlentities($row->MiddleName); ?></td>
@@ -180,17 +179,17 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                                     <td style="color: #000;"><?php echo htmlentities($row->rentalEndDate); ?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($row->statusName); ?></td>
                                                     <td style="color: #000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cash</td>
-                                                    <td style="color: #000;"><?php echo htmlentities($row->creationDate); ?></td>
+                                                    <td style="color: #000;"><?php echo htmlentities($cdates); ?></td>
                                                     <td>
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="" href="edit-rental-request.php" class="btn btng btn-success"><i class="fa fa-edit"></i></a>
+                                                            <a type="" href="edit-rental-request.php?viewid=<?php echo htmlentities($row->cID)?>" class="btn btng btn-success"><i class="fa fa-edit"></i></a>
                                                         </div>
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                             <a type="button" href="#delete-cert" data-bs-toggle="modal" role="button" class="btn btng btn-danger"><i class="fa fa-trash"></i></a>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                        <?php $cnt++;
+                                        <?php 
                                             }
                                          ?>
                                     </tbody>
