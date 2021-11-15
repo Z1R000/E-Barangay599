@@ -154,7 +154,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                     
                     <div class="divfortable">
                         <div class="tables">
-                            <table class="table"> <thead style="background-color: #021f4e;">
+                            <table class="table table-bordered"> <thead style="background-color: #021f4e;">
                                  <th><span style="color: #fff; font-size: 120%;">Barangay Position</span></th> 
                                  <th><span style="color: #fff; font-size: 120%;">Official Name</span></th>
                                  <th><span style="color: #fff; font-size: 120%;">Day of Duty</span></th>

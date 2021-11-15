@@ -200,10 +200,11 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                     </ol>
                 </div>
                 <div class="container-fluid px-4">
-                    <div style="background-color: aliceblue;border-radius: 25px;border:1px solid black;padding: 25px;">
-                        <div class="graph-visual tables-main">
+                    <div class= "row mb-5">
+                        <div class="col-11 mx-auto bg-white border shadow-sm rounded-top pt-3 pb-2 ">
+                        <div class="graph-visual tables-main ">
 
-                            <div class="modal-body bg-white ">
+                            
                                 <div class="row">
 
                                     <div class="col-xl-4">
@@ -308,23 +309,21 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
                                 </div>
                                 <br>
-                                <div class="row">
-                                    <div class="col-xl-3">
-
-                                    </div>
-                                    <div class="col-xl-3 ">
-
-                                    </div>
-                                    <div class="col-xl-3 ">
+                                <div class="row py-2">
+                                    <div class="col-12">
+                                    <div class="float-end">
+                                        <div class="btn-group">
                                         <a href="manage-rental.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
+                                        </div>
+                                  <div class="btn-group">
+                                    <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
                                     </div>
-                                    <div class="col-xl-3 ">
-                                        <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
+                        
                         </div>
-
                     </div>
                     <!-- /#page-content-wrapper -->
                 </div>
