@@ -87,9 +87,9 @@
                         </div>
 
                      
-                        <div class="btn-group">
+                      <!--  <div class="btn-group">
                             <button class="btn-danger btn" data-bs-toggle ="modal" href ="#addpur" type = "button"><i class="fa fa-trash mx-1"></i>Delete This Purok</button>
-                        </div>
+                        </div>-->
                 </div>
                 </div>     
                     </div>

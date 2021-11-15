@@ -695,14 +695,12 @@
                     <div class="row g-0 mt-2">             
                         <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle= "tab" href="#ser">Services</a>
+                            <a class="nav-link active" data-bs-toggle= "tab" href="#ser">Certification</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle= "tab" href="#req">Requests</a>
+                            <a class="nav-link" data-bs-toggle= "tab" href="#req">Rental</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle= "tab" href="#pay">Payments</a>
-                        </li>
+                      
                         <li class="nav-item">
                             <a class="nav-link " href = "#reg" data-bs-toggle= "tab">Registrations</a>
                         </li>
@@ -712,9 +710,20 @@
                     <div class="tab-pane active" id = "ser">
                         <div class="container g-0 py-2">
                             <div class="row g-0 border border-top-0 px-3">
+                                <?php
                                 
+                                        $sql= "Select * from tblcreatecertificate where status = 8";
+
+                                        $query = $dbh->prepare($sql);
+                                        $query->execute();
+                                        $results = $query->fetchAll()
+                                        
+                                
+                                
+                                
+                                ?>
                                 <div class="row py-2">
-                                <div class="fs-5">Declined Service Transactions</div>
+                                <div class="fs-5">Declined Certifications</div>
                                 </div>
                                 <div class="row">
                                     <div class="col py-2" style= "overflow-x:auto;">
@@ -728,14 +737,15 @@
                                                         Requestor
                                                     </th>
                                                     <th>
-                                                        Service Type
+                                                        Type
                                                     </th>
                                                     <th>
                                                         Date
                                                     </th>
                                                     <th>
-                                                        Decline Reason
+                                                        Reason
                                                     </th>
+                                         
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -746,35 +756,20 @@
                                                     1
                                                 </td>
                                                 <td>
-                                                    Boss idol
+                                                    Ledesma,Marithess C.
                                                 </td>
                                                 <td>
-                                                    Certification - Employment
+                                                   Employment
                                                 </td>
                                                 <td>
-                                                    10/30/2021
+                                                Monday, 15 November 2021 - 02:30 AM
                                                 </td>
                                                 <td>
-                                                    Invalid Payment
+                                                    Invalid Credentials
                                                 </td>
+                                              
                                                 </tr>
-                                                <tr>
-                                                <td>
-                                                    2
-                                                </td>
-                                                <td>
-                                                    Boss Manong
-                                                </td>
-                                                <td>
-                                                    Rental - barangay Van
-                                                </td>
-                                                <td>
-                                                    10/30/2021
-                                                </td>
-                                                <td>
-                                                    Has pending debt
-                                                </td>
-                                                </tr>
+                                                
                                             </tbody>
                                         </table>
                                     </div>
@@ -789,7 +784,7 @@
                             <div class="row g-0 border border-top-0 px-3">
                                 
                                 <div class="row py-2">
-                                <div class="fs-5">Declined Service Requests</div>
+                                <div class="fs-5">Declined Rentals</div>
                                 </div>
                                 <div class="row">
                                     <div class="col py-2" style= "overflow-x:auto;">
@@ -809,8 +804,9 @@
                                                         Date
                                                     </th>
                                                     <th>
-                                                        Decline Reason
+                                                        Reason
                                                     </th>
+                                                  
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -821,34 +817,21 @@
                                                     1
                                                 </td>
                                                 <td>
-                                                    Boss idol
+                                                Legaspi, Zyra Mae Jr.
                                                 </td>
                                                 <td>
-                                                    Certification - Employment
+                                                    Daycare
                                                 </td>
                                                 <td>
-                                                    10/30/2021
+                                                Monday, 15 November 2021 - 11:55 AM
                                                 </td>
                                                 <td>
                                                     Invalid Payment
                                                 </td>
                                                 </tr>
-                                                <tr>
-                                                <td>
-                                                    2
-                                                </td>
-                                                <td>
-                                                    Boss Manong
-                                                </td>
-                                                <td>
-                                                    Rental - barangay Van
-                                                </td>
-                                                <td>
-                                                    10/30/2021
-                                                </td>
-                                                <td>
-                                                    Has pending debt
-                                                </td>
+                                               
+                                              
+                                                
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -902,10 +885,10 @@
                                                     Certification - Employment
                                                 </td>
                                                 <td>
-                                                    10/30/2021
+                                                November 13 2021 - 04:03 PM
                                                 </td>
                                                 <td>
-                                                    Invalid proof 
+                                                    Mismatch Credentials
                                                 </td>
                                                 </tr>
                                                 <tr>
@@ -919,10 +902,10 @@
                                                     Rental - barangay Van
                                                 </td>
                                                 <td>
-                                                    10/30/2021
+                                                November 13 2021 - 01:03 PM
                                                 </td>
                                                 <td>
-                                                    Insufficient
+                                                    Trolling Detection
                                                 </td>
                                                 </tr>
                                             </tbody>
@@ -969,14 +952,14 @@
                                                     1
                                                 </td>
                                                 <td>
-                                                    Boss idol
+                                                    Fake Person Sample  
                                                 </td>
                                                 
                                                 <td>
-                                                    10/30/2021
+                                                    November 13 2021 - 04:03 PM
                                                 </td>
                                                 <td>
-                                                    Invalid Payment
+                                                    Mismatched Credentials
                                                 </td>
                                                 </tr>
                                                 <tr>
@@ -984,14 +967,14 @@
                                                     2
                                                 </td>
                                                 <td>
-                                                    Boss Manong
+                                                    Vert, Lil Uzi
                                                 </td>
                                                 
                                                 <td>
-                                                    10/30/2021
+                                                November 13 2021 - 01:03 PM
                                                 </td>
                                                 <td>
-                                                    Has pending debt
+                                                    Trolling Detection
                                                 </td>
                                                 </tr>
                                             </tbody>
@@ -1014,8 +997,9 @@
                         <div class="row mb-5">
                             <div class="col-xl-8">
                             <div class="row bg-dark text-white shadow-sm">
-                                <div class="fs-5 py-1">Payment Credentials </diV>
+                                <div class="fs-5 py-1">Payment Credentials </div>
                             </div>
+
                             <div class="row  bg-light border shadow-sm">
                                 <form action="POST row g-2">
                                 <div class="col-xl-12 col-lg-4 col-md-4 col-sm-12 col-xs-12">

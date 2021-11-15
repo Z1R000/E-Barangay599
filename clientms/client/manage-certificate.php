@@ -54,6 +54,15 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
 
         <style type="text/css">
+            .body{
+                font-size: 16px;
+            }
+            table td{
+                font-size: 1.15em;
+            }
+            .btn{
+                font-size: 1.15em;
+            }
             .sidebar li .submenu {
                 list-style: none;
                 margin: 0;
@@ -126,7 +135,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                 <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                     <div class="d-flex align-items-center">
                         <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
-                        <h2 class="fs-2 m-0">Certification Record</h2>
+                        <h2 class="fs-2 m-0">Certification List</h2>
 
                     </div>
 
@@ -140,16 +149,17 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                     <ol class="breadcrumb m-b-0" style="text-indent: 15px; margin-left: 2.5%;overflow-x:auto;">
                         <li><a href="dashboard.php">Home</a></li>/
                         <li class="active">Record</li>/
-                        <li class="active">Certification Record</li>
+                        <li class="active">Certification List</li>
                     </ol>
                 </div>
 
 
                 <div class="container-fluid px-4">
-                    <div style="background-color: aliceblue;border-radius: 10px;padding: 25px;">
-                        <h3 class="inner-tittle two">Certificate Request List</h3>
+                            <div class="row">
+                        <div class="col-11  mx-auto">
+                            <div class="row">
                         <div class="col-xl-12 col-md-12 col-sm-12">
-                            <div class="row my-2">
+                            <div class="row my-2 ">
                                 <div class="col-md-8">
 
                                     <div class="btn-group" role="group">
@@ -161,16 +171,16 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
                             </div>
                         </div>
-                        <div class="divfortable">
+                        <div class="row mb-5" style = "overflow-x:auto">
                             <div class="tables">
-                                <table class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;" id ="alldata">
+                                <table class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 900px;" id ="alldata">
                                     <thead style="background-color: #021f4e;">
-                                        <th><span style="color: #fff; font-size:120%;">Certificate Name</th>
-                                        <th><span style="color: #fff; font-size:120%;">Resident Name</th>
-                                        <th><span style="color: #fff; font-size:120%;">Certificate Price</th>
-                                        <th><span style="color: #fff; font-size:120%;">Request Status</th>
-                                        <th><span style="color: #fff; font-size:120%;">Request Date</th>
-                                        <th><span style="color: #fff; font-size:120%;">Payment Method</th>
+                                        <th><span style="color: #fff; font-size:1.25em;">Certificate Name</span></th>
+                                        <th><span style="color: #fff; font-size:120%;">Resident Name</span></th>
+                                        <th><span style="color: #fff; font-size:120%;">Certificate Price</span></th>
+                                        <th><span style="color: #fff; font-size:120%;">Request Status</span></th>
+                                        <th><span style="color: #fff; font-size:120%;">Request Date</span></th>
+            
                                         <th><span style="color: #fff; font-size:120%;">Option</th>
                                         </tr>
                                     </thead>
@@ -196,14 +206,14 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                                     <td style="color: #000;"><?php echo htmlentities($row->CertificatePrice); ?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($row->statusName); ?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($cdates); ?></td>
-                                                    <td style="color: #000;">G-Cash</td>
+                                              
                                                     <td>
 
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="" href="edit-certificate-request.php?editid=<?php echo $row->getID;?>" class="btn btng btn-success"><i class="fa fa-edit"></i></a>
+                                                            <a type="" href="edit-certificate-request.php?editid=<?php echo $row->getID;?>" class="btn btng btn-success"><i class="fa fa-edit"></i>Edit</a>
                                                         </div>
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="button" href="#delete-cert" data-bs-toggle="modal" role="button" class="btn btng btn-danger"><i class="fa fa-trash"></i></a>
+                                                            <a type="button" href="#delete-cert" data-bs-toggle="modal" role="button" class="btn btng btn-danger"><i class="fa fa-trash"></i>Delete</a>
                                                         </div>
                                                     </td>
 
@@ -215,7 +225,8 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                     </tbody>
                                 </table>
                             </div>
-
+                            </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /#page-content-wrapper -->

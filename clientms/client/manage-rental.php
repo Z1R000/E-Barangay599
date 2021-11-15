@@ -53,12 +53,18 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
 
         <style type="text/css">
+            table td{
+                font-size: 1.15em;
+            }
             .sidebar li .submenu {
                 list-style: none;
                 margin: 0;
                 padding: 0;
                 padding-left: 1rem;
                 padding-right: 1rem;
+            }
+            .btn{
+                font-size: 1.15em;
             }
 
             .divfortable {
@@ -132,8 +138,9 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
 
                 <div class="container-fluid px-4">
-                    <div style="background-color: aliceblue;border-radius: 10px;padding: 25px;">
-                        <h3 class="inner-tittle two">Rental Record List</h3>
+                    <div class="row">
+                        <div class="col-11 mx-auto">
+                            <div class="row">
                         <div class="col-xl-12 col-md-12 col-sm-12">
                             <div class="row my-2">
                                 <div class="col-md-8">
@@ -146,8 +153,9 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                             </div>
                         </div>
                         <div class="graph">
-                            <div class="tables" style="overflow-x:auto;">
-                                <table class="table" id = "alldata" border="1">
+                            <div class="row" style="overflow-x:auto;">
+                            <div class="tables" >
+                                <table class="table bg-white table-bordered" id = "alldata"  style= "min-width: 1000px;">
                                     <thead style="background-color: #021f4e;">
                                         <th><span style="color: #fff; font-size:120%;">Rent</th>
                                         <th><span style="color: #fff; font-size:120%;">Resident Name</th>
@@ -155,7 +163,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                         <th><span style="color: #fff; font-size:120%;">Start Rent</th>
                                         <th><span style="color: #fff; font-size:120%;">End Rent</th>
                                         <th><span style="color: #fff; font-size:120%;">Status</th>
-                                        <th><span style="color: #fff; font-size:120%;">Payment Method</th>
+         
                                         <th><span style="color: #fff; font-size:120%;">Request Date</th>
                                         <th><span style="color: #fff; font-size:120%;">Option</th>
                                         </tr>
@@ -178,14 +186,14 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                                     <td style="color: #000;"><?php echo htmlentities($row->rentalStartDate); ?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($row->rentalEndDate); ?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($row->statusName); ?></td>
-                                                    <td style="color: #000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cash</td>
+                                                 
                                                     <td style="color: #000;"><?php echo htmlentities($cdates); ?></td>
                                                     <td>
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="" href="edit-rental-request.php?viewid=<?php echo htmlentities($row->cID)?>" class="btn btng btn-success"><i class="fa fa-edit"></i></a>
+                                                            <a type="" href="edit-rental-request.php?viewid=<?php echo htmlentities($row->cID)?>" class="btn btng btn-success"><i class="fa fa-edit"></i>Edit</a>
                                                         </div>
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="button" href="#delete-cert" data-bs-toggle="modal" role="button" class="btn btng btn-danger"><i class="fa fa-trash"></i></a>
+                                                            <a type="button" href="#delete-cert" data-bs-toggle="modal" role="button" class="btn btng btn-danger"><i class="fa fa-trash"></i>Delete</a>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -194,9 +202,10 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                          ?>
                                     </tbody>
                                 </table>
+                                </div>
                             </div>
-
-                        </div>
+                            </div>
+                        </div></div>    
                     </div>
                     <!-- /#page-content-wrapper -->
                 </div>

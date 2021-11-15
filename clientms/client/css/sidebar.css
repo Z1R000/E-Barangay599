@@ -72,7 +72,7 @@ border-radius: 100%;
 
 body{
     height: 100%;
-    background-image: url('../images/bg.png');
+    background-color: rgb(255, 255, 255);
     background-size: cover;
 }
 
@@ -101,6 +101,7 @@ body{
 
 #menu-toggle {
     cursor: pointer;
+    color: #021f4e;
 }
 
 .list-group-item {
