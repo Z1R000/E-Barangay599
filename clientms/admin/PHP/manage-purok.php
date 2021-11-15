@@ -30,7 +30,7 @@
    
     <div class="row bg-light py-3">
     <div class="container ">
-        <div class="row">
+        <!--<div class="row">
             <div class="col-xl-12">
                 <div class="float-end mb-3 mt-2">
                     <div class="btn-group">
@@ -39,7 +39,7 @@
                    
                 </div>
             </div>
-        </div>
+        </div>-->
         
    
         <form action="purok-streets.php" method = "GET">

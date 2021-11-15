@@ -84,11 +84,11 @@ if(isset($_POST["id"]))
             </div>
         
         </div>
-        <label for="payed" class="fs-5 mb-2">Proof of Payment- <a href= "'.$row['proof'].'" download target = "_blank" class= "text-decoration-none"><i class= "fa fa-download"></i>Download proof</label></a>
+        <label for="payed" class="fs-5 mb-2">Proof of Payment- <a href= "../'.$row['proof'].'" download target = "_blank" class= "text-decoration-none"><i class= "fa fa-download"></i>Download proof</label></a>
         
         <div class="row justify-content-center text-center">
             <div class="col-md-4"> 
-                <a align ="center" href = "#proof" data-bs-toggle ="modal" style= "max-height: 400px"><img src="'.$row['proof'].'" class= "img-fluid"></a>
+                <a align ="center" href = "#proof" data-bs-toggle ="modal" style= "max-height: 400px"><img src="../'.$row['proof'].'" class= "img-fluid"></a>
             </div>
         </div>                                                    
     </div>
@@ -115,7 +115,7 @@ if(isset($_POST["id"]))
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body bg-white" align = "center">
-                        <img src="'.$row['proof'].'" alt="" style= "max-width: 100%;">
+                        <img src="../'.$row['proof'].'" alt="" style= "max-width: 100%;">
                 </div>
                <div class="row">
                    <div class="col-md-12">
