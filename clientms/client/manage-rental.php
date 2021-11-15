@@ -194,10 +194,10 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                                     <td style="color: #000;"><?php echo htmlentities($cdates); ?></td>
                                                     <td>
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="" href="edit-rental-request.php?editid=<?php echo htmlentities($row->cID)?>" class="btn btng btn-success"><i class="fa fa-edit"></i></a>
+                                                            <a type="" href="edit-rental-request.php?editid=<?php echo htmlentities($row->cID)?>" class="btn btng btn-success"><i class="fa fa-edit mx-1"></i>Edit</a>
                                                         </div>
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="button" href="#delete-cert" data-bs-toggle="modal" role="button" class="btn btng btn-danger"><i class="fa fa-trash"></i></a>
+                                                            <a type="button" href="#delete-cert" data-bs-toggle="modal" role="button" class="btn btng btn-danger"><i class="fa fa-trash mx-1"></i>Delete</a>
                                                         </div>
                                                     </td>
                                                 </tr>
