@@ -233,7 +233,8 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
 					?>
 						<div class="container-fluid px-4">
-							<div style="background-color: aliceblue;border-radius: 25px;border:1px solid black;padding: 25px;">
+							<div class ="row pt-2 pb-3 px-4 ">
+								<div class="col-10 mx-auto bg-white border pt-3 rounded-top px-5 pb-4">
 								<div class="row">
 									<div class="col-xl-4">
 										<label for="date" class="black fw-bold fs-5">Date today</label>
@@ -423,26 +424,23 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 		
 										</div>
 										<br>
-										<div class="row">
-											<div class="col-xl-3">
-		
-											</div>
-											<div class="col-xl-3 ">
-		
-											</div>
-											<div class="col-xl-3 ">
-												
-											</div>
-											<div class="col-xl-3 ">
+										<div class="row py-3">
+											
+											<div class="col-xl-12 ">
+											<div class="float-end">										
 											<a href="manage-certificate.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
 											</div>
+											</div>
+
 										</div>';
 										}
 									?>
 							</div>
 						</div>
+						</div>
 				</form>
 			<?php } ?>
+
 
 
 			<!-- /#page-content-wrapper -->
