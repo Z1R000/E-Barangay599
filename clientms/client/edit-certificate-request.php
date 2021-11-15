@@ -27,6 +27,17 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 		echo '<script>alert("Certificate Information has been updated")</script>';
 		echo "<script>window.location.href ='edit-certificate-request.php?editid=" . $eid . "'</script>";
 	}
+
+	if (isset($_POST['delete'])){
+		$stats = "8";
+		$sql = "update tblcreatecertificate set status=:stats WHERE ID=:eid";
+		$query = $dbh->prepare($sql);
+		$query->bindParam(':stats', $stats, PDO::PARAM_STR);
+		$query->bindParam(':eid', $eid, PDO::PARAM_STR);
+		$query->execute();
+		echo '<script>alert("Certificate request has been cancelled.")</script>';
+		echo "<script>window.location.href ='edit-certificate-request.php?editid=" . $eid . "'</script>";
+	}
 ?>
 
 	<!DOCTYPE html>
@@ -216,13 +227,14 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 					<ol class="breadcrumb m-b-0" style="text-indent: 15px; margin-left: 2.5%;">
 						<li><a href="dashboard.php">Home</a></li>/
 						<li class="active">Record</li>/
-						<li class="active"><a href="dashboard.php">Certificate Record</a></li>/
+						<li class="active">Certificate Record</li>/
 						<li class="active">Edit Certificate Record</li>
 					</ol>
 				</div>
+				
 				<form method="post">
 					<?php
-					$sql = "SELECT distinct tblcreatecertificate.*, tblcreatecertificate.ID as getID, tblresident.*, tblcertificate.*, tblstatus.* from tblcreatecertificate join tblcertificate on tblcertificate.ID = tblcreatecertificate.CertificateId join tblstatus on tblcreatecertificate.status = tblstatus.ID join tblresident on tblcreatecertificate.Userid=tblresident.ID WHERE tblcreatecertificate.ID=:eid";
+					$sql = "SELECT distinct tblcreatecertificate.*, tblcreatecertificate.ID as getID, tblresident.*, tblcertificate.*, tblstatus.*, tblpurposes.* from tblcreatecertificate join tblcertificate on tblcertificate.ID = tblcreatecertificate.CertificateId join tblstatus on tblcreatecertificate.status = tblstatus.ID join tblresident on tblcreatecertificate.Userid=tblresident.ID join tblpurposes on tblpurposes.ID = tblcreatecertificate.purpID WHERE tblcreatecertificate.ID=:eid";
 					$query = $dbh->prepare($sql);
 					$query->bindParam(':eid', $eid, PDO::PARAM_STR);
 					$query->execute();
@@ -232,9 +244,19 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 						$cdates = date('F j Y - h:i A', strtotime($cdates));
 
 					?>
+					
 						<div class="container-fluid px-4">
 							<div class ="row pt-2 pb-3 px-4 ">
-								<div class="col-10 mx-auto bg-white border pt-3 rounded-top px-5 pb-4">
+								<div class="col-10 mx-auto bg-white border pt-3 rounded-top px-4 pb-4">
+								<div class="row">
+								<div class="col-xl-11">
+					</div><div class="col-xl-1">
+                        <a type ="button" role = "button" href = "manage-certificate.php" class="btn btn-secondary px-4" data-bs-dismiss= "modal" >
+                                                    <i class="fa fa-arrow-circle-left mx-1"></i>
+                                                            Back
+                                                    </a>
+                        </div>
+						</div>
 								<div class="row">
 									<div class="col-xl-4">
 										<label for="date" class="black fw-bold fs-5">Date today</label>
@@ -256,19 +278,19 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 									<div class="col-md-6">
 										<label for="purp" class= "black fw-bold fs-5">Purpose</label>
 											<select id = "purp" class ="form-select" name= "cmeth" disabled>
-												<option value="<?php echo "$row->Purpose";?>"><?php echo "$row->Purpose";?></option>
+												<option value="<?php echo "$row->purpID";?>"><?php echo "$row->Purpose";?></option>
 											</select>
 									</div>
 								</div>
 									<?php 
-										$purpc = $row->Purpose;
-										if ($purpc == "OTHERS"){
+										$purpc = $row->purpID;
+										if ($purpc == "13"){
 											echo '<div class="col-md-6">
 											</div>
 											<div class="col-md-6">
 		
 												<label for="rname" class="fs-6 fw-bold">Other Reasons</label>
-												<input type="text" class="form-control" id="rname" placeholder="Please Specify:">
+												<input type="text" class="form-control" id="rname" placeholder="Please Specify:" value="'.$row->other.'" disabled>
 		
 											</div>';
 										}
@@ -304,20 +326,20 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 								</div>
 										<br>
 								<?php 
-										$ccheck = $row->CertificateName;
+										$ccheck = $row->CertificateId;
 										if ($ccheck == "6" || $ccheck == "7" || $ccheck == "8"){
 											echo '<div class="row">
 
 											<div class="col-md-6">
 												<label for="purp" class="fs-6 fw-bold">Business name
 													<small class="text-muted">(If business related)</small> </label>
-												<input type="text" class="form-control" id="rname" placeholder="e.g Manong Store">
+												<input type="text" class="form-control" id="rname" placeholder="e.g Manong Store" value="'.$row->bName.'" disabled>
 											</div>
 										</div><br>';
 										}
 
 										$scheck = "$row->statusName";
-										if ($scheck == "PENDING" || $scheck == "REJECTED/CANCELLED"){
+										if ($scheck == "PENDING"){
 											echo '<div class="row">
 											<div class="col-xl-3">
 		
@@ -326,10 +348,9 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 		
 											</div>
 											<div class="col-xl-3 ">
-												<a href="manage-certificate.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
 											</div>
 											<div class="col-xl-3 ">
-												<button type="submit" class="form-control btn btn-outline-success" name="delete" id="delete">Delete</button>
+												<button type="submit" class="form-control btn btn-outline-danger" name="delete" id="delete">Cancel Request</button>
 											</div>
 										</div>';
 										}else if ($scheck == "APPROVED" || $scheck == "PAYMENT REJECTED"){
@@ -362,17 +383,10 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 												<img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
 		
 											</div>
-											<div class="col-xl-1">
-		
-												<img src="images/images.jpg" alt="Girl in a jacket" width="80" height="80">
-		
-		
-											</div>
-											<div class="col-xl-2">
+											<div class="col-xl-3">
+											<label for="ctype" style="font-size:130%; font-weight:600;">Francine Voltaire Ledesma <br><span style="font-size:90%;font-style:italic; font-weight:600;"> 09056602669</span></label>
 		
 		
-		
-												<label for="ctype" style="font-size:130%; font-weight:600;">Francine Voltaire Ledesma <br><span style="font-size:90%;font-style:italic; font-weight:600;"> 09056602669</span></label>
 											</div>
 		
 										</div>
@@ -385,13 +399,13 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 		
 											</div>
 											<div class="col-xl-3 ">
-												<a href="manage-certificate.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
+												<button type="submit" class="form-control btn btn-outline-danger" name="delete" id="delete">Cancel Request</button>
 											</div>
 											<div class="col-xl-3 ">
 												<button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
 											</div>
 										</div>';
-										}else if ($scheck == "PAYMENT VERIFICATION" || $scheck == "PAYMENT VERIFIED" || $scheck == "SETTLED"){
+										}else if ($scheck == "PAYMENT VERIFIED" || $scheck == "SETTLED" || $scheck == "PAYMENT VERIFICATION"){
 											echo '<div class="row">
 											<div class="col-xl-3">
 											<label for="ctype" class="black fw-bold fs-5">Proof of Payment</label>
@@ -422,16 +436,6 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 		
 											</div>
 		
-										</div>
-										<br>
-										<div class="row py-3">
-											
-											<div class="col-xl-12 ">
-											<div class="float-end">										
-											<a href="manage-certificate.php" class="form-control btn btn-outline-danger" name="cancel" id="cancel">Cancel</a>
-											</div>
-											</div>
-
 										</div>';
 										}
 									?>

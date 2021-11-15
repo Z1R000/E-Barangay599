@@ -133,7 +133,7 @@
                                         <div class = "text-inner">
                                             <h4 class="fs-3">
                                                 <?php 
-                                                    $sql1 ="SELECT ID from tblrentalrequest ";
+                                                    $sql1 ="SELECT ID from tblcreaterental WHERE status='1' ";
                                                     $query1 = $dbh -> prepare($sql1);
                                                     $query1->execute();
                                                     $results1=$query1->fetchAll(PDO::FETCH_OBJ);
@@ -157,7 +157,7 @@
                                         <div class = "text-inner">
                                             <h4 class="fs-3">
                                                 <?php 
-                                                    $sql2 ="SELECT ID from tblcertificaterequest ";
+                                                    $sql2 ="SELECT ID from tblcreaterental WHERE status='1' ";
                                                     $query2 = $dbh -> prepare($sql2);
                                                     $query2->execute();
                                                     $results2=$query2->fetchAll(PDO::FETCH_OBJ);

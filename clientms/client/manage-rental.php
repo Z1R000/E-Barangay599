@@ -158,7 +158,6 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                 <table class="table bg-white table-bordered" id = "alldata"  style= "min-width: 1000px;">
                                     <thead style="background-color: #021f4e;">
                                         <th><span style="color: #fff; font-size:120%;">Rent</th>
-                                        <th><span style="color: #fff; font-size:120%;">Resident Name</th>
                                         <th><span style="color: #fff; font-size:120%;">Rental Price</th>
                                         <th><span style="color: #fff; font-size:120%;">Start Rent</th>
                                         <th><span style="color: #fff; font-size:120%;">End Rent</th>
@@ -178,22 +177,27 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                         $query->execute();
                                         $results = $query->fetchAll(PDO::FETCH_OBJ);
                                             foreach ($results as $row) { $cdates = $row->creationDate;
-                                                $cdates = date('F j Y - h:i A', strtotime($cdates));?>
+                                                $cdates = date('F j Y - h:i A', strtotime($cdates));
+                                                $sdates = $row->rentalStartDate;
+                                                $sdates = date('F j Y - h:i A', strtotime($sdates));
+                                                $edates = $row->rentalEndDate;
+                                                $edates = date('F j Y - h:i A', strtotime($edates));
+                                                $pay = $row->payable;
+                                                $pay = number_format($pay,2);?>
                                                 <tr class="active">
                                                     <td style="color: #000;"><?php echo htmlentities($row->rentalName); ?></td>
-                                                    <td style="color: #000;"><?php echo htmlentities($row->LastName); ?>, <?php echo htmlentities($row->FirstName); ?> <?php echo htmlentities($row->MiddleName); ?></td>
-                                                    <td style="color: #000;"><?php echo htmlentities($row->payable)?></td>
-                                                    <td style="color: #000;"><?php echo htmlentities($row->rentalStartDate); ?></td>
-                                                    <td style="color: #000;"><?php echo htmlentities($row->rentalEndDate); ?></td>
+                                                    
+                                                    <td style="color: #000;"><?php echo htmlentities($pay)?></td>
+                                                    <td style="color: #000;"><?php echo htmlentities($sdates); ?></td>
+                                                    <td style="color: #000;"><?php echo htmlentities($edates); ?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($row->statusName); ?></td>
-                                                 
                                                     <td style="color: #000;"><?php echo htmlentities($cdates); ?></td>
                                                     <td>
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="" href="edit-rental-request.php?viewid=<?php echo htmlentities($row->cID)?>" class="btn btng btn-success"><i class="fa fa-edit"></i>Edit</a>
+                                                            <a type="" href="edit-rental-request.php?editid=<?php echo htmlentities($row->cID)?>" class="btn btng btn-success"><i class="fa fa-edit"></i></a>
                                                         </div>
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="button" href="#delete-cert" data-bs-toggle="modal" role="button" class="btn btng btn-danger"><i class="fa fa-trash"></i>Delete</a>
+                                                            <a type="button" href="#delete-cert" data-bs-toggle="modal" role="button" class="btn btng btn-danger"><i class="fa fa-trash"></i></a>
                                                         </div>
                                                     </td>
                                                 </tr>

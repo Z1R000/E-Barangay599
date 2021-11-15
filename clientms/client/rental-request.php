@@ -5,8 +5,9 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsuid'] == 0)) {
     header('location:logout.php');
 } else {
-    $send = 20.00;
-    $sql = 'SELECT * FROM tblpurposes where serviceType = "rental"';
+    $time = new DateTime("now", new DateTimeZone('Asia/Manila'));
+    $send = "0.00";
+    $sql = 'SELECT * FROM tblpurposes where serviceType = "2"';
     $query= $dbh->prepare($sql);
     $query->execute();
     $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -113,6 +114,18 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
         
 
 ?>
+<script>function checkDate() {
+   var st = document.getElementById('startDur').value;
+   var et = document.getElementById('endDur').value;
+   var sd = new Date(st);
+   var ed = new Date(et);
+   var now = new Date();
+   
+   if (ed < sd) {
+      alert("Date must be in the future of start date");
+      $('#endDur').val('');
+    }
+ }</script>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -395,9 +408,17 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                             <label for="prate" class="fs-5 fw-bold">Rental Duration</label>
                                             <div class="input-group">
                                             <button class="btn btn-secondary disabled">From</button>
-                                                <input type="datetime-local" name= "startDur" class="form-control">
+                                                <input type="datetime-local" name= "startDur" class="form-control" id="startDur" onchange="checkDate()">
+                                                <script type="text/javascript">
+                                                    var today = new Date().toISOString().slice(0, 16);
+                                                    document.getElementsByName("startDur")[0].min = today;
+                                                </script>
                                                 <button class="btn btn-secondary disabled">to</button>
-                                                <input type="datetime-local" name= "endDur" class="form-control">
+                                                <input type="datetime-local" name= "endDur" class="form-control" id="endDur" onchange="checkDate()" onBlur="var x = ((new Date(this.value) - new Date(startDur.value))/(1000*60*60)) * document.getElementById('rprice').value; nfObject = new Intl.NumberFormat('en-US'); output = nfObject.format(x); document.getElementById('total').value = output + '.00';">
+                                                <script type="text/javascript">
+                                                    var todays = new Date(today).toISOString().slice(0, 16);
+                                                    document.getElementsByName("endDur")[0].min = todays;
+                                                </script>
                                         
                                             </div>
                                         </div>
@@ -414,15 +435,21 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
                                 
                                         </div>
+                                        <div class="col-xl-6">
+                                        <label for="total" class="fs-5 fw-bold">Total</label>
+                                        <div class="d-flex">
+                                            <input type="text" id="total" class="form-control me-2" name="total" disabled>
+                                        </div>
+                                    </div>
                                         <div class="col-xl-6 " id = "others">
                                                 <label for="prate" class="fs-5 fw-bold">Purpose</label>
                                                 <input type="text"  name= "others" id = "date" class="form-control " value=  "">
                                             </div>
-                                        
-                             
-                                      
                                         </div>
-                                        <div class="col-xl-12 ">
+                                        
+                                    
+                                        
+                                        <div class="col-xl-12 py-2">
                                             <div class="float-end">
                                                 <div class="btn-group">
                                                 <button type="submit" class=" btn btn-outline-success" name="request" >Submit</button>

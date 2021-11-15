@@ -13,17 +13,11 @@
             
             $cont=$_POST['cont'];
             $status="2";
-            $sqls = "Select tbladmin.*, tblresident.*, tblpositions.* from tblresident join tbladmin on tbladmin.residentID = tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition WHERE tbladmin.ID = :aid";
-            $querys=$dbh->prepare($sqls);
-            $querys->bindParam(':aid', $aid, PDO::PARAM_STR);
-            $querys->execute();
-            $results=$querys->fetchAll(PDO::FETCH_OBJ);
-            foreach ($results as $rows) {$getpos = "$rows->Position $rows->LastName";}
+            
 
-        $sql = "update tblcreatecertificate set status=:status, cAdmin=:getpos WHERE ID=:eid";
+        $sql = "update tblcreatecertificate set status=:status WHERE ID=:eid";
         $query = $dbh->prepare($sql);
         $query->bindParam(':eid',$eid,PDO::PARAM_STR);
-        $query->bindParam(':getpos', $getpos, PDO::PARAM_STR);
         $query->bindParam(':status',$status,PDO::PARAM_STR);
         $query->execute();
         echo '<script>alert("Certificate request has been approved.")</script>';

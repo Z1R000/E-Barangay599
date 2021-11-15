@@ -176,7 +176,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                 <table class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 900px;" id ="alldata">
                                     <thead style="background-color: #021f4e;">
                                         <th><span style="color: #fff; font-size:1.25em;">Certificate Name</span></th>
-                                        <th><span style="color: #fff; font-size:120%;">Resident Name</span></th>
+                                        
                                         <th><span style="color: #fff; font-size:120%;">Certificate Price</span></th>
                                         <th><span style="color: #fff; font-size:120%;">Request Status</span></th>
                                         <th><span style="color: #fff; font-size:120%;">Request Date</span></th>
@@ -202,7 +202,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                         ?>
                                                 <tr class="active">
                                                     <td style="color: #000;"><?php echo htmlentities($row->CertificateName); ?></td>
-                                                    <td style="color: #000;"><?php echo htmlentities($row->FirstName); ?> <?php echo htmlentities($row->MiddleName); ?> <?php echo htmlentities($row->LastName); ?> <?php echo htmlentities($row->Suffix); ?></td>
+                                                    
                                                     <td style="color: #000;"><?php echo htmlentities($row->CertificatePrice); ?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($row->statusName); ?></td>
                                                     <td style="color: #000;"><?php echo htmlentities($cdates); ?></td>
@@ -210,10 +210,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                                     <td>
 
                                                         <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="" href="edit-certificate-request.php?editid=<?php echo $row->getID;?>" class="btn btng btn-success"><i class="fa fa-edit"></i>Edit</a>
-                                                        </div>
-                                                        <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
-                                                            <a type="button" href="#delete-cert" data-bs-toggle="modal" role="button" class="btn btng btn-danger"><i class="fa fa-trash"></i>Delete</a>
+                                                            <a type="" href="edit-certificate-request.php?editid=<?php echo $row->getID;?>" class="btn btng btn-primary"><i class="fa fa-edit"></i>Manage</a>
                                                         </div>
                                                     </td>
 
