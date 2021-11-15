@@ -128,7 +128,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Offical List</h2>
+                    <h2 class="fs-2 m-0">Official's List</h2>
                     
                 </div>
                 
@@ -149,8 +149,8 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 
 
             <div class="container-fluid px-4">
-			<div style="background-color: aliceblue;border-radius: 10px;padding: 25px;">
-				<div class="graph-visual tables-main">
+                    <div class="row px-5">
+                    <div class="graph-visual tables-main">
                     
                     <div class="divfortable">
                         <div class="tables">
