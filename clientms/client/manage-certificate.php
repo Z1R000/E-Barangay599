@@ -163,7 +163,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                         </div>
                         <div class="divfortable">
                             <div class="tables">
-                                <table class="table" id="alldata" border="1">
+                                <table class="table bg-white rounded shadow-sm  table-hover table-bordered " style="min-width: 1000px;" id ="alldata">
                                     <thead style="background-color: #021f4e;">
                                         <th><span style="color: #fff; font-size:120%;">Certificate Name</th>
                                         <th><span style="color: #fff; font-size:120%;">Resident Name</th>

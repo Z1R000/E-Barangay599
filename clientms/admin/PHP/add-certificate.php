@@ -8,20 +8,19 @@ if (strlen($_SESSION['clientmsaid']==0)) {
   } else{
   if(isset($_POST['submit']))
   {
-    $eid=intval($_GET['editid']);
     $clientmsaid=$_SESSION['clientmsaid'];
       $cn=$_POST['cn'];
       $cp=$_POST['cp'];
-      $ct=$_POST['cert-info'];
+      $ct=$_POST['ctype'];
 
-      $sql="update tblcertificate set CertificateName=:cn, CertificatePrice=:cp, CertText=:ct where ID=:eid";
+      $sql="insert into tblcertificate (CertificateName, CertificatePrice, Type) VALUES (:cn, :cp, :ct)";
       $query=$dbh->prepare($sql);
       $query->bindParam(':cn',$cn,PDO::PARAM_STR);
       $query->bindParam(':cp',$cp,PDO::PARAM_STR);
       $query->bindParam(':ct',$ct,PDO::PARAM_STR);
-      $query->bindParam(':eid',$eid,PDO::PARAM_STR);
       $query->execute();
-      echo "<script type='text/javascript'> document.location ='edit-cert.php?editid=" , $eid ,"'; </script>";
+      echo "<script type='text/javascript'> document.location ='admin-certificate.php'; </script>";
+      echo "<script>alert('New certificate has been made.')</script>";
   }
 ?>
 <!DOCTYPE html>
@@ -169,42 +168,14 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                 <div class="col-xl-12"> 
                   <ul class="nav  nav-pills justify-content-center"> 
                   <li class="nav-item">
-                        <a class="nav-link fs-5 active" href="#edit-cert" data-bs-toggle = "tab">Customize Certification </a>
-                    </li>    
-                    <li class="nav-item">
-                        <a class="nav-link  fs-5" href="#preview" data-bs-toggle = "tab">Preview</a>
-                    </li>
+                        <a class="nav-link fs-5 active" href="#edit-cert" data-bs-toggle = "tab">Add Certification </a>
+                    </li>   
                  
                   </ul>
                 </div>
                 <div class="col-xl-12">
                   <div class="tab-content">
-                    <div class="tab-pane show fade " id="preview">
-                        <div class="container my-3">
-                                <div class="row g-0 ">
-                                    <div class="col-xl-8  shadow-sm mx-auto  ">
-                                        <div class="row  text-white bg-599 g-0 justify-content-center">
-                                            <div class="col-12">
-                                                <div class="display-6 border-start border-end border-bottom text-center">Certificate Template</div>
-                                            </div>
-
-                                        </div>
-                            
-                                
-                                        <div class="row border-start border-end border-bottom py-3 g-0 justify-content-center">
-                                            <div class="col-10 mx-auto">
-
-                                        
-                                            <div class="embed-responsive mx-auto embed-responsive-16by9">
-                                                <iframe class="embed-responsive-item" id = "frame" src="view-cert.php"></iframe>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-                      
-                    </div>
+                   
                     <div class="tab-pane show fade active" id="edit-cert">
                     <form method ="POST">
   
@@ -219,7 +190,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
               </div>
               
               <div class="row bg-white pb-5 border">
-                <form action="" method = "POST">
+                <form method = "POST">
                   <div class="row g-2 gy-1 px-5">
                     <div class="col-xl-6">
                     <label for="cn" class= "black fw-bold">Certification Name</label>
@@ -240,13 +211,17 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                   <div class="row  g-2 ">
                     <div class="col-md-12 mx-auto">
                       <label for="cert-inf" class= "black fw-bold">Certification Contents</label>
-                      <textarea class= "" name="cert-info" id="cert-inf" cols="30" rows="4" style= "resize: none" placeholder= "Paragraph 1" value=""><?php echo htmlentities($row->CertText);?></textarea>
+                      <select class="form-control action" name="ctype" id="ctype" required style="width: 50%;">
+                                                <option value="" selected disabled>--Select Type of Certification--</option>
+                                                <option value="1" >Non-Business Certificate</option>
+                                                <option value="2" >Business Certificate</option>
+                                            </select>
                     </div>
                    
                   </div>
                   <div class="row g-2">
                     <div class="col-12">
-                    <button type = "button" href = "#save-cert" data-bs-toggle = "modal" role= "button" name="submit" id="submit" class = "btn btnx btn-primary mb-1 float-end"><i class= "fas fa-upload me-2"></i>Upload</button>
+                    <button type = "submit" name="submit" id="submit" class = "btn  btn-primary  my-2 float-end"><i class= "fas fa-save me-2"></i>Save</button>
                     </div>
 
                     </div>

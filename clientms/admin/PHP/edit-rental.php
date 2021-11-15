@@ -131,7 +131,7 @@
         if($arr[8]=="G-cash"){
          
             $det = "disabled";
-            $sql = "Select * from tblstatus where ID = 3 or ID = 2 or ID= 4 or ID= 7";
+            $sql = "Select * from tblstatus where ID = 2 or ID = 3 or ID= 4 or ID= 7";
             $query = $dbh->prepare($sql);
             $query -> execute();
             $result = $query->fetchAll(PDO::FETCH_OBJ);
@@ -163,7 +163,7 @@
 
         }
         if ($arr[8]=="Cash"){
-            $sql = "Select * from tblstatus where ID = 3 or ID= 4 or ID= 7";
+            $sql = "Select * from tblstatus where ID = 2 or ID= 3";
             $query = $dbh->prepare($sql);
             $query -> execute();
             $result = $query->fetchAll(PDO::FETCH_OBJ);
