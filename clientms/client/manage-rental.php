@@ -109,6 +109,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                         </div>
                 <?php }
                 } ?>
+                
                 <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                     <div class="d-flex align-items-center">
                         <i class="fa fa-align-justify primary-text fs-4 me-3" id="menu-toggle"></i>
