@@ -26,6 +26,7 @@
             header("Location: admin-rentals.php?propertyadd=failed");
            }
            else{
+            
             $sql= "Insert into tblrental(rentalName,rentalPrice,availability) values('".$_POST['newProperty']."','".$_POST['newPayment']."', 1)";
             if($con->query($sql)===TRUE){
                 header("Location: admin-rentals.php?propertyadd=success");

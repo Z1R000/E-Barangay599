@@ -116,7 +116,7 @@
                 }
 
              ?><br>
-                <img src = "<?php echo "../".$adminlogo;?>" class = "py-1"style = "width: 60px;"><br>
+                <img src = "<?php echo $adminlogo;?>" class = "py-1"style = "width: 60px;"><br>
                 <div class="btn-group">
                     <a href="client-profile.php" class="btn btn-transparent"><i class="fa fa-user fs-4 text-primary"></i></a>
                     
@@ -208,7 +208,7 @@
                     {
                         foreach($resultss as $rows)
                         {
-                            echo "<img src='../$rows->Blogoone' style='width: 100px;'>";
+                            echo "<img src='$rows->Blogoone' style='width: 100px;'>";
 
                             echo "</div>
 
@@ -221,7 +221,7 @@
 
                             echo "<div class='col-xl-3'>
                                     <div class='float-end'>
-                                        <img src='../$rows->Blogotwo' style='width: 100px;'>
+                                        <img src='$rows->Blogotwo' style='width: 100px;'>
                                     </div>
                                 </div>
                             </div>";

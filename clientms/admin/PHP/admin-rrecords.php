@@ -7,7 +7,7 @@ function moveto(){
      
 
     
-$sql = 'SELECT * FROM tblpurposes where serviceType = "rental"';
+$sql = 'SELECT * FROM tblpurposes where serviceType = 2  ';
     $query= $dbh->prepare($sql);
     $query->execute();
     $results = $query->fetchAll(PDO::FETCH_OBJ);
