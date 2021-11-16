@@ -6,6 +6,8 @@
     if (strlen($_SESSION['clientmsaid']==0)) {
     header('location:logout.php');
     }else{
+        $err = "";
+        $succesEditP = "";
         $infoArr=[];
         $curr ="E-barangay Information";
         $sql = "Select * from tblinformation";
@@ -25,6 +27,171 @@
             array_push($infoArr,$d->gName);
             array_push($infoArr,$d->qr);
         }
+        $fileName = "";
+        $ftypes = array('png','jpeg','jpg');
+        if (isset($_POST['savepcred'])){
+
+            $fileName = $_FILES['qrc']['name'];
+            $fileSize = $_FILES['qrc']['size'];
+            $fileError = $_FILES['qrc']['error'];
+            $filetmpname = $_FILES['qrc']['tmp_name'];
+            $fileExt = explode('.',$fileName);
+            $extension = strtolower(end($fileExt));
+            
+            $destination = "";
+
+            
+            if (in_array($extension,$ftypes)){
+                if($fileSize<5000000){
+                    $newfilename = uniqid('',TRUE).".".$extension;
+                    $destination = "../images/".$newfilename;
+                    move_uploaded_file($filetmpname,$destination);
+                    header('Location: admin-e-content.php?success=1');
+                }
+
+            }
+
+            $sql= '';
+                if ($fileName!= ""){
+        
+                   
+                    $sql = 'Update tblinformation set qr = "'.$destination.'",bContact = "'.$_POST['gcnum'].'",gName ="'.$_POST['gcname'].'"';
+                }
+                else{
+                    $sql = 'Update tblinformation set bContact = "'.$_POST['gcnum'].'",gName ="'.$_POST['gcname'].'"';
+                }
+            
+
+            if (!preg_match('/^(09)+(\d{9})/',$_POST['gcnum'])){
+                $err ='<div class="fs-6 text-danger">Contact Number Must start with 09 and is 11 characters Long (PH format)</div>';
+                $succesEditP = "";
+  
+            }
+      
+
+            else{
+                
+                if ($connect->query($sql)===TRUE){
+                    header('Location: admin-e-content.php?updatepcred=success');
+                    
+                }
+                else{
+                    header('Location: admin-e-content.php?updatepcred=fail');
+                }
+            }
+
+        }
+        if (isset($_POST['saveimg'])){
+
+        }
+        if (isset($_POST['saveText'])){
+            $sql = 'Update tblinformation set eTitle = "'.$_POST['etitle'].'", Baddress = "'.$_POST['badd'].'", bFullAdd = "'.$_POST['bfadd'].'", Btitle = "'.$_POST['btitle'].'", aboutus = "'.$_POST['hist'].'" where ID = 1';
+
+            if ($connect->query($sql)===TRUE){
+                header("Location: admin-e-content.php?textupdate=success");
+            }
+            else{
+                header("Location: admin-e-content.php?textupdate=failed");
+            }
+        }
+        if (isset($_POST['saveimg'])){
+            $filenameone = $_FILES['bnine']['name'];
+            $filenametwo = $_FILES['adnine']['name'];
+            $filenamethree = $_FILES['manl']['name'];
+
+            if($filenameone!=""){
+
+                $fileName = $_FILES['bnine']['name'];
+                $fileSize = $_FILES['bnine']['size'];
+                $fileError = $_FILES['bnine']['error'];
+                $filetmpname = $_FILES['bnine']['tmp_name'];
+                $fileExt = explode('.',$fileName);
+                $extension = strtolower(end($fileExt));
+                
+                $destination = "";
+
+
+                if (in_array($extension,$ftypes)){
+                    if($fileSize<5000000){
+                        $newfilename = uniqid('',TRUE).".".$extension;
+                        $destination = "../images/".$newfilename;
+                        move_uploaded_file($filetmpname,$destination);
+    
+                    }
+    
+                }
+                $sql= 'Update tblinformation set Blogoone = "'.$destination.'" where ID = 1';
+                if ($connect->query($sql)===TRUE){
+                    header('Location: admin-e-content.php?successimag=1');
+                }
+                else{
+                    header('Location: admin-e-content.php?successimag=0');
+                }
+    
+
+            }
+            if($filenametwo!=""){
+
+                $fileName = $_FILES['manl']['name'];
+                $fileSize = $_FILES['adnine']['size'];
+                $fileError = $_FILES['adnine']['error'];
+                $filetmpname = $_FILES['adnine']['tmp_name'];
+                $fileExt = explode('.',$fileName);
+                $extension = strtolower(end($fileExt));
+                
+                $destination = "";
+
+
+                if (in_array($extension,$ftypes)){
+                    if($fileSize<5000000){
+                        $newfilename = uniqid('',TRUE).".".$extension;
+                        $destination = "../images/".$newfilename;
+                        move_uploaded_file($filetmpname,$destination);
+    
+                    }
+    
+                }
+                $sql= 'Update tblinformation set  = "'.$destination.'" where ID = 1';
+                if ($connect->query($sql)===TRUE){
+                    header('Location: admin-e-content.php?successimag=1');
+                }
+                else{
+                    header('Location: admin-e-content.php?successimag=0');
+                }
+            }
+
+            if($filenamethree!=""){
+
+                $fileName = $_FILES['manl']['name'];
+                $fileSize = $_FILES['manl']['size'];
+                $fileError = $_FILES['manl']['error'];
+                $filetmpname = $_FILES['manl']['tmp_name'];
+                $fileExt = explode('.',$fileName);
+                $extension = strtolower(end($fileExt));
+                
+                $destination = "";
+
+
+                if (in_array($extension,$ftypes)){
+                    if($fileSize<5000000){
+                        $newfilename = uniqid('',TRUE).".".$extension;
+                        $destination = "../images/".$newfilename;
+                        move_uploaded_file($filetmpname,$destination);
+    
+                    }
+    
+                }
+                $sql= 'Update tblinformation set Blogotwo = "'.$destination.'" where ID = 1';
+                if ($connect->query($sql)===TRUE){
+                    header('Location: admin-e-content.php?successimag=1');
+                }
+                else{
+                    header('Location: admin-e-content.php?successimag=0');
+                }
+            }
+                        
+        }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -546,8 +713,11 @@
                     </div>
                     
                 </div>
+
+
                 <div class="tab-pane fade show" id = "e-text">
                     <div class="container shadow-sm g-0 mb-5 ">
+                        <form method = "POST">
                             <div class="row bg-dark text-white shadow-sm">
                                 <div class="fs-5 py-1">E-barangay Texts <i class="fa fa-scroll mx-1"></i></div>
                             </div>
@@ -555,12 +725,12 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for = "etitle" class= "fs-5 fw-bold">E-barangay Title</label>
-                                        <input type="text" class="form-control" id = "etitle" placeholder = "599 title" value = "<?php
+                                        <input type="text" name= "etitle" class="form-control" id = "etitle" placeholder = "599 title" value = "<?php
                                         echo $infoArr[8];?>" >
                                     </div>
                                     <div class="col-md-6">
                                         <label for = "etitle" class= "fs-5 fw-bold">Barangay Title</label>
-                                        <input type="text" class="form-control" id = "etitle" placeholder = "599 title" value = "<?php
+                                        <input type="text" name = "btitle" class="form-control" id = "etitle" placeholder = "599 title" value = "<?php
                                         echo $infoArr[7];?>" >
                                     </div>
                                 </div>
@@ -568,12 +738,12 @@
 
                                     <div class="col-md-6">
                                         <label for = "eban1" class= "fs-5 fw-bold">Barangay Address <span class ="text-muted">(for Banner)</span></label>
-                                        <input type="text" class="form-control" id = "eban1" placeholder = "599 title" value = "<?php
+                                        <input type="text" name = "badd" class="form-control" id = "eban1" placeholder = "599 title" value = "<?php
                                         echo $infoArr[0];?>" >
                                     </div>
                                     <div class="col-md-6">
                                         <label for = "eban2" class= "fs-5 fw-bold">Barangay Full Address</label>
-                                        <input type="text" class="form-control" id = "" placeholder = "599 title" value = "<?php
+                                        <input type="text" name= "bfadd"class="form-control" id = "" placeholder = "599 title" value = "<?php
                                         echo $infoArr[1];
                                         ?>" >
                                         
@@ -583,7 +753,7 @@
                                     <div class="row g-2 pt-3 pb-1 px-3">
                                         <label for = "eban2" class= "fs-5 fw-bold">Barangay 599 History</label>
                                         <div class="form-floating mb-3">
-                                            <textarea type="text" class="form-control" id="edit-about" >
+                                            <textarea type="text" name= "hist" class="form-control" id="edit-about" >
                                             <?php echo $infoArr[6]?>
 
                                             </textarea>
@@ -592,7 +762,7 @@
                                     </div>
                                     <div class="row justify-content-end" align = "right">
                                         <div class="col-xl-6">
-                                        <button type = "button" class="btn btn-success" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                        <button type = "submit" name= "saveText" class="btn btn-success" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
                                                 <i class= 'fa fa-save me-2'></i>Save
                                             </button>
                                             <button type = "reset" class="btn btn-danger">
@@ -601,10 +771,9 @@
                                         </div>       
                                     </div>
                                 </div>
-                            
+                                </form>
                         </div>
                     </div>    
-                
                 <div class="tab-pane" id = "e-img">
                     <div class="container mb-5 g-0 shadow-sm">
                         <div class="row bg-dark rounded-top">
@@ -612,6 +781,7 @@
                                 E-barangay Images
                             </div>
                         </div>
+                        <form method= "POST" enctype="multipart/form-data">
                         <div class="row p-4 bg-light justify-content-center align-items-center">
                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <div class="row g-0">
@@ -620,14 +790,14 @@
                                                 Barangay 599's Logo
                                             </div>
                                         
-                                            <img src="../<?php echo $infoArr[2] ?>" alt="" class="img-fluid border border-info rounded ava"  style = "height: 185px">
+                                            <img src="<?php echo $infoArr[2] ?>"  id = "blogo" alt="" class="img-fluid  rounded-circle  rounded ava"  style = "height: 185px">
                                     
                                         </div>
                                     </div>
                                     <div class="row" align = "center">
                                         <div class="col-xl-10 my-2 mx-auto">
-                                            <input type="file" id="selectedFile" style="display: none;" />
-                                            <button type="button"  class= "btn btn-primary" onclick="document.getElementById('selectedFile').click();" ><i class= "fa fa-camera me-2 "></i>Choose photo</button>
+                                            <input type="file" id="selectedFile1" name= "bnine"  onchange="loadFile(event,'blogo')" hidden/>
+                                            <button type="button"  class= "btn btn-primary" onclick="document.getElementById('selectedFile1').click();" ><i class= "fa fa-camera me-2 "></i>Choose photo</button>
                                         </div>
 
                                     </div>
@@ -639,16 +809,15 @@
                                                 599's Admin Logo
                                             </div>
                                         
-                                            <img src="../<?php echo $infoArr[3] ?>" alt="" class="img-fluid border border-info rounded ava"  style = "height: 185px">
+                                            <img src="<?php echo $infoArr[5] ?>" id = "nlogo" alt="" class="img-fluid rounded-circle  ava"  style = "height: 185px">
                                     
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xl-10 my-2 mx-auto" align = "center">
-                                            <input type="file" id="selectedFile" style="display: none;" />
-                                            <button type="button"  class= "btn btn-primary" onclick="document.getElementById('selectedFile').click();" ><i class= "fa fa-camera me-2 "></i>Choose photo</button>
+                                            <input type="file" id="selectedFile3" name= "adnine"  onchange = "loadFile(event,'nlogo') " hidden/>
+                                            <button type="button"  class= "btn btn-primary" onclick="document.getElementById('selectedFile3').click();" ><i class= "fa fa-camera me-2 "></i>Choose photo</button>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
@@ -657,16 +826,14 @@
                                             <div class="fs-5 fw-bold">
                                                 City of Manila Logo
                                             </div>
-
-                                        
-                                            <img src="../<?php echo $infoArr[5] ?>" alt="" class="img-fluid border border-info rounded ava"  style = "height: 185px">
+                                            <img src="<?php echo $infoArr[3] ?>"  id = "mlogo" alt="" class="img-fluid rounded-circle ava"  style = "height: 185px">
                                     
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xl-10 my-2 mx-auto" align = "center">
-                                            <input type="file" id="selectedFile" style="display: none;" />
-                                            <button type="button"  class= "btn btn-primary" onclick="document.getElementById('selectedFile').click();" ><i class= "fa fa-camera me-2 "></i>Choose photo</button>
+                                            <input type="file" id="selectedFile2" name="manl"  onchange = "loadFile(event, 'mlogo');" hidden />
+                                            <button type="button"  class= "btn btn-primary" onclick="document.getElementById('selectedFile2').click();" ><i class= "fa fa-camera me-2 "></i>Choose photo</button>
                                         </div>
 
                                     </div>
@@ -674,10 +841,10 @@
                                 <div class="row justify-content-end">
                                     <div class="col-md-2 my-2 " >
                                         
-                                        <button type ="button" class= "btn btn-success form-control"><i class= "fa fa-save me-2"></i>Save</button>
+                                        <button type ="submit" name = "saveimg" class= "btn btn-success form-control"><i class= "fa fa-save me-2"></i>Save</button>
                                 </div>
                                 </div>
-
+                                </form>
                         </div>
                     </div> 
                 </div>
@@ -710,18 +877,7 @@
                     <div class="tab-pane active" id = "ser">
                         <div class="container g-0 py-2">
                             <div class="row g-0 border border-top-0 px-3">
-                                <?php
-                                
-                                        $sql= "Select * from tblcreatecertificate where status = 8";
-
-                                        $query = $dbh->prepare($sql);
-                                        $query->execute();
-                                        $results = $query->fetchAll()
-                                        
-                                
-                                
-                                
-                                ?>
+                              
                                 <div class="row py-2">
                                 <div class="fs-5">Declined Certifications</div>
                                 </div>
@@ -749,26 +905,38 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-
-                                                
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-                                                    Ledesma,Marithess C.
-                                                </td>
-                                                <td>
-                                                   Employment
-                                                </td>
-                                                <td>
-                                                Monday, 15 November 2021 - 02:30 AM
-                                                </td>
-                                                <td>
-                                                    Invalid Credentials
-                                                </td>
-                                              
-                                                </tr>
+                                                    <?php
+                                
+                                                            $sql= "Select tblresident.*, tblcreatecertificate.*, tblcertificate.*
+                                                            from tblcreatecertificate
+                                                            INNER JOIN tblresident on tblresident.ID = tblcreatecertificate.Userid
+                                                            inner join tblcertificate on tblcertificate.ID = tblcreatecertificate.CertificateId
+                                                            where tblcreatecertificate.status = 8";
+                                                            $query = $dbh->prepare($sql);
+                                                            $query->execute();
+                                                            
+                                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                            $nu = 1;
+                                                            foreach ($results as $r){
+                                                                $cdate = $r->CreationDate;
+                                                                echo'
+                                                                <tr>
+                                                                    <td>'.$nu.'</td>
+                                                                    <td scope="col" style = "text-align: left">'.$r->LastName.",".$r->FirstName." ".$r->MiddleName." ".$r->Suffix.'</td>
+                                                                    <td>'.$r->CertificateName.'</td>
+                                                                    <td>'.date('l, j F Y - h:i A', strtotime($cdate)).'</td>
+                                                                    <td>Invalid Credentials</td>
+                                                                </tr>
+                                                                
+                                                                
+                                                                ';
+                                                                $nu++;
+                                                            }
+                                                    
+                                                    
+                                                    
+                                                    ?>
+                                               
                                                 
                                             </tbody>
                                         </table>
@@ -810,29 +978,36 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
+                                                <?php
+                                                    $sql = 'Select tblrental.*, tblcreaterental.*,tblresident.* from tblcreaterental inner join tblresident on tblresident.ID = tblcreaterental.userID inner join tblrental on tblrental.ID = tblcreaterental.rentalID where tblcreaterental.status = 8
+                                                    ';
+                                                    $query = $dbh->prepare($sql);
+                                                            $query->execute();
+                                                            
+                                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                            $nu = 1;
+                                                            foreach ($results as $r){
+                                                                $cdate = $r->CreationDate;
+                                                                echo'
+                                                                <tr>
+                                                                    <td>'.$nu.'</td>
+                                                                    <td scope="col" style = "text-align: left">'.$r->LastName.",".$r->FirstName." ".$r->MiddleName." ".$r->Suffix.'</td>
+                                                                    <td>'.$r->rentalName.'</td>
+                                                                    <td>'.date('l, j F Y - h:i A', strtotime($cdate)).'</td>
+                                                                    <td>Invalid Credentials</td>
+                                                                </tr>
+                                                                
+                                                                
+                                                                ';
+                                                                $nu++;
+                                                            }
+                                                    
+
 
                                                 
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-                                                Legaspi, Zyra Mae Jr.
-                                                </td>
-                                                <td>
-                                                    Daycare
-                                                </td>
-                                                <td>
-                                                Monday, 15 November 2021 - 11:55 AM
-                                                </td>
-                                                <td>
-                                                    Invalid Payment
-                                                </td>
-                                                </tr>
-                                               
-                                              
                                                 
-                                                </tr>
+                                                
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -999,10 +1174,14 @@
                             <div class="row bg-dark text-white shadow-sm">
                                 <div class="fs-5 py-1">Payment Credentials </div>
                             </div>
-
+                        
                             <div class="row  bg-light border shadow-sm">
-                                <form action="POST row g-2">
-                                <div class="col-xl-12 col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class="row justify-content-center">
+                                    <?php print_r ($fileName);?>
+                                </div>
+                            <form method="POST" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <div class="row g-0">
                                         <div class="col-md-10 mx-auto" align = "center">
                                             <div class="row py-2">
@@ -1014,15 +1193,20 @@
                                                 QR code
                                             </div>
                                         
-                                            <img src="../<?php echo $infoArr[10]?>" alt="" class="img-fluid border border-info rounded ava"  style = "height: 185px">
+                                            <img src="<?php echo $infoArr[10]?>" alt="" id = "output" class="img-fluid border border-info rounded ava"  style = "height: 185px">
                                     
                                         </div>
                                     </div>
                                     <div class="row" align = "center">
                                         <div class="col-xl-10 my-2 mx-auto">
-                                            <input type="file" id="selectedFile" style="display: none;" />
-                                            <button type="button"  class= "btn btn-primary disabled" id = "gbut" onclick="document.getElementById('selectedFile').click();" ><i class= "fa fa-camera me-2"></i>Choose photo</button>
-                                        </div>
+                                        <input id='fileid' type='file'name = "qrc" hidden onchange = "loadFile(event,'output')" />
+                                            <button id='gbut' type='button'  onclick = "openDialog();"  class = " disabled btn btn-primary mx-1"value='Upload MB' ><i class="fa fa fa-camera mx-1"></i>Choose Photo</button>
+                                        <script>
+                                            
+                                            function openDialog() {
+                                                document.getElementById('fileid').click();
+                                            }
+                                        </script>
 
                                     </div>
                                 </div>
@@ -1033,12 +1217,12 @@
                                     <div class="col-xl-6 mx-auto">
                                     <label for="g-cashn" class="fs-5 " >G-cash Name</label>
                                     <div class="input-group" >
-                                        
-                                        <input type="text" value = "<?php echo $infoArr[9]?>" id = "gnam"class="form-control" readonly>
+                                        <input type="text" value = "<?php echo $infoArr[9]?>" name= "gcname" id = "gnam"class="form-control" readonly>
                                     </div>
                                     <label for="g-cashn" class="fs-5">G-cash Number</label>
                                     <div class="input-group">
-                                        <input type="text" value = "<?php echo $infoArr['4']?>"id = "gnum"class="form-control" readonly>
+                                        <input type="text" value = "<?php echo $infoArr[4]?>"id = "gnum" name= "gcnum"  class="form-control" readonly>
+                                        <?php echo $err;?>
                                     </div>
                                     </div>
                                 </div>
@@ -1047,7 +1231,7 @@
                                     <div class="col-xl-12 my-4"style= "display:none;" id = "hid">
                                         <div class="float-end">
                                             <div class="btn-group">
-                                                <button class="btn btn-primary" ><i class="fa fa-save mx-1"></i>Save Changes</button>
+                                                <button type = "submit" name= "savepcred" class="btn btn-primary" ><i class="fa fa-save mx-1"></i>Save Changes</button>
                                             </div>
                                            
                                          
@@ -1056,6 +1240,8 @@
                                 </div>
                                 </form>
                             </div>
+                            </div>
+
                             </div>
                         </div>
                     </div>
@@ -1114,7 +1300,17 @@
         
     }
 </script>
-       
+       <script>
+           var loadFile = function (event,imgid) {
+  var image = document.getElementById(imgid);
+  image.src = URL.createObjectURL(event.target.files[0]);
+};
+
+
+
+
+
+       </script>
 
        
  <script src = "../ckeditor/ckeditor.js"></script>

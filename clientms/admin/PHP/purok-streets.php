@@ -119,7 +119,7 @@
                                      '.$ctr.'   
                                     </td>
                                     <td>
-                                    '.$row->streetName.'
+                                        '.$row->streetName.'
                                     <div class="modal fade" id = "edit-st'.$ctr.'" tab-idndex = "-1">
                                     <div class="modal-dialog modal-dialog-centered modal-md">
                                         <div class="modal-content g-0 border-0 ">
