@@ -6,7 +6,6 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid'] == 0)) {
     header('location:logout.php');
 } else {
-    $con = mysqli_connect("localhost", "root", "", "clientmsdb");
     $aid = $_SESSION['clientmsaid'];
     $sqls = "Select tbladmin.*, tblresident.*, tblpositions.* from tblresident join tbladmin on tbladmin.residentID = tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition WHERE tbladmin.ID = :aid";
         $querys=$dbh->prepare($sqls);

@@ -299,7 +299,7 @@
 
                     where ID ='.$arr[0].';';*/
 
-            if ($connect->query($fupdate)===TRUE){
+            if ($con->query($fupdate)===TRUE){
                 header('Location: edit-rental.php?rid='.$arr[0].'&update=success');
             }
             else{
@@ -312,7 +312,7 @@
 
            $sql = "Update tblcreaterental set status = 8 where ID = ".$arr[0]." ";
 
-           if ($connect->query($fupdate)===TRUE){
+           if ($con->query($fupdate)===TRUE){
                 header('Location: admin-rentals.php?delete=success');
            }
            else{

@@ -118,7 +118,7 @@ $mod = '<option  selected disabled>Mode of payment</option>';
  
     $sqlr= 'Insert into tblcreaterental(status,userID,rentalID,	rentalStartDate,rentalEndDate,modeOfPayment,purpID,payable,others) values('.$stat.','.$userid.','.$rt.',"'.$start.'","'.$end.'",'.$mode.','.$purp.','.$send.',"'.$others.'");';
     
-    if ($connect->query($sqlr)===TRUE){
+    if ($con->query($sqlr)===TRUE){
         header("Location: admin-rentals.php?add-rec=successful");
    
     }

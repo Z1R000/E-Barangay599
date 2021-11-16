@@ -1,7 +1,7 @@
 <?php
     
   
-    $connect = mysqli_connect("localhost", "root", "", "clientmsdb");
+    include('includes/dbconnection.php');
     $sql ="SELECT * from tbllistpurok";
     $query = $dbh -> prepare($sql);
     $query->execute();

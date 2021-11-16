@@ -1,8 +1,8 @@
 <?php
 //fetchdata.php
+include('includes/dbconnection.php');
 if(isset($_POST["action"]))
 {
- $con = mysqli_connect("localhost", "root", "", "clientmsdb");
  $output = '';
  if($_POST["action"] == "ctype")
  {
@@ -21,7 +21,6 @@ if(isset($_POST["action"]))
 
 if(isset($_POST["action"]))
 {
- $con = mysqli_connect("localhost", "root", "", "clientmsdb");
  $output = '';
  if($_POST["action"] == "rtype")
  {
@@ -39,7 +38,6 @@ if(isset($_POST["action"]))
 
 if(isset($_POST["id"]))
 {
- $con = mysqli_connect("localhost", "root", "", "clientmsdb");
  $output = '';
     
   $sql= 'Select tblresident.FirstName,tblcreaterental.ID as cID,tblcreaterental.payment,tblcreaterental.paymentID, tblcreaterental.proof, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblcreaterental.status, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate, tblcreaterental.creationDate, tblpurposes.Purpose, tblrental.rentalName, tblrental.rentalPrice, tblcreaterental.payable, tblstatus.statusName from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID join tblrental on tblrental.ID = tblcreaterental.rentalID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID join tblstatus on tblstatus.ID = tblcreaterental.status where tblcreaterental.status = 3 and tblcreaterental.status<8 and tblcreaterental.ID = '.$_POST['id'].' order by tblcreaterental.creationDate DESC

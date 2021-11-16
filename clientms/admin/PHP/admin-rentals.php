@@ -11,7 +11,7 @@
        if (isset($_POST['editprop'])){
             $sql= 'UPDATE tblrental SET rentalName = "'.$_POST['propName'].'", rentalPrice = "'.$_POST['propRate'].'" ,availability = "'.$_POST['propA'].'" WHERE `tblrental`.ID = '.$_POST['editprop'].';';            
         
-            if ($connect->query($sql)===TRUE){
+            if ($con->query($sql)===TRUE){
                 $upsuccess = "<div class= 'fs-5 text-success'>Successfully Updated</div>".$_POST['propRate']."";
                 header("Location: admin-rentals.php?updateProperty=success");
                 
@@ -27,7 +27,7 @@
            }
            else{
             $sql= "Insert into tblrental(rentalName,rentalPrice,availability) values('".$_POST['newProperty']."','".$_POST['newPayment']."', 1)";
-            if($connect->query($sql)===TRUE){
+            if($con->query($sql)===TRUE){
                 header("Location: admin-rentals.php?propertyadd=success");
                 
             }

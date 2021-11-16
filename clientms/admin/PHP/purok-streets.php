@@ -1,5 +1,6 @@
 <?php 
     $curr ="Manage Purok ".$_GET['purok'];
+    include('includes/dbconnection.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +45,6 @@
     <?php 
         include ('../includes/sidebar.php');
 
-        $connect = mysqli_connect("localhost", "root", "", "clientmsdb");
         $sql ="SELECT * from tblstreet where Purok = ".$_GET['purok']."";
         $query = $dbh -> prepare($sql);
         $query->execute();

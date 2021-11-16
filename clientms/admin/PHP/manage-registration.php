@@ -2,10 +2,7 @@
 $curr = "Manage Registration";
 session_start();
 error_reporting(0);
-$con = mysqli_connect("localhost", "root", "", "clientmsdb");
-if (mysqli_connect_errno()) {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
+
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid'] == 0)) {
     header('location:logout.php');
@@ -420,7 +417,6 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                     <label for="" class="mx-2 fs-5 small">Purok&nbsp;</label>
 
                                                     <?php
-                                                    // $con = mysqli_connect("localhost", "admin", "admin", "countrydb");
                                                     $pName = '';
                                                     $prksel = $row->Purok;
                                                     $query = "SELECT pName FROM tbllistpurok";
@@ -446,7 +442,6 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                     <label for="" class="mx-2 fs-5 small">Street </label>
                                                     <select name="strt" id="strt" class="form-control action" disabled>
                                                         <?php
-                                                        // $con = mysqli_connect("localhost", "admin", "admin", "countrydb");
                                                         $sName = '';
                                                         $ssel = $row->streetName;
                                                         $prkcheck = $row->Purok;

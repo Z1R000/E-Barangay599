@@ -6,7 +6,6 @@
     if (strlen($_SESSION['clientmsaid']==0)) {
     header('location:logout.php');
     } else{
-        $connect = mysqli_connect("localhost", "root", "", "clientmsdb");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -116,7 +115,7 @@
                                                     <?php
                                                     
                                                     $query = "SELECT * FROM tblresident WHERE resStatus='Pending' ORDER BY CreationDate ASC, LastName";
-                                                    $result = mysqli_query($connect, $query);
+                                                    $result = mysqli_query($con, $query);
                                                     $count = 1;  
                                                     while ($row = mysqli_fetch_array($result)) { 
                                                         echo '  

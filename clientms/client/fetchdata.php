@@ -1,8 +1,8 @@
 <?php
 //fetchdata.php
+include('includes/dbconnection.php');
 if(isset($_POST["action"]))
 {
- $con = mysqli_connect("localhost", "root", "", "clientmsdb");
  $output = '';
  if($_POST["action"] == "ctype")
  {
@@ -21,7 +21,6 @@ if(isset($_POST["action"]))
 
 if(isset($_POST["action"]))
 {
- $con = mysqli_connect("localhost", "root", "", "clientmsdb");
  $output = '';
  if($_POST["action"] == "rtype")
  {
@@ -39,7 +38,6 @@ if(isset($_POST["action"]))
 
 if(isset($_POST["id"]))
 {
- $con = mysqli_connect("localhost", "root", "", "clientmsdb");
  $output = '';
  
   $sql= 'SELECT DISTINCT tblpaymentlogs.payment, tblpaymentlogs.refNum,tblrental.rentalPrice, tblpaymentlogs.refNum, tblresident.FirstName,tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblmodes.mode ,tblservices.sertype, tblrental.rentalName,tblpaymentlogs.proof FROM tblpaymentlogs INNER JOIN tblresident ON tblresident.ID = tblpaymentlogs.payorName INNER JOIN tblmodes ON tblmodes.ID = tblpaymentlogs.mode INNER JOIN tblservices ON tblservices.ID = tblpaymentlogs.servicetype INNER JOIN tblrental ON tblrental.ID = tblpaymentlogs.request and tblpaymentlogs.id = "'.$_POST['id'].'"';
