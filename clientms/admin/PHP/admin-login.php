@@ -22,28 +22,26 @@ if(isset($_POST['login']))
 	}
 		$_SESSION['login']=$_POST['email'];
 		echo "<script type='text/javascript'> document.location ='admin-dashboard.php'; </script>";
+		$timein = date_default_timezone_get();
+		$user = $_SESSION['clientmsaid'];
+		$position = 0;
+		$sql= "Select BarangayPosition from tbladmin where ID =".$user."";        
+		$query = $dbh->prepare($sql);
+		$query->execute();
+		$result = $query->fetchAll(PDO::FETCH_OBJ);
+
+		foreach($result as $s){
+			$position = $s->BarangayPosition;
+		}
+		
+		$aud = "Insert into tblloginaudits(resId,position) values('".$user."','".$position."')";
+		if($con->query($aud)===TRUE){
+			header("Location: admin-dashboard.php?success=1");
+		}
 	}
 	else{
 		echo "<script>alert('Invalid Details');</script>";
 	}
-	$timein = date_default_timezone_get();
-	$user = $_SESSION['clientmsaid'];
-	$position = 0;
-	$sql= "Select BarangayPosition from tbladmin where ID =".$user."";        
-	$query = $dbh->prepare($sql);
-	$query->execute();
-	$result = $query->fetchAll(PDO::FETCH_OBJ);
-
-	foreach($result as $s){
-		$position = $s->BarangayPosition;
-	}
-	
-	$aud = "Insert into tblloginaudits(resId,position) values('".$user."','".$position."')";
-	if($con->query($aud)===TRUE){
-		header("Location: admin-dashboard.php?success=1");
-	}
-	
-
 }
 
 
