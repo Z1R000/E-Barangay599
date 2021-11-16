@@ -39,7 +39,7 @@ if(isset($_POST['login']))
 	}
 	
 	$aud = "Insert into tblloginaudits(resId,position) values('".$user."','".$position."')";
-	if($connect->query($aud)===TRUE){
+	if($con->query($aud)===TRUE){
 		header("Location: admin-dashboard.php?success=1");
 	}
 	

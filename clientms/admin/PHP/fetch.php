@@ -1,6 +1,6 @@
 <?php
 //fetch.php
-$connect = mysqli_connect("localhost", "root", "", "clientmsdb");
+include('includes/dbconnection.php');
 $columns = array('first_name', 'last_name');
 
 $query = "SELECT * FROM user ";
@@ -30,9 +30,9 @@ if($_POST["length"] != -1)
  $query1 = 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
 }
 
-$number_filter_row = mysqli_num_rows(mysqli_query($connect, $query));
+$number_filter_row = mysqli_num_rows(mysqli_query($con, $query));
 
-$result = mysqli_query($connect, $query . $query1);
+$result = mysqli_query($con, $query . $query1);
 
 $data = array();
 
@@ -45,16 +45,16 @@ while($row = mysqli_fetch_array($result))
  $data[] = $sub_array;
 }
 
-function get_all_data($connect)
+function get_all_data($con)
 {
  $query = "SELECT * FROM user";
- $result = mysqli_query($connect, $query);
+ $result = mysqli_query($con, $query);
  return mysqli_num_rows($result);
 }
 
 $output = array(
  "draw"    => intval($_POST["draw"]),
- "recordsTotal"  =>  get_all_data($connect),
+ "recordsTotal"  =>  get_all_data($con),
  "recordsFiltered" => $number_filter_row,
  "data"    => $data
 );

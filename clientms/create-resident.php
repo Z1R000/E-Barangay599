@@ -2,10 +2,7 @@
 $curr = "Resident Registration";
 session_start();
 error_reporting(0);
-$con = mysqli_connect("localhost", "root", "", "clientmsdb");
-if (mysqli_connect_errno()) {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
+
 include('includes/dbconnection.php');
 
 if (isset($_POST['submit'])) {

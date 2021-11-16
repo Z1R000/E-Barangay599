@@ -1,8 +1,4 @@
 <?php
-$con = mysqli_connect("localhost", "root", "", "clientmsdb");
-if (mysqli_connect_errno()) {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
@@ -232,11 +228,11 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                 </div>
                 <div class="container-fluid px-4">
                    <div class="row">
-                       <div class="col-11 border shadow-sm  bg-white mx-auto">
-                        <div class="row py-2">
+                       <div class="col-11 mx-auto">
+                        <div class="row">
                             <div class="fs-5 text-white rounded-top" style= "background: #012f4e">Certification Request</div>
                         </div>
-                        <div class="row pt-3 pb-3 px-3 bg-white">
+                        <div class="row pb-3 px-3 bg-white border shadow-sm">
                         <div class="row ">
                             <div class="col-xl-4">
                                 <label for="date" class="fw-bold fs-6">Date today</label>
@@ -267,14 +263,13 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                         <select class="select form-select" name="purp" id="purp" onchange="showOthers('other_txt',this);" required>
                                             <option selected disabled>--Purpose--</option>
                                             <?php
-                                            $sqllist = "select * from tblpurposes where serviceType='certification'";
+                                            $sqllist = "select * from tblpurposes where serviceType='1'";
                                             $checkplist = $dbh->prepare($sqllist);
                                             $checkplist->execute();
                                             $resultplist = $checkplist->fetchAll(PDO::FETCH_OBJ);
                                             foreach ($resultplist as $rowplist) { ?>
-                                            <?php echo '<option value="' . $rowplist->Purpose . '">' . $rowplist->Purpose . '</option>';
+                                            <?php echo '<option value="' . $rowplist->ID . '">' . $rowplist->Purpose . '</option>';
                                             } ?>
-                                            <option value="OTHERS">OTHERS</option>
                                         </select>
                                     </div>
                                 </div>
@@ -426,7 +421,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                 }
 
                 function showOthers(divId, element) {
-                    document.getElementById(divId).style.display = element.value == 'OTHERS' ? 'flex' : 'none';
+                    document.getElementById(divId).style.display = element.value == '13' ? 'flex' : 'none';
                 }
 
                 function showOthersdec(divId, element) {

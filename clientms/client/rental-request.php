@@ -104,7 +104,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                 $sql = 'Insert into tblcreaterental(status,userID,rentalID,adminID,rentalStartDate,rentalEndDate,modeOfPayment,purpID,payable) values (1,'.$user.','.$prop.',0,"'.$start.'","'.$end.'",'.$mod.','.$purp.','.$send.')';
             }
             echo $sql;
-            if ($connect->query($sql)===TRUE){
+            if ($con->query($sql)===TRUE){
                 header("Location: rental-request.php?request=sent&topay=".$send."&h=".$h."&d=".$d."&m=".$i."&rate=".$rate."");
             }
             else{

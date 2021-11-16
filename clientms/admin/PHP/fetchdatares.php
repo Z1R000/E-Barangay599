@@ -1,8 +1,8 @@
 <?php
 //fetchdatares.php
+include('includes/dbconnection.php');
 if(isset($_POST["action"]))
 {
- $con = mysqli_connect("localhost", "root", "", "clientmsdb");
  $output = '';
  if($_POST["action"] == "prk")
  {

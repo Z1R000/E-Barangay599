@@ -1,7 +1,7 @@
 <?php  
- $connect = mysqli_connect("localhost", "root", "", "clientmsdb");  
+ include('includes/dbconnection.php');
  $query ="SELECT * FROM tblresident ORDER BY LastName ASC";  
- $result = mysqli_query($connect, $query);  
+ $result = mysqli_query($con, $query);  
  ?>  
  <!DOCTYPE html>  
  <html>  

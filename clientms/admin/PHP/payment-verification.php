@@ -144,7 +144,7 @@
 
                     where ID ='.$arr[0].';';
 
-            if ($connect->query($sql)===TRUE){
+            if ($con->query($sql)===TRUE){
                 header('Location: edit-rental.php?rid='.$arr[0].'&update=success');
             }
             else{

@@ -1,10 +1,6 @@
 <?php
 $curr = "Certifications";
 
-$con = mysqli_connect("localhost", "root", "", "clientmsdb");
-if (mysqli_connect_errno()) {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
 session_start();
 error_reporting(1);
 include('includes/dbconnection.php');
@@ -26,7 +22,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
             if($mop == "G-Cash"){
                 $stat = "2";
                 $sql = "Insert into tblcreatecertificate(Userid, CertificateId, pMode, cAdmin, Purpose, other, bName, status) values (".$usid.",".$ctype.",'".$mop."','".$cadm."','".$purp."','".$other."','".$bn."','".$stat."');";
-                if ($connect->query($sql)===TRUE){
+                if ($con->query($sql)===TRUE){
                     echo '<script>alert("Certificate information has been added")</script>';
                     echo "<script>window.location.href ='admin-certificate.php'</script>";
                 }
@@ -37,7 +33,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
             }else if ($mop == "Cash"){
                 $stat = "3";
                 $sql = "Insert into tblcreatecertificate(Userid, CertificateId, pMode, cAdmin, Purpose, other, bName, status) values (".$usid.",".$ctype.",'".$mop."','".$cadm."','".$purp."','".$other."','".$bn."','".$stat."');";
-                if ($connect->query($sql)===TRUE){
+                if ($con->query($sql)===TRUE){
                     echo '<script>alert("Certificate information has been added")</script>';
                     echo "<script>window.location.href ='admin-certificate.php'</script>";
                 }

@@ -130,7 +130,6 @@
         $query->execute();
         $results=$query->fetchAll(PDO::FETCH_OBJ);
         $cnt=1;
-        $connect = mysqli_connect("localhost", "root", "", "clientmsdb");
        
         if($query->rowCount() > 0){
             foreach($results as $row)
