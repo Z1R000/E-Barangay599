@@ -12,6 +12,8 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');    
   } else{
+    $time = new DateTime("now", new DateTimeZone('Asia/Manila'));
+    $aid = $_SESSION['clientmsaid'];
 //###########################################################################
 
 
@@ -42,24 +44,25 @@ function itexmo($number,$message,$apicode,$passwd){
 }
 //##########################################################################
 
-if ($_POST) {
+if(isset($_POST['submit'])){
     $sql = "SELECT * from tblcredits";
     $query=$dbh->prepare($sql);
     $query->execute();
     $result1=$query->fetchAll(PDO::FETCH_OBJ);
     foreach ($result1 as $row1) {
-        $api=$row->ApiCode;
-        $passwd=$row->ApiPassword;
+        $api=$row1->ApiCode;
+        $passwd=$row1->ApiPassword;
     }
 
-    $sdates = $_POST['sdates'];
-    $sdates = date('F j Y - h:i A', strtotime($sdates));
-    $edates = $_POST['edates'];
-    $edates = date('F j Y - h:i A', strtotime($edates));
+    $sdata = $_POST['sdates'];
+    $sdates = date('F j, Y - h:i A', strtotime($sdata));
+    $edata = $_POST['edates'];
+    $edates = date('F j, Y - h:i A', strtotime($edata));
     $msg = $_POST['msg'];
-    $text = "Announcement for " . $sdates . " to " . $edates . ": " . $msg;
+    $text = "From Barangay 599 V. Mapa\nAnnouncement for " . $sdates . " to " . $edates . ": \n" . $msg."\n";
+    $texts = "Announcement for " . $sdates . " to " . $edates . ": \n" . $msg."\n";
 
-    $sql = "SELECT * from tblresident";
+    $sql = "SELECT * from tblresident WHERE Cellphnumber IS NOT NULL";
     $query=$dbh->prepare($sql);
     $query->execute();
     $result1=$query->fetchAll(PDO::FETCH_OBJ);
@@ -72,52 +75,67 @@ if ($_POST) {
         Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
         Please CONTACT US for help. ";
             } else if ($result == 0) {
-                try {
-                    //Server settings
-                                         //Enable verbose debug output
-                    $mail->isSMTP();                                            //Send using SMTP
-                    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-                    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                    $mail->Username   = 'barnagay599@gmail.com';                     //SMTP username
-                    $mail->Password   = 'barangay599123';                               //SMTP password
-                    $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
-                    $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-                
-                    $mail->setFrom('barnagay599@gmail.com', 'chairman');
-            
-                    $sqle = "SELECT * from tblresident";
-                    $querye=$dbh->prepare($sqle);
-                    $querye->execute();
-                    $resulte=$querye->fetchAll(PDO::FETCH_OBJ);
-                    foreach ($resulte as $rowe) {
-                        $emails = $rowe->Email;
-                        $mail->addAddress("$emails");
-                        
-                    }
-            
-                    
-                
-                    //Content
-                    $mail->isHTML(true);                                  //Set email format to HTML
-                    $mail->Subject = 'Announcement';
-                    $mail->Body    = "$msg";
-                    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-                
-                    $mail->send();
-                    echo "<script>alert('Announcement has been made.')</script>";
-                } catch (Exception $e) {
-                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                }   
+                 
             } else {
               echo "Error Num " . $result . " was encountered!";
             }
           }
     }
-}
 
+    $sql ="Select tbladmin.*, tblresident.*, tblpositions.* from tblresident join tbladmin on tbladmin.residentID = tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition where tbladmin.ID = :aid";
+    $query = $dbh -> prepare($sql);
+    $query->bindParam(':aid',$aid,PDO::PARAM_STR);
+    $query->execute();
+    foreach($results as $row)
+	{$getpos = "$row->Position $row->LastName";}
 
+    try {
+        //Server settings
+                             //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'barnagay599@gmail.com';                     //SMTP username
+        $mail->Password   = 'barangay599123';                               //SMTP password
+        $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
+        $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    
+        $mail->setFrom('barnagay599@gmail.com', $getpos);
 
-?>
+        $sqle = "SELECT * from tblresident WHERE Email IS NOT NULL";
+        $querye=$dbh->prepare($sqle);
+        $querye->execute();
+        $resulte=$querye->fetchAll(PDO::FETCH_OBJ);
+        foreach ($resulte as $rowe) {
+            $emails = $rowe->Email;
+            $mail->addAddress("$emails");
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Announcement from Barangay 599 V. Mapa';
+            $mail->Body    = "$text";
+            $mail->AltBody = 'Barangay 599 V. Mapa';
+        
+            $mail->send();
+            
+        }
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+
+    $sqle = "insert into tblannouncement (announcement, startDate, endDate, adminID) VALUES (:msg,:sdata,:edata,:aid)";
+    $querye=$dbh->prepare($sqle);
+    $querye->bindParam(':msg', $msg, PDO::PARAM_STR);
+    $querye->bindParam(':sdata', $sdata, PDO::PARAM_STR);
+    $querye->bindParam(':edata', $edata, PDO::PARAM_STR);
+    $querye->bindParam(':aid', $aid, PDO::PARAM_STR);
+    $querye->execute();
+    $LastInsertId = $dbh->lastInsertId();
+    if ($LastInsertId > 0) {
+        echo "<script>alert('Announcement has been made.')</script>";
+        echo "<script>window.location.href ='admin-announcement.php'</script>";
+    } else {
+        echo '<script>alert("Something Went Wrong. Please try again")</script>';
+    }
+}?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -330,20 +348,6 @@ if ($_POST) {
                        </div>
 
 
-
-
-
-
-
-
-
-
-<?php } ?>
-
-
-
-
-
     <div class="modal fade" id = "create-ann" tab-idndex = "-1">
         
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -359,20 +363,31 @@ if ($_POST) {
                         <div class="row py-2">
                             <div class="col-md-6">
                                 <label for = "sdates" class= "fs-5 fw-bold">Starting date</label>
-                                <input type="datetime-local" class="form-control" id = "sdates" name = "sdates" placeholder = "Date of start" >
+                                <input type="datetime-local" class="form-control" id = "sdates" name = "sdates" placeholder = "Date of start" required>
                             </div>
                             <div class="col-md-6">
                                 <label for = "edates" class= "fs-5 fw-bold">Ending date</label>
-                                <input type="datetime-local" class="form-control" id = "edates" name = "edates">
+                                <input type="datetime-local" class="form-control" id = "edates" name = "edates" onchange="checkDate()"required>
                             </div>
-                            <script> var today = new Date().toISOString().split('T')[0];
-                            document.getElementsByName("sdates")[0].setAttribute('min', today);
+                            <script> var today = new Date().toISOString().slice(0, 16);
+                            document.getElementsByName("sdates")[0].min = today;
+                            var todays = new Date().toISOString().slice(0, 16);
+                            document.getElementsByName("edates")[0].min = todays;
+                            function checkDate() {
+                                var ed = document.getElementById('edates').value;
+                                var sd = document.getElementById('sdates').value;
+                                if (ed < sd) {
+                                    alert("Date must be in the future");
+                                    document.getElementById('edates').value = null;
+                                }
+                            }
+
                             </script>
                   
                         </div>
                         <div class="row g-2 pt-3 pb-1">
                             <div class="form-floating mb-3">
-                                <textarea type="text" class="form-control" id="msg" name = "msg"></textarea>
+                                <textarea type="text" class="form-control" id="msg" name = "msg"required></textarea>
                  
                             </div>
                         </div>
@@ -558,3 +573,4 @@ if ($_POST) {
 
 </body>
 </html>
+<?php }?>
