@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2021 at 06:32 PM
+-- Generation Time: Nov 16, 2021 at 08:44 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -123,7 +123,9 @@ INSERT INTO `tblannouncement` (`ID`, `announcement`, `announcementDate`, `startD
 (24, 'Last check announcement', '2021-11-12 16:26:21', '2021-11-13 00:00:00', '2021-11-25 00:00:00', 1),
 (25, 'Last', '2021-11-12 16:28:43', '2021-11-12 00:00:00', '2021-11-25 00:00:00', 1),
 (26, 'Ganito ba ledes', '2021-11-12 16:30:40', '2021-11-12 00:00:00', '2021-11-26 00:00:00', 1),
-(27, 'asdasd', '2021-11-13 14:06:24', '2021-11-19 00:00:00', '2021-11-30 00:00:00', 1);
+(27, 'asdasd', '2021-11-13 14:06:24', '2021-11-19 00:00:00', '2021-11-30 00:00:00', 1),
+(28, 'asdasdasd', '2021-11-17 03:24:01', '2021-11-17 03:22:00', '2021-11-17 03:23:00', 1),
+(29, 'Check', '2021-11-17 03:41:41', '2021-11-17 03:40:00', '2021-11-17 03:41:00', 1);
 
 -- --------------------------------------------------------
 
@@ -152,26 +154,19 @@ INSERT INTO `tblavailability` (`ID`, `ava`) VALUES
 
 CREATE TABLE `tblblotter` (
   `ID` int(11) NOT NULL,
+  `compStatus` int(11) NOT NULL,
   `blotterType` varchar(50) NOT NULL,
-  `incidentLocation` varchar(50) NOT NULL,
+  `incidentLocation` varchar(200) NOT NULL,
   `incidentDate` datetime NOT NULL,
-  `respondent` varchar(500) NOT NULL,
+  `respondent` varchar(1000) NOT NULL,
   `complainant` varchar(500) NOT NULL,
-  `blotterSummary` varchar(1000) NOT NULL,
+  `invPers` varchar(5000) NOT NULL,
+  `blotterSummary` varchar(2000) NOT NULL,
   `blotterStatus` varchar(50) NOT NULL,
   `summonSchedule` datetime NOT NULL,
   `blotterCreationDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `adminID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tblblotter`
---
-
-INSERT INTO `tblblotter` (`ID`, `blotterType`, `incidentLocation`, `incidentDate`, `respondent`, `complainant`, `blotterSummary`, `blotterStatus`, `summonSchedule`, `blotterCreationDate`, `adminID`) VALUES
-(1, 'Property Damage', 'Tindahan ni aling nenas', '2021-04-22 13:29:00', 'Ledesma, Marithe Francois', 'Sallan, Arnold', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n', 'On-Going', '2021-04-22 13:51:00', '2021-04-29 13:04:00', 1),
-(2, 'Property Damage', 'Tapat ni aling gloria', '2021-04-22 20:03:00', 'Kim delacruz', 'Juan delacruz', 'Nagwawala si kim', 'Fulfilled', '2021-04-22 09:05:00', '2021-04-22 12:04:20', 1),
-(3, 'Robbery', 'Bahay ni natham', '2021-04-22 23:50:00', 'Sallan, Arnold', 'Nathan', 'Nagnakaw', 'On-Going', '2021-04-22 23:53:00', '2021-04-22 15:51:11', 1);
 
 -- --------------------------------------------------------
 
@@ -300,7 +295,7 @@ INSERT INTO `tblcreaterental` (`ID`, `status`, `userID`, `rentalID`, `adminID`, 
 (3, 6, 4, 2, 0, '2021-11-15 02:45:00', '2021-11-15 03:45:00', '2021-11-15 02:45:33', 2, 10, '100.00', '', 0, '', '0.00'),
 (4, 3, 1, 1, 0, '2021-11-15 11:12:00', '2021-11-15 01:12:00', '2021-11-15 11:31:30', 1, 11, '3000.00', '', 0, '', '0.00'),
 (5, 2, 1, 2, 0, '2021-11-15 04:34:00', '2021-11-16 03:34:00', '2021-11-15 14:34:55', 1, 10, '2300.00', '', 0, '', '0.00'),
-(6, 2, 1, 2, 0, '2021-11-15 16:51:00', '2021-11-16 16:51:00', '2021-11-15 16:51:09', 2, 10, '2400.00', '', 0, '', '0.00'),
+(6, 8, 1, 2, 0, '2021-11-15 16:51:00', '2021-11-16 16:51:00', '2021-11-15 16:51:09', 2, 10, '2400.00', '', 0, '', '0.00'),
 (7, 2, 1, 2, 0, '2021-11-15 21:41:00', '2021-11-16 21:41:00', '2021-11-15 21:42:08', 1, 10, '2400.00', '', 0, '', '0.00'),
 (8, 1, 1, 4, 0, '2021-11-15 22:29:00', '2021-11-16 22:29:00', '2021-11-15 22:29:47', 1, 10, '6000.00', '', 0, '', '0.00'),
 (9, 1, 1, 1, 0, '2021-11-15 22:31:00', '2021-11-16 22:31:00', '2021-11-15 22:31:51', 2, 10, '7200.00', '', 0, '', '0.00'),
@@ -438,7 +433,23 @@ INSERT INTO `tblloginaudits` (`ID`, `timeIn`, `timeOut`, `resId`, `position`, `d
 (14, '22:01:59', '10:06:19', 1, 1, '2021-11-14'),
 (15, '22:26:12', '01:35:13', 1, 1, '2021-11-14'),
 (16, '01:41:28', '00:00:00', 1, 1, '2021-11-15'),
-(17, '08:33:17', '11:06:31', 1, 1, '2021-11-15');
+(17, '08:33:17', '11:06:31', 1, 1, '2021-11-15'),
+(18, '01:34:39', '00:00:00', 1, 1, '2021-11-16'),
+(19, '13:41:20', '00:00:00', 1, 1, '2021-11-16'),
+(20, '15:18:33', '00:00:00', 1, 1, '2021-11-16'),
+(21, '15:19:30', '00:00:00', 1, 1, '2021-11-16'),
+(22, '15:22:50', '03:29:08', 1, 1, '2021-11-16'),
+(23, '15:31:12', '03:31:14', 1, 1, '2021-11-16'),
+(24, '15:31:18', '03:31:20', 1, 1, '2021-11-16'),
+(25, '15:31:44', '03:32:08', 1, 1, '2021-11-16'),
+(26, '15:33:43', '03:33:46', 1, 1, '2021-11-16'),
+(27, '15:37:56', '03:38:12', 1, 1, '2021-11-16'),
+(28, '15:38:18', '03:38:32', 1, 1, '2021-11-16'),
+(29, '15:40:02', '03:40:04', 1, 1, '2021-11-16'),
+(30, '22:12:28', '00:00:00', 1, 1, '2021-11-16'),
+(31, '22:37:07', '10:48:43', 1, 1, '2021-11-16'),
+(32, '22:48:48', '00:00:00', 1, 1, '2021-11-16'),
+(33, '00:13:56', '00:00:00', 1, 1, '2021-11-17');
 
 -- --------------------------------------------------------
 
@@ -469,6 +480,7 @@ CREATE TABLE `tblpaymentlogs` (
   `ID` int(11) NOT NULL,
   `mode` int(11) NOT NULL,
   `payorName` int(11) NOT NULL,
+  `fName` varchar(200) NOT NULL,
   `refNum` int(11) NOT NULL,
   `proof` varchar(1000) NOT NULL,
   `servicetype` int(11) NOT NULL,
@@ -480,8 +492,8 @@ CREATE TABLE `tblpaymentlogs` (
 -- Dumping data for table `tblpaymentlogs`
 --
 
-INSERT INTO `tblpaymentlogs` (`ID`, `mode`, `payorName`, `refNum`, `proof`, `servicetype`, `request`, `payment`) VALUES
-(1, 1, 1, 12134123, '/images/nirvanalogo.jpg', 2, 1, '230.00');
+INSERT INTO `tblpaymentlogs` (`ID`, `mode`, `payorName`, `fName`, `refNum`, `proof`, `servicetype`, `request`, `payment`) VALUES
+(1, 1, 1, '', 12134123, '/images/nirvanalogo.jpg', 2, 1, '230.00');
 
 -- --------------------------------------------------------
 
@@ -870,7 +882,7 @@ ALTER TABLE `tbladmin`
 -- AUTO_INCREMENT for table `tblannouncement`
 --
 ALTER TABLE `tblannouncement`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `tblavailability`
@@ -882,7 +894,7 @@ ALTER TABLE `tblavailability`
 -- AUTO_INCREMENT for table `tblblotter`
 --
 ALTER TABLE `tblblotter`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tblbtype`
@@ -930,7 +942,7 @@ ALTER TABLE `tbllistpurok`
 -- AUTO_INCREMENT for table `tblloginaudits`
 --
 ALTER TABLE `tblloginaudits`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tblmodes`

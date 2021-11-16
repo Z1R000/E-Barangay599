@@ -6,19 +6,9 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid'] == 0)) {
     header('location:logout.php');
 } else {
-    $arr = [
-        $_POST['comp'],
-        $_POST['resp'],
-        $_POST['inv'],
-        $_POST['btype'],
-        $_POST['inciDate'],
-        $_POST['inciAdd'],
-        $_POST['narr'],
-        date('d/m/Y h:i sa')
-    ];
-
-
-
+    if(isset($_POST['submit'])){
+        
+    }
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -136,14 +126,16 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 </div>
                                 <div class="row px-2 g-2 px-3 pt-2 pb-3 ">
                                     <div class="col-md-5">
+                                        <label for="crstatus" class="fw-bold fs-6">Complainant Type: </label>
+                                        <select class="form-select" name="crstatus" aria-label="Default select example">
+                                            <option value="" disabled selected>--Select Type of Complainant--</option>
+                                            <option value="Outsider">Outsider</option>
+                                            <option value="Resident">Resident</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-5">
                                         <label for="rname" class="fw-bold fs-6">Complainant Name: </label>
-                                        <input name="comp " type="text" id="search" class="form-control action" placeholder="e.g Juan Dela Cruz">
-                                        <!--intellisence resident list-->
-                                        <div class="col" style="z-index: 9;position:relative">
-                                            <div class="list-group w-100" id="show-list" style="position: absolute">
-                                                <!-- Here autocomplete list will be display -->
-                                            </div>
-                                        </div>
+                                        <input name="comp" type="text" id="comp" class="form-control" placeholder="e.g Juan Dela Cruz">
                                     </div>
 
                                 </div>
@@ -165,21 +157,29 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                 <div class="col-lg-8">
                                                     <div id="inputFormRow">
                                                         <div class="input-group mb-3">
-                                                            <input type="text" name="kag[0]" class="form-control" placeholder="">
-
+                                                            <input type="text" name="kag1" id="search" class="form-control action" placeholder="Personnel 1">
+                                                            
 
                                                             <div class="btn-group mx-2">
                                                                 <button id="addkag" type="button" class="btn btn-primary "><i class="fa fa-plus me-2"></i>Add Respondent</button>
                                                             </div>
                                                         </div>
+                                                        
                                                     </div>
+                                                    
                                                     <div id="newRow"></div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                               <!--  <div class="col" style="z-index: 9;position:relative">
+                                    <div class="list-group w-100 border" id="show-list" style="position: absolute">
+                                        Here autocomplete list will be display 
+                                    </div>
+                                </div>-->
                         </div>
                     </div>
                 </div>
@@ -196,7 +196,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <div class="row">
                                         <div class="col-lg-8">
                                             <div class="input-group mb-3">
-                                                <input type="text" name="kag[]" class="form-control" placeholder="Involved person 1">
+                                                <input type="text" name="per1" class="form-control" placeholder="Involved person 1">
 
                                                 <div class="btn-group mx-1">
                                                     <button id="addper" type="button" class="btn btn-primary white"><i class="fa fa-plus me-2"></i> Add Involved</button>
@@ -231,7 +231,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     $resultsbt = $query->fetchAll(PDO::FETCH_OBJ);
                                     $btypes = '<option selected disabled>Incident Type</option>';
                                     foreach ($resultsbt as $bt) {
-                                        $btypes .= '<option value = ' . $bt->btype . '>' . $bt->btype . '</option>';
+                                        $btypes .= '<option value = ' . $bt->bID . '>' . $bt->btype . '</option>';
                                     }
 
 
@@ -278,20 +278,23 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 </div>
 
                             </div>
+                            <div class="row gx-3 py-2 px-3">
                             <div class="col-md-5">
                                 <label for="btype" class="fw-bold fs-6">Summon Schedule: </label>
                                 <select class="form-select input-sm" id="summon" name="summon" aria-label="Default select example" onchange="showsummon('summondate', this)">
-                                    <option value="" disable selected>Schedule</option>
-                                    <option value="summonconf">Summon</option>
+                                    <option value="No" disable selected>No Summon</option>
+                                    <option value="Yes">Summon</option>
                                 </select>
                             </div>
                             <div class="col-md-5 ms-2" id="summondate">
-
                                     <label for="narrative" class="fw-bold fs-6">Summon Schedule</label>
-                                    <input type="datetime-local" class="form-control" name='inciDate' id="sums">
+                                    <input type="datetime-local" class="form-control" name='sumDate' id="sums">
+                                    <script>var today = new Date().toISOString().slice(0, 16);
+                            document.getElementsByName("inciDate")[0].min = today;</script>
 
 
                             </div>
+                                </div>
 
                             <div class="row g-0 ">
                                 <div class="col-md-8">
@@ -299,7 +302,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 </div>
                                 <div class="col-md-4 col-sm-12 p-3">
                                     <div class="float-end">
-                                        <button type="button" href="#submit-record" data-bs-toggle="modal" role="modal" class="btn btn-success"><i class="fa fa-server me-2"></i> Submit</button>
+                                        <button type="submit" name="submit" class="btn btn-success"><i class="fa fa-server me-2"></i> Submit</button>
                                     </div>
 
 
@@ -370,7 +373,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                     let searchText = $(this).val();
                     if (searchText != "") {
                         $.ajax({
-                            url: "searchname.php",
+                            url: "searchnameat.php",
                             method: "post",
                             data: {
                                 query: searchText,
@@ -391,20 +394,14 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
         </script>
         <script type="text/javascript">
             function showsummon(divId, element) {
-                var sumo = document.getElementById('summon').value;
-                if (sumo == "summonconf") {
-                    document.getElementById('sums').required = true;
-                } else {
-                    document.getElementById('sums').required = false;
-                }
-                document.getElementById(divId).style.display = element.value == 'summonconf' ? 'inline' : 'none';
+                document.getElementById(divId).style.display = element.value == 'summonconf' ? 'block' : 'none';
             }
         </script>
         <script type="text/javascript">
-            var x = 0;
+            var x = 2;
             // add row
             $("#addkag").click(function() {
-                if (x >= 50) {
+                if (x > 7) {
                     alert('There are only 7 kagawads');
                 } else {
 
@@ -412,7 +409,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                     html += '<div id="inputFormRow">';
                     html += '<div class="input-group mb-3">';
-                    html += '<select name="kag[' + x + ']" class="form-select" placeholder="Enter title"><option value ="">Kagawad 1</option><option value ="">Kagawad 2</option><option value ="">Kagawad 2</option></select>';
+                    html += '<input type="text" name="kag' + x + '" placeholder="Personnel ' + x + '" class="form-control action">';
                     html += '<div class="input-group-append">';
                     html += '<button id="removekag" type="button" class="btn btn-danger">Remove</button>';
                     html += '</div>';
@@ -431,7 +428,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
             var g = 2;
 
             $("#addper").click(function() {
-                if (g >= 50) {
+                if (g > 50) {
                     alert('Over the limit');
 
                 } else {
@@ -440,7 +437,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                     html += '<div id="inputFormRow2">';
                     html += '<div class="input-group mb-3">';
-                    html += '<input type= "text" name="per[' + g + ']" class="form-control" placeholder="Involved Person ' + g + '">';;
+                    html += '<input type= "text" name="per' + g + '" class="form-control" placeholder="Involved Person ' + g + '">';;
                     html += '<div class="input-group-append">';
                     html += '<button id="removeper" type="button" class="btn btn-danger">Remove</button>';
                     html += '</div>';
