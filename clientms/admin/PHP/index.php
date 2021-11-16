@@ -25,6 +25,7 @@ if(isset($_POST['login']))
 	}
 	else{
 		echo "<script>alert('Invalid Details');</script>";
+		echo "<script type='text/javascript'> document.location ='admin-dashboard.php'; </script>";
 	}
 
 
