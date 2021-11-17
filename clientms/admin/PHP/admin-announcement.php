@@ -312,17 +312,7 @@ if(isset($_POST['submit'])){
 							$results=$query->fetchAll(PDO::FETCH_OBJ);
 							foreach($results as $row)
 							{ 
-                                echo '     <div class="row">
-                                <div class="col-md-12">
-                                    <div class="float-end">
-                                        
-                                    <div class="btn-group" role="group">
-                                    <button type= "button" href = "#delete-ann" data-bs-toggle= "modal" class="btn btn-outline-danger mx-1 my-1"><i class="fa fa-trash"></i>&nbsp;Delete</button>
-                                    </div>
-    
-                                    </div>
-                                </div>
-                            </div>';
+                                
                                 echo "
                                 <div class = 'mb-3 table-responsive' style='background-color:aliceblue;border:1px solid black;  border-radius:4px; overflow: hidden;'>
                                 <h1 class='testfont' style='float: left; margin:25px;color: #021f4e;'>Announcement</h1>";
