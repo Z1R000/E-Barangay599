@@ -40,7 +40,6 @@
             
             $destination = "";
 
-            
             if (in_array($extension,$ftypes)){
                 if($fileSize<5000000){
                     $newfilename = uniqid('',TRUE).".".$extension;
@@ -48,8 +47,8 @@
                     move_uploaded_file($filetmpname,$destination);
                     header('Location: admin-e-content.php?success=1');
                 }
-
             }
+            
 
             $sql= '';
                 if ($fileName!= ""){
@@ -71,7 +70,7 @@
 
             else{
                 
-                if ($connect->query($sql)===TRUE){
+                if ($con->query($sql)===TRUE){
                     header('Location: admin-e-content.php?updatepcred=success');
                     
                 }
@@ -81,13 +80,11 @@
             }
 
         }
-        if (isset($_POST['saveimg'])){
-
-        }
+    
         if (isset($_POST['saveText'])){
             $sql = 'Update tblinformation set eTitle = "'.$_POST['etitle'].'", Baddress = "'.$_POST['badd'].'", bFullAdd = "'.$_POST['bfadd'].'", Btitle = "'.$_POST['btitle'].'", aboutus = "'.$_POST['hist'].'" where ID = 1';
 
-            if ($connect->query($sql)===TRUE){
+            if ($con->query($sql)===TRUE){
                 header("Location: admin-e-content.php?textupdate=success");
             }
             else{
@@ -95,11 +92,13 @@
             }
         }
         if (isset($_POST['saveimg'])){
+        
             $filenameone = $_FILES['bnine']['name'];
             $filenametwo = $_FILES['adnine']['name'];
             $filenamethree = $_FILES['manl']['name'];
 
             if($filenameone!=""){
+
 
                 $fileName = $_FILES['bnine']['name'];
                 $fileSize = $_FILES['bnine']['size'];
@@ -107,7 +106,6 @@
                 $filetmpname = $_FILES['bnine']['tmp_name'];
                 $fileExt = explode('.',$fileName);
                 $extension = strtolower(end($fileExt));
-                
                 $destination = "";
 
 
@@ -121,18 +119,18 @@
     
                 }
                 $sql= 'Update tblinformation set Blogoone = "'.$destination.'" where ID = 1';
-                if ($connect->query($sql)===TRUE){
-                    header('Location: admin-e-content.php?successimag=1');
+                if ($con->query($sql)===TRUE){
+                    //header('Location: admin-e-content.php?successimag=1');
                 }
                 else{
-                    header('Location: admin-e-content.php?successimag=0');
+                    //header('Location: admin-e-content.php?successimag=0');
                 }
     
 
             }
             if($filenametwo!=""){
 
-                $fileName = $_FILES['manl']['name'];
+                $fileName = $_FILES['adnine']['name'];
                 $fileSize = $_FILES['adnine']['size'];
                 $fileError = $_FILES['adnine']['error'];
                 $filetmpname = $_FILES['adnine']['tmp_name'];
@@ -140,7 +138,6 @@
                 $extension = strtolower(end($fileExt));
                 
                 $destination = "";
-
 
                 if (in_array($extension,$ftypes)){
                     if($fileSize<5000000){
@@ -151,8 +148,8 @@
                     }
     
                 }
-                $sql= 'Update tblinformation set  = "'.$destination.'" where ID = 1';
-                if ($connect->query($sql)===TRUE){
+                $sql= 'Update tblinformation set  blogo3= "'.$destination.'" where ID = 1';
+                if ($con->query($sql)===TRUE){
                     header('Location: admin-e-content.php?successimag=1');
                 }
                 else{
@@ -182,7 +179,7 @@
     
                 }
                 $sql= 'Update tblinformation set Blogotwo = "'.$destination.'" where ID = 1';
-                if ($connect->query($sql)===TRUE){
+                if ($con->query($sql)===TRUE){
                     header('Location: admin-e-content.php?successimag=1');
                 }
                 else{
@@ -877,7 +874,6 @@
                     <div class="tab-pane active" id = "ser">
                         <div class="container g-0 py-2">
                             <div class="row g-0 border border-top-0 px-3">
-                              
                                 <div class="row py-2">
                                 <div class="fs-5">Declined Certifications</div>
                                 </div>
@@ -950,7 +946,6 @@
                     <div class="tab-pane" id = "req">
                     <div class="container g-0 py-2">
                             <div class="row g-0 border border-top-0 px-3">
-                                
                                 <div class="row py-2">
                                 <div class="fs-5">Declined Rentals</div>
                                 </div>
@@ -1179,6 +1174,7 @@
                                 <div class="row justify-content-center">
                                     <?php print_r ($fileName);?>
                                 </div>
+
                             <form method="POST" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-xl-12 col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -1192,17 +1188,14 @@
                                             <div class="fs-5 fw-bold">
                                                 QR code
                                             </div>
-                                        
                                             <img src="<?php echo $infoArr[10]?>" alt="" id = "output" class="img-fluid border border-info rounded ava"  style = "height: 185px">
-                                    
                                         </div>
                                     </div>
                                     <div class="row" align = "center">
                                         <div class="col-xl-10 my-2 mx-auto">
                                         <input id='fileid' type='file'name = "qrc" hidden onchange = "loadFile(event,'output')" />
                                             <button id='gbut' type='button'  onclick = "openDialog();"  class = " disabled btn btn-primary mx-1"value='Upload MB' ><i class="fa fa fa-camera mx-1"></i>Choose Photo</button>
-                                        <script>
-                                            
+                                        <script>          
                                             function openDialog() {
                                                 document.getElementById('fileid').click();
                                             }
@@ -1211,8 +1204,6 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-12 px-5 ">
-                                   
-                            
                                 <div class="row py-5">
                                     <div class="col-xl-6 mx-auto">
                                     <label for="g-cashn" class="fs-5 " >G-cash Name</label>
@@ -1233,8 +1224,6 @@
                                             <div class="btn-group">
                                                 <button type = "submit" name= "savepcred" class="btn btn-primary" ><i class="fa fa-save mx-1"></i>Save Changes</button>
                                             </div>
-                                           
-                                         
                                         </div>
                                     </div>
                                 </div>

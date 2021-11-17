@@ -207,17 +207,12 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                     <div id="inputFormRow">
                                                         <div class="input-group mb-3">
                                                             <input type="text" name="kag1" id="search" class="form-control action" placeholder="Personnel">
-                                                            
-
                                                             <div class="btn-group mx-2">
                                                                 <button id="addkag" type="button" class="btn btn-primary "><i class="fa fa-plus me-2"></i>Add Respondent</button>
                                                             </div>
                                                         </div>
-                                                        
                                                     </div>
-                                                    
                                                     <div id="newRow"></div>
-                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -281,20 +276,27 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     $query->execute();
                                     $resultsbt = $query->fetchAll(PDO::FETCH_OBJ);
                                     $btypes = '<option selected disabled>Incident Type</option>';
+                                   
                                     foreach ($resultsbt as $bt) {
                                         $btypes .= '<option value = ' . $bt->bID . '>' . $bt->btype . '</option>';
                                     }
+                                    $btypes .= '<option value = \'others\'>Others    </option>';
 
 
 
                                     ?>
                                     <label for="btype" class="fw-bold fs-6">Incident Type: </label>
-                                    <select class="form-select input-sm" id="btype" name="btype" aria-label="Default select example">
+                                    <select onchange="showDiv('others',this);" class="form-select input-sm" id="btype" name="btype" aria-label="Default select example">
                                         <?php
                                         echo $btypes;
                                         ?>
                                     </select>
+                                    
                                 </div>
+                                <div class="col-md-5 ms-2" id = "others">
+                                                <label for="prate" class="fs-6 fw-bold">Specify Other Incident</label>
+                                                <input type="text"  name= "others" id = "othersincident" class="form-control " name ="date">
+                                            </div>
 
 
 
@@ -356,15 +358,10 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <div class="float-end">
                                         <button type="submit" name="submit" class="btn btn-success"><i class="fa fa-server me-2"></i> Submit</button>
                                     </div>
-
-
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
             </div>
             </div>
@@ -480,6 +477,21 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                 </div>
             </div>
         </div>
+        <script>
+        $(document).ready(function() {
+            $("select").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+    </script>
 
         <script>
             $(document).ready(function() {
@@ -522,3 +534,8 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
     </html>
 <?php } ?>
+<script>
+    function showDiv(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'others' ? 'block' : 'none';
+    }
+</script>
