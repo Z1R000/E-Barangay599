@@ -194,7 +194,7 @@
                                                 
                                                             <td scope="col" style = "text-align: right">'.$rows->payable.'</td>
                                                             <td scope="col" style = "text-align: left">'.$rows->Purpose.'</td>
-                                                            <td scope="col" style = "text-align: left">'.$rows->creationDate.'</td>
+                                                            <td scope="col" style = "text-align: left">'.date('F j, Y - h:i A', strtotime($rows->creationDate)) .'</td>
                                                             <td scope="col" style = "text-align: center">
                                                                    
                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">

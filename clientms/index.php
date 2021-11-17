@@ -233,7 +233,7 @@
 
                             <label for="" class="fs-6 small">Resident of the barangay but not yet registered ?</label><br>
                             <div class="btn-group my-2">
-                                <a href="create-resident.php" class="btn btn-primary">Click Here</a>
+                                <a href="create-resident.php" class="btn btn-primary">Register Here</a>
                             </div>
                         </div>
                     </div>
@@ -689,7 +689,7 @@
         <div class="modal-dialog modal-dialog-centered modal-md ">
             <div class="modal-content bg-info g-0 ">
                 <div class="modal-header bg-primary white">
-                    <div class="modal-title text-white" id="delete">&nbsp;<i class="fa fa-user text-white"></i>&nbsp;&nbsp;Log In as?</div>
+                    <div class="modal-title text-white" id="delete">&nbsp;<i class="fa fa-user text-white"></i>&nbsp;&nbsp;Log In As</div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body bg-white">

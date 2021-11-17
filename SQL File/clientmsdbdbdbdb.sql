@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2021 at 06:46 PM
+-- Generation Time: Nov 17, 2021 at 09:04 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -309,7 +309,11 @@ INSERT INTO `tblcreaterental` (`ID`, `status`, `userID`, `rentalID`, `adminID`, 
 (7, 2, 1, 2, 0, '2021-11-15 21:41:00', '2021-11-16 21:41:00', '2021-11-15 21:42:08', 1, 10, '2400.00', '', 0, '', '0.00'),
 (8, 1, 1, 4, 0, '2021-11-15 22:29:00', '2021-11-16 22:29:00', '2021-11-15 22:29:47', 1, 10, '6000.00', '', 0, '', '0.00'),
 (9, 1, 1, 1, 0, '2021-11-15 22:31:00', '2021-11-16 22:31:00', '2021-11-15 22:31:51', 2, 10, '7200.00', '', 0, '', '0.00'),
-(10, 1, 1, 1, 0, '2021-11-15 22:51:00', '2021-11-16 22:51:00', '2021-11-15 22:51:56', 1, 0, '7200.00', 'SAD', 0, '', '0.00');
+(10, 1, 1, 1, 0, '2021-11-15 22:51:00', '2021-11-16 22:51:00', '2021-11-15 22:51:56', 1, 0, '7200.00', 'SAD', 0, '', '0.00'),
+(11, 2, 1, 1, 0, '2021-11-18 03:40:00', '2021-11-19 03:41:00', '2021-11-18 03:41:06', 1, 0, '7205.00', '', 0, '', '0.00'),
+(12, 2, 1, 1, 0, '2021-11-18 03:45:00', '2021-11-20 03:45:00', '2021-11-18 03:45:18', 1, 0, '14400.00', '', 0, '', '0.00'),
+(13, 1, 1, 1, 0, '2021-11-18 03:47:00', '2021-11-19 03:47:00', '2021-11-18 03:47:58', 2, 10, '7200.00', '', 0, '', '0.00'),
+(14, 2, 1, 2, 0, '2021-11-19 03:59:00', '2021-11-19 06:59:00', '2021-11-18 03:59:53', 1, 9, '300.00', '', 0, '', '0.00');
 
 -- --------------------------------------------------------
 
@@ -381,7 +385,7 @@ CREATE TABLE `tblinformation` (
 --
 
 INSERT INTO `tblinformation` (`ID`, `Baddress`, `bFullAdd`, `Btitle`, `Blogoone`, `Blogotwo`, `bContact`, `blogo3`, `aboutus`, `eTitle`, `gName`, `qr`) VALUES
-(1, 'BARANGAY 599, ZONE 59, DISTRICT VI', '4745 Peralta St. V. Mapa Sta. Mesa, Manila', 'OFFICE OF THE SANGGUNIANG BARANGAY', 'images/barangay.png', 'images/maynila.png', '09123456789', 'images/admin-logo.png', 'Barangay 599 has been one of the forerunning barangays along the streets of “Victorino Mapa” and as stated by a corresponding local of the barangay it has been established way before she was born which was during the early 1970’s and since then, not many integrations were made nor committed by the municipality. According to the barangay’s secretary, there are about 5,600 registered citizens. Barangay 599’s roster of officials is composed of the Barangay Chairman (Jose Milo L. Lacatan), Barangay Secretary (Maria Cecilia C. Dela Cruz),. SK Chairman and Kagawads (Erwin L. Sampaga, Florante V. Bonagua, Crisantro G. Lorica, Alexander S. Ceño, Nelson L. Labrador, Marivic Villareal). Supporting these leaders are the 20 barangay enforcers, 20 “lupontagapamayapa’s”, 3 advisers and being composed of 10 puroks, 10 purok leaders. However, mostly the secretary’s team and the chairman handle the processes, queries, and requests of their residents..', ' Barangay 599 E-barangay', 'Barangay 599', 'images/qr.png');
+(1, 'BARANGAY 599, ZONE 59, DISTRICT VI', '4745 Peralta St. V. Mapa Sta. Mesa, Manila', 'OFFICE OF THE SANGGUNIANG BARANGAY', '../images/61954f98d2c8f6.93313960.png', '../images/619553b53a8119.92770215.png', '09123456789', '../images/61954f98d32fd1.81087863.png', 'Barangay 599 has been one of the forerunning barangays along the streets of “Victorino Mapa” and as stated by a corresponding local of the barangay it has been established way before she was born which was during the early 1970’s and since then, not many integrations were made nor committed by the municipality. According to the barangay’s secretary, there are about 5,600 registered citizens. Barangay 599’s roster of officials is composed of the Barangay Chairman (Jose Milo L. Lacatan), Barangay Secretary (Maria Cecilia C. Dela Cruz),. SK Chairman and Kagawads (Erwin L. Sampaga, Florante V. Bonagua, Crisantro G. Lorica, Alexander S. Ceño, Nelson L. Labrador, Marivic Villareal). Supporting these leaders are the 20 barangay enforcers, 20 “lupontagapamayapa’s”, 3 advisers and being composed of 10 puroks, 10 purok leaders. However, mostly the secretary’s team and the chairman handle the processes, queries, and requests of their residents..', ' Barangay 599 E-barangay', 'Barangay 599', '../images/61954d06658604.45345155.png');
 
 -- --------------------------------------------------------
 
@@ -929,7 +933,7 @@ ALTER TABLE `tblcreatecertificate`
 -- AUTO_INCREMENT for table `tblcreaterental`
 --
 ALTER TABLE `tblcreaterental`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbldays`

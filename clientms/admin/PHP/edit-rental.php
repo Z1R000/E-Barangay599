@@ -23,7 +23,7 @@
             $edate = $r->rentalEndDate;
             array_push($arr,$r->ID);
             array_push($arr,$r->LastName.", ".$r->FirstName." ".$r-> MiddleName." ".$r->Suffix);
-            array_push ($arr, $r->Purpose);
+            array_push ($arr, $r->purpID);
             array_push($arr,date("Y-d-m",strtotime($cdate)));
             array_push($arr,$sdate);
             array_push($arr,$edate);
@@ -525,7 +525,7 @@
                                     <label for="purp" class= "fs-5 fw-bold">Purposes</label>
                                     <?php
                                         
-                                        $sql = 'SELECT * FROM tblpurposes where serviceType = "rental"';
+                                        $sql = 'SELECT * FROM tblpurposes where serviceType = "2"';
                                         $query= $dbh->prepare($sql);
                                         $query->execute();
                                         $results = $query->fetchAll(PDO::FETCH_OBJ);
