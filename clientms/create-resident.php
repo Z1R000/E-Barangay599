@@ -357,13 +357,13 @@ if (isset($_POST['submit'])) {
                     <div class="row g-0  mb-4">
 
                         <div class="display-6 py-2 ps-3">
-                            Barangay Residency Information<span class=" fs-5 text-danger"> (Required)</span>
+                            Barangay Residency Information<span class=" fs-5 text-danger"> ('*' Required)</span>
                         </div>
                     </div>
                     <div class="row g-0 ps-4 pe-2 ps-2">
                         <div class="row g-0 mb-3 px-4">
 
-                            <label for="cs" class="col-sm-2 col-form-label  fs-5">Type of<Br> Residency<br><span class="fs-6 text-muted small"> (Uri ng residente)</span></label>
+                            <label for="cs" class="col-sm-2 col-form-label  fs-5"><span class="text-danger fs-5">*</span>Type of<Br> Residency<br><span class="fs-6 text-muted small"> (Uri ng residente)</span></label>
                             <div class="col-xl-5">
                                 <br>
                                 <select class="form-select input-sm" aria-label="Default select example" name="residenttype" onchange="showDiv('hidden_div', this)" required id="rt">
@@ -374,7 +374,7 @@ if (isset($_POST['submit'])) {
                                     <option value="Living with Relatives">Living with Relatives</option>
                                 </select>
                                 <div class="col-xl-12 col-lg-6 col-md-8 col-sm-12 col-xs-12" id="hidden_div">
-                                    <label class="col-form-label fs-5">Home Owner Name</label>
+                                    <label class="col-form-label fs-5"><span class="text-danger fs-5">*</span>Home Owner Name</label>
                                     <input type="text" class="form-control" placeholder="" id="hm" name="hm" />
 
                                 </div>
@@ -393,7 +393,7 @@ if (isset($_POST['submit'])) {
 
                                 <div class="col-xl-2 col-sm-12 my-2 ">
                                     <div class="input-group">
-                                        <label for="" class=" fs-5 small mx-1">Purok&nbsp;</label>
+                                        <label for="" class=" fs-5 small mx-1"><span class="text-danger fs-5">*</span>Purok&nbsp;</label>
 
                                         <?php
                                         // $con = mysqli_connect("localhost", "admin", "admin", "countrydb");
@@ -413,7 +413,7 @@ if (isset($_POST['submit'])) {
                                 </div>
                                 <div class="col-xl-4 col-sm-12 my-2 ">
                                     <div class="input-group">
-                                        <label for="" class="mx-2 fs-5 small">Street</label>
+                                        <label for="" class="mx-2 fs-5 small"><span class="text-danger fs-5">*</span>Street</label>
                                         <select name="strt" id="strt" class="form-control action">
                                             <option value='' selected disabled>--Street--</option>
                                         </select>
@@ -422,7 +422,7 @@ if (isset($_POST['submit'])) {
                             </div>
                         </div>
                         <div class="row g-0 mb-3 px-4">
-                            <label for="hUnit" class="col-xl-2 fs-5 py-0">House Unit/<br>Lot Number<br><span class="fs-6 text-muted small"> (Numero ng bahay)</span></label>
+                            <label for="hUnit" class="col-xl-2 fs-5 py-0"><span class="text-danger fs-5">*</span>House Unit/<br>Lot Number<br><span class="fs-6 text-muted small"> (Numero ng bahay)</span></label>
                             <div class="col-xl-4 col-sm-12">
                                 <br>
                                 <input type="text" id="hunit" name="hunit" class="form-control" required>
@@ -444,7 +444,7 @@ if (isset($_POST['submit'])) {
                     <div class="row g-0  mb-5 ">
 
                         <div class="display-6 py-2 ps-3">
-                            Contact Information <span class=" fs-5 text-danger">(Fields with '*' are required otherwise not)</span>
+                            Contact Information <span class=" fs-5 text-danger">('*' Required)</span>
                         </div>
                     </div>
                     <div class="row g-0 ps-4  ps-2">
@@ -458,11 +458,11 @@ if (isset($_POST['submit'])) {
                         </div>
 
                         <div class="row g-0 mb-3 px-4">
-                            <label for="email" class="col-xl-2 fs-5  py-0">E-mail Address<br><span class="fs-6 text-muted small"> (Emayl na ginagamit)</span></label>
+                            <label for="email" class="col-xl-2 fs-5  py-0"><span class="text-danger fs-5">*</span>E-mail Address<br><span class="fs-6 text-muted small"> (Emayl na ginagamit.)</span></label>
 
                             <div class="col-xl-5 col-sm-12">
-                                <br>
-                                <input type="text" id="email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                            <span class="fs-6 text-muted small"> (Sa pagkakataon na walang emayl. Ex: DelaCruz.Juan@gmail.com)</span>
+                                <input type="text" id="email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                             </div>
                         </div>
                         <div class="row g-0 px-4 mb-2">

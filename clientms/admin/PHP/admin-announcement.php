@@ -60,7 +60,7 @@ if(isset($_POST['submit'])){
     $edates = date('F j, Y - h:i A', strtotime($edata));
     $msg = $_POST['msg'];
     $text = "From Barangay 599 V. Mapa\nAnnouncement for " . $sdates . " to " . $edates . ": \n" . $msg."\n";
-    $texts = "Announcement for " . $sdates . " to " . $edates . ": \n" . $msg."\n";
+    $texts = "Announcement for " . $sdates . " to " . $edates . ": \n\n" . $msg."\n";
 
     $sql = "SELECT * from tblresident WHERE Cellphnumber IS NOT NULL";
     $query=$dbh->prepare($sql);
@@ -357,7 +357,7 @@ if(isset($_POST['submit'])){
                             </div>
                             <div class="col-md-6">
                                 <label for = "edates" class= "fs-5 fw-bold">Ending date</label>
-                                <input type="datetime-local" class="form-control" id = "edates" name = "edates" onchange="checkDate()"required>
+                                <input type="datetime-local" class="form-control" id = "edates" name = "edates" onchange="checkDate()" required>
                             </div>
                             <script> var today = new Date().toISOString().slice(0, 16);
                             document.getElementsByName("sdates")[0].min = today;

@@ -19,8 +19,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
       $query->bindParam(':cp',$cp,PDO::PARAM_STR);
       $query->bindParam(':ct',$ct,PDO::PARAM_STR);
       $query->execute();
-      echo "<script type='text/javascript'> document.location ='admin-certificate.php'; </script>";
       echo "<script>alert('New certificate has been made.')</script>";
+      echo "<script type='text/javascript'> document.location ='admin-certificate.php'; </script>";
   }
 ?>
 <!DOCTYPE html>

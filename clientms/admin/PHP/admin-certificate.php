@@ -16,55 +16,50 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
             $mop=$_POST['mop'];
             $purp=$_POST['purp'];
             $bn=$_POST['bn'];
-            $cadm=$_POST['cadm'];
             $other=$_POST['other'];
+            $other = strtoupper($other);
 
             if($mop == "G-Cash"){
                 $stat = "2";
-                $sql = "Insert into tblcreatecertificate(Userid, CertificateId, pMode, cAdmin, Purpose, other, bName, status) values (".$usid.",".$ctype.",'".$mop."','".$cadm."','".$purp."','".$other."','".$bn."','".$stat."');";
-                if ($con->query($sql)===TRUE){
+                $sql = "Insert into tblcreatecertificate(Userid, CertificateId, pMode, purpID, other, bName, status) values (:usid, :ctype, :mop, :purp, :other, :bn, :stat)";
+                $query = $dbh->prepare($sql);
+                $query->bindParam(':usid', $usid, PDO::PARAM_STR);
+                $query->bindParam(':ctype', $ctype, PDO::PARAM_STR);
+                $query->bindParam(':purp', $purp, PDO::PARAM_STR);
+                $query->bindParam(':other', $other, PDO::PARAM_STR);
+                $query->bindParam(':bn', $bn, PDO::PARAM_STR);
+                $query->bindParam(':mop', $mop, PDO::PARAM_STR);
+                $query->bindParam(':stat', $stat, PDO::PARAM_STR);
+                $query->execute();
+                $LastInsertId = $dbh->lastInsertId();
+                if ($LastInsertId > 0) {
                     echo '<script>alert("Certificate information has been added")</script>';
                     echo "<script>window.location.href ='admin-certificate.php'</script>";
-                }
-                else{
+                } else {
                     echo '<script>alert("Something Went Wrong. Please try again")</script>';
                     echo "<script>window.location.href ='admin-certificate.php'</script>";
                 }
             }else if ($mop == "Cash"){
                 $stat = "3";
-                $sql = "Insert into tblcreatecertificate(Userid, CertificateId, pMode, cAdmin, Purpose, other, bName, status) values (".$usid.",".$ctype.",'".$mop."','".$cadm."','".$purp."','".$other."','".$bn."','".$stat."');";
-                if ($con->query($sql)===TRUE){
+                $sql = "Insert into tblcreatecertificate(Userid, CertificateId, pMode, purpID, other, bName, status) values (:usid, :ctype, :mop, :purp, :other, :bn, :stat)";
+                $query = $dbh->prepare($sql);
+                $query->bindParam(':usid', $usid, PDO::PARAM_STR);
+                $query->bindParam(':ctype', $ctype, PDO::PARAM_STR);
+                $query->bindParam(':purp', $purp, PDO::PARAM_STR);
+                $query->bindParam(':other', $other, PDO::PARAM_STR);
+                $query->bindParam(':bn', $bn, PDO::PARAM_STR);
+                $query->bindParam(':mop', $mop, PDO::PARAM_STR);
+                $query->bindParam(':stat', $stat, PDO::PARAM_STR);
+                $query->execute();
+                $LastInsertId = $dbh->lastInsertId();
+                if ($LastInsertId > 0) {
                     echo '<script>alert("Certificate information has been added")</script>';
                     echo "<script>window.location.href ='admin-certificate.php'</script>";
-                }
-                else{
+                } else {
                     echo '<script>alert("Something Went Wrong. Please try again")</script>';
                     echo "<script>window.location.href ='admin-certificate.php'</script>";
                 }
             }
-
-          
-           
-            //$sql="insert into tblcreatecertificate (Userid, CertificateId, pMode, cAdmin, Purpose, other, bName) VALUES (:usid,:ctype,:mop,:cadm,:purp,:other,:bn)";
-            /*$query=$dbh->prepare($sql);
-            $query->bindParam(':usid',$usid,PDO::PARAM_STR);
-            $query->bindParam(':mop',$mop,PDO::PARAM_STR);
-            $query->bindParam(':purp',$purp,PDO::PARAM_STR);
-            $query->bindParam(':bn',$bn,PDO::PARAM_STR);
-            $query->bindParam(':other',$other,PDO::PARAM_STR);
-            $query->bindParam(':ctype',$ctype,PDO::PARAM_STR);
-            $query->bindParam(':cadm',$cadm,PDO::PARAM_STR);
-            $query->execute();
-            
-            
-
-            $LastInsertId = $dbh->lastInsertId();
-            if ($LastInsertId > 0) {
-                echo '<script>alert("Certificate information has been added")</script>';
-                echo "<script>window.location.href ='admin-certificate.php'</script>";
-            } else {
-                echo '<script>alert("Something Went Wrong. Please try again")</script>';
-            }*/
         }
 
 
@@ -463,7 +458,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                                 <td scope="col" style = "text-align: left">' . $row["LastName"] . ', ' . $row["FirstName"] . ' ' . $row["MiddleName"] . ' ' . $row["Suffix"] . '</td>
                                                                 <td scope="col" style = "text-align: left">' . $row["CertificateName"] . '</td>
                                                                 <td scope="col" style = "text-align: right">' . $row["CertificatePrice"] . '</td>
-                                                                <td scope="col" style = "text-align: left">' . date('F j Y - h:i A', strtotime($cdate)) . '</td>
+                                                                <td scope="col" style = "text-align: left">' . date('F j, Y - h:i A', strtotime($cdate)) . '</td>
                                                                 <td scope="col" id = "disa" style = "text-align: center">
                                                                             <div class="btn-group me-1 mb-1" role="group" aria-label="First group">
                                                                                 <a type="" href ="edit-cert-record.php?editid=' . $row["getid"] . '"class="btn btn-primary"><i class = "fa fa-edit mx-1"></i><span class="wal">Manage</span></a>
@@ -860,19 +855,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <input type="text" class="form-control" value="<?php echo date("F j, Y"); ?>" readonly>
                                     
                                 </div>
-                                <div class="col-xl-4">
-
-                                    
-                                    <input type="text" class="form-control" name="cadm" id="cadm" style="display: none;" value="<?php  $aid = $_SESSION['clientmsaid']; $sqls="SELECT tbladmin.*, tblresident.*, tblpositions.* from tbladmin JOIN tblresident on tbladmin.residentID=tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition WHERE tbladmin.ID = :aid";
-                                    $querys = $dbh->prepare($sqls);
-                                    $querys->bindParam(':aid',$aid,PDO::PARAM_STR);
-                                    $querys->execute();
-                                    $results = $querys->fetchAll(PDO::FETCH_OBJ);
-                                    $pos = "";
-                                    foreach ($results as $rows) {
-                                        $pos .= "$rows->Position $rows->LastName"; echo "$pos";}?>" readonly>
                                 
-                                </div>
                             </div>
 
 
@@ -896,18 +879,17 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 
                                         <option disabled selected>--Purpose--</option>
                                         <?php
-                                                $sqllist = "select * from tblpurposes where serviceType='certification'";
+                                                $sqllist = "select * from tblpurposes where serviceType='1'";
                                                 $checkplist = $dbh->prepare($sqllist);
                                                 $checkplist->execute();
                                                 $resultplist = $checkplist->fetchAll(PDO::FETCH_OBJ);
                                                 foreach ($resultplist as $rowplist) {?>
-                                                <?php echo '<option value="'.$rowplist->Purpose.'">'.$rowplist->Purpose.'</option>';}?>
-                                                <option value="OTHERS">OTHERS</option>
+                                                <?php echo '<option value="'.$rowplist->ID.'">'.$rowplist->Purpose.'</option>';}?>
                                         </select>
                                 </div>
 
                             </div>
-                            <div class="row g-3 mt-1" id="other_txt">
+                            <div class="row g-3 mt-1" id="other_txt" style="display:none;">
                                 <div class="col-xl-6">
                                 
                                 </div>
@@ -1409,13 +1391,11 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
         <script type="text/javascript">
             function showHid(divId, element) {
                 var bus = document.getElementById('ctype').value;
-                if (bus == 'Business Clearance Capital - Php10,000 Below') {
+                if (bus == '6') {
                     document.getElementById(divId).style.display = 'flex';
-                } else if (bus == "Business Permit") {
+                }else if (bus == "7") {
                     document.getElementById(divId).style.display = 'flex';
-                } else if (bus == "Business Clearance Capital - Php10,001 - Php100-000") {
-                    document.getElementById(divId).style.display = 'flex';
-                } else if (bus == "Business Clearance Capital - Php100,001 - Above") {
+                } else if (bus == "8") {
                     document.getElementById(divId).style.display = 'flex';
                 } else {
                     document.getElementById(divId).style.display = 'none';
@@ -1426,7 +1406,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
             }
 
             function showOthers(divId, element) {
-                document.getElementById(divId).style.display = element.value == 'OTHERS' ? 'flex' : 'none';
+                document.getElementById(divId).style.display = element.value == '13' ? 'flex' : 'none';
             }
 
             function showOthersdec(divId, element) {
