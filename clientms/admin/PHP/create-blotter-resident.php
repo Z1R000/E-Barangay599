@@ -6,8 +6,54 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid'] == 0)) {
     header('location:logout.php');
 } else {
+    $aid = $_SESSION['clientmsaid'];
+    $bstat = "PENDING";
+    
     if(isset($_POST['submit'])){
-        
+        $kagarr = "";
+        $perarr = "";
+        $numberkag = $_POST['numberkag'];
+        $numberper = $_POST['numberper'];
+        for ($x = 1; $x <=  $numberkag; $x++) {
+            $kagarr .= $_POST["kag$x"] .",";
+        }
+        for ($y = 1; $y <=  $numberper; $y++) {
+            $perarr .= $_POST["per$y"] .",";
+        }
+        $crstatus = $_POST['crstatus'];
+		$comp = $_POST['comp'];
+        $bt = $_POST['btype'];
+        $idate = $_POST['inciDate'];
+        $iadd = $_POST['inciAdd'];
+        $narr = $_POST['narr'];
+        $sstat = $_POST['summon'];
+        $sumdate = $_POST['sumDate'];
+
+        $sql = "insert into tblblotter (compStatus, blotterType, incidentLocation, incidentDate, numres, respondent, complainant, numpers, invPers, blotterSummary, blotterStatus, sumStatus, summonSchedule, adminID) VALUES (:crstatus, :bt, :iadd, :idate, :numberkag, :kagarr, :comp, :numberper, :perarr, :narr, :bstat, :sstat, :sumdate, :aid)";
+        $query = $dbh->prepare($sql);
+        $query->bindParam(':crstatus', $crstatus, PDO::PARAM_STR);
+        $query->bindParam(':bt', $bt, PDO::PARAM_STR);
+        $query->bindParam(':iadd', $iadd, PDO::PARAM_STR);
+        $query->bindParam(':idate', $idate, PDO::PARAM_STR);
+        $query->bindParam(':numberkag', $numberkag, PDO::PARAM_STR);
+        $query->bindParam(':kagarr', $kagarr, PDO::PARAM_STR);
+        $query->bindParam(':comp', $comp, PDO::PARAM_STR);
+        $query->bindParam(':numberper', $numberper, PDO::PARAM_STR);
+        $query->bindParam(':perarr', $perarr, PDO::PARAM_STR);
+        $query->bindParam(':narr', $narr, PDO::PARAM_STR);
+        $query->bindParam(':bstat', $bstat, PDO::PARAM_STR);
+        $query->bindParam(':sstat', $sstat, PDO::PARAM_STR);
+        $query->bindParam(':sumdate', $sumdate, PDO::PARAM_STR);
+        $query->bindParam(':aid', $aid, PDO::PARAM_STR);
+        $query->execute();
+        $LastInsertId = $dbh->lastInsertId();
+        if ($LastInsertId > 0) {
+            echo "<script>alert('Blotter created.')</script>";
+            echo "<script>window.location.href ='admin-blotter.php'</script>";
+        } else {
+            echo '<script>alert("Something Went Wrong. Please try again")</script>';
+        }
+
     }
 ?>
     <!DOCTYPE html>
@@ -155,9 +201,12 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                         <div class="row form_field_outer_row">
                                             <div class="row">
                                                 <div class="col-lg-8">
+                                                <div class="input-group mb-3">
+                                                <h3><em>Number of Kagawad Involved: </em></h3><input type="text" id='numberkag' name="numberkag" value="1" readonly class="form-control" style="width: 7%; text-align: center;"></div>
+                                                    <br>
                                                     <div id="inputFormRow">
                                                         <div class="input-group mb-3">
-                                                            <input type="text" name="kag1" id="search" class="form-control action" placeholder="Personnel 1">
+                                                            <input type="text" name="kag1" id="search" class="form-control action" placeholder="Personnel">
                                                             
 
                                                             <div class="btn-group mx-2">
@@ -195,8 +244,10 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 <div class="col-lg-10">
                                     <div class="row">
                                         <div class="col-lg-8">
+                                        <div class="input-group mb-3">
+                                                <h3><em>Number of Person Involved: </em></h3><input type="text" id='numberper' name="numberper" value="1" readonly class="form-control" style="width: 7%; text-align: center;"></div>
                                             <div class="input-group mb-3">
-                                                <input type="text" name="per1" class="form-control" placeholder="Involved person 1">
+                                                <input type="text" name="per1" class="form-control" placeholder="Involved person">
 
                                                 <div class="btn-group mx-1">
                                                     <button id="addper" type="button" class="btn btn-primary white"><i class="fa fa-plus me-2"></i> Add Involved</button>
@@ -282,11 +333,12 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                             <div class="col-md-5">
                                 <label for="btype" class="fw-bold fs-6">Summon Schedule: </label>
                                 <select class="form-select input-sm" id="summon" name="summon" aria-label="Default select example" onchange="showsummon('summondate', this)">
-                                    <option value="No" disable selected>No Summon</option>
+                                    <option value="" disabled selected>--Select Summon--</option>
+                                    <option value="No">No Summon</option>
                                     <option value="Yes">Summon</option>
                                 </select>
                             </div>
-                            <div class="col-md-5 ms-2" id="summondate">
+                            <div class="col-md-5 ms-2" id="summondate" style="display: none;">
                                     <label for="narrative" class="fw-bold fs-6">Summon Schedule</label>
                                     <input type="datetime-local" class="form-control" name='sumDate' id="sums">
                                     <script>var today = new Date().toISOString().slice(0, 16);
@@ -317,6 +369,69 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
             </div>
             </div>
             </div>
+            <script type="text/javascript">
+            var x = 2;
+            // add row
+            $("#addkag").click(function() {
+                if (x > 7) {
+                    alert('There are only 7 kagawads');
+                } else {
+
+                    var html = '';
+
+                    html += '<div id="inputFormRow">';
+                    html += '<div class="input-group mb-3">';
+                    html += '<input type="text" name="kag' + x + '" placeholder="Personnel" class="form-control action">';
+                    html += '<div class="input-group-append">';
+                    html += '<button id="removekag" type="button" class="btn btn-danger">Remove</button>';
+                    html += '</div>';
+                    html += '</div>';
+                    x++;
+                    document.getElementById('numberkag').value++;
+                    $('#newRow').append(html);
+                }
+            });
+
+            // remove row
+            $(document).on('click', '#removekag', function() {
+                $(this).closest('#inputFormRow').remove();
+                x--;
+                document.getElementById('numberkag').value--;
+            });
+
+            //involved persons
+            var g = 2;
+
+            $("#addper").click(function() {
+                if (g > 50) {
+                    alert('Over the limit');
+
+                } else {
+
+                    var html = '';
+
+                    html += '<div id="inputFormRow2">';
+                    html += '<div class="input-group mb-3">';
+                    html += '<input type= "text" name="per' + g + '" class="form-control" placeholder="Involved Person">';;
+                    html += '<div class="input-group-append">';
+                    html += '<button id="removeper" type="button" class="btn btn-danger">Remove</button>';
+                    html += '</div>';
+                    html += '</div>';
+                    g++;
+                    document.getElementById('numberper').value++;
+                    $('#newRow2').append(html);
+                }
+            });
+
+            // remove row
+            $(document).on('click', '#removeper', function() {
+
+                $(this).closest('#inputFormRow2').remove();
+                g--;
+                document.getElementById('numberper').value--;
+
+            });
+        </script>
         </form>
         <?php
         include('services.php');
@@ -394,68 +509,15 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
         </script>
         <script type="text/javascript">
             function showsummon(divId, element) {
-                document.getElementById(divId).style.display = element.value == 'summonconf' ? 'block' : 'none';
+                var summ = document.getElementById('summon').value;
+                if (summ == "Yes") {
+                    document.getElementById('sums').required = true;
+                } else {
+                    document.getElementById('sums').required = false;
+                }
+                document.getElementById(divId).style.display = element.value == 'Yes' ? 'block' : 'none';
             }
         </script>
-        <script type="text/javascript">
-            var x = 2;
-            // add row
-            $("#addkag").click(function() {
-                if (x > 7) {
-                    alert('There are only 7 kagawads');
-                } else {
-
-                    var html = '';
-
-                    html += '<div id="inputFormRow">';
-                    html += '<div class="input-group mb-3">';
-                    html += '<input type="text" name="kag' + x + '" placeholder="Personnel ' + x + '" class="form-control action">';
-                    html += '<div class="input-group-append">';
-                    html += '<button id="removekag" type="button" class="btn btn-danger">Remove</button>';
-                    html += '</div>';
-                    html += '</div>';
-                    x++;
-                    $('#newRow').append(html);
-                }
-            });
-
-            // remove row
-            $(document).on('click', '#removekag', function() {
-                $(this).closest('#inputFormRow').remove();
-            });
-
-            //involved persons
-            var g = 2;
-
-            $("#addper").click(function() {
-                if (g > 50) {
-                    alert('Over the limit');
-
-                } else {
-
-                    var html = '';
-
-                    html += '<div id="inputFormRow2">';
-                    html += '<div class="input-group mb-3">';
-                    html += '<input type= "text" name="per' + g + '" class="form-control" placeholder="Involved Person ' + g + '">';;
-                    html += '<div class="input-group-append">';
-                    html += '<button id="removeper" type="button" class="btn btn-danger">Remove</button>';
-                    html += '</div>';
-                    html += '</div>';
-                    g++;
-                    $('#newRow2').append(html);
-                }
-            });
-
-            // remove row
-            $(document).on('click', '#removeper', function() {
-
-                $(this).closest('#inputFormRow2').remove();
-                g--;
-
-            });
-        </script>
-
     </body>
 
     </html>

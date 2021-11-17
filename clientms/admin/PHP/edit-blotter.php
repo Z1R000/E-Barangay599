@@ -7,22 +7,6 @@
     header('location:logout.php');
     }else{
 
-    $bid = $_GET['bid'];
-        
-    $sql = 'SELECT * from tblblotter where ID ="'.$bid.'"';  
-    $query = $dbh -> prepare($sql);
-    $query->execute();
-    $results =$query->fetchAll(PDO::FETCH_OBJ);
-    $arr = [];
-    foreach ($results as $row){
-        $indcedentDate = $row->$incedentDate;
-        array_push($arr, $row->complainant);        
-        array_push($arr, $row->respondent);
-        array_push ($arr, $row->blotterType);
-        array_push($arr,date('l, j F Y - h:i A', strtotime($incedentDate)));
-        array_push($arr,$row->incidentLocation);
-        array_push($arr,$row->blotterSummary);
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -105,7 +89,19 @@
                 </div>
             </div>
         </div>
-    </nav> 
+    </nav>
+    <?php 
+        $bid = $_GET['bid'];
+        
+        $sql = 'SELECT * from tblblotter where ID ="'.$bid.'"';  
+        $query = $dbh -> prepare($sql);
+        $query->execute();
+        $results =$query->fetchAll(PDO::FETCH_OBJ);
+        foreach ($results as $row){
+            $idate = $row->$incedentDate;
+            $idate = date('l, j F Y - h:i A', strtotime($idate));
+        }
+    ?> 
     <form action="" method = "POST">
     
         <div class="container-fluid  mx-auto px-2 py-1  mb-5">
@@ -117,9 +113,15 @@
                                 <div class= "fs-5 py-1 white">Step 1: Complaint Details</div>
                             </div>
                             <div class="row px-2 g-2 px-3 pt-2 pb-3 ">
+                            <div class="col-md-5">
+                                        <label for="crstatus" class="fw-bold fs-6">Complainant Type: </label>
+                                        <select class="form-select" name="crstatus" aria-label="Default select example" disabled>
+                                            <option value="<?php echo $row->compStatus?>" selected><?php echo $row->compStatus?></option>
+                                        </select>
+                                    </div>
                                 <div class="col-md-5">
                                     <label for="rname"class= "fw-bold fs-6">Complainant Name: </label>
-                                    <input type="text" name= "comp" value = "<?php echo $arr[0]?>" class="form-control" placeholder = "e.g Juan Dela Cruz">
+                                    <input type="text" name= "comp" value = "<?php echo $row->complainant?>" class="form-control" placeholder = "e.g Juan Dela Cruz" disabled>
                                     <!--intellisence resident list-->
                                 </div>     
                             </div>
@@ -130,28 +132,32 @@
                     <div class="col-xl-10  px-3 py-2">
                         <div class="row g-0 my-2 border bg-white shadow-sm">
                             <div class="row border g-0 rounded-top px-2 py-0 bg-599">
-                                <div class= "fs-5 py-1 white" id="step-2">Step 2:Attending barangay personnel <span class="fs-6"></span></div>
+                                <div class= "fs-5 py-1 white" id="step-2">Step 2: Attending barangay personnel <span class="fs-6"></span></div>
                             </div>
                         
                             <div class="row g-2 px-3 py-2" style = "max-height: 400px; overflow-y: auto;  ">
                             
-                                <div class="col-md-10 form_field_outer p-0 form_sec_outer_task " >
-                                    <div class="row form_field_outer_row" >  
-                                        <div class="row" >
-                                            <div class="col-lg-8">
-                                                <div id="inputFormRow">
-                                                    <div class="input-group mb-3">
-                                                        <Select type="text" name="kag[]" class="form-select" placeholder="" >
-                                                               
-                                                        </select>
-                                           
-                                                         
+                            <div class="col-md-10 form_field_outer p-0 form_sec_outer_task ">
+                                        <div class="row form_field_outer_row">
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                <div class="input-group mb-3">
+                                                <h3><em>Number of Kagawad Involved: </em></h3><input type="text" id='numberkag' name="numberkag" value="1" readonly class="form-control" style="width: 7%; text-align: center;"></div>
+                                                    <br>
+                                                    <div id="inputFormRow">
+                                                        <div class="input-group mb-3">
+                                                            <input type="text" name="kag1" id="search" class="form-control action" placeholder="Personnel">
+                                                            
+
                                                             <div class="btn-group mx-2">
-                                                                <button id="addkag" type="button" class="btn btn-primary "><i class= "fa fa-plus me-2"></i>Add Respondent</button>
+                                                                <button id="addkag" type="button" class="btn btn-primary "><i class="fa fa-plus me-2"></i>Add Respondent</button>
                                                             </div>
                                                         </div>
+                                                        
                                                     </div>
+                                                    
                                                     <div id="newRow"></div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -162,32 +168,34 @@
                     </div>
                 </div>
 
-                    <div class="row g-0 justify-content-center">     
-                        <div class="col-xl-10  px-3 py-2">
-                            <div class="row g-0 my-2 bg-white border shadow-sm" >
-                                <div class="row border g-0 rounded-top px-2 py-0 bg-599">
-                                    <div class= "fs-5 py-1 white" id="step-2">Step 3: Involved Persons <span class="fs-6">(e.g Juan Dela Cruz, Asiong Salonga..)</span></div>
-                                </div>
-                            
-                                <div class="row g-2 px-2 py-2" style = "max-height: 400px; overflow-y: auto;  ">
-                                    <div class="col-lg-10">
-                                        <div class="row" >
-                                            <div class="col-lg-8">
-                                                <div class="input-group mb-3">
-                                                    <input type="text" name="kag[]" class="form-control" placeholder="Involved person 1" >  
-                                                   
-                                                    <div class="btn-group mx-1"> 
-                                                        <button id="addper" type="button" class="btn btn-primary white"><i class= "fa fa-plus me-2"></i> Add Involved</button>   
-                                                    </div>  
+                <div class="row g-0 justify-content-center">
+                    <div class="col-xl-10  px-3 py-2">
+                        <div class="row g-0 my-2 bg-white border shadow-sm">
+                            <div class="row border g-0 rounded-top px-2 py-0 bg-599">
+                                <div class="fs-5 py-1 white" id="step-2">Step 3: Involved Persons <span class="fs-6">(e.g Juan Dela Cruz, Asiong Salonga..)</span></div>
+                            </div>
+
+                            <div class="row g-2 px-2 py-2" style="max-height: 400px; overflow-y: auto;  ">
+                                <div class="col-lg-10">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                        <div class="input-group mb-3">
+                                                <h3><em>Number of Person Involved: </em></h3><input type="text" id='numberper' name="numberper" value="<?php echo $row->numpers?>" readonly class="form-control" style="width: 7%; text-align: center;"></div>
+                                            <div class="input-group mb-3">
+                                                <input type="text" name="per1" class="form-control" placeholder="Involved person">
+
+                                                <div class="btn-group mx-1">
+                                                    <button id="addper" type="button" class="btn btn-primary white"><i class="fa fa-plus me-2"></i> Add Involved</button>
                                                 </div>
-                                                <div id="newRow2"></div>
                                             </div>
+                                            <div id="newRow2"></div>
                                         </div>
                                     </div>
-                                </diV>
-                            </div>
+                                </div>
+                            </diV>
                         </div>
                     </div>
+                </div>
                 
 
                 <div class="row g-0 justify-content-center">
@@ -326,66 +334,69 @@
         </div>
         
 
-    <script type="text/javascript">
-        var x = 0;
-        // add row
-        $("#addkag").click(function () {
-            if (x>=50){
-                alert('There are only 7 kagawads');
-            }else{
-            
-            var html = '';
-            
-                html += '<div id="inputFormRow">';
-                html += '<div class="input-group mb-3">';
-                html += '<select name="kag['+x+']" class="form-select" placeholder="Enter title"><option value ="">Kagawad 1</option><option value ="">Kagawad 2</option><option value ="">Kagawad 2</option></select>'
-                ;
-                html += '<div class="input-group-append">';
-                html += '<button id="removekag" type="button" class="btn btn-danger">Remove</button>';
-                html += '</div>';
-                html += '</div>';
-                x++;
-                $('#newRow').append(html);
-            }
-        });
+        <script type="text/javascript">
+            var x = 2;
+            // add row
+            $("#addkag").click(function() {
+                if (x > 7) {
+                    alert('There are only 7 kagawads');
+                } else {
 
-        // remove row
-        $(document).on('click', '#removekag', function () {
-            $(this).closest('#inputFormRow').remove();
-        });
+                    var html = '';
 
-        //involved persons
-        var g = 2;
+                    html += '<div id="inputFormRow">';
+                    html += '<div class="input-group mb-3">';
+                    html += '<input type="text" name="kag' + x + '" placeholder="Personnel" class="form-control action">';
+                    html += '<div class="input-group-append">';
+                    html += '<button id="removekag" type="button" class="btn btn-danger">Remove</button>';
+                    html += '</div>';
+                    html += '</div>';
+                    x++;
+                    document.getElementById('numberkag').value++;
+                    $('#newRow').append(html);
+                }
+            });
 
-        $("#addper").click(function () {
-            if (g>=50){
-                alert('Over the limit');
-           
-            }else{
-            
-            var html = '';
-            
-                html += '<div id="inputFormRow2">';
-                html += '<div class="input-group mb-3">';
-                html += '<input type= "text" name="per['+g+']" class="form-control" placeholder="Involved Person '+g+'">';
-                ;
-                html += '<div class="input-group-append">';
-                html += '<button id="removeper" type="button" class="btn btn-danger">Remove</button>';
-                html += '</div>';
-                html += '</div>';
-                g++;
-                $('#newRow2').append(html);
-            }
-        });
+            // remove row
+            $(document).on('click', '#removekag', function() {
+                $(this).closest('#inputFormRow').remove();
+                x--;
+                document.getElementById('numberkag').value--;
+            });
 
-        // remove row
-        $(document).on('click', '#removeper', function () {
-         
-            $(this).closest('#inputFormRow2').remove();
-            g--;
-            
-        });
-    </script>
+            //involved persons
+            var g = 2;
+
+            $("#addper").click(function() {
+                if (g > 50) {
+                    alert('Over the limit');
+
+                } else {
+
+                    var html = '';
+
+                    html += '<div id="inputFormRow2">';
+                    html += '<div class="input-group mb-3">';
+                    html += '<input type= "text" name="per' + g + '" class="form-control" placeholder="Involved Person">';;
+                    html += '<div class="input-group-append">';
+                    html += '<button id="removeper" type="button" class="btn btn-danger">Remove</button>';
+                    html += '</div>';
+                    html += '</div>';
+                    g++;
+                    document.getElementById('numberper').value++;
+                    $('#newRow2').append(html);
+                }
+            });
+
+            // remove row
+            $(document).on('click', '#removeper', function() {
+
+                $(this).closest('#inputFormRow2').remove();
+                g--;
+                document.getElementById('numberper').value--;
+
+            });
+        </script>
 
 </body>
 </html>

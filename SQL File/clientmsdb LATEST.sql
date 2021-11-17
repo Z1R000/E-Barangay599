@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2021 at 08:44 PM
+-- Generation Time: Nov 17, 2021 at 06:46 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -154,19 +154,29 @@ INSERT INTO `tblavailability` (`ID`, `ava`) VALUES
 
 CREATE TABLE `tblblotter` (
   `ID` int(11) NOT NULL,
-  `compStatus` int(11) NOT NULL,
+  `compStatus` varchar(20) NOT NULL,
   `blotterType` varchar(50) NOT NULL,
   `incidentLocation` varchar(200) NOT NULL,
   `incidentDate` datetime NOT NULL,
+  `numres` varchar(10) NOT NULL,
   `respondent` varchar(1000) NOT NULL,
   `complainant` varchar(500) NOT NULL,
+  `numpers` varchar(10) NOT NULL,
   `invPers` varchar(5000) NOT NULL,
   `blotterSummary` varchar(2000) NOT NULL,
   `blotterStatus` varchar(50) NOT NULL,
+  `sumStatus` varchar(20) NOT NULL,
   `summonSchedule` datetime NOT NULL,
   `blotterCreationDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `adminID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblblotter`
+--
+
+INSERT INTO `tblblotter` (`ID`, `compStatus`, `blotterType`, `incidentLocation`, `incidentDate`, `numres`, `respondent`, `complainant`, `numpers`, `invPers`, `blotterSummary`, `blotterStatus`, `sumStatus`, `summonSchedule`, `blotterCreationDate`, `adminID`) VALUES
+(1, 'Resident', '1', 'Near aling nena', '2021-11-18 01:27:00', '3', 'Kagawad Sallan,Kagawad Ledesma,Kagawad Viray,', 'Ledesma Marithess', '2', 'Arnold Sallan,Ledesma asd,', 'This time', 'PENDING', 'No', '0000-00-00 00:00:00', '2021-11-17 17:27:48', 1);
 
 -- --------------------------------------------------------
 
@@ -256,7 +266,7 @@ INSERT INTO `tblcreatecertificate` (`ID`, `Userid`, `CertificateId`, `resDate`, 
 (7, '1', '9', '2021-11-13 09:41:43', '6', 'G-Cash', 3, '', ''),
 (8, '1', '3', '2021-11-13 09:43:23', '6', 'Cash', 3, '', ''),
 (9, '1', '2', '2021-11-13 09:44:39', '8', 'G-Cash', 2, '', ''),
-(10, '1', '3', '2021-11-13 09:45:25', '1', 'Cash', 2, '', ''),
+(10, '1', '3', '2021-11-13 09:45:25', '8', 'Cash', 2, '', ''),
 (11, '1', '6', '2021-11-15 14:35:55', '8', 'G-Cash', 13, 'BUSINESS', 'Ledesma Store'),
 (12, '1', '6', '2021-11-15 14:54:57', '1', 'G-Cash', 13, 'BUSINESS', 'Ledesma Store'),
 (13, '1', '10', '2021-11-15 15:04:28', '1', 'Cash', 13, 'LIPAT BAHAY', '');
@@ -449,7 +459,8 @@ INSERT INTO `tblloginaudits` (`ID`, `timeIn`, `timeOut`, `resId`, `position`, `d
 (30, '22:12:28', '00:00:00', 1, 1, '2021-11-16'),
 (31, '22:37:07', '10:48:43', 1, 1, '2021-11-16'),
 (32, '22:48:48', '00:00:00', 1, 1, '2021-11-16'),
-(33, '00:13:56', '00:00:00', 1, 1, '2021-11-17');
+(33, '00:13:56', '03:47:31', 1, 1, '2021-11-17'),
+(34, '22:30:36', '00:00:00', 1, 1, '2021-11-17');
 
 -- --------------------------------------------------------
 
@@ -894,7 +905,7 @@ ALTER TABLE `tblavailability`
 -- AUTO_INCREMENT for table `tblblotter`
 --
 ALTER TABLE `tblblotter`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tblbtype`
@@ -942,7 +953,7 @@ ALTER TABLE `tbllistpurok`
 -- AUTO_INCREMENT for table `tblloginaudits`
 --
 ALTER TABLE `tblloginaudits`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tblmodes`
