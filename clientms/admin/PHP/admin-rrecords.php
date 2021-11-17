@@ -64,9 +64,10 @@ $mod = '<option  selected disabled>Mode of payment</option>';
     for ($i = 0; $i<strlen($user);$i++){
         if (is_numeric($user[$i])){
             $userid.= $user[$i];
-        }
-        
+        }   
     }
+
+    
     echo $userid;    
     $purp = $_POST['purpose'];
     $s = $_POST['startDur'];

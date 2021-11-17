@@ -196,48 +196,48 @@
                         </div>
                     </div>
                 </div>
-                
-
-                <div class="row g-0 justify-content-center">
-                
+            
+                <div class="row g-0 justify-content-center">                
                     <div class="col-xl-10  px-3 ">
                         <div class="row g-0 my-2 bg-white border shadow-sm">
                             <div class="row border g-0 rounded-top px-2 py-0 bg-599">
                                 <div class= "fs-5 py-1 white" id="step-2">Step 4: Incident Information <span class="fs-6">(Details regarding the incident)</span></div>
                             </div>
-                            
                             <div class="row gx-3 py-2 px-3">
+                                <div class="col-md-5">
+                                    <?php
+                                    $sql = "SELECT * FROM tblbtype";
+                                    $query = $dbh->prepare($sql);
+                                    $query->execute();
+                                    $resultsbt = $query->fetchAll(PDO::FETCH_OBJ);
+                                    $btypes = '<option selected disabled>Incident Type</option>';
                                 
-                             
-                              <div class="col-md-5">
-                                    <?php    
-                                        $sql = 'SELECT * from tblbtype ';  
-                                        $query = $dbh -> prepare($sql);
-                                        $query->execute();
-                                        $results =$query->fetchAll(PDO::FETCH_OBJ);
-                                        $bty = '';
-                                        foreach($results as $row){
-                                            if ($arr[2]==$row->btype){
-                                                $bty.= '<option value = "'.$arr[2].'"selected>'.$row->btype.'</option>';
-                                            }
-                                            else{
-                                                $bty.= '<option value = "'.$row->btype.'">'.$row->btype.'</option>';
+                                    foreach ($resultsbt as $bt) {
+                                        $btypes .= '<option value = ' . $bt->bID . '>' . $bt->btype . '</option>';
+                                    }
+                                    $btypes .= '<option value = \'others\'>Others    </option>';
 
-                                            }
-                                        }
+
+
                                     ?>
-                                    <label for="btype"class= "fw-bold fs-6">Incident Type: </label>
-                                    <select class="form-select input-sm" id = "btype" aria-label="Default select example">
-                                        <?php echo $bty; ?>
+                                    <label for="btype" class="fw-bold fs-6">Incident Type: </label>
+                                    <select onchange="showDiv('others',this);" class="form-select input-sm" id="btype" name="btype" aria-label="Default select example">
+                                        <?php
+                                        echo $btypes;
+                                        ?>
                                     </select>
+                                    
+                                </div>
+                                <div class="col-md-5 ms-2" id = "others">
+                                                <label for="prate" class="fs-6 fw-bold">Specify Other Incident</label>
+                                                <input type="text"  name= "others" id = "date" class="form-control " name ="date">
+                                            </div>
 
-                                </div>    
-                         
-                                
-                       
 
-                                
-                            </div>
+
+
+
+                                </div>
                            
                             <div class="row gx-3 py-2 px-3">
                                 <div class="col-md-5 ms-2 ">
@@ -272,7 +272,7 @@
                                             <button type="button" href="#submit-record"  data-bs-toggle ="modal" role="modal"  class="btn btn-primary"><i class="fa fa-save mx-1"></i> Save</button>
                                             </div>
                                             <div class="btn-group">
-                                            <a type="button"  data-bs-toggle ="modal" role="modal" href = "admin-blotter.php"  class="btn btn-secondary"><i class="fa fa-arrow-circle-left mx-1"></i> Back</a>
+                                            <a href = "admin-blotter.php"    class="btn btn-secondary"><i class="fa fa-arrow-circle-left mx-1"></i> Back</a>
                                             </div>
                                         </div>
                                         
@@ -401,3 +401,24 @@
 </body>
 </html>
 <?php } ?>
+<script>
+    function showDiv(divId, element) {
+        document.getElementById(divId).style.display = element.value == 'others' ? 'block' : 'none';
+    }
+</script>
+
+<script>
+        $(document).ready(function() {
+            $("select").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+    </script>
