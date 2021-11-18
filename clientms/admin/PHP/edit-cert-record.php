@@ -442,7 +442,7 @@
                                                 if ($rowe->status == "4"){
                                                     echo '
                                                     <div class="btn-group">                               
-                                        <a type="" href ="temp-cert.php?viewid=<?php echo $eid;?>"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
+                                        <a type="" href ="view-cert-temp.php?viewid='.$eid.'"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>
                                         </div> <div class="btn-group"> <button type = "sbumit" href = "#save-cert" name="submit" id="submit" data-bs-toggle = "modal" role= "button"class = "btn  btn-primary  my-2"><i class= "fas fa-save me-2"></i>Save</button></div>';
                                                 }else if ($rowe->status == "3" || $rowe->status == "5"){
                                                     echo '
