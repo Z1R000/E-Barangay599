@@ -306,7 +306,7 @@ if(isset($_POST['submit'])){
     
     <div class="container-fluid px-4">
                         <?php 
-							$sql ="SELECT distinct tblannouncement.ID, tblannouncement.announcement, tblannouncement.announcementDate, tblannouncement.endDate, tblannouncement.adminID, tbladmin.BarangayPosition, tblresident.LastName, tblpositions.* from tblannouncement join tbladmin on tblannouncement.adminID = tbladmin.ID join tblresident on tbladmin.ID = tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition order by tblannouncement.ID Desc";
+							$sql ="SELECT distinct tblannouncement.*, tbladmin.*, tblresident.*, tblpositions.* from tblannouncement join tbladmin on tblannouncement.adminID = tbladmin.ID join tblresident on tbladmin.residentID = tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition order by tblannouncement.ID Desc";
 							$query = $dbh -> prepare($sql);
 							$query->execute();
 							$results=$query->fetchAll(PDO::FETCH_OBJ);
