@@ -94,7 +94,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                             <div class="row">
                                 <div class="col-xl-3 px-1 ">
                                     <div class="float-start" style="margin-left:50px;">
-                                        <img src="../<?php echo $row1->Blogoone; ?>" style="width: 100px;">
+                                        <img src="<?php echo $row1->Blogoone; ?>" style="width: 100px;">
                                     </div>
 
                                 </div>
@@ -104,7 +104,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                 </div>
                                 <div class="col-xl-3">
                                     <div class="float-end" style="margin-right:50px;">
-                                        <img src="../<?php echo $row1->Blogotwo; ?>" style="width: 100px;">
+                                        <img src="<?php echo $row1->Blogotwo; ?>" style="width: 100px;">
                                     </div>
 
 

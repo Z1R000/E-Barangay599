@@ -168,7 +168,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                         
                     </div>
                     <?php 
-                                                    $sql = "Select tblcreatecertificate.ID as getID, tblcreatecertificate.*, tblresident.*, tblcertificate.*, tblpurposes.* from tblcreatecertificate join tblresident on tblcreatecertificate.Userid = tblresident.ID join tblcertificate on tblcertificate.ID = tblcreatecertificate.CertificateId join tblpurposes on tblpurposes.ID = tblcreatecertificate.purpID where tblcreatecertificate.status = '1' order by tblcreatecertificate.resDate ASC";
+                                                    $sql = "Select tblcreatecertificate.ID as getID, tblcreatecertificate.*, tblresident.*, tblcertificate.*, tblpurposes.* from tblcreatecertificate join tblresident on tblcreatecertificate.Userid = tblresident.ID join tblcertificate on tblcertificate.ID = tblcreatecertificate.CertificateId join tblpurposes on tblpurposes.ID = tblcreatecertificate.purpID where tblcreatecertificate.status = 1 order by tblcreatecertificate.resDate ASC";
                                                     $result = mysqli_query($con, $sql);  
 ?>
                     <form method="POST">

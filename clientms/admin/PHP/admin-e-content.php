@@ -26,15 +26,18 @@
             array_push($infoArr,$d->eTitle);
             array_push($infoArr,$d->gName);
             array_push($infoArr,$d->qr);
+            array_push($infoArr,$d->reslogo);
+            
         }
         $fileName = "";
-        $ftypes = array('png','jpeg','jpg');
-        if (isset($_POST['savepcred'])){
-
-            $fileName = $_FILES['qrc']['name'];
-            $fileSize = $_FILES['qrc']['size'];
-            $fileError = $_FILES['qrc']['error'];
-            $filetmpname = $_FILES['qrc']['tmp_name'];
+        
+        function upPhoto ($poid){
+            $ftypes = array('png','jpeg','jpg');
+        
+            $fileName = $_FILES[''.$poid.'']['name'];
+            $fileSize = $_FILES[''.$poid.'']['size'];
+            $fileError = $_FILES[''.$poid.'']['error'];
+            $filetmpname = $_FILES[''.$poid.'']['tmp_name'];
             $fileExt = explode('.',$fileName);
             $extension = strtolower(end($fileExt));
             
@@ -43,12 +46,19 @@
             if (in_array($extension,$ftypes)){
                 if($fileSize<5000000){
                     $newfilename = uniqid('',TRUE).".".$extension;
-                    $destination = "../images/".$newfilename;
+                    $destination = "../../images/".$newfilename;
                     move_uploaded_file($filetmpname,$destination);
-                    header('Location: admin-e-content.php?success=1');
+                   // header('Location: admin-e-content.php?success=1');
                 }
             }
             
+            return $destination;
+
+        }
+        if (isset($_POST['savepcred'])){
+
+            $destination = upPhoto('qrc');
+            $fileName = $destination;
 
             $sql= '';
                 if ($fileName!= ""){
@@ -91,63 +101,31 @@
                 header("Location: admin-e-content.php?textupdate=failed");
             }
         }
+        
         if (isset($_POST['saveimg'])){
         
             $filenameone = $_FILES['bnine']['name'];
             $filenametwo = $_FILES['adnine']['name'];
-            $filenamethree = $_FILES['manl']['name'];
+            $filenamethree = $_FILES['manl']['name'];            
+            $filenamefour = $_FILES['rlog']['name'];
 
             if($filenameone!=""){
 
-
-                $fileName = $_FILES['bnine']['name'];
-                $fileSize = $_FILES['bnine']['size'];
-                $fileError = $_FILES['bnine']['error'];
-                $filetmpname = $_FILES['bnine']['tmp_name'];
-                $fileExt = explode('.',$fileName);
-                $extension = strtolower(end($fileExt));
-                $destination = "";
-
-
-                if (in_array($extension,$ftypes)){
-                    if($fileSize<5000000){
-                        $newfilename = uniqid('',TRUE).".".$extension;
-                        $destination = "../images/".$newfilename;
-                        move_uploaded_file($filetmpname,$destination);
-    
-                    }
-    
-                }
+                $destination = upPhoto('bnine');
+                
                 $sql= 'Update tblinformation set Blogoone = "'.$destination.'" where ID = 1';
                 if ($con->query($sql)===TRUE){
-                    //header('Location: admin-e-content.php?successimag=1');
+                    header('Location: admin-e-content.php?successimag=1');
                 }
                 else{
-                    //header('Location: admin-e-content.php?successimag=0');
+                    header('Location: admin-e-content.php?successimag=0');
                 }
     
 
             }
             if($filenametwo!=""){
 
-                $fileName = $_FILES['adnine']['name'];
-                $fileSize = $_FILES['adnine']['size'];
-                $fileError = $_FILES['adnine']['error'];
-                $filetmpname = $_FILES['adnine']['tmp_name'];
-                $fileExt = explode('.',$fileName);
-                $extension = strtolower(end($fileExt));
-                
-                $destination = "";
-
-                if (in_array($extension,$ftypes)){
-                    if($fileSize<5000000){
-                        $newfilename = uniqid('',TRUE).".".$extension;
-                        $destination = "../images/".$newfilename;
-                        move_uploaded_file($filetmpname,$destination);
-    
-                    }
-    
-                }
+                $destination = upPhoto('adnine');
                 $sql= 'Update tblinformation set  blogo3= "'.$destination.'" where ID = 1';
                 if ($con->query($sql)===TRUE){
                     header('Location: admin-e-content.php?successimag=1');
@@ -159,26 +137,19 @@
 
             if($filenamethree!=""){
 
-                $fileName = $_FILES['manl']['name'];
-                $fileSize = $_FILES['manl']['size'];
-                $fileError = $_FILES['manl']['error'];
-                $filetmpname = $_FILES['manl']['tmp_name'];
-                $fileExt = explode('.',$fileName);
-                $extension = strtolower(end($fileExt));
-                
-                $destination = "";
-
-
-                if (in_array($extension,$ftypes)){
-                    if($fileSize<5000000){
-                        $newfilename = uniqid('',TRUE).".".$extension;
-                        $destination = "../images/".$newfilename;
-                        move_uploaded_file($filetmpname,$destination);
-    
-                    }
-    
-                }
+                $destination = upPhoto('manl');
                 $sql= 'Update tblinformation set Blogotwo = "'.$destination.'" where ID = 1';
+                if ($con->query($sql)===TRUE){
+                    header('Location: admin-e-content.php?successimag=1');
+                }
+                else{
+                    header('Location: admin-e-content.php?successimag=0');
+                }
+            }
+            
+            if ($filenamefour!=""){
+                $destination = upPhoto('rlog');
+                $sql= 'Update tblinformation set reslogo = "'.$destination.'" where ID = 1';
                 if ($con->query($sql)===TRUE){
                     header('Location: admin-e-content.php?successimag=1');
                 }
@@ -189,7 +160,7 @@
                         
         }
 
-?>
+?>  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -319,13 +290,13 @@
         buttons: {
             buttons:[
                 {
+
                     extend: 'print',
                     text: 'Generate copy',
                     className: 'btn btn-primary my-1',
                     message:'The following data are report for audit of deleted service requests in the system.',
                     title:'',
                     exportOptions: {columns: [ 0, 1, 2, 3,4 ]},
-                
                     customize: function (win) {
                         $(win.document.body)
                             .css('font-size', '16pt','')                    
@@ -780,7 +751,7 @@
                         </div>
                         <form method= "POST" enctype="multipart/form-data">
                         <div class="row p-4 bg-light justify-content-center align-items-center">
-                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class="col-xl-6 col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <div class="row g-0">
                                         <div class="col-md-10 mx-auto" align = "center">
                                             <div class="fs-5 fw-bold">
@@ -799,7 +770,7 @@
 
                                     </div>
                                 </div>
-                                <div class="col-xl-4">
+                                <div class="col-xl-6">
                                     <div class="row g-0">
                                         <div class="col-md-10 mx-auto" align = "center">
                                             <div class="fs-5 fw-bold">
@@ -817,7 +788,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-4">
+                                <div class="col-xl-6">
                                     <div class="row g-0">
                                         <div class="col-md-10 mx-auto" align = "center">
                                             <div class="fs-5 fw-bold">
@@ -831,6 +802,23 @@
                                         <div class="col-xl-10 my-2 mx-auto" align = "center">
                                             <input type="file" id="selectedFile2" name="manl"  onchange = "loadFile(event, 'mlogo');" hidden />
                                             <button type="button"  class= "btn btn-primary" onclick="document.getElementById('selectedFile2').click();" ><i class= "fa fa-camera me-2 "></i>Choose photo</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="row g-0">
+                                        <div class="col-md-10 mx-auto" align = "center">
+                                            <div class="fs-5 fw-bold">
+                                                Resident Logo                                            </div>
+                                            <img src="<?php echo $infoArr[11] ?>"  id = "rlogo" alt="" class="img-fluid rounded-circle ava"  style = "height: 185px">
+                                    
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-10 my-2 mx-auto" align = "center">
+                                            <input type="file" id="selectedFile5" name="rlog"  onchange = "loadFile(event, 'rlogo');" hidden />
+                                            <button type="button"  class= "btn btn-primary" onclick="document.getElementById('selectedFile5').click();" ><i class= "fa fa-camera me-2 "></i>Choose photo</button>
                                         </div>
 
                                     </div>
@@ -1172,7 +1160,7 @@
                         
                             <div class="row  bg-light border shadow-sm">
                                 <div class="row justify-content-center">
-                                    <?php print_r ($fileName);?>
+                                    <?php echo $fileName;?>
                                 </div>
 
                             <form method="POST" enctype="multipart/form-data">
@@ -1290,10 +1278,10 @@
     }
 </script>
        <script>
-           var loadFile = function (event,imgid) {
-  var image = document.getElementById(imgid);
-  image.src = URL.createObjectURL(event.target.files[0]);
-};
+        var loadFile = function (event,imgid) {
+        var image = document.getElementById(imgid);
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
 
 
 

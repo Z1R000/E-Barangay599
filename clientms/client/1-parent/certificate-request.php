@@ -13,7 +13,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
         $pMode = $_POST['pMode'];
         $bn = $_POST['bn'];
 
-        $sql = "insert into tblcreatecertificate (Userid, certificateId, Purpose, other, pMode,bName) VALUES (:uid,:ctype,:purp,:other,:pMode,:bn)";
+        $sql = "insert into tblcreatecertificate (Userid, CertificateId, purpID, other, pMode,bName) VALUES (:uid,:ctype,:purp,:other,:pMode,:bn)";
         $query = $dbh->prepare($sql);
         $query->bindParam(':uid', $uid, PDO::PARAM_STR);
         $query->bindParam(':ctype', $ctype, PDO::PARAM_STR);
@@ -186,7 +186,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                 <div class="row">
                     <div class="col-xl-3 px-1 ">
                         <div class="float-start" style="margin-left:50px;">
-                            <img src="../<?php echo $row1->Blogoone;?>" style="width: 100px;">
+                            <img src="<?php echo $row1->Blogoone;?>" style="width: 100px;">
                         </div>
 
                     </div>
@@ -196,7 +196,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                     </div>
                     <div class="col-xl-3">
                         <div class="float-end" style="margin-right:50px;">
-                            <img src="../<?php echo $row1->Blogotwo;?>" style="width: 100px;">
+                            <img src="<?php echo $row1->Blogotwo;?>" style="width: 100px;">
                         </div>
 
 
