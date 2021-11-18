@@ -61,22 +61,21 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 			$query->execute();
 		
 
-			$upload = "Insert into tblpaymentlogs(mode,creationID,proof,servicetype) values(:mop,:eid,:destination,2)";
-			$query1 = $dbh->prepare($upload);
+			$upload = "Insert into tblpaymentlogs(mode,creationID,proof,servicetype) values(".$mop.",".$eid.",'".$destination."',2)";
+			if ($con->query($upload)===TRUE){
+				
+			}
+			
+			/*$query1 = $dbh->prepare($upload);
 			$query1->bindParam(':mop', $mop, PDO::PARAM_STR);			
 			$query1->bindParam(':eid:',$eid , PDO::PARAM_STR);
 			$query1->bindParam(':destination', $destination, PDO::PARAM_STR);
 			$query1->execute();
-			
-			
-			$LastInsertId = $dbh->lastInsertId();
-        if ($LastInsertId > 0) {
+			*/
 			echo '<script>alert("Certificate Information and proof of payment sent has been updated")</script>';
 			echo "<script>window.location.href ='edit-certificate-request.php?editid=" . $eid . "'</script>";
-        } else {
-            echo '<script>alert("Something Went Wrong. Please try again")</script>';
-        }
-		
+			
+    
 	
 		
 	}
@@ -523,20 +522,71 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 												</div>
 			
 											</div>
-											<div class="row">
+											<div class="row">';
+											$sql = "Select * from tblpaymentlogs where creationID=".$eid."";
+											$query = $dbh->prepare($sql);
+											$query ->execute();
+											$result = $query->fetchAll(PDO::FETCH_OBJ);
+
+											foreach ($result as $i){
+
+
+
+											
+											echo'
 												<div class="col-xl-3">
-												<img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
-													<br>
+												<div class="row">
+												<div class="col-12">
+													<img src="'.$i->proof.'" class= "img-fluid" >
+														<br>';
+											}
+											$sql= "Select * from tblinformation";
+											$query= $dbh->prepare($sql);
+											$query->execute();
+											$result = $query->fetchAll(PDO::FETCH_OBJ);
+											
+											foreach ($result as $cred){
+											echo'
+													</div>
+													</div>
 												</div>
 												<div class="col-xl-3">
 			
 												</div>
 												<div class="col-xl-3">
-													<img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
-			
+													<div class="row">
+														<div class="fs-5">Qr Code</div>
+														<div class="col-12">
+															<img src="'.$cred->qr.'" alt="Girl in a jacket" class = "img-fluid">
+														</div>
+													</div>
+												</div>
+												<div class="col-xl-3">
+												
+													<div class="row">
+														<div class="py-2">
+														
+														<div class="col-12">
+														<div class="fs-4">Contact Number:</div>
+														<div class="fs-5 fw-bold">'.$cred->bContact.'</div>
+													
+													</div>					
+													</div>
+													<div class="py-2">	
+														<div class="col-12">
+															<div class="fs-4">G-Cash Owner</div>
+															<div class="fs-5 fw-bold">'.$cred->gName.'</div>
+																											
+														</div>
+																
+														
+																							
+													</div>
+													</div>
 												</div>
 			
 											</div>';
+											}	
 											}
 										?>
 							</div>

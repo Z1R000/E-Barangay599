@@ -130,7 +130,7 @@
 
         <div class="row  g-0">
             <div class="col-3 justify-content-center">
-                <img src="../<?php echo $row1->Blogoone ?>" style ="width: 150px" >
+                <img src="<?php echo $row1->Blogoone ?>" style ="width: 150px" >
             </div>
             
             <div class="col-6 text-center ">
@@ -143,7 +143,7 @@
             </div>
 
             <div class="col-3">
-                <img src="../<?php echo $row1->Blogotwo ?>" style ="width: 150px" >
+                <img src="<?php echo $row1->Blogotwo ?>" style ="width: 150px" >
             </div>
         </div>
       <?php } ?>
