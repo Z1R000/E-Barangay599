@@ -61,7 +61,7 @@ if (isset($_POST['login'])) {
 		}
 
 		body {
-			background: url("../images/barangaybackground.png");
+			background: url("../../images/barangaybackground.png");
 			background-size: cover;
 
 		}

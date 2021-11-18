@@ -179,6 +179,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 			<!-- Page Content -->
 			<div id="page-content-wrapper">
 				<?php
+
 				$sql1 = "select * from tblinformation";
 				$query1 = $dbh->prepare($sql1);
 				$query1->execute();
@@ -190,7 +191,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 							<div class="row">
 								<div class="col-xl-3 px-1 ">
 									<div class="float-start" style="margin-left:50px;">
-										<img src="../<?php echo $row1->Blogoone; ?>" style="width: 100px;">
+										<img src="<?php echo $row1->Blogoone; ?>" style="width: 100px;">
 									</div>
 
 								</div>
@@ -200,7 +201,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 								</div>
 								<div class="col-xl-3">
 									<div class="float-end" style="margin-right:50px;">
-										<img src="../<?php echo $row1->Blogotwo; ?>" style="width: 100px;">
+										<img src="	<?php echo $row1->Blogotwo; ?>" style="width: 100px;">
 									</div>
 
 
@@ -209,7 +210,8 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
 						</div>
 				<?php }
-				} ?>
+				} 
+				?>
 				<nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
 					<div class="d-flex align-items-center">
 						<i class="fa fa-align-justify secondary-text fs-4 me-3" id="menu-toggle"></i>
@@ -322,7 +324,6 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                                 </select>
 									</div>
 
-
 								</div>
 										<br>
 								<?php 
@@ -339,106 +340,130 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 										}
 
 										$scheck = "$row->statusName";
-										if ($scheck == "PENDING"){
-											echo '<div class="row">
-											<div class="col-xl-3">
-		
+
+											if ($scheck == "PENDING"){
+												
+												echo '<div class="row">
+												<div class="col-xl-3">
+												</div>
+												<div class="col-xl-3 ">
+												</div>
+												<div class="col-xl-3 ">
+												</div>
+												<div class="col-xl-3 ">
+													<button type="submit" class="form-control btn btn-outline-danger" name="delete" id="delete">Cancel Request</button>
+												</div>
+												</div>';
+											}else if ($scheck == "APPROVED" || $scheck == "PAYMENT REJECTED"){
+												echo '
+												<div class="row">
+												<div class="col-xl-3">
+													<label for="formFileSm" class="form-label">Upload Proof of Payment<span class="fs-6 text-muted"> (JPEG or PNG format)</span></label>
+			
+												</div>
+												<div class="col-xl-3">
+			
+												</div>
+												<div class="col-xl-3">
+													<label for="ctype" class="black fw-bold fs-5">Payment Details</label>
+			
+												</div>
+												<div class="col-xl-3">
+			
+												</div>
+			
 											</div>
-											<div class="col-xl-3 ">
-		
+											<div class="row">
+												<div class="col-xl-3">
+													<input class="form-control form-control-sm" id="selectproof" onchange = "loadFile(event,\'cproof\');" type="file">
+													<br>
+												</div>
+												<div class="col-xl-3">
+			
+												</div>
+												<div class="col-xl-3">
+												<div class="row justify-content-center align-items-center">
+												<div class="col-8">
+												<a href = "#" download>	<img src="../../images/defaultImage.png" alt="Default Image"  class= "img-fluid" id = "cproof" "></a>
+												</div>
+												</div>
+												</div>
+												<div class="col-xl-3">
+												
+													<div class="row">
+														<div class="py-2">
+														
+														<div class="col-12">
+														<div class="fs-4 fw-bold">Contact Number:</div>
+														<div class="fs-6 fw-bold">'.$row->Cellphnumber.'</div>
+													
+													</div>					
+													</div>
+													<div class="py-2">	
+														<div class="col-12">
+															<div class="fs-4">Amount Payed</div>
+															<input type= "number" class= "form-control">												
+														</div>
+														<div class="col-12">
+															<div class="fs-4">Reference Number</div>
+															<input type= "number" class= "form-control">												
+														</div>				
+														
+																							
+													</div>
+													</div>
+												</div>
+			
 											</div>
-											<div class="col-xl-3 ">
+											<br>
+											<div class="row">
+												<div class="col-xl-3">
+			
+												</div>
+												<div class="col-xl-3 ">
+			
+												</div>
+												<div class="col-xl-3 ">
+													<button type="submit" class="form-control btn btn-outline-danger" name="delete" id="delete">Cancel Request</button>
+												</div>
+												<div class="col-xl-3 ">
+													<button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
+												</div>
+											</div>';
+											}else if ($scheck == "PAYMENT VERIFIED" || $scheck == "SETTLED" || $scheck == "PAYMENT VERIFICATION"){
+												echo '<div class="row">
+												<div class="col-xl-3">
+												<label for="ctype" class="black fw-bold fs-5">Proof of Payment</label>
+			
+												</div>
+												<div class="col-xl-3">
+			
+												</div>
+												<div class="col-xl-3">
+													<label for="ctype" class="black fw-bold fs-5">Payment Details</label>
+			
+												</div>
+												<div class="col-xl-3">
+			
+												</div>
+			
 											</div>
-											<div class="col-xl-3 ">
-												<button type="submit" class="form-control btn btn-outline-danger" name="delete" id="delete">Cancel Request</button>
-											</div>
-										</div>';
-										}else if ($scheck == "APPROVED" || $scheck == "PAYMENT REJECTED"){
-											echo '<div class="row">
-											<div class="col-xl-3">
-												<label for="formFileSm" class="form-label">Upload Proof of Payment<span class="fs-6 text-muted"> (JPEG or PNG format)</span></label>
-		
-											</div>
-											<div class="col-xl-3">
-		
-											</div>
-											<div class="col-xl-3">
-												<label for="ctype" class="black fw-bold fs-5">Payment Details</label>
-		
-											</div>
-											<div class="col-xl-3">
-		
-											</div>
-		
-										</div>
-										<div class="row">
-											<div class="col-xl-3">
-												<input class="form-control form-control-sm" id="formFileSm" type="file">
-												<br>
-											</div>
-											<div class="col-xl-3">
-		
-											</div>
-											<div class="col-xl-3">
+											<div class="row">
+												<div class="col-xl-3">
 												<img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
-		
-											</div>
-											<div class="col-xl-3">
-											<label for="ctype" style="font-size:130%; font-weight:600;">Francine Voltaire Ledesma <br><span style="font-size:90%;font-style:italic; font-weight:600;"> 09056602669</span></label>
-		
-		
-											</div>
-		
-										</div>
-										<br>
-										<div class="row">
-											<div class="col-xl-3">
-		
-											</div>
-											<div class="col-xl-3 ">
-		
-											</div>
-											<div class="col-xl-3 ">
-												<button type="submit" class="form-control btn btn-outline-danger" name="delete" id="delete">Cancel Request</button>
-											</div>
-											<div class="col-xl-3 ">
-												<button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
-											</div>
-										</div>';
-										}else if ($scheck == "PAYMENT VERIFIED" || $scheck == "SETTLED" || $scheck == "PAYMENT VERIFICATION"){
-											echo '<div class="row">
-											<div class="col-xl-3">
-											<label for="ctype" class="black fw-bold fs-5">Proof of Payment</label>
-		
-											</div>
-											<div class="col-xl-3">
-		
-											</div>
-											<div class="col-xl-3">
-												<label for="ctype" class="black fw-bold fs-5">Payment Details</label>
-		
-											</div>
-											<div class="col-xl-3">
-		
-											</div>
-		
-										</div>
-										<div class="row">
-											<div class="col-xl-3">
-											<img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
-												<br>
-											</div>
-											<div class="col-xl-3">
-		
-											</div>
-											<div class="col-xl-3">
-												<img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
-		
-											</div>
-		
-										</div>';
-										}
-									?>
+													<br>
+												</div>
+												<div class="col-xl-3">
+			
+												</div>
+												<div class="col-xl-3">
+													<img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
+			
+												</div>
+			
+											</div>';
+											}
+										?>
 							</div>
 						</div>
 						</div>
@@ -529,6 +554,12 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
             }
         </script>
 	</body>
+	<script>
+		var loadFile = function (event,imgid) {
+        var image = document.getElementById(imgid);
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+	</script>
 
 	</html>
 <?php } ?>

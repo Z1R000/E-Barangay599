@@ -695,10 +695,10 @@
                 <div class="modal-body bg-white">
                     <div class="row  px-3 py-4">
                         <div class="col xl-4 px-3" align="center">
-                            <img src="client/images/resident-logo.png" alt="trash" class=" img-fluid " style="width: 50%;">
+                            <img src="admin/images/resident-logo.png" alt="trash" class=" img-fluid " style="width: 50%;">
 
                             <div class="row">
-                                <a type="button" href="client/index.php" class="btn btn-outline-info rounded" name="resident" value="resident">
+                                <a type="button" href="client/1-parent/index.php" class="btn btn-outline-info rounded" name="resident" value="resident">
                                     599 Resident
                                 </a>
                             </div>

@@ -133,18 +133,30 @@ if (isset($_POST['submit'])) {
 
 <body>
     <div class="container-fluid banner" align="center">
+       
         <?php
+            function lessen($str){
+                
+                $len = strlen($str);
+                $newlogo = "";
+                for ($i = 6; $i<$len;$i++){
+                    $newlogo .= $str[$i];
+                }
+                return $newlogo;
+                
+            }
         $sql1 = "select * from tblinformation";
         $query1 = $dbh->prepare($sql1);
         $query1->execute();
+        
         $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
         echo "<div class='row'>
         <div class='col-xl-3 px-1 dis'>
             <div class='float-start'>";
         if ($query1->rowCount() > 0) {
             foreach ($results1 as $row1) {
-                echo "<img src='$row1->Blogoone' style='width: 100px;'>";
-
+                echo "<img src='".lessen($row1->Blogoone)."' style='width: 100px;'>";
+         
                 echo "</div>
 
                 </div>";
@@ -156,7 +168,7 @@ if (isset($_POST['submit'])) {
 
                 echo "<div class='col-xl-3 dis'>
                         <div class='float-end'>
-                            <img src='$row1->Blogotwo' style='width: 100px;'>
+                            <img src='".lessen($row1->Blogotwo)."' style='width: 100px;'>
                         </div>
                     </div>
                 </div>";
