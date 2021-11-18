@@ -13,6 +13,7 @@ if (strlen($_SESSION['clientmsuid']==0)) {
 <div class='container-fluid px-4 mb-3'>
     <label></label>
 <?php 
+
 							$sql ="SELECT distinct tblannouncement.ID, tblannouncement.announcement, tblannouncement.announcementDate, tblannouncement.endDate, tblannouncement.adminID, tbladmin.BarangayPosition, tblresident.LastName, tblpositions.* from tblannouncement join tbladmin on tblannouncement.adminID = tbladmin.ID join tblresident on tbladmin.ID = tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition where tblannouncement.announcementDate <= now() and tblannouncement.endDate >= now() order by tblannouncement.ID desc";
 							$query = $dbh -> prepare($sql);
 							$query->execute();
