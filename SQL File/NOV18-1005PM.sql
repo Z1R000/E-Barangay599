@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2021 at 11:24 AM
+-- Generation Time: Nov 18, 2021 at 03:05 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -127,7 +127,8 @@ INSERT INTO `tblannouncement` (`ID`, `announcement`, `announcementDate`, `startD
 (26, 'Ganito ba ledes', '2021-11-12 16:30:40', '2021-11-12 00:00:00', '2021-11-26 00:00:00', 1),
 (27, 'asdasd', '2021-11-13 14:06:24', '2021-11-19 00:00:00', '2021-11-30 00:00:00', 1),
 (28, 'asdasdasd', '2021-11-17 03:24:01', '2021-11-17 03:22:00', '2021-11-17 03:23:00', 1),
-(29, 'Check', '2021-11-17 03:41:41', '2021-11-17 03:40:00', '2021-11-17 03:41:00', 1);
+(29, 'Check', '2021-11-17 03:41:41', '2021-11-17 03:40:00', '2021-11-17 03:41:00', 1),
+(30, 'asdfasdf', '2021-11-18 21:01:22', '2021-11-18 21:00:00', '2021-11-19 21:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -180,7 +181,8 @@ CREATE TABLE `tblblotter` (
 
 INSERT INTO `tblblotter` (`ID`, `compStatus`, `blotterType`, `other`, `incidentLocation`, `incidentDate`, `numres`, `respondent`, `complainant`, `numpers`, `invPers`, `blotterSummary`, `blotterStatus`, `sumStatus`, `summonSchedule`, `blotterCreationDate`, `adminID`) VALUES
 (1, 'Resident', '1', '', 'Near aling nenaasfasdf', '2021-11-18 01:27:00', '7', 'asdfasdf,2,3,4,5,6,7,', 'Ledesma Marithess', '11', 'Arnold Sallan,1,2,3,4,5,6,7,8,9,10,', 'This timel;dsjfgbhsk,ldfgj XD', 'PENDING', '', '0000-00-00 00:00:00', '2021-11-17 17:27:48', 1),
-(2, 'Outsider', '1', '', 'Near aling nena', '2021-11-18 16:18:00', '4', 'Kagawad Sallan,Kagawad Ledesma,Kagawad Viray,Kagawad Kim,', 'Ledesma Marithess', '3', 'Arnold Sallan,Ledesma asd,Viray sad,', 'asdfasdf', 'PENDING', 'No', '0000-00-00 00:00:00', '2021-11-18 08:18:42', 1);
+(2, 'Outsider', '1', '', 'Near aling nena', '2021-11-18 16:18:00', '4', 'Kagawad Sallan,Kagawad Ledesma,Kagawad Viray,Kagawad Kim,', 'Ledesma Marithess', '3', 'Arnold Sallan,Ledesma asd,Viray sad,', 'asdfasdf', 'PENDING', 'No', '0000-00-00 00:00:00', '2021-11-18 08:18:42', 1),
+(3, 'Outsider', '0', 'adfasdfasdfasdfasdf', 'Near aling nena', '2021-11-18 20:57:00', '7', 'Kagawad Sallan,Kagawad Ledesma,Kagawad Viray,Kagawad Kim,Kagawad Nat,Kagawad dawagaK,7,', 'Ledesma Marithess', '11', 'Arnold Sallan,Ledesma asd,Viray sad,Kim das,Nathan dsa,345234523452x345,2x342x34552x34,afgadfg,asfdasdf,asdfadf,adfasdf,', 'Narrative sada', 'PENDING', '', '0000-00-00 00:00:00', '2021-11-18 12:57:37', 1);
 
 -- --------------------------------------------------------
 
@@ -265,7 +267,7 @@ INSERT INTO `tblcreatecertificate` (`ID`, `Userid`, `CertificateId`, `resDate`, 
 (1, '2', '13', '2021-11-13 07:12:57', '8', 'G-Cash', 13, 'SAD', ''),
 (2, '1', '9', '2021-11-13 07:20:38', '6', 'G-Cash', 3, '', ''),
 (3, '1', '13', '2021-11-13 08:03:46', '6', 'G-Cash', 3, '', ''),
-(4, '2', '9', '2021-11-13 08:13:21', '3', 'Cash', 3, '', ''),
+(4, '2', '9', '2021-11-13 08:13:21', '6', 'Cash', 3, '', ''),
 (5, '2', '1', '2021-11-13 09:17:41', '2', 'G-Cash', 3, '', ''),
 (6, '1', '1', '2021-11-13 09:31:18', '6', 'Cash', 3, '', ''),
 (7, '1', '9', '2021-11-13 09:41:43', '6', 'G-Cash', 3, '', ''),
@@ -274,7 +276,9 @@ INSERT INTO `tblcreatecertificate` (`ID`, `Userid`, `CertificateId`, `resDate`, 
 (10, '1', '3', '2021-11-13 09:45:25', '8', 'Cash', 2, '', ''),
 (11, '1', '6', '2021-11-15 14:35:55', '8', 'G-Cash', 13, 'BUSINESS', 'Ledesma Store'),
 (12, '1', '6', '2021-11-15 14:54:57', '1', 'G-Cash', 13, 'BUSINESS', 'Ledesma Store'),
-(13, '1', '10', '2021-11-15 15:04:28', '1', 'Cash', 13, 'LIPAT BAHAY', '');
+(13, '1', '10', '2021-11-15 15:04:28', '1', 'Cash', 13, 'LIPAT BAHAY', ''),
+(14, '2', '2', '2021-11-18 12:39:50', '4', 'G-Cash', 13, 'SCHOOL', ''),
+(15, '18', '2', '2021-11-18 13:58:46', '8', 'G-Cash', 2, '', '');
 
 -- --------------------------------------------------------
 
@@ -318,7 +322,8 @@ INSERT INTO `tblcreaterental` (`ID`, `status`, `userID`, `rentalID`, `adminID`, 
 (11, 2, 1, 1, 0, '2021-11-18 03:40:00', '2021-11-19 03:41:00', '2021-11-18 03:41:06', 1, 0, '7205.00', '', 0, '', '0.00'),
 (12, 2, 1, 1, 0, '2021-11-18 03:45:00', '2021-11-20 03:45:00', '2021-11-18 03:45:18', 1, 0, '14400.00', '', 0, '', '0.00'),
 (13, 1, 1, 1, 0, '2021-11-18 03:47:00', '2021-11-19 03:47:00', '2021-11-18 03:47:58', 2, 10, '7200.00', '', 0, '', '0.00'),
-(14, 2, 1, 2, 0, '2021-11-19 03:59:00', '2021-11-19 06:59:00', '2021-11-18 03:59:53', 1, 9, '300.00', '', 0, '', '0.00');
+(14, 2, 1, 2, 0, '2021-11-19 03:59:00', '2021-11-19 06:59:00', '2021-11-18 03:59:53', 1, 9, '300.00', '', 0, '', '0.00'),
+(15, 2, 18, 1, 0, '2021-11-18 21:57:00', '2021-11-19 21:58:00', '2021-11-18 21:58:05', 1, 11, '7205.00', '', 0, '', '0.00');
 
 -- --------------------------------------------------------
 
@@ -390,7 +395,7 @@ CREATE TABLE `tblinformation` (
 --
 
 INSERT INTO `tblinformation` (`ID`, `Baddress`, `bFullAdd`, `Btitle`, `Blogoone`, `Blogotwo`, `bContact`, `blogo3`, `aboutus`, `eTitle`, `gName`, `qr`) VALUES
-(1, 'BARANGAY 599, ZONE 59, DISTRICT VI', '4745 Peralta St. V. Mapa Sta. Mesa, Manila', 'OFFICE OF THE SANGGUNIANG BARANGAY', '../images/61954f98d2c8f6.93313960.png', '../images/61962599ce11b9.85354409.png', '09123456789', '../images/61954f98d32fd1.81087863.png', 'Barangay 599 has been one of the forerunning barangays along the streets of “Victorino Mapa” and as stated by a corresponding local of the barangay it has been established way before she was born which was during the early 1970’s and since then, not many integrations were made nor committed by the municipality. According to the barangay’s secretary, there are about 5,600 registered citizens. Barangay 599’s roster of officials is composed of the Barangay Chairman (Jose Milo L. Lacatan), Barangay Secretary (Maria Cecilia C. Dela Cruz),. SK Chairman and Kagawads (Erwin L. Sampaga, Florante V. Bonagua, Crisantro G. Lorica, Alexander S. Ceño, Nelson L. Labrador, Marivic Villareal). Supporting these leaders are the 20 barangay enforcers, 20 “lupontagapamayapa’s”, 3 advisers and being composed of 10 puroks, 10 purok leaders. However, mostly the secretary’s team and the chairman handle the processes, queries, and requests of their residents..', ' Barangay 599 E-barangay', 'Barangay 599', '../images/61954d06658604.45345155.png');
+(1, 'BARANGAY 599, ZONE 59, DISTRICT VI', '4745 Peralta St. V. Mapa Sta. Mesa, Manila', 'OFFICE OF THE SANGGUNIANG BARANGAY', '../../images/61964f224909a4.46387287.png', '../images/61962599ce11b9.85354409.png', '09123456789', '../images/61954f98d32fd1.81087863.png', 'Barangay 599 has been one of the forerunning barangays along the streets of “Victorino Mapa” and as stated by a corresponding local of the barangay it has been established way before she was born which was during the early 1970’s and since then, not many integrations were made nor committed by the municipality. According to the barangay’s secretary, there are about 5,600 registered citizens. Barangay 599’s roster of officials is composed of the Barangay Chairman (Jose Milo L. Lacatan), Barangay Secretary (Maria Cecilia C. Dela Cruz),. SK Chairman and Kagawads (Erwin L. Sampaga, Florante V. Bonagua, Crisantro G. Lorica, Alexander S. Ceño, Nelson L. Labrador, Marivic Villareal). Supporting these leaders are the 20 barangay enforcers, 20 “lupontagapamayapa’s”, 3 advisers and being composed of 10 puroks, 10 purok leaders. However, mostly the secretary’s team and the chairman handle the processes, queries, and requests of their residents..', ' Barangay 599 E-barangay', 'Barangay 599', '../images/61954d06658604.45345155.png');
 
 -- --------------------------------------------------------
 
@@ -473,7 +478,10 @@ INSERT INTO `tblloginaudits` (`ID`, `timeIn`, `timeOut`, `resId`, `position`, `d
 (35, '16:02:12', '04:07:10', 1, 1, '2021-11-18'),
 (36, '16:07:33', '00:00:00', 1, 1, '2021-11-18'),
 (37, '16:07:53', '00:00:00', 1, 1, '2021-11-18'),
-(38, '17:18:55', '06:11:48', 1, 1, '2021-11-18');
+(38, '17:18:55', '06:11:48', 1, 1, '2021-11-18'),
+(39, '18:25:48', '00:00:00', 1, 1, '2021-11-18'),
+(40, '18:51:54', '00:00:00', 1, 1, '2021-11-18'),
+(41, '20:35:24', '00:00:00', 1, 1, '2021-11-18');
 
 -- --------------------------------------------------------
 
@@ -634,7 +642,7 @@ CREATE TABLE `tblresident` (
 --
 
 INSERT INTO `tblresident` (`ID`, `Purok`, `houseUnit`, `streetName`, `Cellphnumber`, `Email`, `Password`, `CreationDate`, `voter`, `vPrecinct`, `ResidentType`, `LastName`, `Suffix`, `FirstName`, `MiddleName`, `BirthPlace`, `Gender`, `sssNumber`, `tinNumber`, `CivilStatus`, `BirthDate`, `HomeName`, `PassReset`, `resStatus`) VALUES
-(2, 2, 323, 'Narra', '09178078237', 'virayvergel10@gmail.com', '123', '2021-04-12 20:14:26', 'No', '', 'Care Taker', 'Viray', 'Sr.', 'Vergel', 'Sallan', 'Manila', 'Male', '123123123', '3212312', 'Single', '2015-04-01 00:00:00', '', '', 'Active'),
+(1, 2, 323, 'Narra', '09178078237', 'virayvergel10@gmail.com', '123', '2021-04-12 20:14:26', 'No', '', 'Care Taker', 'Viray', 'Sr.', 'Vergel', 'Sallan', 'Manila', 'Male', '123123123', '3212312', 'Single', '2015-04-01 00:00:00', '', '', 'Active'),
 (4, 3, 543, 'Mangga', '09291581899', 'viray.vergel@ue.edu.ph', '123', '2021-04-20 07:49:54', 'Yes', '123', 'Living with Relatives', 'Sallan', 'Jr.', 'Arnold', 'Clavio', 'Manila', 'Female', '12512312', '12315123', 'Married', '2011-04-01 00:00:00', '', '', 'Active'),
 (5, 5, 124, 'Sarmiento', '09154708062', 'nathan@gmail.com', '123', '2021-04-20 08:22:54', 'Yes', '123', 'Rental/Boarder', 'Morales', 'Sr.', 'Nathan', 'Pacquiao', 'Manila', 'Male', '123123', '12315123', 'Married', '2008-02-20 00:00:00', '', '', 'Active'),
 (7, 7, 722, 'Mangga Ext.', '09776819795', 'uy@gmail.com', '123', '2021-05-07 08:42:16', 'No', '', 'Living with Relatives', 'Uy', '', 'Wilvin', 'Voltaire', 'Visayas', 'Female', '45145451', '61451451', 'Married', '2013-01-07 00:00:00', '', '', 'Active'),
@@ -645,7 +653,8 @@ INSERT INTO `tblresident` (`ID`, `Purok`, `houseUnit`, `streetName`, `Cellphnumb
 (16, 2, 23, 'Peralta 3', '09056602669', 'snow@gmail.com', '123', '2021-11-10 07:44:06', 'No', '', 'House Owner', 'Vi', 'Ray', 'Ver', 'Gel', 'Manila', 'Male', NULL, NULL, 'Single', '1961-10-19 15:42:11', '', '', 'Active'),
 (17, 6, 2222, 'Peralta Int.', '09154708062', 'virayvergel10@gmail.com', 'Barangay599', '2021-11-12 06:16:32', 'No', '', 'House Owner', 'XD', '', 'Personal', 'Information', 'Manila', 'Male', '0', '0', 'Single', '2008-01-12 00:00:00', '', '', 'Rejected'),
 (18, 6, 123, 'Peralta Int.', '09291581899', 'ledesma.francinevoltaire@ue.edu.ph', 'Barangay599', '2021-11-12 06:51:34', 'No', '', 'House Owner', 'Legaspi', 'Jr.', 'Zyra', 'Mae', NULL, 'Male', '0', '0', 'Single', '1974-12-09 00:00:00', '', '', 'Active'),
-(19, 4, 2313, 'Mangga', '09052420827', '', 'Barangay599', '2021-11-12 10:59:01', 'No', '', 'House Owner', 'Vert', '', 'Lil', 'Uzi', 'Manila', 'Male', '0', '0', 'Single', '1984-07-23 00:00:00', '', '', 'Pending');
+(19, 4, 2313, 'Mangga', '09052420827', '', 'Barangay599', '2021-11-12 10:59:01', 'No', '', 'House Owner', 'Vert', '', 'Lil', 'Uzi', 'Manila', 'Male', '0', '0', 'Single', '1984-07-23 00:00:00', '', '', 'Rejected'),
+(20, 1, 322, 'Old Sta. Mesa', '09291581899', 'vergel@gmail.com', 'Barangay599', '2021-11-18 12:38:24', 'No', '', 'House Owner', 'Sallan', '', 'vergel', 'Clavio', NULL, 'Male', '', '', 'Single', '1999-02-18 00:00:00', '', '', 'Active');
 
 -- --------------------------------------------------------
 
@@ -905,7 +914,7 @@ ALTER TABLE `tbladmin`
 -- AUTO_INCREMENT for table `tblannouncement`
 --
 ALTER TABLE `tblannouncement`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `tblavailability`
@@ -917,7 +926,7 @@ ALTER TABLE `tblavailability`
 -- AUTO_INCREMENT for table `tblblotter`
 --
 ALTER TABLE `tblblotter`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tblbtype`
@@ -935,13 +944,13 @@ ALTER TABLE `tblcertificate`
 -- AUTO_INCREMENT for table `tblcreatecertificate`
 --
 ALTER TABLE `tblcreatecertificate`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tblcreaterental`
 --
 ALTER TABLE `tblcreaterental`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tbldays`
@@ -965,7 +974,7 @@ ALTER TABLE `tbllistpurok`
 -- AUTO_INCREMENT for table `tblloginaudits`
 --
 ALTER TABLE `tblloginaudits`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `tblmodes`
@@ -1001,7 +1010,7 @@ ALTER TABLE `tblrental`
 -- AUTO_INCREMENT for table `tblresident`
 --
 ALTER TABLE `tblresident`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tblrespondents`
