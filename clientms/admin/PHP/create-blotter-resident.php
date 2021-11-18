@@ -23,17 +23,19 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
         $crstatus = $_POST['crstatus'];
 		$comp = $_POST['comp'];
         $bt = $_POST['btype'];
+        $other = $_POST['others'];
         $idate = $_POST['inciDate'];
         $iadd = $_POST['inciAdd'];
         $narr = $_POST['narr'];
         $sstat = $_POST['summon'];
         $sumdate = $_POST['sumDate'];
 
-        $sql = "insert into tblblotter (compStatus, blotterType, incidentLocation, incidentDate, numres, respondent, complainant, numpers, invPers, blotterSummary, blotterStatus, sumStatus, summonSchedule, adminID) VALUES (:crstatus, :bt, :iadd, :idate, :numberkag, :kagarr, :comp, :numberper, :perarr, :narr, :bstat, :sstat, :sumdate, :aid)";
+        $sql = "insert into tblblotter (compStatus, blotterType, incidentLocation, incidentDate, numres, respondent, complainant, numpers, invPers, blotterSummary, blotterStatus, sumStatus, summonSchedule, adminID, other) VALUES (:crstatus, :bt, :iadd, :idate, :numberkag, :kagarr, :comp, :numberper, :perarr, :narr, :bstat, :sstat, :sumdate, :aid, :other)";
         $query = $dbh->prepare($sql);
         $query->bindParam(':crstatus', $crstatus, PDO::PARAM_STR);
         $query->bindParam(':bt', $bt, PDO::PARAM_STR);
         $query->bindParam(':iadd', $iadd, PDO::PARAM_STR);
+        $query->bindParam(':other', $other, PDO::PARAM_STR);
         $query->bindParam(':idate', $idate, PDO::PARAM_STR);
         $query->bindParam(':numberkag', $numberkag, PDO::PARAM_STR);
         $query->bindParam(':kagarr', $kagarr, PDO::PARAM_STR);
@@ -53,6 +55,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
         } else {
             echo '<script>alert("Something Went Wrong. Please try again")</script>';
         }
+
 
     }
 ?>
@@ -207,12 +210,17 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                                     <div id="inputFormRow">
                                                         <div class="input-group mb-3">
                                                             <input type="text" name="kag1" id="search" class="form-control action" placeholder="Personnel">
+                                                            
+
                                                             <div class="btn-group mx-2">
                                                                 <button id="addkag" type="button" class="btn btn-primary "><i class="fa fa-plus me-2"></i>Add Respondent</button>
                                                             </div>
                                                         </div>
+                                                        
                                                     </div>
+                                                    
                                                     <div id="newRow"></div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -276,11 +284,9 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     $query->execute();
                                     $resultsbt = $query->fetchAll(PDO::FETCH_OBJ);
                                     $btypes = '<option selected disabled>Incident Type</option>';
-                                   
                                     foreach ($resultsbt as $bt) {
                                         $btypes .= '<option value = ' . $bt->bID . '>' . $bt->btype . '</option>';
                                     }
-                                    $btypes .= '<option value = \'others\'>Others    </option>';
 
 
 
@@ -290,14 +296,13 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                         <?php
                                         echo $btypes;
                                         ?>
+                                        <option value ="0">OTHERS</option>
                                     </select>
-                                    
-                                </div>
-                                <div class="col-md-5 ms-2" id = "others">
+                                <div class="col-md-5 ms-2" id = "others" style="display: none;">
                                                 <label for="prate" class="fs-6 fw-bold">Specify Other Incident</label>
-                                                <input type="text"  name= "others" id = "othersincident" class="form-control " name ="date">
+                                                <input type="text"  name= "others" id = "others" class="form-control ">
                                             </div>
-
+                                </div>
 
 
 
@@ -334,7 +339,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                             <div class="row gx-3 py-2 px-3">
                             <div class="col-md-5">
                                 <label for="btype" class="fw-bold fs-6">Summon Schedule: </label>
-                                <select class="form-select input-sm" id="summon" name="summon" aria-label="Default select example" onchange="showsummon('summondate', this)">
+                                <select class="form-select input-sm" id="summon" name="summon" aria-label="Default select example" onchange="showsummon('summondate', this)" required>
                                     <option value="" disabled selected>--Select Summon--</option>
                                     <option value="No">No Summon</option>
                                     <option value="Yes">Summon</option>
@@ -358,10 +363,15 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <div class="float-end">
                                         <button type="submit" name="submit" class="btn btn-success"><i class="fa fa-server me-2"></i> Submit</button>
                                     </div>
+
+
                                 </div>
                             </div>
+
                         </div>
+
                     </div>
+
                 </div>
             </div>
             </div>
@@ -477,21 +487,6 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                 </div>
             </div>
         </div>
-        <script>
-        $(document).ready(function() {
-            $("select").change(function() {
-                $(this).find("option:selected").each(function() {
-                    var optionValue = $(this).attr("value");
-                    if (optionValue) {
-                        $(".box").not("." + optionValue).hide();
-                        $("." + optionValue).show();
-                    } else {
-                        $(".box").hide();
-                    }
-                });
-            }).change();
-        });
-    </script>
 
         <script>
             $(document).ready(function() {
@@ -530,12 +525,12 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                 document.getElementById(divId).style.display = element.value == 'Yes' ? 'block' : 'none';
             }
         </script>
+        <script>
+    function showDiv(divId, element) {
+        document.getElementById(divId).style.display = element.value == '0' ? 'block' : 'none';
+    }
+</script>
     </body>
 
     </html>
 <?php } ?>
-<script>
-    function showDiv(divId, element) {
-        document.getElementById(divId).style.display = element.value == 'others' ? 'block' : 'none';
-    }
-</script>
