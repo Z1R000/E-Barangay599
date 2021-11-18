@@ -1,6 +1,5 @@
 <?php 
     $curr ="Manage Purok ".$_GET['purok'];
-    include('includes/dbconnection.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

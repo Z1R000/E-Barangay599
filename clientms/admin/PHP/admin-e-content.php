@@ -15,6 +15,7 @@
         $query->execute();
         $result= $query->fetchAll(PDO::FETCH_OBJ);
         foreach($result as $d){
+            
             array_push($infoArr,$d->Baddress);
             array_push($infoArr,$d->bFullAdd);
             array_push($infoArr,$d->Blogoone);
@@ -148,6 +149,7 @@
             }
             
             if ($filenamefour!=""){
+
                 $destination = upPhoto('rlog');
                 $sql= 'Update tblinformation set reslogo = "'.$destination.'" where ID = 1';
                 if ($con->query($sql)===TRUE){
@@ -156,6 +158,7 @@
                 else{
                     header('Location: admin-e-content.php?successimag=0');
                 }
+
             }
                         
         }

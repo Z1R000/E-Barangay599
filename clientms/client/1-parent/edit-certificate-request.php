@@ -2,6 +2,35 @@
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
+
+
+
+function upPhoto ($poid){
+	$ftypes = array('png','jpeg','jpg');
+
+	$fileName = $_FILES[''.$poid.'']['name'];
+	$fileSize = $_FILES[''.$poid.'']['size'];
+	$fileError = $_FILES[''.$poid.'']['error'];
+	$filetmpname = $_FILES[''.$poid.'']['tmp_name'];
+	$fileExt = explode('.',$fileName);
+	$extension = strtolower(end($fileExt));
+	
+	$destination = "";
+
+	if (in_array($extension,$ftypes)){
+		if($fileSize<5000000){
+			$newfilename = uniqid('',TRUE).".".$extension;
+			$destination = "../../images/".$newfilename;
+			move_uploaded_file($filetmpname,$destination);
+		   // header('Location: admin-e-content.php?success=1');
+		}
+	}
+	
+	return $destination;
+
+}
+
+
 if (strlen($_SESSION['clientmsuid'] == 0)) {
 	header('location:logout.php');
 } else {
@@ -14,18 +43,42 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 	foreach($resultscheck as $rowcheck){
 		$statcheck = $rowcheck->status;
 	}
+
 	if (isset($_POST['submit'])) {
 		$stats = $_POST['status'];
 		if ($statcheck == "2" || $statcheck == "7"){
 			$stats = "3";
 		}
-		$sql = "update tblcreatecertificate set status=:stats WHERE ID=:eid";
-		$query = $dbh->prepare($sql);
-		$query->bindParam(':stats', $stats, PDO::PARAM_STR);
-		$query->bindParam(':eid', $eid, PDO::PARAM_STR);
-		$query->execute();
-		echo '<script>alert("Certificate Information has been updated")</script>';
-		echo "<script>window.location.href ='edit-certificate-request.php?editid=" . $eid . "'</script>";
+		$subm = $_FILES['proof']['name'];
+
+		
+			$destination = upPhoto('proof');
+			$mop =1;
+			$sql = "update tblcreatecertificate set status=:stats WHERE ID=:eid";
+			$query = $dbh->prepare($sql);
+			$query->bindParam(':stats', $stats, PDO::PARAM_STR);
+			$query->bindParam(':eid', $eid, PDO::PARAM_STR);
+			$query->execute();
+		
+
+			$upload = "Insert into tblpaymentlogs(mode,creationID,proof,servicetype) values(:mop,:eid,:destination,2)";
+			$query1 = $dbh->prepare($upload);
+			$query1->bindParam(':mop', $mop, PDO::PARAM_STR);			
+			$query1->bindParam(':eid:',$eid , PDO::PARAM_STR);
+			$query1->bindParam(':destination', $destination, PDO::PARAM_STR);
+			$query1->execute();
+			
+			
+			$LastInsertId = $dbh->lastInsertId();
+        if ($LastInsertId > 0) {
+			echo '<script>alert("Certificate Information and proof of payment sent has been updated")</script>';
+			echo "<script>window.location.href ='edit-certificate-request.php?editid=" . $eid . "'</script>";
+        } else {
+            echo '<script>alert("Something Went Wrong. Please try again")</script>';
+        }
+		
+	
+		
 	}
 
 	if (isset($_POST['delete'])){
@@ -234,16 +287,22 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 					</ol>
 				</div>
 				
-				<form method="post">
+				<form method="post" enctype="multipart/form-data">
 					<?php
 					$sql = "SELECT distinct tblcreatecertificate.*, tblcreatecertificate.ID as getID, tblresident.*, tblcertificate.*, tblstatus.*, tblpurposes.* from tblcreatecertificate join tblcertificate on tblcertificate.ID = tblcreatecertificate.CertificateId join tblstatus on tblcreatecertificate.status = tblstatus.ID join tblresident on tblcreatecertificate.Userid=tblresident.ID join tblpurposes on tblpurposes.ID = tblcreatecertificate.purpID WHERE tblcreatecertificate.ID=:eid";
 					$query = $dbh->prepare($sql);
 					$query->bindParam(':eid', $eid, PDO::PARAM_STR);
 					$query->execute();
 					$results = $query->fetchAll(PDO::FETCH_OBJ);
+			
+					
 					foreach ($results as $row) {
 						$cdates = $row->resDate;
 						$cdates = date('F j Y - h:i A', strtotime($cdates));
+
+						$payorId = $row->ID;
+						$mop = $row->pMode;
+				
 
 					?>
 					
@@ -338,7 +397,6 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 											</div>
 										</div><br>';
 										}
-
 										$scheck = "$row->statusName";
 
 											if ($scheck == "PENDING"){
@@ -372,19 +430,35 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 			
 												</div>
 			
-											</div>
+											</div>';
+											$sql = "Select * from tblinformation";
+												
+											$query= $dbh->prepare($sql);
+											$query->execute();
+											$result = $query->fetchAll(PDO::FETCH_OBJ);
+											
+											foreach ($result as $cred){
+											echo '
 											<div class="row">
 												<div class="col-xl-3">
-													<input class="form-control form-control-sm" id="selectproof" onchange = "loadFile(event,\'cproof\');" type="file">
-													<br>
+													
+														<div class="col-12">													<input 	name = "proof" class="form-control form-control-sm" id="selectproof" onchange = "loadFile(event,\'cproof\');" type="file">
+														</div>
+														<div class="col-12">
+															<img src = "../../images/defaultimage.png" class= "img-fluid" id = "cproof">
+														</div>
+													
+
 												</div>
 												<div class="col-xl-3">
 			
 												</div>
 												<div class="col-xl-3">
+												<div class= "fs-4">Qr Code</div>
 												<div class="row justify-content-center align-items-center">
 												<div class="col-8">
-												<a href = "#" download>	<img src="../../images/defaultImage.png" alt="Default Image"  class= "img-fluid" id = "cproof" "></a>
+											
+												<a href = "'.$cred->qr.'	" target = "_blank">	<img src="'.$cred->qr.'" alt="Default Image"  class= "img-fluid"  "></a>
 												</div>
 												</div>
 												</div>
@@ -394,20 +468,18 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 														<div class="py-2">
 														
 														<div class="col-12">
-														<div class="fs-4 fw-bold">Contact Number:</div>
-														<div class="fs-6 fw-bold">'.$row->Cellphnumber.'</div>
+														<div class="fs-4">Contact Number:</div>
+														<div class="fs-5 fw-bold">'.$cred->bContact.'</div>
 													
 													</div>					
 													</div>
 													<div class="py-2">	
 														<div class="col-12">
-															<div class="fs-4">Amount Payed</div>
-															<input type= "number" class= "form-control">												
+															<div class="fs-4">G-Cash Owner</div>
+															<div class="fs-5 fw-bold">'.$cred->gName.'</div>
+																											
 														</div>
-														<div class="col-12">
-															<div class="fs-4">Reference Number</div>
-															<input type= "number" class= "form-control">												
-														</div>				
+																
 														
 																							
 													</div>
@@ -416,11 +488,14 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 			
 											</div>
 											<br>
+											';
+											}
+											echo '
 											<div class="row">
 												<div class="col-xl-3">
 			
 												</div>
-												<div class="col-xl-3 ">
+												<div class="col-xl-3 ">	
 			
 												</div>
 												<div class="col-xl-3 ">
