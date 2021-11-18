@@ -108,7 +108,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
   <main class="py-5">
   
 
-    <section class="custom-container   print-container bg-white">
+    <section class="custom-container print-container bg-white">
       <!-- header -->
       <header class="row pb-4 blue ">
         <?php
@@ -126,7 +126,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 
         <div class="row  g-0">
             <div class="col-3 justify-content-center">
-                <img src="../<?php echo $row1->Blogoone ?>" style ="width: 150px" >
+                <img src="<?php echo $row1->Blogoone ?>" style ="width: 150px" >
             </div>
             
             <div class="col-6 text-center ">
@@ -139,7 +139,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
             </div>
 
             <div class="col-3">
-                <img src="../<?php echo $row1->Blogotwo ?>" style ="width: 150px" >
+                <img src="<?php echo $row1->Blogotwo ?>" style ="width: 150px" >
             </div>
         </div>
       <?php } ?>
