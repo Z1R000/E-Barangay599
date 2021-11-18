@@ -698,7 +698,7 @@
                             <img src="admin/images/resident-logo.png" alt="trash" class=" img-fluid " style="width: 50%;">
 
                             <div class="row">
-                                <a type="button" href="client/1-parent/index.php" class="btn btn-outline-info rounded" name="resident" value="resident">
+                                <a type="button" href="client/1-parent/" class="btn btn-outline-info rounded" name="resident" value="resident">
                                     599 Resident
                                 </a>
                             </div>

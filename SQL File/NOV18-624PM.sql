@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2021 at 09:02 AM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.8
+-- Generation Time: Nov 18, 2021 at 11:24 AM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,9 @@ INSERT INTO `password_reset_temp` (`email`, `key`, `expDate`) VALUES
 ('virayvergel10@gmail.com', 'v?xJ?????????GEeaf3ccd704', '2021-11-06 15:57:57'),
 ('virayvergel10@gmail.com', 'v?xJ?????????GEb24a86af3c', '2021-11-06 15:58:31'),
 ('virayvergel10@gmail.com', 'v?xJ?????????GE9bb4026f02', '2021-11-06 15:58:39'),
-('virayvergel10@gmail.com', 'v?xJ?????????GE6e0abc97b5', '2021-11-06 16:22:00');
+('virayvergel10@gmail.com', 'v?xJ?????????GE6e0abc97b5', '2021-11-06 16:22:00'),
+('ledes@gmail.com', 'v?xJ?????????GEef38972bd3', '2021-11-19 08:58:05'),
+('virayvergel10@gmail.com', 'v?xJ?????????GE4232583c32', '2021-11-19 08:58:21');
 
 -- --------------------------------------------------------
 
@@ -156,6 +158,7 @@ CREATE TABLE `tblblotter` (
   `ID` int(11) NOT NULL,
   `compStatus` varchar(20) NOT NULL,
   `blotterType` varchar(50) NOT NULL,
+  `other` varchar(100) NOT NULL,
   `incidentLocation` varchar(200) NOT NULL,
   `incidentDate` datetime NOT NULL,
   `numres` varchar(10) NOT NULL,
@@ -175,8 +178,9 @@ CREATE TABLE `tblblotter` (
 -- Dumping data for table `tblblotter`
 --
 
-INSERT INTO `tblblotter` (`ID`, `compStatus`, `blotterType`, `incidentLocation`, `incidentDate`, `numres`, `respondent`, `complainant`, `numpers`, `invPers`, `blotterSummary`, `blotterStatus`, `sumStatus`, `summonSchedule`, `blotterCreationDate`, `adminID`) VALUES
-(1, 'Resident', '1', 'Near aling nena', '2021-11-18 01:27:00', '3', 'Kagawad Sallan,Kagawad Ledesma,Kagawad Viray,', 'Ledesma Marithess', '2', 'Arnold Sallan,Ledesma asd,', 'This time', 'PENDING', 'No', '0000-00-00 00:00:00', '2021-11-17 17:27:48', 1);
+INSERT INTO `tblblotter` (`ID`, `compStatus`, `blotterType`, `other`, `incidentLocation`, `incidentDate`, `numres`, `respondent`, `complainant`, `numpers`, `invPers`, `blotterSummary`, `blotterStatus`, `sumStatus`, `summonSchedule`, `blotterCreationDate`, `adminID`) VALUES
+(1, 'Resident', '1', '', 'Near aling nenaasfasdf', '2021-11-18 01:27:00', '7', 'asdfasdf,2,3,4,5,6,7,', 'Ledesma Marithess', '11', 'Arnold Sallan,1,2,3,4,5,6,7,8,9,10,', 'This timel;dsjfgbhsk,ldfgj XD', 'PENDING', '', '0000-00-00 00:00:00', '2021-11-17 17:27:48', 1),
+(2, 'Outsider', '1', '', 'Near aling nena', '2021-11-18 16:18:00', '4', 'Kagawad Sallan,Kagawad Ledesma,Kagawad Viray,Kagawad Kim,', 'Ledesma Marithess', '3', 'Arnold Sallan,Ledesma asd,Viray sad,', 'asdfasdf', 'PENDING', 'No', '0000-00-00 00:00:00', '2021-11-18 08:18:42', 1);
 
 -- --------------------------------------------------------
 
@@ -194,10 +198,11 @@ CREATE TABLE `tblbtype` (
 --
 
 INSERT INTO `tblbtype` (`bID`, `btype`) VALUES
-(1, 'Property Damage'),
-(2, 'Violence'),
-(3, 'Public Disturbance'),
-(4, 'Robbery');
+(0, 'OTHERS'),
+(1, 'PROPERTY DAMAGE'),
+(2, 'VIOLENCE'),
+(3, 'PUBLIC DISTURBANCE'),
+(4, 'ROBBERY');
 
 -- --------------------------------------------------------
 
@@ -249,29 +254,27 @@ CREATE TABLE `tblcreatecertificate` (
   `pMode` varchar(10) NOT NULL,
   `purpID` int(25) NOT NULL,
   `other` varchar(100) NOT NULL,
-  `bName` varchar(50) NOT NULL DEFAULT 'N/A',
-  `proofID` int(11) NOT NULL
+  `bName` varchar(50) NOT NULL DEFAULT 'N/A'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tblcreatecertificate`
 --
 
-INSERT INTO `tblcreatecertificate` (`ID`, `Userid`, `CertificateId`, `resDate`, `status`, `pMode`, `purpID`, `other`, `bName`, `proofID`) VALUES
-(1, '2', '13', '2021-11-13 07:12:57', '8', 'G-Cash', 13, 'SAD', '', 0),
-(2, '1', '9', '2021-11-13 07:20:38', '6', 'G-Cash', 3, '', '', 0),
-(3, '1', '13', '2021-11-13 08:03:46', '6', 'G-Cash', 3, '', '', 0),
-(4, '2', '9', '2021-11-13 08:13:21', '3', 'Cash', 3, '', '', 0),
-(5, '2', '1', '2021-11-13 09:17:41', '2', 'G-Cash', 3, '', '', 0),
-(6, '1', '1', '2021-11-13 09:31:18', '6', 'Cash', 3, '', '', 0),
-(7, '1', '9', '2021-11-13 09:41:43', '6', 'G-Cash', 3, '', '', 0),
-(8, '1', '3', '2021-11-13 09:43:23', '6', 'Cash', 3, '', '', 0),
-(9, '1', '2', '2021-11-13 09:44:39', '8', 'G-Cash', 2, '', '', 0),
-(10, '1', '3', '2021-11-13 09:45:25', '8', 'Cash', 2, '', '', 0),
-(11, '1', '6', '2021-11-15 14:35:55', '8', 'G-Cash', 13, 'BUSINESS', 'Ledesma Store', 0),
-(12, '1', '6', '2021-11-15 14:54:57', '1', 'G-Cash', 13, 'BUSINESS', 'Ledesma Store', 0),
-(13, '1', '10', '2021-11-15 15:04:28', '1', 'Cash', 13, 'LIPAT BAHAY', '', 0),
-(14, '1', '3', '2021-11-17 21:55:29', '2', 'G-Cash', 3, '', '', 0);
+INSERT INTO `tblcreatecertificate` (`ID`, `Userid`, `CertificateId`, `resDate`, `status`, `pMode`, `purpID`, `other`, `bName`) VALUES
+(1, '2', '13', '2021-11-13 07:12:57', '8', 'G-Cash', 13, 'SAD', ''),
+(2, '1', '9', '2021-11-13 07:20:38', '6', 'G-Cash', 3, '', ''),
+(3, '1', '13', '2021-11-13 08:03:46', '6', 'G-Cash', 3, '', ''),
+(4, '2', '9', '2021-11-13 08:13:21', '3', 'Cash', 3, '', ''),
+(5, '2', '1', '2021-11-13 09:17:41', '2', 'G-Cash', 3, '', ''),
+(6, '1', '1', '2021-11-13 09:31:18', '6', 'Cash', 3, '', ''),
+(7, '1', '9', '2021-11-13 09:41:43', '6', 'G-Cash', 3, '', ''),
+(8, '1', '3', '2021-11-13 09:43:23', '6', 'Cash', 3, '', ''),
+(9, '1', '2', '2021-11-13 09:44:39', '8', 'G-Cash', 2, '', ''),
+(10, '1', '3', '2021-11-13 09:45:25', '8', 'Cash', 2, '', ''),
+(11, '1', '6', '2021-11-15 14:35:55', '8', 'G-Cash', 13, 'BUSINESS', 'Ledesma Store'),
+(12, '1', '6', '2021-11-15 14:54:57', '1', 'G-Cash', 13, 'BUSINESS', 'Ledesma Store'),
+(13, '1', '10', '2021-11-15 15:04:28', '1', 'Cash', 13, 'LIPAT BAHAY', '');
 
 -- --------------------------------------------------------
 
@@ -379,16 +382,15 @@ CREATE TABLE `tblinformation` (
   `aboutus` varchar(2000) NOT NULL,
   `eTitle` varchar(1000) NOT NULL,
   `gName` varchar(1000) NOT NULL,
-  `qr` varchar(1000) NOT NULL,
-  `reslogo` varchar(1000) NOT NULL
+  `qr` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tblinformation`
 --
 
-INSERT INTO `tblinformation` (`ID`, `Baddress`, `bFullAdd`, `Btitle`, `Blogoone`, `Blogotwo`, `bContact`, `blogo3`, `aboutus`, `eTitle`, `gName`, `qr`, `reslogo`) VALUES
-(1, 'BARANGAY 599, ZONE 59, DISTRICT VI', '4745 Peralta St. V. Mapa Sta. Mesa, Manila', 'OFFICE OF THE SANGGUNIANG BARANGAY', '../../images/619575910163b3.54393094.png', '../../images/619577ae60dd56.36705005.png', '09123456789', '../../images/619575c849cc02.21592851.png', 'Barangay 599 has been one of the forerunning barangays along the streets of “Victorino Mapa” and as stated by a corresponding local of the barangay it has been established way before she was born which was during the early 1970’s and since then, not many integrations were made nor committed by the municipality. According to the barangay’s secretary, there are about 5,600 registered citizens. Barangay 599’s roster of officials is composed of the Barangay Chairman (Jose Milo L. Lacatan), Barangay Secretary (Maria Cecilia C. Dela Cruz),. SK Chairman and Kagawads (Erwin L. Sampaga, Florante V. Bonagua, Crisantro G. Lorica, Alexander S. Ceño, Nelson L. Labrador, Marivic Villareal). Supporting these leaders are the 20 barangay enforcers, 20 “lupontagapamayapa’s”, 3 advisers and being composed of 10 puroks, 10 purok leaders. However, mostly the secretary’s team and the chairman handle the processes, queries, and requests of their residents..', ' Barangay 599 E-barangay', 'Barangay 599', '../../images/619575f854ff74.65558256.png', '../../images/6195780e6a58d4.95099315.png');
+INSERT INTO `tblinformation` (`ID`, `Baddress`, `bFullAdd`, `Btitle`, `Blogoone`, `Blogotwo`, `bContact`, `blogo3`, `aboutus`, `eTitle`, `gName`, `qr`) VALUES
+(1, 'BARANGAY 599, ZONE 59, DISTRICT VI', '4745 Peralta St. V. Mapa Sta. Mesa, Manila', 'OFFICE OF THE SANGGUNIANG BARANGAY', '../images/61954f98d2c8f6.93313960.png', '../images/61962599ce11b9.85354409.png', '09123456789', '../images/61954f98d32fd1.81087863.png', 'Barangay 599 has been one of the forerunning barangays along the streets of “Victorino Mapa” and as stated by a corresponding local of the barangay it has been established way before she was born which was during the early 1970’s and since then, not many integrations were made nor committed by the municipality. According to the barangay’s secretary, there are about 5,600 registered citizens. Barangay 599’s roster of officials is composed of the Barangay Chairman (Jose Milo L. Lacatan), Barangay Secretary (Maria Cecilia C. Dela Cruz),. SK Chairman and Kagawads (Erwin L. Sampaga, Florante V. Bonagua, Crisantro G. Lorica, Alexander S. Ceño, Nelson L. Labrador, Marivic Villareal). Supporting these leaders are the 20 barangay enforcers, 20 “lupontagapamayapa’s”, 3 advisers and being composed of 10 puroks, 10 purok leaders. However, mostly the secretary’s team and the chairman handle the processes, queries, and requests of their residents..', ' Barangay 599 E-barangay', 'Barangay 599', '../images/61954d06658604.45345155.png');
 
 -- --------------------------------------------------------
 
@@ -468,13 +470,10 @@ INSERT INTO `tblloginaudits` (`ID`, `timeIn`, `timeOut`, `resId`, `position`, `d
 (32, '22:48:48', '00:00:00', 1, 1, '2021-11-16'),
 (33, '00:13:56', '03:47:31', 1, 1, '2021-11-17'),
 (34, '22:30:36', '00:00:00', 1, 1, '2021-11-17'),
-(35, '04:49:02', '04:49:34', 1, 1, '2021-11-18'),
-(36, '04:51:06', '04:51:17', 1, 1, '2021-11-18'),
-(37, '04:51:55', '04:52:02', 1, 1, '2021-11-18'),
-(38, '04:54:48', '05:46:07', 1, 1, '2021-11-18'),
-(39, '05:56:06', '00:00:00', 1, 1, '2021-11-18'),
-(40, '06:01:45', '00:00:00', 1, 1, '2021-11-18'),
-(41, '06:19:58', '00:00:00', 1, 1, '2021-11-18');
+(35, '16:02:12', '04:07:10', 1, 1, '2021-11-18'),
+(36, '16:07:33', '00:00:00', 1, 1, '2021-11-18'),
+(37, '16:07:53', '00:00:00', 1, 1, '2021-11-18'),
+(38, '17:18:55', '06:11:48', 1, 1, '2021-11-18');
 
 -- --------------------------------------------------------
 
@@ -494,6 +493,31 @@ CREATE TABLE `tblmodes` (
 INSERT INTO `tblmodes` (`ID`, `mode`) VALUES
 (1, 'G-cash'),
 (2, 'Cash');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblpaymentlogs`
+--
+
+CREATE TABLE `tblpaymentlogs` (
+  `ID` int(11) NOT NULL,
+  `mode` int(11) NOT NULL,
+  `payorName` int(11) NOT NULL,
+  `fName` varchar(200) NOT NULL,
+  `refNum` int(11) NOT NULL,
+  `proof` varchar(1000) NOT NULL,
+  `servicetype` int(11) NOT NULL,
+  `request` int(11) NOT NULL,
+  `payment` decimal(16,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblpaymentlogs`
+--
+
+INSERT INTO `tblpaymentlogs` (`ID`, `mode`, `payorName`, `fName`, `refNum`, `proof`, `servicetype`, `request`, `payment`) VALUES
+(1, 1, 1, '', 12134123, '/images/nirvanalogo.jpg', 2, 1, '230.00');
 
 -- --------------------------------------------------------
 
@@ -610,7 +634,6 @@ CREATE TABLE `tblresident` (
 --
 
 INSERT INTO `tblresident` (`ID`, `Purok`, `houseUnit`, `streetName`, `Cellphnumber`, `Email`, `Password`, `CreationDate`, `voter`, `vPrecinct`, `ResidentType`, `LastName`, `Suffix`, `FirstName`, `MiddleName`, `BirthPlace`, `Gender`, `sssNumber`, `tinNumber`, `CivilStatus`, `BirthDate`, `HomeName`, `PassReset`, `resStatus`) VALUES
-(1, 3, 534, 'Old Sta. Mesa', '09056602669', 'ledesma.francinevoltaire@ue.edu.ph', '123', '2021-04-12 19:36:11', 'Yes', '123', 'Rental/Boarder', 'Ledesma', '', 'Marithess', 'Cortez', 'Manila', 'Male', '123123123', '1231321', 'Single', '2012-04-05 00:00:00', '', '', 'Active'),
 (2, 2, 323, 'Narra', '09178078237', 'virayvergel10@gmail.com', '123', '2021-04-12 20:14:26', 'No', '', 'Care Taker', 'Viray', 'Sr.', 'Vergel', 'Sallan', 'Manila', 'Male', '123123123', '3212312', 'Single', '2015-04-01 00:00:00', '', '', 'Active'),
 (4, 3, 543, 'Mangga', '09291581899', 'viray.vergel@ue.edu.ph', '123', '2021-04-20 07:49:54', 'Yes', '123', 'Living with Relatives', 'Sallan', 'Jr.', 'Arnold', 'Clavio', 'Manila', 'Female', '12512312', '12315123', 'Married', '2011-04-01 00:00:00', '', '', 'Active'),
 (5, 5, 124, 'Sarmiento', '09154708062', 'nathan@gmail.com', '123', '2021-04-20 08:22:54', 'Yes', '123', 'Rental/Boarder', 'Morales', 'Sr.', 'Nathan', 'Pacquiao', 'Manila', 'Male', '123123', '12315123', 'Married', '2008-02-20 00:00:00', '', '', 'Active'),
@@ -815,6 +838,12 @@ ALTER TABLE `tblmodes`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `tblpaymentlogs`
+--
+ALTER TABLE `tblpaymentlogs`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `tblpositions`
 --
 ALTER TABLE `tblpositions`
@@ -888,13 +917,13 @@ ALTER TABLE `tblavailability`
 -- AUTO_INCREMENT for table `tblblotter`
 --
 ALTER TABLE `tblblotter`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tblbtype`
 --
 ALTER TABLE `tblbtype`
-  MODIFY `bID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `bID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tblcertificate`
@@ -906,7 +935,7 @@ ALTER TABLE `tblcertificate`
 -- AUTO_INCREMENT for table `tblcreatecertificate`
 --
 ALTER TABLE `tblcreatecertificate`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tblcreaterental`
@@ -936,13 +965,19 @@ ALTER TABLE `tbllistpurok`
 -- AUTO_INCREMENT for table `tblloginaudits`
 --
 ALTER TABLE `tblloginaudits`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `tblmodes`
 --
 ALTER TABLE `tblmodes`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tblpaymentlogs`
+--
+ALTER TABLE `tblpaymentlogs`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tblpositions`

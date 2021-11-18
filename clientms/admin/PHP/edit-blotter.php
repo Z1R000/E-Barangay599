@@ -6,7 +6,46 @@
     if (strlen($_SESSION['clientmsaid']==0)) {
     header('location:logout.php');
     }else{
+        $bid = $_GET['bid'];
+        $bstat = "PENDING";
 
+        if(isset($_POST['submit'])){
+            
+            $kagarr = "";
+            $perarr = "";
+            $numberkag = $_POST['numberkag'];
+            $numberper = $_POST['numberper'];
+            for ($x = 1; $x <=  $numberkag; $x++) {
+                $kagarr .= $_POST["kag$x"] .",";
+            }
+            for ($y = 1; $y <=  $numberper; $y++) {
+                $perarr .= $_POST["per$y"] .",";
+            }
+            $other = $_POST['others'];
+            $bt = $_POST['btype'];
+            if ($bt != "0"){
+                $other = "";
+            }
+            $narr = $_POST['narr'];
+            $sstat = $_POST['summon'];
+            $sumdate = $_POST['sumDate'];
+            $iadd = $_POST['inciAdd'];
+            $sql = "update tblblotter set blotterType=:bt, incidentLocation=:iadd, numres=:numberkag, respondent=:kagarr, numpers=:numberper, invPers=:perarr, blotterSummary=:narr, sumStatus=:sstat, summonSchedule=:sumdate, other=:other WHERE ID = :bid";
+            $query = $dbh->prepare($sql);
+            $query->bindParam(':bt', $bt, PDO::PARAM_STR);
+            $query->bindParam(':iadd', $iadd, PDO::PARAM_STR);
+            $query->bindParam(':other', $other, PDO::PARAM_STR);
+            $query->bindParam(':numberkag', $numberkag, PDO::PARAM_STR);
+            $query->bindParam(':kagarr', $kagarr, PDO::PARAM_STR);
+            $query->bindParam(':numberper', $numberper, PDO::PARAM_STR);
+            $query->bindParam(':perarr', $perarr, PDO::PARAM_STR);
+            $query->bindParam(':narr', $narr, PDO::PARAM_STR);
+            $query->bindParam(':sstat', $sstat, PDO::PARAM_STR);
+            $query->bindParam(':sumdate', $sumdate, PDO::PARAM_STR);
+            $query->bindParam(':bid', $bid, PDO::PARAM_STR);
+            $query->execute();
+            echo "<script>alert('Blotter updated.')</script>";
+        }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,8 +137,21 @@
         $query->execute();
         $results =$query->fetchAll(PDO::FETCH_OBJ);
         foreach ($results as $row){
-            $idate = $row->$incedentDate;
-            $idate = date('l, j F Y - h:i A', strtotime($idate));
+            
+        }
+        $idate = $row->incidentDate;
+        $idate = date('l, j F Y - h:i A', strtotime($idate));
+        $kags = $row->respondent;
+        $numberk = $row->numres;
+        $pers = $row->invPers;
+        $numberper = $row->numpers;
+        $piecek = explode(",", "$kags");
+        $piecep = explode(",", "$pers");
+        for ($k = 0; $k < $numberk; $k++){
+            $karr[$k] = $piecek[$k];
+        }
+        for ($p = 0; $p < $numberper; $p++){
+            $parr[$p] = $piecep[$p];
         }
     ?> 
     <form action="" method = "POST">
@@ -142,11 +194,11 @@
                                             <div class="row">
                                                 <div class="col-lg-8">
                                                 <div class="input-group mb-3">
-                                                <h3><em>Number of Kagawad Involved: </em></h3><input type="text" id='numberkag' name="numberkag" value="1" readonly class="form-control" style="width: 7%; text-align: center;"></div>
+                                                <h3><em>Number of Kagawad Involved: </em></h3><input type="text" id='numberkag' name="numberkag" value="<?php echo $row->numres;?>" readonly class="form-control" style="width: 7%; text-align: center;"></div>
                                                     <br>
                                                     <div id="inputFormRow">
                                                         <div class="input-group mb-3">
-                                                            <input type="text" name="kag1" id="search" class="form-control action" placeholder="Personnel">
+                                                            <input type="text" name="kag1" id="search" class="form-control action" placeholder="Personnel" value="<?php echo $karr[0];?>">
                                                             
 
                                                             <div class="btn-group mx-2">
@@ -156,6 +208,19 @@
                                                         
                                                     </div>
                                                     
+                                                    <?php 
+                                                        $res = $row->numres;
+                                                        for ($x = 2; $x <=$res; $x++){
+                                                            echo '<div id="inputFormRow">
+                                                            <div class="input-group mb-3">
+                                                                <input type="text" name="kag' . $x . '" placeholder="Personnel" class="form-control action" value="'.$karr[$x-1].'">
+                                                                <div class="input-group-append">
+                                                                <button id="removekag" type="button" class="btn btn-danger">Remove</button>
+                                                                </div>
+                                                            </div>
+                                                            </div>';
+                                                        }
+                                                    ?>
                                                     <div id="newRow"></div>
                                                     
                                                 </div>
@@ -182,12 +247,27 @@
                                         <div class="input-group mb-3">
                                                 <h3><em>Number of Person Involved: </em></h3><input type="text" id='numberper' name="numberper" value="<?php echo $row->numpers?>" readonly class="form-control" style="width: 7%; text-align: center;"></div>
                                             <div class="input-group mb-3">
-                                                <input type="text" name="per1" class="form-control" placeholder="Involved person">
+                                                <input type="text" name="per1" class="form-control" placeholder="Involved person" value="<?php echo $parr[0];?>">
 
                                                 <div class="btn-group mx-1">
                                                     <button id="addper" type="button" class="btn btn-primary white"><i class="fa fa-plus me-2"></i> Add Involved</button>
                                                 </div>
                                             </div>
+
+                                            <?php 
+                                                $per = $row->numpers;
+                                                for ($y = 2; $y <=$per; $y++){
+                                                    echo '<div id="inputFormRow2">
+                                                    <div class="input-group mb-3">
+                                                        <input type= "text" name="per' . $y . '" class="form-control" placeholder="Involved Person" value="'.$parr[$y-1].'">
+                                                        <div class="input-group-append">
+                                                            <button id="removeper" type="button" class="btn btn-danger">Remove</button>
+                                                        </div>
+                                                    </div>
+                                                </div>';
+                                                }
+                                            ?>
+
                                             <div id="newRow2"></div>
                                         </div>
                                     </div>
@@ -206,6 +286,7 @@
                             <div class="row gx-3 py-2 px-3">
                                 <div class="col-md-5">
                                     <?php
+                                    $row->blotterType;
                                     $sql = "SELECT * FROM tblbtype";
                                     $query = $dbh->prepare($sql);
                                     $query->execute();
@@ -213,10 +294,12 @@
                                     $btypes = '<option selected disabled>Incident Type</option>';
                                 
                                     foreach ($resultsbt as $bt) {
-                                        $btypes .= '<option value = ' . $bt->bID . '>' . $bt->btype . '</option>';
+                                        if ($bt->bID == $row->blotterType){
+                                            $btypes .= '<option value = ' . $bt->bID . ' selected>' . $bt->btype . '</option>';
+                                        }else{
+                                            $btypes .= '<option value = ' . $bt->bID . '>' . $bt->btype . '</option>';
+                                        }
                                     }
-                                    $btypes .= '<option value = \'others\'>Others    </option>';
-
 
 
                                     ?>
@@ -230,23 +313,18 @@
                                 </div>
                                 <div class="col-md-5 ms-2" id = "others">
                                                 <label for="prate" class="fs-6 fw-bold">Specify Other Incident</label>
-                                                <input type="text"  name= "others" id = "date" class="form-control " name ="date">
+                                                <input type="text"  name= "others" id = "others" class="form-control" value="<?php echo $row->other?>">
                                             </div>
-
-
-
-
-
                                 </div>
                            
                             <div class="row gx-3 py-2 px-3">
                                 <div class="col-md-5 ms-2 ">
                                     <label for="narrative" class= "fw-bold fs-6">Incident Date and time</label>
-                                    <input type="text" class="form-control" name='inciDate-start' value = "<?php echo $arr[3]?>" disabled>
+                                    <input type="text" class="form-control" name='inciDate-start' value = "<?php echo $idate?>" disabled>
                                 </div>
                                 <div class="col-md-5 ms-2">
                                     <label for="narrative" class= "fw-bold fs-6">Incident Location</label>
-                                    <input type="text" class="form-control" value = "<?php echo $arr[4]; ?>"name='inciAdd' placeholder='e.g Near Purok 2 along the road'>
+                                    <input type="text" class="form-control" value = "<?php echo $row->incidentLocation ?>"name='inciAdd' placeholder='e.g Near Purok 2 along the road'>
                 
                                 </div>
                                 
@@ -257,7 +335,7 @@
                             <div class="row g-0 px-3 py-2">
                                 <div class="col-md-12 mb-3">
                                     <label for="narrative" class= "fw-bold fs-6">Incident Narrative </label><br>
-                                    <textarea class= "form-control" type = "text" name="" id="narrative"   rows="6" style= "resize: none;" placeholder ="Complainant's Summary"><?php echo $arr[5]; ?></textarea>
+                                    <textarea class= "form-control" type = "text" name="narr" id="narrative"   rows="6" style= "resize: none;" placeholder ="Complainant's Summary" ><?php echo $row->blotterSummary; ?></textarea>
                                   
                                 </div>
                                 
@@ -269,7 +347,7 @@
                                     <div class="col-md-12 col-sm-12 p-3">
                                         <div class="float-end">
                                             <div class="btn-group">
-                                            <button type="button" href="#submit-record"  data-bs-toggle ="modal" role="modal"  class="btn btn-primary"><i class="fa fa-save mx-1"></i> Save</button>
+                                            <button type="submit" name="submit" class="btn btn-success"><i class="fa fa-save mx-1"></i> Save</button>
                                             </div>
                                             <div class="btn-group">
                                             <a href = "admin-blotter.php"    class="btn btn-secondary"><i class="fa fa-arrow-circle-left mx-1"></i> Back</a>
@@ -335,13 +413,14 @@
         
 
         <script type="text/javascript">
-            var x = 2;
+            var x = <?php echo $row->numres?>;
             // add row
             $("#addkag").click(function() {
-                if (x > 7) {
+                if (x > 6) {
                     alert('There are only 7 kagawads');
                 } else {
-
+                    
+                    x++;
                     var html = '';
 
                     html += '<div id="inputFormRow">';
@@ -351,7 +430,7 @@
                     html += '<button id="removekag" type="button" class="btn btn-danger">Remove</button>';
                     html += '</div>';
                     html += '</div>';
-                    x++;
+                    html += '</div>';
                     document.getElementById('numberkag').value++;
                     $('#newRow').append(html);
                 }
@@ -365,24 +444,25 @@
             });
 
             //involved persons
-            var g = 2;
+            var g = <?php echo $row->numpers?>;
 
             $("#addper").click(function() {
-                if (g > 50) {
+                if (g > 49) {
                     alert('Over the limit');
 
                 } else {
-
+                    
+                    g++;
                     var html = '';
 
                     html += '<div id="inputFormRow2">';
                     html += '<div class="input-group mb-3">';
-                    html += '<input type= "text" name="per' + g + '" class="form-control" placeholder="Involved Person">';;
+                    html += '<input type= "text" name="per' + g + '" class="form-control" placeholder="Involved Person">';
                     html += '<div class="input-group-append">';
                     html += '<button id="removeper" type="button" class="btn btn-danger">Remove</button>';
                     html += '</div>';
                     html += '</div>';
-                    g++;
+                    html += '</div>';
                     document.getElementById('numberper').value++;
                     $('#newRow2').append(html);
                 }
@@ -390,7 +470,7 @@
 
             // remove row
             $(document).on('click', '#removeper', function() {
-
+                
                 $(this).closest('#inputFormRow2').remove();
                 g--;
                 document.getElementById('numberper').value--;
@@ -403,7 +483,7 @@
 <?php } ?>
 <script>
     function showDiv(divId, element) {
-        document.getElementById(divId).style.display = element.value == 'others' ? 'block' : 'none';
+        document.getElementById(divId).style.display = element.value == '0' ? 'block' : 'none';
     }
 </script>
 

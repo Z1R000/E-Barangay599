@@ -6,7 +6,7 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');    
   } else{   
-    $sql ="SELECT tbladmin.BarangayPosition, tblresident.Gender,tblpositions.Position, tblresident.CivilStatus,tblresident.BirthDate,tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix, tblresident.Cellphnumber, tbladmin.Email,tbladmin.Password, tbladmin.AdminRegdate, tbldays.dDay from tbladmin inner join tblpositions on tblpositions.ID = tbladmin.BarangayPosition inner join tblresident on tblresident.ID = tbladmin.residentID inner join tbldays on tbldays.ID = tbladmin.dayDuty and tbladmin.ID = 1";
+    $sql ="SELECT tbladmin.*, tblresident.*,tblpositions.*, tbldays.* from tbladmin join tblpositions on tblpositions.ID = tbladmin.BarangayPosition join tblresident on tblresident.ID = tbladmin.residentID join tbldays on tbldays.ID = tbladmin.dayDuty and tbladmin.ID = 1";
 
     $query = $dbh->prepare($sql);
     $query->execute();
