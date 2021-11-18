@@ -226,7 +226,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                             <h5 class="testfont" style="text-align: justify; font-family: Segoe UI; margin:25px; text-indent: 5%;"><?php  echo $row->announcement;?> </h5>
                         </div>
                         <h3 class="testfont" style="margin: 25px; font-family: Segoe UI; color: #021f4e;">Announced By:</h3>
-                        <h2 class="testfont" style="margin: 25px; font-family: Segoe UI;color: #021f4e;"><?php  echo $row->Position; echo $row->LastName;
+                        <h2 class="testfont" style="margin: 25px; font-family: Segoe UI;color: #021f4e;"><?php  echo "$row->Position "; echo $row->LastName;
                         echo "</h2></div>";    
                         }
                     }

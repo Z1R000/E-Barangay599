@@ -254,8 +254,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                     <div class="col-md-6">
 
                                         <label for="rname" class="fs-6 fw-bold">Requestor Name</label>
-                                        <input type="text" class="form-control" id="rname" placeholder="e.g Juan Dela Cruz" value="<?php echo "$row->FirstName $row->MiddleName $row->LastName $row->Suffix";
-                                                                                                                                } ?>" readonly>
+                                        <input type="text" class="form-control" id="rname" placeholder="e.g Juan Dela Cruz" value="<?php echo "$row->FirstName $row->MiddleName $row->LastName $row->Suffix"; }?>" readonly>
 
                                     </div>
                                     <div class="col-md-6">

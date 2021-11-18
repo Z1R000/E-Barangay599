@@ -136,7 +136,8 @@
             {   
                 
                 $gbd = $row->BirthDate;
-                $gbd = date('Y-m-d', strtotime($gbd));  
+                $gbd = date('Y-m-d', strtotime($gbd));
+                $bd = date('F j, Y ', strtotime($gbd));
                 $today = date('Y-m-d');
                 $diff = date_diff(date_create($gbd), date_create($today));
     ?>
@@ -324,7 +325,15 @@
                                             Date of Birth
                                     </th>
                                     <td style = "padding-top: 10px; padding-bottom:10px;text-align:right" colspan = 2>
-                                            <?php echo $gbd;?>
+                                            <?php echo $bd;?>
+                                    </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <th style = "padding-top: 10px; padding-bottom:10px;">
+                                            Age
+                                    </th>
+                                    <td style = "padding-top: 10px; padding-bottom:10px;text-align:right" colspan = 2>
+                                            <?php echo $diff->format('%y');?>
                                     </td>
                                     </tr>
                                     <tr>
