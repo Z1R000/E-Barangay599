@@ -476,7 +476,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                 </th>
                                                                 <td style= "text-align:right">
                                                                      '.$r->Cellphnumber.'
-                                                                </td> 
+                                                                </td>
+                                                                 
                                                             </tr>
                                                             <tr>
                                                                 <th>
