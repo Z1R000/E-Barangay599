@@ -29,8 +29,6 @@ function upPhoto ($poid){
 	return $destination;
 
 }
-
-
 if (strlen($_SESSION['clientmsuid'] == 0)) {
 	header('location:logout.php');
 } else {
@@ -45,15 +43,26 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 	}
 
 	if (isset($_POST['submit'])) {
+		$upload = "";
+		$destination = upPhoto('proof');
+		$mop =1;
 		$stats = $_POST['status'];
-		if ($statcheck == "2" || $statcheck == "7"){
+		if ($statcheck == "2"){
 			$stats = "3";
+			$upload = "Insert into tblpaymentlogs(mode,creationID,proof,servicetype) values(".$mop.",".$eid.",'".$destination."',2)";
+			$msg= '<script>alert("Certificate Information and proof of payment sent has been updated")</script>';
+		}
+		else if ($statcheck == "7"){
+			
+			$stats = "3";
+			$upload = "Update tblpaymentlogs set proof = '".$destination."' where creationID =".$eid." ";
+			$msg= '<script>alert("Certificate payment updated")</script>';
+
 		}
 		$subm = $_FILES['proof']['name'];
 
 		
-			$destination = upPhoto('proof');
-			$mop =1;
+		
 			$sql = "update tblcreatecertificate set status=:stats WHERE ID=:eid";
 			$query = $dbh->prepare($sql);
 			$query->bindParam(':stats', $stats, PDO::PARAM_STR);
@@ -61,7 +70,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 			$query->execute();
 		
 
-			$upload = "Insert into tblpaymentlogs(mode,creationID,proof,servicetype) values(".$mop.",".$eid.",'".$destination."',2)";
+			
 			if ($con->query($upload)===TRUE){
 				
 			}
@@ -72,11 +81,9 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 			$query1->bindParam(':destination', $destination, PDO::PARAM_STR);
 			$query1->execute();
 			*/
-			echo '<script>alert("Certificate Information and proof of payment sent has been updated")</script>';
+			echo $msg;
 			echo "<script>window.location.href ='edit-certificate-request.php?editid=" . $eid . "'</script>";
 			
-    
-	
 		
 	}
 
@@ -397,7 +404,9 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 										</div><br>';
 										}
 										$scheck = "$row->statusName";
+										$mcheck = $row->pMode;
 
+										if ($mcheck == "G-Cash" ){
 											if ($scheck == "PENDING"){
 												
 												echo '<div class="row">
@@ -411,7 +420,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 													<button type="submit" class="form-control btn btn-outline-danger" name="delete" id="delete">Cancel Request</button>
 												</div>
 												</div>';
-											}else if ($scheck == "APPROVED" || $scheck == "PAYMENT REJECTED"){
+											}else if ($scheck == "PAYMENT REJECTED"){
 												echo '
 												<div class="row">
 												<div class="col-xl-3">
@@ -437,14 +446,21 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 											$result = $query->fetchAll(PDO::FETCH_OBJ);
 											
 											foreach ($result as $cred){
-											echo '
-											<div class="row">
+												$sql = "Select proof from tblpaymentlogs where creationID = ".$eid."";
+												$query = $dbh->prepare($sql);
+												$query->execute();
+												$cre = $query->fetchAll(PDO::FETCH_OBJ);
+												foreach($cre as $i){
+
+												
+												echo '
+												<div class="row">
 												<div class="col-xl-3">
 													
 														<div class="col-12">													<input 	name = "proof" class="form-control form-control-sm" id="selectproof" onchange = "loadFile(event,\'cproof\');" type="file">
 														</div>
 														<div class="col-12">
-															<img src = "../../images/defaultimage.png" class= "img-fluid" id = "cproof">
+															<img src = "'.$i->proof.'" class= "img-fluid" id = "cproof">
 														</div>
 													
 
@@ -488,7 +504,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 											</div>
 											<br>
 											';
-											}
+											}}
 											echo '
 											<div class="row">
 												<div class="col-xl-3">
@@ -501,10 +517,24 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 													<button type="submit" class="form-control btn btn-outline-danger" name="delete" id="delete">Cancel Request</button>
 												</div>
 												<div class="col-xl-3 ">
-													<button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
+													<button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Re-Submit</button>
 												</div>
 											</div>';
-											}else if ($scheck == "PAYMENT VERIFIED" || $scheck == "SETTLED" || $scheck == "PAYMENT VERIFICATION"){
+											}else if ($scheck == "PAYMENT VERIFIED" || $scheck == "FOR PICK-UP"|| $scheck == "SETTLED" || $scheck == "PAYMENT VERIFICATION"){
+												$sql = "Select remarks, diff from tblcreatecertificate where ID = ".$eid."";
+												$query  = $dbh->prepare($sql);
+												$query->execute();
+												$pf = $query->fetchAll(PDO::FETCH_OBJ);
+												foreach($pf as $p){
+
+												
+											
+												echo '
+													<div class="fs-5 text-center text-info">'.$p->diff.'</div>
+													<div class="fs-5 text-center text-info">Remarks: 	'.$p->remarks.'</div>
+													
+												';
+												}	
 												echo '<div class="row">
 												<div class="col-xl-3">
 												<label for="ctype" class="black fw-bold fs-5">Proof of Payment</label>
@@ -523,7 +553,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 			
 											</div>
 											<div class="row">';
-											$sql = "Select * from tblpaymentlogs where creationID=".$eid."";
+											$sql = "Select * from tblpaymentlogs where creationID=".$eid." and servicetype= 2";
 											$query = $dbh->prepare($sql);
 											$query ->execute();
 											$result = $query->fetchAll(PDO::FETCH_OBJ);
@@ -587,7 +617,183 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 			
 											</div>';
 											}	
+										
+												
+											
+											}else if ($scheck == "APPROVED" ){
+												echo '
+												<div class="row">
+												<div class="col-xl-3">
+													<label for="formFileSm" class="form-label">Upload Proof of Payment<span class="fs-6 text-muted"> (JPEG or PNG format)</span></label>
+			
+												</div>
+												<div class="col-xl-3">
+			
+												</div>
+												<div class="col-xl-3">
+													<label for="ctype" class="black fw-bold fs-5">Payment Details</label>
+			
+												</div>
+												<div class="col-xl-3">
+			
+												</div>
+			
+											</div>';
+											$sql = "Select * from tblinformation";
+												
+											$query= $dbh->prepare($sql);
+											$query->execute();
+											$result = $query->fetchAll(PDO::FETCH_OBJ);
+											
+											foreach ($result as $cred){
+											echo '
+											<div class="row">
+												<div class="col-xl-3">
+													
+														<div class="col-12">													<input 	name = "proof" class="form-control form-control-sm" id="selectproof" onchange = "loadFile(event,\'cproof\');" type="file">
+														</div>
+														<div class="col-12">
+															<img src = "../../images/defaultimage.png" class= "img-fluid" id = "cproof">
+														</div>
+													
+
+												</div>
+												<div class="col-xl-3">
+			
+												</div>
+												<div class="col-xl-3">
+												<div class= "fs-4">Qr Code</div>
+												<div class="row justify-content-center align-items-center">
+												<div class="col-8">
+											
+												<a href = "'.$cred->qr.'	" target = "_blank">	<img src="'.$cred->qr.'" alt="Default Image"  class= "img-fluid"  "></a>
+												</div>
+												</div>
+												</div>
+												<div class="col-xl-3">
+													<div class="row">
+														<div class="py-2">
+														
+														<div class="col-12">
+														<div class="fs-4">Contact Number:</div>
+														<div class="fs-5 fw-bold">'.$cred->bContact.'</div>
+													
+													</div>					
+													</div>
+													<div class="py-2">	
+														<div class="col-12">
+															<div class="fs-4">G-Cash Owner</div>
+															<div class="fs-5 fw-bold">'.$cred->gName.'</div>
+																											
+														</div>
+																
+														
+																							
+													</div>
+													</div>
+												</div>
+			
+											</div>
+											<br>
+											';
 											}
+											echo '
+											<div class="row">
+												<div class="col-xl-3">
+			
+												</div>
+												<div class="col-xl-3 ">	
+			
+												</div>
+												<div class="col-xl-3 ">
+													<button type="submit" class="form-control btn btn-outline-danger" name="delete" id="delete">Cancel Request</button>
+												</div>
+												<div class="col-xl-3 ">
+													<button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
+												</div>
+											</div>';
+											}else if ($scheck == "PAYMENT VERIFIED" || $scheck == "SETTLED" || $scheck == "PAYMENT VERIFICATION"){
+												
+												echo '<div class="row">
+												<div class="col-xl-3">
+												<label for="ctype" class="black fw-bold fs-5">Proof of Payment</label>
+			
+												</div>
+												<div class="col-xl-3">
+			
+												</div>
+												<div class="col-xl-3">
+													<label for="ctype" class="black fw-bold fs-5">Payment Details</label>
+			
+												</div>
+												<div class="col-xl-3">
+			
+												</div>
+			
+											</div>
+											<div class="row">';
+											$sql = "Select * from tblpaymentlogs where creationID=".$eid."";
+											$query = $dbh->prepare($sql);
+											$query ->execute();
+											$result = $query->fetchAll(PDO::FETCH_OBJ);
+
+											foreach ($result as $i){
+
+											echo'
+												<div class="col-xl-3">
+												<div class="row">
+												<div class="col-12">
+													<img src="'.$i->proof.'" class= "img-fluid" >
+														<br>';
+											}
+											$sql= "Select * from tblinformation";
+											$query= $dbh->prepare($sql);
+											$query->execute();
+											$result = $query->fetchAll(PDO::FETCH_OBJ);
+											
+											foreach ($result as $cred){
+											echo'
+												</div>
+												</div>
+												</div>
+												<div class="col-xl-3">
+			
+												</div>
+												<div class="col-xl-3">
+													<div class="row">
+														<div class="fs-5">Qr Code</div>
+														<div class="col-12">
+															<img src="'.$cred->qr.'" alt="Girl in a jacket" class = "img-fluid">
+														</div>
+													</div>
+												</div>
+												<div class="col-xl-3">
+												
+													<div class="row">
+														<div class="py-2">
+														
+														<div class="col-12">
+														<div class="fs-4">Contact Number:</div>
+														<div class="fs-5 fw-bold">'.$cred->bContact.'</div>
+													
+													</div>					
+													</div>
+													<div class="py-2">	
+														<div class="col-12">
+															<div class="fs-4">G-Cash Owner</div>
+															<div class="fs-5 fw-bold">'.$cred->gName.'</div>
+																											
+														</div>
+																
+														
+																							
+													</div>
+													</div>
+												</div>
+			
+											</div>';
+											}	
+											}}
 										?>
 							</div>
 						</div>

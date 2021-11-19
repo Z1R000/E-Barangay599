@@ -245,19 +245,16 @@
                                                 <select id = "purp" class ="form-select" name= "cmeth" disabled>
                                                     <option value="<?php echo "$rowe->CertificateName";?>" selected><?php echo "$rowe->CertificateName";?></option>                                                
                                                 </select>
-
                                             </div>
                                             <div class="col-xl-3">
                                                 <label for="cname" class= "black fw-bold fs-5">Certification fee</label>
                                                 <input id = "cname" class ="form-control" type="text" placeholder = "Certfication fee" name= "cname" value="<?php echo "$rowe->CertificatePrice";?>" disabled>
-
                                             </div>
                                             <div class="col-xl-3">
                                                 <label for="cname" class= "black fw-bold fs-5">Mode of Payment</label>
                                                 <select id = "cname" class ="form-select" name= "cmeth" disabled>
                                                     <option value="<?php echo "$rowe->pMode";?>" id=""><?php echo "$rowe->pMode";?></option>                                                
                                                 </select>
-
                                             </div>
                                         </div>
                                         <div class="row g-2 px-5">
@@ -295,7 +292,7 @@
                                         
                                         <div class="btn-group">
                                     
-                                                                            <a type="button" href ="#delete-record" data-bs-toggle = "modal" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Delete</span></a>
+                                                                            <a type="button" href ="decline-req.php?editid='<?php echo $eid?>'" role = "button" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Reject</span></a>
                                                                        
                                         </div>
                                         </div>
@@ -339,8 +336,7 @@
                                     <div class="btn-group">
                                         
                                <input type = "submit" class="btn btn-primary" href= "#success" data-bs-dismiss = "modal"  name = "canc" value ="Cancel">
-          
-
+        
                                     </div>
                                 </div>
                             </div>
@@ -352,64 +348,6 @@
             </div>
         </div>
 
-        <div class="modal fade" id = "delete-record" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 bg-danger" >
-                    <div class="modal-header  white ">
-                        <div class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</div>
-                        
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-white">
-                        <div class="row">
-                            <div class="col xl-4" align = "center">
-                                <img src="../images/trash.png" alt="trash" class= " img-fluid " style ="width: 10%;">
-                            </div>
-                    
-                        </div>
-                        <div class="row">
-                            <p class = "fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
-                        </div>
-                        <div class="row justify-content-center" align = "center">
-                            <form method = "POST" action = "#">
-                            <div class="col-12">
-                                <div class="float-end">
-                                
-                                <button type = "button" class="btn btn-success" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                    <i class= 'fa fa-check mx-1 '></i> Confirm
-                                </button>
-                                <button type = "button" class="btn btn-danger" data-bs-dismiss = "modal"  name = "no" value ="No">
-                                    <i class= "fa fa-times mx-1"></i> Cancel
-                                </button>
-                                </div>
-                                </div>
-                            </form>
-                        </div>
-                
-                    </div>
-                    <div class="modal-footer">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id = "proof" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 border-0 border-bottom border-transparent ">
-                    <div class="modal-header  bg-transparent border-bottom border-white  ">
-                        
-                        <button type="button" class="btn-close btn-primary" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-transparent border-0" align = "center" >
-                    <img src="../images/proof.jpg" alt="proof of payment">
-                       
-                       
-                
-                    </div>
-                  
-                </div>
-            </div>
-        </div>
 
         <?php   include('services.php'); ?>
         <div class="modal fade" id = "success" tab-idndex = "-1">
@@ -435,7 +373,100 @@
                 </div> 
             </div>
         </div>
-        
+
+        <div class="modal fade" id = "decline-req" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-danger ">
+                    <div class="modal-header bg-danger bg-transparent ">
+                        <div class="modal-title text-white" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Declining request?</div>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        <div class="row mt-2 me-3 ms-2">
+                            <form action="" method = "POST">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="dname">Requestor Name</label>
+                                        <input id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
+
+                                    </div>
+                           
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6">
+                                        <label for="contac">Contact Number</label>
+                                        <input id = "contac" type="text" class="form-control" value = "09123456789" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="emails" >Email Address</label>
+                                        <input id = "emails" type="text" class="form-control" value = "juanDelaC@gmail.com" readonly>
+                                        
+                                    
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="decreason" >Decline Reason</label>
+                                        <select name="" id="decreason" class= "form-select" onclick = "showOthersdec('other_txt-dec',this)">
+                                            <option value="">Insufficient payment</option>
+                                            <option value="">Invalid proof sent</option>
+                                            <option value="others">Others</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row g-0 my-2" id = "other_txt-dec" style= "display:none;">
+                                 
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" placeholder= "Specify a reason here">
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                        <label for="remarks" >Remarks</label>
+                                        <div class="col-md-12">
+                                            <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;resize: none;"></textarea>
+                                            <label for="floatingTextarea2">Remarks here (max 10 words)</label>
+                                                
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                                <div class="row mt-2">
+                                    <label for="remarks" >Mode of delivery <i class= "fa fa-envelope"></i></label>
+                                 
+                                </div>
+                                <div class="row justify-content-center" align = "center">
+                                    
+                                <div class="col-md-12">
+                                        <div class="float-end">
+                                            <div class="btn-group">
+                                        <button href ="" onclick = "alert('Decline Message Sent')" type = "button" class="btn btn-success " data-bs-dismiss ="modal" data-bs-toggle= "modal" >
+                                            <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
+                                        </button>
+                                        </div>
+                                        <div class="btn-group">
+
+                                        
+                                        <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times me-2"></i> Discard
+                                        </button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>  
+                            </form>
+
+                        </div>
+                      
+                
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script src = '../ckeditor/ckeditor.js'></script>
         <script>
           CKEDITOR.replace('cont');

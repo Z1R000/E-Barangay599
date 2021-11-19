@@ -440,7 +440,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                         <div class="col-xl-6">
                                             <label for="total" class="fs-5 fw-bold">Total</label>
                                             <div class="d-flex">
-                                                <input type="text" id="total" class="form-control me-2" name="total" disabled>
+                                                <input type="decimal" id="total" class="form-control me-2" name="total" disabled>
                                             </div>
                                         </div>
                                         <div class="col-xl-6 " id = "others">
@@ -546,3 +546,5 @@ $(document).ready(function(){
 
 
     </script>
+
+    
