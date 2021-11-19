@@ -106,7 +106,22 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 </head>
 <body>
   <main class="py-5">
-  
+  <div class="container">
+          <div class="row">
+            <div class="float-end">
+            <div class="col-12">
+              <a href = "edit-cert-record.php?editid=<?php echo $vid; ?>"class = "btn btn-secondary"><i class="fa fa-arrow-circle-left mx-1"></i>Back</a>
+            </div>
+          </div>
+          </div>
+        </div>
+  <div class="container" align="center">
+          <div class="row">
+            <div class="col-12">
+              <button class = "btn btn-primary"onclick="window.print()"><i class="fa fa-print mx-1"></i>Print</button>
+            </div>
+          </div>
+        </div>
 
     <section class="custom-container print-container bg-white">
       <!-- header -->
@@ -123,8 +138,9 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                   foreach ($results1 as $row1) {
         ?>
                   
-
+      
         <div class="row  g-0">
+            
             <div class="col-3 justify-content-center">
                 <img src="<?php echo $row1->Blogoone ?>" style ="width: 150px" >
             </div>

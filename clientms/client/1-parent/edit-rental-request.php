@@ -5,6 +5,33 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsuid'] == 0)) {
     header('location:logout.php');
 } else {
+    
+function upPhoto ($poid){
+	$ftypes = array('png','jpeg','jpg');
+
+	$fileName = $_FILES[''.$poid.'']['name'];
+	$fileSize = $_FILES[''.$poid.'']['size'];
+	$fileError = $_FILES[''.$poid.'']['error'];
+	$filetmpname = $_FILES[''.$poid.'']['tmp_name'];
+	$fileExt = explode('.',$fileName);
+	$extension = strtolower(end($fileExt));
+	
+	$destination = "";
+
+	if (in_array($extension,$ftypes)){
+		if($fileSize<5000000){
+			$newfilename = uniqid('',TRUE).".".$extension;
+			$destination = "../../images/".$newfilename;
+			move_uploaded_file($filetmpname,$destination);
+		   // header('Location: admin-e-content.php?success=1');
+		}
+	}
+	
+	return $destination;
+
+}
+
+
     $eid = intval($_GET['editid']);
 	$sqlcheck="Select * from tblcreaterental where ID = :eid";
 	$querycheck= $dbh->prepare($sqlcheck);
@@ -15,16 +42,39 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 		$statcheck = $rowcheck->status;
 	}
 	if (isset($_POST['submit'])) {
+        $upload = "";
 		$stats = $_POST['status'];
-		if ($statcheck == "2" || $statcheck == "7"){
-			$stats = "3";
+       
+        $destination = upPhoto('proof');
+        $mop =1;
+
+
+		if ($statcheck == "2"){
+            $stats = "3";
+			$upload = "Insert into tblpaymentlogs(mode,creationID,proof,servicetype) values(".$mop.",".$eid.",'".$destination."',1)";
+			$msg= '<script>alert("Rental Information and proof of payment sent has been updated")</script>';
 		}
+        else if ($statcheck == "7"){
+            $stats = "3";
+			$upload = "Update tblpaymentlogs set proof = '".$destination."' where creationID =".$eid." and servicetype = 1 ";
+			$msg= '<script>alert("Rental payment updated")</script>';
+
+        }
+
+        
 		$sql = "update tblcreaterental set status=:stats WHERE ID=:eid";
 		$query = $dbh->prepare($sql);
 		$query->bindParam(':stats', $stats, PDO::PARAM_STR);
 		$query->bindParam(':eid', $eid, PDO::PARAM_STR);
 		$query->execute();
-		echo '<script>alert("Rental Information has been updated")</script>';
+	
+
+
+      
+			if ($con->query($upload)===TRUE){
+				
+		}
+        echo '<script>alert("Rental Information and payment log has been updated")</script>';
 		echo "<script>window.location.href ='edit-rental-request.php?editid=" . $eid . "'</script>";
 	}
     if (isset($_POST['delete'])){
@@ -189,7 +239,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                             <div class="row">
                                 <div class="col-xl-3 px-1 ">
                                     <div class="float-start" style="margin-left:50px;">
-                                        <img src="../<?php echo $row1->Blogoone; ?>" style="width: 100px;">
+                                        <img src="<?php echo $row1->Blogoone; ?>" style="width: 100px;">
                                     </div>
 
                                 </div>
@@ -199,7 +249,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                 </div>
                                 <div class="col-xl-3">
                                     <div class="float-end" style="margin-right:50px;">
-                                        <img src="../<?php echo $row1->Blogotwo; ?>" style="width: 100px;">
+                                        <img src="<?php echo $row1->Blogotwo; ?>" style="width: 100px;">
                                     </div>
 
 
@@ -238,6 +288,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                     $results = $query->fetchAll(PDO::FETCH_OBJ);
                     foreach($results as $row){
                         $checkstat = $row->status;
+                        $mode = $row->modeOfPayment;
                         $pay = $row->payable;
                         $pay = number_format($pay,2);
                         $sdates = $row->rentalStartDate;
@@ -246,14 +297,14 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                         $edates = date('F j Y - h:i A', strtotime($edates));
                     
                 ?>
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                 <div class="container-fluid px-4 bg-white ">
                     
                     <div style="border-radius: 25px;border:1px solid black;padding: 25px;">
                     <div class="row">
 								<div class="col-xl-11">
 					</div><div class="col-xl-1">
-                        <a type ="button" role = "button" href = "manage-certificate.php" class="btn btn-secondary px-4" data-bs-dismiss= "modal" >
+                        <a type ="button" role = "button" href = "manage-rental.php" class="btn btn-secondary px-4" data-bs-dismiss= "modal" >
                                                     <i class="fa fa-arrow-circle-left mx-1"></i>
                                                             Back
                                                     </a>
@@ -299,7 +350,6 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                         
                                             </div>
                                         </div>
-
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-6">
@@ -321,7 +371,10 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                 </div>
                                 <br>
                                 <?php 
+                                   
+
                                     if ($checkstat == "1"){
+
                                         echo '<div class="row">
                                         <div class="col-xl-3">
     
@@ -335,7 +388,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                             <button type="submit" class="form-control btn btn-outline-danger" name="delete" id="delete">Cancel Request</button>
                                         </div>
                                     </div>';
-                                    }else if ($checkstat == "2" || $checkstat == "7"){
+                                    }else if (($checkstat == "7")&&($mode==1)){
                                         echo '<div class="row">
                                         <div class="col-xl-3">
                                             <label for="formFileSm" class="form-label">Upload Proof of Payment<span class="fs-6 text-muted"> (JPEG or PNG format)</span></label>
@@ -352,21 +405,60 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
     
                                         </div>
     
-                                    </div>
+                                    </div>';
+                                    $sql = "Select * from tblinformation";
+												
+											$query= $dbh->prepare($sql);
+											$query->execute();
+											$result = $query->fetchAll(PDO::FETCH_OBJ);
+											
+											foreach ($result as $cred){
+                                    echo'
                                     <div class="row">
                                         <div class="col-xl-3">
-                                            <input class="form-control form-control-sm" id="formFileSm" type="file">
-                                            <br>
+                                            
+											<div class="col-12">
+                                            <input 	name =  "proof" class="form-control form-control-sm" id="selectproof" onchange = "loadFile(event,\'cproof\');" type="file">
+										    </div>
+											<div class="col-12">
+										    <img src = "../../images/defaultimage.png" class= "img-fluid" id = "cproof">
+											</div>
+													
                                         </div>
                                         <div class="col-xl-3">
     
                                         </div>
                                         <div class="col-xl-3">
-                                            <img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
+                                        <div class= "fs-4">Qr Code</div>
+                                        <div class="row justify-content-center align-items-center">
+                                        <div class="col-8">
+                                    
+                                        <a href = "'.$cred->qr.'	" target = "_blank"><img src="'.$cred->qr.'" alt="Default Image"  class= "img-fluid"  "></a>
+                                        </div>
+                                        </div>
     
                                         </div>
                                         <div class="col-xl-3">
-                                        <label for="ctype" style="font-size:130%; font-weight:600;">Francine Voltaire Ledesma <br><span style="font-size:90%;font-style:italic; font-weight:600;"> 09056602669</span></label>
+                                        <div class="row">
+                                        <div class="py-2">
+                                        
+                                        <div class="col-12">
+                                        <div class="fs-4">Contact Number:</div>
+                                        <div class="fs-5 fw-bold">'.$cred->bContact.'</div>
+                                    
+                                    </div>					
+                                    </div>
+                                    <div class="py-2">	
+                                        <div class="col-12">
+                                            <div class="fs-4">G-Cash Owner</div>
+                                            <div class="fs-5 fw-bold">'.$cred->gName.'</div>
+                                                                                            
+                                        </div>
+                                                
+                                        
+                                                                            
+                                    </div>
+                                    </div>
     
     
                                         </div>
@@ -386,8 +478,108 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                         <div class="col-xl-3 ">
                                             <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
                                         </div>
+                                    </div>';}
+                                        
+
+                                    }
+                                    else if (($checkstat == "2")&&($mode==1)){
+                                        echo '<div class="row">
+                                        <div class="col-xl-3">
+                                            <label for="formFileSm" class="form-label">Upload Proof of Payment<span class="fs-6 text-muted"> (JPEG or PNG format)</span></label>
+    
+                                        </div>
+                                        <div class="col-xl-3">
+    
+                                        </div>
+                                        <div class="col-xl-3">
+                                            <label for="ctype" class="black fw-bold fs-5">Payment Details</label>
+    
+                                        </div>
+                                        <div class="col-xl-3">
+    
+                                        </div>
+    
                                     </div>';
-                                    }else if ($checkstat == "4" || $checkstat == "6" || $checkstat == "3"){
+                                    $sql = "Select * from tblinformation";
+												
+											$query= $dbh->prepare($sql);
+											$query->execute();
+											$result = $query->fetchAll(PDO::FETCH_OBJ);
+											
+											foreach ($result as $cred){
+                                                $sql = "Select proof from tblpaymentlogs where creationID = ".$eid." and servicetype = 1";
+                                                $query= $dbh->prepare($sql);
+											    $query->execute();
+											    $res = $query->fetchAll(PDO::FETCH_OBJ);
+                                                foreach($cr as $c){
+
+                                    echo'
+                                    <div class="row">
+                                        <div class="col-xl-3">
+                                            
+											<div class="col-12">
+                                            <input 	name =  "proof" class="form-control form-control-sm" id="selectproof" onchange = "loadFile(event,\'cproof\');" type="file">
+										    </div>
+											<div class="col-12">
+										    <img src = "../../images/defaultimage.png" class= "img-fluid" id = "cproof">
+											</div>
+													
+                                        </div>
+                                        <div class="col-xl-3">
+    
+                                        </div>
+                                        <div class="col-xl-3">
+                                        <div class= "fs-4">Qr Code</div>
+                                        <div class="row justify-content-center align-items-center">
+                                        <div class="col-8">
+                                    
+                                        <a href = "'.$cred->qr.'	" target = "_blank"><img src="'.$cred->qr.'" alt="Default Image"  class= "img-fluid"  "></a>
+                                        </div>
+                                        </div>
+    
+                                        </div>
+                                        <div class="col-xl-3">
+                                        <div class="row">
+                                        <div class="py-2">
+                                        
+                                        <div class="col-12">
+                                        <div class="fs-4">Contact Number:</div>
+                                        <div class="fs-5 fw-bold">'.$cred->bContact.'</div>
+                                    
+                                    </div>					
+                                    </div>
+                                    <div class="py-2">	
+                                        <div class="col-12">
+                                            <div class="fs-4">G-Cash Owner</div>
+                                            <div class="fs-5 fw-bold">'.$cred->gName.'</div>
+                                                                                            
+                                        </div>
+                                                
+                                        
+                                                                            
+                                    </div>
+                                    </div>
+    
+    
+                                        </div>
+    
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xl-3">
+    
+                                        </div>
+                                        <div class="col-xl-3 ">
+    
+                                        </div>
+                                        <div class="col-xl-3 ">
+                                            <button type="submit" class="form-control btn btn-outline-danger" name="delete" id="delete">Cancel Request</button>
+                                        </div>
+                                        <div class="col-xl-3 ">
+                                            <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
+                                        </div>
+                                    </div>';}}
+                                    }else if (($checkstat == "4" || $checkstat == "6" || $checkstat == "3")&&($mode==1)){
                                         echo '<div class="row">
                                         <div class="col-xl-3">
                                         <label for="ctype" class="black fw-bold fs-5">Proof of Payment</label>
@@ -405,20 +597,73 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
                                         </div>
     
                                     </div>
-                                    <div class="row">
+                                    <div class="row">';
+                                    $sql = "Select * from tblpaymentlogs where creationID=".$eid." and servicetype = 1";
+                                    $query = $dbh->prepare($sql);
+                                    $query ->execute();
+                                    $result = $query->fetchAll(PDO::FETCH_OBJ);
+
+                                    foreach ($result as $i){
+
+
+
+                                    
+                                    echo'
                                         <div class="col-xl-3">
-                                        <img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
-                                            <br>
+                                        <div class="row">
+                                        <div class="col-12">
+                                            <img src="'.$i->proof.'" class= "img-fluid" >
+                                                <br>';
+                                    }
+                                    $sql= "Select * from tblinformation";
+                                    $query= $dbh->prepare($sql);
+                                    $query->execute();
+                                    $result = $query->fetchAll(PDO::FETCH_OBJ);
+                                    
+                                    foreach ($result as $cred){
+                                    echo'
+                                            </div>
+                                            </div>
                                         </div>
                                         <div class="col-xl-3">
     
                                         </div>
                                         <div class="col-xl-3">
-                                            <img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
-    
+                                            <div class="row">
+                                                <div class="fs-5">Qr Code</div>
+                                                <div class="col-12">
+                                                    <img src="'.$cred->qr.'" alt="Girl in a jacket" class = "img-fluid">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3">
+                                        
+                                            <div class="row">
+                                                <div class="py-2">
+                                                
+                                                <div class="col-12">
+                                                <div class="fs-4">Contact Number:</div>
+                                                <div class="fs-5 fw-bold">'.$cred->bContact.'</div>
+                                            
+                                            </div>					
+                                            </div>
+                                            <div class="py-2">	
+                                                <div class="col-12">
+                                                    <div class="fs-4">G-Cash Owner</div>
+                                                    <div class="fs-5 fw-bold">'.$cred->gName.'</div>
+                                                                                                    
+                                                </div>
+                                                        
+                                                
+                                                                                    
+                                            </div>
+                                            </div>
                                         </div>
     
                                     </div>';
+                                    }
+                                    
+
                                     }
                                 ?>
                                 </div>
@@ -443,3 +688,10 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 
     </html>
 <?php } ?>
+
+<script>
+		var loadFile = function (event,imgid) {
+        var image = document.getElementById(imgid);
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+	</script>

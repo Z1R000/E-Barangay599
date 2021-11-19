@@ -512,8 +512,6 @@
                                         <input type= "text" value ="<?php echo $arr[0]; ?>" name = "id" style= "display:none;">
                                         <input type="text" readonly  id = "search" value = "<?php echo $arr[1]; ?>" class="form-control" name ="rname" placeholder= "">
                                     </div>
-                                    
-
                                     <div class="col" style= "z-index: 9;position:relative">
                                             <div class="list-group w-100"  id="show-list" style="position: absolute">
                                             <!-- Here autocomplete list will be display -->
@@ -577,10 +575,9 @@
                                                 </div>
                                                 </div> 
                                             </div>
-                                    </div>
+                                        </div>
                                     </div>
                                     
-                                        
                                     <div class="row">
                                         <div class="col-xl-6" >  
                                             <?php
@@ -656,7 +653,22 @@
                                                            <?php echo $stat; ?>       
                                                     </select>
                                             </div>
-                                                                
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="row g-3">
+                                                    <div class="fs-5">Payment Verification</div>
+                                                        <div class="col-xl-6">
+                                                            
+                                                            <a href = "" target= "_blank" ><img src  ="" class = "img-fluid"></a> 
+                                                        </div>
+                                                        <div class="col-xl-6">
+                                                            <div class="fs-5">Payment Details</div>
+                                                            <a href = "" target= "_blank" ><img src ="" class = "img-fluid"></a> 
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>                                                                
                                             <div class="row g-0" align= "right">
                                                 <div class="col-md-12  px-3 mx-auto my-2">
 

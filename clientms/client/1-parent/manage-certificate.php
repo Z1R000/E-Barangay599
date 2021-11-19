@@ -7,7 +7,6 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 } else {
     $uid = $_SESSION['clientmsuid'];
 ?>
-
     <!DOCTYPE html>
     <html lang="en">
 

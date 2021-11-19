@@ -11,14 +11,19 @@
             $eid=intval($_GET['editid']);
             $clientmsaid=$_SESSION['clientmsaid'];
             $status=$_POST['status'];
-        
-     
+            if ($_POST['pmod']=="Cash"){
+                $sql = "Update tblcreatecertificate set status =".$_POST['status']." where ID = ".$eid."";
+                if ($con->query($sql)===TRUE){
+                    echo '<script>alert("Certificate Record and payment log has been updated")</script>';
+                }
+            }
+            else{
             if ($status=="4"){
                 
                 $paid = $_POST['paid'];
                 $cpayable  =$_POST['cpayable'];
                 $time = new DateTime("now", new DateTimeZone('Asia/Manila'));
-                $now= $time->format("Y-m-d h:i:s");
+                $now= $time->format("Y-m-d h:i");
                 if ($paid > $cpayable){
                     $diff = $paid - $cpayable;
                     $sql="update tblcreatecertificate set status=:status WHERE ID=:eid";
@@ -32,7 +37,6 @@
                         dateAccepted = '".$now."',
                         refNum = ".$_POST['refNum'].",
                         payment = ".$paid."
-
                         where creationID = ".$eid."
                         ";
 
@@ -43,25 +47,24 @@
                   
                 }
                 elseif ($paid<$cpayable){
-                    $diff = $cpayable -$paid;
-                    $time = new DateTime("now", new DateTimeZone('Asia/Manila'));
+                    $diff = $cpayable - $paid;
                     $sql="update tblcreatecertificate set status=:status WHERE ID=:eid";
                     $query=$dbh->prepare($sql);
                     $query->bindParam(':status',$status,PDO::PARAM_STR);
                     $query->bindParam(':eid',$eid,PDO::PARAM_STR);
                     $query->execute();
-
                     $payup = "update tblpaymentlogs set 
                         dateAccepted = '".$now."',
                         refNum = ".$_POST['refNum'].",
                         payment = ".$paid."
+
+                        where creationID = ".$eid."
                         ";
 
                     if ($con->query($payup)===TRUE){
-                      
-                        echo "<script>window.location.href ='payment-verification-cert.php?editid=".$eid."&change=".$diff."</script>";
+                        echo '<script>alert("Certificate Record and payment log has been updated")</script>';
+                        echo "<script>window.location.href ='payment-verification-cert.php?editid=".$eid."&diff=".$diff."&type=2'</script>";
                     }
-
                 }
                 else{
 
@@ -79,6 +82,7 @@
                 echo '<script>alert("Certificate Record has been updated")</script>';
                 //echo "<script>window.location.href ='edit-cert-record.php?editid=".$eid."'</script>";
             }
+        }
 
         }
         if(isset($_POST['delete']))
@@ -292,16 +296,23 @@
                                     <div class="row  border shadow-sm bg-white pt-2 pb-5 mb-3">
                                        
                                         <div class="row g-2 px-5">
-                                            <div class="col-xl-5">
+                                            <div class="col-xl-8">
                                                 <label for="cname" class= "black fw-bold fs-5">Requestor Name</label>
                                                 <input id = "cname" class ="form-control"type="text" placeholder = "Requestor Name" name= "cnrame" disabled value="<?php echo "$rowe->FirstName $rowe->MiddleName $rowe->LastName $rowe->Suffix";?>">
                                             </div>
-                                            <div class="col-xl-3">
+                                            <div class="col-xl-4">
                                             <label for="cname" class= "black fw-bold fs-5">Status</label>
                                             
                                                 <?php 
+
                                                     $check = $rowe->status;
                                                     $cheme = $rowe->statusName;
+                                                    $mcheck = $rowe->pMode;
+                                                if ($mcheck=="G-Cash"){
+
+                                                   
+
+                                                    
                                                     if ($check == "6" || $check == "7" || $check == "2" || $check == "8"){
                                                         echo '<select id = "status" class ="form-select" name= "status" disabled><option value="'.$check.'" selected>'.$cheme.'</option>
                                                         ';
@@ -339,13 +350,109 @@
                                                             ';
                                                         }
                                                     }
+                                                }
+                                                else{
+                                                    if ($check=="2"){
+                                                        echo '<select id = "status" class ="form-select" name= "status">';
+                                                        $sqlst="SELECT * from tblstatus WHERE ID ='3' or ID ='4' or ID='7'";
+                                                        $queryst=$dbh->prepare($sqlst);
+                                                        $queryst->execute();
+                                                        $resultst=$queryst->fetchAll(PDO::FETCH_OBJ);
+                                                        foreach($resultst as $rowst){
+                                                            foreach($resultst as $rowst){
+                                                               
+                                                                if ($rowst->ID== $rowe->status){
+                                                                    echo '<option selected value = "'.$rowst->ID.'">'.$rowst->statusName.'</option>';
+    
+                                                                }
+                                                                else{
+                                                                echo '<option value="'.$rowst->ID.'">'.$rowst->statusName.'</option>
+                                                               ';
+                                                                }   
+                                                            }
+                                                        }
+                                                    
+                                                    
+                                                    }else if ($check == "3" || $check == "7"){
+                                                        echo '<select id = "status" class ="form-select" name= "status">';
+                                                        $sqlst="SELECT * from tblstatus WHERE ID ='3' or ID ='4' or ID='7'";
+                                                        $queryst=$dbh->prepare($sqlst);
+                                                        $queryst->execute();
+                                                        $resultst=$queryst->fetchAll(PDO::FETCH_OBJ);
+                                                        foreach($resultst as $rowst){
+                                                           
+                                                                if ($rowst->ID== $rowe->status){
+                                                                    echo '<option selected value = "'.$rowst->ID.'">'.$rowst->statusName.'</option>';
+    
+                                                                }
+                                                                else{
+                                                                echo '<option value="'.$rowst->ID.'">'.$rowst->statusName.'</option>
+                                                               ';
+                                                                }
+                                                            
+                                                        }
+                                                    
+                                                    }else if ($check == "5"){
+                                                        echo '<select id = "status" class ="form-select" name= "status">';
+                                                        $sqlst="SELECT * from tblstatus WHERE ID = '5' or ID ='6'";
+                                                        $queryst=$dbh->prepare($sqlst);
+                                                        $queryst->execute();
+                                                        $resultst=$queryst->fetchAll(PDO::FETCH_OBJ);
+                                                        foreach($resultst as $rowst){
+                                                            
+                                                                if ($rowst->ID== $rowe->status){
+                                                                    echo '<option selected value = "'.$rowst->ID.'">'.$rowst->statusName.'</option>';
+    
+                                                                }
+                                                                else{
+                                                                echo '<option value="'.$rowst->ID.'">'.$rowst->statusName.'</option>
+                                                               ';
+                                                                }
+                                                            
+                                                        }
+                                                    }
+                                                    else if ($check == "4"){
+                                                        echo '<select id = "status" class ="form-select" name= "status">';
+                                                        $sqlst="SELECT * from tblstatus WHERE ID = '4' or ID ='5'";
+                                                        $queryst=$dbh->prepare($sqlst);
+                                                        $queryst->execute();
+                                                        $resultst=$queryst->fetchAll(PDO::FETCH_OBJ);
+                                                        foreach($resultst as $rowst){
+                                                            
+                                                            if ($rowst->ID== $rowe->status){
+                                                                echo '<option selected value = "'.$rowst->ID.'">'.$rowst->statusName.'</option>';
+
+                                                            }
+                                                            else{
+                                                            echo '<option value="'.$rowst->ID.'">'.$rowst->statusName.'</option>
+                                                           ';
+                                                            }
+                                                        }
+                                                    }
+                                                    else if ($check == "6"){
+                                                        echo '<select disabled id = "status" class ="form-select" name= "status">';
+                                                        $sqlst="SELECT * from tblstatus WHERE ID = '5' or ID ='6'";
+                                                        $queryst=$dbh->prepare($sqlst);
+                                                        $queryst->execute();
+                                                        $resultst=$queryst->fetchAll(PDO::FETCH_OBJ);
+                                                        foreach($resultst as $rowst){
+                                                            if ($rowst->ID== $rowe->status){
+                                                                echo '<option selected value = "'.$rowst->ID.'">'.$rowst->statusName.'</option>';
+
+                                                            }
+                                                            else{
+                                                            echo '<option value="'.$rowst->ID.'">'.$rowst->statusName.'</option>
+                                                           ';
+                                                            }
+                                                        }
+                                                    }
+                                                  
+
+                                                }
                                                 ?>
                                                 </select>
                                             </div>
-                                            <div class="col-xl-4">
-                                                <label for="cname" class= "black fw-bold fs-5">Barangay Certification number</label>
-                                                <input id = "cname" class ="form-control" type="text" placeholder = "bcn-###-##" name= "cname" readonly>
-                                            </div>
+                                         
                                         </div>
                                         <div class="row g-2 px-5">
                                             <div class="col-xl-6">
@@ -362,10 +469,8 @@
                                             </div>
                                             <div class="col-xl-3">
                                                 <label for="cname" class= "black fw-bold fs-5">Mode of Payment</label>
-                                                <select id = "cname" class ="form-select" name= "cmeth" disabled>
-                                                    <option value="<?php echo "$rowe->pMode";?>" id=""><?php echo "$rowe->pMode";?></option>                                                
+                                                <input type ="text" class= "form-control" name = "pmod"  value="<?php echo "$rowe->pMode";?>" id="" readonly>                                              
                                                 </select>
-
                                             </div>
                                         </div>
                                         <div class="row g-2 px-5">
@@ -385,13 +490,7 @@
                                                 <label for="cname" class= "black fw-bold fs-5">Date</label>
                                                 <input id = "cdate" class ="form-control" type="text" placeholder = "Date of certification" name= "cdate" value="<?php echo $cdate;?>" disabled>
                                             </div>
-                                            <div class="col-xl-6">
-                                                <label for="cname" class= "black fw-bold fs-5">Officer on Duty</label>
-                                                <select id = "kod" class ="form-control " name= "cmeth" disabled>
-                                                    <option value="<?php echo $rowe->cAdmin?>" id="" selected><?php echo $rowe->cAdmin?></option>
-                                                </select>
-
-                                            </div>
+                                        
                                             <div class="col-xl-6" style= "display: none">
                                                 <label for="cname" class= "black fw-bold fs-5">Business name <span class= "text-muted fs-6">( For business related only )</span></label>
                                                 <input id = "cname" class ="form-control" type="text" placeholder = "business name here" name= "cname" value="<?php echo $rowe->bName?>" disabled>
@@ -400,62 +499,41 @@
                                    
                                         </div>
                                         <?php 
-                                   if ($checkstat == "7"){
-                                       
-                                        echo '<div class="row">
-                                        <div class="col-xl-3">
-                                            <label for="formFileSm" class="form-label">Upload Proof of Payment<span class="fs-6 text-muted"> (JPEG or PNG format)</span></label>
-    
-                                        </div>
-                                        <div class="col-xl-3">
-    
-                                        </div>
-                                        <div class="col-xl-3">
-                                            <label for="ctype" class="black fw-bold fs-5">Payment Details</label>
-    
-                                        </div>
-                                        <div class="col-xl-3">
-    
-                                        </div>
-    
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xl-3">
-                                            <input class="form-control form-control-sm" id="formFileSm" type="file">
-                                            <br>
-                                        </div>
-                                        <div class="col-xl-3">
-    
-                                        </div>
-                                        <div class="col-xl-3">
-                                            <img src="images/barangaybackground.png" alt="Girl in a jacket" width="280" height="250">
-    
-                                        </div>
-                                        <div class="col-xl-3">
-                                        <label for="ctype" style="font-size:130%; font-weight:600;">Francine Voltaire Ledesma <br><span style="font-size:90%;font-style:italic; font-weight:600;"> 09056602669</span></label>
-    
-    
-                                        </div>
-    
-                                    </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-xl-3">
-    
-                                        </div>
-                                        <div class="col-xl-3 ">
-    
-                                        </div>
-                                        <div class="col-xl-3 ">
-                                            <button type="submit" class="form-control btn btn-outline-danger" name="delete" id="delete">Cancel Request</button>
-                                        </div>
-                                        <div class="col-xl-3 ">
-                                            <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
-                                        </div>
-                                    </div>';
-                                    }else if ($checkstat == "6" || $checkstat == "3"){
+
+                                    if ($mcheck=="Cash"){
+                                            if ($checkstat =="5" ||$checkstat=="6"){
+                                                echo '
+                                                <div class="row">
+                                                <div class="col-12">
+                                                <div class="float-end">
+                                                <div class="btn-group">   
+                                                <a type="" href ="view-cert-temp.php?viewid='.$eid.'"class="btn btn-success"><i class = "fa fa-print mx-1"></i><span class="wal">Print</span></a>                            
+                                                </div> <div class="btn-group"> <button type = "sbumit" href = "#save-cert" name="submit" id="submit" class= "btn btn-primary"  my-2"><i class= "fas fa-save me-2"></i>Save</button></div>
+                                                <div class="btn-group">                               
+                                                <button type="delete" name="delete" id="delete" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Reject</span></button>
+                                                </div>
+                                                </div>
+                                                </div>';
+                                            }else{
+                                                echo '
+                                                <div class="row">
+                                                <div class="col-12">
+                                                <div class="float-end">
+                                                <div class="btn-group">                               
+                                                </div> <div class="btn-group"> <button type = "sbumit" href = "#save-cert" name="submit" id="submit" class = "btn  btn-primary  my-2"><i class= "fas fa-save me-2"></i>Save</button></div>
+                                                <div class="btn-group">                               
+                                                <button type="delete" name="delete" id="delete" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Reject</span></button>
+                                                </div>
+                                                </div>
+                                                </div>';
+                                            }
                                         
-                                        $sql ="select * from tblpaymentlogs where creationID = ".$_GET['editid']."";
+                                    }
+                                    else{
+
+                                    if ($checkstat == "6" || $checkstat == "3"){
+                                        
+                                        $sql ="select * from tblpaymentlogs where creationID = ".$_GET['editid']." and servicetype= 2";
                                         $query= $dbh->prepare($sql);
                                         $query->execute();
                                         $result = $query->fetchAll(PDO::FETCH_OBJ);
@@ -464,7 +542,7 @@
                                             echo'
                                             <div class="row gx-4 gy-3 px-5">
                                                 <p class="fs-4 text-primary">Payment Verification</p>
-                                                <div class="col-xl-6 border border-info">
+                                                <div class="col-xl-6 border ">
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <a target = "_blank" href = "'.$i->proof.'"><img src="'.$i->proof.'" alt="" class="img-fluid"></a>
@@ -481,7 +559,6 @@
                                                         $query = $dbh->prepare($sql);
                                                         $query ->execute();
                                                         $plog = $query->fetchAll(PDO::FETCH_OBJ);
-
                                                         foreach($plog as $i){
 
                                                         
@@ -538,13 +615,156 @@
                                                 </div>
 
                                             </div>';
+                                                          
                                                         }
                                         }
+                                    }
+                                    else if ($checkstat=="5" || $checkstat=="6"){
+                                        $sql ="select * from tblpaymentlogs where creationID = ".$_GET['editid']." and servicetype = 2";
+                                        $query= $dbh->prepare($sql);
+                                        $query->execute();
+                                        $result = $query->fetchAll(PDO::FETCH_OBJ);
+                                        foreach($result as $i){
+                                            $cdate = date('F j, Y - h:i A', strtotime($i->paymentDate));
+                                            $adate = date('F j, Y - h:i A', strtotime($i->dateAccepted));
+                                            echo'
+                                            <div class="row gx-4 gy-3 px-5">
+                                                <p class="fs-4 text-primary">Payment Verification</p>
+                                                <div class="col-xl-6">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <a target = "_blank" href = "'.$i->proof.'"><img src="'.$i->proof.'" alt="" class="img-fluid"></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                        <div class="row g-2">
+                                                       
+                                                        <table>';
+                                                        $select = "Select * from tblpaymentlogs where creationID = ".$eid."";
+                                                        $query = $dbh->prepare($sql);
+                                                        $query ->execute();
+                                                        $plog = $query->fetchAll(PDO::FETCH_OBJ);
+
+                                                        foreach($plog as $i){
+
+                                                        
+                                                        echo'
+                                                            
+                                                                    <table>
+                                                                      <tr>
+                                                                        <td><div class="input-group py-1">
+                                                                        <label for="refnum" class="fs-5 text-primary pe-2">Date Submitted: </label> </td>  
+                                                                        <td>
+                                                                        <div class="fs-5 text-secondary"> '.$cdate.'</div>
+                                                                        </td>
+                                                                        </div>
+                                                                    </tr>
+                                                                      <tr>
+                                                                        <td><div class="input-group py-1">
+                                                                        <label for="refnum" class="fs-5 text-primary pe-2">Reference Number:</label> </td>  
+                                                                        <td>
+                                                                        <div class="col-10 py-2">         
+                                                                        <input type="text" name = "refNum" id = "refnum" class="form-control" value = '.$i->refNum.' readonly>
+                                                                        </td>
+                                                                        </div>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><div class="input-group py-1">
+                                                                        <label for="paid" class="fs-5 text-primary pe-2">Amount Paid:</label> </td>  
+                                                                        <td>
+                                                                        <div class="col-8 py-2">   
+                                                                        <div class="input-group">
+                                                                        <button class="btn btn-secondary disabled">₱</button>      
+                                                                        <input style= "text-align:right" type="decimal" name = "paid" id = "paid" value = '.$i->payment.' class="form-control" readonly>
+                                                                        </div>
+                                                                        </td>
+                                                                    </div>
+                                                                    <tr>
+                                                                    <td><div class="input-group py-1">
+                                                                    <label for="payable" style = "text-align:right" class="fs-5 text-primary pe-2">Amount to Pay :</label></td>   
+                                                                    <td>
+                                                                    <div class="col-8 py-2">         
+                                                                    <div class="input-group">
+                                                                    <button class="btn btn-secondary disabled">₱</button>
+                                                                    <input type="decimal" name = "cpayable" id = "topay" value = '.$rowe->CertificatePrice.' style = "text-align:right" class="form-control" readonly>
+                                                                    </div>
+                                                                    </td>
+                                                                    </div>    
+                                                                    </div>
+                                                                    </tr>';
+                                                                    $diff = 0;
+                                                                    if ($rowe->CertificatePrice<$i->payment){
+                                                                        $diff = $i->payment-$rowe->CertificatePrice;
+                                                                        $val = number_format($diff,2);
+                                                                        echo '
+                                                                        
+                                                                        <tr>
+                                                                        <td><div class="input-group py-1">
+                                                                        <label for="payable" style = "text-align:right" class="fs-5 text-primary pe-2">Change :</label></td>   
+                                                                        <td>
+                                                                        <div class="col-8 py-2">         
+                                                                        <div class="input-group">
+                                                                        <button class="btn btn-secondary disabled">₱</button>
+                                                                        <input type="decimal" name = "change" id = "topay" value = '.$val.' style = "text-align:right" class="form-control" readonly>
+                                                                        </div>
+                                                                        </td>
+                                                                        </div>    
+                                                                        </div>
+                                                                        </tr>';
+                                                                            
+                                                                    }
+                                                                    else if ($rowe->CertificatePrice>$i->payment){
+                                                                        $diff =  $rowe->CertificatePrice - $i->payment;
+                                                                        $val = number_format($diff,2);
+                                                                        
+
+                                                                        
+                                                                        echo '
+                                                                        
+                                                                        <tr>
+                                                                        <td><div class="input-group py-1">
+                                                                        <label for="payable" style = "text-align:right" class="fs-5 text-primary pe-2">Credit :</label></td>   
+                                                                        <td>
+                                                                        <div class="col-8 py-2">         
+                                                                        <div class="input-group">
+                                                                        <button class="btn btn-secondary disabled">₱</button>
+                                                                        <input type= "decimal" name = "credit" id = "topay" value = '.$val.' style = "text-align:right" class="form-control" readonly>
+                                                                        </div>
+                                                                        </td>
+                                                                        </div>    
+                                                                        </div>
+                                                                        </tr>';
+
+                                                                    }
+                                                                    echo'
+                                                                    <tr>
+                                                                    <td><div class="input-group py-1">
+                                                                    <label for="refnum" class="fs-5 text-primary pe-2">Date Accepted: </label> </td>  
+                                                                    <td>
+                                                                    <div class="fs-5 text-secondary"> '.$adate.'</div>
+                                                                    </td>
+                                                                    </div>
+                                                                    </tr>
+                                                                    </table>
+                                                                    </div>
+
+                                                        </div>
+                                                    
+                                                    </div>
+                                                </div>
+
+                                            </div>';
+                                                                }
+                                                            }
+
                                     }
                                         
                                         else if ($checkstat == "4" ){
                                         
-                                            $sql ="select * from tblpaymentlogs where creationID = ".$_GET['editid']."";
+                                            $sql ="select * from tblpaymentlogs where creationID = ".$_GET['editid']." and servicetype = 2";
                                             $query= $dbh->prepare($sql);
                                             $query->execute();
                                             $result = $query->fetchAll(PDO::FETCH_OBJ);
@@ -554,7 +774,7 @@
                                                 echo'
                                                 <div class="row gx-4 gy-3 px-5">
                                                     <p class="fs-4 text-primary">Payment Verification</p>
-                                                    <div class="col-xl-6 border border-info">
+                                                    <div class="col-xl-6">
                                                         <div class="row">
                                                             <div class="col-12">
                                                                 <a target = "_blank" href = "'.$i->proof.'"><img src="'.$i->proof.'" alt="" class="img-fluid"></a>
@@ -641,7 +861,11 @@
                                                                                 
                                                                         }
                                                                         else if ($rowe->CertificatePrice>$i->payment){
-                                                                            $diff =  $rowe->CertificatePrice - $i->payment ;
+                                                                            $diff =  $rowe->CertificatePrice - $i->payment;
+                                                                            $val = number_format($diff,2);
+                                                                            
+
+                                                                            
                                                                             echo '
                                                                             
                                                                             <tr>
@@ -651,7 +875,7 @@
                                                                             <div class="col-8 py-2">         
                                                                             <div class="input-group">
                                                                             <button class="btn btn-secondary disabled">₱</button>
-                                                                            <input type=decimal name = "credit" id = "topay" value = '.$diff.' style = "text-align:right" class="form-control" readonly>
+                                                                            <input type= "decimal" name = "credit" id = "topay" value = '.$val.' style = "text-align:right" class="form-control" readonly>
                                                                             </div>
                                                                             </td>
                                                                             </div>    
@@ -713,11 +937,11 @@
                                                     <div class="btn-group">                               
                                                     <button type="delete" name="delete" id="delete" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Reject</span></button>';
                                                 }
-                                            ?>
+                                            }?>
                                             
                                     
                                                                             
-                                                                       
+                                                            
                                         
                                         </div>
                                         </div>

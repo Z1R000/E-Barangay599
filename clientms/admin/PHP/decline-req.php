@@ -1,7 +1,7 @@
 <?php 
     session_start();
     error_reporting(1);
-    $curr = "Payment verification";
+    $curr = "Decline Request";
 
     include('includes/dbconnection.php');
     if (strlen($_SESSION['clientmsaid']==0)) {
@@ -11,6 +11,7 @@
         $type = $_GET['type'];
         $diff = $_GET['diff'];
         $condition = "";
+
         if($type == 1){
             $condition = "With change: ". number_format($diff,2);
         }
@@ -202,8 +203,8 @@
             <div class="col-xl-8   mx-auto">
        
                 <div class="container" style= "display:block;">
-                <div class="row gx-3 bg-success border-success text-white">
-                    <div class="fs-5">Accepted Payment Message</div>
+                <div class="row gx-3 bg-danger border-success text-white">
+                    <div class="fs-5">Decline Payment Message</div>
                 </div>
                 <form method = "POST">
                 <div class="row gx-3 border-start border-end border-bottom shadow-sm">
@@ -231,6 +232,8 @@
                                     </div>
                                 </div>
                                 <div class="row mt-2">
+
+                                    
                                     <div class="col-md-6">
                                         <label for="ars">Acquired Certificate</label>
                                         <input id = "crs" type="text" class="form-control" value = "<?php echo $i->CertificateName?>" readonly>
@@ -243,19 +246,28 @@
                                        
                                     
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="emails" >Condition</label>
-                                        <input id = "emails" type="text" class="form-control" value = "<?php echo $condition?>" readonly>
-                                       
                                     
+                                    <div class="col-md-12">
+                                        <label for="decreason" >Decline Reason</label>
+                                        <select name="" id="decreason" class= "form-select" onclick = "showOthersdec('other_txt-dec',this)">
+                                            <option value="">Insufficient payment</option>
+                                            <option value="">Invalid proof sent</option>
+                                            <option value="others">Others</option>
+                                        </select>
+                                        <div class="row g-0 my-2" id = "other_txt-dec" style= "display:none;">
+                                 
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control" placeholder= "Specify a reason here">
+                                        </div>
                                     </div>
+                                 
                                 </div>
                                 <div class="row mt-2">
                                         <label for="remarks" >Remarks</label>
-                                        <div class="col-md-112">
+                                        <div class="col-md-12">
                                             <div class="form-floating">
                                             <textarea class="form-control" name= "rmrks" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;resize: none"><?php echo $i->remarks?></textarea> 
-                                            <label for="floatingTextarea2">Remarks here (max 10 words)</label>
+                                            <label for="floatingTextarea2">Remarks here</label>
                                                 
                                             </div>
                                         </div>
@@ -381,6 +393,7 @@
     function showotherEdit(divId, element) {
         document.getElementById(divId).style.display = element.value == '13' ? 'block' : 'none';
     }
+
     function newDuration(divid,element) {
         var ebut = document.getElementById(element);
         if (document.getElementById(divid).style.display == "none"){

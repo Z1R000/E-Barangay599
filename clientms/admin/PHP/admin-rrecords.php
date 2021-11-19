@@ -141,9 +141,7 @@ if ($_GET['delete'] == "success") {
         <strong><i class="fa fa-trash me-2"></i>A record was deleted</strong> See archives in <a href = "admin-e-content.php" >E-barangay settings</a> to check deleted record.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     
-        </div>
-    
-    
+        </div>    
     ';
 }
 
@@ -160,7 +158,7 @@ if ($_GET['delete'] == "success") {
         <div class="row pb-2 px-4 g-0 justify-content-end">
             <div class="col-3 ">
                 <div class="btn-group float-end">
-                    <a href="#new-rental" data-bs-toggle="modal" role="button" class="btn btn-outline-primary mx-1 my-1"><i class="fa fa-plus mx-1"></i><span class="wal">Walk-in Rental</span></a>
+                    <a href="#new-rental" data-bs-toggle="modal" role="button" class="btn btn-outline-primary mx-1 my-1 "><i class="fa fa-plus mx-1"></i><span class="wal">Walk-in Rental</span></a>
                 </div>
             </div>
             <div class="row g-0">
