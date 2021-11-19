@@ -1,14 +1,19 @@
 <?php 
-    $curr ="Payment Verification";
+
+    
 
     session_start();
     error_reporting(1);
+    $curr = "Payment verification";
     include('includes/dbconnection.php');
     if (strlen($_SESSION['clientmsaid']==0)) {
     header('location:logout.php');
     }else{
-
-        $sql= 'Select tblcreatecertificate.*, tblresident.*, tblpaymentlogs.*';
+        $eid =  $_GET['editid'];
+        $type = $_GET['type'];
+        $diff = $_GET['diff'];
+        $sql= 'Select tblcreatecertificate.*, tblresident.*, tblpaymentlogs.*, tblmode.*, tblstatus.* from tblcreatecertificate
+        joinn tblresident on tblresident.ID = tblcreatecertificate.Userid';
 
         $query = $dbh ->prepare($sql);
         $query ->execute();
