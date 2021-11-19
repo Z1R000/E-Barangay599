@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2021 at 03:05 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Generation Time: Nov 19, 2021 at 10:08 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -256,29 +256,22 @@ CREATE TABLE `tblcreatecertificate` (
   `pMode` varchar(10) NOT NULL,
   `purpID` int(25) NOT NULL,
   `other` varchar(100) NOT NULL,
-  `bName` varchar(50) NOT NULL DEFAULT 'N/A'
+  `bName` varchar(50) NOT NULL DEFAULT 'N/A',
+  `remarks` mediumtext DEFAULT NULL,
+  `diff` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tblcreatecertificate`
 --
 
-INSERT INTO `tblcreatecertificate` (`ID`, `Userid`, `CertificateId`, `resDate`, `status`, `pMode`, `purpID`, `other`, `bName`) VALUES
-(1, '2', '13', '2021-11-13 07:12:57', '8', 'G-Cash', 13, 'SAD', ''),
-(2, '1', '9', '2021-11-13 07:20:38', '6', 'G-Cash', 3, '', ''),
-(3, '1', '13', '2021-11-13 08:03:46', '6', 'G-Cash', 3, '', ''),
-(4, '2', '9', '2021-11-13 08:13:21', '6', 'Cash', 3, '', ''),
-(5, '2', '1', '2021-11-13 09:17:41', '2', 'G-Cash', 3, '', ''),
-(6, '1', '1', '2021-11-13 09:31:18', '6', 'Cash', 3, '', ''),
-(7, '1', '9', '2021-11-13 09:41:43', '6', 'G-Cash', 3, '', ''),
-(8, '1', '3', '2021-11-13 09:43:23', '6', 'Cash', 3, '', ''),
-(9, '1', '2', '2021-11-13 09:44:39', '8', 'G-Cash', 2, '', ''),
-(10, '1', '3', '2021-11-13 09:45:25', '8', 'Cash', 2, '', ''),
-(11, '1', '6', '2021-11-15 14:35:55', '8', 'G-Cash', 13, 'BUSINESS', 'Ledesma Store'),
-(12, '1', '6', '2021-11-15 14:54:57', '1', 'G-Cash', 13, 'BUSINESS', 'Ledesma Store'),
-(13, '1', '10', '2021-11-15 15:04:28', '1', 'Cash', 13, 'LIPAT BAHAY', ''),
-(14, '2', '2', '2021-11-18 12:39:50', '4', 'G-Cash', 13, 'SCHOOL', ''),
-(15, '18', '2', '2021-11-18 13:58:46', '8', 'G-Cash', 2, '', '');
+INSERT INTO `tblcreatecertificate` (`ID`, `Userid`, `CertificateId`, `resDate`, `status`, `pMode`, `purpID`, `other`, `bName`, `remarks`, `diff`) VALUES
+(1, '1', '3', '2021-11-19 17:06:33', '6', 'G-Cash', 2, '', '', NULL, NULL),
+(2, '1', '1', '2021-11-19 17:46:03', '6', 'G-Cash', 2, '', '', 'x', NULL),
+(3, '1', '4', '2021-11-19 18:06:48', '3', 'G-Cash', 3, '', '', 'asdasd', 'With change: 80.00'),
+(4, '1', '3', '2021-11-19 18:35:14', '6', 'G-Cash', 1, '', '', 'asfagsasaxasd', 'With credit: 130.00'),
+(5, '1', '2', '2021-11-19 19:28:59', '5', 'Cash', 1, '', '', NULL, NULL),
+(6, '1', '3', '2021-11-19 20:48:41', '1', 'G-Cash', 1, '', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -309,21 +302,8 @@ CREATE TABLE `tblcreaterental` (
 --
 
 INSERT INTO `tblcreaterental` (`ID`, `status`, `userID`, `rentalID`, `adminID`, `rentalStartDate`, `rentalEndDate`, `creationDate`, `modeOfPayment`, `purpID`, `payable`, `others`, `paymentID`, `proof`, `payment`) VALUES
-(1, 6, 10, 4, 0, '2021-11-15 03:17:00', '2021-11-15 08:17:00', '2021-11-15 01:18:10', 2, 9, '1250.00', '', 0, '1asd', '0.00'),
-(2, 6, 5, 1, 0, '2021-11-15 02:30:00', '2021-11-15 04:30:00', '2021-11-15 02:30:18', 2, 9, '600.00', '', 0, '', '0.00'),
-(3, 6, 4, 2, 0, '2021-11-15 02:45:00', '2021-11-15 03:45:00', '2021-11-15 02:45:33', 2, 10, '100.00', '', 0, '', '0.00'),
-(4, 3, 1, 1, 0, '2021-11-15 11:12:00', '2021-11-15 01:12:00', '2021-11-15 11:31:30', 1, 11, '3000.00', '', 0, '', '0.00'),
-(5, 2, 1, 2, 0, '2021-11-15 04:34:00', '2021-11-16 03:34:00', '2021-11-15 14:34:55', 1, 10, '2300.00', '', 0, '', '0.00'),
-(6, 8, 1, 2, 0, '2021-11-15 16:51:00', '2021-11-16 16:51:00', '2021-11-15 16:51:09', 2, 10, '2400.00', '', 0, '', '0.00'),
-(7, 2, 1, 2, 0, '2021-11-15 21:41:00', '2021-11-16 21:41:00', '2021-11-15 21:42:08', 1, 10, '2400.00', '', 0, '', '0.00'),
-(8, 1, 1, 4, 0, '2021-11-15 22:29:00', '2021-11-16 22:29:00', '2021-11-15 22:29:47', 1, 10, '6000.00', '', 0, '', '0.00'),
-(9, 1, 1, 1, 0, '2021-11-15 22:31:00', '2021-11-16 22:31:00', '2021-11-15 22:31:51', 2, 10, '7200.00', '', 0, '', '0.00'),
-(10, 1, 1, 1, 0, '2021-11-15 22:51:00', '2021-11-16 22:51:00', '2021-11-15 22:51:56', 1, 0, '7200.00', 'SAD', 0, '', '0.00'),
-(11, 2, 1, 1, 0, '2021-11-18 03:40:00', '2021-11-19 03:41:00', '2021-11-18 03:41:06', 1, 0, '7205.00', '', 0, '', '0.00'),
-(12, 2, 1, 1, 0, '2021-11-18 03:45:00', '2021-11-20 03:45:00', '2021-11-18 03:45:18', 1, 0, '14400.00', '', 0, '', '0.00'),
-(13, 1, 1, 1, 0, '2021-11-18 03:47:00', '2021-11-19 03:47:00', '2021-11-18 03:47:58', 2, 10, '7200.00', '', 0, '', '0.00'),
-(14, 2, 1, 2, 0, '2021-11-19 03:59:00', '2021-11-19 06:59:00', '2021-11-18 03:59:53', 1, 9, '300.00', '', 0, '', '0.00'),
-(15, 2, 18, 1, 0, '2021-11-18 21:57:00', '2021-11-19 21:58:00', '2021-11-18 21:58:05', 1, 11, '7205.00', '', 0, '', '0.00');
+(1, 3, 1, 2, 0, '2021-11-20 01:31:00', '2021-11-20 02:31:00', '2021-11-20 01:32:00', 1, 10, '100.00', '', 0, '', '0.00'),
+(2, 3, 13, 2, 0, '2021-11-20 03:35:00', '2021-11-20 06:35:00', '2021-11-20 03:36:02', 2, 10, '300.00', '', 0, '', '0.00');
 
 -- --------------------------------------------------------
 
@@ -387,15 +367,16 @@ CREATE TABLE `tblinformation` (
   `aboutus` varchar(2000) NOT NULL,
   `eTitle` varchar(1000) NOT NULL,
   `gName` varchar(1000) NOT NULL,
-  `qr` varchar(1000) NOT NULL
+  `qr` varchar(1000) NOT NULL,
+  `reslogo` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tblinformation`
 --
 
-INSERT INTO `tblinformation` (`ID`, `Baddress`, `bFullAdd`, `Btitle`, `Blogoone`, `Blogotwo`, `bContact`, `blogo3`, `aboutus`, `eTitle`, `gName`, `qr`) VALUES
-(1, 'BARANGAY 599, ZONE 59, DISTRICT VI', '4745 Peralta St. V. Mapa Sta. Mesa, Manila', 'OFFICE OF THE SANGGUNIANG BARANGAY', '../../images/61964f224909a4.46387287.png', '../images/61962599ce11b9.85354409.png', '09123456789', '../images/61954f98d32fd1.81087863.png', 'Barangay 599 has been one of the forerunning barangays along the streets of “Victorino Mapa” and as stated by a corresponding local of the barangay it has been established way before she was born which was during the early 1970’s and since then, not many integrations were made nor committed by the municipality. According to the barangay’s secretary, there are about 5,600 registered citizens. Barangay 599’s roster of officials is composed of the Barangay Chairman (Jose Milo L. Lacatan), Barangay Secretary (Maria Cecilia C. Dela Cruz),. SK Chairman and Kagawads (Erwin L. Sampaga, Florante V. Bonagua, Crisantro G. Lorica, Alexander S. Ceño, Nelson L. Labrador, Marivic Villareal). Supporting these leaders are the 20 barangay enforcers, 20 “lupontagapamayapa’s”, 3 advisers and being composed of 10 puroks, 10 purok leaders. However, mostly the secretary’s team and the chairman handle the processes, queries, and requests of their residents..', ' Barangay 599 E-barangay', 'Barangay 599', '../images/61954d06658604.45345155.png');
+INSERT INTO `tblinformation` (`ID`, `Baddress`, `bFullAdd`, `Btitle`, `Blogoone`, `Blogotwo`, `bContact`, `blogo3`, `aboutus`, `eTitle`, `gName`, `qr`, `reslogo`) VALUES
+(1, 'BARANGAY 599, ZONE 59, DISTRICT VI', '4745 Peralta St. V. Mapa Sta. Mesa, Manila', 'OFFICE OF THE SANGGUNIANG BARANGAY', '../../images/6196601977e9a4.10584123.png', '../../images/6197bee5a723e6.16409319.png', '09123456789', '../images/61954f98d32fd1.81087863.png', 'Barangay 599 has been one of the forerunning barangays along the streets of “Victorino Mapa” and as stated by a corresponding local of the barangay it has been established way before she was born which was during the early 1970’s and since then, not many integrations were made nor committed by the municipality. According to the barangay’s secretary, there are about 5,600 registered citizens. Barangay 599’s roster of officials is composed of the Barangay Chairman (Jose Milo L. Lacatan), Barangay Secretary (Maria Cecilia C. Dela Cruz),. SK Chairman and Kagawads (Erwin L. Sampaga, Florante V. Bonagua, Crisantro G. Lorica, Alexander S. Ceño, Nelson L. Labrador, Marivic Villareal). Supporting these leaders are the 20 barangay enforcers, 20 “lupontagapamayapa’s”, 3 advisers and being composed of 10 puroks, 10 purok leaders. However, mostly the secretary’s team and the chairman handle the processes, queries, and requests of their residents..', ' Barangay 599 E-barangay', 'Barangay 599', '../../images/6196647b7e5b65.95929099.png', '../../images/619660f9739845.24677801.png');
 
 -- --------------------------------------------------------
 
@@ -481,7 +462,11 @@ INSERT INTO `tblloginaudits` (`ID`, `timeIn`, `timeOut`, `resId`, `position`, `d
 (38, '17:18:55', '06:11:48', 1, 1, '2021-11-18'),
 (39, '18:25:48', '00:00:00', 1, 1, '2021-11-18'),
 (40, '18:51:54', '00:00:00', 1, 1, '2021-11-18'),
-(41, '20:35:24', '00:00:00', 1, 1, '2021-11-18');
+(41, '20:35:24', '10:20:06', 1, 1, '2021-11-18'),
+(42, '22:22:33', '00:00:00', 1, 1, '2021-11-18'),
+(43, '23:10:35', '00:00:00', 1, 1, '2021-11-18'),
+(44, '10:29:23', '00:00:00', 1, 1, '2021-11-19'),
+(45, '20:06:44', '00:00:00', 1, 1, '2021-11-19');
 
 -- --------------------------------------------------------
 
@@ -511,21 +496,25 @@ INSERT INTO `tblmodes` (`ID`, `mode`) VALUES
 CREATE TABLE `tblpaymentlogs` (
   `ID` int(11) NOT NULL,
   `mode` int(11) NOT NULL,
-  `payorName` int(11) NOT NULL,
-  `fName` varchar(200) NOT NULL,
-  `refNum` int(11) NOT NULL,
+  `creationID` int(11) NOT NULL,
+  `refNum` int(11) DEFAULT NULL,
   `proof` varchar(1000) NOT NULL,
   `servicetype` int(11) NOT NULL,
-  `request` int(11) NOT NULL,
-  `payment` decimal(16,2) NOT NULL
+  `paymentDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `payment` decimal(16,2) NOT NULL DEFAULT 0.00,
+  `dateAccepted` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tblpaymentlogs`
 --
 
-INSERT INTO `tblpaymentlogs` (`ID`, `mode`, `payorName`, `fName`, `refNum`, `proof`, `servicetype`, `request`, `payment`) VALUES
-(1, 1, 1, '', 12134123, '/images/nirvanalogo.jpg', 2, 1, '230.00');
+INSERT INTO `tblpaymentlogs` (`ID`, `mode`, `creationID`, `refNum`, `proof`, `servicetype`, `paymentDate`, `payment`, `dateAccepted`) VALUES
+(1, 1, 1, NULL, '../../images/6197dda59c27d6.30640669.jpg', 2, '2021-11-20 01:07:13', '0.00', '2021-11-20 01:07:13'),
+(2, 1, 1, NULL, '../../images/6197e0ec7c75c3.45053675.png', 1, '2021-11-20 01:36:45', '0.00', '2021-11-20 01:36:45'),
+(3, 1, 2, 550100263, '../../images/6197e340d428f6.74289293.png', 2, '2021-11-20 01:47:06', '600.00', '2021-11-20 01:48:00'),
+(4, 1, 3, 1231234, '../../images/6197e7de7b7f63.83399824.png', 2, '2021-11-20 02:07:26', '200.00', '2021-11-20 02:08:00'),
+(5, 1, 4, 123213123, '../../images/6197ef8586c143.25191505.png', 2, '2021-11-20 02:35:48', '20.00', '2021-11-20 02:45:00');
 
 -- --------------------------------------------------------
 
@@ -684,8 +673,8 @@ CREATE TABLE `tblservices` (
 --
 
 INSERT INTO `tblservices` (`ID`, `sertype`) VALUES
-(1, 'Certification'),
-(2, 'Rental'),
+(1, 'Rental'),
+(2, 'Certification'),
 (3, 'Blotter');
 
 -- --------------------------------------------------------
@@ -944,13 +933,13 @@ ALTER TABLE `tblcertificate`
 -- AUTO_INCREMENT for table `tblcreatecertificate`
 --
 ALTER TABLE `tblcreatecertificate`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tblcreaterental`
 --
 ALTER TABLE `tblcreaterental`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbldays`
@@ -974,7 +963,7 @@ ALTER TABLE `tbllistpurok`
 -- AUTO_INCREMENT for table `tblloginaudits`
 --
 ALTER TABLE `tblloginaudits`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `tblmodes`
@@ -986,7 +975,7 @@ ALTER TABLE `tblmodes`
 -- AUTO_INCREMENT for table `tblpaymentlogs`
 --
 ALTER TABLE `tblpaymentlogs`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tblpositions`
@@ -1022,7 +1011,7 @@ ALTER TABLE `tblrespondents`
 -- AUTO_INCREMENT for table `tblservices`
 --
 ALTER TABLE `tblservices`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tblstatus`
