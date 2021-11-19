@@ -8,15 +8,19 @@
       } else{
         if(isset($_POST['submit']))
         {
+            $eid=intval($_GET['editid']);
+            $clientmsaid=$_SESSION['clientmsaid'];
+            $status=$_POST['status'];
+        
      
-            if ($_POST['status']=="4"){
+            if ($status=="4"){
                 
                 $paid = $_POST['paid'];
                 $cpayable  =$_POST['cpayable'];
                 $time = new DateTime("now", new DateTimeZone('Asia/Manila'));
                 $now= $time->format("Y-m-d h:i:s");
                 if ($paid > $cpayable){
-                   
+                    $diff = $paid - $cpayable;
                     $sql="update tblcreatecertificate set status=:status WHERE ID=:eid";
                     $query=$dbh->prepare($sql);
                     $query->bindParam(':status',$status,PDO::PARAM_STR);
@@ -24,7 +28,7 @@
                     $query->execute();
 
 
-                    /*$payup = "update tblpaymentlogs set 
+                    $payup = "update tblpaymentlogs set 
                         dateAccepted = '".$now."',
                         refNum = ".$_POST['refNum'].",
                         payment = ".$paid."
@@ -34,8 +38,8 @@
 
                     if ($con->query($payup)===TRUE){
                         echo '<script>alert("Certificate Record and payment log has been updated")</script>';
-                        echo "<script>window.location.href ='payment-verification-cert.php?editid=".$eid."&change=".$diff."</script>";
-                    }*/
+                        echo "<script>window.location.href ='payment-verification-cert.php?editid=".$eid."&diff=".$diff."&type=1'</script>";
+                    }
                   
                 }
                 elseif ($paid<$cpayable){
@@ -54,7 +58,7 @@
                         ";
 
                     if ($con->query($payup)===TRUE){
-                        echo '<script>alert("Certificate Record and payment log has been updated")</script>';
+                      
                         echo "<script>window.location.href ='payment-verification-cert.php?editid=".$eid."&change=".$diff."</script>";
                     }
 
@@ -66,17 +70,14 @@
             }
             else{
 
-                $eid=intval($_GET['editid']);
-                $clientmsaid=$_SESSION['clientmsaid'];
-                $status=$_POST['status'];
-            
+             
                 $sql="update tblcreatecertificate set status=:status WHERE ID=:eid";
                 $query=$dbh->prepare($sql);
                 $query->bindParam(':status',$status,PDO::PARAM_STR);
                 $query->bindParam(':eid',$eid,PDO::PARAM_STR);
                 $query->execute();
                 echo '<script>alert("Certificate Record has been updated")</script>';
-                echo "<script>window.location.href ='edit-cert-record.php?editid=".$eid."'</script>";
+                //echo "<script>window.location.href ='edit-cert-record.php?editid=".$eid."'</script>";
             }
 
         }
@@ -356,7 +357,7 @@
                                             </div>
                                             <div class="col-xl-3">
                                                 <label for="cname" class= "black fw-bold fs-5">Certification fee</label>
-                                                <input id = "cname" class ="form-control" type="text" placeholder = "Certfication fee" name= "cname" value="<?php echo "$rowe->CertificatePrice";?>" disabled>
+                                                <input style = "text-align: right;" id = "cname" class ="form-control" type="text" placeholder = "Certfication fee" name= "cname" value="<?php echo "$rowe->CertificatePrice";?>" disabled>
 
                                             </div>
                                             <div class="col-xl-3">
@@ -452,7 +453,7 @@
                                             <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
                                         </div>
                                     </div>';
-                                    }else if ($checkstat == "4" || $checkstat == "6" || $checkstat == "3"){
+                                    }else if ($checkstat == "6" || $checkstat == "3"){
                                         
                                         $sql ="select * from tblpaymentlogs where creationID = ".$_GET['editid']."";
                                         $query= $dbh->prepare($sql);
@@ -511,7 +512,7 @@
                                                                         <div class="col-8 py-2">   
                                                                         <div class="input-group">
                                                                         <button class="btn btn-secondary disabled">₱</button>      
-                                                                        <input style= "text-align:right" type="number" name = "paid" id = "paid" value = '.$i->payment.' class="form-control" required>
+                                                                        <input style= "text-align:right" type=decimal name = "paid" id = "paid" value = '.$i->payment.' class="form-control" required>
                                                                         </div>
                                                                         </td>
                                                                     </div>
@@ -522,7 +523,7 @@
                                                                     <div class="col-8 py-2">         
                                                                     <div class="input-group">
                                                                     <button class="btn btn-secondary disabled">₱</button>
-                                                                    <input type="number" name = "cpayable" id = "topay" value = '.$rowe->CertificatePrice.' style = "text-align:right" class="form-control" readonly>
+                                                                    <input type=decimal name = "cpayable" id = "topay" value = '.$rowe->CertificatePrice.' style = "text-align:right" class="form-control" readonly>
                                                                     </div>
                                                                     </td>
                                                                     </div>    
@@ -537,8 +538,147 @@
                                                 </div>
 
                                             </div>';
+                                                        }
                                         }
-                                        }
+                                    }
+                                        
+                                        else if ($checkstat == "4" ){
+                                        
+                                            $sql ="select * from tblpaymentlogs where creationID = ".$_GET['editid']."";
+                                            $query= $dbh->prepare($sql);
+                                            $query->execute();
+                                            $result = $query->fetchAll(PDO::FETCH_OBJ);
+                                            foreach($result as $i){
+                                                $cdate = date('F j, Y - h:i A', strtotime($i->paymentDate));
+                                                $adate = date('F j, Y - h:i A', strtotime($i->dateAccepted));
+                                                echo'
+                                                <div class="row gx-4 gy-3 px-5">
+                                                    <p class="fs-4 text-primary">Payment Verification</p>
+                                                    <div class="col-xl-6 border border-info">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <a target = "_blank" href = "'.$i->proof.'"><img src="'.$i->proof.'" alt="" class="img-fluid"></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                            <div class="row g-2">
+                                                           
+                                                            <table>';
+                                                            $select = "Select * from tblpaymentlogs where creationID = ".$eid."";
+                                                            $query = $dbh->prepare($sql);
+                                                            $query ->execute();
+                                                            $plog = $query->fetchAll(PDO::FETCH_OBJ);
+    
+                                                            foreach($plog as $i){
+    
+                                                            
+                                                            echo'
+                                                                
+                                                                        <table>
+                                                                          <tr>
+                                                                            <td><div class="input-group py-1">
+                                                                            <label for="refnum" class="fs-5 text-primary pe-2">Date Submitted: </label> </td>  
+                                                                            <td>
+                                                                            <div class="fs-5 text-secondary"> '.$cdate.'</div>
+                                                                            </td>
+                                                                            </div>
+                                                                        </tr>
+                                                                          <tr>
+                                                                            <td><div class="input-group py-1">
+                                                                            <label for="refnum" class="fs-5 text-primary pe-2">Reference Number:</label> </td>  
+                                                                            <td>
+                                                                            <div class="col-10 py-2">         
+                                                                            <input type="text" name = "refNum" id = "refnum" class="form-control" value = '.$i->refNum.' readonly>
+                                                                            </td>
+                                                                            </div>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><div class="input-group py-1">
+                                                                            <label for="paid" class="fs-5 text-primary pe-2">Amount Paid:</label> </td>  
+                                                                            <td>
+                                                                            <div class="col-8 py-2">   
+                                                                            <div class="input-group">
+                                                                            <button class="btn btn-secondary disabled">₱</button>      
+                                                                            <input style= "text-align:right" type="decimal" name = "paid" id = "paid" value = '.$i->payment.' class="form-control" readonly>
+                                                                            </div>
+                                                                            </td>
+                                                                        </div>
+                                                                        <tr>
+                                                                        <td><div class="input-group py-1">
+                                                                        <label for="payable" style = "text-align:right" class="fs-5 text-primary pe-2">Amount to Pay :</label></td>   
+                                                                        <td>
+                                                                        <div class="col-8 py-2">         
+                                                                        <div class="input-group">
+                                                                        <button class="btn btn-secondary disabled">₱</button>
+                                                                        <input type="decimal" name = "cpayable" id = "topay" value = '.$rowe->CertificatePrice.' style = "text-align:right" class="form-control" readonly>
+                                                                        </div>
+                                                                        </td>
+                                                                        </div>    
+                                                                        </div>
+                                                                        </tr>';
+                                                                        $diff = 0;
+                                                                        if ($rowe->CertificatePrice<$i->payment){
+                                                                            $diff = $i->payment-$rowe->CertificatePrice;
+                                                                            $val = number_format($diff,2);
+                                                                            echo '
+                                                                            
+                                                                            <tr>
+                                                                            <td><div class="input-group py-1">
+                                                                            <label for="payable" style = "text-align:right" class="fs-5 text-primary pe-2">Change :</label></td>   
+                                                                            <td>
+                                                                            <div class="col-8 py-2">         
+                                                                            <div class="input-group">
+                                                                            <button class="btn btn-secondary disabled">₱</button>
+                                                                            <input type="decimal" name = "change" id = "topay" value = '.$val.' style = "text-align:right" class="form-control" readonly>
+                                                                            </div>
+                                                                            </td>
+                                                                            </div>    
+                                                                            </div>
+                                                                            </tr>';
+                                                                                
+                                                                        }
+                                                                        else if ($rowe->CertificatePrice>$i->payment){
+                                                                            $diff =  $rowe->CertificatePrice - $i->payment ;
+                                                                            echo '
+                                                                            
+                                                                            <tr>
+                                                                            <td><div class="input-group py-1">
+                                                                            <label for="payable" style = "text-align:right" class="fs-5 text-primary pe-2">Credit :</label></td>   
+                                                                            <td>
+                                                                            <div class="col-8 py-2">         
+                                                                            <div class="input-group">
+                                                                            <button class="btn btn-secondary disabled">₱</button>
+                                                                            <input type=decimal name = "credit" id = "topay" value = '.$diff.' style = "text-align:right" class="form-control" readonly>
+                                                                            </div>
+                                                                            </td>
+                                                                            </div>    
+                                                                            </div>
+                                                                            </tr>';
+
+                                                                        }
+                                                                        echo'
+                                                                        <tr>
+                                                                        <td><div class="input-group py-1">
+                                                                        <label for="refnum" class="fs-5 text-primary pe-2">Date Accepted: </label> </td>  
+                                                                        <td>
+                                                                        <div class="fs-5 text-secondary"> '.$adate.'</div>
+                                                                        </td>
+                                                                        </div>
+                                                                        </tr>
+                                                                        </table>
+                                                                        </div>
+    
+                                                            </div>
+                                                        
+                                                        </div>
+                                                    </div>
+    
+                                                </div>';
+                                            }
+                                            }
                                     }
                                 ?>
                                         <div class="row gy-2 mx-2 my-2 ">
