@@ -182,12 +182,12 @@
     <div class="container-fluid p-5 ">
         <?php
             $sql= 'SELECT tblcertificate.*, tblcreatecertificate.*, tblcreatecertificate.resDate as getDate, tblresident.*, tblstatus.*, tblpurposes.* 
+
             FROM tblcertificate 
             join tblcreatecertificate on tblcreatecertificate.CertificateId = tblcertificate.ID 
             join tblresident on tblcreatecertificate.Userid = tblresident.ID 
             join tblstatus on tblstatus.ID = tblcreatecertificate.status 
-            join tblpurposes on tblpurposes.ID = tblcreatecertificate.purpID WHERE tblcreatecertificate.ID = '.$eid.'
-            ';
+            join tblpurposes on tblpurposes.ID = tblcreatecertificate.purpID WHERE tblcreatecertificate.ID = '.$eid.'';
             $query= $dbh->prepare($sql);
             $query->execute();
             $result = $query->fetchAll(PDO::FETCH_OBJ);

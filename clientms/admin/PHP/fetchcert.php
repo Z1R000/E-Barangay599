@@ -1,55 +1,14 @@
 <?php
-//fetchdata.php
 include('includes/dbconnection.php');
-if(isset($_POST["action"]))
+
+
+if(isset($_POST["cid"]))
 {
- $output = '';
- if($_POST["action"] == "ctype")
- {
-  $query = "SELECT CertificatePrice, ID FROM tblcertificate WHERE ID = '".$_POST["query"]."'";
-  $result = mysqli_query($con, $query);
-  while($row = mysqli_fetch_array($result))
-  {
-   $output .= '<option value="'.$row["CertificatePrice"].'" selected disabled>'.$row["CertificatePrice"].'</option>';
-  }
- }
- echo $output;
-}
-
-
-
-
-if(isset($_POST["action"]))
-{
- $output = '';
- if($_POST["action"] == "rtype")
- {
-  $query = "SELECT rentalPrice FROM tblrental WHERE ID = '".$_POST["query"]."'";
-  $result = mysqli_query($con, $query);
-  while($row = mysqli_fetch_array($result))
-  {
-   $output .= '<button class="btn btn-secondary disabled">₱</button>    
-                <input type= "text" name="rprice" id="rprice" style= "text-align:right" value = "'.$row['rentalPrice'].' "class="form-control action" readonly>';
-  }
- }
- echo $output;
-}
-
-
-
-
-
- 
-
-if(isset($_POST["id"]))
-{
- $output = '';
-    
-  $sql= 'Select tblresident.FirstName,tblcreaterental.ID as cID,tblcreaterental.payment,tblcreaterental.paymentID, tblcreaterental.proof, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblcreaterental.status, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate, tblcreaterental.creationDate, tblpurposes.Purpose, tblrental.rentalName, tblrental.rentalPrice, tblcreaterental.payable, tblstatus.statusName from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID join tblrental on tblrental.ID = tblcreaterental.rentalID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID join tblstatus on tblstatus.ID = tblcreaterental.status where tblcreaterental.status = 4 and tblcreaterental.status<8 and tblcreaterental.ID = '.$_POST['id'].' order by tblcreaterental.creationDate DESC
-  ';
-
-
-  
+  $output = '';  
+  $sql= 'Select tblresident.*, tblcreatecertificate.*, tblcertificate.*, tblcreatecertificate.ID as cID from tblcreatecertificate 
+  join tblresident on tblresident.ID = tblcreatecertificate.Userid
+  join tblcertificate on tblcertificate.ID = tblcreatecertificate.CertificateId where tblcreatecertificate.status = 4 or tblcreatecertificate.status = 6 or tblcreatecertificate.status = 5 and tblcreatecertificate.ID = '.$_POST['cid'].'
+  ORDER BY tblcreatecertificate.resDate DESC ';
 
   if ($result = mysqli_query($con, $sql)){
     if (mysqli_num_rows($result)>0){
@@ -60,7 +19,7 @@ if(isset($_POST["id"]))
             $proof = '';
             $da = '';
             $pd = '';
-            $payment = "Select * from tblpaymentlogs where creationID = ".$_POST['id']." and servicetype = 1";
+            $payment = "Select * from tblpaymentlogs where creationID = ".$_POST['cid']." and servicetype = 2";
                 if ($res = mysqli_query($con,$payment)){
                     if(mysqli_num_rows($res)>0){   
                         while($rows=mysqli_fetch_array($res)){
@@ -106,7 +65,7 @@ if(isset($_POST["id"]))
             <label for="payed" class= "fs-5">Payable</label>
             <div class="input-group">
                 <button class="btn btn-secondary disabled">₱</button>
-                <input id = "payed" type="text" class= "form-control" placeholder = "Payor Name" value = "'.$row['payable'].'" style= "text-align: right"readonly> 
+                <input id = "payed" type="text" class= "form-control" placeholder = "Payor Name" value = "'.$row['CertificatePrice'].'" style= "text-align: right"readonly> 
             </div>
         </div>
     
@@ -127,7 +86,7 @@ if(isset($_POST["id"]))
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body bg-white" align = "center">
-                        <img src="../'.$row['proof'].'" alt="" style= "max-width: 100%;">
+                        <img src="'.$proof.'" alt="" style= "max-width: 100%;">
                 </div>
                <div class="row">
                    <div class="col-md-12">
@@ -155,24 +114,8 @@ if(isset($_POST["id"]))
     
 
  }
- 
+
+
+
 
 ?>
-
-
-
-<!--<div class="row justify-content-end">
-        <div class="col" align= "right">
-
-
-        <div class="btn-group">
-        <div class="btn-group  mb-1  " role="group" aria-label="First group">
-            <a href ="payment-verification.php?payment=success&rid='.$row['cID'].'"class="btn btn-success mx-1"  style = ""><i class = "fa fa-check mx-1 "></i><span class= "wal">Accept</span></a>
-        </div>
-            <div class="btn-group  mb-1  " role="group" aria-label="First group">
-            <a href ="payment-verification.php?payment=rejected&rid='.$row['cID'].' "class="btn btn-danger mx-1" style= ""><i class = "fa fa-times fa-1x mx-1 "></i><span class= "wal"> Decline</span></a>
-        </div>
-        </div>
--->
-
-    

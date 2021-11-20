@@ -284,7 +284,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
         </div>
         </nav>
 
-<form method = "POST">
+        <form method = "POST">
         <?php
         $eid = $_GET['editid'];
         $clientmsaid = $_SESSION['clientmsaid'];
@@ -299,6 +299,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
         if ($query->rowCount() > 0) {
             foreach ($results as $row) {
         ?>
+
                 <form method="POST">
                     <div class="container-fluid px-5">
                         <div class="row px-5">
@@ -485,14 +486,9 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     </div>
                                     <div class="row g-0 mb-3 px-4">
 
-                                        <label for="cs" class="col-sm-2 col-form-label  fs-5">Attach Valid ID <br><span class="fs-6 text-muted small"> (Aydentipikasyon)</span></label>
-                                        <div class="col-xl-5">
-                                            <br>
-                                            <div class="mb-3">
-
-                                                <input disabled class="form-control form-control " id="formFileSm" type="file">
-                                            </div>
-                                        </div>
+                                        <label for="cs" class="col-sm-2 col-form-label  fs-5">Attached Valid ID <br><span class="fs-6 text-muted small"> (Aydentipikasyon)</span></label>
+                                        <a href="<?php echo "../../".$row->attachment;?>" target= "_blank" class="link link-primary">Attached Valid ID <?php echo $row->LastName; ?></a>
+                                        
                                     </div>
                                     <div class="row g-0 mb-3 px-4">
                                         <label for="sss" class="col-xl-2 fs-4 py-0">SSS Number<br></label>

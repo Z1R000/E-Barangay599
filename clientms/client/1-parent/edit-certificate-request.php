@@ -29,6 +29,8 @@ function upPhoto ($poid){
 	return $destination;
 
 }
+
+
 if (strlen($_SESSION['clientmsuid'] == 0)) {
 	header('location:logout.php');
 } else {
