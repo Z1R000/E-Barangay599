@@ -239,7 +239,7 @@
                                     <label for="purp" class= "fs-5 fw-bold">Purposes</label>
                                     <?php
                                         
-                                        $sql = 'SELECT * FROM tblpurposes where serviceType = "rental"';
+                                        $sql = 'SELECT * FROM tblpurposes where serviceType = "2"';
                                         $query= $dbh->prepare($sql);
                                         $query->execute();
                                         $results = $query->fetchAll(PDO::FETCH_OBJ);

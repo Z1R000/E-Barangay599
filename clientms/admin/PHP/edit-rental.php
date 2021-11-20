@@ -17,17 +17,19 @@
         $status = "";
         $btn = "";
         $sen = "display:none";
+        
         foreach ($result as $r){
             $cdate = $r->creationDate;
             $sdate = $r->rentalStartDate;
             $edate = $r->rentalEndDate;
+            $pay4 = number_format($r->payable,2);
             array_push($arr,$r->ID);
             array_push($arr,$r->LastName.", ".$r->FirstName." ".$r-> MiddleName." ".$r->Suffix);
             array_push ($arr, $r->purpID);
-            array_push($arr,date("Y-d-m",strtotime($cdate)));
+            array_push($arr,date("F j, Y - h:i A",strtotime($cdate)));
             array_push($arr,$sdate);
             array_push($arr,$edate);
-            array_push($arr, $r->payable);
+            array_push($arr, $pay4);
             array_push($arr,$r->rentalName);
             array_push($arr,$r->mode);
             array_push($arr,$r->statusName);
@@ -36,7 +38,7 @@
             array_push($arr,$r->resid);
             array_push($arr,$r->proof);
             array_push($arr, $r->statid);
-            array_push($arr,$r->payable);
+            array_push($arr,$pay4);
 
         }
             $stat ="";
@@ -131,7 +133,7 @@
         if($arr[8]=="G-cash"){
          
             $det = "disabled";
-            $sql = "Select * from tblstatus where ID = 2 or ID = 3 or ID= 4 or ID= 7";
+            $sql = "Select * from tblstatus where ID = 3 or ID= 4 or ID= 7";
             $query = $dbh->prepare($sql);
             $query -> execute();
             $result = $query->fetchAll(PDO::FETCH_OBJ);
@@ -183,7 +185,26 @@
 
         if ($arr[9]=="PAYMENT VERIFIED"){
             $btn= "disabled";
-            $sql = "Select * from tblstatus where  ID= 5 or ID= 6";
+            $sql = "Select * from tblstatus where ID = 4 or ID=9";
+            $query = $dbh->prepare($sql);
+            $query -> execute();
+            $result = $query->fetchAll(PDO::FETCH_OBJ);
+            $stat = "";
+            foreach($result as $r){
+                if ($arr[9] == $r->statusName){
+                    $stat.='<option value="'.$r->ID.'" selected>'.$r->statusName.'</option>';
+                }
+                else{
+                    $stat.='<option value="'.$r->ID.'">'.$r->statusName.'</option>';
+                }
+            }
+
+            $fupdate = 'Update tblcreaterental set status = '.$status.'  
+            where ID ='.$arr[0].';';
+        }
+        if ($arr[9]=="ON-GOING"){
+            $btn= "disabled";
+            $sql = "Select * from tblstatus where ID = 9 or ID=6";
             $query = $dbh->prepare($sql);
             $query -> execute();
             $result = $query->fetchAll(PDO::FETCH_OBJ);
@@ -253,7 +274,6 @@
             where ID ='.$arr[0].';';
         }
 
-        
         if ($arr[9] == "SETTLED"){
             $btn = "disabled";
             $hide = "none";
@@ -273,44 +293,44 @@
                 }
             }
         }
+        if ($arr[9] == "APPROVED"){
+            $det = "disabled";
+        }
 
         
 
         if (isset($_POST['update'])){
+            if (isset($_POST['paid'])){
+                $paid = $_POST['paid'];
             
-            //payable computation
-            //echo $ad."</br>";
-            //echo $userid."</br>";
-            //echo $stat."</br>";
-            //echo $rtype."</br>";
-            //echo $purp."</br>";
-            echo $mode."</br>";
-            echo $start."</br>";
-            echo $end."</br>";
-            echo $rate."</br>";  
-            echo $send."</br>";
-            echo $status;
-            echo "</br>".$fupdate;
-            /*$sql = 'Update tblcreaterental set 
-                    status ='.$stat.',rentalStartDate = "'.$start.'", rentalEndDate = "'.$end.'", modeOfPayment = '.$mode.',  payable = '.$send.'
-                     
-
-                    where ID ='.$arr[0].';';*/
-
-            if ($con->query($fupdate)===TRUE){
-                header('Location: edit-rental.php?rid='.$arr[0].'&update=success');
+                $status = $_POST['stat'];
+            
+                $sql = 'update tblcreaterental set status ='.$status.',rentalStartDate = "'.$start.'", rentalEndDate = "'.$end.'",  payable = '.$paid.' where ID ='.$eid.';';
+                echo "</br>".$sql;
+                if ($con->query($sql)===TRUE){
+                    header('Location: edit-rental.php?rid='.$arr[0].'&update=success');
+                }
+                else{
+                    header('Location: edit-rental.php?rid='.$arr[0].'&update=failed');
+                }
+            }else{
+                $status = $_POST['stat'];
+                $sql = 'update tblcreaterental set status ='.$status.' where ID ='.$eid.';';
+                echo "</br>".$sql;
+                if ($con->query($sql)===TRUE){
+                    header('Location: edit-rental.php?rid='.$arr[0].'&update=success');
+                }
+                else{
+                    header('Location: edit-rental.php?rid='.$arr[0].'&update=failed');
+                }
             }
-            else{
-                echo "lima";
-            }
-
 
         }
         if (isset($_POST['del-rec'])){
 
            $sql = "Update tblcreaterental set status = 8 where ID = ".$arr[0]." ";
 
-           if ($con->query($fupdate)===TRUE){
+           if ($con->query($sql)===TRUE){
                 header('Location: admin-rentals.php?delete=success');
            }
            else{
@@ -529,7 +549,7 @@
                                         $opt = "<option  selected disabled>Purposes</option>";
                                         foreach($results as $row){
 
-                                            if ($row->Purpose == $arr[2] ){
+                                            if ($row->ID == $arr[2] ){
                                                 $opt .= '<option  value ="'.$row->ID.'" selected>'.$row->Purpose.'</option>';
                                               
                                             }
@@ -551,7 +571,7 @@
                             </div>
                                 <div class="row gy-2">
                                     <div class="col-xl-3" >
-                                        <label for="prate" class="fs-5 fw-bold">Rental Date</label>
+                                        <label for="prate" class="fs-5 fw-bold">Request Date</label>
                                             <input type="text"  name = "cdate" id = "date" class="form-control " value = "<?php echo $arr[3]?>" name ="date" readonly>
                                     </div>
                                     <div class="col-xl-9" >
