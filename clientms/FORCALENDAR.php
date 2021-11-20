@@ -11,16 +11,7 @@
     <link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
 </head>
 <body>
-<div class="">
-    <div class="aHl">
 
-    </div>
-    <div id=":2g8" tabindex="-1">
-
-    </div>
-    <div id=":2fx" class="ii gt" jslog="20277; u014N:xr6bB; 4:W251bGwsbnVsbCxbXV0.">
-        <div id=":2fw" class="a3s aiL msg-3877720715821999831"><u></u>
-<div style="color:#565a5c;background-color:#f2f5f6;margin:0px 0px 0px 0px">
   <div style="color:#565a5c;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;font-size:16px;border-collapse:collapse;max-width:800px;margin:0px auto;padding-top:25px;padding-left:25px;padding-right:25px">
     <div>
   <div>
@@ -33,7 +24,6 @@
     </div>
   </div>
 </div>
-    <div id="m_-3877720715821999831body-wrapper">
       <div style="background-color:#ffffff;padding-top:1px">
         <div class="m_-3877720715821999831content">
           
@@ -58,7 +48,6 @@
           
         </div>
       </div>
-    </div>
     <div>
   <div>
   <div id="m_-3877720715821999831footer-wrapper">
@@ -89,7 +78,7 @@
 </div></div></div><div id=":2gc" class="ii gt" style="display:none"><div id=":2gd" class="a3s aiL "></div></div><div class="hi"></div></div>
 
 
-<div class="">
+<!-- <div class="">
     <div class="aHl">
 
     </div>
@@ -182,7 +171,7 @@
 </div></div><div class="adL">
 
 
-</div></div></div><div id=":2gc" class="ii gt" style="display:none"><div id=":2gd" class="a3s aiL "></div></div><div class="hi"></div></div>
+</div></div></div><div id=":2gc" class="ii gt" style="display:none"><div id=":2gd" class="a3s aiL "></div></div><div class="hi"></div></div> -->
 
 
 

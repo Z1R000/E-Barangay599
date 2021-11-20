@@ -1,21 +1,189 @@
 <?php
 $curr = "Manage Registration";
 session_start();
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
 error_reporting(0);
 
 include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid'] == 0)) {
     header('location:logout.php');
 } else {
+    $eid = intval($_GET['editid']);
+    $time = new DateTime("now", new DateTimeZone('Asia/Manila'));
+
+    $mail = new PHPMailer(true);
+
+    function itexmo($number,$message,$apicode,$passwd){
+        $ch = curl_init();
+        $itexmo = array('1' => $number, '2' => $message, '3' => $apicode, 'passwd' => $passwd);
+        curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
+        curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, 
+                    http_build_query($itexmo));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        return curl_exec ($ch);
+        curl_close ($ch);
+    }
+
     if (isset($_POST['submit'])) {
+        $sql = "SELECT * from tblcredits";
+        $query=$dbh->prepare($sql);
+        $query->execute();
+        $result1=$query->fetchAll(PDO::FETCH_OBJ);
+        foreach ($result1 as $row1) {
+            $api=$row1->ApiCode;
+            $passwd=$row1->ApiPassword;
+        }
 
+        
+        $today = date('Y-m-d');
+        $sdates = date('F j, Y - h:i A', strtotime($today));
+        $text = "From Barangay 599 V. Mapa\n\nYour registration request has been accepted.\n\n This is a system-generated message. Please do not reply.";
 
-        $eid = intval($_GET['editid']);
+        $sql = "SELECT * from tblresident WHERE Cellphnumber IS NOT NULL AND ID = :eid";
+        $query=$dbh->prepare($sql);
+        $query->bindParam(':eid', $eid, PDO::PARAM_STR);
+        $query->execute();
+        $result1=$query->fetchAll(PDO::FETCH_OBJ);
+        foreach ($result1 as $row1) {
+            $number = $row1->Cellphnumber;
+            $result = itexmo($number, $text, $api, $passwd);
+            if ($result == "") {
+            echo "iTexMo: No response from server!!!
+        Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+        Please CONTACT US for help. ";
+            } else if ($result == 0) {
+                
+            } else {
+            echo "Error Num " . $result . " was encountered!";
+            }
+        }
 
-        $sql = "update tblresident set resStatus ='Active' WHERE ID=:eid";
-        $query = $dbh->prepare($sql);
-        $queryd->bindParam(':eid', $eid, PDO::PARAM_STR);
-        $queryd->execute();
+        $sql ="Select tbladmin.*, tblresident.*, tblpositions.* from tblresident join tbladmin on tbladmin.residentID = tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition where tbladmin.ID = :aid";
+    $query = $dbh -> prepare($sql);
+    $query->bindParam(':aid',$aid,PDO::PARAM_STR);
+    $query->execute();
+    foreach($results as $row)
+	{$getpos = "$row->Position $row->LastName";}
+
+    try {
+        //Server settings
+                             //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'barnagay599@gmail.com';                     //SMTP username
+        $mail->Password   = 'barangay599123';                               //SMTP password
+        $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
+        $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    
+        $mail->setFrom('barnagay599@gmail.com', $getpos);
+
+        $sqle = "SELECT * from tblresident WHERE ID = :eid";
+        $querye=$dbh->prepare($sqle);
+        $querye->bindParam(':eid',$eid,PDO::PARAM_STR);
+        $querye->execute();
+        $resulte=$querye->fetchAll(PDO::FETCH_OBJ);
+        foreach ($resulte as $rowe) {
+            $mid = $rowe->MiddleName;
+            $emails = $rowe->Email;
+            $mail->addAddress("$emails");
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Notification from Barangay 599 V. Mapa';
+            $mail->Body    = '<div class="">
+            <div class="aHl">
+        
+            </div>
+            <div id=":2g8" tabindex="-1">
+        
+            </div>
+            <div id=":2fx" class="ii gt" jslog="20277; u014N:xr6bB; 4:W251bGwsbnVsbCxbXV0.">
+                <div id=":2fw" class="a3s aiL msg-3877720715821999831"><u></u>
+        <div style="color:#565a5c;background-color:#f2f5f6;margin:0px 0px 0px 0px">
+          <div style="color:#565a5c;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;font-size:16px;border-collapse:collapse;max-width:800px;margin:0px auto;padding-top:25px;padding-left:25px;padding-right:25px">
+            <div>
+          <div>
+            <div id="m_-3877720715821999831header-wrapper" style="margin-bottom:16px">
+              <div>
+                <a href="https://barangay599.com/" style="text-decoration:none;outline:none" target="_blank" data-saferedirecturl="https://barangay599.com/">
+                  <img style="width:120px;height:100px" src="https://scontent-sin6-2.xx.fbcdn.net/v/t1.15752-9/255421087_257470519597544_8116769992785817332_n.png?_nc_cat=105&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeHWhijsWVAHOygPG_m3voCBmxZz3dIYsgabFnPd0hiyBp9aH3-I_IUogzCpXWiHWsvjj7BGhoUj3j6LW5c0qklh&_nc_ohc=JDSRMi83fA4AX_33U-M&tn=cYgfj995MRwIySit&_nc_ht=scontent-sin6-2.xx&oh=5b77bbab7229a3a6cf8935f99c8ef96f&oe=61BCECF6" class="CToWUd">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+            <div id="m_-3877720715821999831body-wrapper">
+              <div style="background-color:#ffffff;padding-top:1px">
+                <div class="m_-3877720715821999831content">
+                  
+                  <div style="margin:0;padding:0">
+                    <div style="margin:0;padding:0;margin-top:1em">
+                      Hi <b>'.ucfirst($rowe->FirstName)." ".ucfirst($mid[0]).". ".ucfirst($rowe->LastName)." ".ucfirst($rowe->Suffix).'</b>,
+                    </div>
+        
+                    <div style="margin:0;padding:0;margin-top:1em">
+                      Your registration request has been approved.
+                    </div>
+        
+                    <div style="margin:0;padding:0;margin-top:1em">
+                      
+                    </div>
+        
+                    <div style="margin:0;padding:0;margin-top:1em">
+                      <p>Please do not reply to this message. This is a system-generated email sent to <span>[<a href="mailto:'.$emails.'" target="_blank">'.$emails.'</a>]</span>.</p>
+                      <p>Thank you !</p>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            <div>
+          <div>
+          <div id="m_-3877720715821999831footer-wrapper">
+            <div align="center">
+              <table style="padding-top:30px;padding-bottom:30px;padding-left:30px;padding-right:30px;font-size:13px">
+                <tbody>
+                <tr>
+                  <td style="text-align:center">
+                    <div style="margin-top:20px">
+                      <p style="text-decoration:none;outline:none;color:#9b9b9b;text-align:center">This is an electronic information from Barangay 599 Online System</p>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table><div class="yj6qo"></div><div class="adL">
+            </div></div><div class="adL">
+          </div></div><div class="adL">
+        
+          </div></div><div class="adL">
+        
+        </div></div><div class="adL">
+        
+          </div></div><div class="adL">
+        
+        </div></div><div class="adL">
+        
+        
+        </div></div></div><div id=":2gc" class="ii gt" style="display:none"><div id=":2gd" class="a3s aiL "></div></div><div class="hi"></div></div>
+        ';
+            $mail->AltBody = 'Barangay 599 V. Mapa';
+        
+            $mail->send();
+            
+        }
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+
+        $sqla = "update tblresident set resStatus ='Active' WHERE ID=:eid";
+        $querya = $dbh->prepare($sqla);
+        $querya->bindParam(':eid', $eid, PDO::PARAM_STR);
+        $querya->execute();
 
         echo '<script>alert("Resident has been approved.")</script>';
         echo "<script>window.location.href ='admin-residence.php'</script>";

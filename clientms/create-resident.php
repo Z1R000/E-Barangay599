@@ -29,43 +29,45 @@ if (isset($_POST['submit'])) {
     $hm = $_POST['hm'];
     $stat = "Pending";
 
-    $sql = "insert into tblresident (ResidentType,Purok,houseUnit,voter,LastName,Suffix,FirstName,MiddleName,Gender,BirthDate,BirthPlace,streetName,Cellphnumber,tinNumber,sssNumber,CivilStatus,Email,Password,vPrecinct,HomeName,resStatus)
+    
+        $sql = "insert into tblresident (ResidentType,Purok,houseUnit,voter,LastName,Suffix,FirstName,MiddleName,Gender,BirthDate,BirthPlace,streetName,Cellphnumber,tinNumber,sssNumber,CivilStatus,Email,Password,vPrecinct,HomeName,resStatus)
         values(:residenttype,:prk,:hunit,:voter,:lname,:sf,:fname,:mname,:gend,:bdate,:bp,:strt,:contact,:tin,:sss,:cstatus,:email,:password,:vp,:hm,:stat)";
-    $query = $dbh->prepare($sql);
-    $query->bindParam(':residenttype', $residenttype, PDO::PARAM_STR);
-    $query->bindParam(':prk', $prk, PDO::PARAM_STR);
-    $query->bindParam(':sf', $sf, PDO::PARAM_STR);
-    $query->bindParam(':hunit', $hunit, PDO::PARAM_STR);
-    $query->bindParam(':voter', $voter, PDO::PARAM_STR);
-    $query->bindParam(':vp', $vp, PDO::PARAM_STR);
-    $query->bindParam(':bp', $bp, PDO::PARAM_STR);
-    $query->bindParam(':stat', $stat, PDO::PARAM_STR);
-    $query->bindParam(':lname', $lname, PDO::PARAM_STR);
-    $query->bindParam(':fname', $fname, PDO::PARAM_STR);
-    $query->bindParam(':mname', $mname, PDO::PARAM_STR);
-    $query->bindParam(':gend', $gend, PDO::PARAM_STR);
-    $query->bindParam(':bdate', $bdate, PDO::PARAM_STR);
-    $query->bindParam(':strt', $strt, PDO::PARAM_STR);
-    $query->bindParam(':contact', $contact, PDO::PARAM_STR);
-    $query->bindParam(':tin', $tin, PDO::PARAM_STR);
-    $query->bindParam(':sss', $sss, PDO::PARAM_STR);
-    $query->bindParam(':hm', $hm, PDO::PARAM_STR);
-    $query->bindParam(':cstatus', $cstatus, PDO::PARAM_STR);
-    $query->bindParam(':email', $email, PDO::PARAM_STR);
-    $query->bindParam(':password', $password, PDO::PARAM_STR);
-    $query->execute();
+        $query = $dbh->prepare($sql);
+        $query->bindParam(':residenttype', $residenttype, PDO::PARAM_STR);
+        $query->bindParam(':prk', $prk, PDO::PARAM_STR);
+        $query->bindParam(':sf', $sf, PDO::PARAM_STR);
+        $query->bindParam(':hunit', $hunit, PDO::PARAM_STR);
+        $query->bindParam(':voter', $voter, PDO::PARAM_STR);
+        $query->bindParam(':vp', $vp, PDO::PARAM_STR);
+        $query->bindParam(':bp', $bp, PDO::PARAM_STR);
+        $query->bindParam(':stat', $stat, PDO::PARAM_STR);
+        $query->bindParam(':lname', $lname, PDO::PARAM_STR);
+        $query->bindParam(':fname', $fname, PDO::PARAM_STR);
+        $query->bindParam(':mname', $mname, PDO::PARAM_STR);
+        $query->bindParam(':gend', $gend, PDO::PARAM_STR);
+        $query->bindParam(':bdate', $bdate, PDO::PARAM_STR);
+        $query->bindParam(':strt', $strt, PDO::PARAM_STR);
+        $query->bindParam(':contact', $contact, PDO::PARAM_STR);
+        $query->bindParam(':tin', $tin, PDO::PARAM_STR);
+        $query->bindParam(':sss', $sss, PDO::PARAM_STR);
+        $query->bindParam(':hm', $hm, PDO::PARAM_STR);
+        $query->bindParam(':cstatus', $cstatus, PDO::PARAM_STR);
+        $query->bindParam(':email', $email, PDO::PARAM_STR);
+        $query->bindParam(':password', $password, PDO::PARAM_STR);
+        $query->execute();
 
-    $LastInsertId = $dbh->lastInsertId();
-    if ($LastInsertId > 0) {
-        echo '<script>alert("Resident request has been sent.")</script>';
-        echo "<script>window.location.href ='index.php'</script>";
-    } else {
-        echo '<script>alert("Something Went Wrong. Please try again")</script>';
-    }
+        $LastInsertId = $dbh->lastInsertId();
+        if ($LastInsertId > 0) {
+            echo '<script>alert("Resident request has been sent.")</script>';
+            echo "<script>window.location.href ='index.php'</script>";
+        } else {
+            echo '<script>alert("Something Went Wrong. Please try again")</script>';
+        }
+    
 
-    $mes = "";
+    /*$mes = "";
     $mes = mysqli_real_escape_string($con, $mes);
-	mysqli_query($con,"insert into tbladminnotif (message) values (:mes)");
+	mysqli_query($con,"insert into tbladminnotif (message) values (:mes)");*/
 }
 ?>
 <!DOCTYPE html>
@@ -510,12 +512,6 @@ if (isset($_POST['submit'])) {
                                     <input class="form-check-input" type="checkbox" value="" id="privacy" required>
                                     <label class="form-check-label fs-6" for="privacy">
                                         I have read and agreed with the <a href="privacy-policy.php" target="_blank"><i>privacy policy</i></a>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" required>
-                                    <label class="form-check-label" for="flexCheckChecked">
-                                        Checked checkbox
                                     </label>
                                 </div>
                             </div>

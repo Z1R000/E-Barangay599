@@ -6,39 +6,51 @@
     if (strlen($_SESSION['clientmsaid']==0)) {
       header('location:logout.php');    
       } else{   
-          $cname = $_POST['cname'];
-          $userid = '';
-            for ($i = 0; $i < strlen($cname); $i++) {
-                if (is_numeric($cname[$i])) {
-                    $usid .= $cname[$i];
+        if (isset($_POST['submit'])){
+            $cname = $_POST['cname'];
+            $userid = '';
+                for ($i = 0; $i < strlen($cname); $i++) {
+                    if (is_numeric($cname[$i])) {
+                        $usid .= $cname[$i];
+                    }
                 }
+              $a = $b = $c = $d = $e = $f = $g = $h = $i = 0;
+              if(isset($_POST['btncheck0'])){
+                  $a = 1;
+              }
+              if(isset($_POST['btncheck1'])){
+                $b = 2;
+              }
+              if(isset($_POST['btncheck2'])){
+                $c = 3;
             }
-          $a = $b = $c = $d = $e = $f = $g = $h = $i = 0;
-          if(isset($_POST['btncheck0'])){
-              $a = 1;
-          }
-          if(isset($_POST['btncheck1'])){
-            $b = 2;
-          }
-          if(isset($_POST['btncheck2'])){
-            $c = 3;
+            if(isset($_POST['btncheck3'])){
+                $d = 4;
+            }
+            if(isset($_POST['btncheck4'])){
+                $e = 5;
+            }
+            if(isset($_POST['btncheck5'])){
+                $f = 6;
+            }
+            if(isset($_POST['btncheck6'])){
+                $g = 7;
+            }
+            if(isset($_POST['btncheck7'])){
+                $h = 8;
+            }
+              $get = $a . "," . $b . "," . $c . "," . $d . "," . $e . "," . $f . "," .  $g . "," . $h;
+              if(isset($_POST['submit'])){
+                $sql = "update tbladmin set residentID=:usid, dayDuty=:get where ID = '1'";
+                $query = $dbh->prepare($sql);
+                $query->bindParam(':get', $get, PDO::PARAM_STR);
+                $query->bindParam(':usid', $usid, PDO::PARAM_STR);
+                $query->execute();
+    
+                echo '<script>alert("Admin Official has been updated.")</script>';
+                echo "<script>window.location.href ='admin-officials.php'</script>";
+              }
         }
-        if(isset($_POST['btncheck3'])){
-            $d = 4;
-        }
-        if(isset($_POST['btncheck4'])){
-            $e = 5;
-        }
-        if(isset($_POST['btncheck5'])){
-            $f = 6;
-        }
-        if(isset($_POST['btncheck6'])){
-            $g = 7;
-        }
-        if(isset($_POST['btncheck7'])){
-            $h = 8;
-        }
-          $get = $a . "," . $b . "," . $c . "," . $d . "," . $e . "," . $f . "," .  $g . "," . $h;
 
 ?>
 <form method="POST">
@@ -76,8 +88,8 @@
                                     </div>
                                         
                                     <div class="input-group">
-                                        <input type="text" id = "search" class="form-control" name ="cname" value = "<?php echo $arr[1];?>" placeholder = "Officials Name" style= "text-align:center;font-size: 1.4em;">
-                                       
+                                    
+                                        <input type="text" name="cname" id="search" class="form-control form-control-lg rounded-0 border-info" placeholder="Officials Name" value = "<?php echo $arr[1];?>" style= "text-align:center;font-size: 1.4em;"autocomplete="off">
                                     
 
                                     </div>
@@ -356,30 +368,31 @@
             }
         }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-                        $(document).ready(function() {
-                            // Send Search Text to the server
-                            $("#search").keyup(function() {
-                                let searchText = $(this).val();
-                                if (searchText != "") {
-                                    $.ajax({
-                                        url: "searchname.php",
-                                        method: "post",
-                                        data: {
-                                            query: searchText,
-                                        },
-                                        success: function(response) {
-                                            $("#show-list").html(response);
-                                        },
-                                    });
-                                } else {
-                                    $("#show-list").html("");
-                                }
-                            });
-                            $(document).on("click", "#clicks", function() {
-                                $("#search").val($(this).text());
-                                $("#show-list").html("");
-                            });
-                        });
-                    </script>
+    $(document).ready(function() {
+        // Send Search Text to the server
+        $("#search").keyup(function() {
+            let searchText = $(this).val();
+            if (searchText != "") {
+                $.ajax({
+                    url: "searchname.php",
+                    method: "post",
+                    data: {
+                        query: searchText,
+                    },
+                    success: function(response) {
+                        $("#show-list").html(response);
+                    },
+                });
+            } else {
+                $("#show-list").html("");
+            }
+        });
+        $(document).on("click", "#clicks", function() {
+            $("#search").val($(this).text());
+            $("#show-list").html("");
+        });
+    });
+</script>
 <?php } ?>
