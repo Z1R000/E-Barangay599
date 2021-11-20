@@ -191,11 +191,13 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
     if (isset($_POST['delete'])) {
         $decr= $_POST['decr'];
+        
         if (isset($_POST['spcr'])){
             $decr =$_POST['spcr'];
         }else{
             $decr =$_POST['decr'];
         }
+
         
         $insert = "Update tblresident set decreason = '".$decr."', remarks = '".$_POST['rmrks']."' where ID = ".$eid."";
         if ($con->query($insert)===TRUE){
@@ -736,9 +738,9 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     
                                     <div class="col-md-12">
                                         <label for="decreason" >Decline Reason</label>
-                                        <select name="" id="decreason" class= "form-select" onchange = "showOthersdec('other_txt-dec',this);">
-                                            <option value="">Insufficient credentials</option>
-                                            <option value="">Detected inconsistency</option>
+                                        <select name="decr" id="decreason" class= "form-select" onchange = "showOthersdec('other_txt-dec',this);">
+                                            <option value="Insufficient credentials">Insufficient credentials</option>
+                                            <option value="Detected inconsistency">Detected inconsistency</option>
                                             <option value="others">Others</option>
                                         </select>
                                         <div class="row g-0 my-2" id = "other_txt-dec" style= "display: none;">
@@ -754,7 +756,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                         <label for="remarks" >Remarks</label>
                                         <div class="col-md-12">
                                             <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;resize: none;"></textarea>
+                                            <textarea class="form-control" name= "rmrks" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;resize: none;"></textarea>
                                             <label for="floatingTextarea2">Remarks here (max 10 words)</label>
                                                 
                                             </div>
@@ -768,7 +770,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     
                                     <div class="col-md-12">
                                         <div class="float-end">
-                                        <button href ="#dec-val" type = "button" class="btn btn-success" data-bs-dismiss ="modal" data-bs-toggle= "modal" >
+                                        <button  type = "submit" name= "delete" class= "btn btn-success">
                                             <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
                                         </button>
                                         <button type = "button" class="btn btn-danger" data-bs-dismiss = "modal"  name = "no" value ="No">

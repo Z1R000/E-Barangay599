@@ -5,9 +5,8 @@ include('includes/dbconnection.php');
 if(isset($_POST["cid"]))
 {
   $output = '';  
-  $sql= 'Select tblresident.*, tblcreatecertificate.*, tblcertificate.*, tblcreatecertificate.ID as cID from tblcreatecertificate 
-  join tblresident on tblresident.ID = tblcreatecertificate.Userid
-  join tblcertificate on tblcertificate.ID = tblcreatecertificate.CertificateId where tblcreatecertificate.status = 4 or tblcreatecertificate.status = 6 or tblcreatecertificate.status = 5 and tblcreatecertificate.ID = '.$_POST['cid'].'
+  $sql= 'Select tblresident.*, tblcreatecertificate.*, tblcertificate.*, tblcreatecertificate.ID as cID from tblcreatecertificate join tblresident on tblresident.ID = tblcreatecertificate.Userid join tblcertificate on tblcertificate.ID = tblcreatecertificate.CertificateId and tblcreatecertificate.ID = '.$_POST['cid'].' ORDER BY tblcreatecertificate.resDate DESC';
+  '
   ORDER BY tblcreatecertificate.resDate DESC ';
 
   if ($result = mysqli_query($con, $sql)){

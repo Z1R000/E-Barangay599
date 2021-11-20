@@ -1,6 +1,4 @@
-<style>
-  
-    
+<style> 
     .op{
         background: rgba(0,0,0,0.5);
     }
@@ -17,17 +15,17 @@
     <div class="collapse navbar-collapse opacity-100" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item fs-6">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="../../index.php">Home</a>
         </li>
         <li class="nav-item fs-6">
-          <a class="nav-link" href="#">About Us</a>
+          <a class="nav-link" href="../../index.php#au">About Us</a>
         </li>
         <li class="nav-item fs-6">
-          <a class="nav-link" href="#">Contact Us</a>
+          <a class="nav-link" href="../../index.php#contact">Contact Us</a>
         </li>
       </ul>
     
-      <a class="navbar-brand fs-6 text-secondary"onclick ="window.history.back();" href="#"><i class= "fa fa-arrow-circle-left"></i> Previous Page</a>
+      <a class="navbar-brand fs-6 text-secondary" onclick ="window.history.back();" href="../../index.php"><i class= "fa fa-arrow-circle-left"></i> Previous Page</a>
       
     </div>
   </div>
