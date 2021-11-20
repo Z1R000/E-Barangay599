@@ -62,6 +62,10 @@ if (isset($_POST['submit'])) {
     } else {
         echo '<script>alert("Something Went Wrong. Please try again")</script>';
     }
+
+    $mes = "";
+    $mes = mysqli_real_escape_string($con, $mes);
+	mysqli_query($con,"insert into tbladminnotif (message) values (:mes)");
 }
 ?>
 <!DOCTYPE html>
@@ -180,7 +184,7 @@ if (isset($_POST['submit'])) {
 
 
 
-    <form method="POST">
+    <form method="POST" id="add_form">
         <div class="container-fluid px-5">
             <div class="row px-5">
                 <div class="col-xl-5"></div>
