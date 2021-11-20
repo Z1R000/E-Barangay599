@@ -7,13 +7,13 @@
     if (strlen($_SESSION['clientmsaid']==0)) {
     header('location:logout.php');
     }else{
-        $eid = $_GET['editid'];
+        $gid = $_GET['getid'];
 
         
-      $sql ="SELECT tbladmin.ID as didd, tbladmin.*, tblresident.*, tblpositions.* from tbladmin join tblpositions on tblpositions.ID = tbladmin.BarangayPosition join tblresident on tblresident.ID = tbladmin.residentID WHERE tbladmin.ID = :eid";
+      $sql ="SELECT tbladmin.ID as sad, tbladmin.*, tblresident.*, tblpositions.* from tbladmin join tblpositions on tblpositions.ID = tbladmin.BarangayPosition join tblresident on tblresident.ID = tbladmin.residentID WHERE tbladmin.ID = :gid";
 
     $query = $dbh->prepare($sql);
-    $query->bindParam(':eid', $eid, PDO::PARAM_STR);
+    $query->bindParam(':gid', $gid, PDO::PARAM_STR);
     $query->execute();
     $result = $query->fetchAll(PDO::FETCH_OBJ);
     $arr =[];
@@ -108,12 +108,12 @@
             }
             $get = $a . "," . $b . "," . $c . "," . $d . "," . $e . "," . $f . "," .  $g . "," . $h;
         if(isset($_POST['submit'])){
-          $sql = "update tbladmin set residentID=:usid, dayDuty=:get where ID = :eid";
+          $sql = "update tbladmin set residentID=:usid, dayDuty=:get where ID = :gid";
           //echo $sql;
           $query = $dbh->prepare($sql);
           $query->bindParam(':get', $get, PDO::PARAM_STR);
           $query->bindParam(':usid', $usid, PDO::PARAM_STR);
-          $query->bindParam(':eid', $eid, PDO::PARAM_STR);
+          $query->bindParam(':gid', $gid, PDO::PARAM_STR);
           $query->execute();
 
           echo '<script>alert("Admin Official has been updated.")</script>';
@@ -215,7 +215,7 @@
      </div>
     <div class="container-fluid p-5 ">
         <?php
-            $sql= 'SELECT tbladmin.ID as didd, tbladmin.*, tblresident.*, tblpositions.* from tbladmin join tblpositions on tblpositions.ID = tbladmin.BarangayPosition join tblresident on tblresident.ID = tbladmin.residentID WHERE tbladmin.ID ='.$eid.'';
+            $sql= 'SELECT tbladmin.ID as sad, tbladmin.*, tblresident.*, tblpositions.* from tbladmin join tblpositions on tblpositions.ID = tbladmin.BarangayPosition join tblresident on tblresident.ID = tbladmin.residentID WHERE tbladmin.ID ='.$gid.'';
             $query= $dbh->prepare($sql);
             $query->execute();
             $result = $query->fetchAll(PDO::FETCH_OBJ);
@@ -257,7 +257,7 @@
                                         
                                     <div class="input-group">
 
-                                        <input type="text" id = "search" class="form-control" name ="cname" value = "<?php echo $row->didd." ". $row->LastName." ". $row->FirstName." ".$row->MiddleName." ".$row->Suffix;?>" placeholder = "ID / Officials Name" style= "text-align:center;font-size: 1.4em;">
+                                        <input type="text" id = "search" class="form-control" name ="cname" value = "<?php echo $gid." ". $fn;?>" placeholder = "ID / Officials Name" style= "text-align:center;font-size: 1.4em;">
                                     </div>
                                     <div class="col" style= "z-index: 9;position:relative">
                                             <div class="list-group w-100"  id="show-list" style="position: absolute">
@@ -274,21 +274,17 @@
                                                     $query = $dbh->prepare($sql);
                                                     $query->execute();
                                                     $res = $query->fetchAll(PDO::FETCH_OBJ);
-                                                    
+                                                    $ctr = 0;
                                                     foreach ($res as $d){
-                                                        $ctr = 0;
-                                                        for ($l = 0; $l <= strlen($piece); $l++){
-                                                            if ($d->ID == $piece[$ctr]){
-                                                                echo '  <div class = "btn-group p-1 active"><input type="checkbox" checked value = "'.$d->dDay.'" onclick="showHid()" class="btn-check" id="btncheck'.$ctr.'" name="btncheck'.$ctr.'" autocomplete="off" ">
-                                                                <label class="btn btn-outline-primary" for="btncheck'.$ctr.'">'.$d->dDay.'</label></div>';    
-                                                            }
+                                                        if ($d->ID == $piece[$ctr]){
+                                                            echo '  <div class = "btn-group p-1 active"><input type="checkbox" checked value = "'.$d->dDay.'" onclick="showHid()" class="btn-check" id="btncheck'.$ctr.'" name="btncheck'.$ctr.'" autocomplete="off" ">
+                                                            <label class="btn btn-outline-primary" for="btncheck'.$ctr.'">'.$d->dDay.'</label></div>';    
                                                         }
-                                                        
-                                                            echo '  <div class = "btn-group p-1"><input type="checkbox" value = "'.$d->dDay.'" name="btncheck'.$ctr.'"class="btn-check" onclick="showHid()" id="btncheck'.$ctr.'" autocomplete="off"">
-                                                            <label class="btn btn-outline-primary" for="btncheck'.$ctr.'">'.$d->dDay.'</label></div>';
-                                                         
-                                                            $ctr ++;
-                                                        
+                                                        else{
+                                                        echo '  <div class = "btn-group p-1"><input type="checkbox" value = "'.$d->dDay.'" name="btncheck'.$ctr.'"class="btn-check" onclick="showHid()" id="btncheck'.$ctr.'" autocomplete="off"">
+                                                        <label class="btn btn-outline-primary" for="btncheck'.$ctr.'">'.$d->dDay.'</label></div>';
+                                                        }
+                                                        $ctr ++;
 
                                                     }
                                             ?>
@@ -425,6 +421,7 @@
         });
     </script>
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
 $(document).ready(function () {

@@ -305,7 +305,7 @@
                                                 </select>
                                                 <div class="col-6" id="hidden_div">
                                                     <label class="col-form-label fs-5">Home Owner Name</label>
-                                                    <input type="text" class="form-control" placeholder="" id="residenttype" required />
+                                                    <input type="text" class="form-control" placeholder="" id="hm" required />
                                                 </div>
 
                         

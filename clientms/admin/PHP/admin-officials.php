@@ -76,55 +76,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
     }
 
     
-
-    if (isset($_POST['submit'])){
-        $cname = $_POST['cname'];
-        $userid = '';
-            for ($i = 0; $i < strlen($cname); $i++) {
-                if (is_numeric($cname[$i])) {
-                    $usid .= $cname[$i];
-                }
-            }
-          $a = $b = $c = $d = $e = $f = $g = $h = $i = 0;
-          if(isset($_POST['btncheck0'])){
-              $a = 1;
-          }
-          if(isset($_POST['btncheck1'])){
-            $b = 2;
-          }
-          if(isset($_POST['btncheck2'])){
-            $c = 3;
-        }
-        if(isset($_POST['btncheck3'])){
-            $d = 4;
-        }
-        if(isset($_POST['btncheck4'])){
-            $e = 5;
-        }
-        if(isset($_POST['btncheck5'])){
-            $f = 6;
-        }
-        if(isset($_POST['btncheck6'])){
-            $g = 7;
-        }
-        if(isset($_POST['btncheck7'])){
-            $h = 8;
-        }
-          $get = $a . "," . $b . "," . $c . "," . $d . "," . $e . "," . $f . "," .  $g . "," . $h;
-          if(isset($_POST['submit'])){
-            $sql = "update tbladmin set residentID=:usid, dayDuty=:get where ID = '1'";
-            $query = $dbh->prepare($sql);
-            $query->bindParam(':get', $get, PDO::PARAM_STR);
-            $query->bindParam(':usid', $usid, PDO::PARAM_STR);
-            $query->execute();
-
-            echo '<script>alert("Admin Official has been updated.")</script>';
-            echo "<script>window.location.href ='admin-officials.php'</script>";
-          }
-    }
- 
-    
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -392,7 +343,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                         </div>
                                         <div class="row g-0  bg-light text-center">
                                             <div class="col-xl-12 my-2">
-                                                <a href = "manage-position.php?editid='.$r->diode.'" class= "link link-info"><i class= "fa fa-edit text-info"></i> Manage </a>      
+                                                <a href = "manage-position.php?getid='.$r->diode.'" class= "link link-info"><i class= "fa fa-edit text-info"></i> Manage </a>      
                                             </div>
                                         </div>
                                     </div>
@@ -452,9 +403,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 
 <?php } ?>
 
-<script>
-   
-</script>
                                                 
 </body>
 </html>
