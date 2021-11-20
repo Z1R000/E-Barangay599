@@ -335,7 +335,6 @@
 
             }
             if (isset($_POST['paid'])){
-                
             
                 $status = $_POST['stat'];
             

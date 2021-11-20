@@ -1,6 +1,7 @@
 <?php 
     session_start();
     error_reporting(1);
+
     $curr = "Payment verification";
 
     include('includes/dbconnection.php');
@@ -182,12 +183,12 @@
     <div class="container-fluid p-5 ">
         <?php
             $sql= "SELECT tblstatus.ID as statid, tblcreaterental.*,tblcreaterental.ID,tblrental.ID as renid,tblresident.ID as resid,tblcreaterental.payable, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate,tblcreaterental.creationDate, tblpurposes.Purpose, tblresident.FirstName, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix,tblrental.rentalName, tblrental.rentalPrice, tblmodes.mode, tblstatus.statusName,tblpurposes.ID as purposeID FROM tblcreaterental INNER JOIN tblpurposes ON tblcreaterental.purpID = tblpurposes.ID INNER JOIN tblresident ON tblresident.ID = tblcreaterental.userID INNER JOIN tblrental ON tblrental.ID = tblcreaterental.rentalID INNER JOIN tblmodes ON tblmodes.ID = tblcreaterental.modeOfPayment INNER JOIN tblstatus ON tblstatus.ID = tblcreaterental.status and tblcreaterental.ID =".$_GET['rid']." ";
-            
+
+
             $query= $dbh->prepare($sql);
             $query->execute();
             $result = $query->fetchAll(PDO::FETCH_OBJ);
             
-   
             foreach ($result as $i){
                 
           
@@ -195,7 +196,6 @@
         
         <div class="row">
             <div class="col-xl-8   mx-auto">
-       
                 <div class="container" style= "display:block;">
                 <div class="row gx-3 bg-success border-success text-white">
                     <div class="fs-5">Accepted Payment Message</div>

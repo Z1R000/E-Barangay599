@@ -14,11 +14,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $curr;?></title>
-   
     <?php include ('link.php')?>
-
 	<link rel="icon" href="../IMAGES/Barangay.png" type="image/icon type">
-
     <style type = "text/css">
       @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@500&display=swap');
       table,td,tr,th{

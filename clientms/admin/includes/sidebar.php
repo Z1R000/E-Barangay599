@@ -2,31 +2,14 @@
     include('dbconnection.php');
     session_start();
     error_reporting(1);
-    if (strlen($_SESSION['clientmsaid']==0)) {
-    header('location:logout.php');
-    }else{
-        $eid = $_SESSION['clientmsaid'];
-        $sql = "select BarangayPosition from tbladmin where ID = :eid";
-        $query = $dbh->prepare($sql);
-        $query->bindParam('eid', $eid, PDO::PARAM_STR);
-        $query->execute();
-        $result= $query->fetchAll(PDO::FETCH_OBJ);
-	    foreach($result as $row){
-            $getpos = $row->BarangayPosition;
-        }
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <script>
-
         document.addEventListener("DOMContentLoaded", function(){
         document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
         element.addEventListener('click', function (e) {
@@ -74,51 +57,6 @@
                     display: flex;
                 }
             }
-
-    .dropdown-menu {
-		top: 60px;
-		left: 0px;
-		right: unset;
-		width: 460px;
-		box-shadow: 0px 5px 7px -1px #c1c1c1;
-		padding-bottom: 0px;
-		padding: 0px;
-	}
-
-	.dropdown-menu:before {
-		content: "";
-		position: absolute;
-		top: -20px;
-		right: 12px;
-		border: 10px solid #343A40;
-		border-color: transparent transparent #343A40 transparent;
-	}
-
-	.notification-box {
-		padding: 10px 0px;
-	}
-
-
-	@media (max-width: 1000px) {
-		.dropdown-menu {
-			top: 50px;
-			left: -16px;
-			width: 290px;
-		}
-
-		.nav {
-			display: block;
-		}
-
-		.nav .nav-item,
-		.nav .nav-item a {
-			padding-left: 0px;
-		}
-
-		.message {
-			font-size: 13px;
-		}
-	}
        
         
        
@@ -127,6 +65,8 @@
 </head>
 
 <?php
+
+
     $sql = "Select * from tblinformation";
     $query = $dbh->prepare($sql);
     $query->execute();
@@ -137,8 +77,6 @@
         $adminlogo = $l->blogo3;
         $title = $l->eTitle;
     }
-
-     
     $sql ="Select max(ID)as current from tblloginaudits";
 
     $latest =0;
@@ -148,8 +86,31 @@
     foreach($results as $c){
         $latest = $c->current;
     }
+
+    $adid = $_SESSION['clientmsaid'];
+
+    $rhid = "";
+    $bhid = "";
+    $chid = "";
+
+    if ($adid == 2){
+        $bhid = "none";
+
+    }
+    else if ($adid>2){
+        $chid = "none";
+        $rhid = "none";
+    }
+    else{
+        $rhid = "";
+        $bhid = "";
+        $chid = "";
+    }
 ?>
-<body></body>
+
+
+
+<body>
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="side-color" id="sidebar-wrapper">
@@ -180,22 +141,9 @@
              ?><br>
                 <img src = "<?php echo $adminlogo;?>" class = "py-1"style = "width: 60px;"><br>
                 <div class="btn-group">
-				<nav class="navbar navbar-expand-lg">
-						<ul class="nav navbar-nav nav-pills mr-auto justify-content-end">
-							<li class="nav-item">
-                            <a href="client-profile.php" class="btn btn-transparent"><i class="fa fa-user fs-4 text-primary"></i></a>
-							</li>
-							<li class="nav-item">
-                            <a href="change-password.php" class="btn btn-transparent"><i class="fa fa-cog  fs-4 text-primary"></i></a>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <span class="label label-pill label-danger count" style="border-radius:10px;"></span><i class="fa fa-bell fs-4 text-primary"></i>
-								</a>
-								<ul class="dropdown-menu"></ul>
-							</li>
-						</ul>
-				</nav>
+                    <a href="client-profile.php" class="btn btn-transparent"><i class="fa fa-user fs-4 text-primary"></i></a>
+                    <a href="change-password.php" class="btn btn-transparent"><i class="fa fa-cog  fs-4 text-primary"></i></a>
+                    <a href="#" class="btn btn-transparent shadow-0"><i class="fa fa-bell fs-4 text-primary"></i></a>
                 </div>
                 <br>
                 <div class="btn-group my-2" role="group" aria-label="Basic example">
@@ -204,18 +152,15 @@
                         </form>          
                 </div>
                 
-                
             </div>
 
             <nav class="sidebar">
 
                 <ul class="nav flex-column" id="nav_accordion">
                     <li class="nav-item">
-                        <a href="admin-dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text"><i
+                        <a style= "display:<?php echo $chid?>" href="admin-dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text"><i
                             class="fas fa-tachometer-alt me-2"></i>Dashboard </a>    
-                        
                     </li>
-
 
                     <li class="nav-item has-submenu">
                         <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text nav-link fs-6">
@@ -229,18 +174,18 @@
                         <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text nav-link fs-6">
                             <i class="fas fa-hand-paper my-0 me-2"></i>Services</a>
                         <ul class="submenu collapse">
-                            <li><a class="nav-link fs-6" href="admin-certificate.php">Certification </a></li>
-                            <li><a class="nav-link fs-6" href="admin-blotter.php">Blotter </a></li>
-                            <li><a class="nav-link fs-6" href="admin-rentals.php">Rentals</a></li>
+                            <li style= "display:<?php echo $chid?>;"><a class="nav-link fs-6" href="admin-certificate.php">Certification </a></li>
+                            <li style= "display:<?php echo $bhid?>;"><a class="nav-link fs-6" href="admin-blotter.php">Blotter </a></li>
+                            <li style= "display:<?php echo $rhid?>;"><a class="nav-link fs-6" href="admin-rentals.php">Rentals</a></li>
                             <!--<li><a class="nav-link fs-6" href="admin-otherservice.php">Other Services </a></li>-->
                         </ul>
                     </li>
-                    <li class="nav-item has-submenu">
-                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text  nav-link fs-6">
-                            <i class="fas fa-book my-0 me-2"></i>Request</a>
+                    <li class="nav-item has-submenu"  >
+                        <a  style= "display:<?php echo $chid?>"  href="#" class="list-group-item list-group-item-action dropdown-toggle bg-transparent second-text  nav-link fs-6">
+                            <i  class="fas fa-book my-0 me-2"></i>Request</a>
                         <ul class="submenu collapse">
                             <li><a class="nav-link fs-6" href="admin-cert-request.php">Certification</a></li>
-                            <li><a class="nav-link fs-6" href="admin-rental-request.php">Rental</a></li>
+                            <li ><a class="nav-link fs-6" href="admin-rental-request.php">Rental</a></li>
                             <!--<li><a class="nav-link fs-6" href="admin-other-request.php">Other Service</a></li>-->
                         </ul>
                     </li>
@@ -314,8 +259,7 @@
 
                 
             
-                    <?php } ?>
-
+           
    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
@@ -327,37 +271,3 @@
             el.classList.toggle("toggled");
         };
     </script>
-    <script type = "text/javascript">
-$(document).ready(function(){
-	
-	function load_unseen_notification(view = '')
-	{
-		$.ajax({
-			url:"fetch.php",
-			method:"POST",
-			data:{view:view},
-			dataType:"json",
-			success:function(data)
-			{
-			$('.dropdown-menu').html(data.notification);
-			if(data.unseen_notification > 0){
-			$('.count').html(data.unseen_notification);
-			}
-			}
-		});
-	}
- 
-	load_unseen_notification();
- 
-	 
-	$(document).on('click', '.dropdown-toggle', function(){
-	$('.count').html('');
-	load_unseen_notification('yes');
-	});
- 
-	setInterval(function(){ 
-		load_unseen_notification();; 
-	}, 5000);
- 
-});
-</script>

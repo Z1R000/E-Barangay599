@@ -5,8 +5,34 @@ error_reporting(0);
 
 include('includes/dbconnection.php');
 
+function upPhoto ($poid){
+    $ftypes = array('png','jpeg','jpg');
+
+    $fileName = $_FILES[''.$poid.'']['name'];
+    $fileSize = $_FILES[''.$poid.'']['size'];
+    $fileError = $_FILES[''.$poid.'']['error'];
+    $filetmpname = $_FILES[''.$poid.'']['tmp_name'];
+    $fileExt = explode('.',$fileName);
+    $extension = strtolower(end($fileExt));
+    
+    $destination = "";
+
+    if (in_array($extension,$ftypes)){
+        if($fileSize<5000000){
+            $newfilename = uniqid('',TRUE).".".$extension;
+            $destination = "images/".$newfilename;
+            move_uploaded_file($filetmpname,$destination);
+           // header('Location: admin-e-content.php?success=1');
+        }
+    }
+    
+    return $destination;
+
+}
+
 if (isset($_POST['submit'])) {
 
+    $destination = upPhoto('proof');
     $residenttype = $_POST['residenttype'];
     $prk = $_POST['prk'];
     $hunit = $_POST['hunit'];
@@ -30,8 +56,8 @@ if (isset($_POST['submit'])) {
     $stat = "Pending";
 
     
-        $sql = "insert into tblresident (ResidentType,Purok,houseUnit,voter,LastName,Suffix,FirstName,MiddleName,Gender,BirthDate,BirthPlace,streetName,Cellphnumber,tinNumber,sssNumber,CivilStatus,Email,Password,vPrecinct,HomeName,resStatus)
-        values(:residenttype,:prk,:hunit,:voter,:lname,:sf,:fname,:mname,:gend,:bdate,:bp,:strt,:contact,:tin,:sss,:cstatus,:email,:password,:vp,:hm,:stat)";
+        $sql = "insert into tblresident (ResidentType,Purok,houseUnit,voter,LastName,Suffix,FirstName,MiddleName,Gender,BirthDate,BirthPlace,streetName,Cellphnumber,tinNumber,sssNumber,CivilStatus,Email,Password,vPrecinct,HomeName,resStatus,attachment)
+        values(:residenttype,:prk,:hunit,:voter,:lname,:sf,:fname,:mname,:gend,:bdate,:bp,:strt,:contact,:tin,:sss,:cstatus,:email,:password,:vp,:hm,:stat,:destination)";
         $query = $dbh->prepare($sql);
         $query->bindParam(':residenttype', $residenttype, PDO::PARAM_STR);
         $query->bindParam(':prk', $prk, PDO::PARAM_STR);
@@ -54,6 +80,7 @@ if (isset($_POST['submit'])) {
         $query->bindParam(':cstatus', $cstatus, PDO::PARAM_STR);
         $query->bindParam(':email', $email, PDO::PARAM_STR);
         $query->bindParam(':password', $password, PDO::PARAM_STR);
+        $query->bindParam(':destination', $destination, PDO::PARAM_STR);
         $query->execute();
 
         $LastInsertId = $dbh->lastInsertId();
@@ -61,7 +88,7 @@ if (isset($_POST['submit'])) {
             echo '<script>alert("Resident request has been sent.")</script>';
             echo "<script>window.location.href ='index.php'</script>";
         } else {
-            echo '<script>alert("Something Went Wrong. Please try again")</script>';
+            echo '<script>alert("Something Went Wrong.'.$destination.' Please try again")</script>';
         }
     
 
@@ -186,7 +213,7 @@ if (isset($_POST['submit'])) {
 
 
 
-    <form method="POST" id="add_form">
+    <form method="POST" id="add_form" enctype="multipart/form-data">
         <div class="container-fluid px-5">
             <div class="row px-5">
                 <div class="col-xl-5"></div>
@@ -300,11 +327,8 @@ if (isset($_POST['submit'])) {
                             <div class="col-xl-4 mx-2" id="precinct">
                                 <div class="input-group align-items-center">
                                 <label class="fs-6 small px-2">Precinct Number</label>
-                                <select class="form-select input-sm" name="vp" id="pres">
-                                    <option value="">--Select--</option>
-                                    <option value="1a">1-A</option>
-                                    <option value="2a">2-A</option>
-                                </select>
+                                <input type= "text" class="form-control input-sm" name="vp" id="pres">
+                                
                                 </div>
 
                             </div>
@@ -332,7 +356,17 @@ if (isset($_POST['submit'])) {
                                 <br>
                                 <div class="mb-3">
 
-                                    <input class="form-control form-control " id="formFileSm" type="file">
+                                <div class="col-12">
+														<input 	name = "proof" class="form-control form-control-sm" id="selectproof" onchange = "loadFile(event,'cproof');" type="file">
+														</div>
+														<div class="col-12">
+															<img style= "display:none" src = "../../images/defaultimage.png" class= "img-fluid" id = "cproof">
+														</div>
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -652,3 +686,13 @@ if (isset($_POST['submit'])) {
         });
     });
 </script>
+<script>
+		var loadFile = function (event,imgid) {
+        
+        var image = document.getElementById(imgid);
+            image.src = URL.createObjectURL(event.target.files[0]);
+            image.style.display = "block";
+        
+        
+        };
+	</script>   

@@ -726,7 +726,6 @@
                                         <div class="form-floating mb-3">
                                             <textarea type="text" name= "hist" class="form-control" id="edit-about" >
                                             <?php echo $infoArr[6]?>
-
                                             </textarea>
 
                                         </div>
@@ -1012,6 +1011,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col py-2" style= "overflow-x:auto;">
+                                    <?php
+                                      
+                                    
+                                    ?>
                                         <table class="table table-striped  table-bordered" id = "del-pay" style = "min-width: 600px;">
                                             <thead class= "bg-light">
                                                 <tr>
@@ -1106,38 +1109,28 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-
+                                                <?php
                                                 
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-                                                    Fake Person Sample  
-                                                </td>
+                                                $sql= "Select * from tblresident where resStatus = 'Rejected'";
+                                                $query = $dbh->prepare($sql);
+                                                $query->execute();
+                                                $dec = $query->fetchAll(PDO::FETCH_OBJ);
+                                                $nu=1;
+                                                foreach($dec as $r){
+                                                    $cdate= $r->dateofRegistration;
+                                                    
+                                                    echo '<tr> <td>'.$nu.'</td>
+                                                    <td scope="col" style = "text-align: left">'.$r->LastName.",".$r->FirstName." ".$r->MiddleName." ".$r->Suffix.'</td>   <td>'.date('l, j F Y - h:i A', strtotime($cdate)).'</td>
+                                                    <td>'.$r->decreason.'</td>
+                                                    
+                                                    
+                                                    </tr>';
+                                                    $nu += 1;
+                                                }
                                                 
-                                                <td>
-                                                    November 13 2021 - 04:03 PM
-                                                </td>
-                                                <td>
-                                                    Mismatched Credentials
-                                                </td>
-                                                </tr>
-                                                <tr>
-                                                <td>
-                                                    2
-                                                </td>
-                                                <td>
-                                                    Vert, Lil Uzi
-                                                </td>
                                                 
-                                                <td>
-                                                November 13 2021 - 01:03 PM
-                                                </td>
-                                                <td>
-                                                    Trolling Detection
-                                                </td>
-                                                </tr>
+                                                ?>
+                                               
                                             </tbody>
                                         </table>
                                     </div>

@@ -1,5 +1,8 @@
 <?php 
     $curr ="Manage Purok ".$_GET['purok'];
+    session_start();
+    error_reporting(0);
+    include('includes/dbconnection.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,6 +42,17 @@
         }else{
             header('Location: ../../unauthorized-access.php');
         }
+
+        if (isset($_POST['update'])){
+            $sid = $_POST['update'];
+            $sname= $_POST['sname'];
+            $prn = $_POST['prn'];
+
+            $update = "Update tblstreet set streetName = '".$sname."', Purok =".$prn." where ID = ".$sid."";
+            if ($con->query($update)===TRUE){
+                header("Location: admin-e-content.php?streetsupdpate=success");
+            }
+        }
        
     ?>
     <?php 
@@ -49,7 +63,7 @@
         $query->execute();
         $results=$query->fetchAll(PDO::FETCH_OBJ);
         $ctr =1;
-
+        
       
     ?> 
      <!--breadcrumb-->
@@ -69,7 +83,7 @@
             </div>
         </div>
     </nav>
-
+   
     <div class="container-fluid ">
         <div class="row g-3 p-3  justify-content-center">
             <div class="row justify-content-center px-5 py-3     ">
@@ -109,7 +123,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <form method = "GET" action = "#edit-st">
+                                
                                 <?php
                                 foreach($results as $row){
 
@@ -119,126 +133,122 @@
                                     </td>
                                     <td>
                                         '.$row->streetName.'
-                                    <div class="modal fade" id = "edit-st'.$ctr.'" tab-idndex = "-1">
-                                    <div class="modal-dialog modal-dialog-centered modal-md">
-                                        <div class="modal-content g-0 border-0 ">
-                                            <div class="modal-header bg-599 border-599 text-white ">
-                                                <div class="modal-title" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Edit Street</div>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body bg-white ">
-                                                <div class="row g-2 justify-content-center">
-                                                
+                                        </td>
+                                        <div class="modal fade" id = "edit-st'.$ctr.'" tab-idndex = "-1">
+                                        <div class="modal-dialog modal-dialog-centered modal-md">
+                                            <div class="modal-content g-0 border-0 ">
+                                                <div class="modal-header bg-599 border-599 text-white ">
+                                                    <div class="modal-title" >&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Edit Street</div>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body bg-white ">
+                                                    <div class="row g-2 justify-content-center">
                                                     
-                                                    <div class = "col-xl-4">
-                                                    <label for = "prn" class= "fs-5">Current Purok </label>
- 
-                                                                ';
-                                           
-                                                 
-                                                        $sql_purok ="SELECT * FROM `tbllistpurok`";
-                                                        $query_purok = $dbh -> prepare($sql_purok);
-                                                        $query_purok->execute();
-                                                        $resultspur=$query_purok->fetchAll(PDO::FETCH_OBJ);
-                                                        
-                                                        $puroks = "";
-                                                        foreach($resultspur as $p){
-                                                            if ($p->pName == $row->Purok){
-                                                                $puroks.='<option selected value = "'.$p->pName.'">'.$p->pName.'</option>';
+                                                    <form method = "POST" >
+                                                        <div class = "col-xl-4">
+                                                        <label for = "prn" class= "fs-5">Current Purok </label>
+     
+                                                                    ';
+                                                     
+                                                            $sql_purok ="SELECT * FROM `tbllistpurok`";
+                                                            $query_purok = $dbh -> prepare($sql_purok);
+                                                            $query_purok->execute();
+                                                            $resultspur=$query_purok->fetchAll(PDO::FETCH_OBJ);
+                                                            
+                                                            $puroks = "";
+                                                            foreach($resultspur as $p){
+                                                                if ($p->pName == $row->Purok){
+                                                                    $puroks.='<option selected value = "'.$p->pName.'">'.$p->pName.'</option>';
+                                                                }
+                                                                else{
+                                                                    $puroks.='<option  value = "'.$p->pName.'">'.$p->pName.'</option>';
+                                                                }
+                                                              
                                                             }
-                                                            else{
-                                                                $puroks.='<option  value = "'.$p->pName.'">'.$p->pName.'</option>';
-                                                            }
-                                                          
-                                                        }
-                                                        echo '<select class= "form-select" name= "prn">'.$puroks.'</select>';
+                                                            echo '<select class= "form-select" name= "prn">'.$puroks.'</select>';
+    
+                                        echo'
+                                        
+                                                        </div>
+                                                       
+                                                        <div class="col-xl-8">
+                                                        <label for = "sname" class= "fs-5">Street Name </label>
+                                                            <input name= "sname" type = "text" value ="'.$row->streetName.'" class= "form-control">
+                                                        </div>
 
-                                    echo'
-                                    
-                                                    </div>
-                                                    
-                                                    <div class="col-xl-8">
-                                                    <label for = "sname" class= "fs-5">Street Name </label>
-                                                        <input name= "sname" type = "text" value ="'.$row->streetName.'" class= "form-control"/>
-                                                    </div>
-                                                    </div>
-                                                    <div class="row my-2">
-                                                    <div class="col-xl-12">
-                                                    <div class="float-end">
-                                                    <div class="btn-group">
-                                                       <button type= "submit" class="btn-primary btn"><i class="fa fa-save mx-1"></i>Save Changes</button>
-                                                    </div>
-                                                    <div class="btn-group">
-                                                    <button data-bs-dismiss ="modal" class="btn-secondary btn"><i class="fa fa-times-circle mx-1"></i>Cancel</button>
-                                                    </div>
-                                                 
-                                                    </div></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal fade" id = "delete-street" tab-idndex = "-1">
-                                    <div class="modal-dialog modal-dialog-centered modal-md">
-                                        <div class="modal-content g-0 bg-danger" >
-                                            <div class="modal-header  white ">
-                                                <div class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</div>
-                                                
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body bg-white">
-                                                <div class="row">
-                                                    <div class="col xl-4" align = "center">
-                                                        <img src="../images/trash.png" alt="trash" class= " img-fluid " style ="width: 10%;">
-                                                    </div>
-                                            
-                                                </div>
-                                                <div class="row">
-                                                    <p class = "fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
-                                                </div>
-                                                <div class="row justify-content-center" align = "center">
-                                                    <form method = "POST" action = "#">
-                                                    <div class="col-xl-12">
+                                                        </div>
+                                                        <div class="row my-2">
+                                                        <div class="col-xl-12">
                                                         <div class="float-end">
-                                                            <div class="btn-group">
-                                                                <button type = "button" class="btn btn-success " data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                                            <i class= "fa fa-check mx-1"></i>Confirm
-                                                        </button>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-primary" type="submit" name= "update" value = "'.$row->ID.'"><i class="fa fa-save mx-2"></i>Save</button>
                                                         </div>
                                                         <div class="btn-group">
-                                                        <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
-                                                            <i class= "fa fa-times-circle mx-1"></i>Cancel
-                                                        </button>
+                                                        <button data-bs-dismiss ="modal" class="btn-secondary btn"><i class="fa fa-times-circle mx-1"></i>Cancel</button>
                                                         </div>
-                                                   
+                                                     
+                                                        </div></div>
+                                                        </div>
                                                     </div>
-                                                    </div>
-                                                    </form>
                                                 </div>
-                                        
                                             </div>
-                                            <div class="modal-footer">
+                                        </div>
+                                        <div class="modal fade" id = "delete-street" tab-idndex = "-1">
+                                        <div class="modal-dialog modal-dialog-centered modal-md">
+                                            <div class="modal-content g-0 bg-danger" >
+                                                <div class="modal-header  white ">
+                                                    <div class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</div>
+                                                    
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body bg-white">
+                                                    <div class="row">
+                                                        <div class="col xl-4" align = "center">
+                                                            <img src="../images/trash.png" alt="trash" class= " img-fluid " style ="width: 10%;">
+                                                        </div>
                                                 
+                                                    </div>
+                                                    <div class="row">
+                                                        <p class = "fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
+                                                    </div>
+                                                    <div class="row justify-content-center" align = "center">
+                                                        
+                                                        <div class="col-xl-12">
+                                                            <div class="float-end">
+                                                                <div class="btn-group">
+                                                                    <button type = "button" class="btn btn-success " data-bs-dismiss = "modal"  name = "yes" value ="Yes">
+                                                                <i class= "fa fa-check mx-1"></i>Confirm
+                                                            </button>
+                                                            </div>
+                                                            <div class="btn-group">
+                                                            <button type = "button" class="btn btn-danger " data-bs-dismiss = "modal"  name = "no" value ="No">
+                                                                <i class= "fa fa-times-circle mx-1"></i>Cancel
+                                                            </button>
+                                                            </div>
+                                                       
+                                                        </div>
+                                                        </div>
+                                                  
+                                                    </div>
+                                                            </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                    </td>
-                                    <td style= "width:30%;text-align:center;">
-                                        <div class= "btn-group">
-                                        <button type= "submit" name= "edit" class= "btn btn-primary" value= "'.$row->ID.'"  data-bs-toggle = "modal" href= "#edit-st'.$ctr.'"><i class="fa fa-edit mx-1"></i>Manage</button> 
-                                        </div>
-                                     
-
-                                        <div class= "btn-group">
-                                        <button class= "btn btn-danger" value= "'.$row->ID.'"><i class="fa fa-trash mx-1"></i>Delete</button> 
-                                        </div>
-                                    </td>
-                                                                
-                                    </tr> 
-                                    
-                                    
-
+                                        <td style= "width:30%;text-align:center;">
+                                            <div class= "btn-group">
+                                            <button type= "button" name= "edit" class= "btn btn-primary" value= "'.$row->ID.'"  data-bs-toggle = "modal" href= "#edit-st'.$ctr.'"><i class="fa fa-edit mx-1"></i>Manage</button> 
+                                            </div>
+                                         
+    
+                                         
+                                        </td>
+                                                                    
+                                        </tr> 
+                                        
                                     ';
 
                                     $ctr++;
@@ -264,7 +274,6 @@
         </div>
     </div>
     
-        </form>
-   
+       
 </body>
 </html>

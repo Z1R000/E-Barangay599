@@ -1,5 +1,7 @@
 <?php
- $sql= 'Select tblresident.FirstName,tblcreaterental.ID as cID,tblcreaterental.payment,tblcreaterental.paymentID, tblcreaterental.proof, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblcreaterental.status, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate, tblcreaterental.creationDate, tblpurposes.Purpose, tblrental.rentalName, tblrental.rentalPrice, tblcreaterental.payable, tblstatus.statusName from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID join tblrental on tblrental.ID = tblcreaterental.rentalID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID join tblstatus on tblstatus.ID = tblcreaterental.status where tblcreaterental.status = 3 and tblcreaterental.status<8 order by tblcreaterental.creationDate DESC';
+ $sql= 'Select tblresident.FirstName,tblcreaterental.ID as cID,tblcreaterental.payment,tblcreaterental.paymentID, tblcreaterental.proof, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix, tblcreaterental.status, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate, tblcreaterental.creationDate, tblpurposes.Purpose, tblrental.rentalName, tblrental.rentalPrice, tblcreaterental.payable, tblstatus.statusName from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID join tblrental on tblrental.ID = tblcreaterental.rentalID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID join tblstatus on tblstatus.ID = tblcreaterental.status where tblcreaterental.status = 4 and tblcreaterental.status<8 order by tblcreaterental.creationDate DESC';
+
+
  $query = $dbh->prepare($sql);
  $query->execute();
  $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -215,7 +217,6 @@
                 <div class="modal-content g-0 bg-danger ">
                     <div class="modal-header bg-danger bg-transparent ">
                         <div class="modal-title text-white" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Declining payment?</div>
-                        
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">

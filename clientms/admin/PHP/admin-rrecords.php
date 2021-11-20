@@ -127,11 +127,7 @@ if ($_GET['add-rec'] == "successful") {
     <div class="alert alert-success alert-dismissible fade show " id = "alert" role="alert">
         <strong><i class="fa fa-check-circle mx-2"></i>New Record Added</strong> See <a href = "admin-rental-request.php" > pending</a> to check if pending status was set for rental record.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    
-        </div>
-    
-    
-    ';
+        </div>';
 } else {
 }
 if ($_GET['delete'] == "success") {
