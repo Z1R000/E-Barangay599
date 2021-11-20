@@ -9,39 +9,111 @@
     }else{
         $eid = $_GET['editid'];
 
-        $a = $b = $c = $d = $e = $f = $g = $h = $i = 0;
-        if(isset($_POST['btncheck0'])){
-            $a = 1;
+        
+      $sql ="SELECT tbladmin.ID as didd, tbladmin.*, tblresident.*, tblpositions.* from tbladmin join tblpositions on tblpositions.ID = tbladmin.BarangayPosition join tblresident on tblresident.ID = tbladmin.residentID WHERE tbladmin.ID = :eid";
+
+    $query = $dbh->prepare($sql);
+    $query->bindParam(':eid', $eid, PDO::PARAM_STR);
+    $query->execute();
+    $result = $query->fetchAll(PDO::FETCH_OBJ);
+    $arr =[];
+    $bday = "";
+    $diff = 0;
+    $term = 0;
+    $start = "";
+
+    foreach($result as $row)
+    {   
+        $get = $row->dayDuty;
+        $pieces = explode(",",$get);
+        $up="";
+
+        for ($x = 0; $x <= count($pieces); $x++) {
+            if ($pieces[$x] != 0){
+                $up .= "$pieces[$x],"; 
+            }
+            
         }
-        if(isset($_POST['btncheck1'])){
-          $b = 2;
+        $piece ='';
+        for ($i = 0; $i < strlen($up); $i++) {
+            if (is_numeric($up[$i])) {
+                $piece .= $up[$i];
+            }
         }
-        if(isset($_POST['btncheck2'])){
-          $c = 3;
-      }
-      if(isset($_POST['btncheck3'])){
-          $d = 4;
-      }
-      if(isset($_POST['btncheck4'])){
-          $e = 5;
-      }
-      if(isset($_POST['btncheck5'])){
-          $f = 6;
-      }
-      if(isset($_POST['btncheck6'])){
-          $g = 7;
-      }
-      if(isset($_POST['btncheck7'])){
-          $h = 8;
-      }
+        $day="";
+        for ($y = 0; $y < 9; $y++){
+            if ($piece[$y] != 0){
+                $g = $piece[$y];
+                $sqlg = "select * from tbldays WHERE ID = :g";
+                $qg = $dbh->prepare($sqlg);
+                $qg-> bindParam(':g', $g, PDO::PARAM_STR);
+                $qg-> execute();
+                $rg=$qg->fetchAll(PDO::FETCH_OBJ);
+                if($qg->rowCount() > 0)
+                {
+                    foreach ($rg as $rg) {
+                        $day .= "$rg->dDay ";
+                    }
+                }
+            }
+        }
+        $gbd = $row->BirthDate;
+        $gbd = date('Y-m-d', strtotime($gbd));
+        $bday = date('j F Y', strtotime($gbd));
+        $today = date('Y-m-d');
+        $diff = date_diff(date_create($gbd), date_create($today));
+        $fn = $row->LastName." ". $row->FirstName." ".$row->MiddleName." ".$row->Suffix;     
+        $start1 = date_create($row->AdminRegDate);
+        $start = date_create($row->AdminRegDate);
+
+        $term = date_add($start1,date_interval_create_from_date_string("2 Years"));
+      
+        
+        
+    }
 
       
-        $get = $a . "," . $b . "," . $c . "," . $d . "," . $e . "," . $f . "," .  $g . "," . $h;
+        
+    $cname = $_POST['cname'];
+    $usid = '';
+      for ($i = 0; $i < strlen($cname); $i++) {
+          if (is_numeric($cname[$i])) {
+              $usid .= $cname[$i];
+          }
+      }
+      $a = $b = $c = $d = $e = $f = $g = $h = $i = 0;
+            if(isset($_POST['btncheck0'])){
+                $a = 1;
+            }
+            if(isset($_POST['btncheck1'])){
+            $b = 2;
+            }
+            if(isset($_POST['btncheck2'])){
+            $c = 3;
+            }
+            if(isset($_POST['btncheck3'])){
+                $d = 4;
+            }
+            if(isset($_POST['btncheck4'])){
+                $e = 5;
+            }
+            if(isset($_POST['btncheck5'])){
+                $f = 6;
+            }
+            if(isset($_POST['btncheck6'])){
+                $g = 7;
+            }
+            if(isset($_POST['btncheck7'])){
+                $h = 8;
+            }
+            $get = $a . "," . $b . "," . $c . "," . $d . "," . $e . "," . $f . "," .  $g . "," . $h;
         if(isset($_POST['submit'])){
-          $sql = "update tbladmin set residentID=:usid, dayDuty=:get where ID = '1'";
+          $sql = "update tbladmin set residentID=:usid, dayDuty=:get where ID = :eid";
+          //echo $sql;
           $query = $dbh->prepare($sql);
           $query->bindParam(':get', $get, PDO::PARAM_STR);
           $query->bindParam(':usid', $usid, PDO::PARAM_STR);
+          $query->bindParam(':eid', $eid, PDO::PARAM_STR);
           $query->execute();
 
           echo '<script>alert("Admin Official has been updated.")</script>';
@@ -118,7 +190,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a class= "text-decoration-none" href="admin-dashboard.php"><i class="fa fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="admin-officials.php"     role ="button"><i class="fa fa-id-card"></i>&nbsp;599 OFficials</a></li>
+                                <li class="breadcrumb-item"><a  class= "text-decoration-none" href="admin-officials.php" role ="button"><i class="fa fa-id-card"></i>&nbsp;599 OFficials</a></li>
                                 <li class="breadcrumb-item active"><a href="#"><i class="fa fa-sitemap text-muted"></i></a>&nbsp;<?php echo $curr;?></li>
                             </ol>
                         </nav>
@@ -151,12 +223,10 @@
 
                 $arr=[];
 
-                   
-                            
-
             }
             
         ?>
+        <form method="post">
         <div class="row">
         <ul class="nav nav-tabs">
                         <li class="nav-item">
@@ -185,24 +255,7 @@
                                         
                                     <div class="input-group">
 
-                                        <input type="text" id = "search" class="form-control" name ="cname" value = "<?php echo $ar[1];?>" placeholder = "Officials Name" style= "text-align:center;font-size: 1.4em;" readonly>
-                                        <button class="btn btn-info text-white" onclick = "ful()" type ="button">
-                                            <i class="fa fa-edit">
-
-                                            </i>
-                                        </button>
-                                                <script>
-                                                    function ful(){
-                                                        var ps = document.getElementById('search').readonly;
-
-                                                        if (ps){
-                                                            document.getElementById('search').readonly = false;
-                                                        }
-                                                        else{
-                                                            document.getElementById('search').readonly = true;
-                                                        }
-                                                    }
-                                                </script>
+                                        <input type="text" id = "search" class="form-control" name ="cname" value = "<?php echo $row->didd." ". $row->LastName." ". $row->FirstName." ".$row->MiddleName." ".$row->Suffix;?>" placeholder = "ID / Officials Name" style= "text-align:center;font-size: 1.4em;">
                                     </div>
                                     <div class="col" style= "z-index: 9;position:relative">
                                             <div class="list-group w-100"  id="show-list" style="position: absolute">
@@ -219,17 +272,21 @@
                                                     $query = $dbh->prepare($sql);
                                                     $query->execute();
                                                     $res = $query->fetchAll(PDO::FETCH_OBJ);
-                                                    $ctr = 0;
+                                                    
                                                     foreach ($res as $d){
-                                                        if ($d->dDay == $det->dayOfDuty){
-                                                            echo '  <div class = "btn-group p-1 active"><input type="checkbox" checked value = "'.$d->dDay.'" onclick="showHid()" class="btn-check" id="btncheck'.$ctr.'" name="btncheck'.$ctr.'" autocomplete="off" ">
-                                                            <label class="btn btn-outline-primary" for="btncheck'.$ctr.'">'.$d->dDay.'</label></div>';    
+                                                        $ctr = 0;
+                                                        for ($l = 0; $l <= strlen($piece); $l++){
+                                                            if ($d->ID == $piece[$ctr]){
+                                                                echo '  <div class = "btn-group p-1 active"><input type="checkbox" checked value = "'.$d->dDay.'" onclick="showHid()" class="btn-check" id="btncheck'.$ctr.'" name="btncheck'.$ctr.'" autocomplete="off" ">
+                                                                <label class="btn btn-outline-primary" for="btncheck'.$ctr.'">'.$d->dDay.'</label></div>';    
+                                                            }
                                                         }
-                                                        else{
-                                                        echo '  <div class = "btn-group p-1"><input type="checkbox" value = "'.$d->dDay.'" name="btncheck'.$ctr.'"class="btn-check" onclick="showHid()" id="btncheck'.$ctr.'" autocomplete="off"">
-                                                        <label class="btn btn-outline-primary" for="btncheck'.$ctr.'">'.$d->dDay.'</label></div>';
-                                                        }
-                                                        $ctr ++;
+                                                        
+                                                            echo '  <div class = "btn-group p-1"><input type="checkbox" value = "'.$d->dDay.'" name="btncheck'.$ctr.'"class="btn-check" onclick="showHid()" id="btncheck'.$ctr.'" autocomplete="off"">
+                                                            <label class="btn btn-outline-primary" for="btncheck'.$ctr.'">'.$d->dDay.'</label></div>';
+                                                         
+                                                            $ctr ++;
+                                                        
 
                                                     }
                                             ?>
@@ -249,7 +306,7 @@
                                         
                                         <div class="btn-group"><button type= "submit" name="submit" class= "btn btn-success"><i class= "fa fa-save me-2"></i>Save</button>
                                         </div>
-                                        <div class="btn-group"><button type= "button" data-bs-dismiss="modal" class= "btn btn-secondary"><i class= "fa fa-times-circle me-2"></i>Cancel</button>
+                                        <div class="btn-group"><a href="admin-officials.php"class= "btn btn-secondary"><i class= "fa fa-times-circle me-2"></i>Cancel</a>
                                         </div>
                                         </div>
                                         </div>
@@ -269,7 +326,7 @@
                                                 <i class="fa fa-phone-square me-2"></i>Barangay Position
                                             </th>
                                             <td style= "text-align:right">
-                                                 <?php echo $arr[0];?>
+                                                 <?php echo $row->Position;?>
                                             </td> 
                                         </tr>
                                         <tr>
@@ -277,7 +334,7 @@
                                                 <i class="fa fa-phone-square me-2"></i>Contact Number
                                             </th>
                                             <td style= "text-align:right">
-                                                 <?php echo $arr[2];?>
+                                                 <?php echo $row->Cellphnumber;?>
                                             </td> 
                                         </tr>
                                         <tr>
@@ -285,7 +342,7 @@
                                                 <i class="fa fa-circle me-2"></i>Civil Status
                                             </th>
                                             <td style= "text-align:right">
-                                                <?php echo $arr[3];?>
+                                                <?php echo $row->CivilStatus;?>
                                             </td>
                                         </tr>
                                         <tr>
@@ -302,7 +359,7 @@
                                             </th>
                                             <td style= "text-align:right">
                                                 <?php
-                                                    echo $arr[4];
+                                                    echo $row->Gender;
                                                 ?>
                                             </td>
                                         </tr>
@@ -324,7 +381,7 @@
                                             </th>
                                             <td style= "text-align:right">
                                             <?php
-                                                    echo $arr[5];
+                                                    echo $day;
                                                 ?>
                                             </td>
                                         </tr>

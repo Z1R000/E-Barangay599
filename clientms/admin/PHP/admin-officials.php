@@ -6,7 +6,7 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');    
   } else{   
-    $sql ="SELECT tbladmin.ID as didd, tbladmin.*, tblresident.*, tblpositions.* from tbladmin join tblpositions on tblpositions.ID = tbladmin.BarangayPosition join tblresident on tblresident.ID = tbladmin.residentID WHERE tbladmin.ID = 1";
+    $sql ="SELECT tblresident.ID as didd, tbladmin.*, tblresident.*, tblpositions.* from tbladmin join tblpositions on tblpositions.ID = tbladmin.BarangayPosition join tblresident on tblresident.ID = tbladmin.residentID WHERE tbladmin.ID = 1";
 
     $query = $dbh->prepare($sql);
     $query->execute();
@@ -318,7 +318,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                     <div class="col-xl-8 col-lg-6 col-md-12 px-4 border-start border-secondary bg-light " style= "max-height: 650px; overflow-y: auto;">
                         <div class="row g-2 pb-3"  >   
                             <?php
-                               $sql ="SELECT tbladmin.*, tblresident.ID as rid, tblresident.*,tblpositions.*from tbladmin join tblpositions on tblpositions.ID = tbladmin.BarangayPosition join tblresident on tblresident.ID = tbladmin.residentID WHERE tbladmin.ID > 1";
+                               $sql ="SELECT tbladmin.ID as diode, tbladmin.*, tblresident.ID as rid, tblresident.*,tblpositions.*from tbladmin join tblpositions on tblpositions.ID = tbladmin.BarangayPosition join tblresident on tblresident.ID = tbladmin.residentID WHERE tbladmin.ID > 1";
                                $query = $dbh->prepare($sql);
                                $query -> execute();
                                $result = $query->fetchAll(PDO::FETCH_OBJ);
@@ -387,12 +387,12 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                 <img src="../images/barangay.png" alt="" class= "img-fluid rounded-circle" style= "height: 130px;">
                                             </div>
                                                 <h5 class= "text-center text-white">
-                                                    '.ucfirst($r->LastName).",".ucfirst($r->FirstName)." ".ucfirst($mid[0]).". ".ucfirst($r->Suffix).'
+                                                    '.ucfirst($r->FirstName)." ".ucfirst($mid[0]).". ".ucfirst($r->LastName)." ".ucfirst($r->Suffix).'
                                                 </h5>
                                         </div>
                                         <div class="row g-0  bg-light text-center">
                                             <div class="col-xl-12 my-2">
-                                                <a href = "manage-position.php?editid='.$r->rid.'" class= "link link-info"><i class= "fa fa-edit text-info"></i> Manage'.$ct.' </a>      
+                                                <a href = "manage-position.php?editid='.$r->diode.'" class= "link link-info"><i class= "fa fa-edit text-info"></i> Manage </a>      
                                             </div>
                                         </div>
                                     </div>
