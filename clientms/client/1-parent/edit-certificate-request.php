@@ -41,50 +41,59 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 	foreach($resultscheck as $rowcheck){
 		$statcheck = $rowcheck->status;
 	}
-
+	$pm = $_POST['cmeth'];
 	if (isset($_POST['submit'])) {
-		$upload = "";
-		$destination = upPhoto('proof');
-		$mop =1;
-		$stats = $_POST['status'];
-		if ($statcheck == "2"){
-			$stats = "3";
-			$upload = "Insert into tblpaymentlogs(mode,creationID,proof,servicetype) values(".$mop.",".$eid.",'".$destination."',2)";
-			$msg= '<script>alert("Certificate Information and proof of payment sent has been updated")</script>';
-		}
-		else if ($statcheck == "7"){
-			
-			$stats = "3";
-			$upload = "Update tblpaymentlogs set proof = '".$destination."' where creationID =".$eid." ";
-			$msg= '<script>alert("Certificate payment updated")</script>';
-
-		}
-		$subm = $_FILES['proof']['name'];
-
-		
-		
-			$sql = "update tblcreatecertificate set status=:stats WHERE ID=:eid";
-			$query = $dbh->prepare($sql);
-			$query->bindParam(':stats', $stats, PDO::PARAM_STR);
-			$query->bindParam(':eid', $eid, PDO::PARAM_STR);
-			$query->execute();
-		
-
-			
-			if ($con->query($upload)===TRUE){
-				
+		if (isset($_POST['proof'])) {
+			$upload = "";
+			$destination = upPhoto('proof');
+			$mop =1;
+			$stats = $_POST['status'];
+			if ($statcheck == "2"){
+				$stats = "3";
+				$upload = "Insert into tblpaymentlogs(mode,creationID,proof,servicetype) values(".$mop.",".$eid.",'".$destination."',2)";
+				$msg= '<script>alert("Certificate Information and proof of payment sent has been updated")</script>';
 			}
+			else if ($statcheck == "7"){
+				
+				$stats = "3";
+				$upload = "Update tblpaymentlogs set proof = '".$destination."' where creationID =".$eid." ";
+				$msg= '<script>alert("Certificate payment updated")</script>';
+
+			}
+			$subm = $_FILES['proof']['name'];
+
 			
-			/*$query1 = $dbh->prepare($upload);
-			$query1->bindParam(':mop', $mop, PDO::PARAM_STR);			
-			$query1->bindParam(':eid:',$eid , PDO::PARAM_STR);
-			$query1->bindParam(':destination', $destination, PDO::PARAM_STR);
-			$query1->execute();
-			*/
-			echo $msg;
-			echo "<script>window.location.href ='edit-certificate-request.php?editid=" . $eid . "'</script>";
 			
-		
+				$sql = "update tblcreatecertificate set status=:stats WHERE ID=:eid";
+				$query = $dbh->prepare($sql);
+				$query->bindParam(':stats', $stats, PDO::PARAM_STR);
+				$query->bindParam(':eid', $eid, PDO::PARAM_STR);
+				$query->execute();
+			
+
+				
+				if ($con->query($upload)===TRUE){
+					
+				}
+				
+				/*$query1 = $dbh->prepare($upload);
+				$query1->bindParam(':mop', $mop, PDO::PARAM_STR);			
+				$query1->bindParam(':eid:',$eid , PDO::PARAM_STR);
+				$query1->bindParam(':destination', $destination, PDO::PARAM_STR);
+				$query1->execute();
+				*/
+				echo $msg;
+				echo "<script>window.location.href ='edit-certificate-request.php?editid=" . $eid . "'</script>";
+			}else{
+				
+				$sql = "update tblcreatecertificate set pMode=:pm where ID = :eid";
+				$query = $dbh->prepare($sql);
+				$query->bindParam('pm',$pm, PDO::PARAM_STR);
+				$query->bindParam('eid',$eid, PDO::PARAM_STR);
+				$query->execute();
+				echo '<script>alert("Certificate request has been updated.")</script>';
+				echo "<script>window.location.href ='edit-certificate-request.php?editid=" . $eid . "'</script>";
+			}
 	}
 
 	if (isset($_POST['delete'])){
@@ -344,7 +353,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 									</div>
 									<div class="col-md-6">
 										<label for="purp" class= "black fw-bold fs-5">Purpose</label>
-											<select id = "purp" class ="form-select" name= "cmeth" disabled>
+											<select id = "purp" class ="form-select" name= "purp" disabled>
 												<option value="<?php echo "$row->purpID";?>"><?php echo "$row->Purpose";?></option>
 											</select>
 									</div>
@@ -367,7 +376,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 									<div class="col-md-4">
 
 									<label for="purp" class= "black fw-bold fs-5">Certificate Type</label>
-                                                <select id = "purp" class ="form-select" name= "cmeth" disabled>
+                                                <select id = "purp" class ="form-select" name= "ct" disabled>
                                                     <option value="<?php echo "$row->CertificateId";?>" selected><?php echo "$row->CertificateName";?></option>                                                
                                                 </select>
 									</div>
@@ -384,9 +393,27 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 									</div>
 									<div class="col-md-6">
 										<label for="cname" class= "black fw-bold fs-5">Mode of Payment</label>
-                                                <select id = "cname" class ="form-select" name= "cmeth" disabled>
-                                                    <option value="<?php echo "$row->pMode";?>" id=""><?php echo "$row->pMode";?><option>                                                
-                                                </select>
+												<?php 
+													if($row->statusName != "APPROVED"){
+														echo '<select id = "cname" class ="form-select" name= "cmeth" readonly>
+														<option value="'.$row->pMode.'" id="">'.$row->pMode.'</option>                                                
+													</select>';
+													}else{
+														if($row->pMode == "G-Cash"){ 
+															echo '<select id = "cname" class ="form-select" name= "cmeth">
+															<option value="Cash" >Cash</option>
+															<option value="G-Cash" selected>G-Cash</option>                                           
+													</select>';
+														}else{
+															echo '<select id = "cname" class ="form-select" name= "cmeth">
+															<option value="Cash" selected>Cash</option>
+															<option value="G-Cash" >G-Cash</option>                                           
+													</select>';
+														}
+														
+													}
+												?>
+                                                
 									</div>
 
 								</div>
@@ -620,7 +647,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 										
 												
 											
-											}else if ($scheck == "APPROVED" ){
+											}else if ($scheck == "APPROVED"){
 												echo '
 												<div class="row">
 												<div class="col-xl-3">
@@ -793,7 +820,25 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 			
 											</div>';
 											}	
-											}}
+											}}else{
+												if ($scheck == "APPROVED"){
+													echo '
+											<div class="row">
+												<div class="col-xl-3">
+			
+												</div>
+												<div class="col-xl-3 ">	
+			
+												</div>
+												<div class="col-xl-3 ">
+													<button type="submit" class="form-control btn btn-outline-danger" name="delete" id="delete">Cancel Request</button>
+												</div>
+												<div class="col-xl-3 ">
+													<button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
+												</div>
+											</div>';
+												}
+											}
 										?>
 							</div>
 						</div>
