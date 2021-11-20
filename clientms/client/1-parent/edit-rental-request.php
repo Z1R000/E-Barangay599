@@ -482,7 +482,7 @@ function upPhoto ($poid){
                                         
 
                                     }
-                                    else if (($checkstat == "2")&&($mode==1)){
+                                    else if ($checkstat == 2){
                                         echo '<div class="row">
                                         <div class="col-xl-3">
                                             <label for="formFileSm" class="form-label">Upload Proof of Payment<span class="fs-6 text-muted"> (JPEG or PNG format)</span></label>
@@ -500,6 +500,7 @@ function upPhoto ($poid){
                                         </div>
     
                                     </div>';
+                                    
                                     $sql = "Select * from tblinformation";
 												
 											$query= $dbh->prepare($sql);
@@ -507,12 +508,7 @@ function upPhoto ($poid){
 											$result = $query->fetchAll(PDO::FETCH_OBJ);
 											
 											foreach ($result as $cred){
-                                                $sql = "Select proof from tblpaymentlogs where creationID = ".$eid." and servicetype = 1";
-                                                $query= $dbh->prepare($sql);
-											    $query->execute();
-											    $res = $query->fetchAll(PDO::FETCH_OBJ);
-                                                foreach($cr as $c){
-
+        
                                     echo'
                                     <div class="row">
                                         <div class="col-xl-3">
@@ -578,8 +574,8 @@ function upPhoto ($poid){
                                         <div class="col-xl-3 ">
                                             <button type="submit" class="form-control btn btn-outline-success" name="submit" id="submit">Submit</button>
                                         </div>
-                                    </div>';}}
-                                    }else if (($checkstat == "4" || $checkstat == "6" || $checkstat == "3")&&($mode==1)){
+                                    </div>';}
+                                    }else if (($checkstat == "4" || $checkstat == "6" || $checkstat == "3")){
                                         echo '<div class="row">
                                         <div class="col-xl-3">
                                         <label for="ctype" class="black fw-bold fs-5">Proof of Payment</label>
@@ -604,9 +600,6 @@ function upPhoto ($poid){
                                     $result = $query->fetchAll(PDO::FETCH_OBJ);
 
                                     foreach ($result as $i){
-
-
-
                                     
                                     echo'
                                         <div class="col-xl-3">

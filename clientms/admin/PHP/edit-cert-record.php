@@ -555,7 +555,7 @@
                                                         <div class="row g-2">
                                                        
                                                         <table>';
-                                                        $select = "Select * from tblpaymentlogs where creationID = ".$eid."";
+                                                        $select = "Select * from tblpaymentlogs where creationID = ".$eid."servicetype=1";
                                                         $query = $dbh->prepare($sql);
                                                         $query ->execute();
                                                         $plog = $query->fetchAll(PDO::FETCH_OBJ);
