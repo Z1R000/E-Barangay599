@@ -1,10 +1,27 @@
+<?php
+$sql = "Select reslogo from tblinformation";
+$query = $dbh->prepare($sql);
+$query-> execute();
+$results = $query->fetchAll(PDO::FETCH_OBJ);
+
+
+
+?>
 <div style="background-color: #021f4e;" id="sidebar-wrapper">
 
 
     <div class="sidebar-heading text-center py-2 second-text fs-5 fw-bold border-bottom">
-
+    <?php
+    $logo= "";
+    foreach ($results as $r){
+        $logo= $r->reslogo;
+    }
+    
+    
+    
+    ?>
         <br>Barangay 599 <br>E-barangay<br>
-        <img src="images/resident-logo.png" class="py-1" style="width: 60px;"><br>
+        <img src="<?php echo $logo; ?>" class="py-1" style="width: 60px;"><br>
 
 
 
