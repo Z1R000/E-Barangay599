@@ -22,6 +22,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         $get = $row->dayDuty;
         $pieces = explode(",",$get);
         $up="";
+
         for ($x = 0; $x <= count($pieces); $x++) {
             if ($pieces[$x] != 0){
                 $up .= "$pieces[$x],"; 
@@ -55,10 +56,8 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         $gbd = date('Y-m-d', strtotime($gbd));
         $bday = date('j F Y', strtotime($gbd));
         $today = date('Y-m-d');
-
         $diff = date_diff(date_create($gbd), date_create($today));
-        $fn = $row->LastName." ". $row->FirstName." ".$row->MiddleName." ".$row->Suffix;
-        
+        $fn = $row->LastName." ". $row->FirstName." ".$row->MiddleName." ".$row->Suffix;     
         $start1 = date_create($row->AdminRegDate);
         $start = date_create($row->AdminRegDate);
 
@@ -271,7 +270,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                             </td>
                                             
                                         
-                                    
                                         </tr>
                                         <tr class= "">
                                             <th class =""><i class= "fa fa-address-card me-1"></i>Age  </th>
@@ -302,7 +300,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                 <td colspan = 2 style ="text-align: right; padding-right: 6%;">
                                                    <?php echo $arr[5]?>
                                                 </td>
-                                            
                                         </tr>
                                         <tr class= "">
                                         
@@ -311,9 +308,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                 <?php echo $start->format('20y')."-".$term->format('20y');?>
                                             </td>
                                         
-                                            
                                         </tr>
-                                     
                                         
                                      </table>
                                 </div>
@@ -382,8 +377,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                     $mid = $r->MiddleName;
                                     
                                     echo '       
-                                      
-                              
                                     <div class="col-xl-4  border-secondary px-3"  >
                                         <div class="row g-0 shadow-lg">
                                             <div class="row g-0 bg py-1 bg-light">
@@ -399,228 +392,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                         </div>
                                         <div class="row g-0  bg-light text-center">
                                             <div class="col-xl-12 my-2">
-                                                <a href = "#account'.$ct.'" data-bs-toggle= "modal"class= "link link-info"><i class= "fa fa-edit text-info"></i> Manage'.$ct.' </a>      
+                                                <a href = "manage-position.php?editid='.$r->rid.'" class= "link link-info"><i class= "fa fa-edit text-info"></i> Manage'.$ct.' </a>      
                                             </div>
                                         </div>
                                     </div>
                                     </div>
                                     
 
-                                    <div class="modal fade" id = "account'.$ct.'" tab-idndex = "-1">
-                                    <div class="modal-dialog modal-dialog-centered modal-md">
-                                        <div class="modal-content bg-dark g-0  ">
-                                            <div class="modal-header bg-dark  ">
-                                                <h4 class="modal-title text-white"><i class= "fa fa-cog text-secondary"></i> E-barangay Account Settings</h4>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body bg-white">
-                                                <ul class="nav nav-tabs">
-                                                    <li class="nav-item">
-                                                        <a class="nav-link active" aria-current="page" href="#ebgy'.$ct.'" data-bs-toggle= "tab">E-barangay Account</a>
-                                                    </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#person'.$ct.'"data-bs-toggle= "tab">Personal Details</a>
-                                                </li>
-                                                </ul>
-                                                
-                                                <div class="tab-content ">
-                                                <form method="post">
-                                                    <div class="tab-pane active" id="ebgy'.$ct.'">
-                                                        <div class="container pt-4">
-                                                            <div class="row g-3 justify-content-center">
-                                                                <div class="col-10">
-                                                                    <div class="input-group">
-
-                                                                        <input type="text" id = "search'.$ct.'" name= "fullName'.$ct.'" class="form-control ser." value = "'.ucfirst($r->rid)." ".ucfirst($r->LastName).",".ucfirst($r->FirstName)." ".ucfirst($r->MiddleName).". ".ucfirst($r->Suffix).'" placeholder = "Officials Name" style= "text-align:center;font-size: 1.4em;">
-                                                                        <button class="btn btn-info text-white" onclick = "ful'.$ct.'()" type ="button">
-                                                                        <i class="fa fa-edit">
-                                                                       
-                                                                        </i>    
-                                                                        </button>
-
-                                                                    </div>
-                                                                    <script>
-                                                                        function ful'.$ct.'(){
-                                                                            var ps = document.getElementById(\'search'.$ct.'\').readonly;
-                    
-                                                                            if (ps){
-                                                                                document.getElementById(\'search'.$ct.'\').readonly = false;
-                                                                            }
-                                                                            else{
-                                                                                document.getElementById(\'search'.$ct.'\').readonly = true;
-                                                                            }
-                                                                        }
-                                                                    </script>
-                                                                    <script>
-
-                                                                            $(document).ready(function () {
-                                                                            // Send Search Text to the server
-                                                                            $("#search'.$ct.'").keyup(function () {
-                                                                                let searchText = $(this).val();
-                                                                                if (searchText != "") {
-                                                                                $.ajax({
-                                                                                    url: "searchname.php",
-                                                                                    method: "post",
-                                                                                    data: {
-                                                                                    query: searchText,
-                                                                                    },
-                                                                                    success: function (response) {
-                                                                                    $("#show-list'.$ct.'").html(response);
-                                                                                    },
-                                                                                });
-                                                                                } else {
-                                                                                $("#show-list'.$ct.'").html("");
-                                                                                }
-                                                                            });
-                                                                            $(document).on("click", "#clicks", function () {
-                                                                                $("#search'.$ct.'").val($(this).text());
-                                                                                $("#show-list'.$ct.'").html("");
-                                                                            });
-                                                                            });
-
-
-                                                                            </script>
-                                                                    <div class="col" style= "z-index: 9;position:relative">
-                                                                    <div class="list-group w-100"  id="show-list'.$ct.'" style="position: absolute">
-                                                                    <!-- Here autocomplete list will be display -->
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-12 ">
-                                                                    <div class="row justify-content-center">
-                                                                    <div class="col-12" align = \'center\'>
-                                                                        <h3 class= "text-center">Day of Duty</h3>';
-                                                                        
-                                                                        $sql = "Select * from tbldays";
-                                                                        $query = $dbh->prepare($sql);
-                                                                        $query->execute();
-                                                                        $res = $query->fetchAll(PDO::FETCH_OBJ);
-                                                                        $ctr = 0;
-                                                                        foreach ($res as $d){
-                                                                            if ($d->dDay == $row->dDay){
-                                                                                echo ' 
-                                                                                 <div class = "btn-group p-1 "><input type="checkbox"   value = "'.$d->dDay.'" class="btn-check" id="erday'.$ctr.$ct.'" autocomplete="off" >
-                                                                                <label class="btn btn-outline-primary" for="btncheck'.$ctr.$ct.'">'.$d->dDay.'</label></div>';    
-                                                                            }
-
-                                                                            else{
-                                                                            echo '  <div class = "btn-group p-1"><input type="checkbox" value = "'.$d->dDay.'" class="btn-check" id="btncheck'.$ctr.$ct.'" autocomplete="off">
-                                                                            <label class="btn btn-outline-primary" for="btncheck'.$ctr.$ct.'">'.$d->dDay.'</label></div>';
-                                                                            }
-                                                                            $ctr ++;
-                    
-                                                                        }
-                                                        echo '
-                                                        
-                                                    <div class="row my-2">
-                                                        <div class="col-xl-12 my-2" >
-                                                            <div class="float-end">
-                                                                <div class="btn-group"><button type= "submit" name="submit" class= "btn btn-success"><i class= "fa fa-save me-2"></i>Save</button>
-                                                                </div>
-                                                                <div class="btn-group"><button type= "button" data-bs-dismiss="modal" class= "btn btn-secondary"><i class= "fa fa-times-circle me-2"></i>Cancel</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                
-                                                    </div>
-                                                                </div>
-                                                                </div>
-                                                                </div>
-
-                                                            </div>
-                                                            
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    </form>
-                                                    <div class="tab-pane " id = "person'.$ct.'">
-                                                    <div class="row g-0 justify-content-center  ms-2 me-3">
-                                                    <div class="col-md-12 mt-4">        
-                                                        <table class="table">
-                                                        <tr>
-                                                                <th>
-                                                                    <i class="fa fa-phone-square me-2"></i>Barangay Position
-                                                                </th>
-                                                                <td style= "text-align:right">
-                                                                     '.$r->Position.'
-                                                                </td>
-                                                                 
-                                                            </tr>
-                                                            <tr>
-                                                                <th>
-                                                                    <i class="fa fa-phone-square me-2"></i>Contact Number
-                                                                </th>
-                                                                <td style= "text-align:right">
-                                                                     '.$r->Cellphnumber.'
-                                                                </td>
-                                                                 
-                                                            </tr>
-                                                            <tr>
-                                                                <th>
-                                                                    <i class="fa fa-circle me-2"></i>Civil Status
-                                                                </th>
-                                                                <td style= "text-align:right">
-                                                                    '.$r->CivilStatus.'
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>
-                                                                    <i class="fa fa-id-card me-2"></i>Age
-                                                                </th>
-                                                                <td style= "text-align:right">
-                                                                    '.$diff->format('%y').'
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>
-                                                                    <i class="fa fa-venus-mars me-2"></i>Gender
-                                                                </th>
-                                                                <td style= "text-align:right">
-                                                                   '.$r->Gender.'
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>
-                                                                    <i class="fa fa-birthday-cake me-2"></i>Date of Birth
-                                                                </th>
-                                                                <td style= "text-align:right">
-                                                                   '.$bday.'
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>
-                                                                    <i class="fa fa-check-square me-2"></i>Day/s of Duty
-                                                                </th>
-                                                                <td style= "text-align:right">
-                                                                    '.$day.'
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>
-                                                                    <i class="fa fa-calendar me-2"></i>Term
-                                                                </th>
-                                                                <td style= "text-align:right">
-                                                                    '.$acterm.'
-                                                                </td>
-                                                            </tr>
-                                                            </table>
-                                                            </div>
-                                                                      
-                                                    </div>
-                                                    <div class="row my-2">
-                                                    <div class="col-xl-12 my-2" >
-                                                        <div class="float-end">
-                                                           
-                                                            <div class="btn-group"><button type= "button" data-bs-dismiss="modal" class= "btn btn-secondary"></i>Done</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                                    </div>
-                                                
-                                                </div>
-                                          </div></div>
-                                    </div>
-                                    </div>
 
 
                                     ';   
@@ -633,7 +411,6 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                     </div>                
             </div>
         </div>
-
 
     <div class="modal fade" id = "change-dp" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-sm">
