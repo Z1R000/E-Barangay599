@@ -24,7 +24,9 @@
                 $cpayable  =$_POST['cpayable'];
                 $time = new DateTime("now", new DateTimeZone('Asia/Manila'));
                 $now= $time->format("Y-m-d h:i");
+
                 if ($paid > $cpayable){
+
                     $diff = $paid - $cpayable;
                     $sql="update tblcreatecertificate set status=:status WHERE ID=:eid";
                     $query=$dbh->prepare($sql);
@@ -47,12 +49,14 @@
                   
                 }
                 elseif ($paid<$cpayable){
+
                     $diff = $cpayable - $paid;
                     $sql="update tblcreatecertificate set status=:status WHERE ID=:eid";
                     $query=$dbh->prepare($sql);
                     $query->bindParam(':status',$status,PDO::PARAM_STR);
                     $query->bindParam(':eid',$eid,PDO::PARAM_STR);
                     $query->execute();
+
                     $payup = "update tblpaymentlogs set 
                         dateAccepted = '".$now."',
                         refNum = ".$_POST['refNum'].",
@@ -222,7 +226,6 @@
             </div>
         </div>
     </nav>
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-12"> 
@@ -230,7 +233,7 @@
             </div>
         </div>
     </div>
-    
+
     <form method ="POST">
         <?php
             $eid=intval($_GET['editid']);
@@ -531,7 +534,7 @@
                                     }
                                     else{
 
-                                    if ($checkstat == "6" || $checkstat == "3"){
+                                    if ($checkstat == "3"){
                                         
                                         $sql ="select * from tblpaymentlogs where creationID = ".$_GET['editid']." and servicetype= 2";
                                         $query= $dbh->prepare($sql);
@@ -696,6 +699,7 @@
                                                                     </div>
                                                                     </tr>';
                                                                     $diff = 0;
+                                                                if ($checkstat=="6"){
                                                                     if ($rowe->CertificatePrice<$i->payment){
                                                                         $diff = $i->payment-$rowe->CertificatePrice;
                                                                         $val = number_format($diff,2);
@@ -716,6 +720,7 @@
                                                                         </tr>';
                                                                             
                                                                     }
+                                                              
                                                                     else if ($rowe->CertificatePrice>$i->payment){
                                                                         $diff =  $rowe->CertificatePrice - $i->payment;
                                                                         $val = number_format($diff,2);
@@ -738,6 +743,11 @@
                                                                         </div>
                                                                         </tr>';
 
+                                                                    }
+                                                                    else{
+
+                                                                        
+                                                                    }
                                                                     }
                                                                     echo'
                                                                     <tr>

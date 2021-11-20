@@ -150,8 +150,6 @@
             foreach($result as $row){
 
                 $arr=[];
-
-                   
                             
 
             }
