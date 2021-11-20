@@ -2,14 +2,38 @@
     $curr ="Resident Registration";
     session_start();
     error_reporting(0);
-   
+    function upPhoto ($poid){
+        $ftypes = array('png','jpeg','jpg');
+    
+        $fileName = $_FILES[''.$poid.'']['name'];
+        $fileSize = $_FILES[''.$poid.'']['size'];
+        $fileError = $_FILES[''.$poid.'']['error'];
+        $filetmpname = $_FILES[''.$poid.'']['tmp_name'];
+        $fileExt = explode('.',$fileName);
+        $extension = strtolower(end($fileExt));
+        
+        $destination = "";
+    
+        if (in_array($extension,$ftypes)){
+            if($fileSize<5000000){
+                $newfilename = uniqid('',TRUE).".".$extension;
+                $destination = "../../images/".$newfilename;
+                move_uploaded_file($filetmpname,$destination);
+               // header('Location: admin-e-content.php?success=1');
+            }
+        }
+        
+        return $destination;
+    
+    }
+    
     include('includes/dbconnection.php');
     if (strlen($_SESSION['clientmsaid']==0)) {
         header('location:logout.php');
         } else{
             if(isset($_POST['submit']))
             {
-            
+            $destination = upPhoto("proof");
             $residenttype=$_POST['residenttype'];
             $prk=$_POST['prk'];
             $hunit=$_POST['hunit'];
@@ -31,8 +55,8 @@
             $hm=$_POST['hm'];
             $stat = "Active";
             
-            $sql="insert into tblresident (ResidentType,Purok,houseUnit,voter,LastName,Suffix,FirstName,MiddleName,Gender,BirthDate,streetName,Cellphnumber,tinNumber,sssNumber,CivilStatus,Email,Password,vPrecinct,HomeName, resStatus)
-            values(:residenttype,:prk,:hunit,:voter,:lname,:sf,:fname,:mname,:gend,:bdate,:strt,:contact,:tin,:sss,:cstatus,:email,:password,:vp,:hm, :stat)";
+            $sql="insert into tblresident (ResidentType,Purok,houseUnit,voter,LastName,Suffix,FirstName,MiddleName,Gender,BirthDate,streetName,Cellphnumber,tinNumber,sssNumber,CivilStatus,Email,Password,vPrecinct,HomeName, resStatus,attachment)
+            values(:residenttype,:prk,:hunit,:voter,:lname,:sf,:fname,:mname,:gend,:bdate,:strt,:contact,:tin,:sss,:cstatus,:email,:password,:vp,:hm, :stat,:destination)";
             $query=$dbh->prepare($sql);
             $query->bindParam(':residenttype',$residenttype,PDO::PARAM_STR);
             $query->bindParam(':prk',$prk,PDO::PARAM_STR);
@@ -54,6 +78,7 @@
             $query->bindParam(':cstatus',$cstatus,PDO::PARAM_STR);
             $query->bindParam(':email',$email,PDO::PARAM_STR);
             $query->bindParam(':password',$password,PDO::PARAM_STR);
+            $query->bindParam(':destination',$destination,PDO::PARAM_STR);
             $query->execute();
         
             $LastInsertId=$dbh->lastInsertId();
@@ -141,7 +166,7 @@
             </div>
         </div>
     </nav>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         <div class="container-fluid px-5">
             <div class="row px-5">
                 <div class="col-xl-5"></div>
@@ -284,7 +309,11 @@
                                 <br>
                                 <div class="mb-3">
 
-                                    <input class="form-control form-control " id="formFileSm" type="file">
+                                <input 	name = "proof" class="form-control form-control-sm" id="selectproof" onchange = "loadFile(event,'cproof');" type="file">
+													
+                                                    <div class="col-12 my-2">
+                                                        <img style= "display:none" src = "../../images/defaultimage.png" class= "img-fluid" id = "cproof">
+                                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -470,12 +499,7 @@
                                         I have read and agreed with the <a href="../../privacy-policy.php" target="_blank"><i>privacy policy</i></a>
                                     </label>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" required>
-                                    <label class="form-check-label" for="flexCheckChecked">
-                                        Checked checkbox
-                                    </label>
-                                </div>
+                              
                             </div>
                         </div>
 
@@ -613,3 +637,14 @@ $(document).ready(function(){
         });
     });
 </script>
+
+<script>
+		var loadFile = function (event,imgid) {
+        
+        var image = document.getElementById(imgid);
+            image.src = URL.createObjectURL(event.target.files[0]);
+            image.style.display = "block";
+        
+        
+        };
+	</script>   
