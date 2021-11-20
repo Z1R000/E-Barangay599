@@ -1,7 +1,7 @@
 <?php
  $sql= 'Select tblresident.*, tblcreatecertificate.*, tblcertificate.*, tblcreatecertificate.ID as cID from tblcreatecertificate 
  join tblresident on tblresident.ID = tblcreatecertificate.Userid
- join tblcertificate on tblcertificate.ID = tblcreatecertificate.CertificateId where tblcreatecertificate.status = 4 or tblcreatecertificate.status = 6 or tblcreatecertificate.status = 5
+ join tblcertificate on tblcertificate.ID = tblcreatecertificate.CertificateId where tblcreatecertificate.status = 4 or tblcreatecertificate.status = 6 or tblcreatecertificate.status = 5 
 
  ORDER BY tblcreatecertificate.resDate DESC';
  $query = $dbh->prepare($sql);

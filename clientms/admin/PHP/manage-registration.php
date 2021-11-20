@@ -190,6 +190,18 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
     }
 
     if (isset($_POST['delete'])) {
+        $decr= $_POST['decr'];
+        if (isset($_POST['spcr'])){
+            $decr =$_POST['spcr'];
+        }else{
+            $decr =$_POST['decr'];
+        }
+        
+        $insert = "Update tblresident set decreason = '".$decr."', remarks = '".$_POST['rmrks']."' where ID = ".$eid."";
+        if ($con->query($insert)===TRUE){
+
+        }
+
         $eid = intval($_GET['editid']);
 
         $sqld = "Update tblresident set resStatus='Rejected' where ID=:eid";
@@ -686,7 +698,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                     <div class="col-xl-12 ">
                                         <div class="float-end">
                                         <div class="btn-group">
-                                        <button type="submit" class="btn btn-danger form-control" name="delete"   href ="#decline-proof"id="delete">Reject</button>
+                                        <button type="button" data-bs-toggle="modal"  class="btn btn-danger form-control"  href ="#decline-proof" id="delete">Reject</button>
                                         </div>
                                         <div class="btn-group">
                                                         
@@ -707,7 +719,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
 
                     </div>
 
-                <div class="modal fade" id = "decline-proof" tab-idndex = "-1">
+        <div class="modal fade" id = "decline-proof" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content g-0 bg-danger ">
                     <div class="modal-header bg-danger text-white bg-transparent ">
@@ -716,30 +728,15 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">
-                        <div class="row mt-1 ms-2 me-3">
+                        <div class="row mt-1 px-3">
                            
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label for="dname">Requestor Name</label>
-                                        <input disabled id = "dname" type="text" class="form-control" value = "Juan Dela Cruz" readonly>
-
-                                    </div>
-                           
-                                </div>
+                        
                                 <div class="row mt-2">
-                                    <div class="col-md-6">
-                                        <label for="contac">Contact Number</label>
-                                        <input disabled id = "contac" type="text" class="form-control" value = "09123456789" readonly>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="emails" >Email Address</label>
-                                        <input disabled id = "emails" type="text" class="form-control" value = "juanDelaC@gmail.com" readonly>
-                                        
                                     
-                                    </div>
+                                    
                                     <div class="col-md-12">
                                         <label for="decreason" >Decline Reason</label>
-                                        <select name="" id="decreason" class= "form-control" onchange = "showOthersdec('other_txt-dec',this);">
+                                        <select name="" id="decreason" class= "form-select" onchange = "showOthersdec('other_txt-dec',this);">
                                             <option value="">Insufficient credentials</option>
                                             <option value="">Detected inconsistency</option>
                                             <option value="others">Others</option>
@@ -747,7 +744,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                         <div class="row g-0 my-2" id = "other_txt-dec" style= "display: none;">
                                  
                                  <div class="col-md-12">
-                                     <input disabled type="text" class="form-control" placeholder= "Specify a reason here">
+                                     <input  type="text" class="form-control" placeholder= "Specify a reason here">
                                  </div>
                              </div>
                                     </div>
@@ -765,34 +762,19 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                    
                                 </div>
                                 <div class="row mt-2">
-                                    <label for="remarks" >Mode of delivery <i class= "fa fa-envelope"></i></label>
-                                    <div class="col-md-6">
-                                            <div class="form-check">
-                                                <input disabled class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    SMS
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input disabled class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
-                                                <label class="form-check-label" for="flexCheckChecked">
-                                                    E-mail
-                                                </label>  
-                                            </div>
-                              
-
-                                    </div>
+                                   
                                 </div>
-                                <div class="row justify-content-center" align = "center">
+                                <div class="row justify-content-center">
                                     
-                                    <div class="col-mx-6">
+                                    <div class="col-md-12">
+                                        <div class="float-end">
                                         <button href ="#dec-val" type = "button" class="btn btn-success" data-bs-dismiss ="modal" data-bs-toggle= "modal" >
                                             <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
                                         </button>
                                         <button type = "button" class="btn btn-danger" data-bs-dismiss = "modal"  name = "no" value ="No">
                                             <i class= "fa fa-times me-2"></i>Discard
                                         </button>
-                                
+                                        </div>
                                     </div>
                                     
                                 </div>  
@@ -880,7 +862,7 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
                                 <div class="row justify-content-center" align = "center">
                                     
                                     <div class="col-mx-6">
-                                        <button href ="#" type = "button" class="btn btn-success" data-bs-dismiss ="modal" data-bs-toggle= "modal" >
+                                        <button href ="#" type = "submit" name= "delete"  >
                                             <i class= 'fa fa-paper-plane me-2'> </i>Send
                                         </button>
                                         <button type = "button" class="btn btn-danger" data-bs-dismiss = "modal"  name = "no" value ="No">

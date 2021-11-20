@@ -2,13 +2,38 @@
     $curr ="Manage Registration";
     session_start();
     error_reporting(0);
+    function upPhoto ($poid){
+        $ftypes = array('png','jpeg','jpg');
+    
+        $fileName = $_FILES[''.$poid.'']['name'];
+        $fileSize = $_FILES[''.$poid.'']['size'];
+        $fileError = $_FILES[''.$poid.'']['error'];
+        $filetmpname = $_FILES[''.$poid.'']['tmp_name'];
+        $fileExt = explode('.',$fileName);
+        $extension = strtolower(end($fileExt));
+        
+        $destination = "";
+    
+        if (in_array($extension,$ftypes)){
+            if($fileSize<5000000){
+                $newfilename = uniqid('',TRUE).".".$extension;
+                $destination = "../../images/".$newfilename;
+                move_uploaded_file($filetmpname,$destination);
+               // header('Location: admin-e-content.php?success=1');
+            }
+        }
+        
+        return $destination;
+    
+    }
     include('includes/dbconnection.php');
     if (strlen($_SESSION['clientmsaid']==0)) {
         header('location:logout.php');
         } else{
         if(isset($_POST['submit']))
     {
-          
+
+    $destination = upPhoto("proof");
     $residenttype=$_POST['residenttype'];
     $prk=$_POST['prk'];
     $hunit=$_POST['hunit'];
@@ -27,8 +52,8 @@
     $email=$_POST['email'];
     $vp=$_POST['vp'];
     
-    $sql="insert into tblresident (ResidentType,Purok,houseUnit,voter,LastName,FirstName,MiddleName,Gender,BirthDate,streetName,Cellphnumber,tinNumber,sssNumber,CivilStatus,Email,Password,vPrecinct)
-        values(:residenttype,:prk,:hunit,:voter,:lname,:fname,:mname,:gend,:bdate,:strt,:contact,:tin,:sss,:cstatus,:email,:password,:vp)";
+     $sql="insert into tblresident (ResidentType,Purok,houseUnit,voter,LastName,Suffix,FirstName,MiddleName,Gender,BirthDate,streetName,Cellphnumber,tinNumber,sssNumber,CivilStatus,Email,Password,vPrecinct,HomeName, resStatus,attachment)
+            values(:residenttype,:prk,:hunit,:voter,:lname,:sf,:fname,:mname,:gend,:bdate,:strt,:contact,:tin,:sss,:cstatus,:email,:password,:vp,:hm, :stat,:destination)";
     $query=$dbh->prepare($sql);
     $query->bindParam(':residenttype',$residenttype,PDO::PARAM_STR);
     $query->bindParam(':prk',$prk,PDO::PARAM_STR);
@@ -47,6 +72,7 @@
     $query->bindParam(':cstatus',$cstatus,PDO::PARAM_STR);
     $query->bindParam(':email',$email,PDO::PARAM_STR);
     $query->bindParam(':password',$password,PDO::PARAM_STR);
+    $query->bindParam(':destination',$destination,PDO::PARAM_STR);
     $query->execute();
 
     $LastInsertId=$dbh->lastInsertId();
