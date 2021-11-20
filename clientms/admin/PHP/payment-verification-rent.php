@@ -3,30 +3,217 @@
     error_reporting(1);
 
     $curr = "Payment verification";
+    
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+
+    require 'vendor/autoload.php';
 
     include('includes/dbconnection.php');
     if (strlen($_SESSION['clientmsaid']==0)) {
     header('location:logout.php');
     }else{
-        $eid =  $_GET['editid'];
+        $time = new DateTime("now", new DateTimeZone('Asia/Manila'));
+        $mail = new PHPMailer(true);
+        $eid =  $_GET['rid'];
         $type = $_GET['type'];
         $diff = $_GET['diff'];
         $condition = "";
+        $rmk = $_POST['rmrks'];
         if($type == 1){
             $condition = "With change: ". number_format($diff,2);
         }
         else if ($type == 2){
             $condition = "With credit: ". number_format($diff,2);
+        }else{
+            $condition = "Payment complete. ";
         }
+
+        $sql = "select tblcreaterental.*, tblresident.ID as residd, tblresident.* from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID WHERE tblcreaterental.ID =:eid";
+        $query = $dbh->prepare($sql);
+        $query->bindParam(':eid',$eid, PDO::PARAM_STR);
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_OBJ);
+
+        foreach ($result as $r){
+            $residd = $r->residd;
+        }
+
+        function itexmo($number,$message,$apicode,$passwd){
+            $ch = curl_init();
+            $itexmo = array('1' => $number, '2' => $message, '3' => $apicode, 'passwd' => $passwd);
+            curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
+            curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, 
+                        http_build_query($itexmo));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            return curl_exec ($ch);
+            curl_close ($ch);
+        }
+
+
             
         if(isset($_POST['send'])){
-            $sql = "Update tblcreatecertificate set diff = '".$condition."' , remarks = '".$_POST['rmrks']."' where ID = ".$eid."";
-            if($con->query($sql)===TRUE){
-                header('Location: edit-cert-record.php?editid='.$eid.'');
+
+            $sql = "SELECT * from tblcredits";
+            $query=$dbh->prepare($sql);
+            $query->execute();
+            $result1=$query->fetchAll(PDO::FETCH_OBJ);
+            foreach ($result1 as $row1) {
+                $api=$row1->ApiCode;
+                $passwd=$row1->ApiPassword;
             }
-            else{
-                header('Location: payment-verification-cert.php?editid=5&diff=102&type=1&success=false');        
+    
+            
+            $today = date('Y-m-d');
+            $sdates = date('F j, Y - h:i A', strtotime($today));
+            $text = "From Barangay 599 V. Mapa\n\nYour payment for ".$rname." has been verified. Remarks=".$condition.". ".$rmk."\n\n This is a system-generated message. Please do not reply.";
+    
+            $sql = "SELECT * from tblresident WHERE Cellphnumber IS NOT NULL AND ID = :residd";
+            $query=$dbh->prepare($sql);
+            $query->bindParam(':residd', $residd, PDO::PARAM_STR);
+            $query->execute();
+            $result1=$query->fetchAll(PDO::FETCH_OBJ);
+            foreach ($result1 as $row1) {
+                $number = $row1->Cellphnumber;
+                $result = itexmo($number, $text, $api, $passwd);
+                if ($result == "") {
+                echo "iTexMo: No response from server!!!
+            Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
+            Please CONTACT US for help. ";
+                } else if ($result == 0) {
+                    
+                } else {
+                echo "Error Num " . $result . " was encountered!";
+                }
             }
+    
+            $sql ="Select tbladmin.*, tblresident.*, tblpositions.* from tblresident join tbladmin on tbladmin.residentID = tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition where tbladmin.ID = :aid";
+        $query = $dbh -> prepare($sql);
+        $query->bindParam(':aid',$aid,PDO::PARAM_STR);
+        $query->execute();
+        foreach($results as $row)
+        {$getpos = "$row->Position $row->LastName";}
+    
+        try {
+            //Server settings
+                                 //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'ebarangay599@gmail.com';                     //SMTP username
+            $mail->Password   = '599-E-Barangay';                               //SMTP password
+            $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
+            $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        
+            $mail->setFrom('ebarangay599@gmail.com', $getpos);
+    
+            $sqle = "SELECT * from tblresident WHERE ID = :residd";
+            $querye=$dbh->prepare($sqle);
+            $querye->bindParam(':residd',$residd,PDO::PARAM_STR);
+            $querye->execute();
+            $resulte=$querye->fetchAll(PDO::FETCH_OBJ);
+            foreach ($resulte as $rowe) {
+                $mid = $rowe->MiddleName;
+                $emails = $rowe->Email;
+                $mail->addAddress("$emails");
+                $mail->isHTML(true);                                  //Set email format to HTML
+                $mail->Subject = 'Notification from Barangay 599 V. Mapa';
+                $mail->Body    = '<div class="">
+                <div class="aHl">
+            
+                </div>
+                <div id=":2g8" tabindex="-1">
+            
+                </div>
+                <div id=":2fx" class="ii gt" jslog="20277; u014N:xr6bB; 4:W251bGwsbnVsbCxbXV0.">
+                    <div id=":2fw" class="a3s aiL msg-3877720715821999831"><u></u>
+            <div style="color:#565a5c;background-color:#f2f5f6;margin:0px 0px 0px 0px">
+              <div style="color:#565a5c;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;font-size:16px;border-collapse:collapse;max-width:800px;margin:0px auto;padding-top:25px;padding-left:25px;padding-right:25px">
+                <div>
+              <div>
+                <div id="m_-3877720715821999831header-wrapper" style="margin-bottom:16px">
+                  <div>
+                    <a href="https://barangay599.com/" style="text-decoration:none;outline:none" target="_blank" data-saferedirecturl="https://barangay599.com/">
+                      <img style="width:120px;height:100px" src="https://scontent-sin6-2.xx.fbcdn.net/v/t1.15752-9/255421087_257470519597544_8116769992785817332_n.png?_nc_cat=105&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeHWhijsWVAHOygPG_m3voCBmxZz3dIYsgabFnPd0hiyBp9aH3-I_IUogzCpXWiHWsvjj7BGhoUj3j6LW5c0qklh&_nc_ohc=JDSRMi83fA4AX_33U-M&tn=cYgfj995MRwIySit&_nc_ht=scontent-sin6-2.xx&oh=5b77bbab7229a3a6cf8935f99c8ef96f&oe=61BCECF6" class="CToWUd">
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+                <div id="m_-3877720715821999831body-wrapper">
+                  <div style="background-color:#ffffff;padding-top:1px">
+                    <div class="m_-3877720715821999831content">
+                      
+                      <div style="margin:0;padding:0">
+                        <div style="margin:0;padding:0;margin-top:1em">
+                          Hi <b>'.ucfirst($rowe->FirstName)." ".ucfirst($mid[0]).". ".ucfirst($rowe->LastName)." ".ucfirst($rowe->Suffix).'</b>,
+                        </div>
+            
+                        <div style="margin:0;padding:0;margin-top:1em">
+                        Your payment for '.$rname.' has been verified. Remarks='.$condition.'. '.$rmk.'
+                        </div>
+            
+                        <div style="margin:0;padding:0;margin-top:1em">
+                          
+                        </div>
+            
+                        <div style="margin:0;padding:0;margin-top:1em">
+                          <p>Please do not reply to this message. This is a system-generated email sent to <span>[<a href="mailto:'.$emails.'" target="_blank">'.$emails.'</a>]</span>.</p>
+                          <p>Thank you !</p>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div>
+              <div>
+              <div id="m_-3877720715821999831footer-wrapper">
+                <div align="center">
+                  <table style="padding-top:30px;padding-bottom:30px;padding-left:30px;padding-right:30px;font-size:13px">
+                    <tbody>
+                    <tr>
+                      <td style="text-align:center">
+                        <div style="margin-top:20px">
+                          <p style="text-decoration:none;outline:none;color:#9b9b9b;text-align:center">This is an electronic information from Barangay 599 Online System</p>
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table><div class="yj6qo"></div><div class="adL">
+                </div></div><div class="adL">
+              </div></div><div class="adL">
+            
+              </div></div><div class="adL">
+            
+            </div></div><div class="adL">
+            
+              </div></div><div class="adL">
+            
+            </div></div><div class="adL">
+            
+            
+            </div></div></div><div id=":2gc" class="ii gt" style="display:none"><div id=":2gd" class="a3s aiL "></div></div><div class="hi"></div></div>
+            ';
+                $mail->AltBody = 'Barangay 599 V. Mapa';
+            
+                $mail->send();
+                
+            }
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+
+            $sql = "Update tblcreaterental set diff =:condition, remarks =:rmk where ID =:eid";
+            $query = $dbh->prepare($sql);
+            $query->bindParam(':condition',$condition, PDO::PARAM_STR);
+            $query->bindParam(':rmk',$rmk, PDO::PARAM_STR);
+            $query->bindParam(':eid',$eid, PDO::PARAM_STR);
+            $query->execute();
+            echo "<script>alert('Rental payment has been approved.')</script>";
+            header('Location: edit-rental.php?rid='.$eid);
         }
 
 ?>
@@ -182,8 +369,8 @@
      </div>
     <div class="container-fluid p-5 ">
         <?php
-            $sql= "SELECT tblstatus.ID as statid, tblcreaterental.*,tblcreaterental.ID,tblrental.ID as renid,tblresident.ID as resid,tblcreaterental.payable, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate,tblcreaterental.creationDate, tblpurposes.Purpose, tblresident.FirstName, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix,tblrental.rentalName, tblrental.rentalPrice, tblmodes.mode, tblstatus.statusName,tblpurposes.ID as purposeID FROM tblcreaterental INNER JOIN tblpurposes ON tblcreaterental.purpID = tblpurposes.ID INNER JOIN tblresident ON tblresident.ID = tblcreaterental.userID INNER JOIN tblrental ON tblrental.ID = tblcreaterental.rentalID INNER JOIN tblmodes ON tblmodes.ID = tblcreaterental.modeOfPayment INNER JOIN tblstatus ON tblstatus.ID = tblcreaterental.status and tblcreaterental.ID =".$_GET['rid']." ";
-
+            $sql= "SELECT tblstatus.ID as statid, tblcreaterental.*,tblrental.ID as renid,tblresident.ID as resid,tblpurposes.*, tblresident.*,tblrental.*, tblmodes.*, tblstatus.*,tblpurposes.ID as purposeID FROM tblcreaterental JOIN tblpurposes ON tblcreaterental.purpID = tblpurposes.ID JOIN tblresident ON tblresident.ID = tblcreaterental.userID JOIN tblrental ON tblrental.ID = tblcreaterental.rentalID JOIN tblmodes ON tblmodes.ID = tblcreaterental.modeOfPayment JOIN tblstatus ON tblstatus.ID = tblcreaterental.status and tblcreaterental.ID =".$_GET['rid']." ";
+            
 
             $query= $dbh->prepare($sql);
             $query->execute();
@@ -207,7 +394,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label for="dname">Requestor Name</label>
-                                        <input id = "dname" type="text" class="form-control" value = "<?php echo $i->LastName.",".$i->FirstName." ".$i->MiddleName." ".$i->$Suffix; ?>  "readonly>
+                                        <input id = "dname" type="text" class="form-control" value = "<?php echo $i->FirstName." ".$i->MiddleName." ".$i->LastName." ".$i->$Suffix; ?>  "readonly>
                                     </div>
                            
                                 </div>
@@ -227,8 +414,8 @@
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-md-6">
-                                        <label for="ars">Acquired Certificate</label>
-                                        <input id = "crs" type="text" class="form-control" value = "<?php echo $i->CertificateName?>" readonly>
+                                        <label for="ars">Acquired Rental Property</label>
+                                        <input id = "crs" type="text" class="form-control" value = "<?php echo $i->rentalName?>" readonly>
                    
                                        
                                     </div>

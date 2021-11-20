@@ -46,7 +46,7 @@ foreach ($results as $row) {
     $mod .= '<option  value ="' . $row->ID . '" >' . $row->mode . '</option>';
 }
 
-$sql = 'Select tblresident.*,tblcreaterental.ID as cID, tblcreaterental.*, tblpurposes.*, tblrental.*, tblstatus.* from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID join tblrental on tblrental.ID = tblcreaterental.rentalID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID join tblstatus on tblstatus.ID = tblcreaterental.status where tblcreaterental.status > 1 and tblcreaterental.status < 8 order by tblcreaterental.creationDate DESC, tblcreaterental.status';
+$sql = 'Select tblresident.*,tblcreaterental.ID as cID, tblcreaterental.*, tblpurposes.*, tblrental.*, tblstatus.* from tblcreaterental join tblresident on tblresident.ID = tblcreaterental.userID join tblrental on tblrental.ID = tblcreaterental.rentalID join tblpurposes on tblpurposes.ID = tblcreaterental.purpID join tblstatus on tblstatus.ID = tblcreaterental.status where tblcreaterental.status > 1 and tblcreaterental.status != 8 order by tblcreaterental.creationDate DESC, tblcreaterental.status';
 
 
 
