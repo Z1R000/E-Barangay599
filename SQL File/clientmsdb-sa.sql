@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2021 at 10:08 PM
+-- Generation Time: Nov 20, 2021 at 05:11 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -266,12 +266,7 @@ CREATE TABLE `tblcreatecertificate` (
 --
 
 INSERT INTO `tblcreatecertificate` (`ID`, `Userid`, `CertificateId`, `resDate`, `status`, `pMode`, `purpID`, `other`, `bName`, `remarks`, `diff`) VALUES
-(1, '1', '3', '2021-11-19 17:06:33', '6', 'G-Cash', 2, '', '', NULL, NULL),
-(2, '1', '1', '2021-11-19 17:46:03', '6', 'G-Cash', 2, '', '', 'x', NULL),
-(3, '1', '4', '2021-11-19 18:06:48', '3', 'G-Cash', 3, '', '', 'asdasd', 'With change: 80.00'),
-(4, '1', '3', '2021-11-19 18:35:14', '6', 'G-Cash', 1, '', '', 'asfagsasaxasd', 'With credit: 130.00'),
-(5, '1', '2', '2021-11-19 19:28:59', '5', 'Cash', 1, '', '', NULL, NULL),
-(6, '1', '3', '2021-11-19 20:48:41', '1', 'G-Cash', 1, '', '', NULL, NULL);
+(1, '1', '4', '2021-11-20 14:43:12', '6', 'G-Cash', 2, '', '', 'asda', 'With change: 21,190.00');
 
 -- --------------------------------------------------------
 
@@ -302,8 +297,7 @@ CREATE TABLE `tblcreaterental` (
 --
 
 INSERT INTO `tblcreaterental` (`ID`, `status`, `userID`, `rentalID`, `adminID`, `rentalStartDate`, `rentalEndDate`, `creationDate`, `modeOfPayment`, `purpID`, `payable`, `others`, `paymentID`, `proof`, `payment`) VALUES
-(1, 3, 1, 2, 0, '2021-11-20 01:31:00', '2021-11-20 02:31:00', '2021-11-20 01:32:00', 1, 10, '100.00', '', 0, '', '0.00'),
-(2, 3, 13, 2, 0, '2021-11-20 03:35:00', '2021-11-20 06:35:00', '2021-11-20 03:36:02', 2, 10, '300.00', '', 0, '', '0.00');
+(1, 4, 1, 1, 0, '2021-11-20 22:58:00', '2021-11-20 23:58:00', '2021-11-20 22:58:29', 1, 9, '300.00', '', 0, '', '0.00');
 
 -- --------------------------------------------------------
 
@@ -466,7 +460,9 @@ INSERT INTO `tblloginaudits` (`ID`, `timeIn`, `timeOut`, `resId`, `position`, `d
 (42, '22:22:33', '00:00:00', 1, 1, '2021-11-18'),
 (43, '23:10:35', '00:00:00', 1, 1, '2021-11-18'),
 (44, '10:29:23', '00:00:00', 1, 1, '2021-11-19'),
-(45, '20:06:44', '00:00:00', 1, 1, '2021-11-19');
+(45, '20:06:44', '00:00:00', 1, 1, '2021-11-19'),
+(46, '12:49:48', '00:00:00', 1, 1, '2021-11-20'),
+(47, '17:45:23', '00:00:00', 1, 1, '2021-11-20');
 
 -- --------------------------------------------------------
 
@@ -510,11 +506,8 @@ CREATE TABLE `tblpaymentlogs` (
 --
 
 INSERT INTO `tblpaymentlogs` (`ID`, `mode`, `creationID`, `refNum`, `proof`, `servicetype`, `paymentDate`, `payment`, `dateAccepted`) VALUES
-(1, 1, 1, NULL, '../../images/6197dda59c27d6.30640669.jpg', 2, '2021-11-20 01:07:13', '0.00', '2021-11-20 01:07:13'),
-(2, 1, 1, NULL, '../../images/6197e0ec7c75c3.45053675.png', 1, '2021-11-20 01:36:45', '0.00', '2021-11-20 01:36:45'),
-(3, 1, 2, 550100263, '../../images/6197e340d428f6.74289293.png', 2, '2021-11-20 01:47:06', '600.00', '2021-11-20 01:48:00'),
-(4, 1, 3, 1231234, '../../images/6197e7de7b7f63.83399824.png', 2, '2021-11-20 02:07:26', '200.00', '2021-11-20 02:08:00'),
-(5, 1, 4, 123213123, '../../images/6197ef8586c143.25191505.png', 2, '2021-11-20 02:35:48', '20.00', '2021-11-20 02:45:00');
+(1, 1, 1, 13214, '../../images/61990a172bafc9.05079001.png', 2, '2021-11-20 22:45:43', '120.00', '2021-11-20 10:46:00'),
+(2, 1, 1, 2147483647, '../../images/61990d342b00c0.38426336.png', 1, '2021-11-20 22:59:00', '2500.00', '2021-11-20 11:19:00');
 
 -- --------------------------------------------------------
 
@@ -643,7 +636,7 @@ INSERT INTO `tblresident` (`ID`, `Purok`, `houseUnit`, `streetName`, `Cellphnumb
 (17, 6, 2222, 'Peralta Int.', '09154708062', 'virayvergel10@gmail.com', 'Barangay599', '2021-11-12 06:16:32', 'No', '', 'House Owner', 'XD', '', 'Personal', 'Information', 'Manila', 'Male', '0', '0', 'Single', '2008-01-12 00:00:00', '', '', 'Rejected'),
 (18, 6, 123, 'Peralta Int.', '09291581899', 'ledesma.francinevoltaire@ue.edu.ph', 'Barangay599', '2021-11-12 06:51:34', 'No', '', 'House Owner', 'Legaspi', 'Jr.', 'Zyra', 'Mae', NULL, 'Male', '0', '0', 'Single', '1974-12-09 00:00:00', '', '', 'Active'),
 (19, 4, 2313, 'Mangga', '09052420827', '', 'Barangay599', '2021-11-12 10:59:01', 'No', '', 'House Owner', 'Vert', '', 'Lil', 'Uzi', 'Manila', 'Male', '0', '0', 'Single', '1984-07-23 00:00:00', '', '', 'Rejected'),
-(20, 1, 322, 'Old Sta. Mesa', '09291581899', 'vergel@gmail.com', 'Barangay599', '2021-11-18 12:38:24', 'No', '', 'House Owner', 'Sallan', '', 'vergel', 'Clavio', NULL, 'Male', '', '', 'Single', '1999-02-18 00:00:00', '', '', 'Active');
+(12234, 1, 322, 'Old Sta. Mesa', '09291581899', 'vergel@gmail.com', 'Barangay599', '2021-11-18 12:38:24', 'No', '', 'House Owner', 'Sallan', '', 'vergel', 'Clavio', NULL, 'Male', '', '', 'Single', '1999-02-18 00:00:00', '', '', 'Active');
 
 -- --------------------------------------------------------
 
@@ -933,13 +926,13 @@ ALTER TABLE `tblcertificate`
 -- AUTO_INCREMENT for table `tblcreatecertificate`
 --
 ALTER TABLE `tblcreatecertificate`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tblcreaterental`
 --
 ALTER TABLE `tblcreaterental`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbldays`
@@ -963,7 +956,7 @@ ALTER TABLE `tbllistpurok`
 -- AUTO_INCREMENT for table `tblloginaudits`
 --
 ALTER TABLE `tblloginaudits`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `tblmodes`
@@ -975,7 +968,7 @@ ALTER TABLE `tblmodes`
 -- AUTO_INCREMENT for table `tblpaymentlogs`
 --
 ALTER TABLE `tblpaymentlogs`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tblpositions`
@@ -999,7 +992,7 @@ ALTER TABLE `tblrental`
 -- AUTO_INCREMENT for table `tblresident`
 --
 ALTER TABLE `tblresident`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12236;
 
 --
 -- AUTO_INCREMENT for table `tblrespondents`
@@ -1011,7 +1004,7 @@ ALTER TABLE `tblrespondents`
 -- AUTO_INCREMENT for table `tblservices`
 --
 ALTER TABLE `tblservices`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tblstatus`
