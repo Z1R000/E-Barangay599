@@ -1,3 +1,57 @@
+<?php 
+    session_start();
+    error_reporting(1);
+    $curr = "599 Officials";
+    include('includes/dbconnection.php');
+    if (strlen($_SESSION['clientmsaid']==0)) {
+      header('location:logout.php');    
+      } else{   
+          $cname = $_POST['cname'];
+          $userid = '';
+            for ($i = 0; $i < strlen($cname); $i++) {
+                if (is_numeric($cname[$i])) {
+                    $usid .= $cname[$i];
+                }
+            }
+          $a = $b = $c = $d = $e = $f = $g = $h = $i = 0;
+          if(isset($_POST['btncheck0'])){
+              $a = 1;
+          }
+          if(isset($_POST['btncheck1'])){
+            $b = 2;
+          }
+          if(isset($_POST['btncheck2'])){
+            $c = 3;
+        }
+        if(isset($_POST['btncheck3'])){
+            $d = 4;
+        }
+        if(isset($_POST['btncheck4'])){
+            $e = 5;
+        }
+        if(isset($_POST['btncheck5'])){
+            $f = 6;
+        }
+        if(isset($_POST['btncheck6'])){
+            $g = 7;
+        }
+        if(isset($_POST['btncheck7'])){
+            $h = 8;
+        }
+          $get = $a . "," . $b . "," . $c . "," . $d . "," . $e . "," . $f . "," .  $g . "," . $h;
+          if(isset($_POST['submit'])){
+            $sql = "update tbladmin set residentID=:usid, dayDuty=:get where ID = '1'";
+            $query = $dbh->prepare($sql);
+            $query->bindParam(':get', $get, PDO::PARAM_STR);
+            $query->bindParam(':usid', $usid, PDO::PARAM_STR);
+            $query->execute();
+
+            echo '<script>alert("Admin Official has been updated.")</script>';
+            echo "<script>window.location.href ='admin-officials.php'</script>";
+          }
+
+?>
+<form method="POST">
 <div class="modal fade" id = "account-owner" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content bg-dark g-0  ">
@@ -32,7 +86,7 @@
                                     </div>
                                         
                                     <div class="input-group">
-                                        <input type="text" id = "search" class="form-control" value = "<?php echo $arr[1];?>" placeholder = "Officials Name" style= "text-align:center;font-size: 1.4em;" readonly>
+                                        <input type="text" id = "search" class="form-control" name ="cname" value = "<?php echo $arr[1];?>" placeholder = "Officials Name" style= "text-align:center;font-size: 1.4em;" readonly>
                                         <button class="btn btn-info text-white" onclick = "ful()" type ="button">
                                             <i class="fa fa-edit">
 
@@ -40,13 +94,13 @@
                                         </button>
                                         <script>
                                                     function ful(){
-                                                        var ps = document.getElementById('search').readOnly;
+                                                        var ps = document.getElementById('search').readonly;
 
                                                         if (ps){
-                                                            document.getElementById('search').readOnly = false;
+                                                            document.getElementById('search').readonly = false;
                                                         }
                                                         else{
-                                                            document.getElementById('search').readOnly = true;
+                                                            document.getElementById('search').readonly = true;
                                                         }
                                                     }
                                                 </script>
@@ -63,8 +117,7 @@
                                         <div class="col-xl-12" align ="center">
                                       
                                         <div class="col-xl-12 my-2">
-                                            <?php
-                                            
+                                        <?php
                                                     $sql = "Select * from tbldays";
                                                     $query = $dbh->prepare($sql);
                                                     $query->execute();
@@ -72,18 +125,16 @@
                                                     $ctr = 0;
                                                     foreach ($res as $d){
                                                         if ($d->dDay == $row->dDay){
-                                                            echo '  <div class = "btn-group p-1 active"><input type="checkbox" checked value = "'.$d->dDay.'" class="btn-check" id="btncheck'.$ctr.'" autocomplete="off">
+                                                            echo '  <div class = "btn-group p-1 active"><input type="checkbox" checked value = "'.$d->dDay.'" onclick="showHid()" class="btn-check" id="btncheck'.$ctr.'" name="btncheck'.$ctr.'" autocomplete="off" ">
                                                             <label class="btn btn-outline-primary" for="btncheck'.$ctr.'">'.$d->dDay.'</label></div>';    
                                                         }
                                                         else{
-                                                        echo '  <div class = "btn-group p-1"><input type="checkbox" value = "'.$d->dDay.'" class="btn-check" id="btncheck'.$ctr.'" autocomplete="off">
+                                                        echo '  <div class = "btn-group p-1"><input type="checkbox" value = "'.$d->dDay.'" name="btncheck'.$ctr.'"class="btn-check" onclick="showHid()" id="btncheck'.$ctr.'" autocomplete="off"">
                                                         <label class="btn btn-outline-primary" for="btncheck'.$ctr.'">'.$d->dDay.'</label></div>';
                                                         }
                                                         $ctr ++;
 
                                                     }
-                                            
-                                            
                                             ?>
                                         
                                             
@@ -95,62 +146,11 @@
                                   
                                    
                     
-                                    <div class="row justify-content-center">
-                                        <div class="col-xl-12 text-center">
-
-                                            <label for="email" class="fs-5 text-secondary">Email Address</label>
-                                            <div class="input-group">
-                                                <input type="email" value = "<?php echo $arr[6];?>"id = "email"class="form-control" placeholder = "e.g chairman@gmail.com" readonly>
-                                                <button type= "button" name= "edit-em"class="btn btn-info" onclick = 'em()'>
-                                                    <i class= "fa fa-edit text-white"></i>
-                                                </button>
-
-                                            </div>
-
-                                            <script>
-                                                    function em(){
-                                                        var ps = document.getElementById('email').readOnly;
-
-                                                        if (ps){
-                                                            document.getElementById('email').readOnly = false;
-                                                        }
-                                                        else{
-                                                            document.getElementById('email').readOnly = true;
-                                                        }
-                                                    }
-                                                </script>
-                                            
-                                        
-                                        </div>
-                                    </div>
-                                    <div class="row justify-content-center">
-                                        <div class="col-xl-12 text-center">
-                                            <label for="pas" class="fs-5 text-secondary">Password</label>
-                                            <div class="input-group">
-                                                <input type="text" value = "<?php echo $arr[7];?>" id = "pas" class="form-control" placeholder = "123456" readonly >
-                                                <button type= "button" name= "editpas" class="btn btn-info" onclick = 'pas()' >
-                                                    <i class= "fa fa-edit text-white"></i>
-                                                </button>
-                                                <script>
-                                                    function pas(){
-                                                        var ps = document.getElementById('pas').readOnly;
-
-                                                        if (ps){
-                                                            document.getElementById('pas').readOnly = false;
-                                                        }
-                                                        else{
-                                                            document.getElementById('pas').readOnly = true;
-                                                        }
-                                                    }
-                                                </script>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="row my-2">
                                         <div class="col-xl-12 my-2" >
                                         <div class="float-end">
                                         
-                                        <div class="btn-group"><button type= "submit" onclick= "alert('Credential Update Successful')" class= "btn btn-success"><i class= "fa fa-save me-2"></i>Save</button>
+                                        <div class="btn-group"><button type= "submit" name="submit" class= "btn btn-success"><i class= "fa fa-save me-2"></i>Save</button>
                                         </div>
                                         <div class="btn-group"><button type= "button" data-bs-dismiss="modal" class= "btn btn-secondary"><i class= "fa fa-times-circle me-2"></i>Cancel</button>
                                         </div>
@@ -162,10 +162,19 @@
                                 </div>
                             </div>            
                         </div>
+                        </form>
                         <div class="tab-pane" id="person">
                             <div class="row g-0 justify-content-center  ms-2 me-3">
                                 <div class="col-md-12 mt-4">        
                                     <table class="table">
+                                    <tr>
+                                            <th>
+                                                <i class="fa fa-phone-square me-2"></i>Barangay Position
+                                            </th>
+                                            <td style= "text-align:right">
+                                                 <?php echo $arr[0];?>
+                                            </td> 
+                                        </tr>
                                         <tr>
                                             <th>
                                                 <i class="fa fa-phone-square me-2"></i>Contact Number
@@ -276,7 +285,7 @@
                                                 <i class="fa fa-phone-square me-2"></i>Contact Number
                                             </th>
                                             <td style= "text-align:right">
-                                                 09123456789
+                                                 0912345678asdasd9
                                             </td>
                                         </tr>
                                         <tr>
@@ -345,3 +354,59 @@
             </div>
         </div> 
                                                 </div>
+                                                <script>
+        function showHid(){
+            if ( document.getElementById('btncheck0').checked == true) {
+                document.getElementById("btncheck1").disabled = true;
+              	document.getElementById("btncheck2").disabled = true;
+                  document.getElementById("btncheck3").disabled = true;
+              	document.getElementById("btncheck4").disabled = true;
+                  document.getElementById("btncheck5").disabled = true;
+              	document.getElementById("btncheck6").disabled = true;
+                  document.getElementById("btncheck7").disabled = true;
+
+            } else {
+                document.getElementById("btncheck1").disabled = false;
+              	document.getElementById("btncheck2").disabled = false;
+                  document.getElementById("btncheck3").disabled = false;
+              	document.getElementById("btncheck4").disabled = false;
+                  document.getElementById("btncheck5").disabled = false;
+              	document.getElementById("btncheck6").disabled = false;
+                  document.getElementById("btncheck7").disabled = false;
+            }
+  			
+  			if ( document.getElementById('btncheck1').checked == true || document.getElementById('btncheck2').checked == true || document.getElementById('btncheck3').checked == true || document.getElementById('btncheck4').checked == true || document.getElementById('btncheck5').checked == true || document.getElementById('btncheck6').checked == true || document.getElementById('btncheck7').checked == true) {
+                document.getElementById("btncheck0").disabled = true;
+
+            } else if ( document.getElementById('btncheck1').checked == false || document.getElementById('btncheck2').checked == false || document.getElementById('btncheck3').checked == false || document.getElementById('btncheck4').checked == false || document.getElementById('btncheck5').checked == false || document.getElementById('btncheck6').checked == false || document.getElementById('btncheck7').checked == false) {
+                document.getElementById("btncheck0").disabled = false;
+            }
+        }
+</script>
+<script>
+                        $(document).ready(function() {
+                            // Send Search Text to the server
+                            $("#search").keyup(function() {
+                                let searchText = $(this).val();
+                                if (searchText != "") {
+                                    $.ajax({
+                                        url: "searchname.php",
+                                        method: "post",
+                                        data: {
+                                            query: searchText,
+                                        },
+                                        success: function(response) {
+                                            $("#show-list").html(response);
+                                        },
+                                    });
+                                } else {
+                                    $("#show-list").html("");
+                                }
+                            });
+                            $(document).on("click", "#clicks", function() {
+                                $("#search").val($(this).text());
+                                $("#show-list").html("");
+                            });
+                        });
+                    </script>
+<?php } ?>
