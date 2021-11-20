@@ -39,16 +39,6 @@
             $h = 8;
         }
           $get = $a . "," . $b . "," . $c . "," . $d . "," . $e . "," . $f . "," .  $g . "," . $h;
-          if(isset($_POST['submit'])){
-            $sql = "update tbladmin set residentID=:usid, dayDuty=:get where ID = '1'";
-            $query = $dbh->prepare($sql);
-            $query->bindParam(':get', $get, PDO::PARAM_STR);
-            $query->bindParam(':usid', $usid, PDO::PARAM_STR);
-            $query->execute();
-
-            echo '<script>alert("Admin Official has been updated.")</script>';
-            echo "<script>window.location.href ='admin-officials.php'</script>";
-          }
 
 ?>
 <form method="POST">
@@ -86,24 +76,8 @@
                                     </div>
                                         
                                     <div class="input-group">
-                                        <input type="text" id = "search" class="form-control" name ="cname" value = "<?php echo $arr[1];?>" placeholder = "Officials Name" style= "text-align:center;font-size: 1.4em;" readonly>
-                                        <button class="btn btn-info text-white" onclick = "ful()" type ="button">
-                                            <i class="fa fa-edit">
-
-                                            </i>
-                                        </button>
-                                        <script>
-                                                    function ful(){
-                                                        var ps = document.getElementById('search').readonly;
-
-                                                        if (ps){
-                                                            document.getElementById('search').readonly = false;
-                                                        }
-                                                        else{
-                                                            document.getElementById('search').readonly = true;
-                                                        }
-                                                    }
-                                                </script>
+                                        <input type="text" id = "search" class="form-control" name ="cname" value = "<?php echo $arr[1];?>" placeholder = "Officials Name" style= "text-align:center;font-size: 1.4em;">
+                                       
                                     
 
                                     </div>
@@ -124,7 +98,7 @@
                                                     $res = $query->fetchAll(PDO::FETCH_OBJ);
                                                     $ctr = 0;
                                                     foreach ($res as $d){
-                                                        if ($d->dDay == $row->dDay){
+                                                        if ($d->ID == $piece[$ctr]){
                                                             echo '  <div class = "btn-group p-1 active"><input type="checkbox" checked value = "'.$d->dDay.'" onclick="showHid()" class="btn-check" id="btncheck'.$ctr.'" name="btncheck'.$ctr.'" autocomplete="off" ">
                                                             <label class="btn btn-outline-primary" for="btncheck'.$ctr.'">'.$d->dDay.'</label></div>';    
                                                         }
