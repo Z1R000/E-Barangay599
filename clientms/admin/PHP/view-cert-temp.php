@@ -495,8 +495,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         </div>
         <div class="container">
           <div class="col">
-            <div class="float-end">
-              <b>bcn 015-22</b><!--supply with bcn-->
+            <div class="float-end"><!--supply with bcn-->
             </div>
           </div>
         </div>

@@ -11,7 +11,12 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
     if(isset($_POST['new-record']))
         {
             $user = $_POST['rcName'];
-            $usid=$user[0];
+            $usid = '';
+            for ($i = 0; $i < strlen($user); $i++) {
+                if (is_numeric($user[$i])) {
+                    $usid .= $user[$i];
+                }
+            }
             $ctype=$_POST['ctype'];
             $mop=$_POST['mop'];
             $purp=$_POST['purp'];

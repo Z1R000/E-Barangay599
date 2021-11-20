@@ -76,12 +76,12 @@ if (strlen($_SESSION['clientmsaid'] == 0)) {
         $mail->isSMTP();                                            //Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'barnagay599@gmail.com';                     //SMTP username
-        $mail->Password   = 'barangay599123';                               //SMTP password
+        $mail->Username   = 'ebarangay599@gmail.com';                     //SMTP username
+        $mail->Password   = '599-E-Barangay';                               //SMTP password
         $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
         $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
-        $mail->setFrom('barnagay599@gmail.com', $getpos);
+        $mail->setFrom('ebarangay599@gmail.com', $getpos);
 
         $sqle = "SELECT * from tblresident WHERE ID = :eid";
         $querye=$dbh->prepare($sqle);

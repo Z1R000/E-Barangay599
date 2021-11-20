@@ -7,12 +7,16 @@
     header('location:logout.php');
     }else{
         $eid = $_GET['rid'];
-        $sql= "SELECT tblstatus.ID as statid, tblcreaterental.*,tblcreaterental.ID,tblrental.ID as renid,tblresident.ID as resid,tblcreaterental.payable, tblcreaterental.rentalStartDate, tblcreaterental.rentalEndDate,tblcreaterental.creationDate, tblpurposes.Purpose, tblresident.FirstName, tblresident.LastName,tblresident.MiddleName, tblresident.Suffix,tblrental.rentalName, tblrental.rentalPrice, tblmodes.mode, tblstatus.statusName,tblpurposes.ID as purposeID FROM tblcreaterental INNER JOIN tblpurposes ON tblcreaterental.purpID = tblpurposes.ID INNER JOIN tblresident ON tblresident.ID = tblcreaterental.userID INNER JOIN tblrental ON tblrental.ID = tblcreaterental.rentalID INNER JOIN tblmodes ON tblmodes.ID = tblcreaterental.modeOfPayment INNER JOIN tblstatus ON tblstatus.ID = tblcreaterental.status and tblcreaterental.ID =".$_GET['rid']." ";
+        
+        $time = new DateTime("now", new DateTimeZone('Asia/Manila'));
+        $now= $time->format("Y-m-d h:i");
 
+        $sqls= "SELECT tblstatus.ID as statid, tblcreaterental.payment as pmnt,tblcreaterental.*,tblrental.ID as renid, tblresident.ID as resid, tblpurposes.*, tblrental.*, tblmodes.*, tblstatus.*,tblpurposes.ID as purposeID, tblresident.* FROM tblcreaterental JOIN tblpurposes ON tblcreaterental.purpID = tblpurposes.ID JOIN tblresident ON tblresident.ID = tblcreaterental.userID JOIN tblrental ON tblrental.ID = tblcreaterental.rentalID JOIN tblmodes ON tblmodes.ID = tblcreaterental.modeOfPayment JOIN tblstatus ON tblstatus.ID = tblcreaterental.status WHERE tblcreaterental.ID =:eid";
 
-        $query = $dbh ->prepare($sql);
-        $query ->execute();
-        $result = $query->fetchAll(PDO::FETCH_OBJ);
+        $querys = $dbh ->prepare($sqls);
+        $querys->bindParam(':eid',$eid,PDO::PARAM_STR);
+        $querys ->execute();
+        $result = $querys->fetchAll(PDO::FETCH_OBJ);
         $arr= [];
         $det = "";
         $fupdate = "";
@@ -26,6 +30,12 @@
             $cdate = $r->creationDate;
             $sdate = $r->rentalStartDate;
             $edate = $r->rentalEndDate;
+            $pdpd = number_format($r->payment,2);
+            $pypy = $r->payable;
+            $ch = $r->pmnt - $r->payable;
+            $cr = $r->payable - $r->pmnt;
+            $cr = number_format($cr,2);
+            $ch = number_format($ch,2);
             $pay4 = number_format($r->payable,2);
             array_push($arr,$r->ID);
             array_push($arr,$r->LastName.", ".$r->FirstName." ".$r-> MiddleName." ".$r->Suffix);
@@ -42,8 +52,6 @@
             array_push($arr,$r->resid);
             array_push($arr,$r->proof);
             array_push($arr, $r->statid);
-            
-
         }
             $stat ="";
 
@@ -140,23 +148,6 @@
         if($arr[8]=="G-cash"){
             
             $difference = "";
-
-
-            if (($_POST['paid']!="")&&($_POST['refNum'] != "")){
-              
-                $time = new DateTime("now", new DateTimeZone('Asia/Manila'));
-                $now= $time->format("Y-m-d h:i");
-                
-              
-                $paid = $_POST['paid'];
-
-                
-                $up = "Update tblpaymentlogs set refNum = ".$_POST['refNum']. ", payment = ".$_POST['paid'].",dateAccepted = '".$now."' where creationID = ".$eid." and servicetype = 1";
-
-             
-                echo '<script>alert("Certificate Record and payment log has been updated")</script>';
-          
-            }
          
             $det = "disabled";
             $sql = "Select * from tblstatus where ID = 3 or ID= 4 or ID= 7";
@@ -178,7 +169,7 @@
                 $status = $_POST['stat'];
                 $fupdate = 'Update tblcreaterental set status = '.$status.' ,rentalStartDate = "'.$start.'" ,rentalEndDate = "'.$end.'"
                 ,modeOfPayment = '.$mode.' ,payable = '.$send.'
-                where ID ='.$arr[0].';';
+                where ID ='.$eid.';';
         
         }
         if ($arr[8]=="Cash"){
@@ -198,13 +189,13 @@
             $status = $_POST['stat'];
             $fupdate = 'Update tblcreaterental set status = '.$status.' ,rentalStartDate = "'.$start.'" ,rentalEndDate = "'.$end.'"
             ,modeOfPayment = '.$mode.' ,payable = '.$send.'
-            where ID ='.$arr[0].';';
+            where ID ='.$eid.';';
         }
         
 
         if ($arr[9]=="PAYMENT VERIFIED"){
             $btn= "disabled";
-            $sql = "Select * from tblstatus where ID = 4 or ID = 5";
+            $sql = "Select * from tblstatus where ID = 4 or ID = 9";
             $query = $dbh->prepare($sql);
             $query -> execute();
             $result = $query->fetchAll(PDO::FETCH_OBJ);
@@ -219,7 +210,7 @@
             }
 
             $fupdate = 'Update tblcreaterental set status = '.$status.'  
-            where ID ='.$arr[0].';';
+            where ID ='.$eid.';';
      
         }
         if ($arr[9]=="ON-GOING"){
@@ -239,7 +230,7 @@
             }
 
             $fupdate = 'Update tblcreaterental set status = '.$status.'  
-            where ID ='.$arr[0].';';
+            where ID ='.$eid.';';
         }
 
         if ($arr[9]== "PAYMENT REJECTED"){
@@ -262,7 +253,7 @@
             if ($arr[13]==""){
                 $det = "disabled";
                 $fupdate = 'Update tblcreaterental set 
-                modeOfPayment = '.$mode.' where ID ='.$arr[0].';';
+                modeOfPayment = '.$mode.' where ID ='.$eid.';';
             }
             else{
                 $det = "";
@@ -270,31 +261,12 @@
                 $fupdate = 'Update tblcreaterental set status = '.$status.' ,rentalStartDate = "'.$start.'" ,rentalEndDate = "'.$end.'"
                 ,modeOfPayment = '.$mode.' ,payable = '.$send.'
                 
-                where ID ='.$arr[0].';';
+                where ID ='.$eid.';';
             }
 
         }
 
-        if ($arr[9] == "FOR PICK-UP"){
-            $sen = "flex";
-            $btn = "disabled";
-            $sql = "Select * from tblstatus where ID = 5 or  ID= 6";
-            $query = $dbh->prepare($sql);
-            $query -> execute();
-            $result = $query->fetchAll(PDO::FETCH_OBJ);
-            $stat = "";
-            foreach($result as $r){
-                if ($arr[9] == $r->statusName){
-                    $stat.='<option value="'.$r->ID.'" selected>'.$r->statusName.'</option>';
-                }
-                else{
-                    $stat.='<option value="'.$r->ID.'">'.$r->statusName.'</option>';
-                }
-            }
-            $fupdate = 'Update tblcreaterental set status = '.$status.'  
-            where ID ='.$arr[0].';';
-        }
-
+        
         if ($arr[9] == "SETTLED"){
             $btn = "disabled";
             $hide = "none";
@@ -316,6 +288,16 @@
         }
         if ($arr[9] == "APPROVED"){
             $det = "disabled";
+            $stat = "";
+            $sql = "Select * from tblstatus where ID = 2";
+            $query = $dbh->prepare($sql);
+            $query -> execute();
+            $result = $query->fetchAll(PDO::FETCH_OBJ);
+            foreach($result as $r){
+                if ($arr[9] == $r->statusName){
+                    $stat.='<option value="'.$r->ID.'" selected>'.$r->statusName.'</option>';
+                }
+            }
         }
 
         
@@ -324,55 +306,65 @@
             
             $status = $_POST['stat'];
             $dbPay = "";
-            $pmnt = "Select payment from tblpaymentlogs where creationID = ".$eid." and servicetype= 1";
+            $pmnt = "Select payable from tblcreaterental where ID = ".$eid."";
             $query= $dbh->prepare($pmnt);
             $query->execute();
             $res= $query->fetchAll(PDO::FETCH_OBJ);
 
             foreach($res as $re){
                 
-                $dbPay = $re->payment;
+                $dbPay = $re->payable;
 
             }
             if (isset($_POST['paid'])){
-            
-                $status = $_POST['stat'];
-            
-                $sql = 'update tblcreaterental set status ='.$status.',rentalStartDate = "'.$start.'", rentalEndDate = "'.$end.'",  payable = '.$send.' where ID ='.$eid.';';
+              
+                
+                $sd = $_POST['paid'];
 
-                echo "</br>".$sql;
+                $status = $_POST['stat'];
+                $rfn = $_POST['refNum'];
+                
+                $sql = 'update tblcreaterental set status ='.$status.',rentalStartDate = "'.$start.'", rentalEndDate = "'.$end.'",  payment = '.$sd.' where ID ='.$eid.';';
+
+                $up = "Update tblpaymentlogs set refNum =:rfn, payment =:sd,dateAccepted =:now where creationID = :eid and servicetype = 1";
+                $qup = $dbh->prepare($up);
+                $qup->bindParam(':rfn',$rfn,PDO::PARAM_STR);
+                $qup->bindParam(':sd',$sd,PDO::PARAM_STR);
+                $qup->bindParam(':now',$now,PDO::PARAM_STR);
+                $qup->bindParam(':eid',$eid,PDO::PARAM_STR);
+                $qup->execute();
                 
                 if ($con->query($sql)===TRUE){
-                    $diff = $dbPay - $dbPay;
-                    if ($dbPay<$arr[6]){
-                        header('Location: payment-verification-rent.php?rid='.$arr[0].'&update=success&type=1&diff='.$diff.'');
+                    $diff = $dbPay - $sd;
+                    if ($sd<$dbPay){
+                        header('Location: payment-verification-rent.php?rid='.$eid.'&update=success&type=2&diff='.$diff.'');
                     
                     }
-                    else if ($dbPay>$arr[6]){
-                        header('Location: payment-verification-rent.php?rid='.$arr[0].'&update=success&type=2&diff='.$diff.'');
+                    else if ($sd>$dbPay){
+                        header('Location: payment-verification-rent.php?rid='.$eid.'&update=success&type=1&diff='.$diff.'');
                     
+                    }else{
+                        header('Location: payment-verification-rent.php?rid='.$eid.'&update=success');
                     }
                 }
 
                 else{
-                    header('Location: edit-rental.php?rid='.$arr[0].'&update=failed');
+                    header('Location: edit-rental.php?rid='.$eid.'&update=failed');
                 }
             }else{
-                $status = $_POST['stat'];
-                $sql = 'update tblcreaterental set status ='.$status.' where ID ='.$eid.';';
-                echo "</br>".$sql;
-                if ($con->query($sql)===TRUE){
-                    header('Location: edit-rental.php?rid='.$arr[0].'&update=success1');
-                }
-                else{
-                    header('Location: edit-rental.php?rid='.$arr[0].'&update=failed');
-                }
+                $stat = $_POST['stat'];
+                $sql = 'update tblcreaterental set status =:stat where ID =:eid';
+                $qup = $dbh->prepare($sql);
+                $qup->bindParam(':stat',$stat,PDO::PARAM_STR);
+                $qup->bindParam(':eid',$eid,PDO::PARAM_STR);
+                $qup->execute();
+                header('Location: edit-rental.php?rid='.$eid);
             }
 
         }
         if (isset($_POST['del-rec'])){
 
-           $sql = "Update tblcreaterental set status = 8 where ID = ".$arr[0]." ";
+           $sql = "Update tblcreaterental set status = 8 where ID = ".$eid." ";
 
            if ($con->query($sql)===TRUE){
                 header('Location: admin-rentals.php?delete=success');
@@ -564,7 +556,7 @@
                             <div class="col-xl-6 ">
                                 <label for="prate" class="fs-5 fw-bold">Requestor Name</label>
                                     <div class="input-group">    
-                                        <input type= "text" value ="<?php echo $arr[0]; ?>" name = "id" style= "display:none;">
+                                        <input type= "text" value ="<?php echo $eid; ?>" name = "id" style= "display:none;">
                                         <input type="text" readonly  id = "search" value = "<?php echo $arr[1]; ?>" class="form-control" name ="rname" placeholder= "">
                                     </div>
                                     <div class="col" style= "z-index: 9;position:relative">
@@ -833,8 +825,8 @@
                                                         }
                                                        
                                                 }
-                                                else if ($scheck =="PAYMENT VERIFIED"|| $scheck =="FOR PICK-UP" ||$scheck == "SETTLED"){
-                                                 
+                                                else if ($scheck =="PAYMENT VERIFIED"|| $scheck =="ON-GOING" ||$scheck == "SETTLED"){
+                                                    if ($ch > $cr || $ch < $cr){
                                                         $sql= "Select * from tblinformation";
                                                         $query = $dbh->prepare($sql);
                                                         $query->execute();
@@ -921,7 +913,7 @@
                                                                         <div class="col-8 py-2">   
                                                                         <div class="input-group">
                                                                         <button class="btn btn-secondary disabled">₱</button>      
-                                                                        <input style= "text-align:right" type="decimal" name = "paid" id = "paid" value = "'.$i->payment.'" class="form-control" readonly>
+                                                                        <input style= "text-align:right" type="decimal" name = "paid" id = "paid" value = "'.$pdpd.'" class="form-control">
                                                                         </div>
                                                                         </td>
                                                                     </div>
@@ -933,7 +925,7 @@
                                                                     <div class="col-8 py-2">         
                                                                     <div class="input-group">
                                                                     <button class="btn btn-secondary disabled">₱</button>
-                                                                    <input type="decimal" name = "cpayable" id = "topay" value = '.$arr[6].' style = "text-align:right" class="form-control" readonly>
+                                                                    <input type="decimal" name = "cpayable" id = "topay" value = '.$arr[6].' style = "text-align:right" class="form-control" disabled>
                                                                     </div>
                                                                     </td>
                                                                     
@@ -942,10 +934,9 @@
                                                                     </tr>
                                                                     <tr>
                                                                     ';
-                                                                    $py = $i->payment;
+                                                                    $py = $i->pymnt;
                                                                     
-                                                                    if ($py>$arr[6]){
-                                                                        $df = $py-$arr[6];
+                                                                    if ($ch > $cr){
                                                                         echo ' 
                                                                         <tr>
                                                                         <td><div class="input-group py-1">
@@ -954,7 +945,7 @@
                                                                         <div class="col-8 py-2">         
                                                                         <div class="input-group">
                                                                         <button class="btn btn-secondary disabled">₱</button>
-                                                                        <input type="decimal" name = "cpayable" id = "topay" value = '.number_format($df,2).' style = "text-align:right" class="form-control" readonly>
+                                                                        <input type="decimal" name = "cpayable" id = "topay" value = '.$ch.' style = "text-align:right" class="form-control" disabled>
                                                                         </div>
                                                                         </td>
                                                                         
@@ -964,9 +955,7 @@
                                                                         
                                                                         
                                                                         ';
-                                                                    }
-                                                                    else if ($arr[6]<$py){
-                                                                        $df = $arr[6]-$py; 
+                                                                    }else if ($ch < $cr){
                                                                         echo ' 
                                                                         <tr>
                                                                         <td><div class="input-group py-1">
@@ -975,7 +964,7 @@
                                                                         <div class="col-8 py-2">         
                                                                         <div class="input-group">
                                                                         <button class="btn btn-secondary disabled">₱</button>
-                                                                        <input type="decimal" name = "cpayable" id = "topay" value = '.number_format($df,2).' style = "text-align:right" class="form-control" readonly>
+                                                                        <input type="decimal" name = "cpayable" id = "topay" value = '.$cr.' style = "text-align:right" class="form-control" disabled>
                                                                         </div>
                                                                         </td>
                                                                         
@@ -985,9 +974,6 @@
                                                                         
                                                                         
                                                                         ';
-
-                                                                    }
-                                                                    else{
 
                                                                     }
 
@@ -1041,7 +1027,211 @@
                                                     </div>';
 
                                                     }
+                                                }
+                                                    }else{
+                                                        $sql= "Select * from tblinformation";
+                                                        $query = $dbh->prepare($sql);
+                                                        $query->execute();
+                                                        $inf = $query->fetchAll(PDO::FETCH_OBJ);
+                                                        foreach($inf as $in){
+                                                            
+                                                        echo '
+                                                        <div class="row pt-4">
+                                                            <div class="col-12">
+                                                                <div class="row">
+                                                                   
+                                                                    <div class="col-xl-6">
+                                                                        <label for="ctype" class="black fw-bold fs-5">Proof of Payment</label>
+    
+                                
+                                                                    </div>
+                                                                
+                                                                    <div class="col-xl-6">
+                                                                        <label for="ctype" class="black fw-bold fs-5">Payment Details</label>
+                                
+                                                                    </div>
+                                                                    <div class="col-xl-3">
+                                
+                                                                    </div>       
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        
+                                                        </div>
+                                                        
+                                                        
+                                                        ';
+    
+                                                        $select = "Select * from tblpaymentlogs where creationID = ".$eid." and servicetype=1";
+                                                        $query = $dbh->prepare($select);
+                                                        $query ->execute();
+                                                        $plog = $query->fetchAll(PDO::FETCH_OBJ);
+    
+                                                        foreach($plog as $i){
+    
+                                                        echo '
+                                                            <div class="row">
+                                                            <div class="col-12">
+                                                            <div class="row g-2">
+                                                            <div class="col-xl-6">
+                                                            <div class="row">
+
+                                                            <div class="col-12">
+                                                                <a target = "_blank" href = "'.$i->proof.'"><img src="'.$i->proof.'" alt="" class="img-fluid"></a>
+                                                            </div>
+
+                                                            </div>
+                                                            </div>
+                                                            <div class="col-xl-6">
+                                                            <table>';
+                                                   
+    
+                                                            $cdate = date('F j, Y - h:i A', strtotime($i->paymentDate));
+                                                            $adate = date('F j, Y - h:i A', strtotime($i->dateAccepted));
+                                                            echo'
+                                                            
+                                                                    <table>
+                                                                      <tr>
+                                                                        <td><div class="input-group py-1">
+                                                                        <label for="refnum" class="fs-5 text-primary pe-2">Date Submitted: </label> </td>  
+                                                                        <td>
+                                                                        <div class="fs-5 text-secondary"> '.$cdate.'</div>
+                                                                        </td>
+                                                                        </div>
+                                                                    </tr>
+                                                                      <tr>
+                                                                        <td><div class="input-group py-1">
+                                                                        <label for="refnum" class="fs-5 text-primary pe-2">Reference Number:</label> </td>  
+                                                                        <td>
+                                                                        <div class="col-10 py-2">         
+                                                                        <input type="text" name = "refNum" id = "refnum" class="form-control" value = "'.$i->refNum.'" disabled>
+                                                                        </td>
+                                                                        </div>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><div class="input-group py-1">
+                                                                        <label for="paid" class="fs-5 text-primary pe-2">Amount Paid:</label> </td>  
+                                                                        <td>
+                                                                        <div class="col-8 py-2">   
+                                                                        <div class="input-group">
+                                                                        <button class="btn btn-secondary disabled">₱</button>      
+                                                                        <input style= "text-align:right" type="decimal" name = "paid" id = "paid" value = "'.$pdpd.'" class="form-control" disabled>
+                                                                        </div>
+                                                                        </td>
+                                                                    </div>
+    
+                                                                    <tr>
+                                                                    <td><div class="input-group py-1">
+                                                                    <label for="payable" style = "text-align:right" class="fs-5 text-primary pe-2">Amount to Pay :</label></td>   
+                                                                    <td>
+                                                                    <div class="col-8 py-2">         
+                                                                    <div class="input-group">
+                                                                    <button class="btn btn-secondary disabled">₱</button>
+                                                                    <input type="decimal" name = "cpayable" id = "topay" value = '.$arr[6].' style = "text-align:right" class="form-control" disabled>
+                                                                    </div>
+                                                                    </td>
+                                                                    
+                                                                    </div>    
+                                                                    </div>
+                                                                    </tr>
+                                                                    <tr>
+                                                                    ';
+                                                                    $py = $i->pymnt;
+                                                                    
+                                                                    if ($ch > $cr){
+                                                                        echo ' 
+                                                                        <tr>
+                                                                        <td><div class="input-group py-1">
+                                                                        <label for="payable" style = "text-align:right" class="fs-5 text-primary pe-2">Change to claim :</label></td>   
+                                                                        <td>
+                                                                        <div class="col-8 py-2">         
+                                                                        <div class="input-group">
+                                                                        <button class="btn btn-secondary disabled">₱</button>
+                                                                        <input type="decimal" name = "cpayable" id = "topay" value = '.$ch.' style = "text-align:right" class="form-control" disabled>
+                                                                        </div>
+                                                                        </td>
+                                                                        
+                                                                        </div>    
+                                                                        </div>
+                                                                        </tr>
+                                                                        
+                                                                        
+                                                                        ';
+                                                                    }else if ($ch < $cr){
+                                                                        echo ' 
+                                                                        <tr>
+                                                                        <td><div class="input-group py-1">
+                                                                        <label for="payable" style = "text-align:right" class="fs-5 text-primary pe-2">Credit to Settle :</label></td>   
+                                                                        <td>
+                                                                        <div class="col-8 py-2">         
+                                                                        <div class="input-group">
+                                                                        <button class="btn btn-secondary disabled">₱</button>
+                                                                        <input type="decimal" name = "cpayable" id = "topay" value = '.$cr.' style = "text-align:right" class="form-control" disabled>
+                                                                        </div>
+                                                                        </td>
+                                                                        
+                                                                        </div>    
+                                                                        </div>
+                                                                        </tr>
+                                                                        
+                                                                        
+                                                                        ';
+
+                                                                    }
+
+
+                                                                    echo'
+                                                                    <tr>
+                                                                    <td><div class="input-group py-1">
+                                                                    <label for="refnum" class="fs-5 text-primary pe-2">Date Submitted: </label> </td>  
+                                                                    <td>
+                                                                    <div class="fs-5 text-secondary"> '.$adate.'</div>
+                                                                    </td>
+                                                                    </div>
+                                                                </tr>
+                                                                    </table';
+                                                               
+                                                        
+                                                                
+                                                        
+                                                                }
+
+                                                           if ($scheck == "SETTLED"){
+                                                        echo ' <div class="row g-0" align= "right">
+                                                        <div class="col-md-12  px-3 mx-auto my-2">
+                                                            <div class="float-end">
+                                                               
+                                                            <a type ="button"  href = "admin-rentals.php" = "button" href = ""class="btn btn-secondary px-2"  >
+                                                            <i class="fa fa-arrow-circle-left mx-1"></i>
+                                                                    Done
+                                                            </a>
+                                                            </div>
+                                                          
+                                                            </div>
+                                                            </div>';
+                                                        
+                                                    
+
+                                                    }else{
+                                                        echo ' <div class="row g-0" align= "right">
+                                                        <div class="col-md-12  px-3 mx-auto my-2">
+                                                            <div class="float-end">
+                                                            
+                                                            <button  type ="submit" name= "update" role = "button" class="btn btn-primary px-2" >
+                                                            <i class= "fa fa-save mx-1"></i>Save</button>
+                                                            <button type ="button" data-bs-toggle = "modal" href = "#delete-rental" role = "button" href = ""class="btn btn-danger px-2" data-bs-dismiss= "modal" >
+                                                            <i class="fa fa-trash mx-1"></i>
+                                                                    Reject
+                                                            </button>
+                                                            </div>
+                                                          
+                                                        </div>
+                                                    </div>';
+
                                                     }
+                                                }
+                                                    }
+                                                    
                                                 }
                                                
                                              
