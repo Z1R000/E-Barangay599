@@ -164,22 +164,54 @@ if (strlen($_SESSION['clientmsuid']==0)) {
                                     <tbody>
                                         <?php
 
-                                            $sql="SELECT distinct tbladmin.*, tblresident.*, tblpositions.*, tbldays.* from tbladmin JOIN tblresident on tbladmin.residentID=tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition join tbldays on tbladmin.dayDuty = tbldays.ID order by tblpositions.ID ASC, tbladmin.dayDuty";
+                                            $sql="SELECT distinct tbladmin.*, tblresident.*, tblpositions.* from tbladmin JOIN tblresident on tbladmin.residentID=tblresident.ID join tblpositions on tblpositions.ID = tbladmin.BarangayPosition order by tblpositions.ID ASC";
                                             $query = $dbh -> prepare($sql);
                                             $query->execute();
                                             $results=$query->fetchAll(PDO::FETCH_OBJ);
 
                                             $cnt=1;
-                                            if($query->rowCount() > 0)
-                                            {
+                                            
                                             foreach($results as $row)
-                                            {               ?>
+                                            { 
+                                                $get = $row->dayDuty;
+                                                $pieces = explode(",",$get);
+                                                $up="";
+                                                for ($x = 0; $x <= count($pieces); $x++) {
+                                                    if ($pieces[$x] != 0){
+                                                        $up .= "$pieces[$x],"; 
+                                                    }
+                                                    
+                                                }
+                                                $piece ='';
+                                                for ($i = 0; $i < strlen($up); $i++) {
+                                                    if (is_numeric($up[$i])) {
+                                                        $piece .= $up[$i];
+                                                    }
+                                                }
+                                                $day="";
+                                                for ($y = 0; $y < 9; $y++){
+                                                    if ($piece[$y] != 0){
+                                                        $g = $piece[$y];
+                                                        $sqlg = "select * from tbldays WHERE ID = :g";
+                                                        $qg = $dbh->prepare($sqlg);
+                                                        $qg-> bindParam(':g', $g, PDO::PARAM_STR);
+                                                        $qg-> execute();
+                                                        $rg=$qg->fetchAll(PDO::FETCH_OBJ);
+                                                        if($qg->rowCount() > 0)
+                                                        {
+                                                            foreach ($rg as $rg) {
+                                                                $day .= "$rg->dDay ";
+                                                            }
+                                                        }
+                                                    }
+                                                }
+            ?>
                                      <tr class="active">
                                         <td style="color: black;"><?php  echo htmlentities($row->Position);?></td>
                                          <td style="color: black;"><?php  echo htmlentities($row->LastName);?>, <?php  echo htmlentities($row->FirstName);?> <?php  echo htmlentities($row->MiddleName);?></td>
-                                         <td><input type="text" name="td" value="<?php  echo $row->dDay;?>" class="form-control" required='true' readonly='true' style="border:none; color: black; "></td>
+                                         <td style="color: black;"><?php  echo htmlentities($day);?></td>
                                      </tr>
-                                     <?php $cnt=$cnt+1;}} ?>
+                                     <?php $cnt=$cnt+1;} ?>
                                      </tbody> </table> 
                         </div>
 

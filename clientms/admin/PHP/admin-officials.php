@@ -6,7 +6,7 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['clientmsaid']==0)) {
   header('location:logout.php');    
   } else{   
-    $sql ="SELECT tbladmin.*, tblresident.*,tblpositions.*, tbldays.* from tbladmin join tblpositions on tblpositions.ID = tbladmin.BarangayPosition join tblresident on tblresident.ID = tbladmin.residentID join tbldays on tbldays.ID = tbladmin.dayDuty and tbladmin.ID = 1";
+    $sql ="SELECT tbladmin.ID as didd, tbladmin.*, tblresident.*, tblpositions.* from tbladmin join tblpositions on tblpositions.ID = tbladmin.BarangayPosition join tblresident on tblresident.ID = tbladmin.residentID WHERE tbladmin.ID = 1";
 
     $query = $dbh->prepare($sql);
     $query->execute();
@@ -19,11 +19,45 @@ if (strlen($_SESSION['clientmsaid']==0)) {
 
     foreach($result as $row)
     {   
+        $get = $row->dayDuty;
+        $pieces = explode(",",$get);
+        $up="";
+        for ($x = 0; $x <= count($pieces); $x++) {
+            if ($pieces[$x] != 0){
+                $up .= "$pieces[$x],"; 
+            }
+            
+        }
+        $piece ='';
+        for ($i = 0; $i < strlen($up); $i++) {
+            if (is_numeric($up[$i])) {
+                $piece .= $up[$i];
+            }
+        }
+        $day="";
+        for ($y = 0; $y < 9; $y++){
+            if ($piece[$y] != 0){
+                $g = $piece[$y];
+                $sqlg = "select * from tbldays WHERE ID = :g";
+                $qg = $dbh->prepare($sqlg);
+                $qg-> bindParam(':g', $g, PDO::PARAM_STR);
+                $qg-> execute();
+                $rg=$qg->fetchAll(PDO::FETCH_OBJ);
+                if($qg->rowCount() > 0)
+                {
+                    foreach ($rg as $rg) {
+                        $day .= "$rg->dDay ";
+                    }
+                }
+            }
+        }
         $gbd = $row->BirthDate;
+        $gbd = date('Y-m-d', strtotime($gbd));
         $bday = date('j F Y', strtotime($gbd));
         $today = date('Y-m-d');
 
         $diff = date_diff(date_create($gbd), date_create($today));
+        $fn = $row->LastName." ". $row->FirstName." ".$row->MiddleName." ".$row->Suffix;
         
         $start1 = date_create($row->AdminRegDate);
         $start = date_create($row->AdminRegDate);
@@ -31,14 +65,63 @@ if (strlen($_SESSION['clientmsaid']==0)) {
         $term = date_add($start1,date_interval_create_from_date_string("2 Years"));
       
         array_push($arr, $row->Position);
-        array_push($arr, $row->LastName." ". $row->FirstName." ".$row->MiddleName." ".$row->Suffix);
+        array_push($arr, $row->didd." ". $row->LastName." ". $row->FirstName." ".$row->MiddleName." ".$row->Suffix);
         array_push($arr,$row->Cellphnumber);
         array_push($arr, $row->CivilStatus);
         array_push($arr,$row->Gender);
-        array_push($arr,$row->dDay);
+        array_push($arr,$day);
         array_push($arr,$row->Email);
         array_push ($arr,$row->Password);
+        array_push($arr,$row->residentID);
         
+    }
+
+    
+
+    if (isset($_POST['submit'])){
+        $cname = $_POST['cname'];
+        $userid = '';
+            for ($i = 0; $i < strlen($cname); $i++) {
+                if (is_numeric($cname[$i])) {
+                    $usid .= $cname[$i];
+                }
+            }
+          $a = $b = $c = $d = $e = $f = $g = $h = $i = 0;
+          if(isset($_POST['btncheck0'])){
+              $a = 1;
+          }
+          if(isset($_POST['btncheck1'])){
+            $b = 2;
+          }
+          if(isset($_POST['btncheck2'])){
+            $c = 3;
+        }
+        if(isset($_POST['btncheck3'])){
+            $d = 4;
+        }
+        if(isset($_POST['btncheck4'])){
+            $e = 5;
+        }
+        if(isset($_POST['btncheck5'])){
+            $f = 6;
+        }
+        if(isset($_POST['btncheck6'])){
+            $g = 7;
+        }
+        if(isset($_POST['btncheck7'])){
+            $h = 8;
+        }
+          $get = $a . "," . $b . "," . $c . "," . $d . "," . $e . "," . $f . "," .  $g . "," . $h;
+          if(isset($_POST['submit'])){
+            $sql = "update tbladmin set residentID=:usid, dayDuty=:get where ID = '1'";
+            $query = $dbh->prepare($sql);
+            $query->bindParam(':get', $get, PDO::PARAM_STR);
+            $query->bindParam(':usid', $usid, PDO::PARAM_STR);
+            $query->execute();
+
+            echo '<script>alert("Admin Official has been updated.")</script>';
+            echo "<script>window.location.href ='admin-officials.php'</script>";
+          }
     }
  
     
@@ -164,7 +247,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                             <div class="col-md-11 px-1 pb-4 mx-auto position-relative " align= "center">
                                 <img src="../images/admin-logo.png" alt="" class="img-fluid rounded-circle "  style = "height: 135px">
                           
-                                <div class= "text-center fs-3 text-secondary"><?php echo $arr[1];?></div>
+                                <div class= "text-center fs-3 text-secondary"><?php echo $fn;?></div>
                             </div>
                         </div>
                         <div class="row g-0">
@@ -240,7 +323,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                     <div class="col-xl-8 col-lg-6 col-md-12 px-4 border-start border-secondary bg-light " style= "max-height: 650px; overflow-y: auto;">
                         <div class="row g-2 pb-3"  >   
                             <?php
-                               $sql ="SELECT tbladmin.BarangayPosition, tblresident.Gender,tblpositions.Position, tblresident.CivilStatus,tblresident.BirthDate,tblresident.LastName, tblresident.FirstName, tblresident.MiddleName, tblresident.Suffix, tblresident.Cellphnumber, tbladmin.Email,tbladmin.Password, tbladmin.AdminRegdate, tbldays.dDay from tbladmin inner join tblpositions on tblpositions.ID = tbladmin.BarangayPosition inner join tblresident on tblresident.ID = tbladmin.residentID inner join tbldays on tbldays.ID = tbladmin.dayDuty and tbladmin.ID > 1";
+                               $sql ="SELECT tbladmin.*, tblresident.ID as rid, tblresident.*,tblpositions.*from tbladmin join tblpositions on tblpositions.ID = tbladmin.BarangayPosition join tblresident on tblresident.ID = tbladmin.residentID WHERE tbladmin.ID > 1";
                                $query = $dbh->prepare($sql);
                                $query -> execute();
                                $result = $query->fetchAll(PDO::FETCH_OBJ);
@@ -252,6 +335,38 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                $start = "";
 
                                foreach($result as $r){
+                                $get = $r->dayDuty;
+                                $pieces = explode(",",$get);
+                                $up="";
+                                for ($x = 0; $x <= count($pieces); $x++) {
+                                    if ($pieces[$x] != 0){
+                                        $up .= "$pieces[$x],"; 
+                                    }
+                                    
+                                }
+                                $piece ='';
+                                for ($i = 0; $i < strlen($up); $i++) {
+                                    if (is_numeric($up[$i])) {
+                                        $piece .= $up[$i];
+                                    }
+                                }
+                                $day="";
+                                for ($y = 0; $y < 9; $y++){
+                                    if ($piece[$y] != 0){
+                                        $g = $piece[$y];
+                                        $sqlg = "select * from tbldays WHERE ID = :g";
+                                        $qg = $dbh->prepare($sqlg);
+                                        $qg-> bindParam(':g', $g, PDO::PARAM_STR);
+                                        $qg-> execute();
+                                        $rg=$qg->fetchAll(PDO::FETCH_OBJ);
+                                        if($qg->rowCount() > 0)
+                                        {
+                                            foreach ($rg as $rg) {
+                                                $day .= "$rg->dDay ";
+                                            }
+                                        }
+                                    }
+                                }
                                     $gbd = $r->BirthDate;
                                     $bday = date('j F Y', strtotime($gbd));
                                     $today = date('Y-m-d');
@@ -307,14 +422,16 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                     <a class="nav-link" href="#person'.$ct.'"data-bs-toggle= "tab">Personal Details</a>
                                                 </li>
                                                 </ul>
+                                                
                                                 <div class="tab-content ">
+                                                <form method="post">
                                                     <div class="tab-pane active" id="ebgy'.$ct.'">
                                                         <div class="container pt-4">
                                                             <div class="row g-3 justify-content-center">
                                                                 <div class="col-10">
                                                                     <div class="input-group">
 
-                                                                        <input type="text" id = "search'.$ct.'" name= "fullName'.$ct.'" class="form-control ser." value = "'.ucfirst($r->LastName).",".ucfirst($r->FirstName)." ".ucfirst($r->MiddleName).". ".ucfirst($r->Suffix).'" placeholder = "Officials Name" style= "text-align:center;font-size: 1.4em;" readonly>
+                                                                        <input type="text" id = "search'.$ct.'" name= "fullName'.$ct.'" class="form-control ser." value = "'.ucfirst($r->rid)." ".ucfirst($r->LastName).",".ucfirst($r->FirstName)." ".ucfirst($r->MiddleName).". ".ucfirst($r->Suffix).'" placeholder = "Officials Name" style= "text-align:center;font-size: 1.4em;">
                                                                         <button class="btn btn-info text-white" onclick = "ful'.$ct.'()" type ="button">
                                                                         <i class="fa fa-edit">
                                                                        
@@ -324,13 +441,13 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                     </div>
                                                                     <script>
                                                                         function ful'.$ct.'(){
-                                                                            var ps = document.getElementById(\'search'.$ct.'\').readOnly;
+                                                                            var ps = document.getElementById(\'search'.$ct.'\').readonly;
                     
                                                                             if (ps){
-                                                                                document.getElementById(\'search'.$ct.'\').readOnly = false;
+                                                                                document.getElementById(\'search'.$ct.'\').readonly = false;
                                                                             }
                                                                             else{
-                                                                                document.getElementById(\'search'.$ct.'\').readOnly = true;
+                                                                                document.getElementById(\'search'.$ct.'\').readonly = true;
                                                                             }
                                                                         }
                                                                     </script>
@@ -393,62 +510,11 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                     
                                                                         }
                                                         echo '
-                                                        <div class="row justify-content-center">
-                                                        <div class="col-xl-12 text-center">
-                
-                                                            <label for="email" class="fs-5 text-secondary">Email Address</label>
-                                                            <div class="input-group">
-                                                                <input type="email" value = "'.$r->Email.'"id = "email'.$ct.'"class="form-control" placeholder = "e.g chairman@gmail.com" readonly>
-                                                                <button type= "button" name= "edit-em" class="btn btn-info" onclick = \'em'.$ct.'()\'>
-                                                                    <i class= "fa fa-edit text-white"></i>
-                                                                </button>
-                
-                                                            </div>
-                
-                                                            <script>
-                                                                    function em'.$ct.'(){
-                                                                        var ps = document.getElementById(\'email'.$ct.'\').readOnly;
-                
-                                                                        if (ps){
-                                                                            document.getElementById(\'email'.$ct.'\').readOnly = false;
-                                                                        }
-                                                                        else{
-                                                                            document.getElementById(\'email'.$ct.'\').readOnly = true;
-                                                                        }
-                                                                    }
-                                                                </script>
-                                                            
                                                         
-                                                        </div>
-                                                    </div>
-                                                    
-                                                        <div class="row justify-content-center">
-                                                        <div class="col-xl-12 text-center">
-                                                            <label for="pas" class="fs-5 text-secondary">Password</label>
-                                                            <div class="input-group">
-                                                                <input type="text" value = "'.$r->Password.'" id = "pas'.$ct.'" class="form-control" placeholder = "123456" readonly >
-                                                                <button type= "button" name= "editpas" class="btn btn-info" onclick = \'pas'.$ct.'()\' >
-                                                                    <i class= "fa fa-edit text-white"></i>
-                                                                </button>
-                                                                <script>
-                                                                    function pas'.$ct.'(){
-                                                                        var ps = document.getElementById(\'pas'.$ct.'\').readOnly;
-                
-                                                                        if (ps){
-                                                                            document.getElementById(\'pas'.$ct.'\').readOnly = false;
-                                                                        }
-                                                                        else{
-                                                                            document.getElementById(\'pas'.$ct.'\').readOnly = true;
-                                                                        }
-                                                                    }
-                                                                </script>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="row my-2">
                                                         <div class="col-xl-12 my-2" >
                                                             <div class="float-end">
-                                                                <div class="btn-group"><button type= "submit" onclick= "alert(\'Credential Update Successful\')" class= "btn btn-success"><i class= "fa fa-save me-2"></i>Save</button>
+                                                                <div class="btn-group"><button type= "submit" name="submit" class= "btn btn-success"><i class= "fa fa-save me-2"></i>Save</button>
                                                                 </div>
                                                                 <div class="btn-group"><button type= "button" data-bs-dismiss="modal" class= "btn btn-secondary"><i class= "fa fa-times-circle me-2"></i>Cancel</button>
                                                             </div>
@@ -465,11 +531,20 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+                                                    </form>
                                                     <div class="tab-pane " id = "person'.$ct.'">
                                                     <div class="row g-0 justify-content-center  ms-2 me-3">
                                                     <div class="col-md-12 mt-4">        
                                                         <table class="table">
+                                                        <tr>
+                                                                <th>
+                                                                    <i class="fa fa-phone-square me-2"></i>Barangay Position
+                                                                </th>
+                                                                <td style= "text-align:right">
+                                                                     '.$r->Position.'
+                                                                </td>
+                                                                 
+                                                            </tr>
                                                             <tr>
                                                                 <th>
                                                                     <i class="fa fa-phone-square me-2"></i>Contact Number
@@ -516,7 +591,7 @@ if (strlen($_SESSION['clientmsaid']==0)) {
                                                                     <i class="fa fa-check-square me-2"></i>Day/s of Duty
                                                                 </th>
                                                                 <td style= "text-align:right">
-                                                                    '.$r->dDay.'
+                                                                    '.$day.'
                                                                 </td>
                                                             </tr>
                                                             <tr>
