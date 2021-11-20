@@ -6,8 +6,8 @@
     if (strlen($_SESSION['clientmsaid']==0)) {
     header('location:logout.php');
     }else{
+
         $eid = $_GET['rid'];
-        
         $time = new DateTime("now", new DateTimeZone('Asia/Manila'));
         $now= $time->format("Y-m-d h:i");
 
