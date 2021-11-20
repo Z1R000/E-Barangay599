@@ -38,16 +38,21 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 	$querycheck->bindParam(':eid',$eid,PDO::PARAM_STR);
 	$querycheck->execute();
 	$resultscheck = $querycheck->fetchAll(PDO::FETCH_OBJ);
+
+	$statcheck="";
 	foreach($resultscheck as $rowcheck){
 		$statcheck = $rowcheck->status;
 	}
 	$pm = $_POST['cmeth'];
 	if (isset($_POST['submit'])) {
-		if (isset($_POST['proof'])) {
+	
+		$ds = $_FILES['proof']['name'];
+		if ($ds!="") {
 			$upload = "";
 			$destination = upPhoto('proof');
 			$mop =1;
 			$stats = $_POST['status'];
+	
 			if ($statcheck == "2"){
 				$stats = "3";
 				$upload = "Insert into tblpaymentlogs(mode,creationID,proof,servicetype) values(".$mop.",".$eid.",'".$destination."',2)";
@@ -62,16 +67,12 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 			}
 			$subm = $_FILES['proof']['name'];
 
-			
-			
 				$sql = "update tblcreatecertificate set status=:stats WHERE ID=:eid";
 				$query = $dbh->prepare($sql);
 				$query->bindParam(':stats', $stats, PDO::PARAM_STR);
 				$query->bindParam(':eid', $eid, PDO::PARAM_STR);
 				$query->execute();
 			
-
-				
 				if ($con->query($upload)===TRUE){
 					
 				}
@@ -91,7 +92,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 				$query->bindParam('pm',$pm, PDO::PARAM_STR);
 				$query->bindParam('eid',$eid, PDO::PARAM_STR);
 				$query->execute();
-				echo '<script>alert("Certificate request has been updated.")</script>';
+				echo '<script>alert("Certificate request has been updated'.$mop.'.")</script>';
 				echo "<script>window.location.href ='edit-certificate-request.php?editid=" . $eid . "'</script>";
 			}
 	}
@@ -586,9 +587,6 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 											$result = $query->fetchAll(PDO::FETCH_OBJ);
 
 											foreach ($result as $i){
-
-
-
 											
 											echo'
 												<div class="col-xl-3">
@@ -677,7 +675,8 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 											<div class="row">
 												<div class="col-xl-3">
 													
-														<div class="col-12">													<input 	name = "proof" class="form-control form-control-sm" id="selectproof" onchange = "loadFile(event,\'cproof\');" type="file">
+														<div class="col-12">
+														<input 	name = "proof" class="form-control form-control-sm" id="selectproof" onchange = "loadFile(event,\'cproof\');" type="file">
 														</div>
 														<div class="col-12">
 															<img src = "../../images/defaultimage.png" class= "img-fluid" id = "cproof">
@@ -759,7 +758,7 @@ if (strlen($_SESSION['clientmsuid'] == 0)) {
 			
 											</div>
 											<div class="row">';
-											$sql = "Select * from tblpaymentlogs where creationID=".$eid."";
+											$sql = "Select * from tblpaymentlogs where creationID=".$eid." servicetype= ";
 											$query = $dbh->prepare($sql);
 											$query ->execute();
 											$result = $query->fetchAll(PDO::FETCH_OBJ);
