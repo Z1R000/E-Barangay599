@@ -299,8 +299,40 @@
                 }
             }
         }
-
         
+        if(isset($_POST['deleterec']))
+        {
+            $decr= $_POST['decr'];
+        
+            if (isset($_POST['spcr'])){
+                $decr =$_POST['spcr'];
+            }else{
+                $decr =$_POST['decr'];
+        
+            
+            $insert = "Update tblcreaterental set decreason = '".$decr."', remarks = '".$_POST['rmrks']."' where ID = ".$eid."";
+            
+          
+            $eid=intval($_GET['editid']);
+            $clientmsaid=$_SESSION['clientmsaid'];
+            $status="8";
+        
+            $sql="update tblcreaterental set status=:status WHERE ID=:eid";
+            $query=$dbh->prepare($sql);
+            $query->bindParam(':status',$status,PDO::PARAM_STR);
+            $query->bindParam(':eid',$eid,PDO::PARAM_STR);
+            $query->execute();
+            
+
+            if($con->query($insert)===TRUE){
+
+            }
+            echo '<script>alert("Certificate Record '.$decr." ".$_POST['rmrks'].' has been updated")</script>';
+            echo "<script>window.location.href ='admin-certificate.php'</script>";
+        }
+    }
+
+
 
         if (isset($_POST['update'])){
             
@@ -814,7 +846,7 @@
                                                                 <a type="button" style= "'.$sen.'"href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info text-white"><i class = "fa fa-paper-plane mx-1 white"></i><span class= "wal">Send</span></a>     
                                                                 <button  type ="submit" name= "update" role = "button" class="btn btn-primary px-2" >
                                                                 <i class= "fa fa-save mx-1"></i>Save</button>
-                                                                <button type ="button" data-bs-toggle = "modal" href = "#delete-rental" role = "button" href = ""class="btn btn-danger px-2" data-bs-dismiss= "modal" >
+                                                                <button type ="button" data-bs-toggle = "modal" href = "#decline-proof" role = "button" href = ""class="btn btn-danger px-2" data-bs-dismiss= "modal" >
                                                                 <i class="fa fa-trash mx-1"></i>
                                                                         Reject
                                                                 </button>
@@ -1017,7 +1049,7 @@
                                                             
                                                             <button  type ="submit" name= "update" role = "button" class="btn btn-primary px-2" >
                                                             <i class= "fa fa-save mx-1"></i>Save</button>
-                                                            <button type ="button" data-bs-toggle = "modal" href = "#delete-rental" role = "button" href = ""class="btn btn-danger px-2" data-bs-dismiss= "modal" >
+                                                            <button type ="button" data-bs-toggle = "modal" href = "#decline-proof" role = "button" href = ""class="btn btn-danger px-2" data-bs-dismiss= "modal" >
                                                             <i class="fa fa-trash mx-1"></i>
                                                                     Reject
                                                             </button>
@@ -1219,7 +1251,7 @@
                                                             
                                                             <button  type ="submit" name= "update" role = "button" class="btn btn-primary px-2" >
                                                             <i class= "fa fa-save mx-1"></i>Save</button>
-                                                            <button type ="button" data-bs-toggle = "modal" href = "#delete-rental" role = "button" href = ""class="btn btn-danger px-2" data-bs-dismiss= "modal" >
+                                                            <button type ="button" data-bs-toggle = "modal" href = "#decline-proof" role = "button" href = ""class="btn btn-danger px-2" data-bs-dismiss= "modal" >
                                                             <i class="fa fa-trash mx-1"></i>
                                                                     Reject
                                                             </button>
@@ -1248,7 +1280,7 @@
                                                     <a type="button" style= "'.$sen.'"href ="#approve-transac" data-bs-toggle = "modal" role = "button" class="btn  btn-info text-white"><i class = "fa fa-paper-plane mx-1 white"></i><span class= "wal">Send</span></a>     
                                                     <button  style= "display:'. $hide.'"type ="submit" name= "update" role = "button" class="btn btn-primary px-2" >
                                                     <i class= "fa fa-save mx-1"></i>Save</button>
-                                                    <button type ="button" data-bs-toggle = "modal" href = "#delete-rental" role = "button" href = ""class="btn btn-danger px-2" data-bs-dismiss= "modal" >
+                                                    <button type ="button" data-bs-toggle = "modal" href = "#decline-proof" role = "button" href = ""class="btn btn-danger px-2" data-bs-dismiss= "modal" >
                                                     <i class="fa fa-trash mx-1"></i>
                                                             Reject
                                                     </button>
@@ -1257,7 +1289,7 @@
                                                 </div>
                                             </div>';
                                             }?>
-                                             </form>                 
+                                                        
                                         </div>
                                     </div>
                                 </div>
@@ -1269,6 +1301,79 @@
 
         </div>
     </div>
+    
+    <div class="modal fade" id = "decline-proof" tab-idndex = "-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content g-0 bg-danger ">
+                    <div class="modal-header bg-danger text-white bg-transparent ">
+                        <div class="modal-title fs-5" id="delete">&nbsp;<i class = "fa fa-times-circle"></i>&nbsp;&nbsp;Declining registration </div>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        <div class="row mt-1 px-3">
+                           
+                        
+                                <div class="row mt-2">
+                                    
+                                    
+                                    <div class="col-md-12">
+                                        <label for="decreason" >Decline Reason</label>
+                                        <select name="decr" id="decreason" class= "form-select" onchange = "showOthersdec('other_txt-dec',this);">
+                                            <option value="Insufficient credentials">Insufficient credentials</option>
+                                            <option value="Detected inconsistency">Detected inconsistency</option>
+                                            <option value="others">Others</option>
+                                        </select>
+                                        <div class="row g-0 my-2" id = "other_txt-dec" style= "display: none;">
+                                 
+                                 <div class="col-md-12">
+                                     <input  type="text" class="form-control" placeholder= "Specify a reason here">
+                                 </div>
+                             </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="row mt-2">
+                                        <label for="remarks" >Remarks</label>
+                                        <div class="col-md-12">
+                                            <div class="form-floating">
+                                            <textarea class="form-control" name= "rmrks" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;resize: none;"></textarea>
+                                            <label for="floatingTextarea2">Remarks here (max 10 words)</label>
+                                                
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                                <div class="row mt-2">
+                                   
+                                </div>
+                                <div class="row justify-content-center">
+                                    
+                                    <div class="col-md-12">
+                                        <div class="float-end">
+                                        <button  type = "submit" name= "deleterec" class= "btn btn-success">
+                                            <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
+                                        </button>
+                                        <button type = "button" class="btn btn-danger" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times me-2"></i>Discard
+                                        </button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>  
+                         
+
+                        </div>
+                      
+                
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     <?php
         include('services.php');
     ?>
@@ -1385,7 +1490,7 @@
                 </div>
             </div>
         </div>
-  >
+        </form>   
 
     </script>
  
@@ -1506,3 +1611,35 @@ $(document).ready(function(){
 </body>
 </html>
 <?php } ?>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        $("select").change(function() {
+                            $(this).find("option:selected").each(function() {
+                                var optionValue = $(this).attr("value");
+                                if (optionValue) {
+                                    $(".box").not("." + optionValue).hide();
+                                    $("." + optionValue).show();
+                                } else {
+                                    $(".box").hide();
+                                }
+                            });
+                        }).change();
+                    });
+                </script>
+
+                <script type="text/javascript">
+                    function showDiv(divId, element) {
+                        var rentype = document.getElementById('rt').value;
+                        if (rentype == "Rental/Boarder") {
+                            document.getElementById('hm').disabled = true;
+                        } else {
+                            document.getElementById('hm').disabled = false;
+                        }
+                        document.getElementById(divId).style.display = element.value == 'Rental/Boarder' ? 'block' : 'none';
+                    }
+                    function showOthersdec(divId, element) {
+                        document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';
+                    }
+                </script>

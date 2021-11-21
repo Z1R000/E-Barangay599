@@ -290,6 +290,17 @@
         }
         if(isset($_POST['delete']))
         {
+            $decr= $_POST['decr'];
+        
+            if (isset($_POST['spcr'])){
+                $decr =$_POST['spcr'];
+            }else{
+                $decr =$_POST['decr'];
+        
+            
+            $insert = "Update tblcreatecertificate set decreason = '".$decr."', remarks = '".$_POST['rmrks']."' where ID = ".$eid."";
+            
+          
             $eid=intval($_GET['editid']);
             $clientmsaid=$_SESSION['clientmsaid'];
             $status="8";
@@ -299,9 +310,15 @@
             $query->bindParam(':status',$status,PDO::PARAM_STR);
             $query->bindParam(':eid',$eid,PDO::PARAM_STR);
             $query->execute();
-            echo '<script>alert("Certificate Record has been updated")</script>';
+            
+
+            if($con->query($insert)===TRUE){
+
+            }
+            echo '<script>alert("Certificate Record '.$decr." ".$_POST['rmrks'].' has been updated")</script>';
             echo "<script>window.location.href ='admin-certificate.php'</script>";
         }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -441,6 +458,7 @@
             $querye->bindParam(':eid',$eid,PDO::PARAM_STR);
             $querye->execute();
             $resulte = $querye->fetchAll(PDO::FETCH_OBJ);
+
             foreach ($resulte as $rowe) {
                 $checkstat = $rowe->status;
                 $gdate = $rowe->resDate;
@@ -724,7 +742,7 @@
                                                 <div class="btn-group">                               
                                                 </div> <div class="btn-group"> <button type = "sbumit" href = "#save-cert" name="submit" id="submit" class = "btn  btn-primary  my-2"><i class= "fas fa-save me-2"></i>Save</button></div>
                                                 <div class="btn-group">                               
-                                                <button type="delete" name="delete" id="delete" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Reject</span></button>
+                                                <button type="button" data-bs-toggle ="modal" href= "#decline-proof"class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Reject</span></button>
                                                 </div>
                                                 </div>
                                                 </div>';
@@ -1144,7 +1162,7 @@
                                                 }else{
                                                     echo '
                                                     <div class="btn-group">                               
-                                                    <button type="delete" name="delete" id="delete" class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Reject</span></button>';
+                                                    <button type="button" data-bs-toggle= "modal" href = "#decline-proof"  class="btn btn-danger"><i class = "fa fa-trash mx-1"></i><span class="wal">Reject</span></button>';
                                                 }
                                             }?>
                                             
@@ -1164,81 +1182,71 @@
             </div>
             <?php } ?>
 
-            
-            </form>
-            <div class="modal fade" id = "save-cert" tab-idndex = "-1">
+         
+       
+        <div class="modal fade" id = "decline-proof" tab-idndex = "-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0  border-0  ">
-                    <div class="modal-header  bg-599 border-599">
-                        <div class="modal-title text-white " id="delete">&nbsp;<i class = "fa fa-edit"></i>&nbsp;&nbsp;Edit Certificate</div>       
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-white">
-                        <div class="row">
-                            <div class="col xl-4" align = "center">
-                                <!--img src="../images/question.png" alt="trash" class= " img-fluid " style ="width: 10%;">-->
-                            </div>
-                    
-                        </div>
-                        <div class="row">
-                            <p class = "fs-4 text-center">A new certificate template is about to be updated, do you wish to continue?<br></p>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="float-end">
-                                    <div class="btn-group">
-                                    <input type = "submit" class="btn btn-success" href= "#success" data-bs-toggle="modal" data-bs-dismiss = "modal"  name = "submit" id="submit" value ="Confirm">
-
-                                    </div>
-                                    <div class="btn-group">
-                                        
-                               <input type = "submit" class="btn btn-primary" href= "#success" data-bs-dismiss = "modal"  name = "canc" value ="Cancel">
-          
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                
-                    </div>
-              
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id = "delete-record" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 bg-danger" >
-                    <div class="modal-header  white ">
-                        <div class="modal-title bg-danger" id="delete">&nbsp;<i class = "fa fa-question-circle"></i>&nbsp;&nbsp;Are you sure</div>
+                <div class="modal-content g-0 bg-danger ">
+                    <div class="modal-header bg-danger text-white bg-transparent ">
+                        <div class="modal-title fs-5" id="delete">&nbsp;<i class = "fa fa-times-circle"></i>&nbsp;&nbsp;Declining registration </div>
                         
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-white">
-                        <div class="row">
-                            <div class="col xl-4" align = "center">
-                                <img src="../images/trash.png" alt="trash" class= " img-fluid " style ="width: 10%;">
-                            </div>
-                    
-                        </div>
-                        <div class="row">
-                            <p class = "fs-4 text-center">You are about to delete an existing record, do you wish to continue?<br><span class="text-muted fs-6">*Select (<i class = "fa fa-check">)</i> if certain</span></p>
-                        </div>
-                        <div class="row justify-content-center" align = "center">
-                            <form method = "POST" action = "#">
-                            <div class="col-12">
-                                <div class="float-end">
-                                
-                                <button type = "button" class="btn btn-success" data-bs-dismiss = "modal"  name = "yes" value ="Yes">
-                                    <i class= 'fa fa-check mx-1 '></i> Confirm
-                                </button>
-                                <button type = "button" class="btn btn-danger" data-bs-dismiss = "modal"  name = "no" value ="No">
-                                    <i class= "fa fa-times mx-1"></i> Cancel
-                                </button>
+                        <div class="row mt-1 px-3">
+                           
+                        
+                                <div class="row mt-2">
+                                    
+                                    
+                                    <div class="col-md-12">
+                                        <label for="decreason" >Decline Reason</label>
+                                        <select name="decr" id="decreason" class= "form-select" onchange = "showOthersdec('other_txt-dec',this);">
+                                            <option value="Insufficient credentials">Insufficient credentials</option>
+                                            <option value="Detected inconsistency">Detected inconsistency</option>
+                                            <option value="others">Others</option>
+                                        </select>
+                                        <div class="row g-0 my-2" id = "other_txt-dec" style= "display: none;">
+                                 
+                                 <div class="col-md-12">
+                                     <input  type="text" class="form-control" placeholder= "Specify a reason here">
+                                 </div>
+                             </div>
+                                    </div>
                                 </div>
+                               
+                                <div class="row mt-2">
+                                        <label for="remarks" >Remarks</label>
+                                        <div class="col-md-12">
+                                            <div class="form-floating">
+                                            <textarea class="form-control" name= "rmrks" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;resize: none;"></textarea>
+                                            <label for="floatingTextarea2">Remarks here (max 10 words)</label>
+                                                
+                                            </div>
+                                        </div>
+                                   
                                 </div>
-                            </form>
+                                <div class="row mt-2">
+                                   
+                                </div>
+                                <div class="row justify-content-center">
+                                    
+                                    <div class="col-md-12">
+                                        <div class="float-end">
+                                        <button  type = "submit" name= "delete" class= "btn btn-success">
+                                            <i class= 'fa fa-paper-plane py-1 me-2'></i>Send
+                                        </button>
+                                        <button type = "button" class="btn btn-danger" data-bs-dismiss = "modal"  name = "no" value ="No">
+                                            <i class= "fa fa-times me-2"></i>Discard
+                                        </button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>  
+                         
+
                         </div>
+                      
                 
                     </div>
                     <div class="modal-footer">
@@ -1247,49 +1255,10 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id = "proof" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content g-0 border-0 border-bottom border-transparent ">
-                    <div class="modal-header  bg-transparent border-bottom border-white  ">
-                        
-                        <button type="button" class="btn-close btn-primary" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-transparent border-0" align = "center" >
-                    <img src="../images/proof.jpg" alt="proof of payment">
-                       
-                       
-                
-                    </div>
-                  
-                </div>
-            </div>
-        </div>
-
-        <?php   include('services.php'); ?>
-        <div class="modal fade" id = "success" tab-idndex = "-1">
-            <div class="modal-dialog modal-dialog-centered modal-sm">
-                <div class="modal-content g-0 bg-success ">
-                    <div class="modal-header bg-success white ">
-                        <h5 class="modal-title" id="delete">&nbsp;<i class = ""></i>&nbsp;&nbsp;Success</h5>    
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-white">
-                        <div class="row">
-                            <div class="col xl-4" align = "center">
-                                <img src="../images/check.png" alt="trash" class= " img-fluid " style ="width: 25%;">
-                            </div>
-                    
-                        </div>
-                        <div class="row">
-                            <p class = "fs-4 text-center">New Certificate Successfully added.<br></p>
-                        </div>
-                
-                    </div>
-                   
-                </div> 
-            </div>
-        </div>
         
+                                        </form>
+        <?php   include('services.php'); ?>
+               
         <script src = '../ckeditor/ckeditor.js'></script>
         <script>
           CKEDITOR.replace('cont');
@@ -1298,3 +1267,36 @@
 </body>
 </html>
 <?php } ?>
+
+
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        $("select").change(function() {
+                            $(this).find("option:selected").each(function() {
+                                var optionValue = $(this).attr("value");
+                                if (optionValue) {
+                                    $(".box").not("." + optionValue).hide();
+                                    $("." + optionValue).show();
+                                } else {
+                                    $(".box").hide();
+                                }
+                            });
+                        }).change();
+                    });
+                </script>
+
+                <script type="text/javascript">
+                    function showDiv(divId, element) {
+                        var rentype = document.getElementById('rt').value;
+                        if (rentype == "Rental/Boarder") {
+                            document.getElementById('hm').disabled = true;
+                        } else {
+                            document.getElementById('hm').disabled = false;
+                        }
+                        document.getElementById(divId).style.display = element.value == 'Rental/Boarder' ? 'block' : 'none';
+                    }
+                    function showOthersdec(divId, element) {
+                        document.getElementById(divId).style.display = element.value == 'others' ? 'flex' : 'none';
+                    }
+                </script>
